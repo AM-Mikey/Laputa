@@ -211,11 +211,6 @@ func _calc_velocity_rolling() -> Vector2:
 
 	move_velocity = speed * move_dir * in_water_mult
 	
-	if is_wind_affected && wind_areas_inside.size() > 0:
-		for wind_area in wind_areas_inside:
-			gravity_velocity.y += wind_area.speed * wind_area.wind_dir.y * delta
-			move_velocity.x += wind_area.speed * wind_area.wind_dir.x
-	
 	if ceil_bounce_next_frame:
 		am.play("enemy_metal_thud", self, null, gravity_velocity.length() / 25.0)
 		if gravity_velocity.length() > 100.0:
@@ -275,9 +270,13 @@ func _calc_velocity_rolling() -> Vector2:
 				gravity_velocity.x = move_toward(gravity_velocity.x, 0.0, 1.0)
 				gravity_velocity.x = abs(gravity_velocity.x) * move_dir.x
 				gravity_velocity.y = 0.0
+			
 	
-	#if name == "Roller":
-		#print(move_velocity, " ", gravity_velocity)
+	if is_wind_affected && wind_areas_inside.size() > 0:
+		for wind_area in wind_areas_inside:
+			gravity_velocity.y += wind_area.speed * wind_area.wind_dir.y
+			move_velocity.x += wind_area.speed * wind_area.wind_dir.x
+	
 	return move_velocity + gravity_velocity
 
 

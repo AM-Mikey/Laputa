@@ -21,7 +21,7 @@ func _physics_process(delta: float):
 	for a in affected_entities:
 		if a.is_on_floor() && (wind_dir == Vector2.DOWN || (wind_dir == Vector2.UP && speed <= 4.0)):
 			return
-		a.velocity += wind_dir * speed * delta
+		a.velocity += wind_dir * speed
 
 func update():
 	$BodyDetector/CollisionShape2D.shape.size = column_rect.size

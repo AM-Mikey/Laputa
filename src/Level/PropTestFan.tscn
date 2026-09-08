@@ -102,7 +102,7 @@ properties = {
 "do_bubble": [false, 1, ""],
 "editor_hidden": [false, 1, ""],
 "id": [&"PhysFan", 4, ""],
-"speed": [600.0, 3, ""],
+"speed": [20.0, 3, ""],
 "toggled": [true, 1, ""]
 }
 
@@ -110,7 +110,7 @@ properties = {
 visibility_layer = 2
 position = Vector2(8, 8)
 tag_name = "wind_dir"
-direction = Vector2(-1, -8.742278e-08)
+direction = Vector2(-1, 8.742278e-08)
 snap_degrees = 90.0
 movement_locked = true
 
@@ -145,7 +145,7 @@ properties = {
 [node name="VUVector" parent="Spawns/Billy" unique_id=966558784 instance=ExtResource("11_bke65")]
 visibility_layer = 2
 tag_name = "move_dir"
-direction = Vector2(-1, -8.742278e-08)
+direction = Vector2(-1, 8.742278e-08)
 snap_degrees = 180.0
 
 [node name="Sentry" parent="Spawns" unique_id=1748391449 instance=ExtResource("15_idcuc")]
@@ -196,7 +196,7 @@ properties = {
 "do_bubble": [false, 1, ""],
 "editor_hidden": [false, 1, ""],
 "id": [&"PhysFan", 4, ""],
-"speed": [600.0, 3, ""],
+"speed": [20.0, 3, ""],
 "toggled": [true, 1, ""]
 }
 
@@ -204,7 +204,7 @@ properties = {
 visibility_layer = 2
 position = Vector2(8, 8)
 tag_name = "wind_dir"
-direction = Vector2(-1, -8.742278e-08)
+direction = Vector2(-1, 8.742278e-08)
 snap_degrees = 90.0
 movement_locked = true
 
@@ -222,7 +222,7 @@ properties = {
 "do_bubble": [false, 1, ""],
 "editor_hidden": [false, 1, ""],
 "id": [&"PhysFan", 4, ""],
-"speed": [600.0, 3, ""],
+"speed": [20.0, 3, ""],
 "toggled": [true, 1, ""]
 }
 
@@ -230,7 +230,7 @@ properties = {
 visibility_layer = 2
 position = Vector2(8, 8)
 tag_name = "wind_dir"
-direction = Vector2(-1, -8.742278e-08)
+direction = Vector2(-1, 8.742278e-08)
 snap_degrees = 90.0
 movement_locked = true
 
@@ -248,7 +248,7 @@ properties = {
 "do_bubble": [false, 1, ""],
 "editor_hidden": [false, 1, ""],
 "id": [&"PhysFan", 4, ""],
-"speed": [600.0, 3, ""],
+"speed": [20.0, 3, ""],
 "toggled": [true, 1, ""]
 }
 
@@ -256,7 +256,7 @@ properties = {
 visibility_layer = 2
 position = Vector2(8, 8)
 tag_name = "wind_dir"
-direction = Vector2(-1, -8.742278e-08)
+direction = Vector2(-1, 8.742278e-08)
 snap_degrees = 90.0
 movement_locked = true
 
@@ -274,7 +274,7 @@ properties = {
 "do_bubble": [false, 1, ""],
 "editor_hidden": [false, 1, ""],
 "id": [&"PhysFan", 4, ""],
-"speed": [600.0, 3, ""],
+"speed": [60.0, 3, ""],
 "toggled": [true, 1, ""]
 }
 
@@ -282,7 +282,7 @@ properties = {
 visibility_layer = 2
 position = Vector2(8, 8)
 tag_name = "wind_dir"
-direction = Vector2(-1, -8.742278e-08)
+direction = Vector2(-1, 8.742278e-08)
 snap_degrees = 90.0
 movement_locked = true
 
@@ -300,7 +300,7 @@ properties = {
 "do_bubble": [false, 1, ""],
 "editor_hidden": [false, 1, ""],
 "id": [&"PhysFan", 4, ""],
-"speed": [600.0, 3, ""],
+"speed": [60.0, 3, ""],
 "toggled": [true, 1, ""]
 }
 
@@ -308,7 +308,7 @@ properties = {
 visibility_layer = 2
 position = Vector2(8, 8)
 tag_name = "wind_dir"
-direction = Vector2(-1, -8.742278e-08)
+direction = Vector2(-1, 8.742278e-08)
 snap_degrees = 90.0
 movement_locked = true
 
@@ -326,7 +326,7 @@ properties = {
 "do_bubble": [false, 1, ""],
 "editor_hidden": [false, 1, ""],
 "id": [&"PhysFan", 4, ""],
-"speed": [600.0, 3, ""],
+"speed": [60.0, 3, ""],
 "toggled": [true, 1, ""]
 }
 
@@ -334,7 +334,7 @@ properties = {
 visibility_layer = 2
 position = Vector2(8, 8)
 tag_name = "wind_dir"
-direction = Vector2(-1, -8.742278e-08)
+direction = Vector2(-1, 8.742278e-08)
 snap_degrees = 90.0
 movement_locked = true
 
@@ -352,7 +352,7 @@ properties = {
 "do_bubble": [false, 1, ""],
 "editor_hidden": [false, 1, ""],
 "id": [&"PhysFan", 4, ""],
-"speed": [600.0, 3, ""],
+"speed": [60.0, 3, ""],
 "toggled": [true, 1, ""]
 }
 
@@ -360,7 +360,7 @@ properties = {
 visibility_layer = 2
 position = Vector2(8, 8)
 tag_name = "wind_dir"
-direction = Vector2(-1, -8.742278e-08)
+direction = Vector2(-1, 8.742278e-08)
 snap_degrees = 90.0
 movement_locked = true
 
@@ -370,7 +370,7 @@ position = Vector2(-264, 8)
 tag_name = "distance"
 lock_x = true
 
-[node name="PhysFan4" parent="Spawns" unique_id=284085888 instance=ExtResource("9_uijyh")]
+[node name="PhysFan79" parent="Spawns" unique_id=284085888 instance=ExtResource("9_uijyh")]
 visibility_layer = 2
 position = Vector2(3792, 1968)
 prop_path = "res://src/Prop/PhysFan.tscn"
@@ -378,11 +378,11 @@ properties = {
 "do_bubble": [false, 1, ""],
 "editor_hidden": [false, 1, ""],
 "id": [&"PhysFan", 4, ""],
-"speed": [600.0, 3, ""],
+"speed": [20.0, 3, ""],
 "toggled": [true, 1, ""]
 }
 
-[node name="WindVector" parent="Spawns/PhysFan4" unique_id=1674352412 instance=ExtResource("11_bke65")]
+[node name="WindVector" parent="Spawns/PhysFan79" unique_id=1674352412 instance=ExtResource("11_bke65")]
 visibility_layer = 2
 position = Vector2(8, 8)
 tag_name = "wind_dir"
@@ -390,13 +390,13 @@ direction = Vector2(-4.371139e-08, -1)
 snap_degrees = 90.0
 movement_locked = true
 
-[node name="Distance" parent="Spawns/PhysFan4" unique_id=122986401 instance=ExtResource("13_4p5xh")]
+[node name="Distance" parent="Spawns/PhysFan79" unique_id=122986401 instance=ExtResource("13_4p5xh")]
 visibility_layer = 2
 position = Vector2(7.9999876, -272.1176)
 tag_name = "distance"
 lock_x = true
 
-[node name="PhysFan5" parent="Spawns" unique_id=1931529584 instance=ExtResource("9_uijyh")]
+[node name="PhysFan80" parent="Spawns" unique_id=1931529584 instance=ExtResource("9_uijyh")]
 visibility_layer = 2
 position = Vector2(3840, 2464)
 prop_path = "res://src/Prop/PhysFan.tscn"
@@ -404,11 +404,11 @@ properties = {
 "do_bubble": [false, 1, ""],
 "editor_hidden": [false, 1, ""],
 "id": [&"PhysFan", 4, ""],
-"speed": [600.0, 3, ""],
+"speed": [20.0, 3, ""],
 "toggled": [true, 1, ""]
 }
 
-[node name="WindVector" parent="Spawns/PhysFan5" unique_id=1896052140 instance=ExtResource("11_bke65")]
+[node name="WindVector" parent="Spawns/PhysFan80" unique_id=1896052140 instance=ExtResource("11_bke65")]
 visibility_layer = 2
 position = Vector2(8, 8)
 tag_name = "wind_dir"
@@ -416,13 +416,13 @@ direction = Vector2(-4.371139e-08, -1)
 snap_degrees = 90.0
 movement_locked = true
 
-[node name="Distance" parent="Spawns/PhysFan5" unique_id=1143684817 instance=ExtResource("13_4p5xh")]
+[node name="Distance" parent="Spawns/PhysFan80" unique_id=1143684817 instance=ExtResource("13_4p5xh")]
 visibility_layer = 2
 position = Vector2(7.9999876, -272.1176)
 tag_name = "distance"
 lock_x = true
 
-[node name="PhysFan6" parent="Spawns" unique_id=1997004293 instance=ExtResource("9_uijyh")]
+[node name="PhysFan81" parent="Spawns" unique_id=1997004293 instance=ExtResource("9_uijyh")]
 visibility_layer = 2
 position = Vector2(3856, 2464)
 prop_path = "res://src/Prop/PhysFan.tscn"
@@ -430,11 +430,11 @@ properties = {
 "do_bubble": [false, 1, ""],
 "editor_hidden": [false, 1, ""],
 "id": [&"PhysFan", 4, ""],
-"speed": [600.0, 3, ""],
+"speed": [20.0, 3, ""],
 "toggled": [true, 1, ""]
 }
 
-[node name="WindVector" parent="Spawns/PhysFan6" unique_id=1404031264 instance=ExtResource("11_bke65")]
+[node name="WindVector" parent="Spawns/PhysFan81" unique_id=1404031264 instance=ExtResource("11_bke65")]
 visibility_layer = 2
 position = Vector2(8, 8)
 tag_name = "wind_dir"
@@ -442,13 +442,13 @@ direction = Vector2(-4.371139e-08, -1)
 snap_degrees = 90.0
 movement_locked = true
 
-[node name="Distance" parent="Spawns/PhysFan6" unique_id=921830566 instance=ExtResource("13_4p5xh")]
+[node name="Distance" parent="Spawns/PhysFan81" unique_id=921830566 instance=ExtResource("13_4p5xh")]
 visibility_layer = 2
 position = Vector2(7.9999876, -272.1176)
 tag_name = "distance"
 lock_x = true
 
-[node name="PhysFan7" parent="Spawns" unique_id=81584610 instance=ExtResource("9_uijyh")]
+[node name="PhysFan82" parent="Spawns" unique_id=81584610 instance=ExtResource("9_uijyh")]
 visibility_layer = 2
 position = Vector2(3872, 2464)
 prop_path = "res://src/Prop/PhysFan.tscn"
@@ -456,11 +456,11 @@ properties = {
 "do_bubble": [false, 1, ""],
 "editor_hidden": [false, 1, ""],
 "id": [&"PhysFan", 4, ""],
-"speed": [600.0, 3, ""],
+"speed": [20.0, 3, ""],
 "toggled": [true, 1, ""]
 }
 
-[node name="WindVector" parent="Spawns/PhysFan7" unique_id=311928386 instance=ExtResource("11_bke65")]
+[node name="WindVector" parent="Spawns/PhysFan82" unique_id=311928386 instance=ExtResource("11_bke65")]
 visibility_layer = 2
 position = Vector2(8, 8)
 tag_name = "wind_dir"
@@ -468,13 +468,13 @@ direction = Vector2(-4.371139e-08, -1)
 snap_degrees = 90.0
 movement_locked = true
 
-[node name="Distance" parent="Spawns/PhysFan7" unique_id=282968547 instance=ExtResource("13_4p5xh")]
+[node name="Distance" parent="Spawns/PhysFan82" unique_id=282968547 instance=ExtResource("13_4p5xh")]
 visibility_layer = 2
 position = Vector2(7.9999876, -272.1176)
 tag_name = "distance"
 lock_x = true
 
-[node name="PhysFan8" parent="Spawns" unique_id=539493034 instance=ExtResource("9_uijyh")]
+[node name="PhysFan83" parent="Spawns" unique_id=539493034 instance=ExtResource("9_uijyh")]
 visibility_layer = 2
 position = Vector2(3888, 2464)
 prop_path = "res://src/Prop/PhysFan.tscn"
@@ -482,11 +482,11 @@ properties = {
 "do_bubble": [false, 1, ""],
 "editor_hidden": [false, 1, ""],
 "id": [&"PhysFan", 4, ""],
-"speed": [600.0, 3, ""],
+"speed": [20.0, 3, ""],
 "toggled": [true, 1, ""]
 }
 
-[node name="WindVector" parent="Spawns/PhysFan8" unique_id=1699513838 instance=ExtResource("11_bke65")]
+[node name="WindVector" parent="Spawns/PhysFan83" unique_id=1699513838 instance=ExtResource("11_bke65")]
 visibility_layer = 2
 position = Vector2(8, 8)
 tag_name = "wind_dir"
@@ -494,13 +494,13 @@ direction = Vector2(-4.371139e-08, -1)
 snap_degrees = 90.0
 movement_locked = true
 
-[node name="Distance" parent="Spawns/PhysFan8" unique_id=617101695 instance=ExtResource("13_4p5xh")]
+[node name="Distance" parent="Spawns/PhysFan83" unique_id=617101695 instance=ExtResource("13_4p5xh")]
 visibility_layer = 2
 position = Vector2(7.9999876, -272.1176)
 tag_name = "distance"
 lock_x = true
 
-[node name="PhysFan9" parent="Spawns" unique_id=600344442 instance=ExtResource("9_uijyh")]
+[node name="PhysFan84" parent="Spawns" unique_id=600344442 instance=ExtResource("9_uijyh")]
 visibility_layer = 2
 position = Vector2(3904, 2464)
 prop_path = "res://src/Prop/PhysFan.tscn"
@@ -508,11 +508,11 @@ properties = {
 "do_bubble": [false, 1, ""],
 "editor_hidden": [false, 1, ""],
 "id": [&"PhysFan", 4, ""],
-"speed": [600.0, 3, ""],
+"speed": [20.0, 3, ""],
 "toggled": [true, 1, ""]
 }
 
-[node name="WindVector" parent="Spawns/PhysFan9" unique_id=1605753188 instance=ExtResource("11_bke65")]
+[node name="WindVector" parent="Spawns/PhysFan84" unique_id=1605753188 instance=ExtResource("11_bke65")]
 visibility_layer = 2
 position = Vector2(8, 8)
 tag_name = "wind_dir"
@@ -520,13 +520,13 @@ direction = Vector2(-4.371139e-08, -1)
 snap_degrees = 90.0
 movement_locked = true
 
-[node name="Distance" parent="Spawns/PhysFan9" unique_id=671191896 instance=ExtResource("13_4p5xh")]
+[node name="Distance" parent="Spawns/PhysFan84" unique_id=671191896 instance=ExtResource("13_4p5xh")]
 visibility_layer = 2
 position = Vector2(7.9999876, -272.1176)
 tag_name = "distance"
 lock_x = true
 
-[node name="PhysFan10" parent="Spawns" unique_id=629800007 instance=ExtResource("9_uijyh")]
+[node name="PhysFan85" parent="Spawns" unique_id=629800007 instance=ExtResource("9_uijyh")]
 visibility_layer = 2
 position = Vector2(3920, 2464)
 prop_path = "res://src/Prop/PhysFan.tscn"
@@ -534,11 +534,11 @@ properties = {
 "do_bubble": [false, 1, ""],
 "editor_hidden": [false, 1, ""],
 "id": [&"PhysFan", 4, ""],
-"speed": [600.0, 3, ""],
+"speed": [20.0, 3, ""],
 "toggled": [true, 1, ""]
 }
 
-[node name="WindVector" parent="Spawns/PhysFan10" unique_id=1388586026 instance=ExtResource("11_bke65")]
+[node name="WindVector" parent="Spawns/PhysFan85" unique_id=1388586026 instance=ExtResource("11_bke65")]
 visibility_layer = 2
 position = Vector2(8, 8)
 tag_name = "wind_dir"
@@ -546,13 +546,13 @@ direction = Vector2(-4.371139e-08, -1)
 snap_degrees = 90.0
 movement_locked = true
 
-[node name="Distance" parent="Spawns/PhysFan10" unique_id=1832614065 instance=ExtResource("13_4p5xh")]
+[node name="Distance" parent="Spawns/PhysFan85" unique_id=1832614065 instance=ExtResource("13_4p5xh")]
 visibility_layer = 2
 position = Vector2(7.9999876, -272.1176)
 tag_name = "distance"
 lock_x = true
 
-[node name="PhysFan11" parent="Spawns" unique_id=290403245 instance=ExtResource("9_uijyh")]
+[node name="PhysFan86" parent="Spawns" unique_id=290403245 instance=ExtResource("9_uijyh")]
 visibility_layer = 2
 position = Vector2(3936, 2464)
 prop_path = "res://src/Prop/PhysFan.tscn"
@@ -560,11 +560,11 @@ properties = {
 "do_bubble": [false, 1, ""],
 "editor_hidden": [false, 1, ""],
 "id": [&"PhysFan", 4, ""],
-"speed": [600.0, 3, ""],
+"speed": [20.0, 3, ""],
 "toggled": [true, 1, ""]
 }
 
-[node name="WindVector" parent="Spawns/PhysFan11" unique_id=1321039726 instance=ExtResource("11_bke65")]
+[node name="WindVector" parent="Spawns/PhysFan86" unique_id=1321039726 instance=ExtResource("11_bke65")]
 visibility_layer = 2
 position = Vector2(8, 8)
 tag_name = "wind_dir"
@@ -572,13 +572,13 @@ direction = Vector2(-4.371139e-08, -1)
 snap_degrees = 90.0
 movement_locked = true
 
-[node name="Distance" parent="Spawns/PhysFan11" unique_id=1127183775 instance=ExtResource("13_4p5xh")]
+[node name="Distance" parent="Spawns/PhysFan86" unique_id=1127183775 instance=ExtResource("13_4p5xh")]
 visibility_layer = 2
 position = Vector2(7.9999876, -272.1176)
 tag_name = "distance"
 lock_x = true
 
-[node name="PhysFan12" parent="Spawns" unique_id=861681752 instance=ExtResource("9_uijyh")]
+[node name="PhysFan87" parent="Spawns" unique_id=861681752 instance=ExtResource("9_uijyh")]
 visibility_layer = 2
 position = Vector2(3952, 2464)
 prop_path = "res://src/Prop/PhysFan.tscn"
@@ -586,11 +586,11 @@ properties = {
 "do_bubble": [false, 1, ""],
 "editor_hidden": [false, 1, ""],
 "id": [&"PhysFan", 4, ""],
-"speed": [600.0, 3, ""],
+"speed": [20.0, 3, ""],
 "toggled": [true, 1, ""]
 }
 
-[node name="WindVector" parent="Spawns/PhysFan12" unique_id=1820142683 instance=ExtResource("11_bke65")]
+[node name="WindVector" parent="Spawns/PhysFan87" unique_id=1820142683 instance=ExtResource("11_bke65")]
 visibility_layer = 2
 position = Vector2(8, 8)
 tag_name = "wind_dir"
@@ -598,13 +598,13 @@ direction = Vector2(-4.371139e-08, -1)
 snap_degrees = 90.0
 movement_locked = true
 
-[node name="Distance" parent="Spawns/PhysFan12" unique_id=1192890866 instance=ExtResource("13_4p5xh")]
+[node name="Distance" parent="Spawns/PhysFan87" unique_id=1192890866 instance=ExtResource("13_4p5xh")]
 visibility_layer = 2
 position = Vector2(7.9999876, -272.1176)
 tag_name = "distance"
 lock_x = true
 
-[node name="PhysFan13" parent="Spawns" unique_id=1664359034 instance=ExtResource("9_uijyh")]
+[node name="PhysFan88" parent="Spawns" unique_id=1664359034 instance=ExtResource("9_uijyh")]
 visibility_layer = 2
 position = Vector2(3968, 2464)
 prop_path = "res://src/Prop/PhysFan.tscn"
@@ -612,11 +612,11 @@ properties = {
 "do_bubble": [false, 1, ""],
 "editor_hidden": [false, 1, ""],
 "id": [&"PhysFan", 4, ""],
-"speed": [600.0, 3, ""],
+"speed": [20.0, 3, ""],
 "toggled": [true, 1, ""]
 }
 
-[node name="WindVector" parent="Spawns/PhysFan13" unique_id=1867321619 instance=ExtResource("11_bke65")]
+[node name="WindVector" parent="Spawns/PhysFan88" unique_id=1867321619 instance=ExtResource("11_bke65")]
 visibility_layer = 2
 position = Vector2(8, 8)
 tag_name = "wind_dir"
@@ -624,13 +624,13 @@ direction = Vector2(-4.371139e-08, -1)
 snap_degrees = 90.0
 movement_locked = true
 
-[node name="Distance" parent="Spawns/PhysFan13" unique_id=2037487449 instance=ExtResource("13_4p5xh")]
+[node name="Distance" parent="Spawns/PhysFan88" unique_id=2037487449 instance=ExtResource("13_4p5xh")]
 visibility_layer = 2
 position = Vector2(7.9999876, -272.1176)
 tag_name = "distance"
 lock_x = true
 
-[node name="PhysFan14" parent="Spawns" unique_id=1703010865 instance=ExtResource("9_uijyh")]
+[node name="PhysFan89" parent="Spawns" unique_id=1703010865 instance=ExtResource("9_uijyh")]
 visibility_layer = 2
 position = Vector2(3984, 2464)
 prop_path = "res://src/Prop/PhysFan.tscn"
@@ -638,11 +638,11 @@ properties = {
 "do_bubble": [false, 1, ""],
 "editor_hidden": [false, 1, ""],
 "id": [&"PhysFan", 4, ""],
-"speed": [600.0, 3, ""],
+"speed": [20.0, 3, ""],
 "toggled": [true, 1, ""]
 }
 
-[node name="WindVector" parent="Spawns/PhysFan14" unique_id=811105793 instance=ExtResource("11_bke65")]
+[node name="WindVector" parent="Spawns/PhysFan89" unique_id=811105793 instance=ExtResource("11_bke65")]
 visibility_layer = 2
 position = Vector2(8, 8)
 tag_name = "wind_dir"
@@ -650,13 +650,13 @@ direction = Vector2(-4.371139e-08, -1)
 snap_degrees = 90.0
 movement_locked = true
 
-[node name="Distance" parent="Spawns/PhysFan14" unique_id=1857521471 instance=ExtResource("13_4p5xh")]
+[node name="Distance" parent="Spawns/PhysFan89" unique_id=1857521471 instance=ExtResource("13_4p5xh")]
 visibility_layer = 2
 position = Vector2(7.9999876, -272.1176)
 tag_name = "distance"
 lock_x = true
 
-[node name="PhysFan15" parent="Spawns" unique_id=38008996 instance=ExtResource("9_uijyh")]
+[node name="PhysFan90" parent="Spawns" unique_id=38008996 instance=ExtResource("9_uijyh")]
 visibility_layer = 2
 position = Vector2(4000, 2464)
 prop_path = "res://src/Prop/PhysFan.tscn"
@@ -664,11 +664,11 @@ properties = {
 "do_bubble": [false, 1, ""],
 "editor_hidden": [false, 1, ""],
 "id": [&"PhysFan", 4, ""],
-"speed": [600.0, 3, ""],
+"speed": [20.0, 3, ""],
 "toggled": [true, 1, ""]
 }
 
-[node name="WindVector" parent="Spawns/PhysFan15" unique_id=1546230277 instance=ExtResource("11_bke65")]
+[node name="WindVector" parent="Spawns/PhysFan90" unique_id=1546230277 instance=ExtResource("11_bke65")]
 visibility_layer = 2
 position = Vector2(8, 8)
 tag_name = "wind_dir"
@@ -676,13 +676,13 @@ direction = Vector2(-4.371139e-08, -1)
 snap_degrees = 90.0
 movement_locked = true
 
-[node name="Distance" parent="Spawns/PhysFan15" unique_id=507588151 instance=ExtResource("13_4p5xh")]
+[node name="Distance" parent="Spawns/PhysFan90" unique_id=507588151 instance=ExtResource("13_4p5xh")]
 visibility_layer = 2
 position = Vector2(7.9999876, -272.1176)
 tag_name = "distance"
 lock_x = true
 
-[node name="PhysFan16" parent="Spawns" unique_id=1709520910 instance=ExtResource("9_uijyh")]
+[node name="PhysFan91" parent="Spawns" unique_id=1709520910 instance=ExtResource("9_uijyh")]
 visibility_layer = 2
 position = Vector2(4016, 2464)
 prop_path = "res://src/Prop/PhysFan.tscn"
@@ -690,11 +690,11 @@ properties = {
 "do_bubble": [false, 1, ""],
 "editor_hidden": [false, 1, ""],
 "id": [&"PhysFan", 4, ""],
-"speed": [600.0, 3, ""],
+"speed": [20.0, 3, ""],
 "toggled": [true, 1, ""]
 }
 
-[node name="WindVector" parent="Spawns/PhysFan16" unique_id=1059791350 instance=ExtResource("11_bke65")]
+[node name="WindVector" parent="Spawns/PhysFan91" unique_id=1059791350 instance=ExtResource("11_bke65")]
 visibility_layer = 2
 position = Vector2(8, 8)
 tag_name = "wind_dir"
@@ -702,13 +702,13 @@ direction = Vector2(-4.371139e-08, -1)
 snap_degrees = 90.0
 movement_locked = true
 
-[node name="Distance" parent="Spawns/PhysFan16" unique_id=1855039190 instance=ExtResource("13_4p5xh")]
+[node name="Distance" parent="Spawns/PhysFan91" unique_id=1855039190 instance=ExtResource("13_4p5xh")]
 visibility_layer = 2
 position = Vector2(7.9999876, -272.1176)
 tag_name = "distance"
 lock_x = true
 
-[node name="PhysFan17" parent="Spawns" unique_id=735115347 instance=ExtResource("9_uijyh")]
+[node name="PhysFan92" parent="Spawns" unique_id=735115347 instance=ExtResource("9_uijyh")]
 visibility_layer = 2
 position = Vector2(4032, 2464)
 prop_path = "res://src/Prop/PhysFan.tscn"
@@ -716,11 +716,11 @@ properties = {
 "do_bubble": [false, 1, ""],
 "editor_hidden": [false, 1, ""],
 "id": [&"PhysFan", 4, ""],
-"speed": [600.0, 3, ""],
+"speed": [20.0, 3, ""],
 "toggled": [true, 1, ""]
 }
 
-[node name="WindVector" parent="Spawns/PhysFan17" unique_id=1238715574 instance=ExtResource("11_bke65")]
+[node name="WindVector" parent="Spawns/PhysFan92" unique_id=1238715574 instance=ExtResource("11_bke65")]
 visibility_layer = 2
 position = Vector2(8, 8)
 tag_name = "wind_dir"
@@ -728,13 +728,13 @@ direction = Vector2(-4.371139e-08, -1)
 snap_degrees = 90.0
 movement_locked = true
 
-[node name="Distance" parent="Spawns/PhysFan17" unique_id=933053404 instance=ExtResource("13_4p5xh")]
+[node name="Distance" parent="Spawns/PhysFan92" unique_id=933053404 instance=ExtResource("13_4p5xh")]
 visibility_layer = 2
 position = Vector2(8, -272)
 tag_name = "distance"
 lock_x = true
 
-[node name="PhysFan18" parent="Spawns" unique_id=562523641 instance=ExtResource("9_uijyh")]
+[node name="PhysFan93" parent="Spawns" unique_id=562523641 instance=ExtResource("9_uijyh")]
 visibility_layer = 2
 position = Vector2(4048, 2464)
 prop_path = "res://src/Prop/PhysFan.tscn"
@@ -742,11 +742,11 @@ properties = {
 "do_bubble": [false, 1, ""],
 "editor_hidden": [false, 1, ""],
 "id": [&"PhysFan", 4, ""],
-"speed": [600.0, 3, ""],
+"speed": [20.0, 3, ""],
 "toggled": [true, 1, ""]
 }
 
-[node name="WindVector" parent="Spawns/PhysFan18" unique_id=236141640 instance=ExtResource("11_bke65")]
+[node name="WindVector" parent="Spawns/PhysFan93" unique_id=236141640 instance=ExtResource("11_bke65")]
 visibility_layer = 2
 position = Vector2(8, 8)
 tag_name = "wind_dir"
@@ -754,13 +754,13 @@ direction = Vector2(-4.371139e-08, -1)
 snap_degrees = 90.0
 movement_locked = true
 
-[node name="Distance" parent="Spawns/PhysFan18" unique_id=1537365910 instance=ExtResource("13_4p5xh")]
+[node name="Distance" parent="Spawns/PhysFan93" unique_id=1537365910 instance=ExtResource("13_4p5xh")]
 visibility_layer = 2
 position = Vector2(7.9999876, -272.1176)
 tag_name = "distance"
 lock_x = true
 
-[node name="PhysFan19" parent="Spawns" unique_id=2032380229 instance=ExtResource("9_uijyh")]
+[node name="PhysFan94" parent="Spawns" unique_id=2032380229 instance=ExtResource("9_uijyh")]
 visibility_layer = 2
 position = Vector2(3776, 1968)
 prop_path = "res://src/Prop/PhysFan.tscn"
@@ -768,11 +768,11 @@ properties = {
 "do_bubble": [false, 1, ""],
 "editor_hidden": [false, 1, ""],
 "id": [&"PhysFan", 4, ""],
-"speed": [600.0, 3, ""],
+"speed": [20.0, 3, ""],
 "toggled": [true, 1, ""]
 }
 
-[node name="WindVector" parent="Spawns/PhysFan19" unique_id=1470453765 instance=ExtResource("11_bke65")]
+[node name="WindVector" parent="Spawns/PhysFan94" unique_id=1470453765 instance=ExtResource("11_bke65")]
 visibility_layer = 2
 position = Vector2(8, 8)
 tag_name = "wind_dir"
@@ -780,13 +780,13 @@ direction = Vector2(-4.371139e-08, -1)
 snap_degrees = 90.0
 movement_locked = true
 
-[node name="Distance" parent="Spawns/PhysFan19" unique_id=1807390571 instance=ExtResource("13_4p5xh")]
+[node name="Distance" parent="Spawns/PhysFan94" unique_id=1807390571 instance=ExtResource("13_4p5xh")]
 visibility_layer = 2
 position = Vector2(7.9999876, -272.1176)
 tag_name = "distance"
 lock_x = true
 
-[node name="PhysFan20" parent="Spawns" unique_id=1689747014 instance=ExtResource("9_uijyh")]
+[node name="PhysFan95" parent="Spawns" unique_id=1689747014 instance=ExtResource("9_uijyh")]
 visibility_layer = 2
 position = Vector2(3760, 1968)
 prop_path = "res://src/Prop/PhysFan.tscn"
@@ -794,11 +794,11 @@ properties = {
 "do_bubble": [false, 1, ""],
 "editor_hidden": [false, 1, ""],
 "id": [&"PhysFan", 4, ""],
-"speed": [600.0, 3, ""],
+"speed": [20.0, 3, ""],
 "toggled": [true, 1, ""]
 }
 
-[node name="WindVector" parent="Spawns/PhysFan20" unique_id=1103680952 instance=ExtResource("11_bke65")]
+[node name="WindVector" parent="Spawns/PhysFan95" unique_id=1103680952 instance=ExtResource("11_bke65")]
 visibility_layer = 2
 position = Vector2(8, 8)
 tag_name = "wind_dir"
@@ -806,13 +806,13 @@ direction = Vector2(-4.371139e-08, -1)
 snap_degrees = 90.0
 movement_locked = true
 
-[node name="Distance" parent="Spawns/PhysFan20" unique_id=907412190 instance=ExtResource("13_4p5xh")]
+[node name="Distance" parent="Spawns/PhysFan95" unique_id=907412190 instance=ExtResource("13_4p5xh")]
 visibility_layer = 2
 position = Vector2(7.9999876, -272.1176)
 tag_name = "distance"
 lock_x = true
 
-[node name="PhysFan21" parent="Spawns" unique_id=426698748 instance=ExtResource("9_uijyh")]
+[node name="PhysFan96" parent="Spawns" unique_id=426698748 instance=ExtResource("9_uijyh")]
 visibility_layer = 2
 position = Vector2(3744, 1968)
 prop_path = "res://src/Prop/PhysFan.tscn"
@@ -820,11 +820,11 @@ properties = {
 "do_bubble": [false, 1, ""],
 "editor_hidden": [false, 1, ""],
 "id": [&"PhysFan", 4, ""],
-"speed": [600.0, 3, ""],
+"speed": [20.0, 3, ""],
 "toggled": [true, 1, ""]
 }
 
-[node name="WindVector" parent="Spawns/PhysFan21" unique_id=1884934440 instance=ExtResource("11_bke65")]
+[node name="WindVector" parent="Spawns/PhysFan96" unique_id=1884934440 instance=ExtResource("11_bke65")]
 visibility_layer = 2
 position = Vector2(8, 8)
 tag_name = "wind_dir"
@@ -832,13 +832,13 @@ direction = Vector2(-4.371139e-08, -1)
 snap_degrees = 90.0
 movement_locked = true
 
-[node name="Distance" parent="Spawns/PhysFan21" unique_id=870654631 instance=ExtResource("13_4p5xh")]
+[node name="Distance" parent="Spawns/PhysFan96" unique_id=870654631 instance=ExtResource("13_4p5xh")]
 visibility_layer = 2
 position = Vector2(7.9999876, -272.1176)
 tag_name = "distance"
 lock_x = true
 
-[node name="PhysFan22" parent="Spawns" unique_id=791441020 instance=ExtResource("9_uijyh")]
+[node name="PhysFan97" parent="Spawns" unique_id=791441020 instance=ExtResource("9_uijyh")]
 visibility_layer = 2
 position = Vector2(3728, 1968)
 prop_path = "res://src/Prop/PhysFan.tscn"
@@ -846,11 +846,11 @@ properties = {
 "do_bubble": [false, 1, ""],
 "editor_hidden": [false, 1, ""],
 "id": [&"PhysFan", 4, ""],
-"speed": [600.0, 3, ""],
+"speed": [20.0, 3, ""],
 "toggled": [true, 1, ""]
 }
 
-[node name="WindVector" parent="Spawns/PhysFan22" unique_id=1720409632 instance=ExtResource("11_bke65")]
+[node name="WindVector" parent="Spawns/PhysFan97" unique_id=1720409632 instance=ExtResource("11_bke65")]
 visibility_layer = 2
 position = Vector2(8, 8)
 tag_name = "wind_dir"
@@ -858,13 +858,13 @@ direction = Vector2(-4.371139e-08, -1)
 snap_degrees = 90.0
 movement_locked = true
 
-[node name="Distance" parent="Spawns/PhysFan22" unique_id=56480914 instance=ExtResource("13_4p5xh")]
+[node name="Distance" parent="Spawns/PhysFan97" unique_id=56480914 instance=ExtResource("13_4p5xh")]
 visibility_layer = 2
 position = Vector2(7.9999876, -272.1176)
 tag_name = "distance"
 lock_x = true
 
-[node name="PhysFan23" parent="Spawns" unique_id=1465410155 instance=ExtResource("9_uijyh")]
+[node name="PhysFan98" parent="Spawns" unique_id=1465410155 instance=ExtResource("9_uijyh")]
 visibility_layer = 2
 position = Vector2(3712, 1968)
 prop_path = "res://src/Prop/PhysFan.tscn"
@@ -872,11 +872,11 @@ properties = {
 "do_bubble": [false, 1, ""],
 "editor_hidden": [false, 1, ""],
 "id": [&"PhysFan", 4, ""],
-"speed": [600.0, 3, ""],
+"speed": [20.0, 3, ""],
 "toggled": [true, 1, ""]
 }
 
-[node name="WindVector" parent="Spawns/PhysFan23" unique_id=2033440319 instance=ExtResource("11_bke65")]
+[node name="WindVector" parent="Spawns/PhysFan98" unique_id=2033440319 instance=ExtResource("11_bke65")]
 visibility_layer = 2
 position = Vector2(8, 8)
 tag_name = "wind_dir"
@@ -884,13 +884,13 @@ direction = Vector2(-4.371139e-08, -1)
 snap_degrees = 90.0
 movement_locked = true
 
-[node name="Distance" parent="Spawns/PhysFan23" unique_id=1348920924 instance=ExtResource("13_4p5xh")]
+[node name="Distance" parent="Spawns/PhysFan98" unique_id=1348920924 instance=ExtResource("13_4p5xh")]
 visibility_layer = 2
 position = Vector2(7.9999876, -272.1176)
 tag_name = "distance"
 lock_x = true
 
-[node name="PhysFan24" parent="Spawns" unique_id=821347100 instance=ExtResource("9_uijyh")]
+[node name="PhysFan99" parent="Spawns" unique_id=821347100 instance=ExtResource("9_uijyh")]
 visibility_layer = 2
 position = Vector2(3696, 1968)
 prop_path = "res://src/Prop/PhysFan.tscn"
@@ -898,11 +898,11 @@ properties = {
 "do_bubble": [false, 1, ""],
 "editor_hidden": [false, 1, ""],
 "id": [&"PhysFan", 4, ""],
-"speed": [600.0, 3, ""],
+"speed": [20.0, 3, ""],
 "toggled": [true, 1, ""]
 }
 
-[node name="WindVector" parent="Spawns/PhysFan24" unique_id=344616336 instance=ExtResource("11_bke65")]
+[node name="WindVector" parent="Spawns/PhysFan99" unique_id=344616336 instance=ExtResource("11_bke65")]
 visibility_layer = 2
 position = Vector2(8, 8)
 tag_name = "wind_dir"
@@ -910,13 +910,13 @@ direction = Vector2(-4.371139e-08, -1)
 snap_degrees = 90.0
 movement_locked = true
 
-[node name="Distance" parent="Spawns/PhysFan24" unique_id=697428267 instance=ExtResource("13_4p5xh")]
+[node name="Distance" parent="Spawns/PhysFan99" unique_id=697428267 instance=ExtResource("13_4p5xh")]
 visibility_layer = 2
 position = Vector2(7.9999876, -272.1176)
 tag_name = "distance"
 lock_x = true
 
-[node name="PhysFan25" parent="Spawns" unique_id=10413499 instance=ExtResource("9_uijyh")]
+[node name="PhysFan100" parent="Spawns" unique_id=10413499 instance=ExtResource("9_uijyh")]
 visibility_layer = 2
 position = Vector2(3680, 1968)
 prop_path = "res://src/Prop/PhysFan.tscn"
@@ -924,11 +924,11 @@ properties = {
 "do_bubble": [false, 1, ""],
 "editor_hidden": [false, 1, ""],
 "id": [&"PhysFan", 4, ""],
-"speed": [600.0, 3, ""],
+"speed": [20.0, 3, ""],
 "toggled": [true, 1, ""]
 }
 
-[node name="WindVector" parent="Spawns/PhysFan25" unique_id=1306613032 instance=ExtResource("11_bke65")]
+[node name="WindVector" parent="Spawns/PhysFan100" unique_id=1306613032 instance=ExtResource("11_bke65")]
 visibility_layer = 2
 position = Vector2(8, 8)
 tag_name = "wind_dir"
@@ -936,13 +936,13 @@ direction = Vector2(-4.371139e-08, -1)
 snap_degrees = 90.0
 movement_locked = true
 
-[node name="Distance" parent="Spawns/PhysFan25" unique_id=754129186 instance=ExtResource("13_4p5xh")]
+[node name="Distance" parent="Spawns/PhysFan100" unique_id=754129186 instance=ExtResource("13_4p5xh")]
 visibility_layer = 2
 position = Vector2(7.9999876, -272.1176)
 tag_name = "distance"
 lock_x = true
 
-[node name="PhysFan26" parent="Spawns" unique_id=712588940 instance=ExtResource("9_uijyh")]
+[node name="PhysFan101" parent="Spawns" unique_id=712588940 instance=ExtResource("9_uijyh")]
 visibility_layer = 2
 position = Vector2(3664, 1968)
 prop_path = "res://src/Prop/PhysFan.tscn"
@@ -950,11 +950,11 @@ properties = {
 "do_bubble": [false, 1, ""],
 "editor_hidden": [false, 1, ""],
 "id": [&"PhysFan", 4, ""],
-"speed": [600.0, 3, ""],
+"speed": [20.0, 3, ""],
 "toggled": [true, 1, ""]
 }
 
-[node name="WindVector" parent="Spawns/PhysFan26" unique_id=1254182947 instance=ExtResource("11_bke65")]
+[node name="WindVector" parent="Spawns/PhysFan101" unique_id=1254182947 instance=ExtResource("11_bke65")]
 visibility_layer = 2
 position = Vector2(8, 8)
 tag_name = "wind_dir"
@@ -962,13 +962,13 @@ direction = Vector2(-4.371139e-08, -1)
 snap_degrees = 90.0
 movement_locked = true
 
-[node name="Distance" parent="Spawns/PhysFan26" unique_id=552581006 instance=ExtResource("13_4p5xh")]
+[node name="Distance" parent="Spawns/PhysFan101" unique_id=552581006 instance=ExtResource("13_4p5xh")]
 visibility_layer = 2
 position = Vector2(7.9999876, -272.1176)
 tag_name = "distance"
 lock_x = true
 
-[node name="PhysFan27" parent="Spawns" unique_id=1706060095 instance=ExtResource("9_uijyh")]
+[node name="PhysFan102" parent="Spawns" unique_id=1706060095 instance=ExtResource("9_uijyh")]
 visibility_layer = 2
 position = Vector2(3648, 1968)
 prop_path = "res://src/Prop/PhysFan.tscn"
@@ -976,11 +976,11 @@ properties = {
 "do_bubble": [false, 1, ""],
 "editor_hidden": [false, 1, ""],
 "id": [&"PhysFan", 4, ""],
-"speed": [600.0, 3, ""],
+"speed": [20.0, 3, ""],
 "toggled": [true, 1, ""]
 }
 
-[node name="WindVector" parent="Spawns/PhysFan27" unique_id=1404088989 instance=ExtResource("11_bke65")]
+[node name="WindVector" parent="Spawns/PhysFan102" unique_id=1404088989 instance=ExtResource("11_bke65")]
 visibility_layer = 2
 position = Vector2(8, 8)
 tag_name = "wind_dir"
@@ -988,13 +988,13 @@ direction = Vector2(-4.371139e-08, -1)
 snap_degrees = 90.0
 movement_locked = true
 
-[node name="Distance" parent="Spawns/PhysFan27" unique_id=519754261 instance=ExtResource("13_4p5xh")]
+[node name="Distance" parent="Spawns/PhysFan102" unique_id=519754261 instance=ExtResource("13_4p5xh")]
 visibility_layer = 2
 position = Vector2(7.9999876, -272.1176)
 tag_name = "distance"
 lock_x = true
 
-[node name="PhysFan28" parent="Spawns" unique_id=472647678 instance=ExtResource("9_uijyh")]
+[node name="PhysFan103" parent="Spawns" unique_id=472647678 instance=ExtResource("9_uijyh")]
 visibility_layer = 2
 position = Vector2(3632, 1968)
 prop_path = "res://src/Prop/PhysFan.tscn"
@@ -1002,11 +1002,11 @@ properties = {
 "do_bubble": [false, 1, ""],
 "editor_hidden": [false, 1, ""],
 "id": [&"PhysFan", 4, ""],
-"speed": [600.0, 3, ""],
+"speed": [20.0, 3, ""],
 "toggled": [true, 1, ""]
 }
 
-[node name="WindVector" parent="Spawns/PhysFan28" unique_id=72275546 instance=ExtResource("11_bke65")]
+[node name="WindVector" parent="Spawns/PhysFan103" unique_id=72275546 instance=ExtResource("11_bke65")]
 visibility_layer = 2
 position = Vector2(8, 8)
 tag_name = "wind_dir"
@@ -1014,13 +1014,13 @@ direction = Vector2(-4.371139e-08, -1)
 snap_degrees = 90.0
 movement_locked = true
 
-[node name="Distance" parent="Spawns/PhysFan28" unique_id=1318132090 instance=ExtResource("13_4p5xh")]
+[node name="Distance" parent="Spawns/PhysFan103" unique_id=1318132090 instance=ExtResource("13_4p5xh")]
 visibility_layer = 2
 position = Vector2(7.9999876, -272.1176)
 tag_name = "distance"
 lock_x = true
 
-[node name="PhysFan29" parent="Spawns" unique_id=457937237 instance=ExtResource("9_uijyh")]
+[node name="PhysFan104" parent="Spawns" unique_id=457937237 instance=ExtResource("9_uijyh")]
 visibility_layer = 2
 position = Vector2(3616, 1968)
 prop_path = "res://src/Prop/PhysFan.tscn"
@@ -1028,11 +1028,11 @@ properties = {
 "do_bubble": [false, 1, ""],
 "editor_hidden": [false, 1, ""],
 "id": [&"PhysFan", 4, ""],
-"speed": [600.0, 3, ""],
+"speed": [20.0, 3, ""],
 "toggled": [true, 1, ""]
 }
 
-[node name="WindVector" parent="Spawns/PhysFan29" unique_id=1935288113 instance=ExtResource("11_bke65")]
+[node name="WindVector" parent="Spawns/PhysFan104" unique_id=1935288113 instance=ExtResource("11_bke65")]
 visibility_layer = 2
 position = Vector2(8, 8)
 tag_name = "wind_dir"
@@ -1040,13 +1040,13 @@ direction = Vector2(-4.371139e-08, -1)
 snap_degrees = 90.0
 movement_locked = true
 
-[node name="Distance" parent="Spawns/PhysFan29" unique_id=1678050407 instance=ExtResource("13_4p5xh")]
+[node name="Distance" parent="Spawns/PhysFan104" unique_id=1678050407 instance=ExtResource("13_4p5xh")]
 visibility_layer = 2
 position = Vector2(7.9999876, -272.1176)
 tag_name = "distance"
 lock_x = true
 
-[node name="PhysFan30" parent="Spawns" unique_id=871846925 instance=ExtResource("9_uijyh")]
+[node name="PhysFan105" parent="Spawns" unique_id=871846925 instance=ExtResource("9_uijyh")]
 visibility_layer = 2
 position = Vector2(3600, 1968)
 prop_path = "res://src/Prop/PhysFan.tscn"
@@ -1054,11 +1054,11 @@ properties = {
 "do_bubble": [false, 1, ""],
 "editor_hidden": [false, 1, ""],
 "id": [&"PhysFan", 4, ""],
-"speed": [600.0, 3, ""],
+"speed": [20.0, 3, ""],
 "toggled": [true, 1, ""]
 }
 
-[node name="WindVector" parent="Spawns/PhysFan30" unique_id=295135163 instance=ExtResource("11_bke65")]
+[node name="WindVector" parent="Spawns/PhysFan105" unique_id=295135163 instance=ExtResource("11_bke65")]
 visibility_layer = 2
 position = Vector2(8, 8)
 tag_name = "wind_dir"
@@ -1066,13 +1066,13 @@ direction = Vector2(-4.371139e-08, -1)
 snap_degrees = 90.0
 movement_locked = true
 
-[node name="Distance" parent="Spawns/PhysFan30" unique_id=1480319105 instance=ExtResource("13_4p5xh")]
+[node name="Distance" parent="Spawns/PhysFan105" unique_id=1480319105 instance=ExtResource("13_4p5xh")]
 visibility_layer = 2
 position = Vector2(7.9999876, -272.1176)
 tag_name = "distance"
 lock_x = true
 
-[node name="PhysFan31" parent="Spawns" unique_id=772257696 instance=ExtResource("9_uijyh")]
+[node name="PhysFan106" parent="Spawns" unique_id=772257696 instance=ExtResource("9_uijyh")]
 visibility_layer = 2
 position = Vector2(3584, 1968)
 prop_path = "res://src/Prop/PhysFan.tscn"
@@ -1080,11 +1080,11 @@ properties = {
 "do_bubble": [false, 1, ""],
 "editor_hidden": [false, 1, ""],
 "id": [&"PhysFan", 4, ""],
-"speed": [600.0, 3, ""],
+"speed": [20.0, 3, ""],
 "toggled": [true, 1, ""]
 }
 
-[node name="WindVector" parent="Spawns/PhysFan31" unique_id=431588432 instance=ExtResource("11_bke65")]
+[node name="WindVector" parent="Spawns/PhysFan106" unique_id=431588432 instance=ExtResource("11_bke65")]
 visibility_layer = 2
 position = Vector2(8, 8)
 tag_name = "wind_dir"
@@ -1092,7 +1092,7 @@ direction = Vector2(-4.371139e-08, -1)
 snap_degrees = 90.0
 movement_locked = true
 
-[node name="Distance" parent="Spawns/PhysFan31" unique_id=93803997 instance=ExtResource("13_4p5xh")]
+[node name="Distance" parent="Spawns/PhysFan106" unique_id=93803997 instance=ExtResource("13_4p5xh")]
 visibility_layer = 2
 position = Vector2(7.9999876, -272.1176)
 tag_name = "distance"
@@ -1106,7 +1106,7 @@ properties = {
 "do_bubble": [false, 1, ""],
 "editor_hidden": [false, 1, ""],
 "id": [&"PhysFan", 4, ""],
-"speed": [600.0, 3, ""],
+"speed": [6.0, 3, ""],
 "toggled": [true, 1, ""]
 }
 
@@ -1132,7 +1132,7 @@ properties = {
 "do_bubble": [false, 1, ""],
 "editor_hidden": [false, 1, ""],
 "id": [&"PhysFan", 4, ""],
-"speed": [600.0, 3, ""],
+"speed": [6.0, 3, ""],
 "toggled": [true, 1, ""]
 }
 
@@ -1158,7 +1158,7 @@ properties = {
 "do_bubble": [false, 1, ""],
 "editor_hidden": [false, 1, ""],
 "id": [&"PhysFan", 4, ""],
-"speed": [600.0, 3, ""],
+"speed": [6.0, 3, ""],
 "toggled": [true, 1, ""]
 }
 
@@ -1184,7 +1184,7 @@ properties = {
 "do_bubble": [false, 1, ""],
 "editor_hidden": [false, 1, ""],
 "id": [&"PhysFan", 4, ""],
-"speed": [600.0, 3, ""],
+"speed": [6.0, 3, ""],
 "toggled": [true, 1, ""]
 }
 
@@ -1210,7 +1210,7 @@ properties = {
 "do_bubble": [false, 1, ""],
 "editor_hidden": [false, 1, ""],
 "id": [&"PhysFan", 4, ""],
-"speed": [600.0, 3, ""],
+"speed": [6.0, 3, ""],
 "toggled": [true, 1, ""]
 }
 
@@ -1236,7 +1236,7 @@ properties = {
 "do_bubble": [false, 1, ""],
 "editor_hidden": [false, 1, ""],
 "id": [&"PhysFan", 4, ""],
-"speed": [600.0, 3, ""],
+"speed": [6.0, 3, ""],
 "toggled": [true, 1, ""]
 }
 
@@ -1262,7 +1262,7 @@ properties = {
 "do_bubble": [false, 1, ""],
 "editor_hidden": [false, 1, ""],
 "id": [&"PhysFan", 4, ""],
-"speed": [600.0, 3, ""],
+"speed": [6.0, 3, ""],
 "toggled": [true, 1, ""]
 }
 
@@ -1288,7 +1288,7 @@ properties = {
 "do_bubble": [false, 1, ""],
 "editor_hidden": [false, 1, ""],
 "id": [&"PhysFan", 4, ""],
-"speed": [600.0, 3, ""],
+"speed": [6.0, 3, ""],
 "toggled": [true, 1, ""]
 }
 
@@ -1314,7 +1314,7 @@ properties = {
 "do_bubble": [false, 1, ""],
 "editor_hidden": [false, 1, ""],
 "id": [&"PhysFan", 4, ""],
-"speed": [600.0, 3, ""],
+"speed": [6.0, 3, ""],
 "toggled": [true, 1, ""]
 }
 
@@ -1340,7 +1340,7 @@ properties = {
 "do_bubble": [false, 1, ""],
 "editor_hidden": [false, 1, ""],
 "id": [&"PhysFan", 4, ""],
-"speed": [600.0, 3, ""],
+"speed": [6.0, 3, ""],
 "toggled": [true, 1, ""]
 }
 
@@ -1366,7 +1366,7 @@ properties = {
 "do_bubble": [false, 1, ""],
 "editor_hidden": [false, 1, ""],
 "id": [&"PhysFan", 4, ""],
-"speed": [600.0, 3, ""],
+"speed": [6.0, 3, ""],
 "toggled": [true, 1, ""]
 }
 
@@ -1392,7 +1392,7 @@ properties = {
 "do_bubble": [false, 1, ""],
 "editor_hidden": [false, 1, ""],
 "id": [&"PhysFan", 4, ""],
-"speed": [600.0, 3, ""],
+"speed": [6.0, 3, ""],
 "toggled": [true, 1, ""]
 }
 
@@ -1418,7 +1418,7 @@ properties = {
 "do_bubble": [false, 1, ""],
 "editor_hidden": [false, 1, ""],
 "id": [&"PhysFan", 4, ""],
-"speed": [600.0, 3, ""],
+"speed": [6.0, 3, ""],
 "toggled": [true, 1, ""]
 }
 
@@ -1444,7 +1444,7 @@ properties = {
 "do_bubble": [false, 1, ""],
 "editor_hidden": [false, 1, ""],
 "id": [&"PhysFan", 4, ""],
-"speed": [600.0, 3, ""],
+"speed": [6.0, 3, ""],
 "toggled": [true, 1, ""]
 }
 
@@ -1487,7 +1487,7 @@ properties = {
 [node name="VUVector" parent="Spawns/Billy1" unique_id=1207504561 instance=ExtResource("11_bke65")]
 visibility_layer = 2
 tag_name = "move_dir"
-direction = Vector2(-1, -8.742278e-08)
+direction = Vector2(-1, 8.742278e-08)
 snap_degrees = 180.0
 
 [node name="Billy2" parent="Spawns" unique_id=1692964768 instance=ExtResource("15_idcuc")]
@@ -1515,7 +1515,7 @@ properties = {
 [node name="VUVector" parent="Spawns/Billy2" unique_id=797404339 instance=ExtResource("11_bke65")]
 visibility_layer = 2
 tag_name = "move_dir"
-direction = Vector2(-1, -8.742278e-08)
+direction = Vector2(-1, 8.742278e-08)
 snap_degrees = 180.0
 
 [node name="Larry" parent="Spawns" unique_id=779889913 instance=ExtResource("15_idcuc")]
@@ -1606,7 +1606,7 @@ position = Vector2(0, -64)
 tag_name = "shoot_y"
 lock_x = true
 
-[node name="Roller1" parent="Spawns" unique_id=1995011477 instance=ExtResource("15_idcuc")]
+[node name="Roller4" parent="Spawns" unique_id=1995011477 instance=ExtResource("15_idcuc")]
 visibility_layer = 2
 position = Vector2(3944, 1808)
 actor_path = "res://src/Actor/Enemy/Roller.tscn"
@@ -1623,7 +1623,7 @@ properties = {
 "water_gravity": [150.0, 3, ""]
 }
 
-[node name="Roller2" parent="Spawns" unique_id=1169695613 instance=ExtResource("15_idcuc")]
+[node name="Roller5" parent="Spawns" unique_id=1169695613 instance=ExtResource("15_idcuc")]
 visibility_layer = 2
 position = Vector2(3688, 1808)
 actor_path = "res://src/Actor/Enemy/Roller.tscn"
@@ -1640,7 +1640,7 @@ properties = {
 "water_gravity": [150.0, 3, ""]
 }
 
-[node name="PhysFan32" parent="Spawns" unique_id=1848297233 instance=ExtResource("9_uijyh")]
+[node name="PhysFan107" parent="Spawns" unique_id=1848297233 instance=ExtResource("9_uijyh")]
 visibility_layer = 2
 position = Vector2(3792, 2176)
 prop_path = "res://src/Prop/PhysFan.tscn"
@@ -1648,25 +1648,25 @@ properties = {
 "do_bubble": [false, 1, ""],
 "editor_hidden": [false, 1, ""],
 "id": [&"PhysFan", 4, ""],
-"speed": [600.0, 3, ""],
+"speed": [20.0, 3, ""],
 "toggled": [true, 1, ""]
 }
 
-[node name="WindVector" parent="Spawns/PhysFan32" unique_id=1802468710 instance=ExtResource("11_bke65")]
+[node name="WindVector" parent="Spawns/PhysFan107" unique_id=1802468710 instance=ExtResource("11_bke65")]
 visibility_layer = 2
 position = Vector2(8, 8)
 tag_name = "wind_dir"
-direction = Vector2(-1, -8.742278e-08)
+direction = Vector2(-1, 8.742278e-08)
 snap_degrees = 90.0
 movement_locked = true
 
-[node name="Distance" parent="Spawns/PhysFan32" unique_id=1578596256 instance=ExtResource("13_4p5xh")]
+[node name="Distance" parent="Spawns/PhysFan107" unique_id=1578596256 instance=ExtResource("13_4p5xh")]
 visibility_layer = 2
 position = Vector2(-264, 8)
 tag_name = "distance"
 lock_x = true
 
-[node name="PhysFan33" parent="Spawns" unique_id=1913875966 instance=ExtResource("9_uijyh")]
+[node name="PhysFan108" parent="Spawns" unique_id=1913875966 instance=ExtResource("9_uijyh")]
 visibility_layer = 2
 position = Vector2(3792, 2144)
 prop_path = "res://src/Prop/PhysFan.tscn"
@@ -1674,25 +1674,25 @@ properties = {
 "do_bubble": [false, 1, ""],
 "editor_hidden": [false, 1, ""],
 "id": [&"PhysFan", 4, ""],
-"speed": [600.0, 3, ""],
+"speed": [20.0, 3, ""],
 "toggled": [true, 1, ""]
 }
 
-[node name="WindVector" parent="Spawns/PhysFan33" unique_id=1084209940 instance=ExtResource("11_bke65")]
+[node name="WindVector" parent="Spawns/PhysFan108" unique_id=1084209940 instance=ExtResource("11_bke65")]
 visibility_layer = 2
 position = Vector2(8, 8)
 tag_name = "wind_dir"
-direction = Vector2(-1, -8.742278e-08)
+direction = Vector2(-1, 8.742278e-08)
 snap_degrees = 90.0
 movement_locked = true
 
-[node name="Distance" parent="Spawns/PhysFan33" unique_id=1419455705 instance=ExtResource("13_4p5xh")]
+[node name="Distance" parent="Spawns/PhysFan108" unique_id=1419455705 instance=ExtResource("13_4p5xh")]
 visibility_layer = 2
 position = Vector2(-264, 8)
 tag_name = "distance"
 lock_x = true
 
-[node name="PhysFan34" parent="Spawns" unique_id=567450904 instance=ExtResource("9_uijyh")]
+[node name="PhysFan109" parent="Spawns" unique_id=567450904 instance=ExtResource("9_uijyh")]
 visibility_layer = 2
 position = Vector2(3792, 2160)
 prop_path = "res://src/Prop/PhysFan.tscn"
@@ -1700,25 +1700,25 @@ properties = {
 "do_bubble": [false, 1, ""],
 "editor_hidden": [false, 1, ""],
 "id": [&"PhysFan", 4, ""],
-"speed": [600.0, 3, ""],
+"speed": [20.0, 3, ""],
 "toggled": [true, 1, ""]
 }
 
-[node name="WindVector" parent="Spawns/PhysFan34" unique_id=514615095 instance=ExtResource("11_bke65")]
+[node name="WindVector" parent="Spawns/PhysFan109" unique_id=514615095 instance=ExtResource("11_bke65")]
 visibility_layer = 2
 position = Vector2(8, 8)
 tag_name = "wind_dir"
-direction = Vector2(-1, -8.742278e-08)
+direction = Vector2(-1, 8.742278e-08)
 snap_degrees = 90.0
 movement_locked = true
 
-[node name="Distance" parent="Spawns/PhysFan34" unique_id=229833934 instance=ExtResource("13_4p5xh")]
+[node name="Distance" parent="Spawns/PhysFan109" unique_id=229833934 instance=ExtResource("13_4p5xh")]
 visibility_layer = 2
 position = Vector2(-264, 8)
 tag_name = "distance"
 lock_x = true
 
-[node name="PhysFan35" parent="Spawns" unique_id=819498662 instance=ExtResource("9_uijyh")]
+[node name="PhysFan110" parent="Spawns" unique_id=819498662 instance=ExtResource("9_uijyh")]
 visibility_layer = 2
 position = Vector2(3792, 2128)
 prop_path = "res://src/Prop/PhysFan.tscn"
@@ -1726,25 +1726,25 @@ properties = {
 "do_bubble": [false, 1, ""],
 "editor_hidden": [false, 1, ""],
 "id": [&"PhysFan", 4, ""],
-"speed": [600.0, 3, ""],
+"speed": [20.0, 3, ""],
 "toggled": [true, 1, ""]
 }
 
-[node name="WindVector" parent="Spawns/PhysFan35" unique_id=251959885 instance=ExtResource("11_bke65")]
+[node name="WindVector" parent="Spawns/PhysFan110" unique_id=251959885 instance=ExtResource("11_bke65")]
 visibility_layer = 2
 position = Vector2(8, 8)
 tag_name = "wind_dir"
-direction = Vector2(-1, -8.742278e-08)
+direction = Vector2(-1, 8.742278e-08)
 snap_degrees = 90.0
 movement_locked = true
 
-[node name="Distance" parent="Spawns/PhysFan35" unique_id=234961697 instance=ExtResource("13_4p5xh")]
+[node name="Distance" parent="Spawns/PhysFan110" unique_id=234961697 instance=ExtResource("13_4p5xh")]
 visibility_layer = 2
 position = Vector2(-264, 8)
 tag_name = "distance"
 lock_x = true
 
-[node name="PhysFan36" parent="Spawns" unique_id=11477069 instance=ExtResource("9_uijyh")]
+[node name="PhysFan111" parent="Spawns" unique_id=11477069 instance=ExtResource("9_uijyh")]
 visibility_layer = 2
 position = Vector2(3792, 2112)
 prop_path = "res://src/Prop/PhysFan.tscn"
@@ -1752,25 +1752,25 @@ properties = {
 "do_bubble": [false, 1, ""],
 "editor_hidden": [false, 1, ""],
 "id": [&"PhysFan", 4, ""],
-"speed": [600.0, 3, ""],
+"speed": [20.0, 3, ""],
 "toggled": [true, 1, ""]
 }
 
-[node name="WindVector" parent="Spawns/PhysFan36" unique_id=453463888 instance=ExtResource("11_bke65")]
+[node name="WindVector" parent="Spawns/PhysFan111" unique_id=453463888 instance=ExtResource("11_bke65")]
 visibility_layer = 2
 position = Vector2(8, 8)
 tag_name = "wind_dir"
-direction = Vector2(-1, -8.742278e-08)
+direction = Vector2(-1, 8.742278e-08)
 snap_degrees = 90.0
 movement_locked = true
 
-[node name="Distance" parent="Spawns/PhysFan36" unique_id=1696339914 instance=ExtResource("13_4p5xh")]
+[node name="Distance" parent="Spawns/PhysFan111" unique_id=1696339914 instance=ExtResource("13_4p5xh")]
 visibility_layer = 2
 position = Vector2(-264, 8)
 tag_name = "distance"
 lock_x = true
 
-[node name="PhysFan37" parent="Spawns" unique_id=382570208 instance=ExtResource("9_uijyh")]
+[node name="PhysFan112" parent="Spawns" unique_id=382570208 instance=ExtResource("9_uijyh")]
 visibility_layer = 2
 position = Vector2(3792, 2096)
 prop_path = "res://src/Prop/PhysFan.tscn"
@@ -1778,25 +1778,25 @@ properties = {
 "do_bubble": [false, 1, ""],
 "editor_hidden": [false, 1, ""],
 "id": [&"PhysFan", 4, ""],
-"speed": [600.0, 3, ""],
+"speed": [20.0, 3, ""],
 "toggled": [true, 1, ""]
 }
 
-[node name="WindVector" parent="Spawns/PhysFan37" unique_id=1156200241 instance=ExtResource("11_bke65")]
+[node name="WindVector" parent="Spawns/PhysFan112" unique_id=1156200241 instance=ExtResource("11_bke65")]
 visibility_layer = 2
 position = Vector2(8, 8)
 tag_name = "wind_dir"
-direction = Vector2(-1, -8.742278e-08)
+direction = Vector2(-1, 8.742278e-08)
 snap_degrees = 90.0
 movement_locked = true
 
-[node name="Distance" parent="Spawns/PhysFan37" unique_id=2046924400 instance=ExtResource("13_4p5xh")]
+[node name="Distance" parent="Spawns/PhysFan112" unique_id=2046924400 instance=ExtResource("13_4p5xh")]
 visibility_layer = 2
 position = Vector2(-264, 8)
 tag_name = "distance"
 lock_x = true
 
-[node name="PhysFan38" parent="Spawns" unique_id=233639421 instance=ExtResource("9_uijyh")]
+[node name="PhysFan113" parent="Spawns" unique_id=233639421 instance=ExtResource("9_uijyh")]
 visibility_layer = 2
 position = Vector2(3792, 2080)
 prop_path = "res://src/Prop/PhysFan.tscn"
@@ -1804,25 +1804,25 @@ properties = {
 "do_bubble": [false, 1, ""],
 "editor_hidden": [false, 1, ""],
 "id": [&"PhysFan", 4, ""],
-"speed": [600.0, 3, ""],
+"speed": [20.0, 3, ""],
 "toggled": [true, 1, ""]
 }
 
-[node name="WindVector" parent="Spawns/PhysFan38" unique_id=309727097 instance=ExtResource("11_bke65")]
+[node name="WindVector" parent="Spawns/PhysFan113" unique_id=309727097 instance=ExtResource("11_bke65")]
 visibility_layer = 2
 position = Vector2(8, 8)
 tag_name = "wind_dir"
-direction = Vector2(-1, -8.742278e-08)
+direction = Vector2(-1, 8.742278e-08)
 snap_degrees = 90.0
 movement_locked = true
 
-[node name="Distance" parent="Spawns/PhysFan38" unique_id=179971168 instance=ExtResource("13_4p5xh")]
+[node name="Distance" parent="Spawns/PhysFan113" unique_id=179971168 instance=ExtResource("13_4p5xh")]
 visibility_layer = 2
 position = Vector2(-264, 8)
 tag_name = "distance"
 lock_x = true
 
-[node name="PhysFan39" parent="Spawns" unique_id=1167921543 instance=ExtResource("9_uijyh")]
+[node name="PhysFan114" parent="Spawns" unique_id=1167921543 instance=ExtResource("9_uijyh")]
 visibility_layer = 2
 position = Vector2(3792, 2064)
 prop_path = "res://src/Prop/PhysFan.tscn"
@@ -1830,25 +1830,25 @@ properties = {
 "do_bubble": [false, 1, ""],
 "editor_hidden": [false, 1, ""],
 "id": [&"PhysFan", 4, ""],
-"speed": [600.0, 3, ""],
+"speed": [20.0, 3, ""],
 "toggled": [true, 1, ""]
 }
 
-[node name="WindVector" parent="Spawns/PhysFan39" unique_id=1608971201 instance=ExtResource("11_bke65")]
+[node name="WindVector" parent="Spawns/PhysFan114" unique_id=1608971201 instance=ExtResource("11_bke65")]
 visibility_layer = 2
 position = Vector2(8, 8)
 tag_name = "wind_dir"
-direction = Vector2(-1, -8.742278e-08)
+direction = Vector2(-1, 8.742278e-08)
 snap_degrees = 90.0
 movement_locked = true
 
-[node name="Distance" parent="Spawns/PhysFan39" unique_id=1617485582 instance=ExtResource("13_4p5xh")]
+[node name="Distance" parent="Spawns/PhysFan114" unique_id=1617485582 instance=ExtResource("13_4p5xh")]
 visibility_layer = 2
 position = Vector2(-264, 8)
 tag_name = "distance"
 lock_x = true
 
-[node name="PhysFan40" parent="Spawns" unique_id=13353659 instance=ExtResource("9_uijyh")]
+[node name="PhysFan115" parent="Spawns" unique_id=13353659 instance=ExtResource("9_uijyh")]
 visibility_layer = 2
 position = Vector2(3792, 2048)
 prop_path = "res://src/Prop/PhysFan.tscn"
@@ -1856,25 +1856,25 @@ properties = {
 "do_bubble": [false, 1, ""],
 "editor_hidden": [false, 1, ""],
 "id": [&"PhysFan", 4, ""],
-"speed": [600.0, 3, ""],
+"speed": [20.0, 3, ""],
 "toggled": [true, 1, ""]
 }
 
-[node name="WindVector" parent="Spawns/PhysFan40" unique_id=956644790 instance=ExtResource("11_bke65")]
+[node name="WindVector" parent="Spawns/PhysFan115" unique_id=956644790 instance=ExtResource("11_bke65")]
 visibility_layer = 2
 position = Vector2(8, 8)
 tag_name = "wind_dir"
-direction = Vector2(-1, -8.742278e-08)
+direction = Vector2(-1, 8.742278e-08)
 snap_degrees = 90.0
 movement_locked = true
 
-[node name="Distance" parent="Spawns/PhysFan40" unique_id=554854575 instance=ExtResource("13_4p5xh")]
+[node name="Distance" parent="Spawns/PhysFan115" unique_id=554854575 instance=ExtResource("13_4p5xh")]
 visibility_layer = 2
 position = Vector2(-264, 8)
 tag_name = "distance"
 lock_x = true
 
-[node name="PhysFan41" parent="Spawns" unique_id=2102964433 instance=ExtResource("9_uijyh")]
+[node name="PhysFan116" parent="Spawns" unique_id=2102964433 instance=ExtResource("9_uijyh")]
 visibility_layer = 2
 position = Vector2(3792, 2032)
 prop_path = "res://src/Prop/PhysFan.tscn"
@@ -1882,25 +1882,25 @@ properties = {
 "do_bubble": [false, 1, ""],
 "editor_hidden": [false, 1, ""],
 "id": [&"PhysFan", 4, ""],
-"speed": [600.0, 3, ""],
+"speed": [20.0, 3, ""],
 "toggled": [true, 1, ""]
 }
 
-[node name="WindVector" parent="Spawns/PhysFan41" unique_id=323785629 instance=ExtResource("11_bke65")]
+[node name="WindVector" parent="Spawns/PhysFan116" unique_id=323785629 instance=ExtResource("11_bke65")]
 visibility_layer = 2
 position = Vector2(8, 8)
 tag_name = "wind_dir"
-direction = Vector2(-1, -8.742278e-08)
+direction = Vector2(-1, 8.742278e-08)
 snap_degrees = 90.0
 movement_locked = true
 
-[node name="Distance" parent="Spawns/PhysFan41" unique_id=1262596762 instance=ExtResource("13_4p5xh")]
+[node name="Distance" parent="Spawns/PhysFan116" unique_id=1262596762 instance=ExtResource("13_4p5xh")]
 visibility_layer = 2
 position = Vector2(-264, 8)
 tag_name = "distance"
 lock_x = true
 
-[node name="PhysFan42" parent="Spawns" unique_id=1288384121 instance=ExtResource("9_uijyh")]
+[node name="PhysFan117" parent="Spawns" unique_id=1288384121 instance=ExtResource("9_uijyh")]
 visibility_layer = 2
 position = Vector2(3792, 2016)
 prop_path = "res://src/Prop/PhysFan.tscn"
@@ -1908,25 +1908,25 @@ properties = {
 "do_bubble": [false, 1, ""],
 "editor_hidden": [false, 1, ""],
 "id": [&"PhysFan", 4, ""],
-"speed": [600.0, 3, ""],
+"speed": [20.0, 3, ""],
 "toggled": [true, 1, ""]
 }
 
-[node name="WindVector" parent="Spawns/PhysFan42" unique_id=849707376 instance=ExtResource("11_bke65")]
+[node name="WindVector" parent="Spawns/PhysFan117" unique_id=849707376 instance=ExtResource("11_bke65")]
 visibility_layer = 2
 position = Vector2(8, 8)
 tag_name = "wind_dir"
-direction = Vector2(-1, -8.742278e-08)
+direction = Vector2(-1, 8.742278e-08)
 snap_degrees = 90.0
 movement_locked = true
 
-[node name="Distance" parent="Spawns/PhysFan42" unique_id=148457250 instance=ExtResource("13_4p5xh")]
+[node name="Distance" parent="Spawns/PhysFan117" unique_id=148457250 instance=ExtResource("13_4p5xh")]
 visibility_layer = 2
 position = Vector2(-264, 8)
 tag_name = "distance"
 lock_x = true
 
-[node name="PhysFan43" parent="Spawns" unique_id=1409069112 instance=ExtResource("9_uijyh")]
+[node name="PhysFan118" parent="Spawns" unique_id=1409069112 instance=ExtResource("9_uijyh")]
 visibility_layer = 2
 position = Vector2(3792, 2000)
 prop_path = "res://src/Prop/PhysFan.tscn"
@@ -1934,19 +1934,19 @@ properties = {
 "do_bubble": [false, 1, ""],
 "editor_hidden": [false, 1, ""],
 "id": [&"PhysFan", 4, ""],
-"speed": [600.0, 3, ""],
+"speed": [20.0, 3, ""],
 "toggled": [true, 1, ""]
 }
 
-[node name="WindVector" parent="Spawns/PhysFan43" unique_id=465766515 instance=ExtResource("11_bke65")]
+[node name="WindVector" parent="Spawns/PhysFan118" unique_id=465766515 instance=ExtResource("11_bke65")]
 visibility_layer = 2
 position = Vector2(8, 8)
 tag_name = "wind_dir"
-direction = Vector2(-1, -8.742278e-08)
+direction = Vector2(-1, 8.742278e-08)
 snap_degrees = 90.0
 movement_locked = true
 
-[node name="Distance" parent="Spawns/PhysFan43" unique_id=377865202 instance=ExtResource("13_4p5xh")]
+[node name="Distance" parent="Spawns/PhysFan118" unique_id=377865202 instance=ExtResource("13_4p5xh")]
 visibility_layer = 2
 position = Vector2(-264, 8)
 tag_name = "distance"
@@ -2179,7 +2179,7 @@ properties = {
 [node name="VUVector" parent="Spawns/Billy3" unique_id=246593208 instance=ExtResource("11_bke65")]
 visibility_layer = 2
 tag_name = "move_dir"
-direction = Vector2(-1, -8.742278e-08)
+direction = Vector2(-1, 8.742278e-08)
 snap_degrees = 180.0
 
 [node name="Frog" parent="Spawns" unique_id=1379839189 instance=ExtResource("15_idcuc")]
@@ -2352,7 +2352,7 @@ properties = {
 "water_gravity": [150.0, 3, ""]
 }
 
-[node name="PhysFan44" parent="Spawns" unique_id=1133701586 instance=ExtResource("9_uijyh")]
+[node name="PhysFan119" parent="Spawns" unique_id=1133701586 instance=ExtResource("9_uijyh")]
 visibility_layer = 2
 position = Vector2(3792, 2352)
 prop_path = "res://src/Prop/PhysFan.tscn"
@@ -2360,25 +2360,25 @@ properties = {
 "do_bubble": [false, 1, ""],
 "editor_hidden": [false, 1, ""],
 "id": [&"PhysFan", 4, ""],
-"speed": [600.0, 3, ""],
+"speed": [20.0, 3, ""],
 "toggled": [true, 1, ""]
 }
 
-[node name="WindVector" parent="Spawns/PhysFan44" unique_id=1801075570 instance=ExtResource("11_bke65")]
+[node name="WindVector" parent="Spawns/PhysFan119" unique_id=1801075570 instance=ExtResource("11_bke65")]
 visibility_layer = 2
 position = Vector2(8, 8)
 tag_name = "wind_dir"
-direction = Vector2(-1, -8.742278e-08)
+direction = Vector2(-1, 8.742278e-08)
 snap_degrees = 90.0
 movement_locked = true
 
-[node name="Distance" parent="Spawns/PhysFan44" unique_id=2112907775 instance=ExtResource("13_4p5xh")]
+[node name="Distance" parent="Spawns/PhysFan119" unique_id=2112907775 instance=ExtResource("13_4p5xh")]
 visibility_layer = 2
 position = Vector2(-264, 8)
 tag_name = "distance"
 lock_x = true
 
-[node name="PhysFan45" parent="Spawns" unique_id=1047588705 instance=ExtResource("9_uijyh")]
+[node name="PhysFan120" parent="Spawns" unique_id=1047588705 instance=ExtResource("9_uijyh")]
 visibility_layer = 2
 position = Vector2(3792, 2368)
 prop_path = "res://src/Prop/PhysFan.tscn"
@@ -2386,25 +2386,25 @@ properties = {
 "do_bubble": [false, 1, ""],
 "editor_hidden": [false, 1, ""],
 "id": [&"PhysFan", 4, ""],
-"speed": [600.0, 3, ""],
+"speed": [20.0, 3, ""],
 "toggled": [true, 1, ""]
 }
 
-[node name="WindVector" parent="Spawns/PhysFan45" unique_id=1588709404 instance=ExtResource("11_bke65")]
+[node name="WindVector" parent="Spawns/PhysFan120" unique_id=1588709404 instance=ExtResource("11_bke65")]
 visibility_layer = 2
 position = Vector2(8, 8)
 tag_name = "wind_dir"
-direction = Vector2(-1, -8.742278e-08)
+direction = Vector2(-1, 8.742278e-08)
 snap_degrees = 90.0
 movement_locked = true
 
-[node name="Distance" parent="Spawns/PhysFan45" unique_id=150311138 instance=ExtResource("13_4p5xh")]
+[node name="Distance" parent="Spawns/PhysFan120" unique_id=150311138 instance=ExtResource("13_4p5xh")]
 visibility_layer = 2
 position = Vector2(-264, 8)
 tag_name = "distance"
 lock_x = true
 
-[node name="PhysFan46" parent="Spawns" unique_id=894287411 instance=ExtResource("9_uijyh")]
+[node name="PhysFan121" parent="Spawns" unique_id=894287411 instance=ExtResource("9_uijyh")]
 visibility_layer = 2
 position = Vector2(3792, 2384)
 prop_path = "res://src/Prop/PhysFan.tscn"
@@ -2412,25 +2412,25 @@ properties = {
 "do_bubble": [false, 1, ""],
 "editor_hidden": [false, 1, ""],
 "id": [&"PhysFan", 4, ""],
-"speed": [600.0, 3, ""],
+"speed": [20.0, 3, ""],
 "toggled": [true, 1, ""]
 }
 
-[node name="WindVector" parent="Spawns/PhysFan46" unique_id=457322238 instance=ExtResource("11_bke65")]
+[node name="WindVector" parent="Spawns/PhysFan121" unique_id=457322238 instance=ExtResource("11_bke65")]
 visibility_layer = 2
 position = Vector2(8, 8)
 tag_name = "wind_dir"
-direction = Vector2(-1, -8.742278e-08)
+direction = Vector2(-1, 8.742278e-08)
 snap_degrees = 90.0
 movement_locked = true
 
-[node name="Distance" parent="Spawns/PhysFan46" unique_id=1917213342 instance=ExtResource("13_4p5xh")]
+[node name="Distance" parent="Spawns/PhysFan121" unique_id=1917213342 instance=ExtResource("13_4p5xh")]
 visibility_layer = 2
 position = Vector2(-264, 8)
 tag_name = "distance"
 lock_x = true
 
-[node name="PhysFan47" parent="Spawns" unique_id=210324505 instance=ExtResource("9_uijyh")]
+[node name="PhysFan122" parent="Spawns" unique_id=210324505 instance=ExtResource("9_uijyh")]
 visibility_layer = 2
 position = Vector2(3792, 2400)
 prop_path = "res://src/Prop/PhysFan.tscn"
@@ -2438,25 +2438,25 @@ properties = {
 "do_bubble": [false, 1, ""],
 "editor_hidden": [false, 1, ""],
 "id": [&"PhysFan", 4, ""],
-"speed": [600.0, 3, ""],
+"speed": [20.0, 3, ""],
 "toggled": [true, 1, ""]
 }
 
-[node name="WindVector" parent="Spawns/PhysFan47" unique_id=157149170 instance=ExtResource("11_bke65")]
+[node name="WindVector" parent="Spawns/PhysFan122" unique_id=157149170 instance=ExtResource("11_bke65")]
 visibility_layer = 2
 position = Vector2(8, 8)
 tag_name = "wind_dir"
-direction = Vector2(-1, -8.742278e-08)
+direction = Vector2(-1, 8.742278e-08)
 snap_degrees = 90.0
 movement_locked = true
 
-[node name="Distance" parent="Spawns/PhysFan47" unique_id=1510444359 instance=ExtResource("13_4p5xh")]
+[node name="Distance" parent="Spawns/PhysFan122" unique_id=1510444359 instance=ExtResource("13_4p5xh")]
 visibility_layer = 2
 position = Vector2(-264, 8)
 tag_name = "distance"
 lock_x = true
 
-[node name="PhysFan48" parent="Spawns" unique_id=61735727 instance=ExtResource("9_uijyh")]
+[node name="PhysFan123" parent="Spawns" unique_id=61735727 instance=ExtResource("9_uijyh")]
 visibility_layer = 2
 position = Vector2(3792, 2416)
 prop_path = "res://src/Prop/PhysFan.tscn"
@@ -2464,25 +2464,25 @@ properties = {
 "do_bubble": [false, 1, ""],
 "editor_hidden": [false, 1, ""],
 "id": [&"PhysFan", 4, ""],
-"speed": [600.0, 3, ""],
+"speed": [20.0, 3, ""],
 "toggled": [true, 1, ""]
 }
 
-[node name="WindVector" parent="Spawns/PhysFan48" unique_id=310628853 instance=ExtResource("11_bke65")]
+[node name="WindVector" parent="Spawns/PhysFan123" unique_id=310628853 instance=ExtResource("11_bke65")]
 visibility_layer = 2
 position = Vector2(8, 8)
 tag_name = "wind_dir"
-direction = Vector2(-1, -8.742278e-08)
+direction = Vector2(-1, 8.742278e-08)
 snap_degrees = 90.0
 movement_locked = true
 
-[node name="Distance" parent="Spawns/PhysFan48" unique_id=985933848 instance=ExtResource("13_4p5xh")]
+[node name="Distance" parent="Spawns/PhysFan123" unique_id=985933848 instance=ExtResource("13_4p5xh")]
 visibility_layer = 2
 position = Vector2(-264, 8)
 tag_name = "distance"
 lock_x = true
 
-[node name="PhysFan49" parent="Spawns" unique_id=997145401 instance=ExtResource("9_uijyh")]
+[node name="PhysFan124" parent="Spawns" unique_id=997145401 instance=ExtResource("9_uijyh")]
 visibility_layer = 2
 position = Vector2(3792, 2432)
 prop_path = "res://src/Prop/PhysFan.tscn"
@@ -2490,25 +2490,25 @@ properties = {
 "do_bubble": [false, 1, ""],
 "editor_hidden": [false, 1, ""],
 "id": [&"PhysFan", 4, ""],
-"speed": [600.0, 3, ""],
+"speed": [20.0, 3, ""],
 "toggled": [true, 1, ""]
 }
 
-[node name="WindVector" parent="Spawns/PhysFan49" unique_id=1070290488 instance=ExtResource("11_bke65")]
+[node name="WindVector" parent="Spawns/PhysFan124" unique_id=1070290488 instance=ExtResource("11_bke65")]
 visibility_layer = 2
 position = Vector2(8, 8)
 tag_name = "wind_dir"
-direction = Vector2(-1, -8.742278e-08)
+direction = Vector2(-1, 8.742278e-08)
 snap_degrees = 90.0
 movement_locked = true
 
-[node name="Distance" parent="Spawns/PhysFan49" unique_id=1384530538 instance=ExtResource("13_4p5xh")]
+[node name="Distance" parent="Spawns/PhysFan124" unique_id=1384530538 instance=ExtResource("13_4p5xh")]
 visibility_layer = 2
 position = Vector2(-264, 8)
 tag_name = "distance"
 lock_x = true
 
-[node name="PhysFan50" parent="Spawns" unique_id=1239610539 instance=ExtResource("9_uijyh")]
+[node name="PhysFan125" parent="Spawns" unique_id=1239610539 instance=ExtResource("9_uijyh")]
 visibility_layer = 2
 position = Vector2(3792, 2448)
 prop_path = "res://src/Prop/PhysFan.tscn"
@@ -2516,25 +2516,25 @@ properties = {
 "do_bubble": [false, 1, ""],
 "editor_hidden": [false, 1, ""],
 "id": [&"PhysFan", 4, ""],
-"speed": [600.0, 3, ""],
+"speed": [20.0, 3, ""],
 "toggled": [true, 1, ""]
 }
 
-[node name="WindVector" parent="Spawns/PhysFan50" unique_id=1560955913 instance=ExtResource("11_bke65")]
+[node name="WindVector" parent="Spawns/PhysFan125" unique_id=1560955913 instance=ExtResource("11_bke65")]
 visibility_layer = 2
 position = Vector2(8, 8)
 tag_name = "wind_dir"
-direction = Vector2(-1, -8.742278e-08)
+direction = Vector2(-1, 8.742278e-08)
 snap_degrees = 90.0
 movement_locked = true
 
-[node name="Distance" parent="Spawns/PhysFan50" unique_id=1614437625 instance=ExtResource("13_4p5xh")]
+[node name="Distance" parent="Spawns/PhysFan125" unique_id=1614437625 instance=ExtResource("13_4p5xh")]
 visibility_layer = 2
 position = Vector2(-264, 8)
 tag_name = "distance"
 lock_x = true
 
-[node name="PhysFan51" parent="Spawns" unique_id=1304205386 instance=ExtResource("9_uijyh")]
+[node name="PhysFan126" parent="Spawns" unique_id=1304205386 instance=ExtResource("9_uijyh")]
 visibility_layer = 2
 position = Vector2(3792, 2464)
 prop_path = "res://src/Prop/PhysFan.tscn"
@@ -2542,25 +2542,25 @@ properties = {
 "do_bubble": [false, 1, ""],
 "editor_hidden": [false, 1, ""],
 "id": [&"PhysFan", 4, ""],
-"speed": [600.0, 3, ""],
+"speed": [20.0, 3, ""],
 "toggled": [true, 1, ""]
 }
 
-[node name="WindVector" parent="Spawns/PhysFan51" unique_id=1066424186 instance=ExtResource("11_bke65")]
+[node name="WindVector" parent="Spawns/PhysFan126" unique_id=1066424186 instance=ExtResource("11_bke65")]
 visibility_layer = 2
 position = Vector2(8, 8)
 tag_name = "wind_dir"
-direction = Vector2(-1, -8.742278e-08)
+direction = Vector2(-1, 8.742278e-08)
 snap_degrees = 90.0
 movement_locked = true
 
-[node name="Distance" parent="Spawns/PhysFan51" unique_id=1904722791 instance=ExtResource("13_4p5xh")]
+[node name="Distance" parent="Spawns/PhysFan126" unique_id=1904722791 instance=ExtResource("13_4p5xh")]
 visibility_layer = 2
 position = Vector2(-264, 8)
 tag_name = "distance"
 lock_x = true
 
-[node name="PhysFan52" parent="Spawns" unique_id=2051661568 instance=ExtResource("9_uijyh")]
+[node name="PhysFan127" parent="Spawns" unique_id=2051661568 instance=ExtResource("9_uijyh")]
 visibility_layer = 2
 position = Vector2(3792, 2336)
 prop_path = "res://src/Prop/PhysFan.tscn"
@@ -2568,25 +2568,25 @@ properties = {
 "do_bubble": [false, 1, ""],
 "editor_hidden": [false, 1, ""],
 "id": [&"PhysFan", 4, ""],
-"speed": [600.0, 3, ""],
+"speed": [20.0, 3, ""],
 "toggled": [true, 1, ""]
 }
 
-[node name="WindVector" parent="Spawns/PhysFan52" unique_id=540845199 instance=ExtResource("11_bke65")]
+[node name="WindVector" parent="Spawns/PhysFan127" unique_id=540845199 instance=ExtResource("11_bke65")]
 visibility_layer = 2
 position = Vector2(8, 8)
 tag_name = "wind_dir"
-direction = Vector2(-1, -8.742278e-08)
+direction = Vector2(-1, 8.742278e-08)
 snap_degrees = 90.0
 movement_locked = true
 
-[node name="Distance" parent="Spawns/PhysFan52" unique_id=53122593 instance=ExtResource("13_4p5xh")]
+[node name="Distance" parent="Spawns/PhysFan127" unique_id=53122593 instance=ExtResource("13_4p5xh")]
 visibility_layer = 2
 position = Vector2(-264, 8)
 tag_name = "distance"
 lock_x = true
 
-[node name="PhysFan53" parent="Spawns" unique_id=1908094708 instance=ExtResource("9_uijyh")]
+[node name="PhysFan128" parent="Spawns" unique_id=1908094708 instance=ExtResource("9_uijyh")]
 visibility_layer = 2
 position = Vector2(3792, 2320)
 prop_path = "res://src/Prop/PhysFan.tscn"
@@ -2594,25 +2594,25 @@ properties = {
 "do_bubble": [false, 1, ""],
 "editor_hidden": [false, 1, ""],
 "id": [&"PhysFan", 4, ""],
-"speed": [600.0, 3, ""],
+"speed": [20.0, 3, ""],
 "toggled": [true, 1, ""]
 }
 
-[node name="WindVector" parent="Spawns/PhysFan53" unique_id=1438592280 instance=ExtResource("11_bke65")]
+[node name="WindVector" parent="Spawns/PhysFan128" unique_id=1438592280 instance=ExtResource("11_bke65")]
 visibility_layer = 2
 position = Vector2(8, 8)
 tag_name = "wind_dir"
-direction = Vector2(-1, -8.742278e-08)
+direction = Vector2(-1, 8.742278e-08)
 snap_degrees = 90.0
 movement_locked = true
 
-[node name="Distance" parent="Spawns/PhysFan53" unique_id=1660903407 instance=ExtResource("13_4p5xh")]
+[node name="Distance" parent="Spawns/PhysFan128" unique_id=1660903407 instance=ExtResource("13_4p5xh")]
 visibility_layer = 2
 position = Vector2(-264, 8)
 tag_name = "distance"
 lock_x = true
 
-[node name="PhysFan54" parent="Spawns" unique_id=1407451044 instance=ExtResource("9_uijyh")]
+[node name="PhysFan129" parent="Spawns" unique_id=1407451044 instance=ExtResource("9_uijyh")]
 visibility_layer = 2
 position = Vector2(3792, 2304)
 prop_path = "res://src/Prop/PhysFan.tscn"
@@ -2620,25 +2620,25 @@ properties = {
 "do_bubble": [false, 1, ""],
 "editor_hidden": [false, 1, ""],
 "id": [&"PhysFan", 4, ""],
-"speed": [600.0, 3, ""],
+"speed": [20.0, 3, ""],
 "toggled": [true, 1, ""]
 }
 
-[node name="WindVector" parent="Spawns/PhysFan54" unique_id=1636592338 instance=ExtResource("11_bke65")]
+[node name="WindVector" parent="Spawns/PhysFan129" unique_id=1636592338 instance=ExtResource("11_bke65")]
 visibility_layer = 2
 position = Vector2(8, 8)
 tag_name = "wind_dir"
-direction = Vector2(-1, -8.742278e-08)
+direction = Vector2(-1, 8.742278e-08)
 snap_degrees = 90.0
 movement_locked = true
 
-[node name="Distance" parent="Spawns/PhysFan54" unique_id=1833224585 instance=ExtResource("13_4p5xh")]
+[node name="Distance" parent="Spawns/PhysFan129" unique_id=1833224585 instance=ExtResource("13_4p5xh")]
 visibility_layer = 2
 position = Vector2(-264, 8)
 tag_name = "distance"
 lock_x = true
 
-[node name="PhysFan55" parent="Spawns" unique_id=1095880654 instance=ExtResource("9_uijyh")]
+[node name="PhysFan130" parent="Spawns" unique_id=1095880654 instance=ExtResource("9_uijyh")]
 visibility_layer = 2
 position = Vector2(3792, 2288)
 prop_path = "res://src/Prop/PhysFan.tscn"
@@ -2646,25 +2646,25 @@ properties = {
 "do_bubble": [false, 1, ""],
 "editor_hidden": [false, 1, ""],
 "id": [&"PhysFan", 4, ""],
-"speed": [600.0, 3, ""],
+"speed": [20.0, 3, ""],
 "toggled": [true, 1, ""]
 }
 
-[node name="WindVector" parent="Spawns/PhysFan55" unique_id=1474299721 instance=ExtResource("11_bke65")]
+[node name="WindVector" parent="Spawns/PhysFan130" unique_id=1474299721 instance=ExtResource("11_bke65")]
 visibility_layer = 2
 position = Vector2(8, 8)
 tag_name = "wind_dir"
-direction = Vector2(-1, -8.742278e-08)
+direction = Vector2(-1, 8.742278e-08)
 snap_degrees = 90.0
 movement_locked = true
 
-[node name="Distance" parent="Spawns/PhysFan55" unique_id=551753276 instance=ExtResource("13_4p5xh")]
+[node name="Distance" parent="Spawns/PhysFan130" unique_id=551753276 instance=ExtResource("13_4p5xh")]
 visibility_layer = 2
 position = Vector2(-264, 8)
 tag_name = "distance"
 lock_x = true
 
-[node name="PhysFan56" parent="Spawns" unique_id=1025991426 instance=ExtResource("9_uijyh")]
+[node name="PhysFan131" parent="Spawns" unique_id=1025991426 instance=ExtResource("9_uijyh")]
 visibility_layer = 2
 position = Vector2(3792, 2272)
 prop_path = "res://src/Prop/PhysFan.tscn"
@@ -2672,25 +2672,25 @@ properties = {
 "do_bubble": [false, 1, ""],
 "editor_hidden": [false, 1, ""],
 "id": [&"PhysFan", 4, ""],
-"speed": [600.0, 3, ""],
+"speed": [20.0, 3, ""],
 "toggled": [true, 1, ""]
 }
 
-[node name="WindVector" parent="Spawns/PhysFan56" unique_id=2081973948 instance=ExtResource("11_bke65")]
+[node name="WindVector" parent="Spawns/PhysFan131" unique_id=2081973948 instance=ExtResource("11_bke65")]
 visibility_layer = 2
 position = Vector2(8, 8)
 tag_name = "wind_dir"
-direction = Vector2(-1, -8.742278e-08)
+direction = Vector2(-1, 8.742278e-08)
 snap_degrees = 90.0
 movement_locked = true
 
-[node name="Distance" parent="Spawns/PhysFan56" unique_id=356408938 instance=ExtResource("13_4p5xh")]
+[node name="Distance" parent="Spawns/PhysFan131" unique_id=356408938 instance=ExtResource("13_4p5xh")]
 visibility_layer = 2
 position = Vector2(-264, 8)
 tag_name = "distance"
 lock_x = true
 
-[node name="PhysFan57" parent="Spawns" unique_id=113150889 instance=ExtResource("9_uijyh")]
+[node name="PhysFan132" parent="Spawns" unique_id=113150889 instance=ExtResource("9_uijyh")]
 visibility_layer = 2
 position = Vector2(3792, 2256)
 prop_path = "res://src/Prop/PhysFan.tscn"
@@ -2698,25 +2698,25 @@ properties = {
 "do_bubble": [false, 1, ""],
 "editor_hidden": [false, 1, ""],
 "id": [&"PhysFan", 4, ""],
-"speed": [600.0, 3, ""],
+"speed": [20.0, 3, ""],
 "toggled": [true, 1, ""]
 }
 
-[node name="WindVector" parent="Spawns/PhysFan57" unique_id=1572909956 instance=ExtResource("11_bke65")]
+[node name="WindVector" parent="Spawns/PhysFan132" unique_id=1572909956 instance=ExtResource("11_bke65")]
 visibility_layer = 2
 position = Vector2(8, 8)
 tag_name = "wind_dir"
-direction = Vector2(-1, -8.742278e-08)
+direction = Vector2(-1, 8.742278e-08)
 snap_degrees = 90.0
 movement_locked = true
 
-[node name="Distance" parent="Spawns/PhysFan57" unique_id=998222673 instance=ExtResource("13_4p5xh")]
+[node name="Distance" parent="Spawns/PhysFan132" unique_id=998222673 instance=ExtResource("13_4p5xh")]
 visibility_layer = 2
 position = Vector2(-264, 8)
 tag_name = "distance"
 lock_x = true
 
-[node name="PhysFan58" parent="Spawns" unique_id=677196169 instance=ExtResource("9_uijyh")]
+[node name="PhysFan133" parent="Spawns" unique_id=677196169 instance=ExtResource("9_uijyh")]
 visibility_layer = 2
 position = Vector2(3792, 2240)
 prop_path = "res://src/Prop/PhysFan.tscn"
@@ -2724,25 +2724,25 @@ properties = {
 "do_bubble": [false, 1, ""],
 "editor_hidden": [false, 1, ""],
 "id": [&"PhysFan", 4, ""],
-"speed": [600.0, 3, ""],
+"speed": [20.0, 3, ""],
 "toggled": [true, 1, ""]
 }
 
-[node name="WindVector" parent="Spawns/PhysFan58" unique_id=1720034421 instance=ExtResource("11_bke65")]
+[node name="WindVector" parent="Spawns/PhysFan133" unique_id=1720034421 instance=ExtResource("11_bke65")]
 visibility_layer = 2
 position = Vector2(8, 8)
 tag_name = "wind_dir"
-direction = Vector2(-1, -8.742278e-08)
+direction = Vector2(-1, 8.742278e-08)
 snap_degrees = 90.0
 movement_locked = true
 
-[node name="Distance" parent="Spawns/PhysFan58" unique_id=152328577 instance=ExtResource("13_4p5xh")]
+[node name="Distance" parent="Spawns/PhysFan133" unique_id=152328577 instance=ExtResource("13_4p5xh")]
 visibility_layer = 2
 position = Vector2(-264, 8)
 tag_name = "distance"
 lock_x = true
 
-[node name="PhysFan59" parent="Spawns" unique_id=1356223055 instance=ExtResource("9_uijyh")]
+[node name="PhysFan134" parent="Spawns" unique_id=1356223055 instance=ExtResource("9_uijyh")]
 visibility_layer = 2
 position = Vector2(3792, 2224)
 prop_path = "res://src/Prop/PhysFan.tscn"
@@ -2750,25 +2750,25 @@ properties = {
 "do_bubble": [false, 1, ""],
 "editor_hidden": [false, 1, ""],
 "id": [&"PhysFan", 4, ""],
-"speed": [600.0, 3, ""],
+"speed": [20.0, 3, ""],
 "toggled": [true, 1, ""]
 }
 
-[node name="WindVector" parent="Spawns/PhysFan59" unique_id=487045076 instance=ExtResource("11_bke65")]
+[node name="WindVector" parent="Spawns/PhysFan134" unique_id=487045076 instance=ExtResource("11_bke65")]
 visibility_layer = 2
 position = Vector2(8, 8)
 tag_name = "wind_dir"
-direction = Vector2(-1, -8.742278e-08)
+direction = Vector2(-1, 8.742278e-08)
 snap_degrees = 90.0
 movement_locked = true
 
-[node name="Distance" parent="Spawns/PhysFan59" unique_id=2078376608 instance=ExtResource("13_4p5xh")]
+[node name="Distance" parent="Spawns/PhysFan134" unique_id=2078376608 instance=ExtResource("13_4p5xh")]
 visibility_layer = 2
 position = Vector2(-264, 8)
 tag_name = "distance"
 lock_x = true
 
-[node name="PhysFan60" parent="Spawns" unique_id=691580177 instance=ExtResource("9_uijyh")]
+[node name="PhysFan135" parent="Spawns" unique_id=691580177 instance=ExtResource("9_uijyh")]
 visibility_layer = 2
 position = Vector2(3792, 2208)
 prop_path = "res://src/Prop/PhysFan.tscn"
@@ -2776,19 +2776,19 @@ properties = {
 "do_bubble": [false, 1, ""],
 "editor_hidden": [false, 1, ""],
 "id": [&"PhysFan", 4, ""],
-"speed": [600.0, 3, ""],
+"speed": [20.0, 3, ""],
 "toggled": [true, 1, ""]
 }
 
-[node name="WindVector" parent="Spawns/PhysFan60" unique_id=829330358 instance=ExtResource("11_bke65")]
+[node name="WindVector" parent="Spawns/PhysFan135" unique_id=829330358 instance=ExtResource("11_bke65")]
 visibility_layer = 2
 position = Vector2(8, 8)
 tag_name = "wind_dir"
-direction = Vector2(-1, -8.742278e-08)
+direction = Vector2(-1, 8.742278e-08)
 snap_degrees = 90.0
 movement_locked = true
 
-[node name="Distance" parent="Spawns/PhysFan60" unique_id=1584362444 instance=ExtResource("13_4p5xh")]
+[node name="Distance" parent="Spawns/PhysFan135" unique_id=1584362444 instance=ExtResource("13_4p5xh")]
 visibility_layer = 2
 position = Vector2(-264, 8)
 tag_name = "distance"
@@ -2903,7 +2903,7 @@ properties = {
 [node name="VUVector" parent="Spawns/Billy4" unique_id=317335612 instance=ExtResource("11_bke65")]
 visibility_layer = 2
 tag_name = "move_dir"
-direction = Vector2(-1, 8.742278e-08)
+direction = Vector2(-1, -8.742278e-08)
 snap_degrees = 180.0
 
 [node name="Billy5" parent="Spawns" unique_id=1098773137 instance=ExtResource("15_idcuc")]
@@ -2931,7 +2931,7 @@ properties = {
 [node name="VUVector" parent="Spawns/Billy5" unique_id=1045796578 instance=ExtResource("11_bke65")]
 visibility_layer = 2
 tag_name = "move_dir"
-direction = Vector2(-1, 8.742278e-08)
+direction = Vector2(-1, -8.742278e-08)
 snap_degrees = 180.0
 
 [node name="Billy6" parent="Spawns" unique_id=1372743431 instance=ExtResource("15_idcuc")]
@@ -2959,7 +2959,7 @@ properties = {
 [node name="VUVector" parent="Spawns/Billy6" unique_id=217698733 instance=ExtResource("11_bke65")]
 visibility_layer = 2
 tag_name = "move_dir"
-direction = Vector2(-1, 8.742278e-08)
+direction = Vector2(-1, -8.742278e-08)
 snap_degrees = 180.0
 
 [node name="Billy7" parent="Spawns" unique_id=1170767736 instance=ExtResource("15_idcuc")]
@@ -2987,7 +2987,7 @@ properties = {
 [node name="VUVector" parent="Spawns/Billy7" unique_id=767767555 instance=ExtResource("11_bke65")]
 visibility_layer = 2
 tag_name = "move_dir"
-direction = Vector2(-1, 8.742278e-08)
+direction = Vector2(-1, -8.742278e-08)
 snap_degrees = 180.0
 
 [node name="Billy8" parent="Spawns" unique_id=279572768 instance=ExtResource("15_idcuc")]
@@ -3015,7 +3015,7 @@ properties = {
 [node name="VUVector" parent="Spawns/Billy8" unique_id=965953082 instance=ExtResource("11_bke65")]
 visibility_layer = 2
 tag_name = "move_dir"
-direction = Vector2(-1, 8.742278e-08)
+direction = Vector2(-1, -8.742278e-08)
 snap_degrees = 180.0
 
 [node name="Billy9" parent="Spawns" unique_id=1639456806 instance=ExtResource("15_idcuc")]
@@ -3043,7 +3043,7 @@ properties = {
 [node name="VUVector" parent="Spawns/Billy9" unique_id=893141423 instance=ExtResource("11_bke65")]
 visibility_layer = 2
 tag_name = "move_dir"
-direction = Vector2(-1, 8.742278e-08)
+direction = Vector2(-1, -8.742278e-08)
 snap_degrees = 180.0
 
 [node name="Sentry4" parent="Spawns" unique_id=338863541 instance=ExtResource("15_idcuc")]
@@ -3608,7 +3608,7 @@ properties = {
 [node name="VUVector" parent="Spawns/Billy10" unique_id=285939045 instance=ExtResource("11_bke65")]
 visibility_layer = 2
 tag_name = "move_dir"
-direction = Vector2(-1, 8.742278e-08)
+direction = Vector2(-1, -8.742278e-08)
 snap_degrees = 180.0
 
 [node name="Billy11" parent="Spawns" unique_id=1296921010 instance=ExtResource("15_idcuc")]
@@ -3636,7 +3636,7 @@ properties = {
 [node name="VUVector" parent="Spawns/Billy11" unique_id=963988871 instance=ExtResource("11_bke65")]
 visibility_layer = 2
 tag_name = "move_dir"
-direction = Vector2(-1, 8.742278e-08)
+direction = Vector2(-1, -8.742278e-08)
 snap_degrees = 180.0
 
 [node name="Billy12" parent="Spawns" unique_id=450781992 instance=ExtResource("15_idcuc")]
@@ -3664,7 +3664,7 @@ properties = {
 [node name="VUVector" parent="Spawns/Billy12" unique_id=1209681821 instance=ExtResource("11_bke65")]
 visibility_layer = 2
 tag_name = "move_dir"
-direction = Vector2(-1, 8.742278e-08)
+direction = Vector2(-1, -8.742278e-08)
 snap_degrees = 180.0
 
 [node name="Billy13" parent="Spawns" unique_id=1911103852 instance=ExtResource("15_idcuc")]
@@ -3692,7 +3692,7 @@ properties = {
 [node name="VUVector" parent="Spawns/Billy13" unique_id=113656252 instance=ExtResource("11_bke65")]
 visibility_layer = 2
 tag_name = "move_dir"
-direction = Vector2(-1, 8.742278e-08)
+direction = Vector2(-1, -8.742278e-08)
 snap_degrees = 180.0
 
 [node name="Billy14" parent="Spawns" unique_id=2071336924 instance=ExtResource("15_idcuc")]
@@ -3720,7 +3720,7 @@ properties = {
 [node name="VUVector" parent="Spawns/Billy14" unique_id=1149925865 instance=ExtResource("11_bke65")]
 visibility_layer = 2
 tag_name = "move_dir"
-direction = Vector2(-1, 8.742278e-08)
+direction = Vector2(-1, -8.742278e-08)
 snap_degrees = 180.0
 
 [node name="Aikka1" parent="Spawns" unique_id=751646884 instance=ExtResource("15_idcuc")]
