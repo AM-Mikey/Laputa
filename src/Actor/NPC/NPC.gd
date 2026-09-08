@@ -252,12 +252,12 @@ func look_at_node(node, inverted = false):
 func calc_velocity(do_gravity = true) -> Vector2:
 	var out: = velocity
 	var fractional_speed = speed
+	var delta: = get_physics_process_delta_time()
 	if is_in_water:
 		fractional_speed = speed * Vector2(0.666, 0.666)
-	if move_dir.x * fractional_speed.x != 0.0:
-		out.x = fractional_speed.x * move_dir.x
+	out.x = fractional_speed.x * move_dir.x
 	if do_gravity:
-		out.y += gravity * get_physics_process_delta_time()
+		out.y += gravity * delta
 		if move_dir.y < 0:
 			out.y = fractional_speed.y * move_dir.y
 	else:
@@ -265,7 +265,10 @@ func calc_velocity(do_gravity = true) -> Vector2:
 	if is_wind_affected && wind_areas_inside.size() > 0: #Inside Wind
 		if out.y < 0.0:
 			out.y *= 0.9
+		for wind_area in wind_areas_inside:
+			out += wind_area.speed * wind_area.wind_dir
 	return out
+
 
 ### NEW PATHFINDING
 
