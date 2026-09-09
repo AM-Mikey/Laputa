@@ -103,6 +103,8 @@ func enter_walk(_prev_state):
 
 func do_walk(delta):
 	velocity = calc_velocity(move_dir)
+	if $AnimationPlayer.current_animation in ["Turn", "TurnNS"]:
+		velocity = Vector2.ZERO
 	move_and_slide()
 
 	if (!$FloorDetectorL.is_colliding() && move_dir.x < 0) \
@@ -110,6 +112,8 @@ func do_walk(delta):
 	|| (velocity.x == 0.0):
 		if !first_frame:
 			move_dir.x *= -1.0
+			change_state("turn")
+
 
 	if (prev_global_position - global_position).length() <= walk_speed.x * delta * 0.5:
 		global_position.y -= 1.0 * delta
@@ -124,6 +128,16 @@ func do_walk(delta):
 
 	if first_frame: first_frame = false
 	prev_global_position = global_position
+
+
+func enter_turn(_last_state):
+	if difficulty == 0:
+		$AnimationPlayer.play("TurnNS")
+	else:
+		$AnimationPlayer.play("Turn")
+	await $AnimationPlayer.animation_finished
+	change_state("walk")
+
 
 func enter_defend(_last_state):
 	if difficulty == 0:
