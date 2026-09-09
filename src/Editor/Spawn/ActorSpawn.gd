@@ -244,6 +244,7 @@ func setup_vus(actor):
 			if i.is_in_group(vu_group):
 				if !get_if_actor_has_visual_utility(i, vu_group):
 					actor.remove_child(i)
+					i.visible = true
 					i.owner = null
 					add_child(i)
 					i.owner = w.current_level

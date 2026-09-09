@@ -58,7 +58,7 @@ _data = {
 
 [node name="GLauncher2" type="CharacterBody2D" unique_id=1665990515]
 collision_layer = 64
-collision_mask = 8
+collision_mask = 40
 script = ExtResource("2")
 is_water_affected = true
 is_wind_affected = true
@@ -94,7 +94,7 @@ position = Vector2(0, 6)
 texture = ExtResource("1")
 hframes = 8
 vframes = 3
-frame = 10
+frame = 15
 
 [node name="Timer" type="Timer" parent="." unique_id=1911554376]
 process_callback = 0
@@ -104,7 +104,7 @@ one_shot = true
 libraries/ = SubResource("AnimationLibrary_t000f")
 
 [node name="WorldCast" type="RayCast2D" parent="." unique_id=1048863942]
-collision_mask = 8
+collision_mask = 40
 collide_with_areas = true
 
 [connection signal="area_entered" from="PlayerCollisionDetector" to="." method="_on_CollisionDetector_area_entered"]
