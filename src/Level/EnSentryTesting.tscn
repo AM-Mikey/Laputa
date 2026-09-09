@@ -2278,7 +2278,7 @@ collision_layer = 16384
 collision_mask = 0
 script = ExtResource("20_acqtr")
 tag_name = "wind_dir"
-direction = Vector2(-1, -8.742278e-08)
+direction = Vector2(-1, 8.742278e-08)
 snap_degrees = 90.0
 movement_locked = true
 
@@ -2314,7 +2314,7 @@ collision_layer = 16384
 collision_mask = 0
 script = ExtResource("20_acqtr")
 tag_name = "wind_dir"
-direction = Vector2(-1, -8.742278e-08)
+direction = Vector2(-1, 8.742278e-08)
 snap_degrees = 90.0
 movement_locked = true
 
