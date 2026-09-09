@@ -28,15 +28,19 @@ func _on_physics_process(delta):
 
 	var collision = move_and_collide(velocity * delta)
 	if collision:
+		var collider = collision.get_collider()
 		cool = true
 		$AnimationPlayer.play("Cool")
-		if velocity.length() > free_speed:
-			velocity *= bounciness
-			velocity = velocity.bounce(collision.get_normal())
-			am.play("bullet_birdshot_bounce", self)
+		if collider is not TileMapLayer && collider.get_collision_layer_value(6) && armor_check(collider):
+			do_fizzle("armor")
 		else:
-			velocity = Vector2.ZERO
-			queue_free()
+			if velocity.length() > free_speed:
+				velocity *= bounciness
+				velocity = velocity.bounce(collision.get_normal())
+				am.play("bullet_birdshot_bounce", self)
+			else:
+				velocity = Vector2.ZERO
+				queue_free()
 
 
 ### GETTERS ###
@@ -71,21 +75,22 @@ func _on_CollisionDetector_body_entered(body):
 		if body.get_collision_layer_value(9): #breakable
 			on_break(break_method)
 		elif body.get_collision_layer_value(6): #armor
-			do_fizzle("armor")
+			if armor_check(body):
+				do_fizzle("armor")
 
 
 func _on_CollisionDetector_area_entered(area):
 	if cool: return
 
 	if area.get_collision_layer_value(18): #enemyhurt
-		area.get_parent().hit(damage, get_blood_dir(area.get_parent()))
-		queue_free()
+		if !is_queued_for_deletion():
+			area.get_parent().hit(damage, get_blood_dir(area.get_parent()), $PlayerCollisionDetector)
+			queue_free()
 	elif area.get_collision_layer_value(9): #breakable
 		area.get_parent().on_break(break_method)
 		#on_break(break_method) produced two fizzle particles so instead do:
 		queue_free()
 	elif area.get_collision_layer_value(6): #armor
-		print("armor")
 		do_fizzle("armor")
 
 
