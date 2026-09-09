@@ -208,7 +208,7 @@ func crush_check():
 							if collider in body_queue.slice(body_queue.size() - 3, body_queue.size()): continue
 							if collider is TileMapLayer || (collider.get_collision_layer_value(4) && !collider.has_node("BreakArea")):
 								if check_body.get_collision_layer_value(1) || check_body.get_collision_layer_value(2):
-									curr_body.hit(999, Vector2.ZERO)
+									curr_body.hit(999, Vector2.ZERO, $Standable/Crush)
 									curr_body.die() 
 								elif body.has_node("BreakArea") and body.get_collision_layer_value(4):
 									success = true
