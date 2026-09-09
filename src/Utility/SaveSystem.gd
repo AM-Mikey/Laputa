@@ -2,6 +2,7 @@ extends Node
 
 const OPTIONS = preload("res://src/UI/Options/Options.tscn")
 
+var first_time_loading_settings := true
 var save_path = "user://save.dat"
 var temp_path = "user://temp.dat"
 var data = {

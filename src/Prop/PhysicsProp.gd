@@ -10,6 +10,7 @@ var spent = false
 
 var is_in_water = false: set = set_is_in_water
 @export var do_bubble: bool = false
+var is_wind_affected := false
 var wind_areas_inside := []
 
 @export var editor_hidden = false
@@ -26,3 +27,15 @@ func setup(): #for children
 func set_is_in_water(val):
 	gravity_scale = base_gravity_scale if !val else water_gravity_scale
 	is_in_water = val
+
+func apply_wind():
+	if !is_wind_affected: return
+	var strongest_by_dir := {}
+
+	for area in wind_areas_inside:
+		var key: Vector2 = area.wind_dir
+		if not strongest_by_dir.has(key) or area.speed > strongest_by_dir[key].speed:
+			strongest_by_dir[key] = area
+
+	for strong_area in strongest_by_dir.values():
+		apply_central_force(strong_area.wind_dir * strong_area.speed)

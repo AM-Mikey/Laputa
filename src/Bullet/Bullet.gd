@@ -54,9 +54,24 @@ func setup(): #for children
 func _physics_process(delta):
 	level_exit_check()
 	_on_physics_process(delta)
+	apply_wind()
 
 func _on_physics_process(_delta): #for children
 	pass
+
+func apply_wind():
+	if !is_wind_affected: return
+	var strongest_by_dir := {}
+
+	for area in wind_areas_inside:
+		var key: Vector2 = area.wind_dir
+		if not strongest_by_dir.has(key) or area.speed > strongest_by_dir[key].speed:
+			strongest_by_dir[key] = area
+
+	for strong_area in strongest_by_dir.values():
+		if is_on_floor() && (strong_area.wind_dir == Vector2.DOWN || (strong_area.wind_dir == Vector2.UP && strong_area.speed <= 4.0)):
+			continue
+		velocity += strong_area.wind_dir * strong_area.speed
 
 func setup_timeout():
 	await get_tree().create_timer(TIMEOUT_TIME, false, true).timeout

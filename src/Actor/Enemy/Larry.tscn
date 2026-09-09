@@ -56,7 +56,7 @@ _data = {
 
 [node name="Larry" type="CharacterBody2D" unique_id=1813287247 groups=["Actors", "Enemies", "Entities"]]
 collision_layer = 2
-collision_mask = 10
+collision_mask = 522
 script = ExtResource("2")
 editor_hidden = false
 
