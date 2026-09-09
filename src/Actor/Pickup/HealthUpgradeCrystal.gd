@@ -18,6 +18,7 @@ func _physics_process(delta):
 	if !$AnimationPlayer.is_playing():
 		if sine_offset < -2.5:
 			$AnimationPlayer.play("Shine")
+	apply_wind()
 
 func exit():
 	prop_owner.spent = true

@@ -61,6 +61,7 @@ func _physics_process(_delta):
 
 	velocity = calc_velocity()
 	move_and_slide()
+	apply_wind()
 
 
 func change_animation(animation: String): #, random_start = false): TODO: random start doesnt work with discrete animations because we could randomly start inbetween changing frames, thus keeping the old animation going until we hit a keyframe
@@ -111,6 +112,9 @@ func change_state(new):
 
 
 ### STATES ###
+func enter_idle(_prev_state):
+	speed = Vector2.ZERO
+
 #func do_idle():
 	#if target_waypoint:
 		#change_state("walkto")
@@ -249,19 +253,23 @@ func look_at_node(node, inverted = false):
 func calc_velocity(do_gravity = true) -> Vector2:
 	var out: = velocity
 	var fractional_speed = speed
+	var delta: = get_physics_process_delta_time()
 	if is_in_water:
 		fractional_speed = speed * Vector2(0.666, 0.666)
 	out.x = fractional_speed.x * move_dir.x
 	if do_gravity:
-		out.y += gravity * get_physics_process_delta_time()
+		out.y += gravity * delta
 		if move_dir.y < 0:
 			out.y = fractional_speed.y * move_dir.y
 	else:
 		out.y = fractional_speed.y * move_dir.y
-	if wind_areas_inside.size() != 0: #Inside Wind
+	if is_wind_affected && wind_areas_inside.size() > 0: #Inside Wind
 		if out.y < 0.0:
 			out.y *= 0.9
+		for wind_area in wind_areas_inside:
+			out += wind_area.speed * wind_area.wind_dir
 	return out
+
 
 ### NEW PATHFINDING
 
