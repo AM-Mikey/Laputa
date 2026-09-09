@@ -21,6 +21,7 @@ func _ready():
 func _physics_process(_delta):
 	velocity = calc_velocity(dir)
 	move_and_slide()
+	apply_wind()
 
 func calc_velocity(direction) -> Vector2:
 	var out: = velocity

@@ -60,6 +60,7 @@ func _physics_process(delta):
 	if has_node("StateLabel"):
 		get_node("StateLabel").text = state
 	_on_physics_process(delta)
+	apply_wind()
 
 func _on_physics_process(_delta): #for child
 	pass

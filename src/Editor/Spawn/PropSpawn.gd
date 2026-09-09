@@ -170,7 +170,7 @@ func on_property_changed(p_name, p_value):
 	var prop = get_prop_name()
 	if prop == "": return
 
-			
+
 
 func on_vu_value_changed(vu, _old_value, new_value):
 	var prop = get_prop_name()
@@ -182,7 +182,7 @@ func on_vu_value_changed(vu, _old_value, new_value):
 				var distance_waypoint = $Distance
 				var true_wp_pos = $Distance.position - Vector2(8.0, 8.0) - 8.0 * new_value
 				var curr_distance = true_wp_pos.length()
-				
+
 				var is_dir_vertical = new_value.snappedf(1.0) in [Vector2.UP, Vector2.DOWN]
 				distance_waypoint.lock_x = is_dir_vertical
 				distance_waypoint.lock_y = !is_dir_vertical

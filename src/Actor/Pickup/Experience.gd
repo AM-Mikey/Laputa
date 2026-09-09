@@ -80,7 +80,7 @@ func _physics_process(delta):
 		$AnimationPlayer.speed_scale = ave_velocity / start_velocity
 		if $AnimationPlayer.speed_scale > 1:
 			$AnimationPlayer.speed_scale = 1
-
+	apply_wind()
 
 
 func calc_starting_velocity(dir) -> Vector2:

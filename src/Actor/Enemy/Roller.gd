@@ -122,7 +122,7 @@ func _on_physics_process(delta):
 
 	if last_collision != null && !on_floor && !on_slope: # Allow it to lodging into 1 tile-gap instead of move over it
 		var c := move_and_collide(Vector2(0, 1.0) * delta)
-		
+
 		if c != null:
 			var diff := c.get_position().x - global_position.x
 			if absf(diff) < 0.1:
@@ -210,7 +210,7 @@ func _calc_velocity_rolling() -> Vector2:
 	var in_water_mult := Vector2.ONE if !is_in_water else Vector2(0.666, 0.666)
 
 	move_velocity = speed * move_dir * in_water_mult
-	
+
 	if ceil_bounce_next_frame:
 		am.play("enemy_metal_thud", self, null, min(gravity_velocity.length() / 25.0, 30.0))
 		if gravity_velocity.length() > 100.0:
@@ -270,13 +270,13 @@ func _calc_velocity_rolling() -> Vector2:
 				gravity_velocity.x = move_toward(gravity_velocity.x, 0.0, 1.0)
 				gravity_velocity.x = abs(gravity_velocity.x) * move_dir.x
 				gravity_velocity.y = 0.0
-			
-	
+
+
 	if is_wind_affected && wind_areas_inside.size() > 0:
 		for wind_area in wind_areas_inside:
 			gravity_velocity.y += wind_area.speed * wind_area.wind_dir.y
 			move_velocity.x += wind_area.speed * wind_area.wind_dir.x
-	
+
 	return move_velocity + gravity_velocity
 
 

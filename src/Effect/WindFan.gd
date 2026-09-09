@@ -17,7 +17,7 @@ func _ready():
 		$Right.emitting = true
 
 
-func update(): 
+func update():
 	if tile_distance <= 0.0:
 		$Left.emitting = false
 		$Right.emitting = false
@@ -37,7 +37,7 @@ func update():
 		$Left.amount_ratio = amount / max_amount
 		$Right.amount_ratio = amount / max_amount
 		rotation = direction.angle()
-	
+
 func stop():
 	is_stopping = true
 	$Left.emitting = false

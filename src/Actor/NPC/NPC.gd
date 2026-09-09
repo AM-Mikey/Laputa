@@ -61,6 +61,7 @@ func _physics_process(_delta):
 
 	velocity = calc_velocity()
 	move_and_slide()
+	apply_wind()
 
 
 func change_animation(animation: String): #, random_start = false): TODO: random start doesnt work with discrete animations because we could randomly start inbetween changing frames, thus keeping the old animation going until we hit a keyframe
