@@ -60,6 +60,7 @@ func _physics_process(delta):
 	if has_node("StateLabel"):
 		get_node("StateLabel").text = state
 	_on_physics_process(delta)
+	apply_wind()
 
 func _on_physics_process(_delta): #for child
 	pass
@@ -67,6 +68,7 @@ func _on_physics_process(_delta): #for child
 func calc_velocity(move_dir, do_gravity = true, do_acceleration = true, do_friction = true) -> Vector2:
 	var out: = velocity
 	var fractional_speed = speed
+	var delta: = get_physics_process_delta_time()
 	if is_in_water:
 		fractional_speed = speed * Vector2(0.666, 0.666)
 	#X
@@ -84,12 +86,12 @@ func calc_velocity(move_dir, do_gravity = true, do_acceleration = true, do_frict
 
 	#Y
 	if do_gravity:
-		out.y += gravity * get_physics_process_delta_time()
+		out.y += gravity * delta
 		if move_dir.y < 0:
 			out.y = fractional_speed.y * move_dir.y
 	else:
 		out.y = fractional_speed.y * move_dir.y
-	if wind_areas_inside.size() != 0: #Inside Wind
+	if is_wind_affected && wind_areas_inside.size() > 0: #Inside Wind
 		if out.y < 0.0:
 			out.y *= 0.9
 	return out
@@ -122,8 +124,8 @@ func change_state(new):
 
 ### DAMAGE/DEATH ###
 
-func hit(damage, blood_direction):
-	_on_hit(damage, blood_direction)
+func hit(damage, blood_direction, hitbox):
+	_on_hit(damage, blood_direction, hitbox)
 	hp -= damage
 	var blood = BLOOD.instantiate()
 	get_tree().get_root().get_node("World/Front").add_child(blood)
@@ -137,7 +139,7 @@ func hit(damage, blood_direction):
 	else:
 		am.play(hurt_sound, self)
 
-func _on_hit(_damage, _blood_direction): #inhereted for enemies to do something on hit
+func _on_hit(_damage, _blood_direction, _hitbox): #inhereted for enemies to do something on hit
 	pass
 
 
@@ -251,7 +253,7 @@ func _on_hitbox_area_entered(area):
 			var enemy_damage = damage_on_contact
 			if enemy_damage_on_contact:
 				enemy_damage = enemy_damage_on_contact
-			area.get_parent().hit(enemy_damage, Vector2(area.global_position - global_position).normalized())
+			area.get_parent().hit(enemy_damage, Vector2(area.global_position - global_position).normalized(), $Hitbox)
 
 func _on_hitbox_area_exited(area):
 	if area.get_collision_layer_value(17): #playerhurt

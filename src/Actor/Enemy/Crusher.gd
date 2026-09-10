@@ -290,7 +290,7 @@ func crush_check():
 						break
 
 				if collide_with_world:
-					body.hit(999, Vector2.ZERO)
+					body.hit(999, Vector2.ZERO, $Standable/Crush)
 					body.die() # Pierce invis
 
 func animate():

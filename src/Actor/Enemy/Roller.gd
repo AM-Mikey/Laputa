@@ -121,7 +121,7 @@ func _on_physics_process(delta):
 	_animate()
 
 	if last_collision != null && !on_floor && !on_slope: # Allow it to lodging into 1 tile-gap instead of move over it
-		var c := move_and_collide(Vector2(0, velocity.y) * delta)
+		var c := move_and_collide(Vector2(0, 1.0) * delta)
 
 		if c != null:
 			var diff := c.get_position().x - global_position.x
@@ -206,12 +206,13 @@ func _create_effect(vfx_name):
 ### GETTERS ###
 
 func _calc_velocity_rolling() -> Vector2:
+	var delta: = get_physics_process_delta_time()
 	var in_water_mult := Vector2.ONE if !is_in_water else Vector2(0.666, 0.666)
 
 	move_velocity = speed * move_dir * in_water_mult
 
 	if ceil_bounce_next_frame:
-		am.play("enemy_metal_thud", self, null, gravity_velocity.length() / 25.0)
+		am.play("enemy_metal_thud", self, null, min(gravity_velocity.length() / 25.0, 30.0))
 		if gravity_velocity.length() > 100.0:
 			_create_effect("Land")
 		if gravity_velocity.length() > 250.0:
@@ -220,7 +221,7 @@ func _calc_velocity_rolling() -> Vector2:
 		ceil_bounce_next_frame = false
 	else:
 		if !on_floor || on_slope:
-			var add_gravity: float = gravity * get_physics_process_delta_time()
+			var add_gravity: float = gravity * delta
 			if on_slope:
 				move_velocity = move_velocity.slide(floor_normal)
 				gravity_velocity = gravity_velocity.slide(floor_normal)
@@ -237,16 +238,17 @@ func _calc_velocity_rolling() -> Vector2:
 					gravity_velocity.x = move_toward(gravity_velocity.x, 0.0, 1.0)
 				gravity_velocity.x = abs(gravity_velocity.x) * move_dir.x
 				gravity_velocity.y += add_gravity
-				var collision = move_and_collide((gravity_velocity + move_velocity) * get_physics_process_delta_time(), true)
+				var collision = move_and_collide((gravity_velocity + move_velocity) * delta, true)
 				var ceil_angle = PI / 3.0
 				if collision != null:
 					var check_angle := (global_position + Vector2(0, -8.0)).angle_to_point(collision.get_position())
-					if check_angle >= -PI / 2.0 - ceil_angle && check_angle <= -PI / 2.0 + ceil_angle:
+					if check_angle >= -PI / 2.0 - ceil_angle && check_angle <= -PI / 2.0 + ceil_angle && $BounceTimer.time_left <= 0.0:
+						$BounceTimer.start()
 						ceil_bounce_next_frame = true
 		else:
 			if just_landed:
 				if difficulty == 0 && abs(gravity_velocity.y) >= 10.0:
-					am.play("enemy_metal_thud", self, null, gravity_velocity.length() / 50.0)
+					am.play("enemy_metal_thud", self, null, min(gravity_velocity.length() / 50.0, 30.0))
 					if last_collision != null:
 						if gravity_velocity.length() > 100.0:
 							_create_effect("Land")
@@ -255,7 +257,7 @@ func _calc_velocity_rolling() -> Vector2:
 					gravity_velocity.y = -abs(gravity_velocity.y) * 0.2
 				elif difficulty == 1:
 					if abs(gravity_velocity.y) >= 5.0:
-						am.play("enemy_metal_thud", self, null, gravity_velocity.length() / 50.0)
+						am.play("enemy_metal_thud", self, null, min(gravity_velocity.length() / 50.0, 30.0))
 						if last_collision != null:
 							if gravity_velocity.length() > 100.0:
 								_create_effect("Land")
@@ -269,7 +271,13 @@ func _calc_velocity_rolling() -> Vector2:
 				gravity_velocity.x = abs(gravity_velocity.x) * move_dir.x
 				gravity_velocity.y = 0.0
 
-	return gravity_velocity + move_velocity
+
+	if is_wind_affected && wind_areas_inside.size() > 0:
+		for wind_area in wind_areas_inside:
+			gravity_velocity.y += wind_area.speed * wind_area.wind_dir.y
+			move_velocity.x += wind_area.speed * wind_area.wind_dir.x
+
+	return move_velocity + gravity_velocity
 
 
 func _angle_to_nearest_x_axis(angle: float) -> float: # Return value in [0, PI / 2.0]

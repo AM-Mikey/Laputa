@@ -3,11 +3,12 @@ extends Prop
 const ICON = preload("res://assets/Prop/PhysFanIcon.png")
 const PHYS_WIND_COLUMN = preload("res://src/Utility/PhysWindColumn.tscn")
 
-
 var wind_dir : Vector2
-var phys_wind_column : Node
+var distance: = 0.0
 @export var speed := 20.0 #4 is about equal with gravity
 @export var toggled := true
+
+var phys_wind_column : Node
 var fan_start_sfx_player: Node
 var fan_loop_sfx_player: Node
 var fan_vis_wind_up_duration := 3.33
@@ -16,7 +17,8 @@ var doing_retrigger_wind_up := false
 
 func setup(): #Reminder: no function called can use await
 	wind_dir = $WindVector.direction.snapped(Vector2(1, 1)) #remove VUVector imprecision
-
+	distance = ($Distance.position - Vector2(8.0, 8.0) - 8.0 * wind_dir).length()
+	$WorldCast.target_position.x = -distance
 	match wind_dir:
 		Vector2.LEFT:
 			$Sprite2D.frame_coords.y = 0
@@ -44,8 +46,6 @@ func setup(): #Reminder: no function called can use await
 	await get_tree().physics_frame
 	if toggled:
 		create_phys_wind_column()
-
-
 
 ### HELPERS ###
 
@@ -80,7 +80,7 @@ func get_column_rect() -> Rect2:
 	if $WorldCast.is_colliding():
 		end_point = $WorldCast.get_collision_point() + Vector2(0, 8).rotated(wind_dir.angle())
 	else:
-		print("PhysFan didn't find a collision point, using PhysFan/WorldCast's length")
+		#print("PhysFan didn't find a collision point, using PhysFan/WorldCast's length")
 		end_point = $WorldCast.global_position + $WorldCast.target_position.rotated($WorldCast.rotation) + Vector2(0, 8).rotated(wind_dir.angle())
 
 	var rect_pos = Vector2(min(start_point.x, end_point.x), min(start_point.y, end_point.y))
@@ -144,6 +144,11 @@ func _physics_process(_delta):
 	else:
 		doing_retrigger_wind_up = false #done winding up
 		$AnimationPlayer.speed_scale = max_speed_scale #TODO: doesnt yet have a way to play a continuous sfx, make vol scalable to speed
+
+	#update wind hitobx
+	if phys_wind_column:
+		phys_wind_column.column_rect = get_column_rect()
+		phys_wind_column.update()
 
 ### SIGNALS ###
 

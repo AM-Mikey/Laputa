@@ -15,6 +15,6 @@ script = ExtResource("1_n57sk")
 shape = SubResource("1")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1572684330]
-modulate = Color(0.85490197, 0.64705884, 0.1254902, 1)
+modulate = Color(0, 0.64705884, 0.1254902, 1)
 z_index = 999
 texture = ExtResource("2_06s3u")

@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://dfxub53miyl7j"]
 
-[ext_resource type="Script" uid="uid://cxnqax67v6rlf" path="res://src/Effect/BasicAnimation.gd" id="1_ij0hb"]
+[ext_resource type="Script" uid="uid://nvb81xll70lp" path="res://src/Effect/bullet_fizzle_world.gd" id="1_ij0hb"]
 [ext_resource type="Texture2D" uid="uid://degk8xlhf3n7n" path="res://assets/Effect/BulletFizzleWorld.png" id="2_t4bob"]
 
 [sub_resource type="Animation" id="Animation_nhonp"]
@@ -41,17 +41,15 @@ _data = {
 &"RESET": SubResource("Animation_u3sda")
 }
 
-[node name="BulletFizzleWorld" type="Node2D"]
+[node name="BulletFizzleWorld" type="Node2D" unique_id=80703311]
 script = ExtResource("1_ij0hb")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=17475927]
 texture = ExtResource("2_t4bob")
 hframes = 4
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-libraries = {
-&"": SubResource("AnimationLibrary_ch17a")
-}
-autoplay = "Fizzle"
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=285258804]
+libraries/ = SubResource("AnimationLibrary_ch17a")
+autoplay = &"Fizzle"
 
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_AnimationPlayer_animation_finished"]

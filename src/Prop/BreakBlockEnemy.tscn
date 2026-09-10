@@ -1,0 +1,86 @@
+[gd_scene format=3 uid="uid://kda8hektiw4u"]
+
+[ext_resource type="Script" uid="uid://xrsv120twbbh" path="res://src/Prop/BreakBlockEnemy.gd" id="1_kqq65"]
+[ext_resource type="PackedScene" uid="uid://7hbenrfv6p3q" path="res://src/Utility/PhysicsLayerBody.tscn" id="2_02ops"]
+[ext_resource type="Texture2D" uid="uid://cj748gt2c20yk" path="res://assets/Prop/BreakBlock.png" id="3_lwqk6"]
+[ext_resource type="PackedScene" uid="uid://crj4agnff8siv" path="res://src/Editor/VisualUtility/VUActor.tscn" id="4_02ops"]
+
+[sub_resource type="RectangleShape2D" id="1"]
+size = Vector2(16, 16)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_xkehe"]
+size = Vector2(17, 17)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_xavsd"]
+size = Vector2(14, 1)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_0cau2"]
+size = Vector2(16, 16)
+
+[node name="BreakBlockEnemy" type="RigidBody2D" unique_id=1193421281 groups=["Entities", "PhysicsProps", "Props"]]
+collision_layer = 24
+collision_mask = 520
+can_sleep = false
+lock_rotation = true
+freeze_mode = 1
+script = ExtResource("1_kqq65")
+metadata/_custom_type_script = "uid://dgt1xd0pgkr67"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=145023394]
+position = Vector2(8, 8)
+shape = SubResource("1")
+
+[node name="PhysicsLayerBody" parent="." unique_id=307469918 instance=ExtResource("2_02ops")]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PhysicsLayerBody" unique_id=1097072401]
+position = Vector2(8, 8)
+shape = SubResource("1")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=130698616]
+texture = ExtResource("3_lwqk6")
+centered = false
+hframes = 5
+frame = 4
+
+[node name="BreakArea" type="Area2D" parent="." unique_id=1617953084]
+collision_layer = 256
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BreakArea" unique_id=913900600]
+position = Vector2(8, 8)
+shape = SubResource("RectangleShape2D_xkehe")
+
+[node name="CrushDetector" type="Area2D" parent="." unique_id=41672407]
+collision_layer = 0
+collision_mask = 3
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CrushDetector" unique_id=228822363]
+position = Vector2(8, 16.5)
+shape = SubResource("RectangleShape2D_xavsd")
+
+[node name="EditorArea" type="Area2D" parent="." unique_id=1143192318]
+collision_layer = 0
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="EditorArea" unique_id=1284484738]
+position = Vector2(8, 8)
+shape = SubResource("RectangleShape2D_0cau2")
+debug_color = Color(0, 0.6, 0.69803923, 0)
+
+[node name="GroundLeft" type="RayCast2D" parent="." unique_id=1408564082]
+position = Vector2(1, 16.5)
+target_position = Vector2(0, 0.5)
+collision_mask = 520
+hit_from_inside = true
+
+[node name="GroundRight" type="RayCast2D" parent="." unique_id=679420263]
+position = Vector2(15, 16.5)
+target_position = Vector2(0, 0.5)
+collision_mask = 520
+hit_from_inside = true
+
+[node name="VUActor" parent="." unique_id=1199277091 instance=ExtResource("4_02ops")]
+position = Vector2(8, 16)
+filter_team = 1
+
+[connection signal="body_entered" from="CrushDetector" to="." method="_on_CrushDetector_body_entered"]

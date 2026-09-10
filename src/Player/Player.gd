@@ -115,14 +115,14 @@ func enemy_entered(enemy):
 	var touching_dir = sign(global_position.x - enemy.global_position.x)
 	var knockback_direction = Vector2((min(touching_distance, 1) * touching_dir), 0) #note this will always return the max direction for enemies of size greater than one tile.
 	#print("kb: ", knockback_direction)
-	hit(damage, knockback_direction)
+	hit(damage, knockback_direction, enemy.get_node("Hitbox"))
 
 
 func enemy_exited(enemy):
 	enemies_touching.erase(enemy)
 
 
-func hit(damage, knockback_direction):
+func hit(damage, knockback_direction, _hitbox):
 	if not disabled and not invincible:
 		if damage > 0:
 			hp -= damage
@@ -185,7 +185,7 @@ func hit_again(): #TODO: prioritize this for all forms of damage, not just enemi
 			toughtest_damage = e.damage_on_contact
 
 	var knockback_direction = Vector2(sign(global_position.x - toughest_enemy.global_position.x), 0)
-	hit(toughtest_damage, knockback_direction)
+	hit(toughtest_damage, knockback_direction, toughest_enemy.get_node("Hitbox"))
 
 
 func die():
