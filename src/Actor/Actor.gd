@@ -42,7 +42,7 @@ func apply_wind():
 	for strong_area in strongest_by_dir.values():
 		if is_on_floor() && (strong_area.wind_dir == Vector2.DOWN || (strong_area.wind_dir == Vector2.UP && strong_area.speed <= 4.0)):
 			continue
-		print(strongest_by_dir.values().size(), " strong wind : ", strong_area.wind_dir, " , ", strong_area.speed)
+		#print(strongest_by_dir.values().size(), " strong wind : ", strong_area.wind_dir, " , ", strong_area.speed)
 		velocity += strong_area.wind_dir * strong_area.speed
 
 #do not _ready() as it will be shadowed
