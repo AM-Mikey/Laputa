@@ -15,11 +15,11 @@ func state_process(_delta):
 	var new_velocity = pc.velocity
 	pc.velocity.y = new_velocity.y #only set y portion because we're doing move and slide with snap
 
-	if pc.is_on_floor() and not pc.is_on_ssp:
-		if Input.is_action_pressed("look_down") and inp.can_act:
+	if pc.is_on_floor() && !pc.is_on_ssp:
+		if inp.held("look_down") and inp.can_act:
 			mm.change_state("run")
 			return
-	if Input.is_action_just_pressed("jump") and inp.can_act:
+	if inp.pressed("jump") and inp.can_act:
 		mm.change_state("jump")
 		return
 
@@ -29,9 +29,7 @@ func state_process(_delta):
 func set_player_directions():
 	var input_dir = Vector2.ZERO
 	if inp.can_act:
-		input_dir = Vector2(
-		Input.get_action_strength("move_right") - Input.get_action_strength("move_left"),
-		Input.get_action_strength("look_down") - Input.get_action_strength("look_up"))
+		input_dir = inp.analogstick
 
 	pc.move_dir = Vector2(input_dir)
 

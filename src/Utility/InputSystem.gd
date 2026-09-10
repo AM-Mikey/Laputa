@@ -60,10 +60,13 @@ var buffer:Array=[
 
 func _on_joypad_connection_changed(_device: int, _connected: bool): #for if controller is connected during
 	print("controllers changed")
-	if active_controller_index in Input.get_connected_joypads():
-		set_active_controller_index(active_controller_index)
+	if Input.get_connected_joypads().size() == 0:
+		active_controller_index = -1
 	else:
-		set_active_controller_index(Input.get_connected_joypads()[0]) #lowest number
+		if active_controller_index in Input.get_connected_joypads():
+			set_active_controller_index(active_controller_index)
+		else:
+			set_active_controller_index(Input.get_connected_joypads()[0]) #lowest number
 
 func set_active_controller_index(index):
 	active_controller_index = index
