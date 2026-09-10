@@ -113,10 +113,11 @@ func _on_CollisionDetector_area_entered(area): #shadows
 	#enemyhurt
 	if area.get_collision_layer_value(18):
 		if $BounceGraceTimer.time_left <= 0.0:
+			var blood_dir = get_blood_dir(area.get_parent())
 			if not touched_floor:
-				area.get_parent().hit(damage, get_blood_dir(area.get_parent()), $PlayerCollisionDetector)
+				area.get_parent().hit(damage, blood_dir, $PlayerCollisionDetector, blood_dir, knockback_strength)
 			else:
-				area.get_parent().hit(int(damage/2.0), get_blood_dir(area.get_parent()), $PlayerCollisionDetector)
+				area.get_parent().hit(int(damage/2.0), blood_dir, $PlayerCollisionDetector, blood_dir, knockback_strength)
 			queue_free()
 
 func _on_Timer_timeout():
@@ -156,4 +157,4 @@ func _on_ExplosionDetector_area_entered(area):
 	elif area.get_collision_layer_value(18):
 		if !is_world_blocking(area):
 			var blood_dir = get_blood_dir(area.get_parent())
-			area.get_parent().hit(int(damage/4.0), $ExplosionDetector, blood_dir, knockback_strength)
+			area.get_parent().hit(int(damage/4.0), blood_dir, $ExplosionDetector, blood_dir, knockback_strength)

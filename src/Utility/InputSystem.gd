@@ -87,10 +87,12 @@ func _input(event: InputEvent): #for sleep
 	if event.device == active_controller_index && (event is InputEventJoypadButton || (event is InputEventJoypadMotion && event.axis in [4, 5])): #triggers
 		if controller_asleep:
 			controller_asleep = false
+			oup.do_level_gradient = true
 			oup.set_controller_light_color(active_controller_index, oup.active_controller_color)
 	elif event is InputEventKey:
 		if !controller_asleep:
 			controller_asleep = true
+			oup.do_level_gradient = false
 			oup.set_controller_light_color(active_controller_index, oup.asleep_controller_color)
 
 

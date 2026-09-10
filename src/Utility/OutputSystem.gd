@@ -1,10 +1,11 @@
 extends Node
 
 var active_controller_color = Color.AQUAMARINE
-var asleep_controller_color = Color.DARK_SLATE_BLUE
+var asleep_controller_color = Color.DARK_SLATE_GRAY
 var inactive_controller_color = Color.BLACK
 
 var level_gradient: Gradient
+var do_level_gradient := true
 var fade_cycle_duration := 64.0
 
 var time_elapsed := 0.0
@@ -32,7 +33,7 @@ func _vibrate(weak_magnitude: float, strong_magnitude: float, duration: float = 
 
 func _process(delta: float):
 	time_elapsed += delta
-	if level_gradient:
+	if do_level_gradient && level_gradient:
 		var offset = fmod(time_elapsed, fade_cycle_duration) / fade_cycle_duration
 		var color = level_gradient.sample(offset)
 		set_controller_light_color(inp.active_controller_index, color)

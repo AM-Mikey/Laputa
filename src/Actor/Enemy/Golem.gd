@@ -96,7 +96,7 @@ func enter_wallslam(_last_state):
 
 
 
-func _on_hit(_damage, _blood_direction):
+func _on_hit(_damage, _blood_direction, _hitnox):
 	if state != "charge":
 		change_state("charge")
 

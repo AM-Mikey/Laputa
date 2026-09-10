@@ -84,7 +84,7 @@ func _on_CollisionDetector_area_entered(area):
 
 	if area.get_collision_layer_value(18): #enemyhurt
 		var blood_dir = get_blood_dir(area.get_parent())
-		area.get_parent().hit(damage, $PlayerCollisionDetector, blood_dir, blood_dir, knockback_strength)
+		area.get_parent().hit(damage, blood_dir, $PlayerCollisionDetector, blood_dir, knockback_strength)
 		queue_free()
 	elif area.get_collision_layer_value(9): #breakable
 		area.get_parent().on_break(break_method)

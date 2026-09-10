@@ -138,7 +138,7 @@ func change_state(new):
 
 ### DAMAGE/DEATH ###
 
-func hit(damage, hitbox, blood_direction, knockback_direction = Vector2.ZERO, knockback_strength = 0):
+func hit(damage, blood_direction, hitbox, knockback_direction = Vector2.ZERO, knockback_strength = 0):
 	_on_hit(damage, blood_direction, hitbox)
 	hp -= damage
 	var blood = BLOOD.instantiate()

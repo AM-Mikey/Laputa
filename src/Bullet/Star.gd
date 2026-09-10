@@ -71,10 +71,11 @@ func _on_CollisionDetector_body_entered(body): #shadows
 				do_fizzle("armor")
 		#enemys
 		elif body.get_collision_layer_value(2):
+			var blood_dir = get_blood_dir(body)
 			if not touched_floor:
-				body.hit(damage, get_blood_dir(body), $PlayerCollisionDetector)
+				body.hit(damage, blood_dir, $PlayerCollisionDetector)
 			else:
-				body.hit(int(damage / 2.0), get_blood_dir(body), $PlayerCollisionDetector)
+				body.hit(int(damage / 2.0), blood_dir, $PlayerCollisionDetector)
 			queue_free()
 		#breakable
 		elif body.get_collision_layer_value(9):

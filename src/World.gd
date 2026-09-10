@@ -378,8 +378,9 @@ func spawn_entities():
 		a.spawn()
 		await finished_spawn_entities_step
 	print("all actors spawned")
-	for w in get_tree().get_nodes_in_group("WaypointGlobalSpawns"):
-		w.spawn()
+	#var group = get_tree().get_nodes_in_group("WaypointGlobalSpawns")
+	for wgs in get_tree().get_nodes_in_group("WaypointGlobalSpawns"):
+		wgs.spawn()
 		await finished_spawn_entities_step
 	print("all waypoint globals spawned")
 	for p in get_tree().get_nodes_in_group("PropSpawns"):
