@@ -380,8 +380,9 @@ func spawn_entities():
 	print("all actors spawned")
 	#var group = get_tree().get_nodes_in_group("WaypointGlobalSpawns")
 	for wgs in get_tree().get_nodes_in_group("WaypointGlobalSpawns"):
-		wgs.spawn()
-		await finished_spawn_entities_step
+		if wgs != null: #TODO i dont know why there are two null ones, is this a memory leak?
+			wgs.spawn()
+			await finished_spawn_entities_step
 	print("all waypoint globals spawned")
 	for p in get_tree().get_nodes_in_group("PropSpawns"):
 		p.spawn()
