@@ -33,7 +33,7 @@ func _on_KickHitbox_area_entered(area: Area2D) -> void:
 		hitbox.set_deferred("monitoring", false)
 		hitbox.set_deferred("monitorable", false)
 	elif area.get_collision_layer_value(17): #playerhurt
-		area.get_parent().hit(em.kick_damage, Vector2(80 * em.look_dir.x, 0))
+		area.get_parent().hit(em.kick_damage, Vector2(80 * em.look_dir.x, 0), em.get_node("KickHitbox"))
 	elif area.get_collision_layer_value(9): #breakable
 		area.get_parent().on_break()
 
