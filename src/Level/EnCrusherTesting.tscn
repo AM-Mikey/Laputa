@@ -1,4 +1,4 @@
-[gd_scene format=4 uid="uid://d38pqr0yukuw"]
+[gd_scene format=4 uid="uid://dno3uipthhhbc"]
 
 [ext_resource type="Script" uid="uid://ucr1waa8u8j1" path="res://src/Level/Level.gd" id="1_6q8mx"]
 [ext_resource type="PackedScene" uid="uid://deyh6xyl8c6tr" path="res://src/Background/LevelLimiter.tscn" id="2_jogqi"]
@@ -96,6 +96,7 @@ visibility_layer = 2
 visibility_layer = 2
 
 [node name="Crusher" parent="Spawns" unique_id=1199277091 instance=ExtResource("9_uly8o")]
+modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 position = Vector2(3368, 1856)
 actor_path = "res://src/Actor/Enemy/Crusher.tscn"
@@ -127,6 +128,7 @@ tag_name = "shape_define"
 value = Rect2(-16, -16, 48, 48)
 
 [node name="Crusher1" parent="Spawns" unique_id=1181723865 instance=ExtResource("9_uly8o")]
+modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 position = Vector2(3432, 1936)
 actor_path = "res://src/Actor/Enemy/Crusher.tscn"
@@ -158,6 +160,7 @@ tag_name = "shape_define"
 value = Rect2(-16, -16, 48, 48)
 
 [node name="Crusher2" parent="Spawns" unique_id=91576435 instance=ExtResource("9_uly8o")]
+modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 position = Vector2(3512, 1824)
 actor_path = "res://src/Actor/Enemy/Crusher.tscn"
@@ -189,6 +192,7 @@ tag_name = "shape_define"
 value = Rect2(-16, -16, 48, 48)
 
 [node name="Crusher5" parent="Spawns" unique_id=1008526891 instance=ExtResource("9_uly8o")]
+modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 position = Vector2(3800, 1872)
 actor_path = "res://src/Actor/Enemy/Crusher.tscn"
@@ -220,6 +224,7 @@ tag_name = "shape_define"
 value = Rect2(-16, -16, 48, 48)
 
 [node name="Crusher6" parent="Spawns" unique_id=1558144139 instance=ExtResource("9_uly8o")]
+modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 position = Vector2(3696, 1952)
 actor_path = "res://src/Actor/Enemy/Crusher.tscn"
@@ -251,6 +256,7 @@ tag_name = "shape_define"
 value = Rect2(-16, -16, 48, 48)
 
 [node name="Crusher7" parent="Spawns" unique_id=992269505 instance=ExtResource("9_uly8o")]
+modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 position = Vector2(4112, 1792)
 actor_path = "res://src/Actor/Enemy/Crusher.tscn"
@@ -282,6 +288,7 @@ tag_name = "shape_define"
 value = Rect2(-16, -16, 48, 48)
 
 [node name="Crusher8" parent="Spawns" unique_id=1865642544 instance=ExtResource("9_uly8o")]
+modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 position = Vector2(4048, 1792)
 actor_path = "res://src/Actor/Enemy/Crusher.tscn"
@@ -313,6 +320,7 @@ tag_name = "shape_define"
 value = Rect2(-16, -16, 48, 48)
 
 [node name="Crusher9" parent="Spawns" unique_id=162148202 instance=ExtResource("9_uly8o")]
+modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 position = Vector2(4024, 1792)
 actor_path = "res://src/Actor/Enemy/Crusher.tscn"
@@ -344,6 +352,7 @@ tag_name = "shape_define"
 value = Rect2(-16, -16, 48, 48)
 
 [node name="Crusher10" parent="Spawns" unique_id=1232174221 instance=ExtResource("9_uly8o")]
+modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 position = Vector2(3984, 1792)
 actor_path = "res://src/Actor/Enemy/Crusher.tscn"
@@ -375,6 +384,7 @@ tag_name = "shape_define"
 value = Rect2(-16, -16, 48, 48)
 
 [node name="Crusher11" parent="Spawns" unique_id=102936381 instance=ExtResource("9_uly8o")]
+modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 position = Vector2(3952, 1792)
 actor_path = "res://src/Actor/Enemy/Crusher.tscn"
@@ -406,6 +416,7 @@ tag_name = "shape_define"
 value = Rect2(-16, -16, 48, 48)
 
 [node name="Crusher12" parent="Spawns" unique_id=488247404 instance=ExtResource("9_uly8o")]
+modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 position = Vector2(3920, 1792)
 actor_path = "res://src/Actor/Enemy/Crusher.tscn"
@@ -437,6 +448,7 @@ tag_name = "shape_define"
 value = Rect2(-16, -16, 48, 48)
 
 [node name="Crusher13" parent="Spawns" unique_id=2112445765 instance=ExtResource("9_uly8o")]
+modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 position = Vector2(3872, 1792)
 actor_path = "res://src/Actor/Enemy/Crusher.tscn"
@@ -468,6 +480,7 @@ tag_name = "shape_define"
 value = Rect2(-16, -16, 48, 48)
 
 [node name="Crusher14" parent="Spawns" unique_id=2073359416 instance=ExtResource("9_uly8o")]
+modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 position = Vector2(4136, 1792)
 actor_path = "res://src/Actor/Enemy/Crusher.tscn"
@@ -499,6 +512,7 @@ tag_name = "shape_define"
 value = Rect2(-16, -16, 48, 48)
 
 [node name="Crusher15" parent="Spawns" unique_id=257098971 instance=ExtResource("9_uly8o")]
+modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 position = Vector2(4176, 1792)
 actor_path = "res://src/Actor/Enemy/Crusher.tscn"
@@ -530,6 +544,7 @@ tag_name = "shape_define"
 value = Rect2(-16, -16, 48, 48)
 
 [node name="Crusher17" parent="Spawns" unique_id=1849245554 instance=ExtResource("9_uly8o")]
+modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 position = Vector2(4208, 1792)
 actor_path = "res://src/Actor/Enemy/Crusher.tscn"
@@ -561,6 +576,7 @@ tag_name = "shape_define"
 value = Rect2(-16, -16, 48, 48)
 
 [node name="Crusher18" parent="Spawns" unique_id=1212031714 instance=ExtResource("9_uly8o")]
+modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 position = Vector2(4240, 1792)
 actor_path = "res://src/Actor/Enemy/Crusher.tscn"
@@ -592,6 +608,7 @@ tag_name = "shape_define"
 value = Rect2(-16, -16, 48, 48)
 
 [node name="Crusher19" parent="Spawns" unique_id=1635172184 instance=ExtResource("9_uly8o")]
+modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 position = Vector2(4288, 1792)
 actor_path = "res://src/Actor/Enemy/Crusher.tscn"
@@ -623,6 +640,7 @@ tag_name = "shape_define"
 value = Rect2(-16, -16, 48, 48)
 
 [node name="Crusher20" parent="Spawns" unique_id=633135661 instance=ExtResource("9_uly8o")]
+modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 position = Vector2(4112, 1968)
 actor_path = "res://src/Actor/Enemy/Crusher.tscn"
@@ -654,6 +672,7 @@ tag_name = "shape_define"
 value = Rect2(-16, -16, 48, 48)
 
 [node name="Crusher21" parent="Spawns" unique_id=515759820 instance=ExtResource("9_uly8o")]
+modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 position = Vector2(4048, 1968)
 actor_path = "res://src/Actor/Enemy/Crusher.tscn"
@@ -685,6 +704,7 @@ tag_name = "shape_define"
 value = Rect2(-16, -16, 48, 48)
 
 [node name="Crusher22" parent="Spawns" unique_id=1547490156 instance=ExtResource("9_uly8o")]
+modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 position = Vector2(4024, 1968)
 actor_path = "res://src/Actor/Enemy/Crusher.tscn"
@@ -716,6 +736,7 @@ tag_name = "shape_define"
 value = Rect2(-16, -16, 48, 48)
 
 [node name="Crusher23" parent="Spawns" unique_id=946600405 instance=ExtResource("9_uly8o")]
+modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 position = Vector2(3984, 1968)
 actor_path = "res://src/Actor/Enemy/Crusher.tscn"
@@ -747,6 +768,7 @@ tag_name = "shape_define"
 value = Rect2(-16, -16, 48, 48)
 
 [node name="Crusher24" parent="Spawns" unique_id=1897428407 instance=ExtResource("9_uly8o")]
+modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 position = Vector2(3952, 1968)
 actor_path = "res://src/Actor/Enemy/Crusher.tscn"
@@ -778,6 +800,7 @@ tag_name = "shape_define"
 value = Rect2(-16, -16, 48, 48)
 
 [node name="Crusher25" parent="Spawns" unique_id=2071641218 instance=ExtResource("9_uly8o")]
+modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 position = Vector2(3920, 1968)
 actor_path = "res://src/Actor/Enemy/Crusher.tscn"
@@ -809,6 +832,7 @@ tag_name = "shape_define"
 value = Rect2(-16, -16, 48, 48)
 
 [node name="Crusher26" parent="Spawns" unique_id=250134656 instance=ExtResource("9_uly8o")]
+modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 position = Vector2(3872, 1968)
 actor_path = "res://src/Actor/Enemy/Crusher.tscn"
@@ -840,6 +864,7 @@ tag_name = "shape_define"
 value = Rect2(-16, -16, 48, 48)
 
 [node name="Crusher27" parent="Spawns" unique_id=692424451 instance=ExtResource("9_uly8o")]
+modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 position = Vector2(4136, 1968)
 actor_path = "res://src/Actor/Enemy/Crusher.tscn"
@@ -871,6 +896,7 @@ tag_name = "shape_define"
 value = Rect2(-16, -16, 48, 48)
 
 [node name="Crusher28" parent="Spawns" unique_id=1552338938 instance=ExtResource("9_uly8o")]
+modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 position = Vector2(4176, 1968)
 actor_path = "res://src/Actor/Enemy/Crusher.tscn"
@@ -902,6 +928,7 @@ tag_name = "shape_define"
 value = Rect2(-16, -16, 48, 48)
 
 [node name="Crusher29" parent="Spawns" unique_id=593291138 instance=ExtResource("9_uly8o")]
+modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 position = Vector2(4208, 1968)
 actor_path = "res://src/Actor/Enemy/Crusher.tscn"
@@ -933,6 +960,7 @@ tag_name = "shape_define"
 value = Rect2(-16, -16, 48, 48)
 
 [node name="Crusher30" parent="Spawns" unique_id=956017260 instance=ExtResource("9_uly8o")]
+modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 position = Vector2(4240, 1968)
 actor_path = "res://src/Actor/Enemy/Crusher.tscn"
@@ -964,6 +992,7 @@ tag_name = "shape_define"
 value = Rect2(-16, -16, 48, 48)
 
 [node name="Crusher31" parent="Spawns" unique_id=102316337 instance=ExtResource("9_uly8o")]
+modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 position = Vector2(4288, 1968)
 actor_path = "res://src/Actor/Enemy/Crusher.tscn"
@@ -995,6 +1024,7 @@ tag_name = "shape_define"
 value = Rect2(-16, -16, 48, 48)
 
 [node name="Crusher32" parent="Spawns" unique_id=1087170217 instance=ExtResource("9_uly8o")]
+modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 position = Vector2(3368, 2032)
 actor_path = "res://src/Actor/Enemy/Crusher.tscn"
@@ -1026,6 +1056,7 @@ tag_name = "shape_define"
 value = Rect2(-16, -16, 48, 48)
 
 [node name="Crusher33" parent="Spawns" unique_id=1004468826 instance=ExtResource("9_uly8o")]
+modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 position = Vector2(3432, 2112)
 actor_path = "res://src/Actor/Enemy/Crusher.tscn"
@@ -1057,6 +1088,7 @@ tag_name = "shape_define"
 value = Rect2(-16, -16, 48, 48)
 
 [node name="Crusher34" parent="Spawns" unique_id=785773416 instance=ExtResource("9_uly8o")]
+modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 position = Vector2(3512, 2000)
 actor_path = "res://src/Actor/Enemy/Crusher.tscn"
@@ -1088,6 +1120,7 @@ tag_name = "shape_define"
 value = Rect2(-16, -16, 48, 48)
 
 [node name="Crusher3" parent="Spawns" unique_id=1118241296 instance=ExtResource("9_uly8o")]
+modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 position = Vector2(3008, 1888)
 actor_path = "uid://bg4lsri7kp7fw"
@@ -1120,6 +1153,7 @@ position = Vector2(0, 16)
 tag_name = "to_point"
 
 [node name="Crusher4" parent="Spawns" unique_id=1071704092 instance=ExtResource("9_uly8o")]
+modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 position = Vector2(3008, 2064)
 actor_path = "uid://bg4lsri7kp7fw"
@@ -1152,6 +1186,7 @@ position = Vector2(0, 16)
 tag_name = "to_point"
 
 [node name="Crusher16" parent="Spawns" unique_id=729456098 instance=ExtResource("9_uly8o")]
+modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 position = Vector2(2504, 1808)
 actor_path = "uid://bg4lsri7kp7fw"
@@ -1184,6 +1219,7 @@ position = Vector2(0, 16)
 tag_name = "to_point"
 
 [node name="Billy" parent="Spawns" unique_id=1255341481 instance=ExtResource("9_uly8o")]
+modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 position = Vector2(3695.5762, 1840.1069)
 actor_path = "res://src/Actor/Enemy/Billy.tscn"
@@ -1208,10 +1244,11 @@ properties = {
 [node name="VUVector" parent="Spawns/Billy" unique_id=872564127 instance=ExtResource("17_4ie3j")]
 visibility_layer = 2
 tag_name = "move_dir"
-direction = Vector2(-1, -8.742278e-08)
+direction = Vector2(-1, 8.742278e-08)
 snap_degrees = 180.0
 
 [node name="Billy1" parent="Spawns" unique_id=212899879 instance=ExtResource("9_uly8o")]
+modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 position = Vector2(3695.5762, 1808.1069)
 actor_path = "res://src/Actor/Enemy/Billy.tscn"
@@ -1236,10 +1273,11 @@ properties = {
 [node name="VUVector" parent="Spawns/Billy1" unique_id=82106591 instance=ExtResource("17_4ie3j")]
 visibility_layer = 2
 tag_name = "move_dir"
-direction = Vector2(-1, -8.742278e-08)
+direction = Vector2(-1, 8.742278e-08)
 snap_degrees = 180.0
 
 [node name="Billy2" parent="Spawns" unique_id=370992722 instance=ExtResource("9_uly8o")]
+modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 position = Vector2(3624, 1888)
 actor_path = "res://src/Actor/Enemy/Billy.tscn"
@@ -1264,10 +1302,11 @@ properties = {
 [node name="VUVector" parent="Spawns/Billy2" unique_id=173504419 instance=ExtResource("17_4ie3j")]
 visibility_layer = 2
 tag_name = "move_dir"
-direction = Vector2(-1, -8.742278e-08)
+direction = Vector2(-1, 8.742278e-08)
 snap_degrees = 180.0
 
 [node name="Billy3" parent="Spawns" unique_id=1212851281 instance=ExtResource("9_uly8o")]
+modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 position = Vector2(3783.5762, 1888.1069)
 actor_path = "res://src/Actor/Enemy/Billy.tscn"
@@ -1292,10 +1331,11 @@ properties = {
 [node name="VUVector" parent="Spawns/Billy3" unique_id=632369843 instance=ExtResource("17_4ie3j")]
 visibility_layer = 2
 tag_name = "move_dir"
-direction = Vector2(-1, -8.742278e-08)
+direction = Vector2(-1, 8.742278e-08)
 snap_degrees = 180.0
 
 [node name="Billy4" parent="Spawns" unique_id=1517460442 instance=ExtResource("9_uly8o")]
+modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 position = Vector2(3695.5762, 1920.1069)
 actor_path = "res://src/Actor/Enemy/Billy.tscn"
@@ -1320,10 +1360,11 @@ properties = {
 [node name="VUVector" parent="Spawns/Billy4" unique_id=2022041345 instance=ExtResource("17_4ie3j")]
 visibility_layer = 2
 tag_name = "move_dir"
-direction = Vector2(-1, -8.742278e-08)
+direction = Vector2(-1, 8.742278e-08)
 snap_degrees = 180.0
 
 [node name="Billy5" parent="Spawns" unique_id=2114491459 instance=ExtResource("9_uly8o")]
+modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 position = Vector2(3695.5762, 1952.1069)
 actor_path = "res://src/Actor/Enemy/Billy.tscn"
@@ -1348,10 +1389,11 @@ properties = {
 [node name="VUVector" parent="Spawns/Billy5" unique_id=1370577228 instance=ExtResource("17_4ie3j")]
 visibility_layer = 2
 tag_name = "move_dir"
-direction = Vector2(-1, -8.742278e-08)
+direction = Vector2(-1, 8.742278e-08)
 snap_degrees = 180.0
 
 [node name="Crusher35" parent="Spawns" unique_id=1173115409 instance=ExtResource("9_uly8o")]
+modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 position = Vector2(3800, 2056)
 actor_path = "res://src/Actor/Enemy/Crusher.tscn"
@@ -1383,6 +1425,7 @@ tag_name = "shape_define"
 value = Rect2(-16, -16, 48, 48)
 
 [node name="Crusher36" parent="Spawns" unique_id=474924539 instance=ExtResource("9_uly8o")]
+modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 position = Vector2(3696, 2128)
 actor_path = "res://src/Actor/Enemy/Crusher.tscn"
@@ -1414,6 +1457,7 @@ tag_name = "shape_define"
 value = Rect2(-16, -16, 48, 48)
 
 [node name="Crusher37" parent="Spawns" unique_id=2070116490 instance=ExtResource("9_uly8o")]
+modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 position = Vector2(4328, 2192)
 actor_path = "res://src/Actor/Enemy/Crusher.tscn"
@@ -1445,6 +1489,7 @@ tag_name = "shape_define"
 value = Rect2(-16, -16, 48, 48)
 
 [node name="Crusher38" parent="Spawns" unique_id=317176340 instance=ExtResource("9_uly8o")]
+modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 position = Vector2(4328, 2176)
 actor_path = "res://src/Actor/Enemy/Crusher.tscn"
@@ -1476,6 +1521,7 @@ tag_name = "shape_define"
 value = Rect2(-16, -16, 48, 48)
 
 [node name="Crusher39" parent="Spawns" unique_id=1009203596 instance=ExtResource("9_uly8o")]
+modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 position = Vector2(4328, 2160)
 actor_path = "res://src/Actor/Enemy/Crusher.tscn"
@@ -1507,6 +1553,7 @@ tag_name = "shape_define"
 value = Rect2(-16, -16, 48, 48)
 
 [node name="Crusher40" parent="Spawns" unique_id=1631949071 instance=ExtResource("9_uly8o")]
+modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 position = Vector2(4328, 2208)
 actor_path = "res://src/Actor/Enemy/Crusher.tscn"
@@ -1538,6 +1585,7 @@ tag_name = "shape_define"
 value = Rect2(-16, -16, 48, 48)
 
 [node name="Crusher41" parent="Spawns" unique_id=368919195 instance=ExtResource("9_uly8o")]
+modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 position = Vector2(4328, 2224)
 actor_path = "res://src/Actor/Enemy/Crusher.tscn"
@@ -1569,6 +1617,7 @@ tag_name = "shape_define"
 value = Rect2(-16, -16, 48, 48)
 
 [node name="Crusher42" parent="Spawns" unique_id=1959864653 instance=ExtResource("9_uly8o")]
+modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 position = Vector2(4328, 2240)
 actor_path = "res://src/Actor/Enemy/Crusher.tscn"
@@ -1600,6 +1649,7 @@ tag_name = "shape_define"
 value = Rect2(-16, -16, 48, 48)
 
 [node name="Crusher43" parent="Spawns" unique_id=1973838852 instance=ExtResource("9_uly8o")]
+modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 position = Vector2(4328, 2256)
 actor_path = "res://src/Actor/Enemy/Crusher.tscn"
@@ -1631,6 +1681,7 @@ tag_name = "shape_define"
 value = Rect2(-16, -16, 48, 48)
 
 [node name="Crusher44" parent="Spawns" unique_id=1884343002 instance=ExtResource("9_uly8o")]
+modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 position = Vector2(4328, 2272)
 actor_path = "res://src/Actor/Enemy/Crusher.tscn"
@@ -1662,6 +1713,7 @@ tag_name = "shape_define"
 value = Rect2(-16, -16, 48, 48)
 
 [node name="Crusher45" parent="Spawns" unique_id=440705821 instance=ExtResource("9_uly8o")]
+modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 position = Vector2(4328, 2288)
 actor_path = "res://src/Actor/Enemy/Crusher.tscn"
@@ -1693,6 +1745,7 @@ tag_name = "shape_define"
 value = Rect2(-16, -16, 48, 48)
 
 [node name="Crusher46" parent="Spawns" unique_id=1468882779 instance=ExtResource("9_uly8o")]
+modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 position = Vector2(4328, 2304)
 actor_path = "res://src/Actor/Enemy/Crusher.tscn"
@@ -1724,6 +1777,7 @@ tag_name = "shape_define"
 value = Rect2(-16, -16, 48, 48)
 
 [node name="Crusher47" parent="Spawns" unique_id=762256518 instance=ExtResource("9_uly8o")]
+modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 position = Vector2(4328, 2368)
 actor_path = "res://src/Actor/Enemy/Crusher.tscn"
@@ -1755,6 +1809,7 @@ tag_name = "shape_define"
 value = Rect2(-16, -16, 48, 48)
 
 [node name="Crusher48" parent="Spawns" unique_id=525340467 instance=ExtResource("9_uly8o")]
+modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 position = Vector2(4328, 2352)
 actor_path = "res://src/Actor/Enemy/Crusher.tscn"
@@ -1786,6 +1841,7 @@ tag_name = "shape_define"
 value = Rect2(-16, -16, 48, 48)
 
 [node name="Crusher49" parent="Spawns" unique_id=916656250 instance=ExtResource("9_uly8o")]
+modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 position = Vector2(4328, 2336)
 actor_path = "res://src/Actor/Enemy/Crusher.tscn"
@@ -1817,6 +1873,7 @@ tag_name = "shape_define"
 value = Rect2(-16, -16, 48, 48)
 
 [node name="Crusher50" parent="Spawns" unique_id=1325849579 instance=ExtResource("9_uly8o")]
+modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 position = Vector2(4328, 2384)
 actor_path = "res://src/Actor/Enemy/Crusher.tscn"
@@ -1848,6 +1905,7 @@ tag_name = "shape_define"
 value = Rect2(-16, -16, 48, 48)
 
 [node name="Crusher51" parent="Spawns" unique_id=670871393 instance=ExtResource("9_uly8o")]
+modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 position = Vector2(4328, 2400)
 actor_path = "res://src/Actor/Enemy/Crusher.tscn"
@@ -1879,6 +1937,7 @@ tag_name = "shape_define"
 value = Rect2(-16, -16, 48, 48)
 
 [node name="Crusher52" parent="Spawns" unique_id=284907875 instance=ExtResource("9_uly8o")]
+modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 position = Vector2(4328, 2416)
 actor_path = "res://src/Actor/Enemy/Crusher.tscn"
@@ -1910,6 +1969,7 @@ tag_name = "shape_define"
 value = Rect2(-16, -16, 48, 48)
 
 [node name="Crusher53" parent="Spawns" unique_id=322833261 instance=ExtResource("9_uly8o")]
+modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 position = Vector2(4328, 2432)
 actor_path = "res://src/Actor/Enemy/Crusher.tscn"
@@ -1941,6 +2001,7 @@ tag_name = "shape_define"
 value = Rect2(-16, -16, 48, 48)
 
 [node name="Crusher54" parent="Spawns" unique_id=1098412805 instance=ExtResource("9_uly8o")]
+modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 position = Vector2(4328, 2448)
 actor_path = "res://src/Actor/Enemy/Crusher.tscn"
@@ -1972,6 +2033,7 @@ tag_name = "shape_define"
 value = Rect2(-16, -16, 48, 48)
 
 [node name="Crusher55" parent="Spawns" unique_id=2143507286 instance=ExtResource("9_uly8o")]
+modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 position = Vector2(4328, 2464)
 actor_path = "res://src/Actor/Enemy/Crusher.tscn"
@@ -2003,6 +2065,7 @@ tag_name = "shape_define"
 value = Rect2(-16, -16, 48, 48)
 
 [node name="Crusher56" parent="Spawns" unique_id=2008001885 instance=ExtResource("9_uly8o")]
+modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 position = Vector2(4328, 2480)
 actor_path = "res://src/Actor/Enemy/Crusher.tscn"
@@ -2034,6 +2097,7 @@ tag_name = "shape_define"
 value = Rect2(-16, -16, 48, 48)
 
 [node name="Billy6" parent="Spawns" unique_id=1572144057 instance=ExtResource("9_uly8o")]
+modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 position = Vector2(3695.5762, 2016.1069)
 actor_path = "res://src/Actor/Enemy/Billy.tscn"
@@ -2058,10 +2122,11 @@ properties = {
 [node name="VUVector" parent="Spawns/Billy6" unique_id=627267428 instance=ExtResource("17_4ie3j")]
 visibility_layer = 2
 tag_name = "move_dir"
-direction = Vector2(-1, -8.742278e-08)
+direction = Vector2(-1, 8.742278e-08)
 snap_degrees = 180.0
 
 [node name="Billy7" parent="Spawns" unique_id=1452136497 instance=ExtResource("9_uly8o")]
+modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 position = Vector2(3695.5762, 1984.1069)
 actor_path = "res://src/Actor/Enemy/Billy.tscn"
@@ -2086,10 +2151,11 @@ properties = {
 [node name="VUVector" parent="Spawns/Billy7" unique_id=751997100 instance=ExtResource("17_4ie3j")]
 visibility_layer = 2
 tag_name = "move_dir"
-direction = Vector2(-1, -8.742278e-08)
+direction = Vector2(-1, 8.742278e-08)
 snap_degrees = 180.0
 
 [node name="Billy8" parent="Spawns" unique_id=259141173 instance=ExtResource("9_uly8o")]
+modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 position = Vector2(3623.5762, 2064.107)
 actor_path = "res://src/Actor/Enemy/Billy.tscn"
@@ -2114,10 +2180,11 @@ properties = {
 [node name="VUVector" parent="Spawns/Billy8" unique_id=1023500448 instance=ExtResource("17_4ie3j")]
 visibility_layer = 2
 tag_name = "move_dir"
-direction = Vector2(-1, -8.742278e-08)
+direction = Vector2(-1, 8.742278e-08)
 snap_degrees = 180.0
 
 [node name="Billy9" parent="Spawns" unique_id=1460219447 instance=ExtResource("9_uly8o")]
+modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 position = Vector2(3431.7336, 2415.5671)
 actor_path = "res://src/Actor/Enemy/Billy.tscn"
@@ -2142,10 +2209,11 @@ properties = {
 [node name="VUVector" parent="Spawns/Billy9" unique_id=163664086 instance=ExtResource("17_4ie3j")]
 visibility_layer = 2
 tag_name = "move_dir"
-direction = Vector2(-1, -8.742278e-08)
+direction = Vector2(-1, 8.742278e-08)
 snap_degrees = 180.0
 
 [node name="Billy10" parent="Spawns" unique_id=934157302 instance=ExtResource("9_uly8o")]
+modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 position = Vector2(3095.7336, 2255.5671)
 actor_path = "res://src/Actor/Enemy/Billy.tscn"
@@ -2170,10 +2238,11 @@ properties = {
 [node name="VUVector" parent="Spawns/Billy10" unique_id=1531437948 instance=ExtResource("17_4ie3j")]
 visibility_layer = 2
 tag_name = "move_dir"
-direction = Vector2(-1, -8.742278e-08)
+direction = Vector2(-1, 8.742278e-08)
 snap_degrees = 180.0
 
 [node name="Billy11" parent="Spawns" unique_id=1618021811 instance=ExtResource("9_uly8o")]
+modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 position = Vector2(3471.5518, 2303.152)
 actor_path = "res://src/Actor/Enemy/Billy.tscn"
@@ -2198,10 +2267,11 @@ properties = {
 [node name="VUVector" parent="Spawns/Billy11" unique_id=850319837 instance=ExtResource("17_4ie3j")]
 visibility_layer = 2
 tag_name = "move_dir"
-direction = Vector2(-1, -8.742278e-08)
+direction = Vector2(-1, 8.742278e-08)
 snap_degrees = 180.0
 
 [node name="Billy12" parent="Spawns" unique_id=1470443311 instance=ExtResource("9_uly8o")]
+modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 position = Vector2(3038.6301, 2367.021)
 actor_path = "uid://ckeh37ixn76w8"
@@ -2226,10 +2296,11 @@ properties = {
 [node name="VUVector" parent="Spawns/Billy12" unique_id=296381768 instance=ExtResource("17_4ie3j")]
 visibility_layer = 2
 tag_name = "move_dir"
-direction = Vector2(-1, -8.742278e-08)
+direction = Vector2(-1, 8.742278e-08)
 snap_degrees = 180.0
 
 [node name="Billy16" parent="Spawns" unique_id=49413177 instance=ExtResource("9_uly8o")]
+modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 position = Vector2(3176, 1880)
 actor_path = "uid://ckeh37ixn76w8"
@@ -2254,10 +2325,11 @@ properties = {
 [node name="VUVector" parent="Spawns/Billy16" unique_id=162702045 instance=ExtResource("17_4ie3j")]
 visibility_layer = 2
 tag_name = "move_dir"
-direction = Vector2(-1, -8.742278e-08)
+direction = Vector2(-1, 8.742278e-08)
 snap_degrees = 180.0
 
 [node name="Billy13" parent="Spawns" unique_id=2095530526 instance=ExtResource("9_uly8o")]
+modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 position = Vector2(3783.5762, 2064.107)
 actor_path = "res://src/Actor/Enemy/Billy.tscn"
@@ -2282,10 +2354,11 @@ properties = {
 [node name="VUVector" parent="Spawns/Billy13" unique_id=1015649292 instance=ExtResource("17_4ie3j")]
 visibility_layer = 2
 tag_name = "move_dir"
-direction = Vector2(-1, -8.742278e-08)
+direction = Vector2(-1, 8.742278e-08)
 snap_degrees = 180.0
 
 [node name="Billy14" parent="Spawns" unique_id=1830224324 instance=ExtResource("9_uly8o")]
+modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 position = Vector2(3695.5762, 2096.107)
 actor_path = "res://src/Actor/Enemy/Billy.tscn"
@@ -2310,10 +2383,11 @@ properties = {
 [node name="VUVector" parent="Spawns/Billy14" unique_id=1338293738 instance=ExtResource("17_4ie3j")]
 visibility_layer = 2
 tag_name = "move_dir"
-direction = Vector2(-1, -8.742278e-08)
+direction = Vector2(-1, 8.742278e-08)
 snap_degrees = 180.0
 
 [node name="Billy15" parent="Spawns" unique_id=922993077 instance=ExtResource("9_uly8o")]
+modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 position = Vector2(3695.5762, 2128.107)
 actor_path = "res://src/Actor/Enemy/Billy.tscn"
@@ -2338,10 +2412,11 @@ properties = {
 [node name="VUVector" parent="Spawns/Billy15" unique_id=329680506 instance=ExtResource("17_4ie3j")]
 visibility_layer = 2
 tag_name = "move_dir"
-direction = Vector2(-1, -8.742278e-08)
+direction = Vector2(-1, 8.742278e-08)
 snap_degrees = 180.0
 
 [node name="SpawnHole" parent="Spawns" unique_id=1449282698 instance=ExtResource("15_lfp3o")]
+modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 position = Vector2(3872, 1872)
 prop_path = "res://src/Prop/SpawnHole.tscn"
@@ -2362,6 +2437,7 @@ tag_name = "player_detection"
 value = Rect2(-16, -128, 240, 288)
 
 [node name="VUActor" parent="Spawns/SpawnHole" unique_id=920023589 instance=ExtResource("17_sbhd6")]
+modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 position = Vector2(8, 0)
 actor_path = "uid://c7yhu5je8w1pf"
@@ -2382,6 +2458,7 @@ properties = {
 }
 
 [node name="SpawnHole1" parent="Spawns" unique_id=156130285 instance=ExtResource("15_lfp3o")]
+modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 position = Vector2(3904, 1872)
 prop_path = "res://src/Prop/SpawnHole.tscn"
@@ -2402,6 +2479,7 @@ tag_name = "player_detection"
 value = Rect2(-16, -128, 240, 288)
 
 [node name="VUActor" parent="Spawns/SpawnHole1" unique_id=1557705627 instance=ExtResource("17_sbhd6")]
+modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 position = Vector2(8, 0)
 actor_path = "uid://c7yhu5je8w1pf"
@@ -2422,6 +2500,7 @@ properties = {
 }
 
 [node name="SpawnHole2" parent="Spawns" unique_id=1353989862 instance=ExtResource("15_lfp3o")]
+modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 position = Vector2(4016, 1872)
 prop_path = "res://src/Prop/SpawnHole.tscn"
@@ -2442,6 +2521,7 @@ tag_name = "player_detection"
 value = Rect2(-16, -128, 240, 288)
 
 [node name="VUActor" parent="Spawns/SpawnHole2" unique_id=1861378077 instance=ExtResource("17_sbhd6")]
+modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 position = Vector2(8, 0)
 actor_path = "uid://c7yhu5je8w1pf"
@@ -2462,6 +2542,7 @@ properties = {
 }
 
 [node name="SpawnHole3" parent="Spawns" unique_id=1319600295 instance=ExtResource("15_lfp3o")]
+modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 position = Vector2(4128, 1872)
 prop_path = "res://src/Prop/SpawnHole.tscn"
@@ -2482,6 +2563,7 @@ tag_name = "player_detection"
 value = Rect2(-16, -128, 240, 288)
 
 [node name="VUActor" parent="Spawns/SpawnHole3" unique_id=743017305 instance=ExtResource("17_sbhd6")]
+modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 position = Vector2(8, 0)
 actor_path = "uid://c7yhu5je8w1pf"
@@ -2502,6 +2584,7 @@ properties = {
 }
 
 [node name="SpawnHole4" parent="Spawns" unique_id=1237369430 instance=ExtResource("15_lfp3o")]
+modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 position = Vector2(4240, 1872)
 prop_path = "res://src/Prop/SpawnHole.tscn"
@@ -2522,6 +2605,7 @@ tag_name = "player_detection"
 value = Rect2(-16, -128, 240, 288)
 
 [node name="VUActor" parent="Spawns/SpawnHole4" unique_id=1636037234 instance=ExtResource("17_sbhd6")]
+modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 position = Vector2(8, 0)
 actor_path = "uid://c7yhu5je8w1pf"
@@ -2542,6 +2626,7 @@ properties = {
 }
 
 [node name="SpawnHole5" parent="Spawns" unique_id=421958056 instance=ExtResource("15_lfp3o")]
+modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 position = Vector2(4272, 1872)
 prop_path = "res://src/Prop/SpawnHole.tscn"
@@ -2562,6 +2647,7 @@ tag_name = "player_detection"
 value = Rect2(-16, -128, 240, 288)
 
 [node name="VUActor" parent="Spawns/SpawnHole5" unique_id=1818170744 instance=ExtResource("17_sbhd6")]
+modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 position = Vector2(8, 0)
 actor_path = "uid://c7yhu5je8w1pf"
@@ -2582,6 +2668,7 @@ properties = {
 }
 
 [node name="SpawnHole6" parent="Spawns" unique_id=839586628 instance=ExtResource("15_lfp3o")]
+modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 position = Vector2(3872, 2048)
 prop_path = "res://src/Prop/SpawnHole.tscn"
@@ -2602,6 +2689,7 @@ tag_name = "player_detection"
 value = Rect2(-16, -128, 240, 288)
 
 [node name="VUActor" parent="Spawns/SpawnHole6" unique_id=295433993 instance=ExtResource("17_sbhd6")]
+modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 position = Vector2(8, 0)
 actor_path = "uid://c7yhu5je8w1pf"
@@ -2622,6 +2710,7 @@ properties = {
 }
 
 [node name="SpawnHole7" parent="Spawns" unique_id=1615760314 instance=ExtResource("15_lfp3o")]
+modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 position = Vector2(3904, 2048)
 prop_path = "res://src/Prop/SpawnHole.tscn"
@@ -2642,6 +2731,7 @@ tag_name = "player_detection"
 value = Rect2(-16, -128, 240, 288)
 
 [node name="VUActor" parent="Spawns/SpawnHole7" unique_id=274995424 instance=ExtResource("17_sbhd6")]
+modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 position = Vector2(8, 0)
 actor_path = "uid://c7yhu5je8w1pf"
@@ -2662,6 +2752,7 @@ properties = {
 }
 
 [node name="SpawnHole8" parent="Spawns" unique_id=1371826307 instance=ExtResource("15_lfp3o")]
+modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 position = Vector2(4016, 2048)
 prop_path = "res://src/Prop/SpawnHole.tscn"
@@ -2682,6 +2773,7 @@ tag_name = "player_detection"
 value = Rect2(-16, -128, 240, 288)
 
 [node name="VUActor" parent="Spawns/SpawnHole8" unique_id=829427144 instance=ExtResource("17_sbhd6")]
+modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 position = Vector2(8, 0)
 actor_path = "uid://c7yhu5je8w1pf"
@@ -2702,6 +2794,7 @@ properties = {
 }
 
 [node name="SpawnHole9" parent="Spawns" unique_id=640607148 instance=ExtResource("15_lfp3o")]
+modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 position = Vector2(4128, 2048)
 prop_path = "res://src/Prop/SpawnHole.tscn"
@@ -2722,6 +2815,7 @@ tag_name = "player_detection"
 value = Rect2(-16, -128, 240, 288)
 
 [node name="VUActor" parent="Spawns/SpawnHole9" unique_id=1227594250 instance=ExtResource("17_sbhd6")]
+modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 position = Vector2(8, 0)
 actor_path = "uid://c7yhu5je8w1pf"
@@ -2742,6 +2836,7 @@ properties = {
 }
 
 [node name="SpawnHole10" parent="Spawns" unique_id=1515102066 instance=ExtResource("15_lfp3o")]
+modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 position = Vector2(4240, 2048)
 prop_path = "res://src/Prop/SpawnHole.tscn"
@@ -2762,6 +2857,7 @@ tag_name = "player_detection"
 value = Rect2(-16, -128, 240, 288)
 
 [node name="VUActor" parent="Spawns/SpawnHole10" unique_id=746536306 instance=ExtResource("17_sbhd6")]
+modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 position = Vector2(8, 0)
 actor_path = "uid://c7yhu5je8w1pf"
@@ -2782,6 +2878,7 @@ properties = {
 }
 
 [node name="SpawnHole11" parent="Spawns" unique_id=510926580 instance=ExtResource("15_lfp3o")]
+modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 position = Vector2(4272, 2048)
 prop_path = "res://src/Prop/SpawnHole.tscn"
@@ -2802,6 +2899,7 @@ tag_name = "player_detection"
 value = Rect2(-16, -128, 240, 288)
 
 [node name="VUActor" parent="Spawns/SpawnHole11" unique_id=750086143 instance=ExtResource("17_sbhd6")]
+modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 position = Vector2(8, 0)
 actor_path = "uid://c7yhu5je8w1pf"
@@ -2822,6 +2920,7 @@ properties = {
 }
 
 [node name="SpawnHole12" parent="Spawns" unique_id=1193287484 instance=ExtResource("15_lfp3o")]
+modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 position = Vector2(3872, 2208)
 prop_path = "res://src/Prop/SpawnHole.tscn"
@@ -2842,6 +2941,7 @@ tag_name = "player_detection"
 value = Rect2(-16, -128, 240, 288)
 
 [node name="VUActor" parent="Spawns/SpawnHole12" unique_id=99725799 instance=ExtResource("17_sbhd6")]
+modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 position = Vector2(8, 0)
 actor_path = "uid://c7yhu5je8w1pf"
@@ -2862,6 +2962,7 @@ properties = {
 }
 
 [node name="SpawnHole13" parent="Spawns" unique_id=1485234649 instance=ExtResource("15_lfp3o")]
+modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 position = Vector2(3904, 2208)
 prop_path = "res://src/Prop/SpawnHole.tscn"
@@ -2882,6 +2983,7 @@ tag_name = "player_detection"
 value = Rect2(-16, -128, 240, 288)
 
 [node name="VUActor" parent="Spawns/SpawnHole13" unique_id=917471444 instance=ExtResource("17_sbhd6")]
+modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 position = Vector2(8, 0)
 actor_path = "uid://c7yhu5je8w1pf"
@@ -2902,6 +3004,7 @@ properties = {
 }
 
 [node name="SpawnHole14" parent="Spawns" unique_id=1710612294 instance=ExtResource("15_lfp3o")]
+modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 position = Vector2(4016, 2208)
 prop_path = "res://src/Prop/SpawnHole.tscn"
@@ -2922,6 +3025,7 @@ tag_name = "player_detection"
 value = Rect2(-16, -128, 240, 288)
 
 [node name="VUActor" parent="Spawns/SpawnHole14" unique_id=745529292 instance=ExtResource("17_sbhd6")]
+modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 position = Vector2(8, 0)
 actor_path = "uid://c7yhu5je8w1pf"
@@ -2942,6 +3046,7 @@ properties = {
 }
 
 [node name="SpawnHole15" parent="Spawns" unique_id=1254010853 instance=ExtResource("15_lfp3o")]
+modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 position = Vector2(4128, 2208)
 prop_path = "res://src/Prop/SpawnHole.tscn"
@@ -2962,6 +3067,7 @@ tag_name = "player_detection"
 value = Rect2(-16, -128, 240, 288)
 
 [node name="VUActor" parent="Spawns/SpawnHole15" unique_id=1767804430 instance=ExtResource("17_sbhd6")]
+modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 position = Vector2(8, 0)
 actor_path = "uid://c7yhu5je8w1pf"
@@ -2982,6 +3088,7 @@ properties = {
 }
 
 [node name="SpawnHole16" parent="Spawns" unique_id=625691394 instance=ExtResource("15_lfp3o")]
+modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 position = Vector2(4240, 2208)
 prop_path = "res://src/Prop/SpawnHole.tscn"
@@ -3002,6 +3109,7 @@ tag_name = "player_detection"
 value = Rect2(-16, -128, 240, 288)
 
 [node name="VUActor" parent="Spawns/SpawnHole16" unique_id=1391165834 instance=ExtResource("17_sbhd6")]
+modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 position = Vector2(8, 0)
 actor_path = "uid://c7yhu5je8w1pf"
@@ -3022,6 +3130,7 @@ properties = {
 }
 
 [node name="SpawnHole17" parent="Spawns" unique_id=539257148 instance=ExtResource("15_lfp3o")]
+modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 position = Vector2(4200, 2176)
 prop_path = "res://src/Prop/SpawnHole.tscn"
@@ -3042,6 +3151,7 @@ tag_name = "player_detection"
 value = Rect2(-16, -128, 240, 288)
 
 [node name="VUActor" parent="Spawns/SpawnHole17" unique_id=1229167008 instance=ExtResource("17_sbhd6")]
+modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 position = Vector2(8, 0)
 actor_path = "uid://c7yhu5je8w1pf"
@@ -3062,6 +3172,7 @@ properties = {
 }
 
 [node name="SpawnHole18" parent="Spawns" unique_id=359675547 instance=ExtResource("15_lfp3o")]
+modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 position = Vector2(3944, 2176)
 prop_path = "res://src/Prop/SpawnHole.tscn"
@@ -3082,6 +3193,7 @@ tag_name = "player_detection"
 value = Rect2(-16, -128, 240, 288)
 
 [node name="VUActor" parent="Spawns/SpawnHole18" unique_id=286767298 instance=ExtResource("17_sbhd6")]
+modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 position = Vector2(8, 0)
 actor_path = "uid://c7yhu5je8w1pf"
@@ -3102,6 +3214,7 @@ properties = {
 }
 
 [node name="SpawnHole19" parent="Spawns" unique_id=1695553497 instance=ExtResource("15_lfp3o")]
+modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 position = Vector2(3944, 2352)
 prop_path = "res://src/Prop/SpawnHole.tscn"
@@ -3122,6 +3235,7 @@ tag_name = "player_detection"
 value = Rect2(-16, -128, 240, 288)
 
 [node name="VUActor" parent="Spawns/SpawnHole19" unique_id=783282927 instance=ExtResource("17_sbhd6")]
+modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 position = Vector2(8, 0)
 actor_path = "uid://c7yhu5je8w1pf"
@@ -3142,6 +3256,7 @@ properties = {
 }
 
 [node name="SpawnHole20" parent="Spawns" unique_id=289678345 instance=ExtResource("15_lfp3o")]
+modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 position = Vector2(4200, 2352)
 prop_path = "res://src/Prop/SpawnHole.tscn"
@@ -3162,6 +3277,7 @@ tag_name = "player_detection"
 value = Rect2(-16, -128, 240, 288)
 
 [node name="VUActor" parent="Spawns/SpawnHole20" unique_id=1791066235 instance=ExtResource("17_sbhd6")]
+modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 position = Vector2(8, 0)
 actor_path = "uid://c7yhu5je8w1pf"
@@ -3182,6 +3298,7 @@ properties = {
 }
 
 [node name="SpawnHole21" parent="Spawns" unique_id=1731284711 instance=ExtResource("15_lfp3o")]
+modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 position = Vector2(4272, 2208)
 prop_path = "res://src/Prop/SpawnHole.tscn"
@@ -3202,6 +3319,7 @@ tag_name = "player_detection"
 value = Rect2(-16, -128, 240, 288)
 
 [node name="VUActor" parent="Spawns/SpawnHole21" unique_id=1176495587 instance=ExtResource("17_sbhd6")]
+modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 position = Vector2(8, 0)
 actor_path = "uid://c7yhu5je8w1pf"
@@ -3222,6 +3340,7 @@ properties = {
 }
 
 [node name="SpawnHole22" parent="Spawns" unique_id=462840484 instance=ExtResource("15_lfp3o")]
+modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 position = Vector2(3872, 2384)
 prop_path = "res://src/Prop/SpawnHole.tscn"
@@ -3242,6 +3361,7 @@ tag_name = "player_detection"
 value = Rect2(-16, -128, 240, 288)
 
 [node name="VUActor" parent="Spawns/SpawnHole22" unique_id=1439529036 instance=ExtResource("17_sbhd6")]
+modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 position = Vector2(8, 0)
 actor_path = "uid://c7yhu5je8w1pf"
@@ -3262,6 +3382,7 @@ properties = {
 }
 
 [node name="SpawnHole23" parent="Spawns" unique_id=2121344288 instance=ExtResource("15_lfp3o")]
+modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 position = Vector2(3904, 2384)
 prop_path = "res://src/Prop/SpawnHole.tscn"
@@ -3282,6 +3403,7 @@ tag_name = "player_detection"
 value = Rect2(-16, -128, 240, 288)
 
 [node name="VUActor" parent="Spawns/SpawnHole23" unique_id=1495051249 instance=ExtResource("17_sbhd6")]
+modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 position = Vector2(8, 0)
 actor_path = "uid://c7yhu5je8w1pf"
@@ -3302,6 +3424,7 @@ properties = {
 }
 
 [node name="SpawnHole24" parent="Spawns" unique_id=998144801 instance=ExtResource("15_lfp3o")]
+modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 position = Vector2(4016, 2384)
 prop_path = "res://src/Prop/SpawnHole.tscn"
@@ -3322,6 +3445,7 @@ tag_name = "player_detection"
 value = Rect2(-16, -128, 240, 288)
 
 [node name="VUActor" parent="Spawns/SpawnHole24" unique_id=1238366982 instance=ExtResource("17_sbhd6")]
+modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 position = Vector2(8, 0)
 actor_path = "uid://c7yhu5je8w1pf"
@@ -3342,6 +3466,7 @@ properties = {
 }
 
 [node name="SpawnHole25" parent="Spawns" unique_id=2014342575 instance=ExtResource("15_lfp3o")]
+modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 position = Vector2(4128, 2384)
 prop_path = "res://src/Prop/SpawnHole.tscn"
@@ -3362,6 +3487,7 @@ tag_name = "player_detection"
 value = Rect2(-16, -128, 240, 288)
 
 [node name="VUActor" parent="Spawns/SpawnHole25" unique_id=64694349 instance=ExtResource("17_sbhd6")]
+modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 position = Vector2(8, 0)
 actor_path = "uid://c7yhu5je8w1pf"
@@ -3382,6 +3508,7 @@ properties = {
 }
 
 [node name="SpawnHole26" parent="Spawns" unique_id=1379523907 instance=ExtResource("15_lfp3o")]
+modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 position = Vector2(4240, 2384)
 prop_path = "res://src/Prop/SpawnHole.tscn"
@@ -3402,6 +3529,7 @@ tag_name = "player_detection"
 value = Rect2(-16, -128, 240, 288)
 
 [node name="VUActor" parent="Spawns/SpawnHole26" unique_id=937913955 instance=ExtResource("17_sbhd6")]
+modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 position = Vector2(8, 0)
 actor_path = "uid://c7yhu5je8w1pf"
@@ -3422,6 +3550,7 @@ properties = {
 }
 
 [node name="SpawnHole27" parent="Spawns" unique_id=1425976372 instance=ExtResource("15_lfp3o")]
+modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 position = Vector2(4272, 2384)
 prop_path = "res://src/Prop/SpawnHole.tscn"
@@ -3442,6 +3571,7 @@ tag_name = "player_detection"
 value = Rect2(-16, -128, 240, 288)
 
 [node name="VUActor" parent="Spawns/SpawnHole27" unique_id=1918983374 instance=ExtResource("17_sbhd6")]
+modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 position = Vector2(8, 0)
 actor_path = "uid://c7yhu5je8w1pf"
@@ -3462,6 +3592,7 @@ properties = {
 }
 
 [node name="Crusher57" parent="Spawns" unique_id=821997458 instance=ExtResource("9_uly8o")]
+modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 position = Vector2(2263.9802, 1903.3464)
 actor_path = "res://src/Actor/Enemy/Crusher.tscn"
@@ -3493,6 +3624,7 @@ tag_name = "shape_define"
 value = Rect2(-16, -16, 48, 48)
 
 [node name="Crusher58" parent="Spawns" unique_id=1066682673 instance=ExtResource("9_uly8o")]
+modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 position = Vector2(2263.9802, 2255.3464)
 actor_path = "res://src/Actor/Enemy/Crusher.tscn"
@@ -3524,6 +3656,7 @@ tag_name = "shape_define"
 value = Rect2(-16, -16, 48, 48)
 
 [node name="Crusher59" parent="Spawns" unique_id=800939480 instance=ExtResource("9_uly8o")]
+modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 position = Vector2(2239.9802, 2271.3464)
 actor_path = "res://src/Actor/Enemy/Crusher.tscn"
@@ -3555,6 +3688,7 @@ tag_name = "shape_define"
 value = Rect2(-16, -16, 48, 48)
 
 [node name="Crusher60" parent="Spawns" unique_id=1484316750 instance=ExtResource("9_uly8o")]
+modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 position = Vector2(2215.9802, 2287.3464)
 actor_path = "res://src/Actor/Enemy/Crusher.tscn"
@@ -3586,6 +3720,7 @@ tag_name = "shape_define"
 value = Rect2(-16, -16, 48, 48)
 
 [node name="Crusher61" parent="Spawns" unique_id=1970471804 instance=ExtResource("9_uly8o")]
+modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 position = Vector2(2191.9802, 2303.3464)
 actor_path = "res://src/Actor/Enemy/Crusher.tscn"
@@ -3617,6 +3752,7 @@ tag_name = "shape_define"
 value = Rect2(-16, -16, 48, 48)
 
 [node name="Crusher62" parent="Spawns" unique_id=745378853 instance=ExtResource("9_uly8o")]
+modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 position = Vector2(2167.9802, 2319.3464)
 actor_path = "res://src/Actor/Enemy/Crusher.tscn"
@@ -3648,6 +3784,7 @@ tag_name = "shape_define"
 value = Rect2(-16, -16, 48, 48)
 
 [node name="Crusher63" parent="Spawns" unique_id=1784108724 instance=ExtResource("9_uly8o")]
+modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 position = Vector2(2143.9802, 2335.3464)
 actor_path = "res://src/Actor/Enemy/Crusher.tscn"
@@ -3679,6 +3816,7 @@ tag_name = "shape_define"
 value = Rect2(-16, -16, 48, 48)
 
 [node name="Crusher64" parent="Spawns" unique_id=1514746747 instance=ExtResource("9_uly8o")]
+modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 position = Vector2(2119.9802, 2351.3464)
 actor_path = "res://src/Actor/Enemy/Crusher.tscn"
@@ -3710,6 +3848,7 @@ tag_name = "shape_define"
 value = Rect2(-16, -16, 48, 48)
 
 [node name="Crusher65" parent="Spawns" unique_id=1662941369 instance=ExtResource("9_uly8o")]
+modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 position = Vector2(2095.9802, 2367.3464)
 actor_path = "res://src/Actor/Enemy/Crusher.tscn"
@@ -3741,6 +3880,7 @@ tag_name = "shape_define"
 value = Rect2(-16, -16, 48, 48)
 
 [node name="Crusher66" parent="Spawns" unique_id=1017470349 instance=ExtResource("9_uly8o")]
+modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 position = Vector2(2071.9802, 2383.3464)
 actor_path = "res://src/Actor/Enemy/Crusher.tscn"
@@ -3772,6 +3912,7 @@ tag_name = "shape_define"
 value = Rect2(-16, -16, 48, 48)
 
 [node name="Crusher67" parent="Spawns" unique_id=1007046275 instance=ExtResource("9_uly8o")]
+modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 position = Vector2(2287.9802, 2239.3464)
 actor_path = "res://src/Actor/Enemy/Crusher.tscn"
@@ -3803,6 +3944,7 @@ tag_name = "shape_define"
 value = Rect2(-16, -16, 48, 48)
 
 [node name="Crusher68" parent="Spawns" unique_id=417663532 instance=ExtResource("9_uly8o")]
+modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 position = Vector2(2311.9802, 2223.3464)
 actor_path = "res://src/Actor/Enemy/Crusher.tscn"
@@ -3834,6 +3976,7 @@ tag_name = "shape_define"
 value = Rect2(-16, -16, 48, 48)
 
 [node name="Crusher69" parent="Spawns" unique_id=2092613030 instance=ExtResource("9_uly8o")]
+modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 position = Vector2(2335.9802, 2207.3464)
 actor_path = "res://src/Actor/Enemy/Crusher.tscn"
@@ -3865,6 +4008,7 @@ tag_name = "shape_define"
 value = Rect2(-16, -16, 48, 48)
 
 [node name="Crusher70" parent="Spawns" unique_id=549065952 instance=ExtResource("9_uly8o")]
+modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 position = Vector2(2359.9802, 2191.3464)
 actor_path = "res://src/Actor/Enemy/Crusher.tscn"
@@ -3896,6 +4040,7 @@ tag_name = "shape_define"
 value = Rect2(-16, -16, 48, 48)
 
 [node name="Crusher71" parent="Spawns" unique_id=1960264964 instance=ExtResource("9_uly8o")]
+modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 position = Vector2(2383.9802, 2175.3464)
 actor_path = "res://src/Actor/Enemy/Crusher.tscn"
@@ -3927,6 +4072,7 @@ tag_name = "shape_define"
 value = Rect2(-16, -16, 48, 48)
 
 [node name="Crusher72" parent="Spawns" unique_id=1966021176 instance=ExtResource("9_uly8o")]
+modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 position = Vector2(2407.9802, 2159.3464)
 actor_path = "res://src/Actor/Enemy/Crusher.tscn"
@@ -3958,6 +4104,7 @@ tag_name = "shape_define"
 value = Rect2(-16, -16, 48, 48)
 
 [node name="Crusher73" parent="Spawns" unique_id=1629818351 instance=ExtResource("9_uly8o")]
+modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 position = Vector2(2431.9802, 2143.3464)
 actor_path = "res://src/Actor/Enemy/Crusher.tscn"
@@ -3989,6 +4136,7 @@ tag_name = "shape_define"
 value = Rect2(-16, -16, 48, 48)
 
 [node name="Crusher74" parent="Spawns" unique_id=1852995393 instance=ExtResource("9_uly8o")]
+modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 position = Vector2(2455.9802, 2127.3464)
 actor_path = "res://src/Actor/Enemy/Crusher.tscn"
@@ -4020,6 +4168,7 @@ tag_name = "shape_define"
 value = Rect2(-16, -16, 48, 48)
 
 [node name="Crusher75" parent="Spawns" unique_id=441791442 instance=ExtResource("9_uly8o")]
+modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 position = Vector2(2287.9802, 1919.3464)
 actor_path = "res://src/Actor/Enemy/Crusher.tscn"
@@ -4051,6 +4200,7 @@ tag_name = "shape_define"
 value = Rect2(-16, -16, 48, 48)
 
 [node name="Crusher76" parent="Spawns" unique_id=1019594979 instance=ExtResource("9_uly8o")]
+modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 position = Vector2(2311.9802, 1935.3464)
 actor_path = "res://src/Actor/Enemy/Crusher.tscn"
@@ -4082,6 +4232,7 @@ tag_name = "shape_define"
 value = Rect2(-16, -16, 48, 48)
 
 [node name="Crusher77" parent="Spawns" unique_id=1878020937 instance=ExtResource("9_uly8o")]
+modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 position = Vector2(2335.9802, 1951.3464)
 actor_path = "res://src/Actor/Enemy/Crusher.tscn"
@@ -4113,6 +4264,7 @@ tag_name = "shape_define"
 value = Rect2(-16, -16, 48, 48)
 
 [node name="Crusher78" parent="Spawns" unique_id=2113717475 instance=ExtResource("9_uly8o")]
+modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 position = Vector2(2359.9802, 1967.3464)
 actor_path = "res://src/Actor/Enemy/Crusher.tscn"
@@ -4144,6 +4296,7 @@ tag_name = "shape_define"
 value = Rect2(-16, -16, 48, 48)
 
 [node name="Crusher79" parent="Spawns" unique_id=791823286 instance=ExtResource("9_uly8o")]
+modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 position = Vector2(2383.9802, 1983.3464)
 actor_path = "res://src/Actor/Enemy/Crusher.tscn"
@@ -4175,6 +4328,7 @@ tag_name = "shape_define"
 value = Rect2(-16, -16, 48, 48)
 
 [node name="Crusher80" parent="Spawns" unique_id=1316416549 instance=ExtResource("9_uly8o")]
+modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 position = Vector2(2407.9802, 1999.3464)
 actor_path = "res://src/Actor/Enemy/Crusher.tscn"
@@ -4206,6 +4360,7 @@ tag_name = "shape_define"
 value = Rect2(-16, -16, 48, 48)
 
 [node name="Crusher81" parent="Spawns" unique_id=737123565 instance=ExtResource("9_uly8o")]
+modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 position = Vector2(2431.9802, 2015.3464)
 actor_path = "res://src/Actor/Enemy/Crusher.tscn"
@@ -4237,6 +4392,7 @@ tag_name = "shape_define"
 value = Rect2(-16, -16, 48, 48)
 
 [node name="Crusher82" parent="Spawns" unique_id=779076558 instance=ExtResource("9_uly8o")]
+modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 position = Vector2(2455.9802, 2031.3464)
 actor_path = "res://src/Actor/Enemy/Crusher.tscn"
@@ -4268,6 +4424,7 @@ tag_name = "shape_define"
 value = Rect2(-16, -16, 48, 48)
 
 [node name="Crusher83" parent="Spawns" unique_id=1047008757 instance=ExtResource("9_uly8o")]
+modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 position = Vector2(2239.9802, 1887.3464)
 actor_path = "res://src/Actor/Enemy/Crusher.tscn"
@@ -4299,6 +4456,7 @@ tag_name = "shape_define"
 value = Rect2(-16, -16, 48, 48)
 
 [node name="Crusher84" parent="Spawns" unique_id=324762736 instance=ExtResource("9_uly8o")]
+modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 position = Vector2(2215.9802, 1871.3464)
 actor_path = "res://src/Actor/Enemy/Crusher.tscn"
@@ -4330,6 +4488,7 @@ tag_name = "shape_define"
 value = Rect2(-16, -16, 48, 48)
 
 [node name="Crusher85" parent="Spawns" unique_id=426742690 instance=ExtResource("9_uly8o")]
+modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 position = Vector2(2191.9802, 1855.3464)
 actor_path = "res://src/Actor/Enemy/Crusher.tscn"
@@ -4361,6 +4520,7 @@ tag_name = "shape_define"
 value = Rect2(-16, -16, 48, 48)
 
 [node name="Crusher86" parent="Spawns" unique_id=1718043054 instance=ExtResource("9_uly8o")]
+modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 position = Vector2(2167.9802, 1839.3464)
 actor_path = "res://src/Actor/Enemy/Crusher.tscn"
@@ -4392,6 +4552,7 @@ tag_name = "shape_define"
 value = Rect2(-16, -16, 48, 48)
 
 [node name="Crusher87" parent="Spawns" unique_id=2297475 instance=ExtResource("9_uly8o")]
+modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 position = Vector2(2143.9802, 1823.3464)
 actor_path = "res://src/Actor/Enemy/Crusher.tscn"
@@ -4423,6 +4584,7 @@ tag_name = "shape_define"
 value = Rect2(-16, -16, 48, 48)
 
 [node name="Crusher88" parent="Spawns" unique_id=695666242 instance=ExtResource("9_uly8o")]
+modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 position = Vector2(2119.9802, 1807.3464)
 actor_path = "res://src/Actor/Enemy/Crusher.tscn"
@@ -4454,6 +4616,7 @@ tag_name = "shape_define"
 value = Rect2(-16, -16, 48, 48)
 
 [node name="Crusher89" parent="Spawns" unique_id=1256271034 instance=ExtResource("9_uly8o")]
+modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 position = Vector2(2095.9802, 1791.3464)
 actor_path = "res://src/Actor/Enemy/Crusher.tscn"
@@ -4485,6 +4648,7 @@ tag_name = "shape_define"
 value = Rect2(-16, -16, 48, 48)
 
 [node name="Crusher90" parent="Spawns" unique_id=1596768615 instance=ExtResource("9_uly8o")]
+modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 position = Vector2(2071.9802, 1775.3464)
 actor_path = "res://src/Actor/Enemy/Crusher.tscn"
@@ -4516,6 +4680,7 @@ tag_name = "shape_define"
 value = Rect2(-16, -16, 48, 48)
 
 [node name="SpawnHole28" parent="Spawns" unique_id=1953488120 instance=ExtResource("15_lfp3o")]
+modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 position = Vector2(2145.299, 1969.7488)
 prop_path = "res://src/Prop/SpawnHole.tscn"
@@ -4537,6 +4702,7 @@ tag_name = "player_detection"
 value = Rect2(-385.29907, -105.74878, 520, 408)
 
 [node name="VUActor" parent="Spawns/SpawnHole28" unique_id=1521530843 instance=ExtResource("17_sbhd6")]
+modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 position = Vector2(8, 0)
 actor_path = "uid://c7yhu5je8w1pf"
@@ -4557,6 +4723,7 @@ properties = {
 }
 
 [node name="SpawnHole29" parent="Spawns" unique_id=848894133 instance=ExtResource("15_lfp3o")]
+modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 position = Vector2(1856, 1960)
 prop_path = "res://src/Prop/SpawnHole.tscn"
@@ -4578,6 +4745,7 @@ tag_name = "player_detection"
 value = Rect2(-105.29907, -80, 545.2991, 384)
 
 [node name="VUActor" parent="Spawns/SpawnHole29" unique_id=936944684 instance=ExtResource("17_sbhd6")]
+modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 position = Vector2(8, 0)
 actor_path = "uid://c7yhu5je8w1pf"
@@ -4598,6 +4766,7 @@ properties = {
 }
 
 [node name="SpawnHole30" parent="Spawns" unique_id=1386520822 instance=ExtResource("15_lfp3o")]
+modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 position = Vector2(1873.2991, 2145.7488)
 prop_path = "res://src/Prop/SpawnHole.tscn"
@@ -4618,6 +4787,7 @@ tag_name = "player_detection"
 value = Rect2(-16, -128, 240, 288)
 
 [node name="VUActor" parent="Spawns/SpawnHole30" unique_id=399171746 instance=ExtResource("17_sbhd6")]
+modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 position = Vector2(8, 0)
 actor_path = "uid://c7yhu5je8w1pf"
@@ -4638,6 +4808,7 @@ properties = {
 }
 
 [node name="SpawnHole31" parent="Spawns" unique_id=448779166 instance=ExtResource("15_lfp3o")]
+modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 position = Vector2(2145.299, 2145.7488)
 prop_path = "res://src/Prop/SpawnHole.tscn"
@@ -4658,6 +4829,7 @@ tag_name = "player_detection"
 value = Rect2(-16, -128, 240, 288)
 
 [node name="VUActor" parent="Spawns/SpawnHole31" unique_id=29027627 instance=ExtResource("17_sbhd6")]
+modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 position = Vector2(8, 0)
 actor_path = "uid://c7yhu5je8w1pf"
@@ -4678,6 +4850,7 @@ properties = {
 }
 
 [node name="SpawnHole32" parent="Spawns" unique_id=2111930307 instance=ExtResource("15_lfp3o")]
+modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 position = Vector2(2577.299, 2281.7488)
 prop_path = "res://src/Prop/SpawnHole.tscn"
@@ -4698,6 +4871,7 @@ tag_name = "player_detection"
 value = Rect2(-16, -128, 240, 288)
 
 [node name="VUActor" parent="Spawns/SpawnHole32" unique_id=906368542 instance=ExtResource("17_sbhd6")]
+modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 position = Vector2(8, 0)
 actor_path = "uid://c7yhu5je8w1pf"
@@ -4718,6 +4892,7 @@ properties = {
 }
 
 [node name="Crusher91" parent="Spawns" unique_id=151143377 instance=ExtResource("9_uly8o")]
+modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 position = Vector2(2511.5527, 2142.7554)
 actor_path = "res://src/Actor/Enemy/Crusher.tscn"
@@ -4749,6 +4924,7 @@ tag_name = "shape_define"
 value = Rect2(-16, -16, 48, 48)
 
 [node name="Crusher92" parent="Spawns" unique_id=36579648 instance=ExtResource("9_uly8o")]
+modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 position = Vector2(2543.5527, 2142.7554)
 actor_path = "res://src/Actor/Enemy/Crusher.tscn"
@@ -4780,6 +4956,7 @@ tag_name = "shape_define"
 value = Rect2(-16, -16, 48, 48)
 
 [node name="Crusher93" parent="Spawns" unique_id=142055439 instance=ExtResource("9_uly8o")]
+modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 position = Vector2(2575.5527, 2142.7554)
 actor_path = "res://src/Actor/Enemy/Crusher.tscn"
@@ -4811,6 +4988,7 @@ tag_name = "shape_define"
 value = Rect2(-16, -16, 48, 48)
 
 [node name="Crusher94" parent="Spawns" unique_id=804135105 instance=ExtResource("9_uly8o")]
+modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 position = Vector2(2607.5527, 2142.7554)
 actor_path = "res://src/Actor/Enemy/Crusher.tscn"
@@ -4842,6 +5020,7 @@ tag_name = "shape_define"
 value = Rect2(-16, -16, 48, 48)
 
 [node name="Crusher95" parent="Spawns" unique_id=538125441 instance=ExtResource("9_uly8o")]
+modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 position = Vector2(2639.5527, 2142.7554)
 actor_path = "res://src/Actor/Enemy/Crusher.tscn"
@@ -4873,6 +5052,7 @@ tag_name = "shape_define"
 value = Rect2(-16, -16, 48, 48)
 
 [node name="Crusher96" parent="Spawns" unique_id=491896383 instance=ExtResource("9_uly8o")]
+modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 position = Vector2(2671.5527, 2142.7554)
 actor_path = "res://src/Actor/Enemy/Crusher.tscn"
@@ -4904,6 +5084,7 @@ tag_name = "shape_define"
 value = Rect2(-16, -16, 48, 48)
 
 [node name="Crusher97" parent="Spawns" unique_id=392442181 instance=ExtResource("9_uly8o")]
+modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 position = Vector2(2703.5527, 2142.7554)
 actor_path = "res://src/Actor/Enemy/Crusher.tscn"
@@ -4935,6 +5116,7 @@ tag_name = "shape_define"
 value = Rect2(-16, -16, 48, 48)
 
 [node name="Crusher98" parent="Spawns" unique_id=84421973 instance=ExtResource("9_uly8o")]
+modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 position = Vector2(2735.5527, 2142.7554)
 actor_path = "res://src/Actor/Enemy/Crusher.tscn"
@@ -4966,6 +5148,7 @@ tag_name = "shape_define"
 value = Rect2(-16, -16, 48, 48)
 
 [node name="Crusher99" parent="Spawns" unique_id=756323674 instance=ExtResource("9_uly8o")]
+modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 position = Vector2(2767.5527, 2142.7554)
 actor_path = "res://src/Actor/Enemy/Crusher.tscn"
@@ -4997,6 +5180,7 @@ tag_name = "shape_define"
 value = Rect2(-16, -16, 48, 48)
 
 [node name="Crusher100" parent="Spawns" unique_id=1113193304 instance=ExtResource("9_uly8o")]
+modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 position = Vector2(2799.5527, 2142.7554)
 actor_path = "res://src/Actor/Enemy/Crusher.tscn"
@@ -5028,6 +5212,7 @@ tag_name = "shape_define"
 value = Rect2(-16, -16, 48, 48)
 
 [node name="Crusher101" parent="Spawns" unique_id=293160278 instance=ExtResource("9_uly8o")]
+modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 position = Vector2(2831.5527, 2142.7554)
 actor_path = "res://src/Actor/Enemy/Crusher.tscn"
@@ -5059,6 +5244,7 @@ tag_name = "shape_define"
 value = Rect2(-16, -16, 48, 48)
 
 [node name="Crusher102" parent="Spawns" unique_id=1044252592 instance=ExtResource("9_uly8o")]
+modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 position = Vector2(2863.5527, 2142.7554)
 actor_path = "res://src/Actor/Enemy/Crusher.tscn"
@@ -5090,6 +5276,7 @@ tag_name = "shape_define"
 value = Rect2(-16, -16, 48, 48)
 
 [node name="Crusher103" parent="Spawns" unique_id=873382169 instance=ExtResource("9_uly8o")]
+modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 position = Vector2(2895.5527, 2142.7554)
 actor_path = "res://src/Actor/Enemy/Crusher.tscn"
@@ -5121,6 +5308,7 @@ tag_name = "shape_define"
 value = Rect2(-16, -16, 48, 48)
 
 [node name="Crusher104" parent="Spawns" unique_id=177361658 instance=ExtResource("9_uly8o")]
+modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 position = Vector2(2927.5527, 2142.7554)
 actor_path = "res://src/Actor/Enemy/Crusher.tscn"
@@ -5152,6 +5340,7 @@ tag_name = "shape_define"
 value = Rect2(-16, -16, 48, 48)
 
 [node name="Crusher105" parent="Spawns" unique_id=770435134 instance=ExtResource("9_uly8o")]
+modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 position = Vector2(2927.5527, 2430.7554)
 actor_path = "res://src/Actor/Enemy/Crusher.tscn"
@@ -5183,6 +5372,7 @@ tag_name = "shape_define"
 value = Rect2(-16, -16, 48, 48)
 
 [node name="Crusher106" parent="Spawns" unique_id=1544953853 instance=ExtResource("9_uly8o")]
+modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 position = Vector2(2895.5527, 2430.7554)
 actor_path = "res://src/Actor/Enemy/Crusher.tscn"
@@ -5214,6 +5404,7 @@ tag_name = "shape_define"
 value = Rect2(-16, -16, 48, 48)
 
 [node name="Crusher107" parent="Spawns" unique_id=1054453903 instance=ExtResource("9_uly8o")]
+modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 position = Vector2(2863.5527, 2430.7554)
 actor_path = "res://src/Actor/Enemy/Crusher.tscn"
@@ -5245,6 +5436,7 @@ tag_name = "shape_define"
 value = Rect2(-16, -16, 48, 48)
 
 [node name="Crusher108" parent="Spawns" unique_id=1769127937 instance=ExtResource("9_uly8o")]
+modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 position = Vector2(2831.5527, 2430.7554)
 actor_path = "res://src/Actor/Enemy/Crusher.tscn"
@@ -5276,6 +5468,7 @@ tag_name = "shape_define"
 value = Rect2(-16, -16, 48, 48)
 
 [node name="Crusher109" parent="Spawns" unique_id=818140486 instance=ExtResource("9_uly8o")]
+modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 position = Vector2(2799.5527, 2430.7554)
 actor_path = "res://src/Actor/Enemy/Crusher.tscn"
@@ -5307,6 +5500,7 @@ tag_name = "shape_define"
 value = Rect2(-16, -16, 48, 48)
 
 [node name="Crusher110" parent="Spawns" unique_id=2100070833 instance=ExtResource("9_uly8o")]
+modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 position = Vector2(2767.5527, 2430.7554)
 actor_path = "res://src/Actor/Enemy/Crusher.tscn"
@@ -5338,6 +5532,7 @@ tag_name = "shape_define"
 value = Rect2(-16, -16, 48, 48)
 
 [node name="Crusher111" parent="Spawns" unique_id=772459144 instance=ExtResource("9_uly8o")]
+modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 position = Vector2(2735.5527, 2430.7554)
 actor_path = "res://src/Actor/Enemy/Crusher.tscn"
@@ -5369,6 +5564,7 @@ tag_name = "shape_define"
 value = Rect2(-16, -16, 48, 48)
 
 [node name="Crusher112" parent="Spawns" unique_id=1165467572 instance=ExtResource("9_uly8o")]
+modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 position = Vector2(2703.5527, 2430.7554)
 actor_path = "res://src/Actor/Enemy/Crusher.tscn"
@@ -5400,6 +5596,7 @@ tag_name = "shape_define"
 value = Rect2(-16, -16, 48, 48)
 
 [node name="Crusher113" parent="Spawns" unique_id=1895368606 instance=ExtResource("9_uly8o")]
+modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 position = Vector2(2671.5527, 2430.7554)
 actor_path = "res://src/Actor/Enemy/Crusher.tscn"
@@ -5431,6 +5628,7 @@ tag_name = "shape_define"
 value = Rect2(-16, -16, 48, 48)
 
 [node name="Crusher114" parent="Spawns" unique_id=1658226220 instance=ExtResource("9_uly8o")]
+modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 position = Vector2(2639.5527, 2430.7554)
 actor_path = "res://src/Actor/Enemy/Crusher.tscn"
@@ -5462,6 +5660,7 @@ tag_name = "shape_define"
 value = Rect2(-16, -16, 48, 48)
 
 [node name="Crusher115" parent="Spawns" unique_id=784336793 instance=ExtResource("9_uly8o")]
+modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 position = Vector2(2607.5527, 2430.7554)
 actor_path = "res://src/Actor/Enemy/Crusher.tscn"
@@ -5493,6 +5692,7 @@ tag_name = "shape_define"
 value = Rect2(-16, -16, 48, 48)
 
 [node name="Crusher116" parent="Spawns" unique_id=117909883 instance=ExtResource("9_uly8o")]
+modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 position = Vector2(2575.5527, 2430.7554)
 actor_path = "res://src/Actor/Enemy/Crusher.tscn"
@@ -5524,6 +5724,7 @@ tag_name = "shape_define"
 value = Rect2(-16, -16, 48, 48)
 
 [node name="Crusher117" parent="Spawns" unique_id=1303754936 instance=ExtResource("9_uly8o")]
+modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 position = Vector2(2543.5527, 2430.7554)
 actor_path = "res://src/Actor/Enemy/Crusher.tscn"
@@ -5555,6 +5756,7 @@ tag_name = "shape_define"
 value = Rect2(-16, -16, 48, 48)
 
 [node name="Crusher118" parent="Spawns" unique_id=2111210388 instance=ExtResource("9_uly8o")]
+modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 position = Vector2(2511.5527, 2430.7554)
 actor_path = "res://src/Actor/Enemy/Crusher.tscn"
@@ -5586,6 +5788,7 @@ tag_name = "shape_define"
 value = Rect2(-16, -16, 48, 48)
 
 [node name="AmmoRefill" parent="Spawns" unique_id=1134375731 instance=ExtResource("15_lfp3o")]
+modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 position = Vector2(2144, 2048)
 prop_path = "res://src/Prop/AmmoRefill.tscn"
@@ -5596,6 +5799,7 @@ properties = {
 }
 
 [node name="AmmoRefill1" parent="Spawns" unique_id=1434110607 instance=ExtResource("15_lfp3o")]
+modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 position = Vector2(2160, 2048)
 prop_path = "res://src/Prop/AmmoRefill.tscn"
@@ -5606,54 +5810,67 @@ properties = {
 }
 
 [node name="BreakBlock" parent="Spawns" unique_id=1377931491 instance=ExtResource("15_lfp3o")]
+modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 position = Vector2(2192, 2048)
 prop_path = "res://src/Prop/BreakBlock.tscn"
 properties = {
+"break_on_fall": [false, 1, ""],
 "crush_enemies": [true, 1, ""],
 "crush_players": [false, 1, ""],
 "do_bubble": [false, 1, ""],
 "editor_hidden": [false, 1, ""],
+"has_gravity": [true, 1, ""],
 "id": [&"BreakBlock", 4, ""]
 }
 
 [node name="BreakBlock1" parent="Spawns" unique_id=1277733560 instance=ExtResource("15_lfp3o")]
+modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 position = Vector2(2208, 2032)
 prop_path = "res://src/Prop/BreakBlock.tscn"
 properties = {
+"break_on_fall": [false, 1, ""],
 "crush_enemies": [true, 1, ""],
 "crush_players": [false, 1, ""],
 "do_bubble": [false, 1, ""],
 "editor_hidden": [false, 1, ""],
+"has_gravity": [true, 1, ""],
 "id": [&"BreakBlock1", 4, ""]
 }
 
 [node name="BreakBlock2" parent="Spawns" unique_id=96753567 instance=ExtResource("15_lfp3o")]
+modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 position = Vector2(2192, 2032)
 prop_path = "res://src/Prop/BreakBlock.tscn"
 properties = {
+"break_on_fall": [false, 1, ""],
 "crush_enemies": [true, 1, ""],
 "crush_players": [false, 1, ""],
 "do_bubble": [false, 1, ""],
 "editor_hidden": [false, 1, ""],
+"has_gravity": [true, 1, ""],
 "id": [&"BreakBlock2", 4, ""]
 }
 
 [node name="BreakBlock3" parent="Spawns" unique_id=292676038 instance=ExtResource("15_lfp3o")]
+modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 position = Vector2(2208, 2048)
 prop_path = "res://src/Prop/BreakBlock.tscn"
 properties = {
+"break_on_fall": [false, 1, ""],
 "crush_enemies": [true, 1, ""],
 "crush_players": [false, 1, ""],
 "do_bubble": [false, 1, ""],
 "editor_hidden": [false, 1, ""],
+"has_gravity": [true, 1, ""],
 "id": [&"BreakBlock3", 4, ""]
 }
 
 [node name="Crusher119" parent="Spawns" unique_id=1963716158 instance=ExtResource("9_uly8o")]
+modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 position = Vector2(3048, 2256)
 actor_path = "res://src/Actor/Enemy/Crusher.tscn"
@@ -5686,6 +5903,7 @@ tag_name = "shape_define"
 value = Rect2(-8, -8, 432, 160)
 
 [node name="Aikka" parent="Spawns" unique_id=1099288069 instance=ExtResource("9_uly8o")]
+modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 position = Vector2(2216, 1744)
 actor_path = "res://src/Actor/NPC/Aikka.tscn"
@@ -5704,1722 +5922,2152 @@ properties = {
 }
 
 [node name="BreakBlock4" parent="Spawns" unique_id=1381121339 instance=ExtResource("15_lfp3o")]
+modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 position = Vector2(4128, 2160)
 prop_path = "res://src/Prop/BreakBlock.tscn"
 properties = {
+"break_on_fall": [false, 1, ""],
 "crush_enemies": [true, 1, ""],
 "crush_players": [false, 1, ""],
 "do_bubble": [false, 1, ""],
 "editor_hidden": [false, 1, ""],
+"has_gravity": [true, 1, ""],
 "id": [&"BreakBlock4", 4, ""]
 }
 
 [node name="BreakBlock5" parent="Spawns" unique_id=1882749979 instance=ExtResource("15_lfp3o")]
+modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 position = Vector2(4128, 2176)
 prop_path = "res://src/Prop/BreakBlock.tscn"
 properties = {
+"break_on_fall": [false, 1, ""],
 "crush_enemies": [true, 1, ""],
 "crush_players": [false, 1, ""],
 "do_bubble": [false, 1, ""],
 "editor_hidden": [false, 1, ""],
+"has_gravity": [true, 1, ""],
 "id": [&"BreakBlock5", 4, ""]
 }
 
 [node name="BreakBlock6" parent="Spawns" unique_id=915789048 instance=ExtResource("15_lfp3o")]
+modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 position = Vector2(4144, 2176)
 prop_path = "res://src/Prop/BreakBlock.tscn"
 properties = {
+"break_on_fall": [false, 1, ""],
 "crush_enemies": [true, 1, ""],
 "crush_players": [false, 1, ""],
 "do_bubble": [false, 1, ""],
 "editor_hidden": [false, 1, ""],
+"has_gravity": [true, 1, ""],
 "id": [&"BreakBlock6", 4, ""]
 }
 
 [node name="BreakBlock7" parent="Spawns" unique_id=1561013948 instance=ExtResource("15_lfp3o")]
+modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 position = Vector2(4144, 2160)
 prop_path = "res://src/Prop/BreakBlock.tscn"
 properties = {
+"break_on_fall": [false, 1, ""],
 "crush_enemies": [true, 1, ""],
 "crush_players": [false, 1, ""],
 "do_bubble": [false, 1, ""],
 "editor_hidden": [false, 1, ""],
+"has_gravity": [true, 1, ""],
 "id": [&"BreakBlock7", 4, ""]
 }
 
 [node name="BreakBlock8" parent="Spawns" unique_id=822976937 instance=ExtResource("15_lfp3o")]
+modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 position = Vector2(4176, 2096)
 prop_path = "res://src/Prop/BreakBlock.tscn"
 properties = {
+"break_on_fall": [false, 1, ""],
 "crush_enemies": [true, 1, ""],
 "crush_players": [false, 1, ""],
 "do_bubble": [false, 1, ""],
 "editor_hidden": [false, 1, ""],
+"has_gravity": [true, 1, ""],
 "id": [&"BreakBlock8", 4, ""]
 }
 
 [node name="BreakBlock9" parent="Spawns" unique_id=358985905 instance=ExtResource("15_lfp3o")]
+modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 position = Vector2(4176, 2080)
 prop_path = "res://src/Prop/BreakBlock.tscn"
 properties = {
+"break_on_fall": [false, 1, ""],
 "crush_enemies": [true, 1, ""],
 "crush_players": [false, 1, ""],
 "do_bubble": [false, 1, ""],
 "editor_hidden": [false, 1, ""],
+"has_gravity": [true, 1, ""],
 "id": [&"BreakBlock9", 4, ""]
 }
 
 [node name="BreakBlock10" parent="Spawns" unique_id=1973368461 instance=ExtResource("15_lfp3o")]
+modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 position = Vector2(4192, 2064)
 prop_path = "res://src/Prop/BreakBlock.tscn"
 properties = {
+"break_on_fall": [false, 1, ""],
 "crush_enemies": [true, 1, ""],
 "crush_players": [false, 1, ""],
 "do_bubble": [false, 1, ""],
 "editor_hidden": [false, 1, ""],
+"has_gravity": [true, 1, ""],
 "id": [&"BreakBlock10", 4, ""]
 }
 
 [node name="BreakBlock11" parent="Spawns" unique_id=1154095716 instance=ExtResource("15_lfp3o")]
+modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 position = Vector2(4176, 2064)
 prop_path = "res://src/Prop/BreakBlock.tscn"
 properties = {
+"break_on_fall": [false, 1, ""],
 "crush_enemies": [true, 1, ""],
 "crush_players": [false, 1, ""],
 "do_bubble": [false, 1, ""],
 "editor_hidden": [false, 1, ""],
+"has_gravity": [true, 1, ""],
 "id": [&"BreakBlock11", 4, ""]
 }
 
 [node name="BreakBlock12" parent="Spawns" unique_id=1334253750 instance=ExtResource("15_lfp3o")]
+modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 position = Vector2(3424, 2080)
 prop_path = "res://src/Prop/BreakBlock.tscn"
 properties = {
+"break_on_fall": [false, 1, ""],
 "crush_enemies": [true, 1, ""],
 "crush_players": [false, 1, ""],
 "do_bubble": [false, 1, ""],
 "editor_hidden": [false, 1, ""],
+"has_gravity": [true, 1, ""],
 "id": [&"BreakBlock12", 4, ""]
 }
 
 [node name="BreakBlock13" parent="Spawns" unique_id=1755242828 instance=ExtResource("15_lfp3o")]
+modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 position = Vector2(3424, 2064)
 prop_path = "res://src/Prop/BreakBlock.tscn"
 properties = {
+"break_on_fall": [false, 1, ""],
 "crush_enemies": [true, 1, ""],
 "crush_players": [false, 1, ""],
 "do_bubble": [false, 1, ""],
 "editor_hidden": [false, 1, ""],
+"has_gravity": [true, 1, ""],
 "id": [&"BreakBlock13", 4, ""]
 }
 
 [node name="BreakBlock14" parent="Spawns" unique_id=1528228344 instance=ExtResource("15_lfp3o")]
+modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 position = Vector2(3432, 2048)
 prop_path = "res://src/Prop/BreakBlock.tscn"
 properties = {
+"break_on_fall": [false, 1, ""],
 "crush_enemies": [true, 1, ""],
 "crush_players": [false, 1, ""],
 "do_bubble": [false, 1, ""],
 "editor_hidden": [false, 1, ""],
+"has_gravity": [true, 1, ""],
 "id": [&"BreakBlock14", 4, ""]
 }
 
 [node name="BreakBlock15" parent="Spawns" unique_id=1512566837 instance=ExtResource("15_lfp3o")]
+modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 position = Vector2(3424, 1872)
 prop_path = "res://src/Prop/BreakBlock.tscn"
 properties = {
+"break_on_fall": [false, 1, ""],
 "crush_enemies": [true, 1, ""],
 "crush_players": [false, 1, ""],
 "do_bubble": [false, 1, ""],
 "editor_hidden": [false, 1, ""],
+"has_gravity": [true, 1, ""],
 "id": [&"BreakBlock15", 4, ""]
 }
 
 [node name="BreakBlock16" parent="Spawns" unique_id=1187293540 instance=ExtResource("15_lfp3o")]
+modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 position = Vector2(3424, 1888)
 prop_path = "res://src/Prop/BreakBlock.tscn"
 properties = {
+"break_on_fall": [false, 1, ""],
 "crush_enemies": [true, 1, ""],
 "crush_players": [false, 1, ""],
 "do_bubble": [false, 1, ""],
 "editor_hidden": [false, 1, ""],
+"has_gravity": [true, 1, ""],
 "id": [&"BreakBlock16", 4, ""]
 }
 
 [node name="BreakBlock17" parent="Spawns" unique_id=705973918 instance=ExtResource("15_lfp3o")]
+modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 position = Vector2(3424, 1904)
 prop_path = "res://src/Prop/BreakBlock.tscn"
 properties = {
+"break_on_fall": [false, 1, ""],
 "crush_enemies": [true, 1, ""],
 "crush_players": [false, 1, ""],
 "do_bubble": [false, 1, ""],
 "editor_hidden": [false, 1, ""],
+"has_gravity": [true, 1, ""],
 "id": [&"BreakBlock17", 4, ""]
 }
 
 [node name="BreakBlock18" parent="Spawns" unique_id=345451316 instance=ExtResource("15_lfp3o")]
+modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 position = Vector2(2584, 1872)
 prop_path = "res://src/Prop/BreakBlock.tscn"
 properties = {
+"break_on_fall": [false, 1, ""],
 "crush_enemies": [true, 1, ""],
 "crush_players": [false, 1, ""],
 "do_bubble": [false, 1, ""],
 "editor_hidden": [false, 1, ""],
+"has_gravity": [true, 1, ""],
 "id": [&"BreakBlock19", 4, ""]
 }
 
 [node name="BreakBlock19" parent="Spawns" unique_id=556965841 instance=ExtResource("15_lfp3o")]
+modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 position = Vector2(2576, 1888)
 prop_path = "res://src/Prop/BreakBlock.tscn"
 properties = {
+"break_on_fall": [false, 1, ""],
 "crush_enemies": [true, 1, ""],
 "crush_players": [false, 1, ""],
 "do_bubble": [false, 1, ""],
 "editor_hidden": [false, 1, ""],
+"has_gravity": [true, 1, ""],
 "id": [&"BreakBlock20", 4, ""]
 }
 
 [node name="BreakBlock20" parent="Spawns" unique_id=1967903346 instance=ExtResource("15_lfp3o")]
+modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 position = Vector2(4144, 2352)
 prop_path = "res://src/Prop/BreakBlock.tscn"
 properties = {
+"break_on_fall": [false, 1, ""],
 "crush_enemies": [true, 1, ""],
 "crush_players": [false, 1, ""],
 "do_bubble": [false, 1, ""],
 "editor_hidden": [false, 1, ""],
+"has_gravity": [true, 1, ""],
 "id": [&"BreakBlock21", 4, ""]
 }
 
 [node name="BreakBlock21" parent="Spawns" unique_id=1538719840 instance=ExtResource("15_lfp3o")]
+modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 position = Vector2(4144, 2336)
 prop_path = "res://src/Prop/BreakBlock.tscn"
 properties = {
+"break_on_fall": [false, 1, ""],
 "crush_enemies": [true, 1, ""],
 "crush_players": [false, 1, ""],
 "do_bubble": [false, 1, ""],
 "editor_hidden": [false, 1, ""],
+"has_gravity": [true, 1, ""],
 "id": [&"BreakBlock22", 4, ""]
 }
 
 [node name="BreakBlock22" parent="Spawns" unique_id=1651233455 instance=ExtResource("15_lfp3o")]
+modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 position = Vector2(4160, 2336)
 prop_path = "res://src/Prop/BreakBlock.tscn"
 properties = {
+"break_on_fall": [false, 1, ""],
 "crush_enemies": [true, 1, ""],
 "crush_players": [false, 1, ""],
 "do_bubble": [false, 1, ""],
 "editor_hidden": [false, 1, ""],
+"has_gravity": [true, 1, ""],
 "id": [&"BreakBlock23", 4, ""]
 }
 
 [node name="BreakBlock23" parent="Spawns" unique_id=1241656552 instance=ExtResource("15_lfp3o")]
+modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 position = Vector2(4160, 2352)
 prop_path = "res://src/Prop/BreakBlock.tscn"
 properties = {
+"break_on_fall": [false, 1, ""],
 "crush_enemies": [true, 1, ""],
 "crush_players": [false, 1, ""],
 "do_bubble": [false, 1, ""],
 "editor_hidden": [false, 1, ""],
+"has_gravity": [true, 1, ""],
 "id": [&"BreakBlock24", 4, ""]
 }
 
 [node name="BreakBlock24" parent="Spawns" unique_id=1980642186 instance=ExtResource("15_lfp3o")]
+modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 position = Vector2(4176, 2352)
 prop_path = "res://src/Prop/BreakBlock.tscn"
 properties = {
+"break_on_fall": [false, 1, ""],
 "crush_enemies": [true, 1, ""],
 "crush_players": [false, 1, ""],
 "do_bubble": [false, 1, ""],
 "editor_hidden": [false, 1, ""],
+"has_gravity": [true, 1, ""],
 "id": [&"BreakBlock25", 4, ""]
 }
 
 [node name="BreakBlock25" parent="Spawns" unique_id=1402734033 instance=ExtResource("15_lfp3o")]
+modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 position = Vector2(4128, 2352)
 prop_path = "res://src/Prop/BreakBlock.tscn"
 properties = {
+"break_on_fall": [false, 1, ""],
 "crush_enemies": [true, 1, ""],
 "crush_players": [false, 1, ""],
 "do_bubble": [false, 1, ""],
 "editor_hidden": [false, 1, ""],
+"has_gravity": [true, 1, ""],
 "id": [&"BreakBlock26", 4, ""]
 }
 
 [node name="BreakBlock26" parent="Spawns" unique_id=1341247604 instance=ExtResource("15_lfp3o")]
+modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 position = Vector2(4176, 2336)
 prop_path = "res://src/Prop/BreakBlock.tscn"
 properties = {
+"break_on_fall": [false, 1, ""],
 "crush_enemies": [true, 1, ""],
 "crush_players": [false, 1, ""],
 "do_bubble": [false, 1, ""],
 "editor_hidden": [false, 1, ""],
+"has_gravity": [true, 1, ""],
 "id": [&"BreakBlock27", 4, ""]
 }
 
 [node name="BreakBlock27" parent="Spawns" unique_id=864921325 instance=ExtResource("15_lfp3o")]
+modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 position = Vector2(2816, 2256)
 prop_path = "res://src/Prop/BreakBlock.tscn"
 properties = {
+"break_on_fall": [false, 1, ""],
 "crush_enemies": [true, 1, ""],
 "crush_players": [false, 1, ""],
 "do_bubble": [false, 1, ""],
 "editor_hidden": [false, 1, ""],
+"has_gravity": [true, 1, ""],
 "id": [&"BreakBlock28", 4, ""]
 }
 
 [node name="BreakBlock28" parent="Spawns" unique_id=92369354 instance=ExtResource("15_lfp3o")]
+modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 position = Vector2(2800, 2272)
 prop_path = "res://src/Prop/BreakBlock.tscn"
 properties = {
+"break_on_fall": [false, 1, ""],
 "crush_enemies": [true, 1, ""],
 "crush_players": [false, 1, ""],
 "do_bubble": [false, 1, ""],
 "editor_hidden": [false, 1, ""],
+"has_gravity": [true, 1, ""],
 "id": [&"BreakBlock29", 4, ""]
 }
 
 [node name="BreakBlock29" parent="Spawns" unique_id=1027285623 instance=ExtResource("15_lfp3o")]
+modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 position = Vector2(2800, 2256)
 prop_path = "res://src/Prop/BreakBlock.tscn"
 properties = {
+"break_on_fall": [false, 1, ""],
 "crush_enemies": [true, 1, ""],
 "crush_players": [false, 1, ""],
 "do_bubble": [false, 1, ""],
 "editor_hidden": [false, 1, ""],
+"has_gravity": [true, 1, ""],
 "id": [&"BreakBlock30", 4, ""]
 }
 
 [node name="BreakBlock30" parent="Spawns" unique_id=2092649610 instance=ExtResource("15_lfp3o")]
+modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 position = Vector2(2816, 2272)
 prop_path = "res://src/Prop/BreakBlock.tscn"
 properties = {
+"break_on_fall": [false, 1, ""],
 "crush_enemies": [true, 1, ""],
 "crush_players": [false, 1, ""],
 "do_bubble": [false, 1, ""],
 "editor_hidden": [false, 1, ""],
+"has_gravity": [true, 1, ""],
 "id": [&"BreakBlock31", 4, ""]
 }
 
 [node name="BreakBlock31" parent="Spawns" unique_id=1172295892 instance=ExtResource("15_lfp3o")]
+modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 position = Vector2(2800, 2288)
 prop_path = "res://src/Prop/BreakBlock.tscn"
 properties = {
+"break_on_fall": [false, 1, ""],
 "crush_enemies": [true, 1, ""],
 "crush_players": [false, 1, ""],
 "do_bubble": [false, 1, ""],
 "editor_hidden": [false, 1, ""],
+"has_gravity": [true, 1, ""],
 "id": [&"BreakBlock32", 4, ""]
 }
 
 [node name="BreakBlock32" parent="Spawns" unique_id=62817789 instance=ExtResource("15_lfp3o")]
+modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 position = Vector2(2864, 2304)
 prop_path = "res://src/Prop/BreakBlock.tscn"
 properties = {
+"break_on_fall": [false, 1, ""],
 "crush_enemies": [true, 1, ""],
 "crush_players": [false, 1, ""],
 "do_bubble": [false, 1, ""],
 "editor_hidden": [false, 1, ""],
+"has_gravity": [true, 1, ""],
 "id": [&"BreakBlock33", 4, ""]
 }
 
 [node name="BreakBlock33" parent="Spawns" unique_id=1271183868 instance=ExtResource("15_lfp3o")]
+modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 position = Vector2(2864, 2288)
 prop_path = "res://src/Prop/BreakBlock.tscn"
 properties = {
+"break_on_fall": [false, 1, ""],
 "crush_enemies": [true, 1, ""],
 "crush_players": [false, 1, ""],
 "do_bubble": [false, 1, ""],
 "editor_hidden": [false, 1, ""],
+"has_gravity": [true, 1, ""],
 "id": [&"BreakBlock34", 4, ""]
 }
 
 [node name="BreakBlock34" parent="Spawns" unique_id=1779071388 instance=ExtResource("15_lfp3o")]
+modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 position = Vector2(2880, 2272)
 prop_path = "res://src/Prop/BreakBlock.tscn"
 properties = {
+"break_on_fall": [false, 1, ""],
 "crush_enemies": [true, 1, ""],
 "crush_players": [false, 1, ""],
 "do_bubble": [false, 1, ""],
 "editor_hidden": [false, 1, ""],
+"has_gravity": [true, 1, ""],
 "id": [&"BreakBlock35", 4, ""]
 }
 
 [node name="BreakBlock35" parent="Spawns" unique_id=405663890 instance=ExtResource("15_lfp3o")]
+modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 position = Vector2(3328, 1888)
 prop_path = "res://src/Prop/BreakBlock.tscn"
 properties = {
+"break_on_fall": [false, 1, ""],
 "crush_enemies": [true, 1, ""],
 "crush_players": [false, 1, ""],
 "do_bubble": [false, 1, ""],
 "editor_hidden": [false, 1, ""],
+"has_gravity": [true, 1, ""],
 "id": [&"BreakBlock36", 4, ""]
 }
 
 [node name="BreakBlock36" parent="Spawns" unique_id=863629970 instance=ExtResource("15_lfp3o")]
+modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 position = Vector2(3328, 1904)
 prop_path = "res://src/Prop/BreakBlock.tscn"
 properties = {
+"break_on_fall": [false, 1, ""],
 "crush_enemies": [true, 1, ""],
 "crush_players": [false, 1, ""],
 "do_bubble": [false, 1, ""],
 "editor_hidden": [false, 1, ""],
+"has_gravity": [true, 1, ""],
 "id": [&"BreakBlock37", 4, ""]
 }
 
 [node name="BreakBlock37" parent="Spawns" unique_id=1099885557 instance=ExtResource("15_lfp3o")]
+modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 position = Vector2(3328, 1936)
 prop_path = "res://src/Prop/BreakBlock.tscn"
 properties = {
+"break_on_fall": [false, 1, ""],
 "crush_enemies": [true, 1, ""],
 "crush_players": [false, 1, ""],
 "do_bubble": [false, 1, ""],
 "editor_hidden": [false, 1, ""],
+"has_gravity": [true, 1, ""],
 "id": [&"BreakBlock38", 4, ""]
 }
 
 [node name="BreakBlock38" parent="Spawns" unique_id=736596040 instance=ExtResource("15_lfp3o")]
+modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 position = Vector2(3328, 1920)
 prop_path = "res://src/Prop/BreakBlock.tscn"
 properties = {
+"break_on_fall": [false, 1, ""],
 "crush_enemies": [true, 1, ""],
 "crush_players": [false, 1, ""],
 "do_bubble": [false, 1, ""],
 "editor_hidden": [false, 1, ""],
+"has_gravity": [true, 1, ""],
 "id": [&"BreakBlock39", 4, ""]
 }
 
 [node name="BreakBlock39" parent="Spawns" unique_id=1359400292 instance=ExtResource("15_lfp3o")]
+modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 position = Vector2(3344, 1920)
 prop_path = "res://src/Prop/BreakBlock.tscn"
 properties = {
+"break_on_fall": [false, 1, ""],
 "crush_enemies": [true, 1, ""],
 "crush_players": [false, 1, ""],
 "do_bubble": [false, 1, ""],
 "editor_hidden": [false, 1, ""],
+"has_gravity": [true, 1, ""],
 "id": [&"BreakBlock40", 4, ""]
 }
 
 [node name="BreakBlock40" parent="Spawns" unique_id=2105116916 instance=ExtResource("15_lfp3o")]
+modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 position = Vector2(3344, 1904)
 prop_path = "res://src/Prop/BreakBlock.tscn"
 properties = {
+"break_on_fall": [false, 1, ""],
 "crush_enemies": [true, 1, ""],
 "crush_players": [false, 1, ""],
 "do_bubble": [false, 1, ""],
 "editor_hidden": [false, 1, ""],
+"has_gravity": [true, 1, ""],
 "id": [&"BreakBlock41", 4, ""]
 }
 
 [node name="BreakBlock41" parent="Spawns" unique_id=220879938 instance=ExtResource("15_lfp3o")]
+modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 position = Vector2(3360, 1904)
 prop_path = "res://src/Prop/BreakBlock.tscn"
 properties = {
+"break_on_fall": [false, 1, ""],
 "crush_enemies": [true, 1, ""],
 "crush_players": [false, 1, ""],
 "do_bubble": [false, 1, ""],
 "editor_hidden": [false, 1, ""],
+"has_gravity": [true, 1, ""],
 "id": [&"BreakBlock42", 4, ""]
 }
 
 [node name="BreakBlock42" parent="Spawns" unique_id=284304624 instance=ExtResource("15_lfp3o")]
+modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 position = Vector2(3360, 1920)
 prop_path = "res://src/Prop/BreakBlock.tscn"
 properties = {
+"break_on_fall": [false, 1, ""],
 "crush_enemies": [true, 1, ""],
 "crush_players": [false, 1, ""],
 "do_bubble": [false, 1, ""],
 "editor_hidden": [false, 1, ""],
+"has_gravity": [true, 1, ""],
 "id": [&"BreakBlock43", 4, ""]
 }
 
 [node name="BreakBlock43" parent="Spawns" unique_id=1204250468 instance=ExtResource("15_lfp3o")]
+modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 position = Vector2(3344, 1936)
 prop_path = "res://src/Prop/BreakBlock.tscn"
 properties = {
+"break_on_fall": [false, 1, ""],
 "crush_enemies": [true, 1, ""],
 "crush_players": [false, 1, ""],
 "do_bubble": [false, 1, ""],
 "editor_hidden": [false, 1, ""],
+"has_gravity": [true, 1, ""],
 "id": [&"BreakBlock44", 4, ""]
 }
 
 [node name="BreakBlock44" parent="Spawns" unique_id=972099080 instance=ExtResource("15_lfp3o")]
+modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 position = Vector2(3360, 1872)
 prop_path = "res://src/Prop/BreakBlock.tscn"
 properties = {
+"break_on_fall": [false, 1, ""],
 "crush_enemies": [true, 1, ""],
 "crush_players": [false, 1, ""],
 "do_bubble": [false, 1, ""],
 "editor_hidden": [false, 1, ""],
+"has_gravity": [true, 1, ""],
 "id": [&"BreakBlock45", 4, ""]
 }
 
 [node name="BreakBlock45" parent="Spawns" unique_id=975850134 instance=ExtResource("15_lfp3o")]
+modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 position = Vector2(3360, 1888)
 prop_path = "res://src/Prop/BreakBlock.tscn"
 properties = {
+"break_on_fall": [false, 1, ""],
 "crush_enemies": [true, 1, ""],
 "crush_players": [false, 1, ""],
 "do_bubble": [false, 1, ""],
 "editor_hidden": [false, 1, ""],
+"has_gravity": [true, 1, ""],
 "id": [&"BreakBlock46", 4, ""]
 }
 
 [node name="BreakBlock46" parent="Spawns" unique_id=448883998 instance=ExtResource("15_lfp3o")]
+modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 position = Vector2(3376, 1888)
 prop_path = "res://src/Prop/BreakBlock.tscn"
 properties = {
+"break_on_fall": [false, 1, ""],
 "crush_enemies": [true, 1, ""],
 "crush_players": [false, 1, ""],
 "do_bubble": [false, 1, ""],
 "editor_hidden": [false, 1, ""],
+"has_gravity": [true, 1, ""],
 "id": [&"BreakBlock47", 4, ""]
 }
 
 [node name="BreakBlock47" parent="Spawns" unique_id=1126264339 instance=ExtResource("15_lfp3o")]
+modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 position = Vector2(3376, 1904)
 prop_path = "res://src/Prop/BreakBlock.tscn"
 properties = {
+"break_on_fall": [false, 1, ""],
 "crush_enemies": [true, 1, ""],
 "crush_players": [false, 1, ""],
 "do_bubble": [false, 1, ""],
 "editor_hidden": [false, 1, ""],
+"has_gravity": [true, 1, ""],
 "id": [&"BreakBlock48", 4, ""]
 }
 
 [node name="BreakBlock48" parent="Spawns" unique_id=1301186498 instance=ExtResource("15_lfp3o")]
+modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 position = Vector2(3376, 1920)
 prop_path = "res://src/Prop/BreakBlock.tscn"
 properties = {
+"break_on_fall": [false, 1, ""],
 "crush_enemies": [true, 1, ""],
 "crush_players": [false, 1, ""],
 "do_bubble": [false, 1, ""],
 "editor_hidden": [false, 1, ""],
+"has_gravity": [true, 1, ""],
 "id": [&"BreakBlock49", 4, ""]
 }
 
 [node name="BreakBlock49" parent="Spawns" unique_id=1707246807 instance=ExtResource("15_lfp3o")]
+modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 position = Vector2(3360, 1936)
 prop_path = "res://src/Prop/BreakBlock.tscn"
 properties = {
+"break_on_fall": [false, 1, ""],
 "crush_enemies": [true, 1, ""],
 "crush_players": [false, 1, ""],
 "do_bubble": [false, 1, ""],
 "editor_hidden": [false, 1, ""],
+"has_gravity": [true, 1, ""],
 "id": [&"BreakBlock50", 4, ""]
 }
 
 [node name="BreakBlock50" parent="Spawns" unique_id=916868372 instance=ExtResource("15_lfp3o")]
+modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 position = Vector2(3376, 1936)
 prop_path = "res://src/Prop/BreakBlock.tscn"
 properties = {
+"break_on_fall": [false, 1, ""],
 "crush_enemies": [true, 1, ""],
 "crush_players": [false, 1, ""],
 "do_bubble": [false, 1, ""],
 "editor_hidden": [false, 1, ""],
+"has_gravity": [true, 1, ""],
 "id": [&"BreakBlock51", 4, ""]
 }
 
 [node name="BreakBlock51" parent="Spawns" unique_id=812549993 instance=ExtResource("15_lfp3o")]
+modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 position = Vector2(3392, 1936)
 prop_path = "res://src/Prop/BreakBlock.tscn"
 properties = {
+"break_on_fall": [false, 1, ""],
 "crush_enemies": [true, 1, ""],
 "crush_players": [false, 1, ""],
 "do_bubble": [false, 1, ""],
 "editor_hidden": [false, 1, ""],
+"has_gravity": [true, 1, ""],
 "id": [&"BreakBlock52", 4, ""]
 }
 
 [node name="BreakBlock52" parent="Spawns" unique_id=1281684394 instance=ExtResource("15_lfp3o")]
+modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 position = Vector2(3392, 1920)
 prop_path = "res://src/Prop/BreakBlock.tscn"
 properties = {
+"break_on_fall": [false, 1, ""],
 "crush_enemies": [true, 1, ""],
 "crush_players": [false, 1, ""],
 "do_bubble": [false, 1, ""],
 "editor_hidden": [false, 1, ""],
+"has_gravity": [true, 1, ""],
 "id": [&"BreakBlock53", 4, ""]
 }
 
 [node name="BreakBlock53" parent="Spawns" unique_id=80932679 instance=ExtResource("15_lfp3o")]
+modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 position = Vector2(3392, 1904)
 prop_path = "res://src/Prop/BreakBlock.tscn"
 properties = {
+"break_on_fall": [false, 1, ""],
 "crush_enemies": [true, 1, ""],
 "crush_players": [false, 1, ""],
 "do_bubble": [false, 1, ""],
 "editor_hidden": [false, 1, ""],
+"has_gravity": [true, 1, ""],
 "id": [&"BreakBlock54", 4, ""]
 }
 
 [node name="BreakBlock54" parent="Spawns" unique_id=1595153033 instance=ExtResource("15_lfp3o")]
+modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 position = Vector2(3392, 1888)
 prop_path = "res://src/Prop/BreakBlock.tscn"
 properties = {
+"break_on_fall": [false, 1, ""],
 "crush_enemies": [true, 1, ""],
 "crush_players": [false, 1, ""],
 "do_bubble": [false, 1, ""],
 "editor_hidden": [false, 1, ""],
+"has_gravity": [true, 1, ""],
 "id": [&"BreakBlock55", 4, ""]
 }
 
 [node name="BreakBlock55" parent="Spawns" unique_id=1367044369 instance=ExtResource("15_lfp3o")]
+modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 position = Vector2(3392, 1856)
 prop_path = "res://src/Prop/BreakBlock.tscn"
 properties = {
+"break_on_fall": [false, 1, ""],
 "crush_enemies": [true, 1, ""],
 "crush_players": [false, 1, ""],
 "do_bubble": [false, 1, ""],
 "editor_hidden": [false, 1, ""],
+"has_gravity": [true, 1, ""],
 "id": [&"BreakBlock56", 4, ""]
 }
 
 [node name="BreakBlock56" parent="Spawns" unique_id=1042197900 instance=ExtResource("15_lfp3o")]
+modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 position = Vector2(3392, 1872)
 prop_path = "res://src/Prop/BreakBlock.tscn"
 properties = {
+"break_on_fall": [false, 1, ""],
 "crush_enemies": [true, 1, ""],
 "crush_players": [false, 1, ""],
 "do_bubble": [false, 1, ""],
 "editor_hidden": [false, 1, ""],
+"has_gravity": [true, 1, ""],
 "id": [&"BreakBlock57", 4, ""]
 }
 
 [node name="BreakBlock57" parent="Spawns" unique_id=1759078144 instance=ExtResource("15_lfp3o")]
+modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 position = Vector2(3408, 1904)
 prop_path = "res://src/Prop/BreakBlock.tscn"
 properties = {
+"break_on_fall": [false, 1, ""],
 "crush_enemies": [true, 1, ""],
 "crush_players": [false, 1, ""],
 "do_bubble": [false, 1, ""],
 "editor_hidden": [false, 1, ""],
+"has_gravity": [true, 1, ""],
 "id": [&"BreakBlock58", 4, ""]
 }
 
 [node name="BreakBlock58" parent="Spawns" unique_id=381166110 instance=ExtResource("15_lfp3o")]
+modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 position = Vector2(3408, 1888)
 prop_path = "res://src/Prop/BreakBlock.tscn"
 properties = {
+"break_on_fall": [false, 1, ""],
 "crush_enemies": [true, 1, ""],
 "crush_players": [false, 1, ""],
 "do_bubble": [false, 1, ""],
 "editor_hidden": [false, 1, ""],
+"has_gravity": [true, 1, ""],
 "id": [&"BreakBlock59", 4, ""]
 }
 
 [node name="BreakBlock59" parent="Spawns" unique_id=685333315 instance=ExtResource("15_lfp3o")]
+modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 position = Vector2(3408, 1872)
 prop_path = "res://src/Prop/BreakBlock.tscn"
 properties = {
+"break_on_fall": [false, 1, ""],
 "crush_enemies": [true, 1, ""],
 "crush_players": [false, 1, ""],
 "do_bubble": [false, 1, ""],
 "editor_hidden": [false, 1, ""],
+"has_gravity": [true, 1, ""],
 "id": [&"BreakBlock60", 4, ""]
 }
 
 [node name="BreakBlock60" parent="Spawns" unique_id=1228153656 instance=ExtResource("15_lfp3o")]
+modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 position = Vector2(3440, 1872)
 prop_path = "res://src/Prop/BreakBlock.tscn"
 properties = {
+"break_on_fall": [false, 1, ""],
 "crush_enemies": [true, 1, ""],
 "crush_players": [false, 1, ""],
 "do_bubble": [false, 1, ""],
 "editor_hidden": [false, 1, ""],
+"has_gravity": [true, 1, ""],
 "id": [&"BreakBlock61", 4, ""]
 }
 
 [node name="BreakBlock61" parent="Spawns" unique_id=1630382574 instance=ExtResource("15_lfp3o")]
+modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 position = Vector2(3440, 1888)
 prop_path = "res://src/Prop/BreakBlock.tscn"
 properties = {
+"break_on_fall": [false, 1, ""],
 "crush_enemies": [true, 1, ""],
 "crush_players": [false, 1, ""],
 "do_bubble": [false, 1, ""],
 "editor_hidden": [false, 1, ""],
+"has_gravity": [true, 1, ""],
 "id": [&"BreakBlock62", 4, ""]
 }
 
 [node name="BreakBlock62" parent="Spawns" unique_id=1617288798 instance=ExtResource("15_lfp3o")]
+modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 position = Vector2(3440, 1856)
 prop_path = "res://src/Prop/BreakBlock.tscn"
 properties = {
+"break_on_fall": [false, 1, ""],
 "crush_enemies": [true, 1, ""],
 "crush_players": [false, 1, ""],
 "do_bubble": [false, 1, ""],
 "editor_hidden": [false, 1, ""],
+"has_gravity": [true, 1, ""],
 "id": [&"BreakBlock63", 4, ""]
 }
 
 [node name="BreakBlock63" parent="Spawns" unique_id=2042536144 instance=ExtResource("15_lfp3o")]
+modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 position = Vector2(3424, 1856)
 prop_path = "res://src/Prop/BreakBlock.tscn"
 properties = {
+"break_on_fall": [false, 1, ""],
 "crush_enemies": [true, 1, ""],
 "crush_players": [false, 1, ""],
 "do_bubble": [false, 1, ""],
 "editor_hidden": [false, 1, ""],
+"has_gravity": [true, 1, ""],
 "id": [&"BreakBlock64", 4, ""]
 }
 
 [node name="BreakBlock64" parent="Spawns" unique_id=606541908 instance=ExtResource("15_lfp3o")]
+modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 position = Vector2(3424, 1824)
 prop_path = "res://src/Prop/BreakBlock.tscn"
 properties = {
+"break_on_fall": [false, 1, ""],
 "crush_enemies": [true, 1, ""],
 "crush_players": [false, 1, ""],
 "do_bubble": [false, 1, ""],
 "editor_hidden": [false, 1, ""],
+"has_gravity": [true, 1, ""],
 "id": [&"BreakBlock65", 4, ""]
 }
 
 [node name="BreakBlock65" parent="Spawns" unique_id=1681674560 instance=ExtResource("15_lfp3o")]
+modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 position = Vector2(3440, 1824)
 prop_path = "res://src/Prop/BreakBlock.tscn"
 properties = {
+"break_on_fall": [false, 1, ""],
 "crush_enemies": [true, 1, ""],
 "crush_players": [false, 1, ""],
 "do_bubble": [false, 1, ""],
 "editor_hidden": [false, 1, ""],
+"has_gravity": [true, 1, ""],
 "id": [&"BreakBlock66", 4, ""]
 }
 
 [node name="BreakBlock66" parent="Spawns" unique_id=1030242920 instance=ExtResource("15_lfp3o")]
+modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 position = Vector2(3424, 1840)
 prop_path = "res://src/Prop/BreakBlock.tscn"
 properties = {
+"break_on_fall": [false, 1, ""],
 "crush_enemies": [true, 1, ""],
 "crush_players": [false, 1, ""],
 "do_bubble": [false, 1, ""],
 "editor_hidden": [false, 1, ""],
+"has_gravity": [true, 1, ""],
 "id": [&"BreakBlock67", 4, ""]
 }
 
 [node name="BreakBlock67" parent="Spawns" unique_id=1644691977 instance=ExtResource("15_lfp3o")]
+modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 position = Vector2(3440, 1840)
 prop_path = "res://src/Prop/BreakBlock.tscn"
 properties = {
+"break_on_fall": [false, 1, ""],
 "crush_enemies": [true, 1, ""],
 "crush_players": [false, 1, ""],
 "do_bubble": [false, 1, ""],
 "editor_hidden": [false, 1, ""],
+"has_gravity": [true, 1, ""],
 "id": [&"BreakBlock68", 4, ""]
 }
 
 [node name="BreakBlock68" parent="Spawns" unique_id=1587811962 instance=ExtResource("15_lfp3o")]
+modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 position = Vector2(3456, 1824)
 prop_path = "res://src/Prop/BreakBlock.tscn"
 properties = {
+"break_on_fall": [false, 1, ""],
 "crush_enemies": [true, 1, ""],
 "crush_players": [false, 1, ""],
 "do_bubble": [false, 1, ""],
 "editor_hidden": [false, 1, ""],
+"has_gravity": [true, 1, ""],
 "id": [&"BreakBlock69", 4, ""]
 }
 
 [node name="BreakBlock69" parent="Spawns" unique_id=104329241 instance=ExtResource("15_lfp3o")]
+modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 position = Vector2(3456, 1840)
 prop_path = "res://src/Prop/BreakBlock.tscn"
 properties = {
+"break_on_fall": [false, 1, ""],
 "crush_enemies": [true, 1, ""],
 "crush_players": [false, 1, ""],
 "do_bubble": [false, 1, ""],
 "editor_hidden": [false, 1, ""],
+"has_gravity": [true, 1, ""],
 "id": [&"BreakBlock70", 4, ""]
 }
 
 [node name="BreakBlock70" parent="Spawns" unique_id=1057108081 instance=ExtResource("15_lfp3o")]
+modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 position = Vector2(3456, 1856)
 prop_path = "res://src/Prop/BreakBlock.tscn"
 properties = {
+"break_on_fall": [false, 1, ""],
 "crush_enemies": [true, 1, ""],
 "crush_players": [false, 1, ""],
 "do_bubble": [false, 1, ""],
 "editor_hidden": [false, 1, ""],
+"has_gravity": [true, 1, ""],
 "id": [&"BreakBlock71", 4, ""]
 }
 
 [node name="BreakBlock71" parent="Spawns" unique_id=1678441487 instance=ExtResource("15_lfp3o")]
+modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 position = Vector2(3456, 1872)
 prop_path = "res://src/Prop/BreakBlock.tscn"
 properties = {
+"break_on_fall": [false, 1, ""],
 "crush_enemies": [true, 1, ""],
 "crush_players": [false, 1, ""],
 "do_bubble": [false, 1, ""],
 "editor_hidden": [false, 1, ""],
+"has_gravity": [true, 1, ""],
 "id": [&"BreakBlock72", 4, ""]
 }
 
 [node name="BreakBlock72" parent="Spawns" unique_id=1661961530 instance=ExtResource("15_lfp3o")]
+modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 position = Vector2(3488, 1888)
 prop_path = "res://src/Prop/BreakBlock.tscn"
 properties = {
+"break_on_fall": [false, 1, ""],
 "crush_enemies": [true, 1, ""],
 "crush_players": [false, 1, ""],
 "do_bubble": [false, 1, ""],
 "editor_hidden": [false, 1, ""],
+"has_gravity": [true, 1, ""],
 "id": [&"BreakBlock73", 4, ""]
 }
 
 [node name="BreakBlock73" parent="Spawns" unique_id=1953499181 instance=ExtResource("15_lfp3o")]
+modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 position = Vector2(3472, 1872)
 prop_path = "res://src/Prop/BreakBlock.tscn"
 properties = {
+"break_on_fall": [false, 1, ""],
 "crush_enemies": [true, 1, ""],
 "crush_players": [false, 1, ""],
 "do_bubble": [false, 1, ""],
 "editor_hidden": [false, 1, ""],
+"has_gravity": [true, 1, ""],
 "id": [&"BreakBlock74", 4, ""]
 }
 
 [node name="BreakBlock74" parent="Spawns" unique_id=1388274958 instance=ExtResource("15_lfp3o")]
+modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 position = Vector2(3472, 1888)
 prop_path = "res://src/Prop/BreakBlock.tscn"
 properties = {
+"break_on_fall": [false, 1, ""],
 "crush_enemies": [true, 1, ""],
 "crush_players": [false, 1, ""],
 "do_bubble": [false, 1, ""],
 "editor_hidden": [false, 1, ""],
+"has_gravity": [true, 1, ""],
 "id": [&"BreakBlock75", 4, ""]
 }
 
 [node name="BreakBlock75" parent="Spawns" unique_id=2115848595 instance=ExtResource("15_lfp3o")]
+modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 position = Vector2(3472, 1904)
 prop_path = "res://src/Prop/BreakBlock.tscn"
 properties = {
+"break_on_fall": [false, 1, ""],
 "crush_enemies": [true, 1, ""],
 "crush_players": [false, 1, ""],
 "do_bubble": [false, 1, ""],
 "editor_hidden": [false, 1, ""],
+"has_gravity": [true, 1, ""],
 "id": [&"BreakBlock76", 4, ""]
 }
 
 [node name="BreakBlock76" parent="Spawns" unique_id=389902775 instance=ExtResource("15_lfp3o")]
+modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 position = Vector2(3488, 1920)
 prop_path = "res://src/Prop/BreakBlock.tscn"
 properties = {
+"break_on_fall": [false, 1, ""],
 "crush_enemies": [true, 1, ""],
 "crush_players": [false, 1, ""],
 "do_bubble": [false, 1, ""],
 "editor_hidden": [false, 1, ""],
+"has_gravity": [true, 1, ""],
 "id": [&"BreakBlock77", 4, ""]
 }
 
 [node name="BreakBlock77" parent="Spawns" unique_id=1673433618 instance=ExtResource("15_lfp3o")]
+modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 position = Vector2(3504, 1872)
 prop_path = "res://src/Prop/BreakBlock.tscn"
 properties = {
+"break_on_fall": [false, 1, ""],
 "crush_enemies": [true, 1, ""],
 "crush_players": [false, 1, ""],
 "do_bubble": [false, 1, ""],
 "editor_hidden": [false, 1, ""],
+"has_gravity": [true, 1, ""],
 "id": [&"BreakBlock78", 4, ""]
 }
 
 [node name="BreakBlock78" parent="Spawns" unique_id=1842006592 instance=ExtResource("15_lfp3o")]
+modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 position = Vector2(3488, 1856)
 prop_path = "res://src/Prop/BreakBlock.tscn"
 properties = {
+"break_on_fall": [false, 1, ""],
 "crush_enemies": [true, 1, ""],
 "crush_players": [false, 1, ""],
 "do_bubble": [false, 1, ""],
 "editor_hidden": [false, 1, ""],
+"has_gravity": [true, 1, ""],
 "id": [&"BreakBlock79", 4, ""]
 }
 
 [node name="BreakBlock79" parent="Spawns" unique_id=1822434081 instance=ExtResource("15_lfp3o")]
+modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 position = Vector2(3488, 1872)
 prop_path = "res://src/Prop/BreakBlock.tscn"
 properties = {
+"break_on_fall": [false, 1, ""],
 "crush_enemies": [true, 1, ""],
 "crush_players": [false, 1, ""],
 "do_bubble": [false, 1, ""],
 "editor_hidden": [false, 1, ""],
+"has_gravity": [true, 1, ""],
 "id": [&"BreakBlock80", 4, ""]
 }
 
 [node name="BreakBlock80" parent="Spawns" unique_id=253383627 instance=ExtResource("15_lfp3o")]
+modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 position = Vector2(3488, 1904)
 prop_path = "res://src/Prop/BreakBlock.tscn"
 properties = {
+"break_on_fall": [false, 1, ""],
 "crush_enemies": [true, 1, ""],
 "crush_players": [false, 1, ""],
 "do_bubble": [false, 1, ""],
 "editor_hidden": [false, 1, ""],
+"has_gravity": [true, 1, ""],
 "id": [&"BreakBlock81", 4, ""]
 }
 
 [node name="BreakBlock81" parent="Spawns" unique_id=781127123 instance=ExtResource("15_lfp3o")]
+modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 position = Vector2(3504, 1936)
 prop_path = "res://src/Prop/BreakBlock.tscn"
 properties = {
+"break_on_fall": [false, 1, ""],
 "crush_enemies": [true, 1, ""],
 "crush_players": [false, 1, ""],
 "do_bubble": [false, 1, ""],
 "editor_hidden": [false, 1, ""],
+"has_gravity": [true, 1, ""],
 "id": [&"BreakBlock82", 4, ""]
 }
 
 [node name="BreakBlock82" parent="Spawns" unique_id=473082685 instance=ExtResource("15_lfp3o")]
+modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 position = Vector2(3504, 1920)
 prop_path = "res://src/Prop/BreakBlock.tscn"
 properties = {
+"break_on_fall": [false, 1, ""],
 "crush_enemies": [true, 1, ""],
 "crush_players": [false, 1, ""],
 "do_bubble": [false, 1, ""],
 "editor_hidden": [false, 1, ""],
+"has_gravity": [true, 1, ""],
 "id": [&"BreakBlock83", 4, ""]
 }
 
 [node name="BreakBlock83" parent="Spawns" unique_id=362002716 instance=ExtResource("15_lfp3o")]
+modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 position = Vector2(3488, 1936)
 prop_path = "res://src/Prop/BreakBlock.tscn"
 properties = {
+"break_on_fall": [false, 1, ""],
 "crush_enemies": [true, 1, ""],
 "crush_players": [false, 1, ""],
 "do_bubble": [false, 1, ""],
 "editor_hidden": [false, 1, ""],
+"has_gravity": [true, 1, ""],
 "id": [&"BreakBlock84", 4, ""]
 }
 
 [node name="BreakBlock84" parent="Spawns" unique_id=1388917929 instance=ExtResource("15_lfp3o")]
+modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 position = Vector2(3472, 1920)
 prop_path = "res://src/Prop/BreakBlock.tscn"
 properties = {
+"break_on_fall": [false, 1, ""],
 "crush_enemies": [true, 1, ""],
 "crush_players": [false, 1, ""],
 "do_bubble": [false, 1, ""],
 "editor_hidden": [false, 1, ""],
+"has_gravity": [true, 1, ""],
 "id": [&"BreakBlock85", 4, ""]
 }
 
 [node name="BreakBlock85" parent="Spawns" unique_id=1098590400 instance=ExtResource("15_lfp3o")]
+modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 position = Vector2(3472, 1936)
 prop_path = "res://src/Prop/BreakBlock.tscn"
 properties = {
+"break_on_fall": [false, 1, ""],
 "crush_enemies": [true, 1, ""],
 "crush_players": [false, 1, ""],
 "do_bubble": [false, 1, ""],
 "editor_hidden": [false, 1, ""],
+"has_gravity": [true, 1, ""],
 "id": [&"BreakBlock86", 4, ""]
 }
 
 [node name="BreakBlock86" parent="Spawns" unique_id=370608075 instance=ExtResource("15_lfp3o")]
+modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 position = Vector2(2736, 2272)
 prop_path = "res://src/Prop/BreakBlock.tscn"
 properties = {
+"break_on_fall": [false, 1, ""],
 "crush_enemies": [true, 1, ""],
 "crush_players": [false, 1, ""],
 "do_bubble": [false, 1, ""],
 "editor_hidden": [false, 1, ""],
+"has_gravity": [true, 1, ""],
 "id": [&"BreakBlock87", 4, ""]
 }
 
 [node name="BreakBlock87" parent="Spawns" unique_id=1228994649 instance=ExtResource("15_lfp3o")]
+modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 position = Vector2(2704, 2288)
 prop_path = "res://src/Prop/BreakBlock.tscn"
 properties = {
+"break_on_fall": [false, 1, ""],
 "crush_enemies": [true, 1, ""],
 "crush_players": [false, 1, ""],
 "do_bubble": [false, 1, ""],
 "editor_hidden": [false, 1, ""],
+"has_gravity": [true, 1, ""],
 "id": [&"BreakBlock88", 4, ""]
 }
 
 [node name="BreakBlock88" parent="Spawns" unique_id=1915913211 instance=ExtResource("15_lfp3o")]
+modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 position = Vector2(2720, 2304)
 prop_path = "res://src/Prop/BreakBlock.tscn"
 properties = {
+"break_on_fall": [false, 1, ""],
 "crush_enemies": [true, 1, ""],
 "crush_players": [false, 1, ""],
 "do_bubble": [false, 1, ""],
 "editor_hidden": [false, 1, ""],
+"has_gravity": [true, 1, ""],
 "id": [&"BreakBlock89", 4, ""]
 }
 
 [node name="BreakBlock89" parent="Spawns" unique_id=1882397247 instance=ExtResource("15_lfp3o")]
+modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 position = Vector2(2736, 2288)
 prop_path = "res://src/Prop/BreakBlock.tscn"
 properties = {
+"break_on_fall": [false, 1, ""],
 "crush_enemies": [true, 1, ""],
 "crush_players": [false, 1, ""],
 "do_bubble": [false, 1, ""],
 "editor_hidden": [false, 1, ""],
+"has_gravity": [true, 1, ""],
 "id": [&"BreakBlock90", 4, ""]
 }
 
 [node name="BreakBlock90" parent="Spawns" unique_id=822103351 instance=ExtResource("15_lfp3o")]
+modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 position = Vector2(2720, 2288)
 prop_path = "res://src/Prop/BreakBlock.tscn"
 properties = {
+"break_on_fall": [false, 1, ""],
 "crush_enemies": [true, 1, ""],
 "crush_players": [false, 1, ""],
 "do_bubble": [false, 1, ""],
 "editor_hidden": [false, 1, ""],
+"has_gravity": [true, 1, ""],
 "id": [&"BreakBlock91", 4, ""]
 }
 
 [node name="BreakBlock91" parent="Spawns" unique_id=1971572264 instance=ExtResource("15_lfp3o")]
+modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 position = Vector2(2192, 2016)
 prop_path = "res://src/Prop/BreakBlock.tscn"
 properties = {
+"break_on_fall": [false, 1, ""],
 "crush_enemies": [true, 1, ""],
 "crush_players": [false, 1, ""],
 "do_bubble": [false, 1, ""],
 "editor_hidden": [false, 1, ""],
+"has_gravity": [true, 1, ""],
 "id": [&"BreakBlock92", 4, ""]
 }
 
 [node name="BreakBlock92" parent="Spawns" unique_id=557965006 instance=ExtResource("15_lfp3o")]
+modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 position = Vector2(2192, 2000)
 prop_path = "res://src/Prop/BreakBlock.tscn"
 properties = {
+"break_on_fall": [false, 1, ""],
 "crush_enemies": [true, 1, ""],
 "crush_players": [false, 1, ""],
 "do_bubble": [false, 1, ""],
 "editor_hidden": [false, 1, ""],
+"has_gravity": [true, 1, ""],
 "id": [&"BreakBlock93", 4, ""]
 }
 
 [node name="BreakBlock93" parent="Spawns" unique_id=1657965867 instance=ExtResource("15_lfp3o")]
+modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 position = Vector2(2176, 2016)
 prop_path = "res://src/Prop/BreakBlock.tscn"
 properties = {
+"break_on_fall": [false, 1, ""],
 "crush_enemies": [true, 1, ""],
 "crush_players": [false, 1, ""],
 "do_bubble": [false, 1, ""],
 "editor_hidden": [false, 1, ""],
+"has_gravity": [true, 1, ""],
 "id": [&"BreakBlock94", 4, ""]
 }
 
 [node name="BreakBlock94" parent="Spawns" unique_id=1924634544 instance=ExtResource("15_lfp3o")]
+modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 position = Vector2(2176, 2032)
 prop_path = "res://src/Prop/BreakBlock.tscn"
 properties = {
+"break_on_fall": [false, 1, ""],
 "crush_enemies": [true, 1, ""],
 "crush_players": [false, 1, ""],
 "do_bubble": [false, 1, ""],
 "editor_hidden": [false, 1, ""],
+"has_gravity": [true, 1, ""],
 "id": [&"BreakBlock95", 4, ""]
 }
 
 [node name="BreakBlock95" parent="Spawns" unique_id=700726060 instance=ExtResource("15_lfp3o")]
+modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 position = Vector2(2176, 2048)
 prop_path = "res://src/Prop/BreakBlock.tscn"
 properties = {
+"break_on_fall": [false, 1, ""],
 "crush_enemies": [true, 1, ""],
 "crush_players": [false, 1, ""],
 "do_bubble": [false, 1, ""],
 "editor_hidden": [false, 1, ""],
+"has_gravity": [true, 1, ""],
 "id": [&"BreakBlock96", 4, ""]
 }
 
 [node name="BreakBlock96" parent="Spawns" unique_id=1721194975 instance=ExtResource("15_lfp3o")]
+modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 position = Vector2(2208, 2016)
 prop_path = "res://src/Prop/BreakBlock.tscn"
 properties = {
+"break_on_fall": [false, 1, ""],
 "crush_enemies": [true, 1, ""],
 "crush_players": [false, 1, ""],
 "do_bubble": [false, 1, ""],
 "editor_hidden": [false, 1, ""],
+"has_gravity": [true, 1, ""],
 "id": [&"BreakBlock97", 4, ""]
 }
 
 [node name="BreakBlock97" parent="Spawns" unique_id=1116007347 instance=ExtResource("15_lfp3o")]
+modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 position = Vector2(2208, 2000)
 prop_path = "res://src/Prop/BreakBlock.tscn"
 properties = {
+"break_on_fall": [false, 1, ""],
 "crush_enemies": [true, 1, ""],
 "crush_players": [false, 1, ""],
 "do_bubble": [false, 1, ""],
 "editor_hidden": [false, 1, ""],
+"has_gravity": [true, 1, ""],
 "id": [&"BreakBlock98", 4, ""]
 }
 
 [node name="BreakBlock98" parent="Spawns" unique_id=1139693107 instance=ExtResource("15_lfp3o")]
+modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 position = Vector2(2208, 1984)
 prop_path = "res://src/Prop/BreakBlock.tscn"
 properties = {
+"break_on_fall": [false, 1, ""],
 "crush_enemies": [true, 1, ""],
 "crush_players": [false, 1, ""],
 "do_bubble": [false, 1, ""],
 "editor_hidden": [false, 1, ""],
+"has_gravity": [true, 1, ""],
 "id": [&"BreakBlock99", 4, ""]
 }
 
 [node name="BreakBlock99" parent="Spawns" unique_id=514774900 instance=ExtResource("15_lfp3o")]
+modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 position = Vector2(2144, 2224)
 prop_path = "res://src/Prop/BreakBlock.tscn"
 properties = {
+"break_on_fall": [false, 1, ""],
 "crush_enemies": [true, 1, ""],
 "crush_players": [false, 1, ""],
 "do_bubble": [false, 1, ""],
 "editor_hidden": [false, 1, ""],
+"has_gravity": [true, 1, ""],
 "id": [&"BreakBlock100", 4, ""]
 }
 
 [node name="BreakBlock100" parent="Spawns" unique_id=2096836796 instance=ExtResource("15_lfp3o")]
+modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 position = Vector2(2160, 2224)
 prop_path = "res://src/Prop/BreakBlock.tscn"
 properties = {
+"break_on_fall": [false, 1, ""],
 "crush_enemies": [true, 1, ""],
 "crush_players": [false, 1, ""],
 "do_bubble": [false, 1, ""],
 "editor_hidden": [false, 1, ""],
+"has_gravity": [true, 1, ""],
 "id": [&"BreakBlock101", 4, ""]
 }
 
 [node name="BreakBlock101" parent="Spawns" unique_id=594655265 instance=ExtResource("15_lfp3o")]
+modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 position = Vector2(2176, 2224)
 prop_path = "res://src/Prop/BreakBlock.tscn"
 properties = {
+"break_on_fall": [false, 1, ""],
 "crush_enemies": [true, 1, ""],
 "crush_players": [false, 1, ""],
 "do_bubble": [false, 1, ""],
 "editor_hidden": [false, 1, ""],
+"has_gravity": [true, 1, ""],
 "id": [&"BreakBlock102", 4, ""]
 }
 
 [node name="BreakBlock102" parent="Spawns" unique_id=49100706 instance=ExtResource("15_lfp3o")]
+modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 position = Vector2(2176, 2208)
 prop_path = "res://src/Prop/BreakBlock.tscn"
 properties = {
+"break_on_fall": [false, 1, ""],
 "crush_enemies": [true, 1, ""],
 "crush_players": [false, 1, ""],
 "do_bubble": [false, 1, ""],
 "editor_hidden": [false, 1, ""],
+"has_gravity": [true, 1, ""],
 "id": [&"BreakBlock103", 4, ""]
 }
 
 [node name="BreakBlock103" parent="Spawns" unique_id=329030541 instance=ExtResource("15_lfp3o")]
+modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 position = Vector2(2160, 2208)
 prop_path = "res://src/Prop/BreakBlock.tscn"
 properties = {
+"break_on_fall": [false, 1, ""],
 "crush_enemies": [true, 1, ""],
 "crush_players": [false, 1, ""],
 "do_bubble": [false, 1, ""],
 "editor_hidden": [false, 1, ""],
+"has_gravity": [true, 1, ""],
 "id": [&"BreakBlock104", 4, ""]
 }
 
 [node name="BreakBlock104" parent="Spawns" unique_id=490174914 instance=ExtResource("15_lfp3o")]
+modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 position = Vector2(2160, 2192)
 prop_path = "res://src/Prop/BreakBlock.tscn"
 properties = {
+"break_on_fall": [false, 1, ""],
 "crush_enemies": [true, 1, ""],
 "crush_players": [false, 1, ""],
 "do_bubble": [false, 1, ""],
 "editor_hidden": [false, 1, ""],
+"has_gravity": [true, 1, ""],
 "id": [&"BreakBlock105", 4, ""]
 }
 
 [node name="BreakBlock105" parent="Spawns" unique_id=1284263669 instance=ExtResource("15_lfp3o")]
+modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 position = Vector2(2176, 2192)
 prop_path = "res://src/Prop/BreakBlock.tscn"
 properties = {
+"break_on_fall": [false, 1, ""],
 "crush_enemies": [true, 1, ""],
 "crush_players": [false, 1, ""],
 "do_bubble": [false, 1, ""],
 "editor_hidden": [false, 1, ""],
+"has_gravity": [true, 1, ""],
 "id": [&"BreakBlock106", 4, ""]
 }
 
 [node name="BreakBlock106" parent="Spawns" unique_id=119310507 instance=ExtResource("15_lfp3o")]
+modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 position = Vector2(2160, 2176)
 prop_path = "res://src/Prop/BreakBlock.tscn"
 properties = {
+"break_on_fall": [false, 1, ""],
 "crush_enemies": [true, 1, ""],
 "crush_players": [false, 1, ""],
 "do_bubble": [false, 1, ""],
 "editor_hidden": [false, 1, ""],
+"has_gravity": [true, 1, ""],
 "id": [&"BreakBlock107", 4, ""]
 }
 
 [node name="BreakBlock107" parent="Spawns" unique_id=1858872067 instance=ExtResource("15_lfp3o")]
+modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 position = Vector2(2144, 2208)
 prop_path = "res://src/Prop/BreakBlock.tscn"
 properties = {
+"break_on_fall": [false, 1, ""],
 "crush_enemies": [true, 1, ""],
 "crush_players": [false, 1, ""],
 "do_bubble": [false, 1, ""],
 "editor_hidden": [false, 1, ""],
+"has_gravity": [true, 1, ""],
 "id": [&"BreakBlock108", 4, ""]
 }
 
 [node name="BreakBlock108" parent="Spawns" unique_id=2132453952 instance=ExtResource("15_lfp3o")]
+modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 position = Vector2(2144, 2192)
 prop_path = "res://src/Prop/BreakBlock.tscn"
 properties = {
+"break_on_fall": [false, 1, ""],
 "crush_enemies": [true, 1, ""],
 "crush_players": [false, 1, ""],
 "do_bubble": [false, 1, ""],
 "editor_hidden": [false, 1, ""],
+"has_gravity": [true, 1, ""],
 "id": [&"BreakBlock109", 4, ""]
 }
 
 [node name="BreakBlock109" parent="Spawns" unique_id=71102800 instance=ExtResource("15_lfp3o")]
+modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 position = Vector2(2760, 2096)
 prop_path = "res://src/Prop/BreakBlock.tscn"
 properties = {
+"break_on_fall": [false, 1, ""],
 "crush_enemies": [true, 1, ""],
 "crush_players": [false, 1, ""],
 "do_bubble": [false, 1, ""],
 "editor_hidden": [false, 1, ""],
+"has_gravity": [true, 1, ""],
 "id": [&"BreakBlock110", 4, ""]
 }
 
 [node name="BreakBlock110" parent="Spawns" unique_id=744328307 instance=ExtResource("15_lfp3o")]
+modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 position = Vector2(2760, 2080)
 prop_path = "res://src/Prop/BreakBlock.tscn"
 properties = {
+"break_on_fall": [false, 1, ""],
 "crush_enemies": [true, 1, ""],
 "crush_players": [false, 1, ""],
 "do_bubble": [false, 1, ""],
 "editor_hidden": [false, 1, ""],
+"has_gravity": [true, 1, ""],
 "id": [&"BreakBlock111", 4, ""]
 }
 
 [node name="BreakBlock111" parent="Spawns" unique_id=708112338 instance=ExtResource("15_lfp3o")]
+modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 position = Vector2(2776, 2080)
 prop_path = "res://src/Prop/BreakBlock.tscn"
 properties = {
+"break_on_fall": [false, 1, ""],
 "crush_enemies": [true, 1, ""],
 "crush_players": [false, 1, ""],
 "do_bubble": [false, 1, ""],
 "editor_hidden": [false, 1, ""],
+"has_gravity": [true, 1, ""],
 "id": [&"BreakBlock118", 4, ""]
 }
 
 [node name="BreakBlock112" parent="Spawns" unique_id=413105399 instance=ExtResource("15_lfp3o")]
+modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 position = Vector2(2776, 2096)
 prop_path = "res://src/Prop/BreakBlock.tscn"
 properties = {
+"break_on_fall": [false, 1, ""],
 "crush_enemies": [true, 1, ""],
 "crush_players": [false, 1, ""],
 "do_bubble": [false, 1, ""],
 "editor_hidden": [false, 1, ""],
+"has_gravity": [true, 1, ""],
 "id": [&"BreakBlock119", 4, ""]
 }
 
 [node name="BreakBlock113" parent="Spawns" unique_id=560089449 instance=ExtResource("15_lfp3o")]
+modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 position = Vector2(3408, 2064)
 prop_path = "res://src/Prop/BreakBlock.tscn"
 properties = {
+"break_on_fall": [false, 1, ""],
 "crush_enemies": [true, 1, ""],
 "crush_players": [false, 1, ""],
 "do_bubble": [false, 1, ""],
 "editor_hidden": [false, 1, ""],
+"has_gravity": [true, 1, ""],
 "id": [&"BreakBlock128", 4, ""]
 }
 
 [node name="BreakBlock114" parent="Spawns" unique_id=52066303 instance=ExtResource("15_lfp3o")]
+modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 position = Vector2(3416, 2048)
 prop_path = "res://src/Prop/BreakBlock.tscn"
 properties = {
+"break_on_fall": [false, 1, ""],
 "crush_enemies": [true, 1, ""],
 "crush_players": [false, 1, ""],
 "do_bubble": [false, 1, ""],
 "editor_hidden": [false, 1, ""],
+"has_gravity": [true, 1, ""],
 "id": [&"BreakBlock129", 4, ""]
 }
 
 [node name="BreakBlock115" parent="Spawns" unique_id=386095571 instance=ExtResource("15_lfp3o")]
+modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 position = Vector2(3408, 2032)
 prop_path = "res://src/Prop/BreakBlock.tscn"
 properties = {
+"break_on_fall": [false, 1, ""],
 "crush_enemies": [true, 1, ""],
 "crush_players": [false, 1, ""],
 "do_bubble": [false, 1, ""],
 "editor_hidden": [false, 1, ""],
+"has_gravity": [true, 1, ""],
 "id": [&"BreakBlock130", 4, ""]
 }
 
 [node name="BreakBlock116" parent="Spawns" unique_id=408925860 instance=ExtResource("15_lfp3o")]
+modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 position = Vector2(3392, 2032)
 prop_path = "res://src/Prop/BreakBlock.tscn"
 properties = {
+"break_on_fall": [false, 1, ""],
 "crush_enemies": [true, 1, ""],
 "crush_players": [false, 1, ""],
 "do_bubble": [false, 1, ""],
 "editor_hidden": [false, 1, ""],
+"has_gravity": [true, 1, ""],
 "id": [&"BreakBlock131", 4, ""]
 }
 
 [node name="BreakBlock117" parent="Spawns" unique_id=1356732213 instance=ExtResource("15_lfp3o")]
+modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 position = Vector2(3392, 2016)
 prop_path = "res://src/Prop/BreakBlock.tscn"
 properties = {
+"break_on_fall": [false, 1, ""],
 "crush_enemies": [true, 1, ""],
 "crush_players": [false, 1, ""],
 "do_bubble": [false, 1, ""],
 "editor_hidden": [false, 1, ""],
+"has_gravity": [true, 1, ""],
 "id": [&"BreakBlock132", 4, ""]
 }
 
 [node name="BreakBlock118" parent="Spawns" unique_id=903873230 instance=ExtResource("15_lfp3o")]
+modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 position = Vector2(3408, 2016)
 prop_path = "res://src/Prop/BreakBlock.tscn"
 properties = {
+"break_on_fall": [false, 1, ""],
 "crush_enemies": [true, 1, ""],
 "crush_players": [false, 1, ""],
 "do_bubble": [false, 1, ""],
 "editor_hidden": [false, 1, ""],
+"has_gravity": [true, 1, ""],
 "id": [&"BreakBlock133", 4, ""]
 }
 
 [node name="BreakBlock119" parent="Spawns" unique_id=77708859 instance=ExtResource("15_lfp3o")]
+modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 position = Vector2(3440, 2032)
 prop_path = "res://src/Prop/BreakBlock.tscn"
 properties = {
+"break_on_fall": [false, 1, ""],
 "crush_enemies": [true, 1, ""],
 "crush_players": [false, 1, ""],
 "do_bubble": [false, 1, ""],
 "editor_hidden": [false, 1, ""],
+"has_gravity": [true, 1, ""],
 "id": [&"BreakBlock134", 4, ""]
 }
 
 [node name="BreakBlock120" parent="Spawns" unique_id=1582467572 instance=ExtResource("15_lfp3o")]
+modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 position = Vector2(3440, 2016)
 prop_path = "res://src/Prop/BreakBlock.tscn"
 properties = {
+"break_on_fall": [false, 1, ""],
 "crush_enemies": [true, 1, ""],
 "crush_players": [false, 1, ""],
 "do_bubble": [false, 1, ""],
 "editor_hidden": [false, 1, ""],
+"has_gravity": [true, 1, ""],
 "id": [&"BreakBlock135", 4, ""]
 }
 
 [node name="BreakBlock121" parent="Spawns" unique_id=1940744892 instance=ExtResource("15_lfp3o")]
+modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 position = Vector2(3448, 2048)
 prop_path = "res://src/Prop/BreakBlock.tscn"
 properties = {
+"break_on_fall": [false, 1, ""],
 "crush_enemies": [true, 1, ""],
 "crush_players": [false, 1, ""],
 "do_bubble": [false, 1, ""],
 "editor_hidden": [false, 1, ""],
+"has_gravity": [true, 1, ""],
 "id": [&"BreakBlock136", 4, ""]
 }
 
 [node name="BreakBlock122" parent="Spawns" unique_id=1066662824 instance=ExtResource("15_lfp3o")]
+modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 position = Vector2(3400, 2000)
 prop_path = "res://src/Prop/BreakBlock.tscn"
 properties = {
+"break_on_fall": [false, 1, ""],
 "crush_enemies": [true, 1, ""],
 "crush_players": [false, 1, ""],
 "do_bubble": [false, 1, ""],
 "editor_hidden": [false, 1, ""],
+"has_gravity": [true, 1, ""],
 "id": [&"BreakBlock137", 4, ""]
 }
 
 [node name="BreakBlock123" parent="Spawns" unique_id=1665397808 instance=ExtResource("15_lfp3o")]
+modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 position = Vector2(3448, 2000)
 prop_path = "res://src/Prop/BreakBlock.tscn"
 properties = {
+"break_on_fall": [false, 1, ""],
 "crush_enemies": [true, 1, ""],
 "crush_players": [false, 1, ""],
 "do_bubble": [false, 1, ""],
 "editor_hidden": [false, 1, ""],
+"has_gravity": [true, 1, ""],
 "id": [&"BreakBlock138", 4, ""]
 }
 
 [node name="BreakBlock124" parent="Spawns" unique_id=1841297552 instance=ExtResource("15_lfp3o")]
+modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 position = Vector2(3416, 2000)
 prop_path = "res://src/Prop/BreakBlock.tscn"
 properties = {
+"break_on_fall": [false, 1, ""],
 "crush_enemies": [true, 1, ""],
 "crush_players": [false, 1, ""],
 "do_bubble": [false, 1, ""],
 "editor_hidden": [false, 1, ""],
+"has_gravity": [true, 1, ""],
 "id": [&"BreakBlock139", 4, ""]
 }
 
 [node name="BreakBlock125" parent="Spawns" unique_id=20922495 instance=ExtResource("15_lfp3o")]
+modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 position = Vector2(3432, 2000)
 prop_path = "res://src/Prop/BreakBlock.tscn"
 properties = {
+"break_on_fall": [false, 1, ""],
 "crush_enemies": [true, 1, ""],
 "crush_players": [false, 1, ""],
 "do_bubble": [false, 1, ""],
 "editor_hidden": [false, 1, ""],
+"has_gravity": [true, 1, ""],
 "id": [&"BreakBlock140", 4, ""]
 }
 
 [node name="BreakBlock126" parent="Spawns" unique_id=628049690 instance=ExtResource("15_lfp3o")]
+modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 position = Vector2(3440, 1984)
 prop_path = "res://src/Prop/BreakBlock.tscn"
 properties = {
+"break_on_fall": [false, 1, ""],
 "crush_enemies": [true, 1, ""],
 "crush_players": [false, 1, ""],
 "do_bubble": [false, 1, ""],
 "editor_hidden": [false, 1, ""],
+"has_gravity": [true, 1, ""],
 "id": [&"BreakBlock141", 4, ""]
 }
 
 [node name="BreakBlock127" parent="Spawns" unique_id=52141430 instance=ExtResource("15_lfp3o")]
+modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 position = Vector2(3456, 1984)
 prop_path = "res://src/Prop/BreakBlock.tscn"
 properties = {
+"break_on_fall": [false, 1, ""],
 "crush_enemies": [true, 1, ""],
 "crush_players": [false, 1, ""],
 "do_bubble": [false, 1, ""],
 "editor_hidden": [false, 1, ""],
+"has_gravity": [true, 1, ""],
 "id": [&"BreakBlock142", 4, ""]
 }
 
 [node name="BreakBlock128" parent="Spawns" unique_id=205145752 instance=ExtResource("15_lfp3o")]
+modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 position = Vector2(3464, 1968)
 prop_path = "res://src/Prop/BreakBlock.tscn"
 properties = {
+"break_on_fall": [false, 1, ""],
 "crush_enemies": [true, 1, ""],
 "crush_players": [false, 1, ""],
 "do_bubble": [false, 1, ""],
 "editor_hidden": [false, 1, ""],
+"has_gravity": [true, 1, ""],
 "id": [&"BreakBlock143", 4, ""]
 }
 
 [node name="BreakBlock129" parent="Spawns" unique_id=1911446183 instance=ExtResource("15_lfp3o")]
+modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 position = Vector2(2592, 1888)
 prop_path = "res://src/Prop/BreakBlock.tscn"
 properties = {
+"break_on_fall": [false, 1, ""],
 "crush_enemies": [true, 1, ""],
 "crush_players": [false, 1, ""],
 "do_bubble": [false, 1, ""],
 "editor_hidden": [false, 1, ""],
+"has_gravity": [true, 1, ""],
 "id": [&"BreakBlock136", 4, ""]
 }
 
 [node name="BreakBlock130" parent="Spawns" unique_id=1377062066 instance=ExtResource("15_lfp3o")]
+modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 position = Vector2(2568, 1872)
 prop_path = "res://src/Prop/BreakBlock.tscn"
 properties = {
+"break_on_fall": [false, 1, ""],
 "crush_enemies": [true, 1, ""],
 "crush_players": [false, 1, ""],
 "do_bubble": [false, 1, ""],
 "editor_hidden": [false, 1, ""],
+"has_gravity": [true, 1, ""],
 "id": [&"BreakBlock137", 4, ""]
 }
 
 [node name="BreakBlock131" parent="Spawns" unique_id=1942675093 instance=ExtResource("15_lfp3o")]
+modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 position = Vector2(2576, 1856)
 prop_path = "res://src/Prop/BreakBlock.tscn"
 properties = {
+"break_on_fall": [false, 1, ""],
 "crush_enemies": [true, 1, ""],
 "crush_players": [false, 1, ""],
 "do_bubble": [false, 1, ""],
 "editor_hidden": [false, 1, ""],
+"has_gravity": [true, 1, ""],
 "id": [&"BreakBlock138", 4, ""]
 }
 
 [node name="BreakBlock132" parent="Spawns" unique_id=747196455 instance=ExtResource("15_lfp3o")]
+modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 position = Vector2(2560, 1856)
 prop_path = "res://src/Prop/BreakBlock.tscn"
 properties = {
+"break_on_fall": [false, 1, ""],
 "crush_enemies": [true, 1, ""],
 "crush_players": [false, 1, ""],
 "do_bubble": [false, 1, ""],
 "editor_hidden": [false, 1, ""],
+"has_gravity": [true, 1, ""],
 "id": [&"BreakBlock139", 4, ""]
 }
 
 [node name="BreakBlock133" parent="Spawns" unique_id=1322151064 instance=ExtResource("15_lfp3o")]
+modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 position = Vector2(2608, 1856)
 prop_path = "res://src/Prop/BreakBlock.tscn"
 properties = {
+"break_on_fall": [false, 1, ""],
 "crush_enemies": [true, 1, ""],
 "crush_players": [false, 1, ""],
 "do_bubble": [false, 1, ""],
 "editor_hidden": [false, 1, ""],
+"has_gravity": [true, 1, ""],
 "id": [&"BreakBlock140", 4, ""]
 }
 
 [node name="BreakBlock134" parent="Spawns" unique_id=1909123952 instance=ExtResource("15_lfp3o")]
+modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 position = Vector2(2600, 1872)
 prop_path = "res://src/Prop/BreakBlock.tscn"
 properties = {
+"break_on_fall": [false, 1, ""],
 "crush_enemies": [true, 1, ""],
 "crush_players": [false, 1, ""],
 "do_bubble": [false, 1, ""],
 "editor_hidden": [false, 1, ""],
+"has_gravity": [true, 1, ""],
 "id": [&"BreakBlock141", 4, ""]
 }
 
 [node name="BreakBlock135" parent="Spawns" unique_id=1015864397 instance=ExtResource("15_lfp3o")]
+modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 position = Vector2(2624, 1856)
 prop_path = "res://src/Prop/BreakBlock.tscn"
 properties = {
+"break_on_fall": [false, 1, ""],
 "crush_enemies": [true, 1, ""],
 "crush_players": [false, 1, ""],
 "do_bubble": [false, 1, ""],
 "editor_hidden": [false, 1, ""],
+"has_gravity": [true, 1, ""],
 "id": [&"BreakBlock142", 4, ""]
 }
 
 [node name="BreakBlock136" parent="Spawns" unique_id=151916755 instance=ExtResource("15_lfp3o")]
+modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 position = Vector2(2608, 1888)
 prop_path = "res://src/Prop/BreakBlock.tscn"
 properties = {
+"break_on_fall": [false, 1, ""],
 "crush_enemies": [true, 1, ""],
 "crush_players": [false, 1, ""],
 "do_bubble": [false, 1, ""],
 "editor_hidden": [false, 1, ""],
+"has_gravity": [true, 1, ""],
 "id": [&"BreakBlock143", 4, ""]
 }
 
 [node name="BreakBlock137" parent="Spawns" unique_id=6761141 instance=ExtResource("15_lfp3o")]
+modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 position = Vector2(2616, 1872)
 prop_path = "res://src/Prop/BreakBlock.tscn"
 properties = {
+"break_on_fall": [false, 1, ""],
 "crush_enemies": [true, 1, ""],
 "crush_players": [false, 1, ""],
 "do_bubble": [false, 1, ""],
 "editor_hidden": [false, 1, ""],
+"has_gravity": [true, 1, ""],
 "id": [&"BreakBlock144", 4, ""]
 }
 
 [node name="BreakBlock138" parent="Spawns" unique_id=1425171504 instance=ExtResource("15_lfp3o")]
+modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 position = Vector2(2632, 1840)
 prop_path = "res://src/Prop/BreakBlock.tscn"
 properties = {
+"break_on_fall": [false, 1, ""],
 "crush_enemies": [true, 1, ""],
 "crush_players": [false, 1, ""],
 "do_bubble": [false, 1, ""],
 "editor_hidden": [false, 1, ""],
+"has_gravity": [true, 1, ""],
 "id": [&"BreakBlock145", 4, ""]
 }
 
 [node name="BreakBlock139" parent="Spawns" unique_id=2137708938 instance=ExtResource("15_lfp3o")]
+modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 position = Vector2(2616, 1840)
 prop_path = "res://src/Prop/BreakBlock.tscn"
 properties = {
+"break_on_fall": [false, 1, ""],
 "crush_enemies": [true, 1, ""],
 "crush_players": [false, 1, ""],
 "do_bubble": [false, 1, ""],
 "editor_hidden": [false, 1, ""],
+"has_gravity": [true, 1, ""],
 "id": [&"BreakBlock146", 4, ""]
 }
 
 [node name="BreakBlock140" parent="Spawns" unique_id=1355304049 instance=ExtResource("15_lfp3o")]
+modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 position = Vector2(2568, 1840)
 prop_path = "res://src/Prop/BreakBlock.tscn"
 properties = {
+"break_on_fall": [false, 1, ""],
 "crush_enemies": [true, 1, ""],
 "crush_players": [false, 1, ""],
 "do_bubble": [false, 1, ""],
 "editor_hidden": [false, 1, ""],
+"has_gravity": [true, 1, ""],
 "id": [&"BreakBlock147", 4, ""]
 }
 
 [node name="BreakBlock141" parent="Spawns" unique_id=881787084 instance=ExtResource("15_lfp3o")]
+modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 position = Vector2(2584, 1840)
 prop_path = "res://src/Prop/BreakBlock.tscn"
 properties = {
+"break_on_fall": [false, 1, ""],
 "crush_enemies": [true, 1, ""],
 "crush_players": [false, 1, ""],
 "do_bubble": [false, 1, ""],
 "editor_hidden": [false, 1, ""],
+"has_gravity": [true, 1, ""],
 "id": [&"BreakBlock148", 4, ""]
 }
 
 [node name="BreakBlock142" parent="Spawns" unique_id=1430421204 instance=ExtResource("15_lfp3o")]
+modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 position = Vector2(2552, 1840)
 prop_path = "res://src/Prop/BreakBlock.tscn"
 properties = {
+"break_on_fall": [false, 1, ""],
 "crush_enemies": [true, 1, ""],
 "crush_players": [false, 1, ""],
 "do_bubble": [false, 1, ""],
 "editor_hidden": [false, 1, ""],
+"has_gravity": [true, 1, ""],
 "id": [&"BreakBlock149", 4, ""]
 }
 
 [node name="BreakBlock143" parent="Spawns" unique_id=814494597 instance=ExtResource("15_lfp3o")]
+modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 position = Vector2(2544, 1824)
 prop_path = "res://src/Prop/BreakBlock.tscn"
 properties = {
+"break_on_fall": [false, 1, ""],
 "crush_enemies": [true, 1, ""],
 "crush_players": [false, 1, ""],
 "do_bubble": [false, 1, ""],
 "editor_hidden": [false, 1, ""],
+"has_gravity": [true, 1, ""],
 "id": [&"BreakBlock150", 4, ""]
 }
 
 [node name="BreakBlock144" parent="Spawns" unique_id=1394202732 instance=ExtResource("15_lfp3o")]
+modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 position = Vector2(2560, 1824)
 prop_path = "res://src/Prop/BreakBlock.tscn"
 properties = {
+"break_on_fall": [false, 1, ""],
 "crush_enemies": [true, 1, ""],
 "crush_players": [false, 1, ""],
 "do_bubble": [false, 1, ""],
 "editor_hidden": [false, 1, ""],
+"has_gravity": [true, 1, ""],
 "id": [&"BreakBlock151", 4, ""]
 }
 
 [node name="BreakBlock145" parent="Spawns" unique_id=212360071 instance=ExtResource("15_lfp3o")]
+modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 position = Vector2(2576, 1824)
 prop_path = "res://src/Prop/BreakBlock.tscn"
 properties = {
+"break_on_fall": [false, 1, ""],
 "crush_enemies": [true, 1, ""],
 "crush_players": [false, 1, ""],
 "do_bubble": [false, 1, ""],
 "editor_hidden": [false, 1, ""],
+"has_gravity": [true, 1, ""],
 "id": [&"BreakBlock152", 4, ""]
 }
 
 [node name="BreakBlock146" parent="Spawns" unique_id=1068380925 instance=ExtResource("15_lfp3o")]
+modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 position = Vector2(2592, 1824)
 prop_path = "res://src/Prop/BreakBlock.tscn"
 properties = {
+"break_on_fall": [false, 1, ""],
 "crush_enemies": [true, 1, ""],
 "crush_players": [false, 1, ""],
 "do_bubble": [false, 1, ""],
 "editor_hidden": [false, 1, ""],
+"has_gravity": [true, 1, ""],
 "id": [&"BreakBlock153", 4, ""]
 }
 
 [node name="Crusher120" parent="Spawns" unique_id=1380131670 instance=ExtResource("9_uly8o")]
+modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 position = Vector2(2600, 1912)
 actor_path = "res://src/Actor/Enemy/Crusher.tscn"
@@ -7452,6 +8100,7 @@ tag_name = "shape_define"
 value = Rect2(0, 0, 280, 152)
 
 [node name="HealthUpgrade" parent="Spawns" unique_id=1165805496 instance=ExtResource("15_lfp3o")]
+modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 position = Vector2(2704, 2096)
 prop_path = "res://src/Prop/HealthUpgrade.tscn"
@@ -7462,6 +8111,7 @@ properties = {
 }
 
 [node name="SaveDisk" parent="Spawns" unique_id=1143351042 instance=ExtResource("15_lfp3o")]
+modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 position = Vector2(2736, 2096)
 prop_path = "res://src/Prop/SaveDisk.tscn"
@@ -7472,6 +8122,7 @@ properties = {
 }
 
 [node name="PhysFan" parent="Spawns" unique_id=1479025217 instance=ExtResource("15_lfp3o")]
+modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 position = Vector2(2800, 2096)
 prop_path = "res://src/Prop/PhysFan.tscn"
@@ -7486,11 +8137,26 @@ properties = {
 [node name="WindVector" parent="Spawns/PhysFan" unique_id=1885235794 instance=ExtResource("17_4ie3j")]
 visibility_layer = 2
 position = Vector2(8, 8)
+direction = Vector2(-1, 8.742278e-08)
+snap_degrees = 90.0
+movement_locked = true
+
+[node name="@Area2D@3350" parent="Spawns/PhysFan" unique_id=920745619 instance=ExtResource("17_4ie3j")]
+visibility_layer = 2
+position = Vector2(8, 8)
+tag_name = "wind_dir"
 direction = Vector2(-1, -8.742278e-08)
 snap_degrees = 90.0
 movement_locked = true
 
+[node name="Distance" parent="Spawns/PhysFan" unique_id=1168409361 instance=ExtResource("11_1ycm6")]
+visibility_layer = 2
+position = Vector2(-264, 8)
+tag_name = "distance"
+lock_x = true
+
 [node name="Lilypad" parent="Spawns" unique_id=1570646544 instance=ExtResource("15_lfp3o")]
+modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 position = Vector2(2624, 2096)
 prop_path = "res://src/Prop/Lilypad.tscn"
@@ -7503,6 +8169,7 @@ properties = {
 }
 
 [node name="Fan" parent="Spawns" unique_id=563478987 instance=ExtResource("15_lfp3o")]
+modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 position = Vector2(2592, 2096)
 prop_path = "res://src/Prop/Fan.tscn"
@@ -7514,6 +8181,7 @@ properties = {
 }
 
 [node name="ChestItem" parent="Spawns" unique_id=1183909373 instance=ExtResource("15_lfp3o")]
+modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 position = Vector2(2560, 2096)
 prop_path = "res://src/Prop/ChestItem.tscn"
@@ -7525,6 +8193,7 @@ properties = {
 }
 
 [node name="Bucket" parent="Spawns" unique_id=1074928038 instance=ExtResource("15_lfp3o")]
+modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 position = Vector2(2896, 2096)
 prop_path = "res://src/Prop/Bucket.tscn"
@@ -7535,6 +8204,7 @@ properties = {
 }
 
 [node name="HealthRefill" parent="Spawns" unique_id=292367048 instance=ExtResource("15_lfp3o")]
+modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 position = Vector2(2912, 2096)
 prop_path = "res://src/Prop/HealthRefill.tscn"

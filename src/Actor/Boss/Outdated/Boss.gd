@@ -21,7 +21,7 @@ func _ready():
 #	connect("setup_ui", hud, "_on_boss_setup_ui")
 #	connect("health_updated", hud, "_on_boss_health_updated")
 
-func hit(damage, blood_direction):
+func hit(damage, blood_direction, hitbox):
 	#emit_signal("health_updated", hp)
 	$PosHurt.play()
 	hp -= damage

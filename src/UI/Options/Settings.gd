@@ -23,6 +23,7 @@ var default = {
 	"TooltipIconType": 0,
 	"PreferredControllerGUID": "",
 	"JumpOnHold": false,
+	"CameraPanSpeed": 1.5
 	}
 var after_ready = false #so we don't trigger a change when loading settings
 var ignore_display_mode = false #so we don't reset the display mode during the options opening mid-game
@@ -35,6 +36,7 @@ var ignore_display_mode = false #so we don't reset the display mode during the o
 @onready var mastervolume = get_node(mastervolume_path)
 @onready var sfxvolume = get_node(sfxvolume_path)
 @onready var musicvolume = get_node(musicvolume_path)
+@onready var camera_pan_speed: VBoxContainer = %CameraPanSpeed
 @onready var displaymode = get_node(displaymode_path)
 @onready var resolutionscale = get_node(resolutionscale_path)
 @onready var mouselock = get_node(mouselock_path)
@@ -110,6 +112,17 @@ func change_bus_volume(value, busname:String):
 		am.play("sound_test")
 		save_setting(busname + "Volume", value)
 
+func _on_camera_pan_speed_changed(value: float) -> void:
+	var camera := get_tree().root.get_camera_2d()
+	var converted_value = 1.0 / value
+	if "h_pan_time" in camera:
+		camera.h_pan_time = converted_value
+		camera.v_pan_time = converted_value
+	else:
+		push_warning("Failed to modify Camera Pan Speed: h_pan_speed is not found in camera!")
+	%CameraPanSpeed.get_node("Label").text = "Camera Pan Speed: %.1f" % (value)
+	if after_ready and !w.get_node("MenuLayer/Options").ishidden:
+		save_setting("CameraPanSpeed", value)
 
 func on_gunscreenshake_value_changed(value: float):
 	vs.gun_screen_shake = value
@@ -168,6 +181,14 @@ func load_settings():
 	print("loading settings")
 	var data = read_data()
 
+	var is_data_modified := false
+	for key in default.keys():
+		if not data.keys().has(key):
+			data[key] = default[key]
+			is_data_modified = true
+	if is_data_modified:
+		write_data(data)
+
 	mastervolume.get_node("Slider").value = data["MasterVolume"]
 	on_mastervolume_changed(data["MasterVolume"])
 	musicvolume.get_node("Slider").value = data["MusicVolume"]
@@ -180,14 +201,19 @@ func load_settings():
 	%OtherScreenShake.get_node("Slider").value = data["OtherScreenShake"]
 	on_otherscreenshake_value_changed(data["OtherScreenShake"])
 
+	camera_pan_speed.get_node("Slider").value = data["CameraPanSpeed"]
+	_on_camera_pan_speed_changed(data["CameraPanSpeed"])
+
 	displaymode.selected = data["DisplayMode"]
-	on_displaymode_changed(data["DisplayMode"])
+	if SaveSystem.first_time_loading_settings:
+		on_displaymode_changed(data["DisplayMode"])
 	#resolutionscale.selected = data["ResolutionScale"]
 	#on_resolutionscale_changed(data["ResolutionScale"])
 
 	mouselock.button_pressed = data["MouseLock"]
 	on_mouselock(data["MouseLock"])
 
+	SaveSystem.first_time_loading_settings = false
 	await get_tree().process_frame
 
 	if Input.get_connected_joypads().size() > 0:

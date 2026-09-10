@@ -1,15 +1,15 @@
-[gd_scene load_steps=3 format=3 uid="uid://htwosg6x78qv"]
+[gd_scene format=3 uid="uid://htwosg6x78qv"]
 
 [ext_resource type="Script" uid="uid://biqlm4sxmcc78" path="res://src/Trigger/Spikes.gd" id="1_hun72"]
 
 [sub_resource type="RectangleShape2D" id="1"]
 size = Vector2(8, 8)
 
-[node name="Spikes" type="Area2D" groups=["Triggers"]]
+[node name="Spikes" type="Area2D" unique_id=1659943882 groups=["Triggers"]]
 collision_layer = 0
 script = ExtResource("1_hun72")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1109376706]
 position = Vector2(4, 4)
 shape = SubResource("1")
 

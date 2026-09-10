@@ -15,12 +15,8 @@
 [ext_resource type="Texture2D" uid="uid://c7xr7xjmw36a7" path="res://assets/Actor/Vehicle/SushiFullSize.png" id="13_iyha2"]
 [ext_resource type="PackedScene" uid="uid://dhjqke0pgo21f" path="res://src/Editor/TitlePreview.tscn" id="14_iyha2"]
 
-[sub_resource type="Gradient" id="Gradient_iyha2"]
-interpolation_mode = 2
-offsets = PackedFloat32Array(0, 0.25, 0.5, 0.75, 1)
-colors = PackedColorArray(0.76862746, 0.42745098, 0.09411765, 1, 0.8352941, 0.9490196, 0.28235295, 1, 0.3647059, 0.68235296, 0.21176471, 1, 0.8352941, 0.9490196, 0.28235295, 1, 0.76862746, 0.42745098, 0.09411765, 1)
-metadata/_snap_enabled = true
-metadata/_snap_count = 12
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_iyha2"]
+normal = Vector2(-1, 0)
 
 [node name="WastesTesting" type="Node2D" unique_id=156549534]
 visibility_layer = 2

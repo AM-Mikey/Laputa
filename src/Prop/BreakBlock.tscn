@@ -38,7 +38,7 @@ shape = SubResource("1")
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=130698616]
 texture = ExtResource("2_0cau2")
 centered = false
-hframes = 3
+hframes = 5
 
 [node name="BreakArea" type="Area2D" parent="." unique_id=1617953084]
 collision_layer = 256

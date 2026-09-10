@@ -7,11 +7,18 @@ var broken = false
 var crush_targets = []
 var is_grounded = true
 
+@export var break_on_fall = false
+@export var has_gravity = true
 @export var crush_players = false
 @export var crush_enemies = true
 
 
 func setup(): #Reminder: no function called can use await
+	if !has_gravity:
+		$Sprite2D.frame = 3
+		base_gravity_scale = 0.0
+		water_gravity_scale = 0.0
+		gravity_scale = 0.0
 	w.emit_signal("finished_spawn_entities_step")
 
 func on_break(method = "cut"):
@@ -41,6 +48,8 @@ func _physics_process(_delta):
 			if !is_grounded:
 				is_grounded = true
 				am.play("block_thud", self)
+				if break_on_fall:
+					on_break()
 		else:
 			is_grounded = false
 	else:
@@ -61,12 +70,12 @@ func crush(type, target):
 		"player":
 			if crush_players:
 				f.pc().invincible = false
-				target.hit(999, Vector2.ZERO)
+				target.hit(999, Vector2.ZERO, $CrushDetector)
 			else:
 				on_break()
 		"enemy":
 			if crush_enemies:
-				target.hit(999, Vector2.ZERO)
+				target.hit(999, Vector2.ZERO, $CrushDetector)
 			else:
 				on_break()
 

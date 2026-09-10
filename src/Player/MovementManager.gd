@@ -79,7 +79,22 @@ func _physics_process(_delta):
 	do_ceiling_push_check()
 	pc.is_on_ssp = get_is_on_ssp()
 	current_state.state_process(_delta)
+	_apply_wind()
 
+
+func _apply_wind():
+	var strongest_by_dir := {}
+
+	for area in pc.wind_areas_inside:
+		var key: Vector2 = area.wind_dir
+		if not strongest_by_dir.has(key) or area.speed > strongest_by_dir[key].speed:
+			strongest_by_dir[key] = area
+
+	for strong_area in strongest_by_dir.values():
+		if pc.is_on_floor() && (strong_area.wind_dir == Vector2.DOWN || (strong_area.wind_dir == Vector2.UP && strong_area.speed <= 4.0)):
+			continue
+		#print(strongest_by_dir.values().size(), " strong wind : ", strong_area.wind_dir, " , ", strong_area.speed)
+		pc.velocity += strong_area.wind_dir * strong_area.speed
 
 func _input(event):
 	if not pc.disabled:

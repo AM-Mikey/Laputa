@@ -14,12 +14,12 @@ func _ready():
 
 func _physics_process(_delta):
 	for b in bodies_allow_down: #Allow down input
-		if not b.mm.current_state == b.mm.states["ladder"] and inp.can_act:
+		if inp.can_act and not b.mm.current_state in [b.mm.states["ladder"],b.mm.states["fly"]]:
 			if Input.is_action_just_pressed("look_down"):
 				b.mm.change_state("ladder")
 				b.position.x = position.x + 8
 	for b in active_bodies: #Allow up and down input
-		if not b.mm.current_state == b.mm.states["ladder"] and inp.can_act:
+		if inp.can_act and not b.mm.current_state in [b.mm.states["ladder"],b.mm.states["fly"]]:
 			if Input.is_action_just_pressed("look_up") or Input.is_action_just_pressed("look_down"):
 				b.mm.change_state("ladder")
 				b.position.x = position.x + 8

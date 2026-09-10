@@ -52,6 +52,7 @@ enum ActorTeamFilter {NONE, ENEMY, NPC}
 							actor.remove_child(ac)
 							ac.owner = null
 							add_child(ac)
+							ac.visible = true
 							ac.owner = w.current_level
 
 			actor.queue_free()
@@ -190,6 +191,15 @@ func draw_arrow(pos: Vector2, dir: Vector2, arrow_length: float, arrow_angle: fl
 func _ready():
 	if w.el.get_child_count() == 0: #not in editor
 		visible = false
+#name
+	var name_index = 0
+	for vua in get_parent().get_children():
+		if !vua.is_in_group("VUActors"): break
+		if vua == self: break
+		else: name_index +=1
+		if name_index == 0: name = "VUActor"
+		else: name = str("VUActor", name_index)
+
 	actor_path = actor_path
 
 func spawn() -> Node:
@@ -250,10 +260,10 @@ func get_if_actor_has_visual_utility(actor_waypoint, group) -> bool:
 ### SIGNALS
 
 func on_editor_select(): #when
-	modulate = Color(1,0,0,.75)
+	modulate = Color.RED
 
 func on_editor_deselect():
-	modulate = Color(1,1,1,.75)
+	modulate = Color(1,1,1)
 
 
 func _input_event(_viewport, event, _shape_idx): #selecting in editor

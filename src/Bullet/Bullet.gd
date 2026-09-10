@@ -25,7 +25,8 @@ var spread_degrees
 var knockback_strength := 0.0
 var origin = Vector2.ZERO
 var direction = Vector2.ZERO
-var instant_fizzle = true
+var instant_fizzle := true
+var already_fizzle := false
 
 var break_method = "cut"
 @export var is_water_affected := false
@@ -49,6 +50,7 @@ const TIMEOUT_TIME: float = 60.0
 const level_exit_safe_distance: float = 512.0
 
 
+
 func _ready():
 	print("doing ready")
 	setup_timeout()
@@ -65,9 +67,24 @@ func setup(): #for children
 func _physics_process(delta):
 	level_exit_check()
 	_on_physics_process(delta)
+	apply_wind()
 
 func _on_physics_process(_delta): #for children
 	pass
+
+func apply_wind():
+	if !is_wind_affected: return
+	var strongest_by_dir := {}
+
+	for area in wind_areas_inside:
+		var key: Vector2 = area.wind_dir
+		if not strongest_by_dir.has(key) or area.speed > strongest_by_dir[key].speed:
+			strongest_by_dir[key] = area
+
+	for strong_area in strongest_by_dir.values():
+		if is_on_floor() && (strong_area.wind_dir == Vector2.DOWN || (strong_area.wind_dir == Vector2.UP && strong_area.speed <= 4.0)):
+			continue
+		velocity += strong_area.wind_dir * strong_area.speed
 
 func setup_timeout():
 	await get_tree().create_timer(TIMEOUT_TIME, false, true).timeout
@@ -88,6 +105,7 @@ func on_break(_method):
 
 func do_fizzle(type: String):
 	#print("fizzling bullet")
+	if already_fizzle: return
 
 	var fizzle
 	match type:
@@ -101,8 +119,6 @@ func do_fizzle(type: String):
 		"bullet":
 			fizzle = FIZZLE_ARMOR.instantiate()
 
-
-	w.player_front.add_child(fizzle)
 	fizzle.position = $End.global_position if has_node("End") else global_position
 	if instant_fizzle and not is_enemy_bullet and f.pc():
 		var gun = f.pc().guns.get_child(0)
@@ -120,6 +136,8 @@ func do_fizzle(type: String):
 		var result = space_state.intersect_ray(query)
 		if result:
 			fizzle.position = result.position
+	w.player_front.add_child(fizzle)
+	already_fizzle = true
 	queue_free()
 
 func instant_fizzle_check():
@@ -156,6 +174,38 @@ func get_blood_dir(body) -> Vector2: #TODO this update changed knockback dir cal
 		out = Vector2.ZERO
 	return out
 
+### UTILITY ###
+func armor_check(body) -> bool:
+	if body.block_dir != Vector2.ZERO:
+		var block_dir = body.block_dir * body.scale
+		var valid_collision_shape = null
+		for child in body.get_children():
+			if child is CollisionShape2D and !child.disabled and child.shape is RectangleShape2D:
+				valid_collision_shape = child
+				break
+		if valid_collision_shape:
+			var collision_rect_center = valid_collision_shape.global_position
+			match block_dir:
+				Vector2.LEFT:
+					if global_position.x <= collision_rect_center.x:
+						body.blocked.emit(self, body)
+						return true
+				Vector2.RIGHT:
+					if global_position.x >= collision_rect_center.x:
+						body.blocked.emit(self, body)
+						return true
+				Vector2.DOWN:
+					if global_position.y >= collision_rect_center.y:
+						body.blocked.emit(self, body)
+						return true
+				Vector2.UP:
+					if global_position.y <= collision_rect_center.y:
+						body.blocked.emit(self, body)
+						return true
+		return false
+	else:
+		body.blocked.emit(self, body)
+		return true
 
 
 ### SIGNALS ###

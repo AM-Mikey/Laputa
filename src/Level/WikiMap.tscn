@@ -1,4 +1,4 @@
-[gd_scene format=4 uid="uid://bl8mc740w7akt"]
+[gd_scene format=4 uid="uid://b8hhj0r45tscy"]
 
 [ext_resource type="Script" uid="uid://ucr1waa8u8j1" path="res://src/Level/Level.gd" id="1_53evh"]
 [ext_resource type="PackedScene" uid="uid://deyh6xyl8c6tr" path="res://src/Background/LevelLimiter.tscn" id="2_72to3"]
@@ -10,6 +10,14 @@
 [ext_resource type="PackedScene" uid="uid://cpkdlvdxe3pdh" path="res://src/Editor/SpawnPoint.tscn" id="10_h4mej"]
 [ext_resource type="PackedScene" uid="uid://ciahlvrcyq5yt" path="res://src/Editor/Spawn/TriggerSpawn.tscn" id="11_1n8rj"]
 [ext_resource type="PackedScene" uid="uid://dim3av368jfya" path="res://src/Editor/VisualUtility/WaypointGlobal.tscn" id="11_2x06w"]
+[ext_resource type="PackedScene" uid="uid://beorrh1dm573t" path="res://src/Editor/Spawn/PropSpawn.tscn" id="13_516th"]
+
+[sub_resource type="Gradient" id="Gradient_c4qnx"]
+interpolation_mode = 2
+offsets = PackedFloat32Array(0, 0.25, 0.5, 0.75, 1)
+colors = PackedColorArray(0.76862746, 0.42745098, 1, 1, 0, 0.79607844, 0.93333334, 1, 0, 0.5294886, 0.89988226, 1, 0, 0.79607844, 0.93333334, 1, 0.76862746, 0.42745098, 1, 1)
+metadata/_snap_enabled = true
+metadata/_snap_count = 12
 
 [node name="WikiMap" type="Node2D" unique_id=734148647]
 visibility_layer = 2
@@ -18,6 +26,7 @@ level_name = "WikiMap"
 dialog_json = "res://src/Dialog/WikiMap.json"
 mission_level_update = "res://src/Mission/WikiMap.json"
 debug_main_mission_stage_name = "textbox_demo"
+controller_color_gradient = SubResource("Gradient_c4qnx")
 
 [node name="LevelLimiter" parent="." unique_id=1355825292 instance=ExtResource("2_72to3")]
 visibility_layer = 2
@@ -199,7 +208,7 @@ properties = {
 
 [node name="Fuuka" parent="Spawns" unique_id=503623607 instance=ExtResource("9_cowyq")]
 visibility_layer = 2
-position = Vector2(296, 200)
+position = Vector2(304, 208)
 actor_path = "res://src/Actor/NPC/Fuuka.tscn"
 properties = {
 "base_gravity": [300.0, 3, ""],
@@ -289,7 +298,7 @@ properties = {
 
 [node name="Lucille" parent="Spawns" unique_id=1476943517 instance=ExtResource("9_cowyq")]
 visibility_layer = 2
-position = Vector2(296, 144)
+position = Vector2(296, 160)
 actor_path = "res://src/Actor/NPC/Lucille.tscn"
 properties = {
 "base_gravity": [300.0, 3, ""],
@@ -434,7 +443,6 @@ properties = {
 size_is_default = false
 
 [node name="Sign" parent="Spawns" unique_id=788296705 instance=ExtResource("11_1n8rj")]
-modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 offset_left = 192.0
 offset_top = 272.0
@@ -452,7 +460,6 @@ But I can only print three!", 4, ""]
 size_is_default = false
 
 [node name="FlavorText" parent="Spawns" unique_id=690933644 instance=ExtResource("11_1n8rj")]
-modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
 offset_left = 288.0
 offset_top = 272.0
@@ -470,6 +477,70 @@ A forth?", 4, ""]
 }
 size_is_default = false
 
+[node name="Aikka1" parent="Spawns" unique_id=1959399737 instance=ExtResource("9_cowyq")]
+visibility_layer = 2
+position = Vector2(152, 288)
+actor_path = "res://src/Actor/NPC/Aikka.tscn"
+properties = {
+"base_gravity": [300.0, 3, ""],
+"do_bubbles": [true, 1, ""],
+"editor_hidden": [false, 1, ""],
+"id": [&"Aikka1", 4, ""],
+"speed": [Vector2(150, 350), 5, ""],
+"starting_state": ["idle", 4, ""],
+"voice_delay": [0.03, 3, ""],
+"voice_sfx": ["npc_voice_normal", 4, ""],
+"voiced": [true, 1, ""],
+"walk_speed": [Vector2(50, 50), 5, ""],
+"water_gravity": [150.0, 3, ""]
+}
+
+[node name="Aikka2" parent="Spawns" unique_id=483181597 instance=ExtResource("9_cowyq")]
+visibility_layer = 2
+position = Vector2(264, 288)
+actor_path = "res://src/Actor/NPC/Aikka.tscn"
+properties = {
+"base_gravity": [300.0, 3, ""],
+"do_bubbles": [true, 1, ""],
+"editor_hidden": [false, 1, ""],
+"id": [&"Aikka2", 4, ""],
+"speed": [Vector2(150, 350), 5, ""],
+"starting_state": ["idle", 4, ""],
+"voice_delay": [0.03, 3, ""],
+"voice_sfx": ["npc_voice_normal", 4, ""],
+"voiced": [true, 1, ""],
+"walk_speed": [Vector2(50, 50), 5, ""],
+"water_gravity": [150.0, 3, ""]
+}
+
+[node name="AmmoRefill" parent="Spawns" unique_id=1449282698 instance=ExtResource("13_516th")]
+visibility_layer = 2
+position = Vector2(136, 216)
+prop_path = "res://src/Prop/AmmoRefill.tscn"
+properties = {
+"do_bubble": [false, 1, ""],
+"editor_hidden": [null, 1, ""],
+"id": [&"AmmoRefill", 4, ""]
+}
+
+[node name="Basil1" parent="Spawns" unique_id=385201492 instance=ExtResource("9_cowyq")]
+visibility_layer = 2
+position = Vector2(264, 48)
+actor_path = "res://src/Actor/NPC/Basil.tscn"
+properties = {
+"base_gravity": [300.0, 3, ""],
+"do_bubbles": [true, 1, ""],
+"editor_hidden": [false, 1, ""],
+"id": [&"Basil1", 4, ""],
+"speed": [Vector2(150, 350), 5, ""],
+"starting_state": ["idle", 4, ""],
+"voice_delay": [0.03, 3, ""],
+"voice_sfx": ["npc_voice_normal", 4, ""],
+"voiced": [true, 1, ""],
+"walk_speed": [Vector2(5000, 50), 5, ""],
+"water_gravity": [150.0, 3, ""]
+}
+
 [node name="Waypoints" type="Node2D" parent="." unique_id=1416282546]
 visibility_layer = 2
 
@@ -478,17 +549,13 @@ visibility_layer = 2
 position = Vector2(56, -312)
 tag_name = "Camera0"
 
-[node name="@Area2D@3722" parent="Waypoints" unique_id=1028370382 instance=ExtResource("11_2x06w")]
+[node name="WaypointGlobal1" parent="Waypoints" unique_id=1035375471 instance=ExtResource("11_2x06w")]
 visibility_layer = 2
 position = Vector2(392, 280)
-owner_id = "Tabith"
 
-[node name="@Area2D@4098" parent="Waypoints" unique_id=541552762 instance=ExtResource("11_2x06w")]
-modulate = Color(1, 0, 0, 1)
+[node name="WaypointGlobal2" parent="Waypoints" unique_id=37205092 instance=ExtResource("11_2x06w")]
 visibility_layer = 2
-position = Vector2(488, 280)
-owner_id = "Tabith"
-index = 1
+position = Vector2(472, 280)
 
 [node name="VanishingPoint" parent="." unique_id=9884164 instance=ExtResource("9_if8wo")]
 visibility_layer = 2
