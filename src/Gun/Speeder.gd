@@ -23,13 +23,13 @@ func _set_level(val: int) -> void:
 		2:
 			bullet_scene = load("res://src/Bullet/Star2.tscn")
 			damage = 1
-			speed = 200
+			speed = 160
 			max_xp = 15
 			f_time = 1.5
 		3:
 			bullet_scene = load("res://src/Bullet/Star3.tscn")
 			damage = 2
-			speed = 240
+			speed = 200
 			max_xp = 20
 			f_time = 2.0
 
