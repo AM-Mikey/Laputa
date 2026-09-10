@@ -164,7 +164,7 @@ func prepare_bullet():
 
 		bullet.speed = Vector2(bullet_vel_x, bullet_vel_y).length()
 		bullet.direction = Vector2(bullet_vel_x, bullet_vel_y).normalized()
-		w.middle.add_child(bullet)
+		w.player_front.add_child(bullet)
 
 	elif difficulty == 3:
 		var bullet = HAIRBALL_RAIN.instantiate()
@@ -174,7 +174,7 @@ func prepare_bullet():
 		bullet.speed = fountain_force
 		var deviation_idx = curr_bullet_idx if rapid_fire_from_left else fountain_bullet_in_spread - 1 - curr_bullet_idx
 		bullet.direction = Vector2.UP.rotated(-fountain_spread / 2.0 + deviation_idx * fountain_spread / (fountain_bullet_in_spread - 1))
-		w.middle.add_child(bullet)
+		w.player_front.add_child(bullet)
 		curr_bullet_idx += 1
 
 	elif difficulty == 4:
@@ -183,7 +183,7 @@ func prepare_bullet():
 		bullet.position = global_position + bullet_origin
 		bullet.speed = fountain_force
 		bullet.direction = Vector2.UP.rotated(randf_range(-fountain_spread / 2.0, fountain_spread / 2.0))
-		w.middle.add_child(bullet)
+		w.player_front.add_child(bullet)
 		curr_bullet_idx += 1
 
 	am.play("enemy_shoot", self)

@@ -2,7 +2,7 @@ extends Area2D
 
 signal selected(spawn_point, type)
 
-@onready var world = get_tree().get_root().get_node("World")
+@onready var w = get_tree().get_root().get_node("World")
 
 func _ready():
 	visible = false
@@ -20,6 +20,6 @@ func on_pressed():
 	emit_signal("selected", self, "spawn_point")
 
 func _input_event(_viewport, event, _shape_idx): #selecting in editor
-	var editor = world.get_node("EditorLayer/Editor")
+	var editor = w.get_node("EditorLayer/Editor")
 	if event.is_action_pressed("editor_rmb"):
 		editor.inspector.on_selected(self, "spawn_point")

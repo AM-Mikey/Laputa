@@ -1,4 +1,8 @@
 extends Node
+
+var active_controller_index = 0
+var controller_asleep = false
+
 var buttonconfig := {
 	holdjumping = false,
 	buttons = {},
@@ -13,6 +17,9 @@ var Y_axis_shoot_deadzone:float = 0.25
 
 			#ETC
 var can_act:= true
+
+func _ready():
+	Input.joy_connection_changed.connect(_on_joypad_connection_changed)
 
 func rawstick() -> Vector2:
 	var outputX:float = Input.get_action_strength("move_right") - Input.get_action_strength("move_left")
@@ -51,6 +58,45 @@ var buffer:Array=[
 	["inventory",0,9000,9000],
 	]
 
+func _on_joypad_connection_changed(_device: int, _connected: bool): #for if controller is connected during
+	print("controllers changed")
+	if Input.get_connected_joypads().size() == 0:
+		active_controller_index = -1
+	else:
+		if active_controller_index in Input.get_connected_joypads():
+			set_active_controller_index(active_controller_index)
+		else:
+			set_active_controller_index(Input.get_connected_joypads()[0]) #lowest number
+
+func set_active_controller_index(index):
+	active_controller_index = index
+	set_input_map_index(active_controller_index)
+	for j in Input.get_connected_joypads():
+		if j == active_controller_index:
+			oup.set_controller_light_color(j, oup.active_controller_color)
+		else:
+			oup.set_controller_light_color(j, oup.inactive_controller_color)
+
+func set_input_map_index(index: int):
+	for action in InputMap.get_actions():
+		for event in InputMap.action_get_events(action):
+			if event is InputEventJoypadButton or event is InputEventJoypadMotion:
+				InputMap.action_erase_event(action, event)
+				event.device = index
+				InputMap.action_add_event(action, event)
+
+
+func _input(event: InputEvent): #for sleep
+	if event.device == active_controller_index && (event is InputEventJoypadButton || (event is InputEventJoypadMotion && event.axis in [4, 5])): #triggers
+		if controller_asleep:
+			controller_asleep = false
+			oup.do_level_gradient = true
+			oup.set_controller_light_color(active_controller_index, oup.active_controller_color)
+	elif event is InputEventKey:
+		if !controller_asleep:
+			controller_asleep = true
+			oup.do_level_gradient = false
+			oup.set_controller_light_color(active_controller_index, oup.asleep_controller_color)
 
 
 func base_inputheld(button:String) -> bool:

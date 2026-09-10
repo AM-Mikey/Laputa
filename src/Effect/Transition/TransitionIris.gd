@@ -2,7 +2,7 @@ extends Control
 
 var animation = "IrisContract"
 
-@onready var world = get_tree().get_root().get_node("World")
+@onready var w = get_tree().get_root().get_node("World")
 @onready var pc = f.pc()
 
 func _ready():

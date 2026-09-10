@@ -4,7 +4,7 @@ const RETURN_ICON = preload("res://assets/UI/Options/IconReturn.png")
 const LEFT_ARROW = preload("res://assets/UI/Options/ArrowLeft.png")
 const RIGHT_ARROW = preload("res://assets/UI/Options/ArrowRight.png")
 
-@onready var world = get_tree().get_root().get_node("World")
+@onready var w = get_tree().get_root().get_node("World")
 var ishidden = false
 var exit_time := 0.4
 var arrow_time := 0.4
@@ -19,10 +19,10 @@ func _ready():
 		display_arrow_icon()
 		tabs.get_node("Settings").ignore_display_mode = true
 		tabs.get_node("Settings").do_focus()
-		if world.has_node("MenuLayer/Title"):
-			world.get_node("MenuLayer/Title").visible = false
-		if world.has_node("MenuLayer/PauseMenu"):
-			world.get_node("MenuLayer/PauseMenu").visible = false
+		if w.has_node("MenuLayer/Title"):
+			w.get_node("MenuLayer/Title").visible = false
+		if w.has_node("MenuLayer/PauseMenu"):
+			w.get_node("MenuLayer/PauseMenu").visible = false
 		%TabContainer.set_tab_title(0, "Main")
 		%TabContainer.set_tab_title(1, "Keyboard")
 		%TabContainer.set_tab_title(2, "Controller")
@@ -80,12 +80,12 @@ func _input(event):
 func exit():
 	%ExitTimer.stop()
 	%ExitDecayTimer.stop()
-	if world.has_node("MenuLayer/PauseMenu"):
-		world.get_node("MenuLayer/PauseMenu").visible = true
-		world.get_node("MenuLayer/PauseMenu").do_focus()
-	if world.has_node("MenuLayer/Title"):
-		world.get_node("MenuLayer/Title").visible = true
-		world.get_node("MenuLayer/Title").do_focus()
+	if w.has_node("MenuLayer/PauseMenu"):
+		w.get_node("MenuLayer/PauseMenu").visible = true
+		w.get_node("MenuLayer/PauseMenu").do_focus()
+	if w.has_node("MenuLayer/Title"):
+		w.get_node("MenuLayer/Title").visible = true
+		w.get_node("MenuLayer/Title").do_focus()
 	queue_free()
 
 

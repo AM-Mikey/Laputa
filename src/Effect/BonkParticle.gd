@@ -8,6 +8,8 @@ func _ready():
 	$Left.one_shot = true
 	$Right.one_shot = true
 	am.play("pc_bonk")
+	oup.vibrate_impulse_light(0.1)
+
 	position.y -=16
 	$Left.direction = normal.rotated(deg_to_rad(90))
 	$Right.direction = normal.rotated(deg_to_rad(-90))

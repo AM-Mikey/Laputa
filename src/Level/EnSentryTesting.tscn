@@ -24,12 +24,19 @@
 [ext_resource type="Script" path="res://src/Editor/VisualUtility/VUVector.gd" id="20_acqtr"]
 [ext_resource type="Script" path="res://src/Editor/SpawnPoint.gd" id="22_hev3v"]
 
+[sub_resource type="Gradient" id="Gradient_6mq6a"]
+offsets = PackedFloat32Array(0, 0.25, 0.5, 0.75, 1)
+colors = PackedColorArray(1, 0.47843137, 0, 1, 0.07450981, 0.4, 0.52156866, 1, 0.84313726, 0, 0.30588236, 1, 0.07450981, 0.4, 0.52156866, 1, 1, 0.47843137, 0, 1)
+metadata/_snap_enabled = true
+metadata/_snap_count = 12
+
 [node name="EnSentryTesting" type="Node2D" unique_id=1952135705]
 visibility_layer = 2
 script = ExtResource("1_6q8mx")
 level_name = "EnSentryTesting"
 music = "train"
 dialog_json = "res://src/Dialog/Village.json"
+controller_color_gradient = SubResource("Gradient_6mq6a")
 
 [node name="LevelLimiter" type="MarginContainer" parent="." unique_id=1011068996 instance=ExtResource("2_jogqi")]
 visibility_layer = 2
@@ -65,7 +72,7 @@ z_index = 1
 
 [node name="FarBack" type="TileMapLayer" parent="TileMap" unique_id=270500202]
 visibility_layer = 2
-z_index = -1
+z_index = -2
 use_parent_material = true
 tile_set = ExtResource("5_6aw22")
 

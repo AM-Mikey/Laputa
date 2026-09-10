@@ -1,9 +1,13 @@
 [gd_scene format=3 uid="uid://bhva2utltbwbv"]
 
-[ext_resource type="Script" uid="uid://boojciwyuqitj" path="res://src/Bullet/BulletGreaseGun.gd" id="1"]
+[ext_resource type="Script" uid="uid://boojciwyuqitj" path="res://src/Bullet/Outdated/BulletGreaseGun.gd" id="1"]
 [ext_resource type="Texture2D" uid="uid://bd1h41uc6n18t" path="res://assets/Bullet/BulletPistol.png" id="2"]
 [ext_resource type="PackedScene" uid="uid://botclre3ffxc4" path="res://src/Bullet/PlayerCollisionDetector.tscn" id="3"]
 [ext_resource type="PackedScene" uid="uid://7hbenrfv6p3q" path="res://src/Utility/PhysicsLayerBody.tscn" id="3_1axo4"]
+
+[sub_resource type="Curve" id="Curve_1axo4"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.12126866, 1), 0.0, 0.0, 0, 0, Vector2(0.24067165, 0.6916796), 0.0, 0.0, 0, 0, Vector2(0.40485078, 0.6916796), 0.0, 0.0, 0, 0, Vector2(0.5317164, 0.30754274), 0.0, 0.0, 0, 0, Vector2(0.6511194, 0.35808706), 0.0, 0.0, 0, 0, Vector2(0.80037314, 0.07503891), 0.0, 0.0, 0, 0, Vector2(0.87873137, 0.15590978), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 9
 
 [sub_resource type="RectangleShape2D" id="1"]
 size = Vector2(16, 2)
@@ -12,6 +16,7 @@ size = Vector2(16, 2)
 collision_layer = 64
 collision_mask = 0
 script = ExtResource("1")
+camera_recoil_curve = SubResource("Curve_1axo4")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1795925163]
 position = Vector2(-8, 0)

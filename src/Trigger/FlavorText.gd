@@ -7,8 +7,6 @@ const DB = preload("res://src/Dialog/DialogBox.tscn")
 var reading = false
 var db
 
-@onready var world = get_tree().get_root().get_node("World")
-
 func _ready(): #Reminder: no function called can use await
 	trigger_type = "flavor_text"
 	w.emit_signal("finished_spawn_entities_step")

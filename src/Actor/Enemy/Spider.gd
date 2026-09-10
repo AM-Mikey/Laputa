@@ -32,7 +32,7 @@ func setup(): #Reminder: no function called can use await
 		#setup_a_star()
 
 func setup_a_star():
-	for l in w.front.get_children():
+	for l in w.farthest_front.get_children():
 		if l.is_in_group("AStarPathLines"):
 			l.queue_free()
 	a_star_line = A_STAR_PATH_LINE.instantiate()
@@ -73,7 +73,7 @@ func find_path():
 	a_star_line.points = path
 	current_point = 1
 	if debug: #warning this orphans the node
-		w.front.add_child(a_star_line)
+		w.farthest_front.add_child(a_star_line)
 
 
 ### STATES ###

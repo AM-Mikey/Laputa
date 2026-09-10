@@ -10,6 +10,7 @@ var idle_time: float
 var active_time: float
 
 func setup(): #Reminder: no function called can use await
+	self_knockback = true
 	hp = 1
 	damage_on_contact = 0
 	speed = Vector2(100, 100)

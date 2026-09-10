@@ -150,7 +150,7 @@ func _on_physics_process(delta):
 			am.play("enemy_slam", self, null, 0.8, 0.1)
 			var spark = SPARK.instantiate()
 			spark.position = global_position
-			w.front.add_child(spark)
+			w.middle_front.add_child(spark)
 			$TurnTimer.start()
 			if difficulty == 1:
 				gravity_velocity.x = -gravity_velocity.x
@@ -190,16 +190,16 @@ func _create_effect(vfx_name):
 				var land = LAND.instantiate()
 				land.global_position = last_collision.get_position()
 				land.rotation = last_collision.get_normal().rotated(PI / 2.0).angle()
-				w.front.add_child(land)
+				w.middle_front.add_child(land)
 			"Bonk":
 				var bonk = BONK.instantiate()
 				bonk.normal = last_collision.get_normal()
 				bonk.global_position = last_collision.get_position() + Vector2(0, 16)
-				w.front.add_child(bonk)
+				w.middle_front.add_child(bonk)
 			"Spark":
 				var spark = SPARK.instantiate()
 				spark.global_position = last_collision.get_position()
-				w.front.add_child(spark)
+				w.middle_front.add_child(spark)
 
 
 

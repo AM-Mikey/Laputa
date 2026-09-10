@@ -24,7 +24,7 @@ var rng = RandomNumberGenerator.new()
 
 @onready var gravity := water_gravity if is_in_water else base_gravity
 
-@onready var world = get_tree().get_root().get_node("World")
+@onready var w = get_tree().get_root().get_node("World")
 
 func set_is_in_water(val):
 	gravity = base_gravity if !val else water_gravity

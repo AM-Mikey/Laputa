@@ -32,9 +32,13 @@ var internal_version: String = get_internal_version()
 @onready var ml = $MenuLayer
 @onready var il = $InventoryLayer
 @onready var dll = $DialogLayer
-@onready var front = $Front
-@onready var middle = $Middle
-@onready var back = $Back
+
+@onready var farthest_back = $FarthestBack
+@onready var middle_back = $MiddleBack
+@onready var player_back = $PlayerBack
+@onready var player_front = $PlayerFront
+@onready var middle_front = $MiddleFront
+@onready var farthest_front = $FarthestFront
 
 
 
@@ -42,7 +46,7 @@ func _ready():
 	get_tree().get_root().connect("close_requested", Callable(self, "on_root_window_close_requested"))
 	self.visibility_layer = 2
 	self.child_entered_tree.connect(child_layer_set)
-	for node: Node in [front, middle, back]:
+	for node: Node in [farthest_back, middle_back, player_back, player_front, middle_front, farthest_front]:
 		if node is CanvasItem:
 			node.visibility_layer = 2
 		node.child_entered_tree.connect(child_layer_set)
@@ -354,12 +358,10 @@ func run_conversation_on_enter(level):
 			level.do_conversation_on_enter(false)
 
 func clear_spawn_layers():
-	for c in back.get_children():
-		c.free()
-	for c in middle.get_children():
-		c.free()
-	for c in front.get_children():
-		c.free()
+	pass
+	#for sl in [farthest_back, middle_back, player_back, player_front, middle_front, farthest_front]:
+		#for c in sl.get_children():
+			#c.free()
 
 func spawn_entities():
 	#TODO: Timing for setting allow_spawn (mission system) goes up here)
@@ -376,9 +378,11 @@ func spawn_entities():
 		a.spawn()
 		await finished_spawn_entities_step
 	print("all actors spawned")
-	for w in get_tree().get_nodes_in_group("WaypointGlobalSpawns"):
-		w.spawn()
-		await finished_spawn_entities_step
+	#var group = get_tree().get_nodes_in_group("WaypointGlobalSpawns")
+	for wgs in get_tree().get_nodes_in_group("WaypointGlobalSpawns"):
+		if wgs != null: #TODO i dont know why there are two null ones, is this a memory leak?
+			wgs.spawn()
+			await finished_spawn_entities_step
 	print("all waypoint globals spawned")
 	for p in get_tree().get_nodes_in_group("PropSpawns"):
 		p.spawn()

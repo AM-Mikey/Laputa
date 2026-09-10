@@ -12,6 +12,8 @@ size = Vector2(10, 10)
 collision_layer = 64
 collision_mask = 0
 script = ExtResource("2")
+camera_recoil_hit_distance = 1.0
+camera_recoil_wall_distance = 0.75
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1590268198]
 position = Vector2(-5, 0)

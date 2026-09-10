@@ -36,7 +36,6 @@ var next_conversation_index: int
 
 var camera_forgiveness = 16
 
-@onready var w = get_tree().get_root().get_node("World")
 
 func _ready(): #Reminder: no function called can use await
 	home = global_position

@@ -1,7 +1,7 @@
 extends Control
 
 var text: String
-@onready var world = get_tree().get_root().get_node("World")
+@onready var w = get_tree().get_root().get_node("World")
 
 func _ready():
 	$Label.text = text

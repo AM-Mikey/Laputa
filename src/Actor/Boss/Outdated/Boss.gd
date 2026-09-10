@@ -27,7 +27,7 @@ func hit(damage, blood_direction, hitbox):
 	hp -= damage
 	var blood = BLOOD.instantiate()
 	for l in get_tree().get_nodes_in_group("Levels"):
-		world.get_node("Front").add_child(blood)
+		w.middle_front.add_child(blood)
 	blood.global_position = global_position
 	blood.direction = blood_direction
 	#print(blood_direction)

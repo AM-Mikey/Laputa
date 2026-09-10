@@ -4,7 +4,7 @@ const GUNICON = preload("res://src/UI/HUD/GunIcon.tscn")
 const UI_BULLET_FLY = preload("res://src/UI/HUD/UIBulletFly.tscn")
 
 #onready var pc = f.pc()
-@onready var world = get_tree().get_root().get_node("World")
+@onready var w = get_tree().get_root().get_node("World")
 
 @export var gun: Node
 @export var ao: Node
@@ -250,8 +250,8 @@ func _on_hp_updated(hp: int, max_hp: int, cause: String) -> void:
 	else:
 		if hp < hp_lost.value:
 			if hp > 0:
-				world.get_node("HUDLayer/HUDAnimator").stop()
-				world.get_node("HUDLayer/HUDAnimator").play("Flash")
+				w.get_node("HUDLayer/HUDAnimator").stop()
+				w.get_node("HUDLayer/HUDAnimator").play("Flash")
 				var tween = get_tree().create_tween()
 				tween.tween_property(hp_lost, "value", hp, 0.4).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT).set_delay(0.4)
 		else: #increasing, just set it
@@ -364,7 +364,7 @@ func _on_money_updated(money):
 		printerr("ERROR: hud cannot display money value of: " + money)
 
 func _on_invincibility_ended():
-	world.get_node("HUDLayer/HUDAnimator").stop()
+	w.get_node("HUDLayer/HUDAnimator").stop()
 
 ### HELPER ###
 

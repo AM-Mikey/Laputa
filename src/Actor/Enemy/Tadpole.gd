@@ -37,6 +37,7 @@ var scatter_to_flock_cooldown_duration := 5.0
 var threats := []
 
 func setup(): #Reminder: no function called can use await
+	self_knockback = true
 	hp = 1
 	damage_on_contact = 0
 	reward = 0

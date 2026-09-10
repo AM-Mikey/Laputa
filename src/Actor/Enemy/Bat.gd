@@ -26,6 +26,7 @@ var bail_time = 6.0
 
 
 func setup(): #Reminder: no function called can use await
+	self_knockback = true
 	hp = 4
 	reward = 2
 	damage_on_contact = 2
@@ -74,7 +75,7 @@ func _on_physics_process(_delta):
 			waypoint.position = position + player_from_self #world pos of raycast
 			waypoint.owner_id = id
 			waypoint.index = -1
-			world.current_level.add_child(waypoint)
+			w.current_level.add_child(waypoint)
 			aggro_waypoint = waypoint
 			set_target(-1)
 
