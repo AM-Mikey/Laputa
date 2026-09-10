@@ -2,7 +2,7 @@ extends Control
 
 const LEVELBUTTON = preload("res://src/UI//LevelSelect/LevelButton.tscn")
 
-@onready var world = get_tree().get_root().get_node("World")
+@onready var w = get_tree().get_root().get_node("World")
 
 func _ready(): #TODO: update load and save to new file
 	vs.connect("scale_changed", Callable(self, "_resolution_scale_changed"))
@@ -37,10 +37,10 @@ func _ready(): #TODO: update load and save to new file
 ### SIGNALS ###
 
 func _on_Return_pressed():
-	if world.has_node("MenuLayer/PauseMenu"):
-		world.get_node("MenuLayer/PauseMenu").do_focus()
-	if world.has_node("MenuLayer/Title"):
-		world.get_node("MenuLayer/Title").do_focus()
+	if w.has_node("MenuLayer/PauseMenu"):
+		w.get_node("MenuLayer/PauseMenu").do_focus()
+	if w.has_node("MenuLayer/Title"):
+		w.get_node("MenuLayer/Title").do_focus()
 	queue_free()
 
 func _resolution_scale_changed(resolution_scale):

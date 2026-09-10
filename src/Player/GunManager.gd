@@ -6,7 +6,7 @@ const LEVELDOWN = preload("res://src/Effect/LevelDown.tscn")
 var gun_order = []
 var disabled = false #this is only because of a func in pc.ladder?
 
-@onready var world = get_tree().get_root().get_node("World")
+@onready var w = get_tree().get_root().get_node("World")
 @onready var pc = get_parent()
 
 #func _ready():
@@ -125,7 +125,7 @@ func level_up(debug):
 	get_parent().emit_signal("guns_updated", $Guns.get_children(), "level_up")
 
 	var effect = LEVELUP.instantiate()
-	world.get_node("Front").add_child(effect)
+	w.farthest_front.add_child(effect)
 	effect.position = pc.global_position
 
 
@@ -136,7 +136,7 @@ func level_down(debug):
 	get_parent().emit_signal("guns_updated", $Guns.get_children(), "level_down")
 
 	var effect = LEVELDOWN.instantiate()
-	world.get_node("Front").add_child(effect)
+	w.farthest_front.add_child(effect)
 	effect.position = pc.global_position
 
 

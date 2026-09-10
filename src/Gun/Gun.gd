@@ -81,7 +81,7 @@ func deactivate_manual():
 func deactivate_auto():
 	pass
 
-func spawn_bullet(bullet_pos, shoot_dir, layer = w.middle) -> Node:
+func spawn_bullet(bullet_pos, shoot_dir, layer = w.player_front) -> Node:
 	var bullet = bullet_scene.instantiate()
 
 	bullet.damage = damage
@@ -102,7 +102,7 @@ func spawn_bullet(bullet_pos, shoot_dir, layer = w.middle) -> Node:
 		var bullet_casing = BULLET_CASING_PHYSICAL.instantiate()
 		bullet_casing.direction = Vector2(shoot_dir.x * -1, -1)
 		bullet_casing.global_position = get_origin()
-		w.front.add_child(bullet_casing)
+		w.middle_front.add_child(bullet_casing)
 	return bullet
 
 

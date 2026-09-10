@@ -51,7 +51,7 @@ z_index = 1
 
 [node name="FarBack" type="TileMapLayer" parent="TileMap" unique_id=270500202]
 visibility_layer = 2
-z_index = -1
+z_index = -2
 use_parent_material = true
 tile_set = ExtResource("5_6aw22")
 

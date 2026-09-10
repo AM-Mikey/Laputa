@@ -320,7 +320,7 @@ func fire():
 		bullet.speed = Vector2(b_speed_x, b_speed_y).length()
 		bullet.direction = Vector2(b_speed_x, b_speed_y).normalized()
 
-	world.get_node("Middle").add_child(bullet)
+	w.player_front.add_child(bullet)
 	am.play("enemy_shoot", self)
 
 func update_animation():

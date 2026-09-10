@@ -120,7 +120,7 @@ func _on_Timer_timeout():
 		explosion.size = "Medium"
 	if $ExplosionDetector/CollisionShape2D.shape.radius == 64:
 		explosion.size = "Large"
-	get_tree().get_root().get_node("World/Front").add_child(explosion)
+	get_tree().get_root().get_node("World").middle_front.add_child(explosion)
 	var tween = get_tree().create_tween()
 	tween.tween_property($ExplosionDetector, "scale", Vector2.ONE, 0.1).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
 	await tween.finished

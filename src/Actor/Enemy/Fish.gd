@@ -72,7 +72,7 @@ func bonk():
 	bonk_effect.normal = slide_collision.get_normal()
 	bonk_effect.global_position.x = global_position.x
 	bonk_effect.global_position.y = global_position.y + 13.0
-	w.get_node("Front").add_child(bonk_effect)
+	w.middle_front.add_child(bonk_effect)
 	did_bonk = true
 
 func calc_velocity(dir, _do_gravity = true, _do_acceleration = true, _do_friction = true) -> Vector2:
@@ -232,7 +232,7 @@ func update_path_lines():
 	if Engine.is_editor_hint():
 		vline.add_point(Vector2.ZERO)
 		vline.add_point(Vector2(0, jump_height * -16))
-	elif debug and world:
+	elif debug and w:
 		vline.add_point(global_position)
 		vline.add_point(global_position + Vector2(0, jump_height * -16))
 	add_child(vline)
@@ -244,7 +244,7 @@ func update_path_lines():
 	#if Engine.is_editor_hint():
 		#hline.add_point(Vector2(x_min, -4))
 		#hline.add_point(Vector2(x_max, -4))
-	#elif debug and world:
+	#elif debug and w:
 		#hline.add_point(global_position + Vector2(x_min, -4))
 		#hline.add_point(global_position + Vector2(x_max, -4))
 	add_child(hline)

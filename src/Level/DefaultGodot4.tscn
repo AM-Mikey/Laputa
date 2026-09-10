@@ -1,28 +1,19 @@
-[gd_scene format=4]
+[gd_scene format=4 uid="uid://cusvpkphoavq1"]
 
-[ext_resource type="Script" path="res://src/Level/Level.gd" id="1_4uhn8"]
-[ext_resource type="TileSet" path="res://src/Tile/Debug.tres" id="2_s4ctt"]
-[ext_resource type="Resource" path="res://src/Background/TiledPlains.tres" id="3_abgb0"]
-[ext_resource type="PackedScene" path="res://src/Background/LevelLimiter.tscn" id="3_t226a"]
-[ext_resource type="Script" path="res://src/Background/LevelLimiter.gd" id="3_wcveo"]
-[ext_resource type="PackedScene" path="res://src/Editor/SpawnPoint.tscn" id="5_sjslv"]
-[ext_resource type="Texture2D" path="res://assets/Background/TiledPlainsColor.png" id="5_v7nqo"]
-[ext_resource type="PackedScene" path="res://src/Editor/Spawn/ActorSpawn.tscn" id="6_dcw0l"]
-[ext_resource type="PackedScene" path="res://src/Editor/VanishingPoint.tscn" id="7_mlr58"]
-[ext_resource type="PackedScene" path="res://src/Editor/Spawn/TriggerSpawn.tscn" id="7_v7nqo"]
-[ext_resource type="Script" path="res://src/Editor/Spawn/ActorSpawn.gd" id="8_hahi5"]
-[ext_resource type="Script" path="res://src/Editor/Spawn/TriggerSpawn.gd" id="10_tk244"]
-[ext_resource type="PackedScene" path="res://src/Editor/VisualUtility/VUVector.tscn" id="11_ug36o"]
-[ext_resource type="Script" path="res://src/Editor/Spawn/PropSpawn.gd" id="12_k26mr"]
-[ext_resource type="Script" path="res://src/Editor/VisualUtility/VUVector.gd" id="14_7v6gq"]
-[ext_resource type="PackedScene" path="res://src/Editor/TitlePreview.tscn" id="14_iuj41"]
-[ext_resource type="PackedScene" path="res://src/Editor/VisualUtility/VURect.tscn" id="15_7v6gq"]
-[ext_resource type="PackedScene" path="res://src/Editor/Spawn/PropSpawn.tscn" id="15_tk244"]
-[ext_resource type="Script" path="res://src/Editor/VisualUtility/VURect.gd" id="16_ah4rl"]
-[ext_resource type="PackedScene" path="res://src/Editor/VisualUtility/WaypointLocal.tscn" id="17_rnumf"]
-[ext_resource type="Script" path="res://src/Editor/VisualUtility/WaypointLocal.gd" id="18_rnumf"]
-[ext_resource type="Script" path="res://src/Editor/VanishingPoint.gd" id="20_r87vw"]
-[ext_resource type="Script" path="res://src/Editor/SpawnPoint.gd" id="22_bq2j0"]
+[ext_resource type="Script" uid="uid://ucr1waa8u8j1" path="res://src/Level/Level.gd" id="1_4uhn8"]
+[ext_resource type="TileSet" uid="uid://dct5q86qhnom8" path="res://src/Tile/Debug.tres" id="2_s4ctt"]
+[ext_resource type="Resource" uid="uid://551crugmnes0" path="res://src/Background/TiledPlains.tres" id="3_abgb0"]
+[ext_resource type="PackedScene" uid="uid://deyh6xyl8c6tr" path="res://src/Background/LevelLimiter.tscn" id="3_t226a"]
+[ext_resource type="PackedScene" uid="uid://cpkdlvdxe3pdh" path="res://src/Editor/SpawnPoint.tscn" id="5_sjslv"]
+[ext_resource type="Texture2D" uid="uid://bogxmmxvagqmt" path="res://assets/Background/TiledPlainsColor.png" id="5_v7nqo"]
+[ext_resource type="PackedScene" uid="uid://cs5m8mi2rih5f" path="res://src/Editor/Spawn/ActorSpawn.tscn" id="6_dcw0l"]
+[ext_resource type="PackedScene" uid="uid://dovj8uq00xato" path="res://src/Editor/VanishingPoint.tscn" id="7_mlr58"]
+[ext_resource type="PackedScene" uid="uid://ciahlvrcyq5yt" path="res://src/Editor/Spawn/TriggerSpawn.tscn" id="7_v7nqo"]
+[ext_resource type="PackedScene" uid="uid://bwp6sqdlvfo84" path="res://src/Editor/VisualUtility/VUVector.tscn" id="11_ug36o"]
+[ext_resource type="PackedScene" uid="uid://dhjqke0pgo21f" path="res://src/Editor/TitlePreview.tscn" id="14_iuj41"]
+[ext_resource type="PackedScene" uid="uid://b0hildwypv8q5" path="res://src/Editor/VisualUtility/VURect.tscn" id="15_7v6gq"]
+[ext_resource type="PackedScene" uid="uid://beorrh1dm573t" path="res://src/Editor/Spawn/PropSpawn.tscn" id="15_tk244"]
+[ext_resource type="PackedScene" uid="uid://cyg86p7wau0n7" path="res://src/Editor/VisualUtility/WaypointLocal.tscn" id="17_rnumf"]
 
 [node name="DefaultGodot4" type="Node2D" unique_id=1165197377]
 visibility_layer = 2
@@ -31,14 +22,12 @@ level_name = "DefaultGodot4"
 music = "train"
 dialog_json = "res://src/Dialog/Village.json"
 
-[node name="LevelLimiter" type="MarginContainer" parent="." unique_id=10937438 instance=ExtResource("3_t226a")]
+[node name="LevelLimiter" parent="." unique_id=10937438 instance=ExtResource("3_t226a")]
 visibility_layer = 2
 offset_left = 1632.0
 offset_top = 1744.0
 offset_right = 2976.0
 offset_bottom = 2288.0
-mouse_filter = 2
-script = ExtResource("3_wcveo")
 background_resource = ExtResource("3_abgb0")
 texture = ExtResource("5_v7nqo")
 layers = 5
@@ -64,7 +53,7 @@ z_index = 1
 
 [node name="FarBack" type="TileMapLayer" parent="TileMap" unique_id=1394156717]
 visibility_layer = 2
-z_index = -1
+z_index = -2
 use_parent_material = true
 tile_map_data = PackedByteArray("AAB7AHYAAAAAAAAAAAB7AHcAAAAAAAAAAAB8AHcAAAAAAAAAAAB9AHcAAAAAAAAAAAB7AHgAAAAAAAAAAAB8AHgAAAAAAAAAAAB9AHgAAAAAAAAAAAB7AHkAAAAAAAAAAAB8AHkAAAAAAAAAAAB9AHkAAAAAAAAAAAB7AHoAAAAAAAAAAAB8AHoAAAAAAAAAAAB9AHoAAAAAAAAAAAB7AHsAAAAAAAAAAAB8AHsAAAAAAAAAAAB9AHsAAAAAAAAAAAB6AHwAAAAAAAAAAAB7AHwAAAAAAAAAAAB8AHwAAAAAAAAAAAB9AHwAAAAAAAAAAAA=")
 tile_set = ExtResource("2_s4ctt")
@@ -103,14 +92,9 @@ visibility_layer = 2
 [node name="Spawns" type="Node2D" parent="." unique_id=993935856]
 visibility_layer = 2
 
-[node name="Stalagtite" type="Area2D" parent="Spawns" unique_id=1099828600 groups=["ActorSpawns", "Entities"] instance=ExtResource("6_dcw0l")]
-modulate = Color(1, 1, 1, 0.75)
+[node name="Stalagtite" parent="Spawns" unique_id=1099828600 instance=ExtResource("6_dcw0l")]
 visibility_layer = 2
-z_index = 999
 position = Vector2(2216, 1984)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("8_hahi5")
 actor_path = "res://src/Actor/Enemy/Stalagtite.tscn"
 properties = {
 "base_gravity": [300.0, 3, ""],
@@ -123,14 +107,9 @@ properties = {
 "water_gravity": [150.0, 3, ""]
 }
 
-[node name="Stalagtite1" type="Area2D" parent="Spawns" unique_id=135404477 groups=["ActorSpawns", "Entities"] instance=ExtResource("6_dcw0l")]
-modulate = Color(1, 1, 1, 0.75)
+[node name="Stalagtite1" parent="Spawns" unique_id=135404477 instance=ExtResource("6_dcw0l")]
 visibility_layer = 2
-z_index = 999
 position = Vector2(2248, 1984)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("8_hahi5")
 actor_path = "res://src/Actor/Enemy/Stalagtite.tscn"
 properties = {
 "base_gravity": [300.0, 3, ""],
@@ -143,14 +122,9 @@ properties = {
 "water_gravity": [150.0, 3, ""]
 }
 
-[node name="Stalagtite2" type="Area2D" parent="Spawns" unique_id=435739753 groups=["ActorSpawns", "Entities"] instance=ExtResource("6_dcw0l")]
-modulate = Color(1, 1, 1, 0.75)
+[node name="Stalagtite2" parent="Spawns" unique_id=435739753 instance=ExtResource("6_dcw0l")]
 visibility_layer = 2
-z_index = 999
 position = Vector2(2184, 1984)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("8_hahi5")
 actor_path = "res://src/Actor/Enemy/Stalagtite.tscn"
 properties = {
 "base_gravity": [300.0, 3, ""],
@@ -163,14 +137,9 @@ properties = {
 "water_gravity": [150.0, 3, ""]
 }
 
-[node name="Sphagnum" type="Area2D" parent="Spawns" unique_id=2134574927 groups=["ActorSpawns", "Entities"] instance=ExtResource("6_dcw0l")]
-modulate = Color(1, 1, 1, 0.75)
+[node name="Sphagnum" parent="Spawns" unique_id=2134574927 instance=ExtResource("6_dcw0l")]
 visibility_layer = 2
-z_index = 999
 position = Vector2(1864, 1984)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("8_hahi5")
 actor_path = "res://src/Actor/Enemy/Sphagnum.tscn"
 properties = {
 "base_gravity": [300.0, 3, ""],
@@ -182,14 +151,9 @@ properties = {
 "water_gravity": [150.0, 3, ""]
 }
 
-[node name="Stalagtite3" type="Area2D" parent="Spawns" unique_id=2139553996 groups=["ActorSpawns", "Entities"] instance=ExtResource("6_dcw0l")]
-modulate = Color(1, 1, 1, 0.75)
+[node name="Stalagtite3" parent="Spawns" unique_id=2139553996 instance=ExtResource("6_dcw0l")]
 visibility_layer = 2
-z_index = 999
 position = Vector2(2168, 1928)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("8_hahi5")
 actor_path = "res://src/Actor/Enemy/Stalagtite.tscn"
 properties = {
 "base_gravity": [300.0, 3, ""],
@@ -202,14 +166,9 @@ properties = {
 "water_gravity": [150.0, 3, ""]
 }
 
-[node name="Climber" type="Area2D" parent="Spawns" unique_id=444396003 groups=["ActorSpawns", "Entities"] instance=ExtResource("6_dcw0l")]
-modulate = Color(1, 1, 1, 0.75)
+[node name="Climber" parent="Spawns" unique_id=444396003 instance=ExtResource("6_dcw0l")]
 visibility_layer = 2
-z_index = 999
 position = Vector2(2048, 1928)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("8_hahi5")
 actor_path = "res://src/Actor/Enemy/Climber.tscn"
 properties = {
 "arm_angle_speed": [0.01, 3, ""],
@@ -227,17 +186,13 @@ properties = {
 "water_gravity": [150.0, 3, ""]
 }
 
-[node name="LoadZone" type="MarginContainer" parent="Spawns" unique_id=782260727 groups=["TriggerSpawns"] instance=ExtResource("7_v7nqo")]
+[node name="LoadZone" parent="Spawns" unique_id=782260727 instance=ExtResource("7_v7nqo")]
 modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
-z_index = 999
-custom_minimum_size = Vector2(8, 8)
 offset_left = 1632.0
 offset_top = 1728.0
 offset_right = 1792.0
 offset_bottom = 1744.0
-mouse_filter = 2
-script = ExtResource("10_tk244")
 trigger_path = "res://src/Trigger/LoadZone.tscn"
 properties = {
 "color": [Color(0, 0.4, 0, 1), 20, ""],
@@ -249,17 +204,13 @@ properties = {
 }
 size_is_default = false
 
-[node name="LoadZone1" type="MarginContainer" parent="Spawns" unique_id=2018169658 groups=["TriggerSpawns"] instance=ExtResource("7_v7nqo")]
+[node name="LoadZone1" parent="Spawns" unique_id=2018169658 instance=ExtResource("7_v7nqo")]
 modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
-z_index = 999
-custom_minimum_size = Vector2(8, 8)
 offset_left = 1616.0
 offset_top = 1840.0
 offset_right = 1632.0
 offset_bottom = 2032.0
-mouse_filter = 2
-script = ExtResource("10_tk244")
 trigger_path = "res://src/Trigger/LoadZone.tscn"
 properties = {
 "color": [Color(0, 0.4, 0, 1), 20, ""],
@@ -271,17 +222,13 @@ properties = {
 }
 size_is_default = false
 
-[node name="Spikes" type="MarginContainer" parent="Spawns" unique_id=206481548 groups=["TriggerSpawns"] instance=ExtResource("7_v7nqo")]
+[node name="Spikes" parent="Spawns" unique_id=206481548 instance=ExtResource("7_v7nqo")]
 modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
-z_index = 999
-custom_minimum_size = Vector2(8, 8)
 offset_left = 1680.0
 offset_top = 2104.0
 offset_right = 1744.0
 offset_bottom = 2112.0
-mouse_filter = 2
-script = ExtResource("10_tk244")
 trigger_path = "res://src/Trigger/Spikes.tscn"
 properties = {
 "color": [Color(1, 0, 0, 1), 20, ""],
@@ -290,17 +237,13 @@ properties = {
 }
 size_is_default = false
 
-[node name="Water" type="MarginContainer" parent="Spawns" unique_id=2131724566 groups=["TriggerSpawns"] instance=ExtResource("7_v7nqo")]
+[node name="Water" parent="Spawns" unique_id=2131724566 instance=ExtResource("7_v7nqo")]
 modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
-z_index = 999
-custom_minimum_size = Vector2(8, 8)
 offset_left = 1648.0
 offset_top = 2176.0
 offset_right = 1776.0
 offset_bottom = 2272.0
-mouse_filter = 2
-script = ExtResource("10_tk244")
 trigger_path = "res://src/Trigger/Water.tscn"
 properties = {
 "color": [Color(0, 0, 0.701961, 1), 20, ""],
@@ -310,17 +253,13 @@ properties = {
 }
 size_is_default = false
 
-[node name="Ladder" type="MarginContainer" parent="Spawns" unique_id=144011345 groups=["TriggerSpawns"] instance=ExtResource("7_v7nqo")]
+[node name="Ladder" parent="Spawns" unique_id=144011345 instance=ExtResource("7_v7nqo")]
 modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
-z_index = 999
-custom_minimum_size = Vector2(8, 8)
 offset_left = 2224.0
 offset_top = 2096.0
 offset_right = 2240.0
 offset_bottom = 2192.0
-mouse_filter = 2
-script = ExtResource("10_tk244")
 trigger_path = "res://src/Trigger/Ladder.tscn"
 properties = {
 "color": [Color(1, 0.494118, 0, 1), 20, ""],
@@ -329,17 +268,13 @@ properties = {
 }
 size_is_default = false
 
-[node name="Spikes1" type="MarginContainer" parent="Spawns" unique_id=118112934 groups=["TriggerSpawns"] instance=ExtResource("7_v7nqo")]
+[node name="Spikes1" parent="Spawns" unique_id=118112934 instance=ExtResource("7_v7nqo")]
 modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
-z_index = 999
-custom_minimum_size = Vector2(8, 8)
 offset_left = 2176.0
 offset_top = 2088.0
 offset_right = 2192.0
 offset_bottom = 2096.0
-mouse_filter = 2
-script = ExtResource("10_tk244")
 trigger_path = "res://src/Trigger/Spikes.tscn"
 properties = {
 "color": [Color(1, 0, 0, 1), 20, ""],
@@ -348,17 +283,13 @@ properties = {
 }
 size_is_default = false
 
-[node name="Sign" type="MarginContainer" parent="Spawns" unique_id=41417858 groups=["TriggerSpawns"] instance=ExtResource("7_v7nqo")]
+[node name="Sign" parent="Spawns" unique_id=41417858 instance=ExtResource("7_v7nqo")]
 modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
-z_index = 999
-custom_minimum_size = Vector2(8, 8)
 offset_left = 1984.0
 offset_top = 2080.0
 offset_right = 2000.0
 offset_bottom = 2096.0
-mouse_filter = 2
-script = ExtResource("10_tk244")
 trigger_path = "res://src/Trigger/Sign.tscn"
 properties = {
 "color": [Color(0.901961, 0.74902, 0, 1), 20, ""],
@@ -370,17 +301,13 @@ batsdsfdsdfsdsd
 }
 size_is_default = false
 
-[node name="Door" type="MarginContainer" parent="Spawns" unique_id=1297641519 groups=["TriggerSpawns"] instance=ExtResource("7_v7nqo")]
+[node name="Door" parent="Spawns" unique_id=1297641519 instance=ExtResource("7_v7nqo")]
 modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
-z_index = 999
-custom_minimum_size = Vector2(8, 8)
 offset_left = 1968.0
 offset_top = 2240.0
 offset_right = 1984.0
 offset_bottom = 2272.0
-mouse_filter = 2
-script = ExtResource("10_tk244")
 trigger_path = "res://src/Trigger/Door.tscn"
 properties = {
 "color": [Color(0, 0.4, 0, 1), 20, ""],
@@ -394,17 +321,13 @@ properties = {
 }
 size_is_default = false
 
-[node name="Door1" type="MarginContainer" parent="Spawns" unique_id=1921410849 groups=["TriggerSpawns"] instance=ExtResource("7_v7nqo")]
+[node name="Door1" parent="Spawns" unique_id=1921410849 instance=ExtResource("7_v7nqo")]
 modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
-z_index = 999
-custom_minimum_size = Vector2(8, 8)
 offset_left = 2032.0
 offset_top = 2240.0
 offset_right = 2048.0
 offset_bottom = 2272.0
-mouse_filter = 2
-script = ExtResource("10_tk244")
 trigger_path = "res://src/Trigger/Door.tscn"
 properties = {
 "color": [Color(0, 0.4, 0, 1), 20, ""],
@@ -418,17 +341,13 @@ properties = {
 }
 size_is_default = false
 
-[node name="Door2" type="MarginContainer" parent="Spawns" unique_id=1929487394 groups=["TriggerSpawns"] instance=ExtResource("7_v7nqo")]
+[node name="Door2" parent="Spawns" unique_id=1929487394 instance=ExtResource("7_v7nqo")]
 modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
-z_index = 999
-custom_minimum_size = Vector2(8, 8)
 offset_left = 2144.0
 offset_top = 2240.0
 offset_right = 2160.0
 offset_bottom = 2272.0
-mouse_filter = 2
-script = ExtResource("10_tk244")
 trigger_path = "res://src/Trigger/Door.tscn"
 properties = {
 "color": [Color(0, 0.4, 0, 1), 20, ""],
@@ -442,17 +361,13 @@ properties = {
 }
 size_is_default = false
 
-[node name="FlavorText" type="MarginContainer" parent="Spawns" unique_id=1567764415 groups=["TriggerSpawns"] instance=ExtResource("7_v7nqo")]
+[node name="FlavorText" parent="Spawns" unique_id=1567764415 instance=ExtResource("7_v7nqo")]
 modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
-z_index = 999
-custom_minimum_size = Vector2(8, 8)
 offset_left = 1936.0
 offset_top = 2080.0
 offset_right = 1952.0
 offset_bottom = 2096.0
-mouse_filter = 2
-script = ExtResource("10_tk244")
 trigger_path = "res://src/Trigger/FlavorText.tscn"
 properties = {
 "color": [Color(0.901961, 0.74902, 0, 1), 20, ""],
@@ -462,14 +377,9 @@ properties = {
 }
 size_is_default = false
 
-[node name="PhysFan" type="Area2D" parent="Spawns" unique_id=1449282698 groups=["Entities", "PropSpawns"] instance=ExtResource("15_tk244")]
-modulate = Color(1, 1, 1, 0.75)
+[node name="PhysFan" parent="Spawns" unique_id=1449282698 instance=ExtResource("15_tk244")]
 visibility_layer = 2
-z_index = 999
 position = Vector2(1840, 2048)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("12_k26mr")
 prop_path = "res://src/Prop/PhysFan.tscn"
 properties = {
 "do_bubble": [false, 1, ""],
@@ -479,24 +389,16 @@ properties = {
 "toggled": [true, 1, ""]
 }
 
-[node name="WindVector" type="Area2D" parent="Spawns/PhysFan" unique_id=195590256 groups=["Entities", "VUVectors", "VisualUtilities"] instance=ExtResource("11_ug36o")]
+[node name="WindVector" parent="Spawns/PhysFan" unique_id=195590256 instance=ExtResource("11_ug36o")]
 visibility_layer = 2
 position = Vector2(8, 8)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("14_7v6gq")
 direction = Vector2(-4.371139e-08, 1)
 snap_degrees = 90.0
 movement_locked = true
 
-[node name="PhysFan1" type="Area2D" parent="Spawns" unique_id=132587828 groups=["Entities", "PropSpawns"] instance=ExtResource("15_tk244")]
-modulate = Color(1, 1, 1, 0.75)
+[node name="PhysFan1" parent="Spawns" unique_id=132587828 instance=ExtResource("15_tk244")]
 visibility_layer = 2
-z_index = 999
 position = Vector2(1872, 2160)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("12_k26mr")
 prop_path = "res://src/Prop/PhysFan.tscn"
 properties = {
 "do_bubble": [false, 1, ""],
@@ -506,24 +408,16 @@ properties = {
 "toggled": [true, 1, ""]
 }
 
-[node name="WindVector" type="Area2D" parent="Spawns/PhysFan1" unique_id=1400282246 groups=["Entities", "VUVectors", "VisualUtilities"] instance=ExtResource("11_ug36o")]
+[node name="WindVector" parent="Spawns/PhysFan1" unique_id=1400282246 instance=ExtResource("11_ug36o")]
 visibility_layer = 2
 position = Vector2(8, 8)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("14_7v6gq")
 direction = Vector2(-4.371139e-08, -1)
 snap_degrees = 90.0
 movement_locked = true
 
-[node name="Basil" type="Area2D" parent="Spawns" unique_id=846815944 groups=["ActorSpawns", "Entities"] instance=ExtResource("6_dcw0l")]
-modulate = Color(1, 1, 1, 0.75)
+[node name="Basil" parent="Spawns" unique_id=846815944 instance=ExtResource("6_dcw0l")]
 visibility_layer = 2
-z_index = 999
 position = Vector2(2360, 2272)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("8_hahi5")
 actor_path = "res://src/Actor/NPC/Basil.tscn"
 properties = {
 "base_gravity": [300.0, 3, ""],
@@ -537,14 +431,9 @@ properties = {
 "water_gravity": [150.0, 3, ""]
 }
 
-[node name="AmmoRefill" type="Area2D" parent="Spawns" unique_id=208725417 groups=["Entities", "PropSpawns"] instance=ExtResource("15_tk244")]
-modulate = Color(1, 1, 1, 0.75)
+[node name="AmmoRefill" parent="Spawns" unique_id=208725417 instance=ExtResource("15_tk244")]
 visibility_layer = 2
-z_index = 999
 position = Vector2(2544, 2256)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("12_k26mr")
 prop_path = "res://src/Prop/AmmoRefill.tscn"
 properties = {
 "do_bubble": [false, 1, ""],
@@ -552,14 +441,9 @@ properties = {
 "id": [&"AmmoRefill", 4]
 }
 
-[node name="HealthRefill" type="Area2D" parent="Spawns" unique_id=932539730 groups=["Entities", "PropSpawns"] instance=ExtResource("15_tk244")]
-modulate = Color(1, 1, 1, 0.75)
+[node name="HealthRefill" parent="Spawns" unique_id=932539730 instance=ExtResource("15_tk244")]
 visibility_layer = 2
-z_index = 999
 position = Vector2(2480, 2224)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("12_k26mr")
 prop_path = "res://src/Prop/HealthRefill.tscn"
 properties = {
 "do_bubble": [false, 1, ""],
@@ -567,17 +451,13 @@ properties = {
 "id": [&"RefillTerminal", 4]
 }
 
-[node name="Door3" type="MarginContainer" parent="Spawns" unique_id=1800792368 groups=["TriggerSpawns"] instance=ExtResource("7_v7nqo")]
+[node name="Door3" parent="Spawns" unique_id=1800792368 instance=ExtResource("7_v7nqo")]
 modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
-z_index = 999
-custom_minimum_size = Vector2(8, 8)
 offset_left = 2512.0
 offset_top = 2240.0
 offset_right = 2528.0
 offset_bottom = 2272.0
-mouse_filter = 2
-script = ExtResource("10_tk244")
 trigger_path = "res://src/Trigger/Door.tscn"
 properties = {
 "color": [Color(0, 0.4, 0, 1), 20, ""],
@@ -591,14 +471,9 @@ properties = {
 }
 size_is_default = false
 
-[node name="Sentry" type="Area2D" parent="Spawns" unique_id=1199277091 groups=["ActorSpawns", "Entities"] instance=ExtResource("6_dcw0l")]
-modulate = Color(1, 1, 1, 0.75)
+[node name="Sentry" parent="Spawns" unique_id=1199277091 instance=ExtResource("6_dcw0l")]
 visibility_layer = 2
-z_index = 999
 position = Vector2(2600, 2080)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("8_hahi5")
 actor_path = "res://src/Actor/Enemy/Sentry.tscn"
 properties = {
 "base_gravity": [300.0, 3, ""],
@@ -618,39 +493,27 @@ properties = {
 "water_gravity": [150.0, 3, ""]
 }
 
-[node name="VURect" type="Node2D" parent="Spawns/Sentry" unique_id=688682803 groups=["Entities", "VURects", "VisualUtilities"] instance=ExtResource("15_7v6gq")]
+[node name="VURect" parent="Spawns/Sentry" unique_id=688682803 instance=ExtResource("15_7v6gq")]
 visibility_layer = 2
-script = ExtResource("16_ah4rl")
 tag_name = "player_detector"
 value = Rect2(-128, -128, 256, 256)
 
-[node name="ShootX" type="Area2D" parent="Spawns/Sentry" unique_id=1432238783 groups=["Entities", "VisualUtilities", "WaypointLocals", "Waypoints"] instance=ExtResource("17_rnumf")]
+[node name="ShootX" parent="Spawns/Sentry" unique_id=1432238783 instance=ExtResource("17_rnumf")]
 visibility_layer = 2
 position = Vector2(64, 0)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("18_rnumf")
 tag_name = "shoot_x"
 lock_y = true
 
-[node name="ShootY" type="Area2D" parent="Spawns/Sentry" unique_id=595539309 groups=["Entities", "VisualUtilities", "WaypointLocals", "Waypoints"] instance=ExtResource("17_rnumf")]
+[node name="ShootY" parent="Spawns/Sentry" unique_id=595539309 instance=ExtResource("17_rnumf")]
 modulate = Color(0, 1.8247963, 1.8247963, 1)
 visibility_layer = 2
 position = Vector2(0, -64)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("18_rnumf")
 tag_name = "shoot_y"
 lock_x = true
 
-[node name="Billy" type="Area2D" parent="Spawns" unique_id=546465970 groups=["ActorSpawns", "Entities"] instance=ExtResource("6_dcw0l")]
-modulate = Color(1, 1, 1, 0.75)
+[node name="Billy" parent="Spawns" unique_id=546465970 instance=ExtResource("6_dcw0l")]
 visibility_layer = 2
-z_index = 999
 position = Vector2(2456, 1936)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("8_hahi5")
 actor_path = "res://src/Actor/Enemy/Billy.tscn"
 properties = {
 "base_gravity": [300.0, 3, ""],
@@ -671,20 +534,14 @@ properties = {
 "water_gravity": [150.0, 3, ""]
 }
 
-[node name="VURect" type="Node2D" parent="Spawns/Billy" unique_id=951928484 groups=["Entities", "VURects", "VisualUtilities"] instance=ExtResource("15_7v6gq")]
+[node name="VURect" parent="Spawns/Billy" unique_id=951928484 instance=ExtResource("15_7v6gq")]
 visibility_layer = 2
-script = ExtResource("16_ah4rl")
 tag_name = "player_detector"
 value = Rect2(-128, -80, 256, 160)
 
-[node name="Billy1" type="Area2D" parent="Spawns" unique_id=1266214651 groups=["ActorSpawns", "Entities"] instance=ExtResource("6_dcw0l")]
-modulate = Color(1, 1, 1, 0.75)
+[node name="Billy1" parent="Spawns" unique_id=1266214651 instance=ExtResource("6_dcw0l")]
 visibility_layer = 2
-z_index = 999
 position = Vector2(2408, 1984)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("8_hahi5")
 actor_path = "res://src/Actor/Enemy/Billy.tscn"
 properties = {
 "base_gravity": [300.0, 3, ""],
@@ -705,20 +562,14 @@ properties = {
 "water_gravity": [150.0, 3, ""]
 }
 
-[node name="VURect" type="Node2D" parent="Spawns/Billy1" unique_id=1859121448 groups=["Entities", "VURects", "VisualUtilities"] instance=ExtResource("15_7v6gq")]
+[node name="VURect" parent="Spawns/Billy1" unique_id=1859121448 instance=ExtResource("15_7v6gq")]
 visibility_layer = 2
-script = ExtResource("16_ah4rl")
 tag_name = "player_detector"
 value = Rect2(-128, -80, 256, 160)
 
-[node name="Billy2" type="Area2D" parent="Spawns" unique_id=285981885 groups=["ActorSpawns", "Entities"] instance=ExtResource("6_dcw0l")]
-modulate = Color(1, 1, 1, 0.75)
+[node name="Billy2" parent="Spawns" unique_id=285981885 instance=ExtResource("6_dcw0l")]
 visibility_layer = 2
-z_index = 999
 position = Vector2(2424, 2096)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("8_hahi5")
 actor_path = "res://src/Actor/Enemy/Billy.tscn"
 properties = {
 "base_gravity": [300.0, 3, ""],
@@ -739,20 +590,14 @@ properties = {
 "water_gravity": [150.0, 3, ""]
 }
 
-[node name="VURect" type="Node2D" parent="Spawns/Billy2" unique_id=41270776 groups=["Entities", "VURects", "VisualUtilities"] instance=ExtResource("15_7v6gq")]
+[node name="VURect" parent="Spawns/Billy2" unique_id=41270776 instance=ExtResource("15_7v6gq")]
 visibility_layer = 2
-script = ExtResource("16_ah4rl")
 tag_name = "player_detector"
 value = Rect2(-128, -80, 256, 160)
 
-[node name="Sentry1" type="Area2D" parent="Spawns" unique_id=986853334 groups=["ActorSpawns", "Entities"] instance=ExtResource("6_dcw0l")]
-modulate = Color(1, 1, 1, 0.75)
+[node name="Sentry1" parent="Spawns" unique_id=986853334 instance=ExtResource("6_dcw0l")]
 visibility_layer = 2
-z_index = 999
 position = Vector2(2648, 2048)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("8_hahi5")
 actor_path = "res://src/Actor/Enemy/Sentry.tscn"
 properties = {
 "base_gravity": [300.0, 3, ""],
@@ -772,39 +617,27 @@ properties = {
 "water_gravity": [150.0, 3, ""]
 }
 
-[node name="VURect" type="Node2D" parent="Spawns/Sentry1" unique_id=1682983982 groups=["Entities", "VURects", "VisualUtilities"] instance=ExtResource("15_7v6gq")]
+[node name="VURect" parent="Spawns/Sentry1" unique_id=1682983982 instance=ExtResource("15_7v6gq")]
 visibility_layer = 2
-script = ExtResource("16_ah4rl")
 tag_name = "player_detector"
 value = Rect2(-128, -128, 256, 256)
 
-[node name="ShootX" type="Area2D" parent="Spawns/Sentry1" unique_id=1771525645 groups=["Entities", "VisualUtilities", "WaypointLocals", "Waypoints"] instance=ExtResource("17_rnumf")]
+[node name="ShootX" parent="Spawns/Sentry1" unique_id=1771525645 instance=ExtResource("17_rnumf")]
 visibility_layer = 2
 position = Vector2(64, 0)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("18_rnumf")
 tag_name = "shoot_x"
 lock_y = true
 
-[node name="ShootY" type="Area2D" parent="Spawns/Sentry1" unique_id=867426649 groups=["Entities", "VisualUtilities", "WaypointLocals", "Waypoints"] instance=ExtResource("17_rnumf")]
+[node name="ShootY" parent="Spawns/Sentry1" unique_id=867426649 instance=ExtResource("17_rnumf")]
 modulate = Color(0, 1.8247963, 1.8247963, 1)
 visibility_layer = 2
 position = Vector2(0, -64)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("18_rnumf")
 tag_name = "shoot_y"
 lock_x = true
 
-[node name="Sentry2" type="Area2D" parent="Spawns" unique_id=2136017153 groups=["ActorSpawns", "Entities"] instance=ExtResource("6_dcw0l")]
-modulate = Color(1, 1, 1, 0.75)
+[node name="Sentry2" parent="Spawns" unique_id=2136017153 instance=ExtResource("6_dcw0l")]
 visibility_layer = 2
-z_index = 999
 position = Vector2(2680, 2048)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("8_hahi5")
 actor_path = "res://src/Actor/Enemy/Sentry.tscn"
 properties = {
 "base_gravity": [300.0, 3, ""],
@@ -824,39 +657,27 @@ properties = {
 "water_gravity": [150.0, 3, ""]
 }
 
-[node name="VURect" type="Node2D" parent="Spawns/Sentry2" unique_id=1881021360 groups=["Entities", "VURects", "VisualUtilities"] instance=ExtResource("15_7v6gq")]
+[node name="VURect" parent="Spawns/Sentry2" unique_id=1881021360 instance=ExtResource("15_7v6gq")]
 visibility_layer = 2
-script = ExtResource("16_ah4rl")
 tag_name = "player_detector"
 value = Rect2(-128, -128, 256, 256)
 
-[node name="ShootX" type="Area2D" parent="Spawns/Sentry2" unique_id=30317187 groups=["Entities", "VisualUtilities", "WaypointLocals", "Waypoints"] instance=ExtResource("17_rnumf")]
+[node name="ShootX" parent="Spawns/Sentry2" unique_id=30317187 instance=ExtResource("17_rnumf")]
 visibility_layer = 2
 position = Vector2(64, 0)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("18_rnumf")
 tag_name = "shoot_x"
 lock_y = true
 
-[node name="ShootY" type="Area2D" parent="Spawns/Sentry2" unique_id=1075785872 groups=["Entities", "VisualUtilities", "WaypointLocals", "Waypoints"] instance=ExtResource("17_rnumf")]
+[node name="ShootY" parent="Spawns/Sentry2" unique_id=1075785872 instance=ExtResource("17_rnumf")]
 modulate = Color(0, 1.8247963, 1.8247963, 1)
 visibility_layer = 2
 position = Vector2(0, -64)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("18_rnumf")
 tag_name = "shoot_y"
 lock_x = true
 
-[node name="Sentry3" type="Area2D" parent="Spawns" unique_id=56174473 groups=["ActorSpawns", "Entities"] instance=ExtResource("6_dcw0l")]
-modulate = Color(1, 1, 1, 0.75)
+[node name="Sentry3" parent="Spawns" unique_id=56174473 instance=ExtResource("6_dcw0l")]
 visibility_layer = 2
-z_index = 999
 position = Vector2(2712, 2048)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("8_hahi5")
 actor_path = "res://src/Actor/Enemy/Sentry.tscn"
 properties = {
 "base_gravity": [300.0, 3, ""],
@@ -876,40 +697,28 @@ properties = {
 "water_gravity": [150.0, 3, ""]
 }
 
-[node name="VURect" type="Node2D" parent="Spawns/Sentry3" unique_id=1647130205 groups=["Entities", "VURects", "VisualUtilities"] instance=ExtResource("15_7v6gq")]
+[node name="VURect" parent="Spawns/Sentry3" unique_id=1647130205 instance=ExtResource("15_7v6gq")]
 visibility_layer = 2
-script = ExtResource("16_ah4rl")
 tag_name = "player_detector"
 value = Rect2(-128, -128, 256, 256)
 
-[node name="ShootX" type="Area2D" parent="Spawns/Sentry3" unique_id=417413993 groups=["Entities", "VisualUtilities", "WaypointLocals", "Waypoints"] instance=ExtResource("17_rnumf")]
+[node name="ShootX" parent="Spawns/Sentry3" unique_id=417413993 instance=ExtResource("17_rnumf")]
 visible = false
 visibility_layer = 2
 position = Vector2(64, 0)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("18_rnumf")
 tag_name = "shoot_x"
 lock_y = true
 
-[node name="ShootY" type="Area2D" parent="Spawns/Sentry3" unique_id=1331188293 groups=["Entities", "VisualUtilities", "WaypointLocals", "Waypoints"] instance=ExtResource("17_rnumf")]
+[node name="ShootY" parent="Spawns/Sentry3" unique_id=1331188293 instance=ExtResource("17_rnumf")]
 modulate = Color(0, 1.8247963, 1.8247963, 1)
 visibility_layer = 2
 position = Vector2(0, -64)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("18_rnumf")
 tag_name = "shoot_y"
 lock_x = true
 
-[node name="Sentry4" type="Area2D" parent="Spawns" unique_id=1799588470 groups=["ActorSpawns", "Entities"] instance=ExtResource("6_dcw0l")]
-modulate = Color(1, 1, 1, 0.75)
+[node name="Sentry4" parent="Spawns" unique_id=1799588470 instance=ExtResource("6_dcw0l")]
 visibility_layer = 2
-z_index = 999
 position = Vector2(2744, 2048)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("8_hahi5")
 actor_path = "res://src/Actor/Enemy/Sentry.tscn"
 properties = {
 "base_gravity": [300.0, 3, ""],
@@ -929,41 +738,29 @@ properties = {
 "water_gravity": [150.0, 3, ""]
 }
 
-[node name="VURect" type="Node2D" parent="Spawns/Sentry4" unique_id=1981119342 groups=["Entities", "VURects", "VisualUtilities"] instance=ExtResource("15_7v6gq")]
+[node name="VURect" parent="Spawns/Sentry4" unique_id=1981119342 instance=ExtResource("15_7v6gq")]
 visibility_layer = 2
-script = ExtResource("16_ah4rl")
 tag_name = "player_detector"
 value = Rect2(-128, -128, 256, 256)
 
-[node name="ShootX" type="Area2D" parent="Spawns/Sentry4" unique_id=1699828033 groups=["Entities", "VisualUtilities", "WaypointLocals", "Waypoints"] instance=ExtResource("17_rnumf")]
+[node name="ShootX" parent="Spawns/Sentry4" unique_id=1699828033 instance=ExtResource("17_rnumf")]
 visible = false
 visibility_layer = 2
 position = Vector2(64, 0)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("18_rnumf")
 tag_name = "shoot_x"
 lock_y = true
 
-[node name="ShootY" type="Area2D" parent="Spawns/Sentry4" unique_id=1066131863 groups=["Entities", "VisualUtilities", "WaypointLocals", "Waypoints"] instance=ExtResource("17_rnumf")]
+[node name="ShootY" parent="Spawns/Sentry4" unique_id=1066131863 instance=ExtResource("17_rnumf")]
 visible = false
 modulate = Color(0, 1.8247963, 1.8247963, 1)
 visibility_layer = 2
 position = Vector2(0, -64)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("18_rnumf")
 tag_name = "shoot_y"
 lock_x = true
 
-[node name="Sentry5" type="Area2D" parent="Spawns" unique_id=1959943275 groups=["ActorSpawns", "Entities"] instance=ExtResource("6_dcw0l")]
-modulate = Color(1, 1, 1, 0.75)
+[node name="Sentry5" parent="Spawns" unique_id=1959943275 instance=ExtResource("6_dcw0l")]
 visibility_layer = 2
-z_index = 999
 position = Vector2(2776, 2048)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("8_hahi5")
 actor_path = "res://src/Actor/Enemy/Sentry.tscn"
 properties = {
 "base_gravity": [300.0, 3, ""],
@@ -983,58 +780,38 @@ properties = {
 "water_gravity": [150.0, 3, ""]
 }
 
-[node name="VURect" type="Node2D" parent="Spawns/Sentry5" unique_id=278657433 groups=["Entities", "VURects", "VisualUtilities"] instance=ExtResource("15_7v6gq")]
+[node name="VURect" parent="Spawns/Sentry5" unique_id=278657433 instance=ExtResource("15_7v6gq")]
 visibility_layer = 2
-script = ExtResource("16_ah4rl")
 tag_name = "player_detector"
 value = Rect2(-128, -128, 256, 256)
 
-[node name="ShootX" type="Area2D" parent="Spawns/Sentry5" unique_id=816198350 groups=["Entities", "VisualUtilities", "WaypointLocals", "Waypoints"] instance=ExtResource("17_rnumf")]
+[node name="ShootX" parent="Spawns/Sentry5" unique_id=816198350 instance=ExtResource("17_rnumf")]
 visible = false
 visibility_layer = 2
 position = Vector2(64, 0)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("18_rnumf")
 tag_name = "shoot_x"
 lock_y = true
 
-[node name="ShootY" type="Area2D" parent="Spawns/Sentry5" unique_id=1956625328 groups=["Entities", "VisualUtilities", "WaypointLocals", "Waypoints"] instance=ExtResource("17_rnumf")]
+[node name="ShootY" parent="Spawns/Sentry5" unique_id=1956625328 instance=ExtResource("17_rnumf")]
 visible = false
 modulate = Color(0, 1.8247963, 1.8247963, 1)
 visibility_layer = 2
 position = Vector2(0, -64)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("18_rnumf")
 tag_name = "shoot_y"
 lock_x = true
 
 [node name="Waypoints" type="Node2D" parent="." unique_id=1140943479]
 visibility_layer = 2
 
-[node name="VanishingPoint" type="Area2D" parent="." unique_id=852042071 groups=["VanishingPoints"] instance=ExtResource("7_mlr58")]
+[node name="VanishingPoint" parent="." unique_id=852042071 instance=ExtResource("7_mlr58")]
 visibility_layer = 2
-z_index = 999
 position = Vector2(2288, 1832)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("20_r87vw")
 
-[node name="SpawnPoint" type="Area2D" parent="." unique_id=1505342073 groups=["SpawnPoints"] instance=ExtResource("5_sjslv")]
+[node name="SpawnPoint" parent="." unique_id=1505342073 instance=ExtResource("5_sjslv")]
 visibility_layer = 2
 position = Vector2(2536, 2048)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("22_bq2j0")
 
-[node name="TitlePreview" type="Area2D" parent="." unique_id=2052223351 groups=["TitlePreviews"] instance=ExtResource("14_iuj41")]
+[node name="TitlePreview" parent="." unique_id=2052223351 instance=ExtResource("14_iuj41")]
 visibility_layer = 2
-z_index = 999
 position = Vector2(2496, 2016)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("20_r87vw")
 zoom = 2.0
-
-[connection signal="body_exited" from="Triggers/KillBox" to="Triggers/KillBox" method="_on_body_exited"]

@@ -44,7 +44,7 @@ var cached_state: Node
 var is_debug = true
 
 
-@onready var world = get_tree().get_root().get_node("World")
+@onready var w = get_tree().get_root().get_node("World")
 @onready var pc = get_parent()
 @onready var state_label = get_node("States/StateLabel")
 @onready var sp = get_node("States")
@@ -99,7 +99,7 @@ func land():
 	if pc.is_in_water: return
 	var effect = LAND.instantiate()
 	effect.position = pc.position
-	world.get_node("Front").add_child(effect)
+	w.middle_front.add_child(effect)
 
 func jump():
 	if pc.is_crouching: return
@@ -110,7 +110,7 @@ func jump():
 		am.play("gun_sword")
 		var effect = LAND.instantiate()
 		effect.position = pc.position
-		world.get_node("Front").add_child(effect)
+		w.middle_front.add_child(effect)
 
 func drop():
 	$States/Jump.is_dropping = true

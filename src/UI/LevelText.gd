@@ -3,7 +3,7 @@ extends Control
 var text
 var wait_time = 0.2
 
-@onready var world = get_tree().get_root().get_node("World")
+@onready var w = get_tree().get_root().get_node("World")
 
 func _ready():
 	$Label.text = text

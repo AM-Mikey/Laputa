@@ -69,7 +69,7 @@ func enter_shoot(_last_state):
 	bullet.position = $BulletOrigin.global_position
 	bullet.origin = bullet.position #TODO: WHY not just have it set origin on ready?
 	bullet.direction = move_dir
-	w.middle.add_child(bullet)
+	w.player_front.add_child(bullet)
 	st.start(reload_time)
 
 

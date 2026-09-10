@@ -2,9 +2,9 @@ extends MarginContainer
 
 signal selected(background, type)
 
-@onready var world = get_tree().get_root().get_node("World")
-@onready var level_limiter = world.current_level.get_node("LevelLimiter")
-@onready var editor = world.get_node("EditorLayer/Editor")
+@onready var w = get_tree().get_root().get_node("World")
+@onready var level_limiter = w.current_level.get_node("LevelLimiter")
+@onready var editor = w.get_node("EditorLayer/Editor")
 
 var state = "idle"
 var active_handle = null

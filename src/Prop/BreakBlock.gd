@@ -23,7 +23,7 @@ func on_break(method = "cut"):
 	am.play("block_break", self)
 	var explosion = EXPLOSION.instantiate()
 	explosion.global_position = global_position + Vector2(8.0, 8.0)
-	w.front.add_child(explosion)
+	w.middle_front.add_child(explosion)
 
 	if $GroundLeft.is_colliding() && $GroundRight.is_colliding():
 		match method:

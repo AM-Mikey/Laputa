@@ -18,7 +18,7 @@ func _on_timer_timeout():
 	if fully_submerged:
 		var bubble = BUBBLE.instantiate()
 		bubble.global_position = global_position + bubble_offset
-		w.front.add_child(bubble)
+		w.middle_front.add_child(bubble)
 
 
 func _on_area_entered(_area: Area2D):

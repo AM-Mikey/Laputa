@@ -32,7 +32,6 @@ var ammo_chance := 1
 @export var debug := false
 @export var id: String
 
-@onready var w = get_tree().get_root().get_node("World")
 @onready var pc = f.pc()
 
 
@@ -141,7 +140,7 @@ func hit(damage, blood_direction, knockback_direction = Vector2.ZERO, knockback_
 	_on_hit(damage, blood_direction)
 	hp -= damage
 	var blood = BLOOD.instantiate()
-	get_tree().get_root().get_node("World/Front").add_child(blood)
+	w.middle_front.add_child(blood)
 	blood.global_position = $Sprite2D.global_position #more accurate for visual
 	blood.direction = blood_direction
 
@@ -173,7 +172,7 @@ func set_damagenum(damage):
 		damage_number.value = damage
 		damage_number.position = global_position
 		damage_number.position.y += y_offset
-		get_tree().get_root().get_node("World/Front").add_child(damage_number)
+		w.farthest_front.add_child(damage_number)
 	else: #add time and add values
 		damage_number.value += damage
 		damage_number.reset()
@@ -193,7 +192,7 @@ func die(quietly = false):
 		do_death_drop()
 		var explosion = EXPLOSION.instantiate()
 		explosion.position = $Sprite2D.global_position #more accurate for visual
-		world.front.add_child(explosion)
+		w.middle_front.add_child(explosion)
 	queue_free()
 
 func do_death_routine(): #shadow this for individual enemies ##note this doesnt wait for the function to finish, so anything that requires await will be cut short
@@ -227,7 +226,7 @@ func do_death_drop():
 			1,2: heart.value = 2
 			3,4,5: heart.value = 4
 			6,7,8,9,10 : heart.value = 8
-		world.middle.call_deferred("add_child", heart)
+		w.player_back.call_deferred("add_child", heart)
 
 	elif drop > heart_chance and drop <= heart_chance + experience_chance: #drop xp
 		var values = [1]
@@ -248,14 +247,14 @@ func do_death_drop():
 			var experience = EXPERIENCE.instantiate()
 			experience.value = v
 			experience.position = global_position
-			world.middle.call_deferred("add_child", experience)
+			w.player_back.call_deferred("add_child", experience)
 
 	else: #drop ammo
 		ammo.position = global_position
 		match reward:
 			1,2: ammo.value = 0.2
 			3,4,5,6,7,8,9,10: ammo.value = 0.5
-		world.middle.call_deferred("add_child", ammo)
+		w.player_back.call_deferred("add_child", ammo)
 
 
 

@@ -66,10 +66,10 @@ func update_path_lines():
 		vline.add_point(Vector2(0, jump_height * -16))
 		add_child(vline)
 		move_child(vline, 0)
-	elif debug and world:
+	elif debug and w:
 		vline.add_point(position)
 		vline.add_point(jump_pos)
-		world.front.add_child(vline)
+		w.farthest_front.add_child(vline)
 
 
 #	var hline = PATH_LINE.instance()
@@ -80,7 +80,7 @@ func update_path_lines():
 #		hline.add_point(Vector2(x_max * 16,0))
 #		add_child(hline)
 #		move_child(hline, 0)
-#	elif debug and world:
+#	elif debug and w:
 #		hline.add_point(position + Vector2(x_min * 16,0))
 #		hline.add_point(position + Vector2(x_max * 16,0))
-#		world.front.add_child(hline)
+#		w.farthest_front.add_child(hline)

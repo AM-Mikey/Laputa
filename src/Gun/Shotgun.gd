@@ -48,4 +48,4 @@ func activate():
 	var gun_smoke = GUN_SMOKE.instantiate()
 	gun_smoke.direction = Vector2(pc.shoot_dir.x, 0)
 	gun_smoke.global_position = $Muzzle.global_position
-	w.middle.add_child(gun_smoke)
+	w.player_front.add_child(gun_smoke)

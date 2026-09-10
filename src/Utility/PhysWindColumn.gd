@@ -17,7 +17,7 @@ func _ready():
 	effect.direction = wind_dir
 	effect.global_position = global_position
 	effect.tile_distance = (max(column_rect.size.x, column_rect.size.y) / 16.0)
-	get_tree().get_root().get_node("World").middle.add_child(effect)
+	get_tree().get_root().get_node("World").player_back.add_child(effect)
 
 
 func _physics_process(_delta: float):

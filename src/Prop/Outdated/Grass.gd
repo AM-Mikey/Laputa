@@ -109,14 +109,14 @@ func do_break_drop():
 		if drop <= heart_chance:
 			heart.position = position
 			heart.value = 2
-			get_tree().get_root().get_node("World/Middle").add_child(heart)
+			get_tree().get_root().get_node("World").player_back.add_child(heart)
 
 		elif drop > heart_chance and drop <= heart_chance + experience_chance:
 			experience.position = position
 			experience.value = 1
-			get_tree().get_root().get_node("World/Middle").add_child(experience)
+			get_tree().get_root().get_node("World").player_back.add_child(experience)
 
 		else:
 			ammo.position = position
 			ammo.value = 0.2
-			get_tree().get_root().get_node("World/Middle").add_child(ammo)
+			get_tree().get_root().get_node("World").player_back.add_child(ammo)
