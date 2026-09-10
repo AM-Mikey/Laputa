@@ -1,6 +1,5 @@
 [gd_scene format=3 uid="uid://0xif3oukmbp7"]
 
-[ext_resource type="Texture2D" uid="uid://7e8qhdr3awj" path="res://assets/Face/Basil.png" id="2_x6ej7"]
 [ext_resource type="Script" uid="uid://ct5k2fxi0u0rb" path="res://src/World.gd" id="8"]
 
 [sub_resource type="Animation" id="Animation_qbf6s"]
@@ -107,59 +106,23 @@ transform = Transform2D(4, 0, 0, 4, 0, 0)
 
 [node name="FarthestBack" type="Node2D" parent="." unique_id=125280429]
 visibility_layer = 2
-
-[node name="Sprite2D" type="Sprite2D" parent="FarthestBack" unique_id=2130218060]
-light_mask = 0
-visibility_layer = 2
-position = Vector2(2777, 2000)
-texture = ExtResource("2_x6ej7")
+z_index = -1
 
 [node name="MiddleBack" type="Node2D" parent="." unique_id=1451941770]
 visibility_layer = 2
-z_index = 1
-
-[node name="Sprite2D" type="Sprite2D" parent="MiddleBack" unique_id=1694232762]
-light_mask = 0
-visibility_layer = 2
-position = Vector2(2753, 1992)
-texture = ExtResource("2_x6ej7")
 
 [node name="PlayerBack" type="Node2D" parent="." unique_id=906505202]
 visibility_layer = 2
-z_index = 2
-
-[node name="Sprite2D" type="Sprite2D" parent="PlayerBack" unique_id=1878720314]
-light_mask = 0
-visibility_layer = 2
-position = Vector2(2721, 1984)
-texture = ExtResource("2_x6ej7")
+z_index = 1
 
 [node name="PlayerFront" type="Node2D" parent="." unique_id=892020458]
 visibility_layer = 2
-z_index = 3
-
-[node name="Sprite2D" type="Sprite2D" parent="PlayerFront" unique_id=443599408]
-light_mask = 0
-visibility_layer = 2
-position = Vector2(2697, 1976)
-texture = ExtResource("2_x6ej7")
+z_index = 2
 
 [node name="MiddleFront" type="Node2D" parent="." unique_id=448726191]
 visibility_layer = 2
-z_index = 4
-
-[node name="Sprite2D" type="Sprite2D" parent="MiddleFront" unique_id=1438310787]
-light_mask = 0
-visibility_layer = 2
-position = Vector2(2681, 1968)
-texture = ExtResource("2_x6ej7")
+z_index = 3
 
 [node name="FarthestFront" type="Node2D" parent="." unique_id=421958040]
 visibility_layer = 2
-z_index = 5
-
-[node name="Sprite2D" type="Sprite2D" parent="FarthestFront" unique_id=1677282569]
-light_mask = 0
-visibility_layer = 2
-position = Vector2(2665, 1960)
-texture = ExtResource("2_x6ej7")
+z_index = 4

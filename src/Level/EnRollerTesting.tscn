@@ -13,12 +13,19 @@
 [ext_resource type="PackedScene" uid="uid://cpkdlvdxe3pdh" path="res://src/Editor/SpawnPoint.tscn" id="13_ddw3t"]
 [ext_resource type="PackedScene" uid="uid://ciahlvrcyq5yt" path="res://src/Editor/Spawn/TriggerSpawn.tscn" id="13_l0h4m"]
 
+[sub_resource type="Gradient" id="Gradient_j2d1k"]
+offsets = PackedFloat32Array(0, 0.25, 0.5, 0.75, 1)
+colors = PackedColorArray(1, 0.47843137, 0, 1, 0.07450981, 0.4, 0.52156866, 1, 0.84313726, 0, 0.30588236, 1, 0.07450981, 0.4, 0.52156866, 1, 1, 0.47843137, 0, 1)
+metadata/_snap_enabled = true
+metadata/_snap_count = 12
+
 [node name="EnRollerTesting" type="Node2D" unique_id=1952135705]
 visibility_layer = 2
 script = ExtResource("1_6q8mx")
 level_name = "EnRollerTesting"
 music = "train"
 dialog_json = "res://src/Dialog/Village.json"
+controller_color_gradient = SubResource("Gradient_j2d1k")
 
 [node name="LevelLimiter" parent="." unique_id=1011068996 instance=ExtResource("2_jogqi")]
 visibility_layer = 2

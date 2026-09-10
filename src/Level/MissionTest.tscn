@@ -12,6 +12,13 @@
 [ext_resource type="PackedScene" uid="uid://ciahlvrcyq5yt" path="res://src/Editor/Spawn/TriggerSpawn.tscn" id="11_1n8rj"]
 [ext_resource type="PackedScene" uid="uid://dhjqke0pgo21f" path="res://src/Editor/TitlePreview.tscn" id="11_53evh"]
 
+[sub_resource type="Gradient" id="Gradient_53evh"]
+interpolation_mode = 2
+offsets = PackedFloat32Array(0, 0.25, 0.5, 0.75, 1)
+colors = PackedColorArray(0.76862746, 0.42745098, 1, 1, 0, 0.79607844, 0.93333334, 1, 0, 0.5294886, 0.89988226, 1, 0, 0.79607844, 0.93333334, 1, 0.76862746, 0.42745098, 1, 1)
+metadata/_snap_enabled = true
+metadata/_snap_count = 12
+
 [node name="MissionTest" type="Node2D" unique_id=734148647]
 visibility_layer = 2
 script = ExtResource("1_53evh")
@@ -19,6 +26,7 @@ level_name = "MissionTest"
 dialog_json = "res://src/Dialog/MissionTest.json"
 mission_level_update = "res://src/Mission/MissionTest.json"
 debug_main_mission_stage_name = "talk_npc_a"
+controller_color_gradient = SubResource("Gradient_53evh")
 
 [node name="LevelLimiter" parent="." unique_id=1355825292 instance=ExtResource("2_72to3")]
 visibility_layer = 2

@@ -15,12 +15,20 @@
 [ext_resource type="PackedScene" uid="uid://beorrh1dm573t" path="res://src/Editor/Spawn/PropSpawn.tscn" id="15_tk244"]
 [ext_resource type="PackedScene" uid="uid://cyg86p7wau0n7" path="res://src/Editor/VisualUtility/WaypointLocal.tscn" id="17_rnumf"]
 
+[sub_resource type="Gradient" id="Gradient_iuj41"]
+interpolation_mode = 2
+offsets = PackedFloat32Array(0, 0.25, 0.5, 0.75, 1)
+colors = PackedColorArray(0.76862746, 0.42745098, 1, 1, 0, 0.79607844, 0.93333334, 1, 0, 0.5294886, 0.89988226, 1, 0, 0.79607844, 0.93333334, 1, 0.76862746, 0.42745098, 1, 1)
+metadata/_snap_enabled = true
+metadata/_snap_count = 12
+
 [node name="DefaultGodot4" type="Node2D" unique_id=1165197377]
 visibility_layer = 2
 script = ExtResource("1_4uhn8")
 level_name = "DefaultGodot4"
 music = "train"
 dialog_json = "res://src/Dialog/Village.json"
+controller_color_gradient = SubResource("Gradient_iuj41")
 
 [node name="LevelLimiter" parent="." unique_id=10937438 instance=ExtResource("3_t226a")]
 visibility_layer = 2

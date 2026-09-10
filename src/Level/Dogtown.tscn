@@ -14,12 +14,19 @@
 [ext_resource type="PackedScene" uid="uid://cyg86p7wau0n7" path="res://src/Editor/VisualUtility/WaypointLocal.tscn" id="13_ho0nu"]
 [ext_resource type="PackedScene" uid="uid://xx5fbltdrdxk" path="res://src/Editor/Spawn/WaypointGlobalSpawn.tscn" id="15_vbnr3"]
 
+[sub_resource type="Gradient" id="Gradient_3og66"]
+offsets = PackedFloat32Array(0, 0.25, 0.5, 0.75, 1)
+colors = PackedColorArray(0.77254903, 0.6431373, 0.4117647, 1, 0.69411767, 0.2627451, 0.12941177, 1, 0.972549, 0.90588236, 0.7764706, 1, 0.2784314, 0.43529412, 0.3019608, 1, 0.77254903, 0.6431373, 0.4117647, 1)
+metadata/_snap_enabled = true
+metadata/_snap_count = 12
+
 [node name="Dogtown" type="Node2D" unique_id=1604351222]
 visibility_layer = 2
 script = ExtResource("1_6s35s")
 level_name = "Dogtown"
 music = "train"
 dialog_json = "res://src/Dialog/Village.json"
+controller_color_gradient = SubResource("Gradient_3og66")
 
 [node name="LevelLimiter" parent="." unique_id=752739957 instance=ExtResource("2_i4wap")]
 visibility_layer = 2

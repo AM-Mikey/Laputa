@@ -17,12 +17,19 @@
 [ext_resource type="PackedScene" uid="uid://bwp6sqdlvfo84" path="res://src/Editor/VisualUtility/VUVector.tscn" id="15_rgqcq"]
 [ext_resource type="PackedScene" uid="uid://dhjqke0pgo21f" path="res://src/Editor/TitlePreview.tscn" id="16_1ombr"]
 
+[sub_resource type="Gradient" id="Gradient_1ombr"]
+offsets = PackedFloat32Array(0, 0.25, 0.5, 0.75, 1)
+colors = PackedColorArray(1, 0.47843137, 0, 1, 0.07450981, 0.4, 0.52156866, 1, 0.84313726, 0, 0.30588236, 1, 0.07450981, 0.4, 0.52156866, 1, 1, 0.47843137, 0, 1)
+metadata/_snap_enabled = true
+metadata/_snap_count = 12
+
 [node name="EnOrnithhopterTesting" type="Node2D" unique_id=156549534]
 visibility_layer = 2
 script = ExtResource("1_q0jps")
 level_name = "EnOrnithhopterTesting"
 music = "dogtown_day"
 dialog_json = "res://src/Dialog/Village.json"
+controller_color_gradient = SubResource("Gradient_1ombr")
 
 [node name="LevelLimiter" parent="." unique_id=1349839013 instance=ExtResource("2_qmqra")]
 visibility_layer = 2
