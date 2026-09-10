@@ -17,6 +17,7 @@ var jump_detector_pos = Vector2.ZERO
 var look_dir: = Vector2.ZERO
 var move_dir: = Vector2.ZERO
 var target = null
+var rise_from_position: = Vector2.ZERO
 
 
 var player_in_jump_zone: = false

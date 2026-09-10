@@ -166,6 +166,10 @@ position = Vector2(-0.5, -7.5)
 shape = SubResource("RectangleShape2D_p2rvj")
 debug_color = Color(1, 0, 0, 0.235294)
 
+[node name="FallTimer" type="Timer" parent="." unique_id=213672864]
+wait_time = 5.0
+one_shot = true
+
 [node name="KickGraceTimer" type="Timer" parent="." unique_id=1715611932]
 process_callback = 0
 wait_time = 0.2
@@ -254,6 +258,7 @@ lock_x = true
 
 [connection signal="area_entered" from="Hitbox" to="." method="_on_hitbox_area_entered"]
 [connection signal="area_exited" from="Hitbox" to="." method="_on_hitbox_area_exited"]
+[connection signal="timeout" from="FallTimer" to="StateMachine/Fall" method="_on_FallTimer_timeout"]
 [connection signal="body_entered" from="KickDectector" to="." method="_on_KickDectector_body_entered"]
 [connection signal="area_entered" from="KickHitbox" to="StateMachine/Kick" method="_on_KickHitbox_area_entered"]
 [connection signal="body_entered" from="KickHitbox" to="StateMachine/Kick" method="_on_KickHitbox_body_entered"]

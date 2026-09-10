@@ -24,6 +24,7 @@ func enter():
 	ap.play("Rise")
 	am.play("enemy_jump", em)
 	em.move_dir = Vector2.UP
+	em.rise_from_position = em.global_position
 
 func exit():
 	em.velocity = Vector2.ZERO

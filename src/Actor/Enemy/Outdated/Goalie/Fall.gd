@@ -10,7 +10,7 @@ func state_process():
 	em.move_and_slide()
 	em.velocity = em.velocity
 
-	if em.velocity.y == 0:
+	if em.is_on_floor() || em.global_position.y > em.rise_from_position.y || em.get_node("FallTimer").time_left <= 0.0:
 		am.play("enemy_land", em)
 		em.create_effect("Land")
 		sm.change_state("Active")
@@ -26,6 +26,7 @@ func calc_velocity() -> Vector2:
 
 func enter():
 	ap.play("Fall")
+	em.get_node("FallTimer").start()
 	if kick_grace_timer.time_left <= 0.0:
 		kick_grace_timer.start()
 
