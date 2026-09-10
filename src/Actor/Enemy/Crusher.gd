@@ -162,7 +162,7 @@ func crush_check():
 	var crush_rect_center := crush_rect.get_center()
 
 	var physics_space = get_world_2d().direct_space_state
-
+	
 	for body in nearby_bodies:
 		if body.get_collision_layer_value(1):
 			body = body.get_parent()
@@ -171,7 +171,7 @@ func crush_check():
 
 		if body_is_breakable_prop:
 			var raycheck_param: PhysicsRayQueryParameters2D = PhysicsRayQueryParameters2D.new()
-			raycheck_param.collision_mask = 8 #World / Prop
+			raycheck_param.collision_mask = 8 + 1 + 2
 			raycheck_param.hit_from_inside = true
 			raycheck_param.collide_with_bodies = true
 			raycheck_param.collide_with_areas = false
@@ -185,37 +185,53 @@ func crush_check():
 				var body_queue := [body]
 				var success := false
 				while !body_queue.is_empty():
-					var curr_body = body_queue.pop_back()
-					var curr_body_collision_shape = curr_body.get_node_or_null("CollisionShape2D")
-					if !curr_body_collision_shape || curr_body_collision_shape.disabled:
-						continue
+					var check_body = body_queue.pop_back()
+					var curr_body = check_body
+					if curr_body.get_collision_layer_value(1):
+						curr_body = curr_body.get_parent()
+					
+					var curr_body_rect: = get_body_collision_shape_rect(curr_body)
+					if curr_body_rect == Rect2(): return
 
-					var curr_body_size = curr_body_collision_shape.shape.get_rect().size
-					var root_check_position = curr_body.global_position + curr_body_size * 0.5 + curr_move_direction * curr_body_size * 0.5
-					for check_direction in [curr_move_direction.rotated(-PI / 2.0), curr_move_direction.rotated(PI / 2.0)]:
+					var curr_body_size = curr_body_rect.size
+					var root_check_position = curr_body_rect.position + curr_body_size * 0.5 + curr_move_direction * curr_body_size * 0.5
+					for check_direction in [Vector2.ZERO, curr_move_direction.rotated(-PI / 2.0), curr_move_direction.rotated(PI / 2.0)]:
 						raycheck_param.from = root_check_position + check_direction * (curr_body_size - Vector2.ONE) * 0.5
 						raycheck_param.to = raycheck_param.from + curr_move_direction * 0.5
-						raycheck_param.exclude = [curr_body.get_rid(), $Standable.get_rid()]
+						var exclude_list = [curr_body.get_rid(), check_body.get_rid(), $Standable.get_rid()]
+						for b in checked_bodies:
+							exclude_list.append(b.get_rid())
+						raycheck_param.exclude = exclude_list
 						var collision = physics_space.intersect_ray(raycheck_param)
 						if collision:
 							var collider = collision["collider"]
+							if collider in body_queue.slice(body_queue.size() - 3, body_queue.size()): continue
 							if collider is TileMapLayer || (collider.get_collision_layer_value(4) && !collider.has_node("BreakArea")):
-								success = true
-								body.on_break()
-								break
+								if check_body.get_collision_layer_value(1) || check_body.get_collision_layer_value(2):
+									curr_body.hit(999, Vector2.ZERO, $Standable/Crush)
+									curr_body.die() 
+								elif body.has_node("BreakArea") and body.get_collision_layer_value(4):
+									success = true
+									body.on_break()
+									break
+								
 							elif collider.has_node("BreakArea"):
 								if !checked_bodies.has(collider):
 									body_queue.append(collider)
-					checked_bodies.append(curr_body)
+							elif collider.get_collision_layer_value(2):
+								if !checked_bodies.has(collider):
+									body_queue.append(collider)
+							elif collider.get_collision_layer_value(1):
+								if !checked_bodies.has(collider):
+									body_queue.append(collider)
+								
+					checked_bodies.append(check_body)
 					if success: break
 				if success: break
 		else:
-			var body_collision_shape = body.get_node("CollisionShape2D")
-			if !body_collision_shape || body_collision_shape.disabled:
-				continue
-
-			var body_size = body_collision_shape.shape.get_rect().size
-			var body_rect := Rect2(body_collision_shape.global_position - body_size / 2.0, body_size)
+			var body_rect: = get_body_collision_shape_rect(body)
+			if body_rect == Rect2(): return
+			
 			var body_overlap_rect := body_rect.intersection(crush_rect)
 
 			if debug:
@@ -292,6 +308,29 @@ func crush_check():
 				if collide_with_world:
 					body.hit(999, Vector2.ZERO, $Standable/Crush)
 					body.die() # Pierce invis
+
+func get_body_collision_shape_rect(body) -> Rect2:
+	var body_collision_shape = null
+	for child in body.get_children():
+		if (child is CollisionShape2D or child is CollisionPolygon2D) and !child.disabled:
+			body_collision_shape = child
+			break
+
+	if !body_collision_shape || body_collision_shape.disabled:
+		return Rect2()
+	
+	var body_rect = Rect2()
+	if body_collision_shape is CollisionShape2D:
+		var body_size = body_collision_shape.shape.get_rect().size
+		body_rect = Rect2(body_collision_shape.global_position - body_size / 2.0, body_size)
+	else:
+		var top_left: Vector2 = Vector2(9999999.0, 9999999.0)
+		var bottom_right: Vector2 = Vector2(-9999999.0, -9999999.0)
+		for point in body_collision_shape.polygon:
+			top_left = top_left.min(point + body_collision_shape.global_position)
+			bottom_right = bottom_right.max(point + body_collision_shape.global_position)
+		body_rect = Rect2(top_left, (bottom_right - top_left).abs())
+	return body_rect
 
 func animate():
 	var anim_playback = $AnimationTree["parameters/playback"]
