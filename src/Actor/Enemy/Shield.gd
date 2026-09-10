@@ -11,6 +11,7 @@ const ICON = preload("res://assets/Actor/Enemy/ShieldIcon.png")
 @onready var bb = $BulletBlocker
 
 func setup(): #Reminder: no function called can use await
+	self_knockback = true
 	hp = 6
 	reward = 2
 	damage_on_contact = 2

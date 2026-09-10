@@ -18,6 +18,8 @@ var hp: int
 var damage_on_contact: int
 var enemy_damage_on_contact: int
 var hit_enemies_on_contact := false
+var self_knockback := false
+var knockback_velocity := Vector2.ZERO
 var hurt_sound = "enemy_hurt"
 var die_sound = "enemy_die"
 var damage_number = null
@@ -60,9 +62,22 @@ func _physics_process(delta):
 	if has_node("StateLabel"):
 		get_node("StateLabel").text = state
 	_on_physics_process(delta)
+	if self_knockback && knockback_velocity != Vector2.ZERO:
+		_do_self_knockback()
 
 func _on_physics_process(_delta): #for child
 	pass
+
+func _do_self_knockback():
+	print(knockback_velocity)
+	if knockback_velocity.y != 0:
+		velocity.y += knockback_velocity.y #set velocity y to this ONCE
+		knockback_velocity.y = 0
+
+	velocity.x += knockback_velocity.x
+	knockback_velocity.x *= 0.5 #next frame it falls off
+	if abs(knockback_velocity.x) < 1:
+		knockback_velocity.x = 0
 
 func calc_velocity(move_dir, do_gravity = true, do_acceleration = true, do_friction = true) -> Vector2:
 	var out: = velocity
@@ -122,13 +137,16 @@ func change_state(new):
 
 ### DAMAGE/DEATH ###
 
-func hit(damage, blood_direction):
+func hit(damage, blood_direction, knockback_direction = Vector2.ZERO, knockback_strength = 0):
 	_on_hit(damage, blood_direction)
 	hp -= damage
 	var blood = BLOOD.instantiate()
 	get_tree().get_root().get_node("World/Front").add_child(blood)
 	blood.global_position = $Sprite2D.global_position #more accurate for visual
 	blood.direction = blood_direction
+
+	if knockback_direction != Vector2.ZERO && self_knockback:
+		knockback_velocity = Vector2(knockback_direction.x * knockback_strength, -1 * knockback_strength) #up and to one side
 
 	set_damagenum(damage)
 

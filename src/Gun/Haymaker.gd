@@ -7,6 +7,7 @@ func _ready(): #since preload, this happens on game start
 	icon_small_texture = load("res://assets/Gun/HaymakerIconSmall.png")
 
 	sfx = "gun_pistol"
+	do_bullet_casing = false
 	cooldown_time = 0.1
 	automatic = false
 	max_ammo = 0

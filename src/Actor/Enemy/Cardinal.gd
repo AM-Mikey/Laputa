@@ -15,6 +15,7 @@ var waypoint_tolerance := 2.0
 @export var max_speed := Vector2(150.0, 100.0)
 
 func setup(): #Reminder: no function called can use await
+	self_knockback = true
 	reward = 1
 	hp = 1
 	is_wind_affected = true

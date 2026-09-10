@@ -8,6 +8,7 @@ func _ready():
 	icon_texture = load("res://assets/Gun/GLauncherIcon.png")
 	icon_small_texture = load("res://assets/Gun/GLauncherIconSmall.png")
 	sfx = "gun_grenade"
+	do_bullet_casing = false
 	automatic = false
 	ammo = 10
 	max_level = 3
@@ -20,6 +21,7 @@ func _set_level(val: int) -> void:
 			damage = 4
 			speed = 200
 			cooldown_time = 1
+			knockback_strength = 32
 			max_ammo = 10
 			max_xp = 20
 		2:
@@ -27,6 +29,7 @@ func _set_level(val: int) -> void:
 			damage = 4
 			speed = 200
 			cooldown_time = 0.5
+			knockback_strength = 48
 			max_ammo = 15
 			max_xp = 20
 		3:
@@ -34,6 +37,7 @@ func _set_level(val: int) -> void:
 			damage = 6
 			speed = 200
 			cooldown_time = 0.5
+			knockback_strength = 64
 			max_ammo = 20
 			max_xp = 20
 

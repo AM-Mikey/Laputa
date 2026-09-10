@@ -16,6 +16,7 @@ var target: Node
 @onready var st = $StateTimer
 
 func setup(): #Reminder: no function called can use await
+	self_knockback = true
 	hp = 12
 	reward = 8
 	damage_on_contact = 3

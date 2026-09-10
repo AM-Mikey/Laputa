@@ -22,6 +22,7 @@ var tongue_unready_time := 1.0
 var tongue_cooldown_time := 6.0
 
 func setup(): #Reminder: no function called can use await
+	self_knockback = true
 	look_dir = $LookVector.direction
 	tongue_max_length = abs($TongueRange.position.x)
 

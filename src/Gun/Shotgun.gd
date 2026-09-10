@@ -8,6 +8,7 @@ func _ready():
 	icon_texture = load("res://assets/Gun/Blunderbuss.png") #need
 	icon_small_texture = load("res://assets/Gun/Blunderbuss.png") #need
 	sfx = "gun_shotgun"
+	do_bullet_casing = false
 	bullet_scene = load("res://src/Bullet/Birdshot.tscn")
 	damage = 1
 	f_range = 0
@@ -24,16 +25,19 @@ func _set_level(val: int) -> void:
 		1:
 			recoil = 10
 			bullets_per_activate = 4
+			knockback_strength = 16
 			speed = 512
 			max_xp = 10
 		2:
 			recoil = 20
 			bullets_per_activate = 8
+			knockback_strength = 16
 			speed = 640
 			max_xp = 15
 		3:
 			recoil = 30 #NOTE: this level of recoil allows jp to reach up +1 and over +0, don't allow more than this.
 			bullets_per_activate = 16
+			knockback_strength = 16
 			speed = 748
 			max_xp = 20
 

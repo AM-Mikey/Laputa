@@ -22,6 +22,7 @@ var f_range
 var f_time
 var speed
 var spread_degrees
+var knockback_strength := 0.0
 var origin = Vector2.ZERO
 var direction = Vector2.ZERO
 var instant_fizzle = true
@@ -186,7 +187,8 @@ func _on_CollisionDetector_body_entered(body):
 
 func _on_CollisionDetector_area_entered(area): #TODO: double check breakable piercing
 	if area.get_collision_layer_value(18): #enemyhurt
-		area.get_parent().hit(damage, get_blood_dir(area.get_parent()))
+		var blood_dir = get_blood_dir(area.get_parent())
+		area.get_parent().hit(damage, blood_dir, blood_dir, knockback_strength)
 		if f.pc(): #and camera gun recoil is true
 			f.pc().get_node("PlayerCamera").impulse(f.pc().shoot_dir * -1, camera_recoil_hit_distance, camera_recoil_time, camera_recoil_curve)
 		if !piercing:

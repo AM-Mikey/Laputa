@@ -143,4 +143,5 @@ func _on_ExplosionDetector_area_entered(area):
 	#enemyhurt
 	elif area.get_collision_layer_value(18):
 		if !is_world_blocking(area):
-			area.get_parent().hit(int(damage/4.0), get_blood_dir(area.get_parent()))
+			var blood_dir = get_blood_dir(area.get_parent())
+			area.get_parent().hit(int(damage/4.0), blood_dir, knockback_strength)

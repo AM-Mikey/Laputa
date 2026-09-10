@@ -75,10 +75,18 @@ radius = 1.0
 collision_layer = 64
 collision_mask = 8
 script = ExtResource("1_akuxm")
+base_gravity = null
+water_gravity = null
+damage = null
 camera_recoil_distance = 0.5
 camera_recoil_hit_distance = 2.0
 camera_recoil_wall_distance = 1.0
 camera_recoil_curve = SubResource("Curve_skik2")
+camera_recoil_time = null
+is_water_affected = null
+is_wind_affected = null
+is_enemy_bullet = null
+piercing = null
 metadata/_custom_type_script = "uid://dpbp5em8cu4x4"
 
 [node name="PlayerCollisionDetector" parent="." unique_id=1126962128 instance=ExtResource("2_skik2")]

@@ -47,6 +47,7 @@ var gravity_velocity := Vector2.ZERO
 @onready var ap = $AnimationPlayer
 
 func setup(): #Reminder: no function called can use await
+	self_knockback = true
 	match difficulty:
 		0:
 			$Sprite2D.texture = TX_0

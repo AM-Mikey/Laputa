@@ -123,6 +123,7 @@ func enter_squirm(_last_state):
 
 
 func enter_run(_last_state):
+	self_knockback = true
 	speed = Vector2(100, 100)
 	$AnimationPlayer.play("Run")
 	$WallRight.enabled = true

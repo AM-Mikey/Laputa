@@ -23,6 +23,7 @@ func _set_level(val: int) -> void:
 			speed = 400
 			cooldown_time = 0.2
 			recoil = 12
+			knockback_strength = 32
 			max_ammo = 200
 			max_xp = 20
 		2:
@@ -32,6 +33,7 @@ func _set_level(val: int) -> void:
 			speed = 400
 			cooldown_time = 0.15
 			recoil = 12
+			knockback_strength = 32
 			max_ammo = 250
 			max_xp = 20
 		3:
@@ -39,6 +41,7 @@ func _set_level(val: int) -> void:
 			speed = 400
 			cooldown_time = 0.15
 			recoil = 12 #NOTE: this level of recoil allows jp to reach up +1 and over +0, don't allow more than this.
+			knockback_strength = 32
 			max_ammo = 250
 			max_xp = 10
 

@@ -21,6 +21,7 @@ func _set_level(val: int) -> void:
 			speed = 400
 			cooldown_time = 0.2
 			recoil = 6
+			knockback_strength = 16
 			max_ammo = 30
 			max_xp = 20
 		2:
@@ -29,6 +30,7 @@ func _set_level(val: int) -> void:
 			speed = 400
 			cooldown_time = 0.15
 			recoil = 6
+			knockback_strength = 16
 			max_ammo = 50
 			max_xp = 20
 		3:
@@ -36,6 +38,7 @@ func _set_level(val: int) -> void:
 			speed = 400
 			cooldown_time = 0.15
 			recoil = 6
+			knockback_strength = 16
 			max_ammo = 70
 			max_xp = 10
 

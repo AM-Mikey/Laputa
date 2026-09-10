@@ -19,6 +19,7 @@ var peeking = false
 
 
 func setup(): #Reminder: no function called can use await
+	self_knockback = true
 	hp = 4
 	damage_on_contact = 1
 	speed = Vector2(100, 200)
