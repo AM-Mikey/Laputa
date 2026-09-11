@@ -244,7 +244,8 @@ func _on_CollisionDetector_area_entered(area): #TODO: double check breakable pie
 		if !piercing:
 			queue_free()
 	elif area.get_collision_layer_value(17): #playerhurt
-		area.get_parent().hit(damage, get_blood_dir(area.get_parent()))
+		var blood_dir = get_blood_dir(area.get_parent())
+		area.get_parent().hit(damage, blood_dir, $EnemyCollisionDetector)
 		if !piercing:
 			queue_free()
 	elif area.get_collision_layer_value(9): #breakable
