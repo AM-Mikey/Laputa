@@ -1,4 +1,4 @@
-[gd_scene format=3 uid="uid://dnbcchgqqamft"]
+[gd_scene format=3 uid="uid://0xif3oukmbp7"]
 
 [ext_resource type="Script" uid="uid://ct5k2fxi0u0rb" path="res://src/World.gd" id="8"]
 
@@ -50,19 +50,7 @@ default_gun_array = Array[String](["Revolver", "Speeder", "MPistol", "GLauncher"
 start_level_path = "res://src/Level/EnGoalieTesting.tscn"
 
 [node name="ParallaxBackground" type="ParallaxBackground" parent="." unique_id=912648782]
-scroll_offset = Vector2(-9760, -6975.5)
-
-[node name="Back" type="Node2D" parent="." unique_id=1451941770]
-visibility_layer = 2
-scale = Vector2(4, 4)
-
-[node name="Middle" type="Node2D" parent="." unique_id=906505202]
-visibility_layer = 2
-z_index = 1
-
-[node name="Front" type="Node2D" parent="." unique_id=448726191]
-visibility_layer = 2
-z_index = 2
+scroll_offset = Vector2(-15120.003, -9151.469)
 
 [node name="InventoryLayer" type="CanvasLayer" parent="." unique_id=1283144760]
 scale = Vector2(4, 4)
@@ -115,3 +103,26 @@ process_mode = 3
 layer = 8
 scale = Vector2(4, 4)
 transform = Transform2D(4, 0, 0, 4, 0, 0)
+
+[node name="FarthestBack" type="Node2D" parent="." unique_id=125280429]
+visibility_layer = 2
+z_index = -1
+
+[node name="MiddleBack" type="Node2D" parent="." unique_id=1451941770]
+visibility_layer = 2
+
+[node name="PlayerBack" type="Node2D" parent="." unique_id=906505202]
+visibility_layer = 2
+z_index = 1
+
+[node name="PlayerFront" type="Node2D" parent="." unique_id=892020458]
+visibility_layer = 2
+z_index = 2
+
+[node name="MiddleFront" type="Node2D" parent="." unique_id=448726191]
+visibility_layer = 2
+z_index = 3
+
+[node name="FarthestFront" type="Node2D" parent="." unique_id=421958040]
+visibility_layer = 2
+z_index = 4

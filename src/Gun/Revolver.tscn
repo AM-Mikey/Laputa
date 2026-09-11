@@ -5,6 +5,7 @@
 
 [node name="Revolver" type="Node2D" unique_id=190404742]
 script = ExtResource("1")
+level = null
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=380006712]
 texture = ExtResource("2")

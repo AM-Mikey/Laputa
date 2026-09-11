@@ -1,15 +1,19 @@
 extends Camera2D
 
+const MAX_SHAKE_PIXELS_FOR_RUMBLE := 32.0
+const RUMBLE_MIN_FREQ := 2.0
+const RUMBLE_MAX_FREQ := 25.0
+
 var h_dir = -1
 var homing_camera = false
 
-@export var h_pan_min_speed = 0.5
-@export var h_pan_time = 1.5
-@export var v_pan_time = 1.5
-@export var h_pan_delay = 0.0
-@export var v_pan_delay = 0.0
-@export var h_pan_distance = 2.0
-@export var v_pan_distance = 2.0
+@export var h_pan_min_speed := 0.5
+@export var h_pan_time := 1.5
+@export var v_pan_time := 1.5
+@export var h_pan_delay := 0.0
+@export var v_pan_delay := 0.0
+@export var h_pan_distance := 2.0
+@export var v_pan_distance := 2.0
 @export var curve_elastic: Curve
 #@export var control_overshoot_distance = 4.0
 
@@ -20,6 +24,12 @@ var h_tween: Tween
 var v_tween: Tween
 var control_tween: Tween
 var control_return_tween: Tween
+var screen_shake_tween: Tween
+
+var noise := FastNoiseLite.new()
+var active_shakes: Array[ScreenShake] = []
+var active_impulses: Array[ScreenImpulse] = []
+var default_impulse_curve: Curve
 
 var adjusting_level_limits = false
 var adjusted_limit_left: float
@@ -32,11 +42,18 @@ var control_active := false
 var control_target: Node = null #reference to a node, not strictly necessary but saves performance
 
 func _ready():
+	noise.frequency = 1.0  #baseline shake
+	default_impulse_curve = Curve.new()
+	default_impulse_curve.add_point(Vector2(0.0, 0.0))
+	default_impulse_curve.add_point(Vector2(0.15, 1.0))   # snap out fast
+	default_impulse_curve.add_point(Vector2(1.0, 0.0))    # ease back slow
+	default_impulse_curve.set_point_right_mode(0, Curve.TANGENT_LINEAR)
+
 	vs.connect("scale_changed", Callable(self, "_resolution_scale_changed"))
 	_resolution_scale_changed(vs.resolution_scale)
 	control_processing()
 
-func _physics_process(_delta):
+func _process(delta):
 	#print("offset: ", offset, "limit left: ", limit_left)
 	if !control_active: #regular camera
 		if h_dir != pc.look_dir.x:
@@ -51,6 +68,8 @@ func _physics_process(_delta):
 			if inp.pressed("look_up",1) or inp.pressed("look_down",1) \
 			or inp.released("look_up") or inp.released("look_down"):
 				pan_vertical(get_v_dir())
+
+		process_shake(delta)
 	#else:
 		#var ll = w.current_level.get_node("LevelLimiter")
 		#on_limit_camera(ll.offset_left, ll.offset_right, ll.offset_top, ll.offset_bottom) #set limit every frame
@@ -86,6 +105,59 @@ func reset(): #TODO: REMOVE THESE AWAITS IT CAUSES SHIT TO MULTITHREAD
 	await get_tree().process_frame #godot quirk that this requires two frames
 	await get_tree().process_frame
 	position_smoothing_enabled = true
+
+
+### Screen Shake ###
+
+func shake(pixels: float, duration: float = 0.4, frequency: float = 4.0, from_gun := false):
+	var pixel_multiplier = vs.gun_screen_shake if from_gun else vs.other_screen_shake
+	active_shakes.append(ScreenShake.new(pixels * pixel_multiplier, pixels, duration, frequency))
+
+func impulse(direction: Vector2, strength: float, duration: float = 0.15, curve: Curve = null, from_gun := false):
+	var strength_multiplier = vs.gun_screen_shake if from_gun else vs.other_screen_shake
+	active_impulses.append(ScreenImpulse.new(direction, strength * strength_multiplier, duration, curve if curve else default_impulse_curve))
+	#impulse rumble
+	var mag = clamp(strength / MAX_SHAKE_PIXELS_FOR_RUMBLE, 0.0, 1.0)
+	oup.vibrate_impulse(mag, duration)
+
+func process_shake(delta):
+	var total_offset := Vector2.ZERO
+	var t := Time.get_ticks_msec() / 1000.0
+	var rumble_weak := 0.0
+	var rumble_strong := 0.0
+	#shake
+	for s in active_shakes.duplicate():
+		s.elapsed += delta
+		if s.elapsed >= s.duration:
+			active_shakes.erase(s)
+			continue
+		var ratio = s.elapsed / s.duration
+		var decay = 1.0 - ratio  # linear falloff; use pow(1.0 - ratio, 2) for a snappier cutoff
+		var nx := noise.get_noise_1d(t * s.frequency + s.seed_x)
+		var ny := noise.get_noise_1d(t * s.frequency + s.seed_y)
+		total_offset += Vector2(nx, ny) * s.amplitude * decay
+		#shake rumble
+		var mag = clamp((s.base_amplitude * decay) / MAX_SHAKE_PIXELS_FOR_RUMBLE, 0.0, 1.0)
+		var freq_t = clamp(inverse_lerp(RUMBLE_MIN_FREQ, RUMBLE_MAX_FREQ, s.frequency), 0.0, 1.0)
+		rumble_weak = max(rumble_weak, mag * freq_t)
+		rumble_strong = max(rumble_strong, mag * (1.0 - freq_t))
+	#impulse
+	for i in active_impulses.duplicate():
+		i.elapsed += delta
+		if i.elapsed >= i.duration:
+			active_impulses.erase(i)
+			continue
+		var ratio = i.elapsed / i.duration
+		var weight = i.curve.sample(ratio)
+		total_offset += i.direction * i.strength * weight
+
+	if rumble_weak > 0.01 or rumble_strong > 0.01:
+		oup.vibrate_shake(rumble_weak, rumble_strong)
+
+	if total_offset.length_squared() > 0.000001:
+		offset = total_offset
+	else:
+		offset = Vector2(0.001, 0.001)
 
 
 

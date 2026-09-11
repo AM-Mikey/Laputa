@@ -2,7 +2,7 @@ extends Node
 
 @export var fly_speed = Vector2(500, 500)
 
-@onready var world = get_tree().get_root().get_node("World")
+@onready var w = get_tree().get_root().get_node("World")
 @onready var pc = get_parent().get_parent().get_parent()
 @onready var mm = pc.get_node("MovementManager")
 

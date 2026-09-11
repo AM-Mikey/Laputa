@@ -82,25 +82,25 @@ func sparkle_on_land():
 	sparkle_left.initial_velocity_min = sparkle_speeds[0]
 	sparkle_left.initial_velocity_max = sparkle_speeds[1]
 	sparkle_left.amount = sparkle_count
-	w.front.add_child(sparkle_left)
+	w.middle_front.add_child(sparkle_left)
 	var sparkle_right = SPARKLE.instantiate()
 	sparkle_right.direction = Vector2(1.0, -1.0)
 	sparkle_right.global_position = $SparklePos.global_position
 	sparkle_right.initial_velocity_min = sparkle_speeds[0]
 	sparkle_right.initial_velocity_max = sparkle_speeds[1]
 	sparkle_right.amount = sparkle_count
-	w.front.add_child(sparkle_right)
+	w.middle_front.add_child(sparkle_right)
 
 func sparkle_on_save():
 	var sparkle_left = SPARKLE.instantiate()
 	sparkle_left.global_position = $SparklePos.global_position
 	sparkle_left.direction = Vector2(-1.0, -1.0)
 
-	w.front.add_child(sparkle_left)
+	w.middle_front.add_child(sparkle_left)
 	var sparkle_right = SPARKLE.instantiate()
 	sparkle_right.direction = Vector2(1.0, -1.0)
 	sparkle_right.global_position = $SparklePos.global_position
-	w.front.add_child(sparkle_right)
+	w.middle_front.add_child(sparkle_right)
 
 #bounces, only allow activation on the ground
 #spins faster when moving past

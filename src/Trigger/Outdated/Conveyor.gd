@@ -5,7 +5,7 @@ extends StaticBody2D
 
 var active_pc = null
 
-@onready var world = get_tree().get_root().get_node("World")
+@onready var w = get_tree().get_root().get_node("World")
 
 func _ready():
 	constant_linear_velocity = speed * direction

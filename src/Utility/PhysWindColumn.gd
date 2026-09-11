@@ -14,7 +14,10 @@ func _ready():
 	$BodyDetector/CollisionShape2D.shape.size = column_rect.size
 	$BodyDetector/CollisionShape2D.global_position = column_rect.position + (column_rect.size / 2.0)
 	effect = WIND_FAN.instantiate()
-	get_tree().get_root().get_node("World").middle.add_child(effect)
+	effect.direction = wind_dir
+	effect.global_position = global_position
+	effect.tile_distance = (max(column_rect.size.x, column_rect.size.y) / 16.0)
+	get_tree().get_root().get_node("World").player_back.add_child(effect)
 	update()
 
 func update():

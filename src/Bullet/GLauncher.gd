@@ -102,8 +102,6 @@ func is_world_blocking(target) -> bool:
 	else:
 		return false
 
-
-
 ### SIGNALS ###
 
 func _on_CollisionDetector_body_entered(body):
@@ -115,10 +113,11 @@ func _on_CollisionDetector_area_entered(area): #shadows
 	#enemyhurt
 	if area.get_collision_layer_value(18):
 		if $BounceGraceTimer.time_left <= 0.0:
+			var blood_dir = get_blood_dir(area.get_parent())
 			if not touched_floor:
-				area.get_parent().hit(damage, get_blood_dir(area.get_parent()), $PlayerCollisionDetector)
+				area.get_parent().hit(damage, blood_dir, $PlayerCollisionDetector, blood_dir, knockback_strength)
 			else:
-				area.get_parent().hit(int(damage/2.0), get_blood_dir(area.get_parent()), $PlayerCollisionDetector)
+				area.get_parent().hit(int(damage/2.0), blood_dir, $PlayerCollisionDetector, blood_dir, knockback_strength)
 			queue_free()
 
 func _on_Timer_timeout():
@@ -134,7 +133,7 @@ func _on_Timer_timeout():
 		explosion.size = "Medium"
 	if $ExplosionDetector/CollisionShape2D.shape.radius == 64:
 		explosion.size = "Large"
-	get_tree().get_root().get_node("World/Front").add_child(explosion)
+	get_tree().get_root().get_node("World").middle_front.add_child(explosion)
 	var tween = get_tree().create_tween()
 	tween.tween_property($ExplosionDetector, "scale", Vector2.ONE, 0.1).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
 	await tween.finished
@@ -157,4 +156,5 @@ func _on_ExplosionDetector_area_entered(area):
 	#enemyhurt
 	elif area.get_collision_layer_value(18):
 		if !is_world_blocking(area):
-			area.get_parent().hit(int(damage/4.0), get_blood_dir(area.get_parent()), $ExplosionDetector)
+			var blood_dir = get_blood_dir(area.get_parent())
+			area.get_parent().hit(int(damage/4.0), blood_dir, $ExplosionDetector, blood_dir, knockback_strength)

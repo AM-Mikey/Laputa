@@ -214,12 +214,12 @@ func create_effect(vfx_name):
 					var land = LAND.instantiate()
 					land.global_position = result["position"]
 					land.rotation = land_rotation
-					w.front.add_child(land)
+					w.farthest_front.add_child(land)
 			"Bonk":
 				var bonk = BONK.instantiate()
 				bonk.normal = last_collision.get_normal()
 				bonk.global_position = last_collision.get_position() + Vector2(0, 16)
-				w.front.add_child(bonk)
+				w.farthest_front.add_child(bonk)
 
 
 ### SIGNALS ###

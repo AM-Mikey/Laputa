@@ -20,6 +20,7 @@ var walk_time = 1
 
 
 func setup(): #Reminder: no function called can use await
+	self_knockback = true
 	rng.randomize()
 	hp = 20
 	damage_on_contact = 1

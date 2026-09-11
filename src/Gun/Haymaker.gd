@@ -7,11 +7,14 @@ func _ready(): #since preload, this happens on game start
 	icon_small_texture = load("res://assets/Gun/HaymakerIconSmall.png")
 
 	sfx = "gun_pistol"
+	do_bullet_casing = false
 	cooldown_time = 0.1
 	automatic = false
 	max_ammo = 0
 	max_level = 3
 	set_level(level)
+
+#only one level, freezes enemies/puts them to sleep. no damage just freezes non-boss enemy code
 
 func _set_level(val: int) -> void:
 	match val:

@@ -12,12 +12,20 @@
 [ext_resource type="PackedScene" uid="uid://cs5m8mi2rih5f" path="res://src/Editor/Spawn/ActorSpawn.tscn" id="11_c6b85"]
 [ext_resource type="PackedScene" uid="uid://dhjqke0pgo21f" path="res://src/Editor/TitlePreview.tscn" id="12_71hdy"]
 
+[sub_resource type="Gradient" id="Gradient_s7n1r"]
+interpolation_mode = 2
+offsets = PackedFloat32Array(0, 0.25, 0.5, 0.75, 1)
+colors = PackedColorArray(0.76862746, 0.42745098, 1, 1, 0, 0.79607844, 0.93333334, 1, 0, 0.5294886, 0.89988226, 1, 0, 0.79607844, 0.93333334, 1, 0.76862746, 0.42745098, 1, 1)
+metadata/_snap_enabled = true
+metadata/_snap_count = 12
+
 [node name="SwitchTest" type="Node2D" unique_id=1165197377]
 visibility_layer = 2
 script = ExtResource("1_4uhn8")
 level_name = "SwitchTest"
 music = "dogtown_night"
 dialog_json = "res://src/Dialog/Village.json"
+controller_color_gradient = SubResource("Gradient_s7n1r")
 
 [node name="LevelLimiter" parent="." unique_id=10937438 instance=ExtResource("3_t226a")]
 visibility_layer = 2
@@ -50,7 +58,7 @@ z_index = 1
 
 [node name="FarBack" type="TileMapLayer" parent="TileMap" unique_id=1394156717]
 visibility_layer = 2
-z_index = -1
+z_index = -2
 use_parent_material = true
 tile_set = ExtResource("2_s4ctt")
 

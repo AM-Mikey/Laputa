@@ -6,6 +6,7 @@ func _ready():
 	icon_texture = load("res://assets/Gun/TsurugiIcon.png")
 	#icon_small_texture = load("res://assets/Gun/TsurugiIconSmall.png") #needed
 	sfx = "gun_sword"
+	do_bullet_casing = false
 	cooldown_time = 0.2
 	automatic = false
 	do_muzzle_flash = false
@@ -19,6 +20,7 @@ func _set_level(val: int) -> void:
 			bullet_scene = load("res://src/Bullet/Slash.tscn")
 			speed = 120
 			damage = 4
+			knockback_strength = 32
 			max_xp = 0
 			f_time = 1.2
 

@@ -27,6 +27,7 @@ const min_swoop_distance: float = 15.0
 const max_swoop_distance: float = 30.0
 
 func setup():
+
 	match difficulty:
 		0:
 			hp = 3

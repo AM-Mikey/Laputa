@@ -115,7 +115,7 @@ func bonk(normal):
 	var effect = BONK.instantiate()
 	effect.position = pc.position
 	effect.normal = normal
-	w.get_node("Front").add_child(effect)
+	w.middle_front.add_child(effect)
 
 ### GETTERS ###
 

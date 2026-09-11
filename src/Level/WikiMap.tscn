@@ -12,6 +12,13 @@
 [ext_resource type="PackedScene" uid="uid://dim3av368jfya" path="res://src/Editor/VisualUtility/WaypointGlobal.tscn" id="11_2x06w"]
 [ext_resource type="PackedScene" uid="uid://beorrh1dm573t" path="res://src/Editor/Spawn/PropSpawn.tscn" id="13_516th"]
 
+[sub_resource type="Gradient" id="Gradient_c4qnx"]
+interpolation_mode = 2
+offsets = PackedFloat32Array(0, 0.25, 0.5, 0.75, 1)
+colors = PackedColorArray(0.76862746, 0.42745098, 1, 1, 0, 0.79607844, 0.93333334, 1, 0, 0.5294886, 0.89988226, 1, 0, 0.79607844, 0.93333334, 1, 0.76862746, 0.42745098, 1, 1)
+metadata/_snap_enabled = true
+metadata/_snap_count = 12
+
 [node name="WikiMap" type="Node2D" unique_id=734148647]
 visibility_layer = 2
 script = ExtResource("1_53evh")
@@ -19,6 +26,7 @@ level_name = "WikiMap"
 dialog_json = "res://src/Dialog/WikiMap.json"
 mission_level_update = "res://src/Mission/WikiMap.json"
 debug_main_mission_stage_name = "textbox_demo"
+controller_color_gradient = SubResource("Gradient_c4qnx")
 
 [node name="LevelLimiter" parent="." unique_id=1355825292 instance=ExtResource("2_72to3")]
 visibility_layer = 2
@@ -51,7 +59,7 @@ z_index = 1
 
 [node name="FarBack" type="TileMapLayer" parent="TileMap" unique_id=390810820]
 visibility_layer = 2
-z_index = -1
+z_index = -2
 use_parent_material = true
 tile_set = ExtResource("5_5uu0q")
 

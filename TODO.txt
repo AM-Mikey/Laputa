@@ -648,3 +648,11 @@ beetlecrawler random direction on startup???
 
 
 reimplement level notes
+
+
+
+
+wind
+
+implement or decide if physprops can be wind affected with process calling apply_wind()
+implement in actor -> pickup, npc, enemy

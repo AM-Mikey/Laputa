@@ -36,7 +36,6 @@ var next_conversation_index: int
 
 var camera_forgiveness = 16
 
-@onready var w = get_tree().get_root().get_node("World")
 
 func _ready(): #Reminder: no function called can use await
 	home = global_position
@@ -266,8 +265,6 @@ func calc_velocity(do_gravity = true) -> Vector2:
 	if is_wind_affected && wind_areas_inside.size() > 0: #Inside Wind
 		if out.y < 0.0:
 			out.y *= 0.9
-		for wind_area in wind_areas_inside:
-			out += wind_area.speed * wind_area.wind_dir
 	return out
 
 

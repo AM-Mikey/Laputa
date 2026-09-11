@@ -1,0 +1,10 @@
+[gd_scene format=3 uid="uid://c6w5kfics4ee4"]
+
+[ext_resource type="Script" uid="uid://kgd8y36wrult" path="res://src/Effect/Outdated/Cloud.gd" id="1"]
+[ext_resource type="Texture2D" uid="uid://xrbo8rjkrcx2" path="res://assets/Effect/CloudLargeKinematic.png" id="2"]
+
+[node name="CloudLargeKinematic" type="CharacterBody2D" unique_id=1335946717]
+script = ExtResource("1")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=2094072207]
+texture = ExtResource("2")

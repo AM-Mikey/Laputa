@@ -127,6 +127,7 @@ func hit(damage, knockback_direction, _hitbox):
 		if damage > 0:
 			hp -= damage
 			am.play("pc_hurt")
+			oup.vibrate_impulse(1)
 			emit_signal("hp_updated", hp, max_hp, "take_damage")
 			if experience_number != null: experience_number.queue_free()
 			if heart_number != null: heart_number.queue_free()
@@ -136,7 +137,7 @@ func hit(damage, knockback_direction, _hitbox):
 				if hp <= 0:
 					damage_number.position = global_position
 					damage_number.position.y -= 18
-					get_tree().get_root().get_node("World/Front").add_child(damage_number)
+					w.farthest_front.add_child(damage_number)
 					die()
 				else:
 					damage_number.position.y -= 18
@@ -149,7 +150,7 @@ func hit(damage, knockback_direction, _hitbox):
 				if hp <= 0:
 					damage_number.position = global_position
 					damage_number.position.y -= 18
-					damage_number.reparent(get_tree().get_root().get_node("World/Front"))
+					damage_number.reparent(w.middle_front)
 					die()
 
 
@@ -197,7 +198,7 @@ func die():
 
 		var explosion = EXPLOSION.instantiate()
 		explosion.position = global_position
-		w.get_node("Front").add_child(explosion)
+		w.middle_front.add_child(explosion)
 
 		w.ui.add_child(load("res://src/UI/DeathScreen.tscn").instantiate())
 		if f.hud():
@@ -221,6 +222,7 @@ func _on_ItemDetector_area_entered(area):
 
 	if area.get_collision_layer_value(11): #pickup
 		var pickup = area.get_parent()
+		oup.vibrate_impulse(0.1)
 
 
 		if pickup.is_in_group("HeartPickups"):
@@ -243,7 +245,7 @@ func _on_ItemDetector_area_entered(area):
 					heart_number.value += hp - hp_before
 					heart_number.reset()
 
-			w.get_node("Front").add_child(heart_get)
+			w.farthest_front.add_child(heart_get)
 			emit_signal("hp_updated", hp, max_hp, "hp_pickup")
 			pickup.queue_free()
 
@@ -254,7 +256,7 @@ func _on_ItemDetector_area_entered(area):
 			am.play_interrupt("get_health_upgrade")
 			var heart_get_max = HEART_GET_MAX.instantiate()
 			heart_get_max.position = pickup.global_position
-			w.get_node("Front").add_child(heart_get_max)
+			w.farthest_front.add_child(heart_get_max)
 			emit_signal("hp_updated", hp, max_hp, "hp_upgrade")
 			pickup.exit()
 
@@ -272,7 +274,7 @@ func _on_ItemDetector_area_entered(area):
 			am.play("get_xp")
 			var experience_get = EXPERIENCE_GET.instantiate()
 			experience_get.position = pickup.global_position
-			w.get_node("Front").add_child(experience_get)
+			w.farthest_front.add_child(experience_get)
 
 			if damage_number != null: damage_number.queue_free()
 			if heart_number != null: heart_number.queue_free()
@@ -298,7 +300,7 @@ func _on_ItemDetector_area_entered(area):
 			am.play("get_ammo")
 			var ammo_get = AMMO_GET.instantiate()
 			ammo_get.position = pickup.global_position
-			w.get_node("Front").add_child(ammo_get)
+			w.farthest_front.add_child(ammo_get)
 			emit_signal("guns_updated", guns.get_children(), "get_ammo")
 			pickup.queue_free()
 
