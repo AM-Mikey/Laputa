@@ -14,7 +14,7 @@ var kick_damage: = 4.0
 
 var active_detector_pos = Vector2.ZERO
 var jump_detector_pos = Vector2.ZERO
-var look_dir: = Vector2.ZERO
+var look_dir: = Vector2.ZERO: set = set_look_dir
 var move_dir: = Vector2.ZERO
 var target = null
 var rise_from_position: = Vector2.ZERO
@@ -23,6 +23,13 @@ var rise_from_position: = Vector2.ZERO
 var player_in_jump_zone: = false
 var kicked: = false
 
+func set_look_dir(val):
+	look_dir = val
+	$KickDectector.scale.x = -look_dir.x
+	$KickHitbox.scale.x = -look_dir.x
+	$ActiveDetector.scale.x = -look_dir.x
+	$JumpDetector.scale.x = -look_dir.x
+	$Sprite2D.flip_h = look_dir.x > 0.0
 
 func _ready():
 	hp = 4
@@ -34,10 +41,7 @@ func _ready():
 	is_wind_affected = true
 
 	look_dir = $LookVector.direction.snappedf(1.0)
-	$KickDectector.scale.x = -look_dir.x
-	$KickHitbox.scale.x = -look_dir.x
 
-	$ActiveDetector.scale.x = -look_dir.x
 	$ActiveDetector/CollisionShape2D.shape.size.y = abs($JumpWaypoint.position.y)
 	$ActiveDetector/CollisionShape2D.position.y = -$ActiveDetector/CollisionShape2D.shape.size.y / 2.0
 	active_detector_pos = $ActiveDetector.position
@@ -45,15 +49,13 @@ func _ready():
 	$ActiveDetector.top_level = true
 	$ActiveDetector.global_position = active_detector_global_pos
 
-	$JumpDetector.scale.x = -look_dir.x
+
 	$JumpDetector/CollisionShape2D.shape.size.y = abs($JumpWaypoint.position.y) - 32.0
 	$JumpDetector/CollisionShape2D.position.y = -$JumpDetector/CollisionShape2D.shape.size.y / 2.0 - 32.0
 	jump_detector_pos = $JumpDetector.position
 	var jump_detector_global_pos = $JumpDetector.global_position
 	$JumpDetector.top_level = true
 	$JumpDetector.global_position = jump_detector_global_pos
-
-	$Sprite2D.flip_h = look_dir.x > 0.0
 
 	jump_pos = $JumpWaypoint.global_position
 	w.emit_signal("finished_spawn_entities_step")
