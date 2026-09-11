@@ -11,7 +11,7 @@ func setup(): #Reminder: no function called can use await
 	w.emit_signal("finished_spawn_entities_step")
 
 func _input(event):
-	if event.is_action_pressed("inspect") && !active_players.is_empty():
+	if inp.pressed("inspect") && !active_players.is_empty():
 		for p in active_players:
 			if !p.disabled && inp.can_act && p.mm.current_state == p.mm.states["run"]:
 				if !get_is_ammo_needed(p):

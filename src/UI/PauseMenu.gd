@@ -16,7 +16,7 @@ func _ready():
 
 
 func _input(event):
-	if event.is_action_pressed("pause") and get_tree().paused and not w.has_node("MenuLayer/Options"):
+	if event.is_action_pressed("pause") && get_tree().paused && !w.has_node("MenuLayer/Options"):
 		exit()
 
 func do_focus():

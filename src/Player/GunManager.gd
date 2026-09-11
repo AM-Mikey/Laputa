@@ -17,13 +17,13 @@ func _process(_delta: float) -> void:
 		return
 	var active_gun = $Guns.get_child(0)
 
-	if Input.is_action_just_pressed("fire_manual"):
+	if inp.pressed("fire_manual"):
 		active_gun.fire("manual")
-	if Input.is_action_pressed("fire_automatic") and active_gun.automatic:
+	if inp.held("fire_automatic") and active_gun.automatic:
 		active_gun.fire("automatic")
-	if Input.is_action_just_released("fire_manual"):
+	if inp.released("fire_manual"):
 		active_gun.release_manual_fire()
-	if Input.is_action_just_released("fire_automatic"):
+	if inp.released("fire_automatic"):
 		active_gun.release_auto_fire()
 
 	if $Guns.get_child_count() > 1: #only swap if more than one gun

@@ -221,11 +221,11 @@ func _on_MainAnimationPlayer_animation_finished(anim_name: StringName):
 
 
 func _on_UpDownTimer_timeout():
-	if Input.is_action_pressed("ui_up") and Input.is_action_pressed("ui_down"):
+	if inp.held("ui_up") and inp.held("ui_down"):
 		return
-	elif Input.is_action_pressed("ui_up"):
+	elif inp.held("ui_up"):
 		$UpDownTimer.start(up_down_cooldown_time)
 		option_up()
-	elif Input.is_action_pressed("ui_down"):
+	elif inp.held("ui_down"):
 		$UpDownTimer.start(up_down_cooldown_time)
 		option_down()
