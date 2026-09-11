@@ -46,8 +46,8 @@ script = ExtResource("8")
 development_stage = "alpha"
 release_version = "1.8"
 do_skip_title = true
-default_gun_array = Array[String](["Revolver", "Speeder", "MPistol", "GLauncher", "Shotgun", "Tsurugi", "Red7", "Roberta", "TurnstileJumper"])
-start_level_path = "res://src/Level/PlaytestZone.tscn"
+default_gun_array = Array[String](["Revolver", "Speeder", "MPistol", "GLauncher", "Shotgun", "Tsurugi", "Red7", "Roberta"])
+start_level_path = "res://src/Level/EnGoalieTesting.tscn"
 
 [node name="ParallaxBackground" type="ParallaxBackground" parent="." unique_id=912648782]
 scroll_offset = Vector2(-15120.003, -9151.469)
