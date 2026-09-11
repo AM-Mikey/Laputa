@@ -39,8 +39,8 @@ func state_process(_delta):
 func set_move_dir():
 	var move_dir = Vector2.ZERO
 	if inp.can_act:
-		move_dir= Vector2(Input.get_action_strength("move_right") - Input.get_action_strength("move_left"), 0.0)
-		if not mm.coyote_timer.is_stopped() and Input.is_action_just_pressed("jump"):
+		move_dir = Vector2(inp.analogstick.x, 0.0)
+		if not mm.coyote_timer.is_stopped() and inp.pressed("jump"):
 			move_dir = Vector2(move_dir.x, -1.0)
 	pc.move_dir = move_dir
 

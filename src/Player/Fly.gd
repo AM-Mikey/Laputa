@@ -13,9 +13,7 @@ func state_process(_delta):
 	pc.velocity = pc.velocity
 
 func get_move_dir() -> Vector2: #bypass inp.can_act
-	return Vector2(
-		Input.get_action_strength("move_right") - Input.get_action_strength("move_left"),
-		Input.get_action_strength("look_down") - Input.get_action_strength("look_up"))
+	return inp.analogstick
 
 
 
@@ -25,7 +23,10 @@ func enter(_prev_state: String) -> void:
 	pc.invincible = true
 	var disable = [
 		pc.get_node("CollisionShape2D"),
-		pc.get_node("CrouchingCollision")]
+		pc.get_node("CrouchingCollision"),
+		pc.get_node("Hurtbox/CollisionShape2D"),
+		pc.get_node("Hurtbox/CrouchingCollision"),
+		]
 	mm.disable_collision_shapes(disable)
 	pc.get_node("CrouchDetector").monitoring = false
 	pc.set_up_direction(mm.FLOOR_NORMAL)
@@ -38,7 +39,10 @@ func exit(_next_state: String) -> void:
 	pc.velocity = Vector2.ZERO
 	var enable = [
 		pc.get_node("CollisionShape2D"),
-		pc.get_node("CrouchingCollision")]
+		pc.get_node("CrouchingCollision"),
+		pc.get_node("Hurtbox/CollisionShape2D"),
+		pc.get_node("Hurtbox/CrouchingCollision"),
+		]
 	mm.enable_collision_shapes(enable)
 	pc.get_node("ItemDetector").monitoring = true
 	pc.get_node("CrouchDetector").monitoring = true

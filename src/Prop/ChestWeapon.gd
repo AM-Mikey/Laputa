@@ -21,7 +21,7 @@ func expend_prop(): #used when loading a spent prop
 
 func _input(event):
 	if !gun: return
-	if event.is_action_pressed("inspect") && !active_players.is_empty():
+	if inp.pressed("inspect") && !active_players.is_empty():
 		for p in active_players:
 			if !p.disabled && inp.can_act && p.mm.current_state == p.mm.states["run"]:
 				if spent:

@@ -11,7 +11,7 @@ var touched_floor = false
 
 @onready var pc = f.pc()
 @onready var pc_on_floor = pc.is_on_floor()
-@onready var pc_held_down = Input.is_action_pressed("look_down") and inp.can_act
+@onready var pc_held_down = inp.pressed("look_down") and inp.can_act
 
 func setup():
 	$FizzleTimer.start(f_time)

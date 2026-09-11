@@ -27,7 +27,7 @@ func setup_length():
 			sprites.append(duplicated_sprite)
 
 func _input(event):
-	if event.is_action_pressed("inspect") && !active_players.is_empty():
+	if inp.pressed("inspect") && !active_players.is_empty():
 		for p in active_players:
 			if !p.disabled && inp.can_act && p.mm.current_state == p.mm.states["run"]:
 				if spent:

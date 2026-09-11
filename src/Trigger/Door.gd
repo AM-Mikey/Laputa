@@ -16,7 +16,7 @@ func _ready():
 	w.emit_signal("finished_spawn_entities_step")
 
 func _input(event):
-	if event.is_action_pressed("inspect") and active_pc != null:
+	if inp.pressed("inspect") and active_pc != null:
 		if active_pc.is_on_floor() and inp.can_act:
 			if not locked:
 				enter_door()

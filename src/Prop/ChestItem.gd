@@ -19,7 +19,7 @@ func setup(): #Reminder: no function called can use await #TODO:check if items a
 
 func _input(event):
 	if !held_item: return
-	if event.is_action_pressed("inspect") && !active_players.is_empty():
+	if inp.pressed("inspect") && !active_players.is_empty():
 		for p in active_players:
 			if !p.disabled && inp.can_act && p.mm.current_state == p.mm.states["run"]:
 				if spent:
