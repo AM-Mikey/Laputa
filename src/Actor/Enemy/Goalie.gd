@@ -7,6 +7,9 @@ const TX_0 = preload("res://assets/Actor/Enemy/Goalie.png")
 @onready var BONK = preload("res://src/Effect/BonkParticle.tscn")
 @onready var LAND = preload("res://src/Effect/LandParticle.tscn")
 
+@onready var ap = $AnimationPlayer
+@onready var kick_hitbox = $KickHitbox
+
 var jump_pos: = Vector2.ZERO
 @export var cooldown_time: = 1.0
 
@@ -31,7 +34,7 @@ func set_look_dir(val):
 	$JumpDetector.scale.x = -look_dir.x
 	$Sprite2D.flip_h = look_dir.x > 0.0
 
-func _ready():
+func setup():
 	hp = 4
 	damage_on_contact = 2
 	speed = Vector2(100, 200)
@@ -49,7 +52,6 @@ func _ready():
 	$ActiveDetector.top_level = true
 	$ActiveDetector.global_position = active_detector_global_pos
 
-
 	$JumpDetector/CollisionShape2D.shape.size.y = abs($JumpWaypoint.position.y) - 32.0
 	$JumpDetector/CollisionShape2D.position.y = -$JumpDetector/CollisionShape2D.shape.size.y / 2.0 - 32.0
 	jump_detector_pos = $JumpDetector.position
@@ -62,6 +64,112 @@ func _ready():
 
 	change_state("idle")
 
+
+### STATE ###
+func enter_idle(_prev_state):
+	ap.play("Idle")
+
+func do_idle(_delta):
+	var player = f.pc()
+	if player:
+		look_dir.x = signf(player.global_position.x - global_position.x)
+	velocity = calc_velocity(Vector2.ZERO)
+	move_and_slide()
+	update_detector_position()
+	if target:
+		change_state("active")
+
+func exit_idle(_prev_state):
+	pass
+
+
+
+
+func enter_active(_prev_state):
+	ap.play("Active")
+
+func do_active(_delta):
+	var player = f.pc()
+	if player:
+		look_dir.x = signf(player.global_position.x - global_position.x)
+	velocity = calc_velocity(Vector2.ZERO)
+	move_and_slide()
+	update_detector_position()
+	if !target:
+		change_state("idle")
+	elif player_in_jump_zone && inp.pressed("jump"):
+		change_state("rise")
+
+func exit_active(_prev_state):
+	pass
+
+
+
+func enter_rise(_prev_state):
+	ap.play("Rise")
+	am.play("enemy_jump", self)
+	move_dir = Vector2.UP
+	rise_from_position = global_position
+
+func do_rise(_delta):
+	if is_on_ceiling():
+		create_effect("Bonk")
+
+	if is_on_ceiling() || position.y <= jump_pos.y || !target || position.y <= target.global_position.y:
+		change_state("fall")
+		return
+	velocity = calc_velocity(Vector2.UP)
+	move_and_slide()
+	velocity = velocity
+
+func exit_rise(_prev_state):
+	velocity = Vector2.ZERO
+
+
+
+func enter_kick(_prev_state):
+	kicked = true
+	ap.play("Kick")
+	am.play("enemy_shoot")
+	kick_hitbox.monitoring = true
+	kick_hitbox.monitorable = true
+
+func do_kick(_delta):
+	if not ap.is_playing():
+		change_state("fall")
+		return
+
+	velocity = Vector2.ZERO
+	move_and_slide()
+
+func exit_kick(_prev_state):
+	velocity = Vector2.ZERO
+	kick_hitbox.monitoring = false
+	kick_hitbox.monitorable = false
+
+
+
+func enter_fall(_prev_state):
+	ap.play("Fall")
+	$FallTimer.start()
+	if $KickGraceTimer.time_left <= 0.0:
+		$KickGraceTimer.start()
+
+func do_fall(_delta):
+	velocity = calc_velocity(Vector2.ZERO)
+	move_and_slide()
+	velocity = velocity
+
+	if is_on_floor() || global_position.y > rise_from_position.y || $FallTimer.time_left <= 0.0:
+		am.play("enemy_land", self)
+		create_effect("Land")
+		change_state("active")
+		return
+
+func exit_fall(_prev_state):
+	kicked = false
+
+### UTILITY ###
 func update_detector_position():
 	$ActiveDetector.global_position = global_position + active_detector_pos
 	$JumpDetector.global_position = global_position + jump_detector_pos
@@ -116,6 +224,7 @@ func create_effect(vfx_name):
 				w.front.add_child(bonk)
 
 
+### SIGNALS ###
 func _on_ActiveDetector_body_entered(body):
 	target = body
 
@@ -125,14 +234,30 @@ func _on_ActiveDetector_body_exited(_body):
 
 func _on_JumpDetector_body_entered(_body):
 	player_in_jump_zone = true
-	if $StateMachine.current_state == $StateMachine/Active:
-		$StateMachine.change_state("Rise")
+	if state == "active":
+		change_state("rise")
 
 func _on_JumpDetector_body_exited(_body):
 	player_in_jump_zone = false
 
 func _on_KickDectector_body_entered(_body):
-	if $StateMachine.current_state == $StateMachine/Rise:
-		$StateMachine.change_state("Kick")
-	elif $StateMachine.current_state == $StateMachine/Fall && $KickGraceTimer.time_left > 0.0:
-		$StateMachine.change_state("Kick")
+	if state == "rise":
+		change_state("kick")
+	elif state == "fall" && $KickGraceTimer.time_left > 0.0:
+		change_state("kick")
+
+
+func _on_KickHitbox_area_entered(area: Area2D) -> void:
+	if area.get_collision_layer_value(6): #armor
+		kick_hitbox.set_deferred("monitoring", false)
+		kick_hitbox.set_deferred("monitorable", false)
+	elif area.get_collision_layer_value(17): #playerhurt
+		area.get_parent().hit(kick_damage, Vector2(80 * look_dir.x, 0), kick_hitbox)
+	elif area.get_collision_layer_value(9): #breakable
+		area.get_parent().on_break()
+
+
+func _on_KickHitbox_body_entered(body: Node2D) -> void:
+	if body.get_collision_layer_value(6): #armor
+		kick_hitbox.set_deferred("monitoring", false)
+		kick_hitbox.set_deferred("monitorable", false)

@@ -3,13 +3,6 @@
 [ext_resource type="Script" uid="uid://cgnp13s3abode" path="res://src/Actor/Enemy/Goalie.gd" id="1_aho6q"]
 [ext_resource type="PackedScene" uid="uid://7hbenrfv6p3q" path="res://src/Utility/PhysicsLayerBody.tscn" id="2_17672"]
 [ext_resource type="Texture2D" uid="uid://clhrvetw6ax6h" path="res://assets/Actor/Enemy/Goalie.png" id="3_c3js0"]
-[ext_resource type="PackedScene" uid="uid://qmvnhwivhm4j" path="res://src/Utility/StateMachine.tscn" id="4_t2tsg"]
-[ext_resource type="Theme" uid="uid://45e84j2sj7w0" path="res://src/UI/Theme/LaputaTheme.tres" id="5_533tp"]
-[ext_resource type="Script" uid="uid://d3h7pxwy2if6w" path="res://src/Actor/Enemy/Outdated/Goalie/Idle.gd" id="6_6vfwe"]
-[ext_resource type="Script" uid="uid://c758j64luap4" path="res://src/Actor/Enemy/Outdated/Goalie/Active.gd" id="7_rilcr"]
-[ext_resource type="Script" uid="uid://bwhf0ctg8u5ho" path="res://src/Actor/Enemy/Outdated/Goalie/Rise.gd" id="8_in2w3"]
-[ext_resource type="Script" uid="uid://bk8sni4bohh65" path="res://src/Actor/Enemy/Outdated/Goalie/Kick.gd" id="9_mejuo"]
-[ext_resource type="Script" uid="uid://cdeed6oueu0d1" path="res://src/Actor/Enemy/Outdated/Goalie/Fall.gd" id="10_8cy3u"]
 [ext_resource type="PackedScene" uid="uid://bwp6sqdlvfo84" path="res://src/Editor/VisualUtility/VUVector.tscn" id="11_p2rvj"]
 [ext_resource type="PackedScene" uid="uid://cyg86p7wau0n7" path="res://src/Editor/VisualUtility/WaypointLocal.tscn" id="12_ax27h"]
 
@@ -217,34 +210,10 @@ position = Vector2(0, -16)
 texture = ExtResource("3_c3js0")
 hframes = 2
 vframes = 5
-frame = 6
+frame = 2
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1193424199]
 libraries/ = SubResource("AnimationLibrary_g0tk0")
-
-[node name="StateMachine" parent="." unique_id=990411388 instance=ExtResource("4_t2tsg")]
-
-[node name="Label" type="Label" parent="StateMachine" unique_id=149672216]
-offset_left = -24.0
-offset_top = -32.0
-offset_right = 24.0
-offset_bottom = -16.0
-theme = ExtResource("5_533tp")
-
-[node name="Idle" type="Node" parent="StateMachine" unique_id=400746828]
-script = ExtResource("6_6vfwe")
-
-[node name="Active" type="Node" parent="StateMachine" unique_id=603508363]
-script = ExtResource("7_rilcr")
-
-[node name="Rise" type="Node" parent="StateMachine" unique_id=1456642393]
-script = ExtResource("8_in2w3")
-
-[node name="Kick" type="Node" parent="StateMachine" unique_id=512728381]
-script = ExtResource("9_mejuo")
-
-[node name="Fall" type="Node" parent="StateMachine" unique_id=1815030219]
-script = ExtResource("10_8cy3u")
 
 [node name="LookVector" parent="." unique_id=872564127 instance=ExtResource("11_p2rvj")]
 tag_name = "look_dir"
@@ -258,10 +227,9 @@ lock_x = true
 
 [connection signal="area_entered" from="Hitbox" to="." method="_on_hitbox_area_entered"]
 [connection signal="area_exited" from="Hitbox" to="." method="_on_hitbox_area_exited"]
-[connection signal="timeout" from="FallTimer" to="StateMachine/Fall" method="_on_FallTimer_timeout"]
 [connection signal="body_entered" from="KickDectector" to="." method="_on_KickDectector_body_entered"]
-[connection signal="area_entered" from="KickHitbox" to="StateMachine/Kick" method="_on_KickHitbox_area_entered"]
-[connection signal="body_entered" from="KickHitbox" to="StateMachine/Kick" method="_on_KickHitbox_body_entered"]
+[connection signal="area_entered" from="KickHitbox" to="." method="_on_KickHitbox_area_entered"]
+[connection signal="body_entered" from="KickHitbox" to="." method="_on_KickHitbox_body_entered"]
 [connection signal="body_entered" from="ActiveDetector" to="." method="_on_ActiveDetector_body_entered"]
 [connection signal="body_exited" from="ActiveDetector" to="." method="_on_ActiveDetector_body_exited"]
 [connection signal="body_entered" from="JumpDetector" to="." method="_on_JumpDetector_body_entered"]
