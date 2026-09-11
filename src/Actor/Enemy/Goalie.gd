@@ -252,7 +252,7 @@ func _on_KickHitbox_area_entered(area: Area2D) -> void:
 	elif area.get_collision_layer_value(17): #playerhurt
 		area.get_parent().hit(kick_damage, Vector2(80 * look_dir.x, 0), kick_hitbox)
 	elif area.get_collision_layer_value(9): #breakable
-		area.get_parent().on_break()
+		area.get_parent().on_break("cut")
 
 
 func _on_KickHitbox_body_entered(body: Node2D) -> void:
