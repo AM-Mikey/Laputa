@@ -1692,7 +1692,7 @@ properties = {
 "fountain_force": [200.0, 3, ""],
 "fountain_spread": [0.2617993877991494, 3, ""],
 "id": [&"Sentry", 4, ""],
-"normal_cooldown": [3.5, 3, ""],
+"normal_cooldown": [1.0, 3, ""],
 "projectile_damage": [2, 2, ""],
 "speed": [Vector2(150, 350), 5, ""],
 "water_gravity": [150.0, 3, ""]
@@ -1702,7 +1702,7 @@ properties = {
 visibility_layer = 2
 script = ExtResource("18_fe88j")
 tag_name = "player_detector"
-value = Rect2(-128, -128, 256, 256)
+value = Rect2(-264, -128, 352, 256)
 
 [node name="ShootX" type="Area2D" parent="Spawns/Sentry" unique_id=410873415 groups=["Entities", "VisualUtilities", "WaypointLocals", "Waypoints"] instance=ExtResource("15_rrhud")]
 visibility_layer = 2
@@ -1743,7 +1743,7 @@ properties = {
 "fountain_force": [200.0, 3, ""],
 "fountain_spread": [0.2617993877991494, 3, ""],
 "id": [&"Sentry1", 4, ""],
-"normal_cooldown": [3.5, 3, ""],
+"normal_cooldown": [1.0, 3, ""],
 "projectile_damage": [2, 2, ""],
 "speed": [Vector2(150, 350), 5, ""],
 "water_gravity": [150.0, 3, ""]
@@ -1753,7 +1753,7 @@ properties = {
 visibility_layer = 2
 script = ExtResource("18_fe88j")
 tag_name = "player_detector"
-value = Rect2(-128, -128, 256, 256)
+value = Rect2(-88, -128, 352, 256)
 
 [node name="ShootX" type="Area2D" parent="Spawns/Sentry1" unique_id=2005260060 groups=["Entities", "VisualUtilities", "WaypointLocals", "Waypoints"] instance=ExtResource("15_rrhud")]
 visibility_layer = 2
