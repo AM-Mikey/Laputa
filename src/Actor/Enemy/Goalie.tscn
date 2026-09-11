@@ -3,7 +3,6 @@
 [ext_resource type="Script" uid="uid://cgnp13s3abode" path="res://src/Actor/Enemy/Goalie.gd" id="1_aho6q"]
 [ext_resource type="PackedScene" uid="uid://7hbenrfv6p3q" path="res://src/Utility/PhysicsLayerBody.tscn" id="2_17672"]
 [ext_resource type="Texture2D" uid="uid://clhrvetw6ax6h" path="res://assets/Actor/Enemy/Goalie.png" id="3_c3js0"]
-[ext_resource type="PackedScene" uid="uid://bwp6sqdlvfo84" path="res://src/Editor/VisualUtility/VUVector.tscn" id="11_p2rvj"]
 [ext_resource type="PackedScene" uid="uid://cyg86p7wau0n7" path="res://src/Editor/VisualUtility/WaypointLocal.tscn" id="12_ax27h"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ax27h"]
@@ -214,11 +213,6 @@ frame = 2
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1193424199]
 libraries/ = SubResource("AnimationLibrary_g0tk0")
-
-[node name="LookVector" parent="." unique_id=872564127 instance=ExtResource("11_p2rvj")]
-tag_name = "look_dir"
-direction = Vector2(-1, 0)
-snap_degrees = 180.0
 
 [node name="JumpWaypoint" parent="." unique_id=1432238783 instance=ExtResource("12_ax27h")]
 position = Vector2(0, -96)

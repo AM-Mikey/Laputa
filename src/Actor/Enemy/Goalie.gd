@@ -43,8 +43,6 @@ func setup():
 	reward = 3
 	is_wind_affected = true
 
-	look_dir = $LookVector.direction.snappedf(1.0)
-
 	$ActiveDetector/CollisionShape2D.shape.size.y = abs($JumpWaypoint.position.y)
 	$ActiveDetector/CollisionShape2D.position.y = -$ActiveDetector/CollisionShape2D.shape.size.y / 2.0
 	active_detector_pos = $ActiveDetector.position
