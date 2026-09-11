@@ -1,0 +1,31 @@
+[gd_scene format=3 uid="uid://qf74wl5o7np"]
+
+[ext_resource type="PackedScene" uid="uid://bp6f5q8b4w4dr" path="res://src/Actor/Enemy/Goalie.tscn" id="1_3vedx"]
+[ext_resource type="Script" uid="uid://c2ox2xx6ka8hd" path="res://src/Actor/Enemy/GoalieReceiver.gd" id="2_du5f3"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_3vedx"]
+resource_local_to_scene = true
+size = Vector2(64, 96)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_du5f3"]
+resource_local_to_scene = true
+size = Vector2(46, 60)
+
+[node name="GoalieReceiver" unique_id=883282154 instance=ExtResource("1_3vedx")]
+script = ExtResource("2_du5f3")
+speed = Vector2(150, 350)
+
+[node name="KickDectector" parent="." index="6" unique_id=487697926]
+collision_mask = 8259
+
+[node name="KickHitbox" parent="." index="7" unique_id=1149402340]
+collision_mask = 74082
+
+[node name="CollisionShape2D" parent="ActiveDetector" parent_id_path=PackedInt32Array(1122222324) index="0" unique_id=1345632410]
+shape = SubResource("RectangleShape2D_3vedx")
+
+[node name="CollisionShape2D" parent="JumpDetector" parent_id_path=PackedInt32Array(104415215) index="0" unique_id=14587079]
+shape = SubResource("RectangleShape2D_du5f3")
+
+[node name="Sprite2D" parent="." index="10" unique_id=1138557505]
+self_modulate = Color(1, 0.45490196, 1, 1)

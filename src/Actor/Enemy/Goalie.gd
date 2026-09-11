@@ -1,5 +1,7 @@
 extends Enemy
 
+class_name EnemyGoalie
+
 const ICON = preload("res://assets/Actor/Enemy/GoalieThumbnail.png")
 
 const TX_0 = preload("res://assets/Actor/Enemy/Goalie.png")
@@ -58,9 +60,13 @@ func setup():
 	$JumpDetector.global_position = jump_detector_global_pos
 
 	jump_pos = $JumpWaypoint.global_position
+	_setup()
 	w.emit_signal("finished_spawn_entities_step")
 
 	change_state("idle")
+
+func _setup():
+	pass
 
 
 ### STATE ###
