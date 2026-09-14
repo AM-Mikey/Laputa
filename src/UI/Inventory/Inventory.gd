@@ -17,7 +17,7 @@ func _ready():
 	#first_topic.topic_stages = [0,1,2,3,4]
 
 func _input(event):
-	if inp.pressed("inventory") and inp.can_act:
+	if event.is_action_pressed("inventory") and inp.can_act:
 		exit()
 
 
@@ -134,7 +134,7 @@ func _on_tab_toggled(toggled_on: bool, tab: String):
 
 func _on_ItemList_item_selected(index: int):
 	var pc = f.pc()
-	%InventoryHeader.text = pc.item_array[index].item_name
+	%InventoryHeader.text = pc.item_array[index].display_name
 	%InventoryBody.text = pc.item_array[index].description
 
 
