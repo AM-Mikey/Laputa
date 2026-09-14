@@ -1,6 +1,6 @@
 extends Trigger
 
-var damage = 2
+@export var damage = 2
 
 func _ready(): #Reminder: no function called can use await
 	trigger_type = "spikes"
