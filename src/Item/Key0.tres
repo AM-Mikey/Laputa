@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="Item" format=3 uid="uid://cp6yxrcme45e1"]
+
+[ext_resource type="Script" uid="uid://dj0u1vtqimy4j" path="res://src/Item/Item.gd" id="1_q40k2"]
+[ext_resource type="Texture2D" uid="uid://cbxijdkxuta1e" path="res://assets/Item/Key.png" id="2_710h7"]
+
+[resource]
+script = ExtResource("1_q40k2")
+display_name = "Key 0"
+id = "key0"
+texture = ExtResource("2_710h7")
+description = "It's just a key."
+is_key = true

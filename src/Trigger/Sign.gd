@@ -13,7 +13,7 @@ func _ready(): #Reminder: no function called can use await
 	w.emit_signal("finished_spawn_entities_step")
 
 func _input(event):
-	if inp.pressed("inspect") and active_pc != null:
+	if event.is_action_pressed("inspect") && active_pc != null:
 		if !reading && !active_pc.disabled && inp.can_act && active_pc.mm.current_state == active_pc.mm.states["run"]:
 			active_pc.inspect_target = $CollisionShape2D
 			reading = true
