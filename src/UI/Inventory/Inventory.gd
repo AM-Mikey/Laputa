@@ -134,7 +134,7 @@ func _on_tab_toggled(toggled_on: bool, tab: String):
 
 func _on_ItemList_item_selected(index: int):
 	var pc = f.pc()
-	%InventoryHeader.text = pc.item_array[index].item_name
+	%InventoryHeader.text = pc.item_array[index].display_name
 	%InventoryBody.text = pc.item_array[index].description
 
 

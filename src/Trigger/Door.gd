@@ -9,6 +9,8 @@ signal level_change(level, door_index)
 @export var door_index: int = 0
 @export var same_level_next_index: int = 0
 @export var locked = false
+@export var key_id = ""
+@export var eat_key = true
 
 func _ready():
 	var _err = connect("level_change", Callable(w, "change_level_via_trigger"))
@@ -18,12 +20,21 @@ func _ready():
 func _input(event):
 	if event.is_action_pressed("inspect") and active_pc != null:
 		if active_pc.is_on_floor() and inp.can_act:
-			if not locked:
+			if !locked || spent:
 				enter_door()
 			else:
-				if active_pc.item_array.has("Key"):
-					var index = active_pc.item_array.find("Key") #TODO: have door store a specific key
-					active_pc.item_array.remove(index)
+				var has_key := false
+				var key_index: int
+				for i in active_pc.item_array:
+					if i.is_key && i.id == key_id:
+						has_key = true
+						key_index = active_pc.item_array.find(i)
+						continue
+				if has_key:
+					if eat_key == true:
+						active_pc.item_array.remove_at(key_index)
+					spent = true
+					locked = false
 					enter_door()
 				else:
 					am.play("locked")
@@ -50,7 +61,8 @@ func enter_door():
 			#return
 		emit_signal("level_change", level, door_index)
 
-
+func expend_trigger():
+	spent = true
 
 ### SIGNALS
 
