@@ -45,6 +45,7 @@ func setup(): #Reminder: no function called can use await
 			hp = 20
 			reward = 5
 			damage_on_contact = normal_damage
+			enemy_damage_on_contact = 999
 			speed = walk_speed
 
 	is_wind_affected = false
@@ -72,9 +73,11 @@ func enter_charge(_last_state):
 	$AnimationPlayer.play("Charge")
 	speed = charge_speed
 	damage_on_contact = charge_damage
+	hit_enemies_on_contact = true
 
 func exit_charge(_next_state):
 	damage_on_contact = normal_damage
+	hit_enemies_on_contact = false
 
 func do_charge(_delta):
 	if on_wall:
@@ -89,15 +92,26 @@ func enter_wallslam(_last_state):
 	await get_tree().create_timer(wallslam_time, false, true).timeout
 	move_dir.x = -move_dir.x
 	$Sprite2D.flip_h = sign(move_dir.x) == 1
-	change_state("walk")
+	if $FloorDetectorL.is_colliding() && $FloorDetectorR.is_colliding():
+		change_state("walk")
+	else:
+		change_state("fall")
 
-#func do_wallslam(_delta):
-	#pass
 
+func enter_fall(_last_state):
+	$AnimationPlayer.play("Fall")
 
+func do_fall(_delta):
+	if $FloorDetectorL.is_colliding() && $FloorDetectorR.is_colliding():
+		change_state("walk")
+	velocity = calc_velocity(move_dir)
+	move_and_slide()
+
+func exit_fall(_next_state):
+	land_shake()
 
 func _on_hit(_damage, _blood_direction, _hitnox):
-	if state != "charge":
+	if !state in ["charge", "wallslam", "fall"]:
 		change_state("charge")
 
 func charge_shake():
@@ -120,6 +134,16 @@ func slam_shake():
 		var shake_pixels = remap(player_distance, 0, max_distance, max_shake_pixels, 0.0)
 		shake_pixels = clampf(shake_pixels, 0.0, max_shake_pixels)
 		f.pc().get_node("PlayerCamera").shake(shake_pixels, 0.6, 16.0)
+
+func land_shake():
+	am.play("enemy_slam", self)
+	if f.pc():
+		var player_distance = f.pc().global_position.distance_to(global_position)
+		var max_distance := 512
+		var max_shake_pixels := 8.0
+		var shake_pixels = remap(player_distance, 0, max_distance, max_shake_pixels, 0.0)
+		shake_pixels = clampf(shake_pixels, 0.0, max_shake_pixels)
+		f.pc().get_node("PlayerCamera").shake(shake_pixels, 0.4, 8.0)
 
 func calc_velocity(dir, _do_gravity = true, _do_acceleration = true, _do_friction = true) -> Vector2:
 	var out: = Vector2.ZERO

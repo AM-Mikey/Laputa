@@ -38,7 +38,7 @@ func activate(player):
 	am.play("chest_open")
 	am.play_interrupt("get_item")
 	var got_item = GOT_ITEM.instantiate()
-	got_item.item_name = held_item_name
+	got_item.item_name = held_item.display_name
 	w.ui.add_child(got_item)
 	$AnimationPlayer.play("Used")
 	spent = true
@@ -51,9 +51,9 @@ func activate(player):
 		if !already_has_item:
 			player.item_array.append(held_item)
 			ms.mission_progress_check()
-			print("added item: '", held_item_name, "' to item array")
+			print("added item: '", held_item.display_name, "' to item array")
 		else:
-			print("WARNING: Item: ", held_item_name, " already in item array, ignoring")
+			print("WARNING: Item: ", held_item.display_name, " already in item array, ignoring")
 	else:
 		printerr("ERROR: INVALID ITEM: ", held_item_name)
 

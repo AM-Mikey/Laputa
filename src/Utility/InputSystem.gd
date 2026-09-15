@@ -56,6 +56,10 @@ var buffer:Array=[
 	["fire_automatic",0,9000,9000],
 	["inspect",0,9000,9000],
 	["inventory",0,9000,9000],
+	["ui_up",0,9000,9000],
+	["ui_down",0,9000,9000],
+	["ui_left",0,9000,9000],
+	["ui_right",0,9000,9000],
 	]
 
 func _on_joypad_connection_changed(_device: int, _connected: bool): #for if controller is connected during

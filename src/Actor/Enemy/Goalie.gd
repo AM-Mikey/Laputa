@@ -135,8 +135,8 @@ func enter_kick(_prev_state):
 	kicked = true
 	ap.play("Kick")
 	am.play("enemy_shoot")
-	kick_hitbox.monitoring = true
-	kick_hitbox.monitorable = true
+	kick_hitbox.set_deferred("monitoring", true)
+	kick_hitbox.set_deferred("monitorable", true)
 
 func do_kick(_delta):
 	if not ap.is_playing():
@@ -148,8 +148,8 @@ func do_kick(_delta):
 
 func exit_kick(_prev_state):
 	velocity = Vector2.ZERO
-	kick_hitbox.monitoring = false
-	kick_hitbox.monitorable = false
+	kick_hitbox.set_deferred("monitoring", false)
+	kick_hitbox.set_deferred("monitorable", false)
 
 
 
