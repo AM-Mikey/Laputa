@@ -11,7 +11,7 @@ func enter_kick(prev_state):
 	super.enter_kick(prev_state)
 	if prev_state in ["idle", "active"]:
 		kick_next_state = "idle"
-	elif prev_state == "rise":
+	elif prev_state in ["rise", "fall"]:
 		kick_next_state = "fall"
 
 
@@ -25,7 +25,7 @@ func do_kick(_delta):
 
 ### SIGNALS ###
 func _on_KickDectector_body_entered(body):
-	if state == "idle":
+	if state in ["idle", "active"]:
 		if body.get_collision_layer_value(7) \
 		|| (allow_to_deflect && (body.get_collision_layer_value(14) || body.get_collision_layer_value(2))):
 			change_state("kick")
@@ -69,10 +69,17 @@ func _on_KickHitbox_body_entered(body: Node2D) -> void:
 	elif body.get_collision_layer_value(7) || (body.get_collision_layer_value(14) && allow_to_deflect):
 		var player = f.pc()
 		if !player: return
-		var tween = body.create_tween()
+		#var tween = body.create_tween()
+		if body.get_collision_layer_value(7):
+			body.change_side(false)
 		var dir: = body.global_position.direction_to(player.global_position + Vector2(0, -15))
-		tween.tween_property(body, "velocity", dir * kick_force, 0.1)
-		tween.tween_property(body, "velocity", dir * kick_force, 3.0)
+		#tween.tween_property(body, "velocity", dir * kick_force, 0.1)
+		#tween.tween_property(body, "velocity", dir * kick_force, 3.0)
+		body.process_mode = Node.PROCESS_MODE_DISABLED
+		body.direction = dir
+		body.velocity = dir * kick_force
+		await get_tree().physics_frame
+		body.process_mode = Node.PROCESS_MODE_INHERIT
 
 
 func _on_PlayerDetector_body_entered(body: Node2D) -> void:
