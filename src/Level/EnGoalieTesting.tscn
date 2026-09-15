@@ -23,8 +23,8 @@
 [ext_resource type="PackedScene" path="res://src/Editor/VisualUtility/VURect.tscn" id="19_fe88j"]
 [ext_resource type="Script" path="res://src/Editor/VisualUtility/VUVector.gd" id="20_gl7cm"]
 [ext_resource type="PackedScene" path="res://src/Editor/VisualUtility/VUActor.tscn" id="21_luw57"]
-[ext_resource type="Script" path="res://src/Editor/VisualUtility/VUActor.gd" id="22_u6fjm"]
-[ext_resource type="Script" path="res://src/Editor/SpawnPoint.gd" id="24_uh1f3"]
+[ext_resource type="Script" path="res://src/Editor/VisualUtility/VUActor.gd" id="22_luw57"]
+[ext_resource type="Script" path="res://src/Editor/SpawnPoint.gd" id="24_u6fjm"]
 
 [node name="EnGoalieTesting" type="Node2D" unique_id=1952135705]
 visibility_layer = 2
@@ -32,6 +32,8 @@ script = ExtResource("1_6q8mx")
 level_name = "EnGoalieTesting"
 music = "train"
 dialog_json = "res://src/Dialog/Village.json"
+metadata/_edit_horizontal_guides_ = [2260.0, 2258.0, 1959.0, 1854.0]
+metadata/_edit_vertical_guides_ = [2889.0, 3001.0]
 
 [node name="LevelLimiter" type="MarginContainer" parent="." unique_id=1011068996 instance=ExtResource("2_jogqi")]
 visibility_layer = 2
@@ -1577,7 +1579,7 @@ lock_x = true
 [node name="SpawnHole" type="Area2D" parent="Spawns" unique_id=557950967 groups=["Entities", "PropSpawns"] instance=ExtResource("17_bc0da")]
 visibility_layer = 2
 z_index = 999
-position = Vector2(3088, 2192)
+position = Vector2(3088, 2096)
 collision_layer = 16384
 collision_mask = 0
 script = ExtResource("16_80658")
@@ -1605,7 +1607,7 @@ z_index = 999
 position = Vector2(8, 0)
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("22_u6fjm")
+script = ExtResource("22_luw57")
 actor_path = "uid://c7yhu5je8w1pf"
 filter_team = 1
 filter_actor = "roller"
@@ -1626,7 +1628,7 @@ properties = {
 [node name="SpawnHole1" type="Area2D" parent="Spawns" unique_id=741047207 groups=["Entities", "PropSpawns"] instance=ExtResource("17_bc0da")]
 visibility_layer = 2
 z_index = 999
-position = Vector2(3024, 2192)
+position = Vector2(3024, 2128)
 collision_layer = 16384
 collision_mask = 0
 script = ExtResource("16_80658")
@@ -1646,7 +1648,7 @@ properties = {
 visibility_layer = 2
 script = ExtResource("18_fe88j")
 tag_name = "player_detection"
-value = Rect2(-192, -16, 224, 96)
+value = Rect2(-320, -16, 352, 96)
 
 [node name="VUActor" type="Area2D" parent="Spawns/SpawnHole1" unique_id=1688417517 groups=["Entities", "VUActors", "VisualUtilities"] instance=ExtResource("21_luw57")]
 visibility_layer = 2
@@ -1654,7 +1656,7 @@ z_index = 999
 position = Vector2(8, 0)
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("22_u6fjm")
+script = ExtResource("22_luw57")
 actor_path = "uid://c7yhu5je8w1pf"
 filter_team = 1
 filter_actor = "roller"
@@ -1833,7 +1835,7 @@ lock_x = true
 [node name="GoalieReceiver2" type="Area2D" parent="Spawns" unique_id=832876688 groups=["ActorSpawns", "Entities"] instance=ExtResource("11_uo8bs")]
 visibility_layer = 2
 z_index = 999
-position = Vector2(2888, 2256)
+position = Vector2(2920, 2256)
 collision_layer = 16384
 collision_mask = 0
 script = ExtResource("12_4fpmn")
@@ -1886,6 +1888,104 @@ script = ExtResource("14_bc0da")
 tag_name = "jump_pos"
 lock_x = true
 
+[node name="Billy" type="Area2D" parent="Spawns" unique_id=1659327322 groups=["ActorSpawns", "Entities"] instance=ExtResource("11_uo8bs")]
+visibility_layer = 2
+z_index = 999
+position = Vector2(3160, 2232)
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("12_4fpmn")
+actor_path = "res://src/Actor/Enemy/Billy.tscn"
+properties = {
+"base_gravity": [300.0, 3, ""],
+"bullet_damage": [2, 2, ""],
+"bullet_speed": [200, 2, ""],
+"deaggro_delay": [3.0, 3, ""],
+"debug": [true, 1, ""],
+"difficulty": [0, 2, ""],
+"do_bubbles": [true, 1, ""],
+"editor_hidden": [false, 1, ""],
+"id": [&"Billy2", 4, ""],
+"idle_max_time": [5.0, 3, ""],
+"lock_distance": [128, 2, ""],
+"lock_tolerance": [16, 2, ""],
+"speed": [Vector2(150, 350), 5, ""],
+"walk_max_time": [10.0, 3, ""],
+"water_gravity": [150.0, 3, ""]
+}
+
+[node name="VUVector" type="Area2D" parent="Spawns/Billy" unique_id=122991577 groups=["Entities", "VUVectors", "VisualUtilities"] instance=ExtResource("13_3gt83")]
+visibility_layer = 2
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("20_gl7cm")
+tag_name = "move_dir"
+direction = Vector2(-1, -8.742278e-08)
+snap_degrees = 180.0
+
+[node name="Billy1" type="Area2D" parent="Spawns" unique_id=552060902 groups=["ActorSpawns", "Entities"] instance=ExtResource("11_uo8bs")]
+visibility_layer = 2
+z_index = 999
+position = Vector2(3224, 2264)
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("12_4fpmn")
+actor_path = "res://src/Actor/Enemy/Billy.tscn"
+properties = {
+"base_gravity": [300.0, 3, ""],
+"bullet_damage": [2, 2, ""],
+"bullet_speed": [200, 2, ""],
+"deaggro_delay": [3.0, 3, ""],
+"debug": [true, 1, ""],
+"difficulty": [0, 2, ""],
+"do_bubbles": [true, 1, ""],
+"editor_hidden": [false, 1, ""],
+"id": [&"Billy3", 4, ""],
+"idle_max_time": [5.0, 3, ""],
+"lock_distance": [128, 2, ""],
+"lock_tolerance": [16, 2, ""],
+"speed": [Vector2(150, 350), 5, ""],
+"walk_max_time": [10.0, 3, ""],
+"water_gravity": [150.0, 3, ""]
+}
+
+[node name="VUVector" type="Area2D" parent="Spawns/Billy1" unique_id=1019054732 groups=["Entities", "VUVectors", "VisualUtilities"] instance=ExtResource("13_3gt83")]
+visibility_layer = 2
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("20_gl7cm")
+tag_name = "move_dir"
+direction = Vector2(-1, -8.742278e-08)
+snap_degrees = 180.0
+
+[node name="Shield" type="Area2D" parent="Spawns" unique_id=1482048526 groups=["ActorSpawns", "Entities"] instance=ExtResource("11_uo8bs")]
+visibility_layer = 2
+z_index = 999
+position = Vector2(2944, 2256)
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("12_4fpmn")
+actor_path = "res://src/Actor/Enemy/Shield.tscn"
+properties = {
+"base_gravity": [300.0, 3, ""],
+"debug": [true, 1, ""],
+"difficulty": [0, 2, ""],
+"do_bubbles": [true, 1, ""],
+"editor_hidden": [false, 1, ""],
+"id": [&"Shield", 4, ""],
+"speed": [Vector2(150, 350), 5, ""],
+"water_gravity": [150.0, 3, ""]
+}
+
+[node name="MoveDir" type="Area2D" parent="Spawns/Shield" unique_id=1540331808 groups=["Entities", "VUVectors", "VisualUtilities"] instance=ExtResource("13_3gt83")]
+visibility_layer = 2
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("20_gl7cm")
+tag_name = "move_dir"
+direction = Vector2(-1, -8.742278e-08)
+snap_degrees = 180.0
+
 [node name="Waypoints" type="Node2D" parent="." unique_id=561693217]
 visibility_layer = 2
 
@@ -1894,7 +1994,7 @@ visibility_layer = 2
 position = Vector2(3000, 1952)
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("24_uh1f3")
+script = ExtResource("24_u6fjm")
 
 [node name="TitlePreview" type="Area2D" parent="." unique_id=1910190675 groups=["TitlePreviews"] instance=ExtResource("11_atco8")]
 visibility_layer = 2
@@ -1976,3 +2076,6 @@ zoom = 3.0
 [connection signal="input_event" from="Spawns/GoalieReceiver1" to="Spawns/GoalieReceiver1" method="_on_input_event"]
 [connection signal="input_event" from="Spawns/GoalieReceiver2" to="Spawns/GoalieReceiver2" method="_on_input_event"]
 [connection signal="input_event" from="Spawns/GoalieReceiver3" to="Spawns/GoalieReceiver3" method="_on_input_event"]
+[connection signal="input_event" from="Spawns/Billy" to="Spawns/Billy" method="_on_input_event"]
+[connection signal="input_event" from="Spawns/Billy1" to="Spawns/Billy1" method="_on_input_event"]
+[connection signal="input_event" from="Spawns/Shield" to="Spawns/Shield" method="_on_input_event"]

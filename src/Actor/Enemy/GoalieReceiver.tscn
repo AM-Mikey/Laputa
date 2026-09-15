@@ -1,7 +1,10 @@
-[gd_scene format=3 uid="uid://cg8vv4p46je81"]
+[gd_scene format=3 uid="uid://yhju87jkfrs4"]
 
 [ext_resource type="PackedScene" uid="uid://bp6f5q8b4w4dr" path="res://src/Actor/Enemy/Goalie.tscn" id="1_3vedx"]
 [ext_resource type="Script" uid="uid://bberivt2vrhwv" path="res://src/Actor/Enemy/GoalieReceiver.gd" id="2_du5f3"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_rumjd"]
+size = Vector2(600, 400)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_3vedx"]
 resource_local_to_scene = true
@@ -15,10 +18,18 @@ size = Vector2(46, 60)
 script = ExtResource("2_du5f3")
 speed = Vector2(150, 350)
 
-[node name="KickDectector" parent="." index="6" unique_id=487697926]
+[node name="PlayerDetector" type="Area2D" parent="." index="6" unique_id=271130369]
+collision_layer = 0
+monitorable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerDetector" index="0" unique_id=1098110437]
+shape = SubResource("RectangleShape2D_rumjd")
+debug_color = Color(1, 0.6, 0.69803923, 0.09803922)
+
+[node name="KickDectector" parent="." index="7" unique_id=487697926]
 collision_mask = 8259
 
-[node name="KickHitbox" parent="." index="7" unique_id=1149402340]
+[node name="KickHitbox" parent="." index="8" unique_id=1149402340]
 collision_mask = 74082
 
 [node name="CollisionShape2D" parent="ActiveDetector" parent_id_path=PackedInt32Array(1122222324) index="0" unique_id=1345632410]
@@ -27,5 +38,8 @@ shape = SubResource("RectangleShape2D_3vedx")
 [node name="CollisionShape2D" parent="JumpDetector" parent_id_path=PackedInt32Array(104415215) index="0" unique_id=14587079]
 shape = SubResource("RectangleShape2D_du5f3")
 
-[node name="Sprite2D" parent="." index="10" unique_id=1138557505]
+[node name="Sprite2D" parent="." index="11" unique_id=1138557505]
 self_modulate = Color(1, 0.45490196, 1, 1)
+
+[connection signal="body_entered" from="PlayerDetector" to="." method="_on_PlayerDetector_body_entered"]
+[connection signal="body_exited" from="PlayerDetector" to="." method="_on_PlayerDetector_body_exited"]
