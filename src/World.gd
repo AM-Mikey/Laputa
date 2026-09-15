@@ -358,10 +358,9 @@ func run_conversation_on_enter(level):
 			level.do_conversation_on_enter(false)
 
 func clear_spawn_layers():
-	pass
-	#for sl in [farthest_back, middle_back, player_back, player_front, middle_front, farthest_front]:
-		#for c in sl.get_children():
-			#c.free()
+	for sl in [farthest_back, middle_back, player_back, player_front, middle_front, farthest_front]:
+		for c in sl.get_children():
+			c.free()
 
 func spawn_entities():
 	#TODO: Timing for setting allow_spawn (mission system) goes up here)

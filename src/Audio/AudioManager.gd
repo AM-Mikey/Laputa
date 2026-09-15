@@ -15,7 +15,7 @@ signal music_fadeout_finished
 	"ui_move": preload("res://assets/SFX/Placeholder/snd_menu_move.ogg"),
 
 	"door": preload("res://assets/SFX/Placeholder/snd_door.ogg"),
-	"locked": preload("res://assets/SFX/Placeholder/snd_gun_click.ogg"),
+	"door_locked": preload("res://assets/SFX/Placeholder/snd_gun_click.ogg"),
 	"click": preload("res://assets/SFX/Placeholder/snd_gun_click.ogg"),
 	"ammo_refill": preload("res://assets/SFX/Placeholder/snd_get_missile.ogg"),
 	"hp_refill": preload("res://assets/SFX/Placeholder/snd_health_refill.ogg"),

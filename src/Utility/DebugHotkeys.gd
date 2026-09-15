@@ -34,7 +34,7 @@ func _input(event):
 			editor_tab = w.el.get_node("Editor/Main/Win/Tab").current_tab
 			w.el.get_node("Editor").exit()
 		else:
-			print("showing level editor")
+			#print("showing level editor")
 			w.el.add_child(LEVEL_EDITOR.instantiate())
 			w.el.get_node("Editor/Main/Win/Tab").current_tab = editor_tab
 			w.el.get_node("Editor").on_tab_changed(editor_tab)

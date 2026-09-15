@@ -26,7 +26,7 @@ var brush #Rect2i
 var tile_map_selection: Rect2i
 var tile_map_copy_buffer: Dictionary
 var active_tile_map_layer: int = 0
-var multi_erase = false
+var multi_erase = true
 var auto_tile = true
 
 var active_tool = "tile"
@@ -82,12 +82,14 @@ func _ready():
 	#$Main/Win.move_child($Main/Win/Tab, 0) TODO: was supposed to make tabcontainer go behind resize controls, didnt work
 
 func enter(): #Call this every time the level is changed or reloaded
-	#print("enter")
+	print("enter")
 	setup_windows()
 	if f.pc():
 		f.pc().disable()
 	if f.hud():
 		f.hud().queue_free()
+	if w.dl.has_node("DebugInfo"):
+		w.dl.get_node("DebugInfo").queue_free()
 	w.ui.visible = false
 	w.bl.visible = false
 	w.clear_spawn_layers()
@@ -1124,6 +1126,7 @@ func on_tab_changed(tab):
 			set_tool("tile")
 			#set_entities_pickable(false)
 			inspector.on_deselected()
+
 		"TileSet":
 			set_tool("tile_set")
 		"Levels":

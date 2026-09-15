@@ -52,7 +52,6 @@ const level_exit_safe_distance: float = 512.0
 
 
 func _ready():
-	print("doing ready")
 	setup_timeout()
 	if f.pc():
 		if camera_recoil_distance > 0.0:
