@@ -39,6 +39,15 @@ var mode_disc = "Mode"
 
 func setup_tiles():
 	tile_master.setup_tile_buttons(self, buttons)
+	select_first_button()
+
+func select_first_button():
+	var first_button = %Buttons.get_child(0).get_child(0)
+	brush_region = Rect2i(first_button.tile_set_position / 16.0, Vector2(1, 1))
+	var layer = floor((first_button.tile_set_position.y / 16.0) / 4.0)
+	set_cursor()
+	editor.on_layer_changed(layer)
+	editor.brush = brush_region
 
 func setup_options(): #AutoLayer, Mode, Etc... TODO: use this if you need to set up defaults
 	multi_erase.button_pressed = editor.multi_erase

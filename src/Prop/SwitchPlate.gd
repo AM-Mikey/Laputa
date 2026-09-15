@@ -88,11 +88,14 @@ func activate():
 
 func _do_click():
 	am.play("switch_lever_down", null, null, 0.8, 0)
+	if f.pc():
+		f.pc().get_node("PlayerCamera").shake(2, 0.4, 0.2)
 func _do_release():
 	am.play("switch_lever_up", null, null, 0.4, 0)
-
+	oup.vibrate_impulse(0.2, 0.2)
 func _do_tick():
 	am.play("switch_timer", self, null, 1.0, 0)
+	oup.vibrate_impulse_light(0.2, 0.1)
 
 ### SIGNALS ###
 
