@@ -23,16 +23,27 @@ func do_kick(_delta):
 	velocity = Vector2.ZERO
 	move_and_slide()
 
+func exit_kick(next_state):
+	super.exit_kick(next_state)
+
+### SETTERS ###
+func set_look_dir(val):
+	super.set_look_dir(val)
+	$DeflectDetector.scale.x = -look_dir.x
+
+
 ### SIGNALS ###
-func _on_KickDectector_body_entered(body):
-	if state in ["idle", "active"]:
+func _on_DeflectDetector_body_entered(body: Node2D) -> void:
+	if state in ["idle", "active", "rise", "fall"]:
 		if body.get_collision_layer_value(7) \
 		|| (allow_to_deflect && (body.get_collision_layer_value(14) || body.get_collision_layer_value(2))):
 			change_state("kick")
-	elif state == "rise":
-		change_state("kick")
-	elif state == "fall" && $KickGraceTimer.time_left > 0.0:
-		change_state("kick")
+
+#func _on_KickDectector_body_entered(body):
+	#if state == "rise":
+		#change_state("kick")
+	#elif state == "fall" && $KickGraceTimer.time_left > 0.0:
+		#change_state("kick")
 
 func _on_KickHitbox_area_entered(area: Area2D) -> void:
 	if area.get_collision_layer_value(6): #armor
