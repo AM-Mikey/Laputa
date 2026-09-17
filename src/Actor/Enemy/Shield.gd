@@ -138,7 +138,6 @@ func enter_turn(_last_state):
 
 func do_turn(_delta):
 	velocity = calc_velocity(Vector2.ZERO)
-	print(velocity)
 	move_and_slide()
 
 
