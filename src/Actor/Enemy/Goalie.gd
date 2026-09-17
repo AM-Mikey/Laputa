@@ -39,7 +39,7 @@ var allow_to_deflect: bool = false
 
 func set_look_dir(val):
 	look_dir = val
-	$KickDectector.scale.x = -look_dir.x
+	$KickDetector.scale.x = -look_dir.x
 	$KickHitbox.scale.x = -look_dir.x
 	$ActiveDetector.scale.x = -look_dir.x
 	$JumpDetector.scale.x = -look_dir.x
@@ -82,7 +82,7 @@ func setup():
 			$Hurtbox/CollisionShape2D.position = Vector2(-2.5, -7.5)
 
 	$DeflectDetector.monitoring = difficulty > 0
-	$PlayerDetector.monitoring = difficulty > 1
+	$PlayerDetector.monitoring = difficulty > 0
 	jump_pos = $JumpWaypoint.global_position
 	_setup()
 	w.emit_signal("finished_spawn_entities_step")
@@ -324,12 +324,9 @@ func _on_DeflectHitbox_body_entered(body: Node2D) -> void:
 	if body.get_collision_layer_value(7) || (body.get_collision_layer_value(14) && allow_to_deflect):
 		var player = f.pc()
 		if !player: return
-		#var tween = body.create_tween()
 		if body.get_collision_layer_value(7):
 			body.change_side(false)
 		var dir: = body.global_position.direction_to(player.global_position + Vector2(0, -15))
-		#tween.tween_property(body, "velocity", dir * kick_force, 0.1)
-		#tween.tween_property(body, "velocity", dir * kick_force, 3.0)
 		body.process_mode = Node.PROCESS_MODE_DISABLED
 		body.direction = dir
 		body.velocity = dir * kick_force
