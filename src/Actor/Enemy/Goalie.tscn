@@ -35,6 +35,9 @@ size = Vector2(64, 96)
 resource_local_to_scene = true
 size = Vector2(46, 60)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_oom1o"]
+size = Vector2(600, 400)
+
 [sub_resource type="Animation" id="5"]
 resource_name = "Active"
 length = 0.3
@@ -173,11 +176,11 @@ process_callback = 0
 wait_time = 0.2
 one_shot = true
 
-[node name="KickDectector" type="Area2D" parent="." unique_id=487697926]
+[node name="KickDetector" type="Area2D" parent="." unique_id=487697926]
 collision_layer = 0
 monitorable = false
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="KickDectector" unique_id=1994513786]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="KickDetector" unique_id=1994513786]
 position = Vector2(-7, -6.5)
 shape = SubResource("10")
 
@@ -194,7 +197,7 @@ debug_color = Color(1, 0, 0, 0.235294)
 
 [node name="DeflectDetector" type="Area2D" parent="." unique_id=1783445768]
 collision_layer = 0
-collision_mask = 8258
+collision_mask = 8256
 monitorable = false
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="DeflectDetector" unique_id=1529987484]
@@ -203,7 +206,7 @@ shape = SubResource("RectangleShape2D_on0yn")
 
 [node name="DeflectHitbox" type="Area2D" parent="." unique_id=2093412947]
 collision_layer = 262144
-collision_mask = 8258
+collision_mask = 8256
 monitoring = false
 monitorable = false
 
@@ -230,6 +233,14 @@ modulate = Color(0, 0.0156863, 0.937255, 0.392157)
 position = Vector2(-25, -62)
 shape = SubResource("4")
 
+[node name="PlayerDetector" type="Area2D" parent="." unique_id=1887303621]
+collision_layer = 0
+monitorable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerDetector" unique_id=705884927]
+shape = SubResource("RectangleShape2D_oom1o")
+debug_color = Color(1, 0.6, 0.69803923, 0.09803922)
+
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1138557505]
 position = Vector2(0, -16)
 texture = ExtResource("3_c3js0")
@@ -247,7 +258,7 @@ lock_x = true
 
 [connection signal="area_entered" from="Hitbox" to="." method="_on_hitbox_area_entered"]
 [connection signal="area_exited" from="Hitbox" to="." method="_on_hitbox_area_exited"]
-[connection signal="body_entered" from="KickDectector" to="." method="_on_KickDectector_body_entered"]
+[connection signal="body_entered" from="KickDetector" to="." method="_on_KickDetector_body_entered"]
 [connection signal="area_entered" from="KickHitbox" to="." method="_on_KickHitbox_area_entered"]
 [connection signal="body_entered" from="KickHitbox" to="." method="_on_KickHitbox_body_entered"]
 [connection signal="body_entered" from="DeflectDetector" to="." method="_on_DeflectDetector_body_entered"]
@@ -256,3 +267,5 @@ lock_x = true
 [connection signal="body_exited" from="ActiveDetector" to="." method="_on_ActiveDetector_body_exited"]
 [connection signal="body_entered" from="JumpDetector" to="." method="_on_JumpDetector_body_entered"]
 [connection signal="body_exited" from="JumpDetector" to="." method="_on_JumpDetector_body_exited"]
+[connection signal="body_entered" from="PlayerDetector" to="." method="_on_PlayerDetector_body_entered"]
+[connection signal="body_exited" from="PlayerDetector" to="." method="_on_PlayerDetector_body_exited"]

@@ -82,6 +82,7 @@ func setup():
 			$Hurtbox/CollisionShape2D.position = Vector2(-2.5, -7.5)
 
 	$DeflectDetector.monitoring = difficulty > 0
+	$PlayerDetector.monitoring = difficulty > 1
 	jump_pos = $JumpWaypoint.global_position
 	_setup()
 	w.emit_signal("finished_spawn_entities_step")
@@ -286,7 +287,7 @@ func _on_JumpDetector_body_entered(_body):
 func _on_JumpDetector_body_exited(_body):
 	player_in_jump_zone = false
 
-func _on_KickDectector_body_entered(_body):
+func _on_KickDetector_body_entered(_body):
 	if state == "rise":
 		change_state("kick")
 	elif state == "fall" && $KickGraceTimer.time_left > 0.0:
@@ -320,23 +321,7 @@ func _on_DeflectDetector_body_entered(body: Node2D) -> void:
 
 
 func _on_DeflectHitbox_body_entered(body: Node2D) -> void:
-	if body.get_collision_layer_value(2) && allow_to_deflect: #enemy
-		if body is EnemyGoalie: return
-		var player = f.pc()
-		if !player: return
-		var dir: = body.global_position.direction_to(player.global_position + Vector2(0, -10))
-		print("Kick: ", body, ": ", body.global_position, " -> ", player.global_position, " = ", dir)
-		var knockback = dir * kick_force * 2.0
-		if dir.y < 0.5:
-			knockback.y = -100.0
-		print("Knockback: ",  knockback)
-		#body.hit(0.0, Vector2.ZERO, kick_hitbox, dir, kick_force)
-		body.velocity = knockback
-		body.knockback_velocity = knockback
-		var tween = body.create_tween()
-		tween.tween_property(body, "velocity:x", knockback.x, 0.1)
-		#tween.tween_property(body, "velocity", knockback, 3.0)
-	elif body.get_collision_layer_value(7) || (body.get_collision_layer_value(14) && allow_to_deflect):
+	if body.get_collision_layer_value(7) || (body.get_collision_layer_value(14) && allow_to_deflect):
 		var player = f.pc()
 		if !player: return
 		#var tween = body.create_tween()
@@ -350,3 +335,10 @@ func _on_DeflectHitbox_body_entered(body: Node2D) -> void:
 		body.velocity = dir * kick_force
 		await get_tree().physics_frame
 		body.process_mode = Node.PROCESS_MODE_INHERIT
+
+
+func _on_PlayerDetector_body_entered(body: Node2D) -> void:
+	allow_to_deflect = true
+
+func _on_PlayerDetector_body_exited(body: Node2D) -> void:
+	allow_to_deflect = false
