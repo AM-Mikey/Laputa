@@ -19,7 +19,7 @@ size = Vector2(11, 15)
 size = Vector2(14, 13)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ax27h"]
-size = Vector2(16, 12)
+size = Vector2(16, 7)
 
 [sub_resource type="RectangleShape2D" id="3"]
 resource_local_to_scene = true
@@ -182,7 +182,7 @@ monitoring = false
 monitorable = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="KickHitbox" unique_id=472885124]
-position = Vector2(-8, -9)
+position = Vector2(-8, -6.5)
 shape = SubResource("RectangleShape2D_ax27h")
 debug_color = Color(1, 0, 0, 0.235294)
 
