@@ -102,6 +102,15 @@ func is_world_blocking(target) -> bool:
 	else:
 		return false
 
+func change_side(to_player: bool):
+	var hitbox = get_node_or_null("PlayerCollisionDetector")
+	set_collision_layer_value(7, to_player)
+	set_collision_layer_value(14, !to_player)
+	hitbox.set_collision_layer_value(7, to_player)
+	hitbox.set_collision_layer_value(14, !to_player)
+	hitbox.set_collision_mask_value(18, to_player)
+	hitbox.set_collision_mask_value(17, !to_player)
+
 ### SIGNALS ###
 
 func _on_CollisionDetector_body_entered(body):
