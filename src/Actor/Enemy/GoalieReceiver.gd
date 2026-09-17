@@ -1,9 +1,5 @@
 extends EnemyGoalie
 
-var kick_next_state: = ""
-var kick_force: = 300.0
-
-var allow_to_deflect: bool = false
 
 
 ### STATES ###

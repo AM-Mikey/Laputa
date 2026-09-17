@@ -1,4 +1,4 @@
-[gd_scene format=3 uid="uid://dr5p8xff40dbm"]
+[gd_scene format=3 uid="uid://cg8vv4p46je81"]
 
 [ext_resource type="PackedScene" uid="uid://bp6f5q8b4w4dr" path="res://src/Actor/Enemy/Goalie.tscn" id="1_3vedx"]
 [ext_resource type="Script" uid="uid://bberivt2vrhwv" path="res://src/Actor/Enemy/GoalieReceiver.gd" id="2_du5f3"]
@@ -52,12 +52,12 @@ collision_mask = 74082
 position = Vector2(-9.5, -9)
 shape = SubResource("RectangleShape2D_03vjl")
 
-[node name="DeflectDetector" type="Area2D" parent="." index="9" unique_id=1685573978]
+[node name="DeflectDetector2" type="Area2D" parent="." index="9" unique_id=1685573978]
 collision_layer = 0
 collision_mask = 8258
 monitorable = false
 
-[node name="CollisionShape2D2" type="CollisionShape2D" parent="DeflectDetector" index="0" unique_id=1213847172]
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="DeflectDetector2" index="0" unique_id=1213847172]
 position = Vector2(-10.25, -9)
 shape = SubResource("RectangleShape2D_3vedx")
 
@@ -67,10 +67,10 @@ shape = SubResource("RectangleShape2D_12liy")
 [node name="CollisionShape2D" parent="JumpDetector" parent_id_path=PackedInt32Array(104415215) index="0" unique_id=14587079]
 shape = SubResource("RectangleShape2D_gynwh")
 
-[node name="Sprite2D" parent="." index="12" unique_id=1138557505]
+[node name="Sprite2D" parent="." index="14" unique_id=1138557505]
 self_modulate = Color(1, 0.45490196, 1, 1)
 frame = 6
 
 [connection signal="body_entered" from="PlayerDetector" to="." method="_on_PlayerDetector_body_entered"]
 [connection signal="body_exited" from="PlayerDetector" to="." method="_on_PlayerDetector_body_exited"]
-[connection signal="body_entered" from="DeflectDetector" to="." method="_on_DeflectDetector_body_entered"]
+[connection signal="body_entered" from="DeflectDetector2" to="." method="_on_DeflectDetector_body_entered"]

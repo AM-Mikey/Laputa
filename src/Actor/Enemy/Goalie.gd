@@ -5,16 +5,21 @@ class_name EnemyGoalie
 const ICON = preload("res://assets/Actor/Enemy/GoalieThumbnail.png")
 
 const TX_0 = preload("res://assets/Actor/Enemy/Goalie.png")
+const TX_1 = preload("res://assets/Actor/Enemy/Goalie.png")
+
 
 @onready var BONK = preload("res://src/Effect/BonkParticle.tscn")
 @onready var LAND = preload("res://src/Effect/LandParticle.tscn")
 
 @onready var ap = $AnimationPlayer
 @onready var kick_hitbox = $KickHitbox
+@onready var deflect_hitbox = $DeflectHitbox
 
 var jump_pos: = Vector2.ZERO
-@export var cooldown_time: = 1.0
+## Diff 1: Allow to deflect buttet both from player and enemy
+@export var difficulty: int = 0
 
+var kick_force: float = 300.0
 var kick_damage: = 4.0
 
 var active_detector_pos = Vector2.ZERO
@@ -24,9 +29,13 @@ var move_dir: = Vector2.ZERO
 var target = null
 var rise_from_position: = Vector2.ZERO
 
-
 var player_in_jump_zone: = false
 var kicked: = false
+
+## Diff 1 related
+var kick_next_state: = ""
+var allow_to_deflect: bool = false
+
 
 func set_look_dir(val):
 	look_dir = val
@@ -36,6 +45,8 @@ func set_look_dir(val):
 	$JumpDetector.scale.x = -look_dir.x
 	$Sprite2D.flip_h = look_dir.x > 0.0
 	$Hitbox.scale.x = -look_dir.x
+	$DeflectDetector.scale.x = -look_dir.x
+	$DeflectHitbox.scale.x = -look_dir.x
 
 func setup():
 	hp = 4
@@ -60,6 +71,17 @@ func setup():
 	$JumpDetector.top_level = true
 	$JumpDetector.global_position = jump_detector_global_pos
 
+	match difficulty:
+		0:
+			$Sprite2D.modulate = Color.WHITE
+			$Hurtbox/CollisionShape2D.shape.size = Vector2(11.0, 15.0)
+			$Hurtbox/CollisionShape2D.position = Vector2(-0.5, -7.5)
+		1:
+			$Sprite2D.modulate = Color(1.0, 0.45, 1.0, 1.0)
+			$Hurtbox/CollisionShape2D.shape.size = Vector2(5.0, 15.0)
+			$Hurtbox/CollisionShape2D.position = Vector2(-2.5, -7.5)
+
+	$DeflectDetector.monitoring = difficulty > 0
 	jump_pos = $JumpWaypoint.global_position
 	_setup()
 	w.emit_signal("finished_spawn_entities_step")
@@ -132,19 +154,35 @@ func exit_rise(_prev_state):
 
 
 
-func enter_kick(_prev_state):
+func enter_kick(prev_state):
 	kicked = true
 	ap.play("Kick")
 	am.play("enemy_shoot")
+	if difficulty == 1:
+		if prev_state in ["idle", "active"]:
+			kick_next_state = "idle"
+		elif prev_state in ["rise", "fall"]:
+			kick_next_state = "fall"
+	if difficulty == 1:
+		deflect_hitbox.set_deferred("monitoring", true)
+		deflect_hitbox.set_deferred("monitorable", true)
 	kick_hitbox.set_deferred("monitoring", true)
 	kick_hitbox.set_deferred("monitorable", true)
 	await get_tree().create_timer(0.2).timeout
 	kick_hitbox.set_deferred("monitoring", false)
 	kick_hitbox.set_deferred("monitorable", false)
+	if difficulty == 1:
+		deflect_hitbox.set_deferred("monitoring", false)
+		deflect_hitbox.set_deferred("monitorable", false)
+
+
 
 func do_kick(_delta):
 	if not ap.is_playing():
-		change_state("fall")
+		if difficulty == 1:
+			change_state(kick_next_state)
+		else:
+			change_state("fall")
 		return
 
 	velocity = Vector2.ZERO
@@ -262,10 +300,53 @@ func _on_KickHitbox_area_entered(area: Area2D) -> void:
 	elif area.get_collision_layer_value(17): #playerhurt
 		area.get_parent().hit(kick_damage, Vector2(80 * look_dir.x, 0), kick_hitbox)
 	elif area.get_collision_layer_value(9): #breakable
-		area.get_parent().on_break("cut")
+		if area.name == "BreakArea":
+			area.get_parent().on_break("cut")
 
 
 func _on_KickHitbox_body_entered(body: Node2D) -> void:
 	if body.get_collision_layer_value(6): #armor
 		kick_hitbox.set_deferred("monitoring", false)
 		kick_hitbox.set_deferred("monitorable", false)
+
+
+
+func _on_DeflectDetector_body_entered(body: Node2D) -> void:
+	if difficulty == 1:
+		if state in ["idle", "active", "rise", "fall"]:
+			if body.get_collision_layer_value(7) \
+			|| (allow_to_deflect && (body.get_collision_layer_value(14) || body.get_collision_layer_value(2))):
+				change_state("kick")
+
+
+func _on_DeflectHitbox_body_entered(body: Node2D) -> void:
+	if body.get_collision_layer_value(2) && allow_to_deflect: #enemy
+		if body is EnemyGoalie: return
+		var player = f.pc()
+		if !player: return
+		var dir: = body.global_position.direction_to(player.global_position + Vector2(0, -10))
+		print("Kick: ", body, ": ", body.global_position, " -> ", player.global_position, " = ", dir)
+		var knockback = dir * kick_force * 2.0
+		if dir.y < 0.5:
+			knockback.y = -100.0
+		print("Knockback: ",  knockback)
+		#body.hit(0.0, Vector2.ZERO, kick_hitbox, dir, kick_force)
+		body.velocity = knockback
+		body.knockback_velocity = knockback
+		var tween = body.create_tween()
+		tween.tween_property(body, "velocity:x", knockback.x, 0.1)
+		#tween.tween_property(body, "velocity", knockback, 3.0)
+	elif body.get_collision_layer_value(7) || (body.get_collision_layer_value(14) && allow_to_deflect):
+		var player = f.pc()
+		if !player: return
+		#var tween = body.create_tween()
+		if body.get_collision_layer_value(7):
+			body.change_side(false)
+		var dir: = body.global_position.direction_to(player.global_position + Vector2(0, -15))
+		#tween.tween_property(body, "velocity", dir * kick_force, 0.1)
+		#tween.tween_property(body, "velocity", dir * kick_force, 3.0)
+		body.process_mode = Node.PROCESS_MODE_DISABLED
+		body.direction = dir
+		body.velocity = dir * kick_force
+		await get_tree().physics_frame
+		body.process_mode = Node.PROCESS_MODE_INHERIT
