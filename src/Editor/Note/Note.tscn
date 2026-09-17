@@ -1,0 +1,141 @@
+[gd_scene format=3 uid="uid://3qvjf720tr4r"]
+
+[ext_resource type="Script" uid="uid://k8tbnpianvmj" path="res://src/Editor/Note/Note.gd" id="1_5uxwx"]
+[ext_resource type="Theme" uid="uid://45e84j2sj7w0" path="res://src/UI/Theme/LaputaTheme.tres" id="1_a7wce"]
+[ext_resource type="StyleBox" uid="uid://djnu2b18r7r1d" path="res://src/UI/StyleBox/Cursor.tres" id="3_gnyyr"]
+
+[node name="Note" type="MarginContainer" unique_id=1359810734]
+z_index = 999
+clip_contents = true
+custom_minimum_size = Vector2(16, 16)
+offset_right = 128.0
+offset_bottom = 64.0
+size_flags_horizontal = 0
+size_flags_vertical = 0
+mouse_filter = 2
+theme = ExtResource("1_a7wce")
+script = ExtResource("1_5uxwx")
+text = "Note Text Here"
+
+[node name="Handles" type="VBoxContainer" parent="." unique_id=466601706]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/separation = 0
+
+[node name="Top" type="HBoxContainer" parent="Handles" unique_id=1287518639]
+layout_mode = 2
+size_flags_vertical = 0
+mouse_filter = 2
+theme_override_constants/separation = 0
+
+[node name="TopLeft" type="TextureButton" parent="Handles/Top" unique_id=1538771089]
+custom_minimum_size = Vector2(2, 2)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+mouse_filter = 1
+mouse_default_cursor_shape = 12
+button_mask = 2
+
+[node name="Top" type="TextureButton" parent="Handles/Top" unique_id=553279547]
+custom_minimum_size = Vector2(2, 2)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 0
+mouse_filter = 1
+mouse_default_cursor_shape = 9
+button_mask = 2
+
+[node name="TopRight" type="TextureButton" parent="Handles/Top" unique_id=864167208]
+custom_minimum_size = Vector2(2, 2)
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 0
+mouse_filter = 1
+mouse_default_cursor_shape = 11
+button_mask = 2
+
+[node name="Mid" type="HBoxContainer" parent="Handles" unique_id=1481666042]
+layout_mode = 2
+size_flags_vertical = 3
+mouse_filter = 2
+theme_override_constants/separation = 0
+
+[node name="Left" type="TextureButton" parent="Handles/Mid" unique_id=302635777]
+custom_minimum_size = Vector2(2, 2)
+layout_mode = 2
+size_flags_horizontal = 0
+mouse_filter = 1
+mouse_default_cursor_shape = 10
+button_mask = 2
+
+[node name="Mid" type="TextureButton" parent="Handles/Mid" unique_id=2627069]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(2, 2)
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_filter = 1
+mouse_default_cursor_shape = 13
+button_mask = 2
+
+[node name="Right" type="TextureButton" parent="Handles/Mid" unique_id=1951205440]
+custom_minimum_size = Vector2(2, 2)
+layout_mode = 2
+size_flags_horizontal = 8
+mouse_filter = 1
+mouse_default_cursor_shape = 10
+button_mask = 2
+
+[node name="Bottom" type="HBoxContainer" parent="Handles" unique_id=1264324841]
+custom_minimum_size = Vector2(0, 2)
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/separation = 0
+
+[node name="BottomLeft" type="TextureButton" parent="Handles/Bottom" unique_id=1035592633]
+custom_minimum_size = Vector2(2, 2)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 8
+mouse_filter = 1
+mouse_default_cursor_shape = 11
+button_mask = 2
+
+[node name="Bottom" type="TextureButton" parent="Handles/Bottom" unique_id=2087639899]
+custom_minimum_size = Vector2(2, 2)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 8
+mouse_filter = 1
+mouse_default_cursor_shape = 9
+button_mask = 2
+
+[node name="BottomRight" type="TextureButton" parent="Handles/Bottom" unique_id=1986511473]
+custom_minimum_size = Vector2(2, 2)
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 8
+mouse_filter = 1
+mouse_default_cursor_shape = 12
+button_mask = 2
+
+[node name="Label" type="RichTextLabel" parent="." unique_id=1102399430]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 0
+mouse_filter = 2
+theme_override_colors/default_color = Color(1, 0, 1, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_outline_size = 0
+theme_override_constants/shadow_offset_x = 1
+theme_override_constants/shadow_offset_y = 1
+theme_override_font_sizes/normal_font_size = 32
+text = "Trigger Name"
+fit_content = true
+scroll_active = false
+
+[node name="Panel" type="Panel" parent="." unique_id=1288441691]
+modulate = Color(1, 1, 1, 0.5)
+layout_mode = 2
+mouse_filter = 2
+theme_override_styles/panel = ExtResource("3_gnyyr")

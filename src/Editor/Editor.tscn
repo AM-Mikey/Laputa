@@ -78,11 +78,11 @@ position = Vector2(0, 32)
 
 [node name="Win" parent="Main" unique_id=1203181185 instance=ExtResource("3")]
 use_parent_material = true
-custom_minimum_size = Vector2(208, 0)
+custom_minimum_size = Vector2(240, 0)
 anchors_preset = 0
 anchor_right = 0.0
 anchor_bottom = 0.0
-offset_right = 192.0
+offset_right = 240.0
 offset_bottom = 416.0
 mouse_filter = 1
 

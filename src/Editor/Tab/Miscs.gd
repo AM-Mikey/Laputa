@@ -10,6 +10,7 @@ const MISC_SCENES = [
 	"res://src/Editor/Spawn/WaypointGlobalSpawn.tscn",
 	"res://src/Editor/SpawnPoint.tscn",
 	"res://src/Editor/VanishingPoint.tscn",
+	"res://src/Editor/Note/Note.tscn",
 ]
 
 signal misc_changed(misc_path)

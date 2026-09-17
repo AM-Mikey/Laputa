@@ -121,6 +121,9 @@ script = ExtResource("7_85c3g")
 [node name="Waypoints" type="Node2D" parent="." unique_id=1710575804]
 visibility_layer = 2
 
+[node name="Notes" type="Node2D" parent="." unique_id=3296572]
+visibility_layer = 2
+
 [node name="VanishingPoint" parent="." unique_id=1188585786 instance=ExtResource("9_ln0on")]
 visibility_layer = 2
 position = Vector2(1840, 1400)

@@ -115,6 +115,9 @@ size_is_default = false
 [node name="Waypoints" type="Node2D" parent="." unique_id=362880651]
 visibility_layer = 2
 
+[node name="Notes" type="Node2D" parent="." unique_id=1481118077]
+visibility_layer = 2
+
 [node name="VanishingPoint" parent="." unique_id=149169147 instance=ExtResource("7_voyti")]
 visibility_layer = 2
 position = Vector2(2040, 1896)

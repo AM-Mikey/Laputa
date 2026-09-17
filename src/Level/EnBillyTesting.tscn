@@ -2020,6 +2020,9 @@ snap_degrees = 180.0
 [node name="Waypoints" type="Node2D" parent="." unique_id=561693217]
 visibility_layer = 2
 
+[node name="Notes" type="Node2D" parent="." unique_id=454159029]
+visibility_layer = 2
+
 [node name="SpawnPoint" parent="." unique_id=1710023778 instance=ExtResource("13_ddw3t")]
 visibility_layer = 2
 position = Vector2(3000, 1952)
