@@ -1,6 +1,12 @@
 extends EnemyGoalie
 
+## Specialized Goalie that can also kick Roller
 
+func setup() -> void:
+	difficulty = 1
+	super.setup()
+	$DeflectDetector.set_collision_mask_value(2, true)
+	deflect_hitbox.set_collision_mask_value(2, true)
 
 ### STATES ###
 func enter_kick(prev_state):
@@ -70,9 +76,6 @@ func _on_KickHitbox_body_entered(body: Node2D) -> void:
 		var tween = body.create_tween()
 		tween.tween_property(body, "velocity:x", knockback.x, 0.1)
 		#tween.tween_property(body, "velocity", knockback, 3.0)
-	elif body.get_collision_layer_value(6): #armor
-		kick_hitbox.set_deferred("monitoring", false)
-		kick_hitbox.set_deferred("monitorable", false)
 	elif body.get_collision_layer_value(7) || (body.get_collision_layer_value(14) && allow_to_deflect):
 		var player = f.pc()
 		if !player: return
