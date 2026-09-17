@@ -3,25 +3,28 @@
 [ext_resource type="Script" path="res://src/Level/Level.gd" id="1_6q8mx"]
 [ext_resource type="PackedScene" path="res://src/Background/LevelLimiter.tscn" id="2_jogqi"]
 [ext_resource type="Resource" path="res://src/Background/iedge.tres" id="3_f378h"]
-[ext_resource type="Script" path="res://src/Background/LevelLimiter.gd" id="3_h8b7i"]
+[ext_resource type="Script" path="res://src/Background/LevelLimiter.gd" id="3_m727m"]
 [ext_resource type="Texture2D" path="res://assets/Background/IslandEdge.png" id="4_53gin"]
 [ext_resource type="TileSet" path="res://src/Tile/Debug.tres" id="5_6aw22"]
 [ext_resource type="PackedScene" path="res://src/Editor/Spawn/ActorSpawn.tscn" id="7_jsexh"]
-[ext_resource type="Script" path="res://src/Editor/Spawn/ActorSpawn.gd" id="8_qcsgf"]
+[ext_resource type="Script" path="res://src/Editor/Spawn/ActorSpawn.gd" id="8_ufpok"]
 [ext_resource type="PackedScene" path="res://src/Editor/VisualUtility/VUVector.tscn" id="9_nwn56"]
-[ext_resource type="Script" path="res://src/Editor/VisualUtility/VUVector.gd" id="10_qe850"]
+[ext_resource type="Script" path="res://src/Editor/VisualUtility/VUVector.gd" id="10_pdhov"]
 [ext_resource type="PackedScene" path="res://src/Editor/VisualUtility/VURect.tscn" id="11_l7f3r"]
-[ext_resource type="Script" path="res://src/Editor/VisualUtility/VURect.gd" id="12_m727m"]
+[ext_resource type="PackedScene" path="res://src/Editor/Note/Note.tscn" id="12_lrxj5"]
 [ext_resource type="PackedScene" path="res://src/Editor/VanishingPoint.tscn" id="12_s0ppf"]
+[ext_resource type="Script" path="res://src/Editor/VisualUtility/VURect.gd" id="12_wfdde"]
 [ext_resource type="PackedScene" path="res://src/Editor/VisualUtility/WaypointLocal.tscn" id="13_0qcn7"]
 [ext_resource type="PackedScene" path="res://src/Editor/SpawnPoint.tscn" id="13_ddw3t"]
-[ext_resource type="Script" path="res://src/Editor/VisualUtility/WaypointLocal.gd" id="14_ufpok"]
+[ext_resource type="Script" path="res://src/Editor/VisualUtility/WaypointLocal.gd" id="14_0ufij"]
 [ext_resource type="PackedScene" path="res://src/Editor/Spawn/TriggerSpawn.tscn" id="15_l44av"]
-[ext_resource type="Script" path="res://src/Editor/Spawn/TriggerSpawn.gd" id="16_pdhov"]
+[ext_resource type="Script" path="res://src/Editor/Spawn/TriggerSpawn.gd" id="16_hdvik"]
 [ext_resource type="PackedScene" path="res://src/Editor/Spawn/PropSpawn.tscn" id="17_h8b7i"]
-[ext_resource type="Script" path="res://src/Editor/Spawn/PropSpawn.gd" id="18_wfdde"]
-[ext_resource type="Script" path="res://src/Editor/VanishingPoint.gd" id="20_0ufij"]
-[ext_resource type="Script" path="res://src/Editor/SpawnPoint.gd" id="22_hdvik"]
+[ext_resource type="Script" path="res://src/Editor/Spawn/PropSpawn.gd" id="18_tlnhc"]
+[ext_resource type="Theme" path="res://src/UI/Theme/LaputaTheme.tres" id="20_h3q3t"]
+[ext_resource type="Script" path="res://src/Editor/Note/Note.gd" id="21_e76nv"]
+[ext_resource type="Script" path="res://src/Editor/VanishingPoint.gd" id="23_sdoga"]
+[ext_resource type="Script" path="res://src/Editor/SpawnPoint.gd" id="25_0f2ls"]
 
 [sub_resource type="Gradient" id="Gradient_nw7w3"]
 offsets = PackedFloat32Array(0, 0.25, 0.5, 0.75, 1)
@@ -48,7 +51,7 @@ offset_top = 1600.0
 offset_right = 4432.0
 offset_bottom = 2496.0
 mouse_filter = 2
-script = ExtResource("3_h8b7i")
+script = ExtResource("3_m727m")
 background_resource = ExtResource("3_f378h")
 texture = ExtResource("4_53gin")
 layers = 5
@@ -77,6 +80,7 @@ z_index = 1
 visibility_layer = 2
 z_index = -2
 use_parent_material = true
+tile_map_data = PackedByteArray("AADAAJIAAAAAAAAAAADBAJIAAAAAAAAAAADCAJIAAAAAAAAAAADDAJIAAAAAAAAAAADEAJIAAAAAAAAAAADFAJIAAAAAAAAAAAA=")
 tile_set = ExtResource("5_6aw22")
 
 [node name="Back" type="TileMapLayer" parent="TileMap" unique_id=505398842]
@@ -117,7 +121,7 @@ z_index = 999
 position = Vector2(3256, 2208)
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("8_qcsgf")
+script = ExtResource("8_ufpok")
 actor_path = "res://src/Actor/Enemy/Golem.tscn"
 properties = {
 "base_gravity": [300.0, 3, ""],
@@ -136,9 +140,9 @@ properties = {
 visibility_layer = 2
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("10_qe850")
+script = ExtResource("10_pdhov")
 tag_name = "move_dir"
-direction = Vector2(-1, -8.742278e-08)
+direction = Vector2(-1, 8.742278e-08)
 snap_degrees = 180.0
 
 [node name="Sphagnum" type="Area2D" parent="Spawns" unique_id=1360181910 groups=["ActorSpawns", "Entities"] instance=ExtResource("7_jsexh")]
@@ -147,7 +151,7 @@ z_index = 999
 position = Vector2(3160, 2128)
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("8_qcsgf")
+script = ExtResource("8_ufpok")
 actor_path = "res://src/Actor/Enemy/Sphagnum.tscn"
 properties = {
 "base_gravity": [300.0, 3, ""],
@@ -165,7 +169,7 @@ z_index = 999
 position = Vector2(2976, 2128)
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("8_qcsgf")
+script = ExtResource("8_ufpok")
 actor_path = "res://src/Actor/Enemy/Sentry.tscn"
 properties = {
 "base_gravity": [300.0, 3, ""],
@@ -187,7 +191,7 @@ properties = {
 
 [node name="VURect" type="Node2D" parent="Spawns/Sentry" unique_id=688682803 groups=["Entities", "VURects", "VisualUtilities"] instance=ExtResource("11_l7f3r")]
 visibility_layer = 2
-script = ExtResource("12_m727m")
+script = ExtResource("12_wfdde")
 tag_name = "player_detector"
 value = Rect2(-128, -128, 256, 256)
 
@@ -196,7 +200,7 @@ visibility_layer = 2
 position = Vector2(64, 0)
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("14_ufpok")
+script = ExtResource("14_0ufij")
 tag_name = "shoot_x"
 lock_y = true
 
@@ -206,7 +210,7 @@ visibility_layer = 2
 position = Vector2(0, -64)
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("14_ufpok")
+script = ExtResource("14_0ufij")
 tag_name = "shoot_y"
 lock_x = true
 
@@ -219,7 +223,7 @@ offset_top = 2200.0
 offset_right = 3552.0
 offset_bottom = 2208.0
 mouse_filter = 2
-script = ExtResource("16_pdhov")
+script = ExtResource("16_hdvik")
 trigger_path = "res://src/Trigger/Spikes.tscn"
 properties = {
 "color": [Color(1, 0, 0, 1), 20, ""],
@@ -235,7 +239,7 @@ z_index = 999
 position = Vector2(3376, 2208)
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("8_qcsgf")
+script = ExtResource("8_ufpok")
 actor_path = "res://src/Actor/Enemy/Frog.tscn"
 properties = {
 "base_gravity": [300.0, 3, ""],
@@ -256,7 +260,7 @@ visibility_layer = 2
 position = Vector2(0, -7)
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("10_qe850")
+script = ExtResource("10_pdhov")
 tag_name = "look"
 snap_degrees = 180.0
 movement_locked = true
@@ -266,7 +270,7 @@ visibility_layer = 2
 position = Vector2(-32, -8)
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("14_ufpok")
+script = ExtResource("14_0ufij")
 tag_name = "tongue_range"
 lock_y = true
 
@@ -276,7 +280,7 @@ z_index = 999
 position = Vector2(3480, 2208)
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("8_qcsgf")
+script = ExtResource("8_ufpok")
 actor_path = "res://src/Actor/Enemy/Frog.tscn"
 properties = {
 "base_gravity": [300.0, 3, ""],
@@ -297,7 +301,7 @@ visibility_layer = 2
 position = Vector2(0, -7)
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("10_qe850")
+script = ExtResource("10_pdhov")
 tag_name = "look"
 snap_degrees = 180.0
 movement_locked = true
@@ -307,7 +311,7 @@ visibility_layer = 2
 position = Vector2(-32, -8)
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("14_ufpok")
+script = ExtResource("14_0ufij")
 tag_name = "tongue_range"
 lock_y = true
 
@@ -317,7 +321,7 @@ z_index = 999
 position = Vector2(3144, 2208)
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("8_qcsgf")
+script = ExtResource("8_ufpok")
 actor_path = "res://src/Actor/Enemy/Frog.tscn"
 properties = {
 "base_gravity": [300.0, 3, ""],
@@ -338,7 +342,7 @@ visibility_layer = 2
 position = Vector2(0, -7)
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("10_qe850")
+script = ExtResource("10_pdhov")
 tag_name = "look"
 snap_degrees = 180.0
 movement_locked = true
@@ -348,11 +352,11 @@ visibility_layer = 2
 position = Vector2(-32, -8)
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("14_ufpok")
+script = ExtResource("14_0ufij")
 tag_name = "tongue_range"
 lock_y = true
 
-[node name="Conveyor" type="MarginContainer" parent="Spawns" unique_id=332793797 groups=["TriggerSpawns"] instance=ExtResource("15_l44av")]
+[node name="ConveyorSegment" type="MarginContainer" parent="Spawns" unique_id=332793797 groups=["TriggerSpawns"] instance=ExtResource("15_l44av")]
 visibility_layer = 2
 z_index = 999
 custom_minimum_size = Vector2(8, 8)
@@ -361,7 +365,7 @@ offset_top = 2128.0
 offset_right = 3552.0
 offset_bottom = 2144.0
 mouse_filter = 2
-script = ExtResource("16_pdhov")
+script = ExtResource("16_hdvik")
 trigger_path = "res://src/Trigger/Conveyor.tscn"
 properties = {
 "color": [Color(0.64969945, 0.0016938174, 0.82506573, 1), 20, ""],
@@ -374,7 +378,7 @@ properties = {
 }
 size_is_default = false
 
-[node name="Conveyor1" type="MarginContainer" parent="Spawns" unique_id=873198160 groups=["TriggerSpawns"] instance=ExtResource("15_l44av")]
+[node name="ConveyorSegment1" type="MarginContainer" parent="Spawns" unique_id=873198160 groups=["TriggerSpawns"] instance=ExtResource("15_l44av")]
 visibility_layer = 2
 z_index = 999
 custom_minimum_size = Vector2(8, 8)
@@ -383,7 +387,7 @@ offset_top = 2080.0
 offset_right = 3360.0
 offset_bottom = 2096.0
 mouse_filter = 2
-script = ExtResource("16_pdhov")
+script = ExtResource("16_hdvik")
 trigger_path = "res://src/Trigger/Conveyor.tscn"
 properties = {
 "color": [Color(0.64969945, 0.0016938174, 0.82506573, 1), 20, ""],
@@ -396,7 +400,7 @@ properties = {
 }
 size_is_default = false
 
-[node name="Conveyor2" type="MarginContainer" parent="Spawns" unique_id=1553428652 groups=["TriggerSpawns"] instance=ExtResource("15_l44av")]
+[node name="ConveyorSegment2" type="MarginContainer" parent="Spawns" unique_id=1553428652 groups=["TriggerSpawns"] instance=ExtResource("15_l44av")]
 visibility_layer = 2
 z_index = 999
 custom_minimum_size = Vector2(8, 8)
@@ -405,7 +409,7 @@ offset_top = 2048.0
 offset_right = 3488.0
 offset_bottom = 2064.0
 mouse_filter = 2
-script = ExtResource("16_pdhov")
+script = ExtResource("16_hdvik")
 trigger_path = "res://src/Trigger/Conveyor.tscn"
 properties = {
 "color": [Color(0.64969945, 0.0016938174, 0.82506573, 1), 20, ""],
@@ -424,7 +428,7 @@ z_index = 999
 position = Vector2(3584, 2112)
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("18_wfdde")
+script = ExtResource("18_tlnhc")
 prop_path = "res://src/Prop/SwitchCrystal.tscn"
 properties = {
 "connected_entity_id": ["Conveyor", 4, ""],
@@ -444,7 +448,7 @@ z_index = 999
 position = Vector2(3552, 2112)
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("18_wfdde")
+script = ExtResource("18_tlnhc")
 prop_path = "res://src/Prop/SwitchLever.tscn"
 properties = {
 "connected_entity_id": ["Conveyor", 4, ""],
@@ -455,7 +459,7 @@ properties = {
 "timer_duration": [1.0, 3, ""]
 }
 
-[node name="Conveyor3" type="MarginContainer" parent="Spawns" unique_id=1674863348 groups=["TriggerSpawns"] instance=ExtResource("15_l44av")]
+[node name="ConveyorSegment3" type="MarginContainer" parent="Spawns" unique_id=1674863348 groups=["TriggerSpawns"] instance=ExtResource("15_l44av")]
 visibility_layer = 2
 z_index = 999
 custom_minimum_size = Vector2(8, 8)
@@ -464,7 +468,7 @@ offset_top = 2048.0
 offset_right = 3648.0
 offset_bottom = 2064.0
 mouse_filter = 2
-script = ExtResource("16_pdhov")
+script = ExtResource("16_hdvik")
 trigger_path = "res://src/Trigger/Conveyor.tscn"
 properties = {
 "color": [Color(0.64969945, 0.0016938174, 0.82506573, 1), 20, ""],
@@ -483,7 +487,7 @@ z_index = 999
 position = Vector2(3600, 2000)
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("18_wfdde")
+script = ExtResource("18_tlnhc")
 prop_path = "res://src/Prop/SwitchPlate.tscn"
 properties = {
 "connected_entity_id": ["Conveyor3", 4, ""],
@@ -501,7 +505,7 @@ z_index = 999
 position = Vector2(3624, 2048)
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("8_qcsgf")
+script = ExtResource("8_ufpok")
 actor_path = "res://src/Actor/Enemy/Frog.tscn"
 properties = {
 "base_gravity": [300.0, 3, ""],
@@ -522,7 +526,7 @@ visibility_layer = 2
 position = Vector2(0, -7)
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("10_qe850")
+script = ExtResource("10_pdhov")
 tag_name = "look"
 snap_degrees = 180.0
 movement_locked = true
@@ -532,11 +536,11 @@ visibility_layer = 2
 position = Vector2(-32, -8)
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("14_ufpok")
+script = ExtResource("14_0ufij")
 tag_name = "tongue_range"
 lock_y = true
 
-[node name="Conveyor4" type="MarginContainer" parent="Spawns" unique_id=1213457327 groups=["TriggerSpawns"] instance=ExtResource("15_l44av")]
+[node name="ConveyorSegment4" type="MarginContainer" parent="Spawns" unique_id=1213457327 groups=["TriggerSpawns"] instance=ExtResource("15_l44av")]
 visibility_layer = 2
 z_index = 999
 custom_minimum_size = Vector2(8, 8)
@@ -545,7 +549,7 @@ offset_top = 2048.0
 offset_right = 3728.0
 offset_bottom = 2064.0
 mouse_filter = 2
-script = ExtResource("16_pdhov")
+script = ExtResource("16_hdvik")
 trigger_path = "res://src/Trigger/Conveyor.tscn"
 properties = {
 "color": [Color(0.64969945, 0.0016938174, 0.82506573, 1), 20, ""],
@@ -558,7 +562,7 @@ properties = {
 }
 size_is_default = false
 
-[node name="Conveyor5" type="MarginContainer" parent="Spawns" unique_id=1982542187 groups=["TriggerSpawns"] instance=ExtResource("15_l44av")]
+[node name="ConveyorSegment5" type="MarginContainer" parent="Spawns" unique_id=1982542187 groups=["TriggerSpawns"] instance=ExtResource("15_l44av")]
 visibility_layer = 2
 z_index = 999
 custom_minimum_size = Vector2(8, 8)
@@ -567,7 +571,7 @@ offset_top = 2048.0
 offset_right = 3808.0
 offset_bottom = 2064.0
 mouse_filter = 2
-script = ExtResource("16_pdhov")
+script = ExtResource("16_hdvik")
 trigger_path = "res://src/Trigger/Conveyor.tscn"
 properties = {
 "color": [Color(0.64969945, 0.0016938174, 0.82506573, 1), 20, ""],
@@ -586,7 +590,7 @@ z_index = 999
 position = Vector2(3704, 2048)
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("8_qcsgf")
+script = ExtResource("8_ufpok")
 actor_path = "res://src/Actor/Enemy/Frog.tscn"
 properties = {
 "base_gravity": [300.0, 3, ""],
@@ -607,7 +611,7 @@ visibility_layer = 2
 position = Vector2(0, -7)
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("10_qe850")
+script = ExtResource("10_pdhov")
 tag_name = "look"
 snap_degrees = 180.0
 movement_locked = true
@@ -617,7 +621,7 @@ visibility_layer = 2
 position = Vector2(-32, -8)
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("14_ufpok")
+script = ExtResource("14_0ufij")
 tag_name = "tongue_range"
 lock_y = true
 
@@ -627,7 +631,7 @@ z_index = 999
 position = Vector2(3784, 2048)
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("8_qcsgf")
+script = ExtResource("8_ufpok")
 actor_path = "res://src/Actor/Enemy/Frog.tscn"
 properties = {
 "base_gravity": [300.0, 3, ""],
@@ -648,7 +652,7 @@ visibility_layer = 2
 position = Vector2(0, -7)
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("10_qe850")
+script = ExtResource("10_pdhov")
 tag_name = "look"
 snap_degrees = 180.0
 movement_locked = true
@@ -658,7 +662,7 @@ visibility_layer = 2
 position = Vector2(-32, -8)
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("14_ufpok")
+script = ExtResource("14_0ufij")
 tag_name = "tongue_range"
 lock_y = true
 
@@ -668,7 +672,7 @@ z_index = 999
 position = Vector2(3776, 2000)
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("18_wfdde")
+script = ExtResource("18_tlnhc")
 prop_path = "res://src/Prop/SwitchPlate.tscn"
 properties = {
 "connected_entity_id": ["Conveyor5", 4, ""],
@@ -686,7 +690,7 @@ z_index = 999
 position = Vector2(3696, 2000)
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("18_wfdde")
+script = ExtResource("18_tlnhc")
 prop_path = "res://src/Prop/SwitchLever.tscn"
 properties = {
 "connected_entity_id": ["Conveyor4", 4, ""],
@@ -700,20 +704,46 @@ properties = {
 [node name="Waypoints" type="Node2D" parent="." unique_id=561693217]
 visibility_layer = 2
 
+[node name="Notes" type="Node2D" parent="." unique_id=1663908532]
+visibility_layer = 2
+
+[node name="Note" type="MarginContainer" parent="Notes" unique_id=1359810734 groups=["Notes"] instance=ExtResource("12_lrxj5")]
+visibility_layer = 2
+z_index = 999
+clip_contents = true
+custom_minimum_size = Vector2(16, 16)
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 3072.0
+offset_top = 2272.0
+offset_right = 3440.0
+offset_bottom = 2368.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+mouse_filter = 2
+theme = ExtResource("20_h3q3t")
+script = ExtResource("21_e76nv")
+text = "This is a test level for Golem,
+an enemy designed to be standable and charge"
+color = Color(0.828125, 0, 1, 1)
+
 [node name="VanishingPoint" type="Area2D" parent="." unique_id=1745666426 groups=["VanishingPoints"] instance=ExtResource("12_s0ppf")]
 visibility_layer = 2
 z_index = 999
 position = Vector2(3008, 1856)
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("20_0ufij")
+script = ExtResource("23_sdoga")
 
 [node name="SpawnPoint" type="Area2D" parent="." unique_id=1710023778 groups=["SpawnPoints"] instance=ExtResource("13_ddw3t")]
 visibility_layer = 2
 position = Vector2(3250.6655, 1984.2908)
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("22_hdvik")
+script = ExtResource("25_0f2ls")
 
 [connection signal="body_entered" from="Triggers/KillBoundaryU" to="Triggers/KillBoundaryU" method="_on_body_entered"]
 [connection signal="body_entered" from="Triggers/KillBoundaryD" to="Triggers/KillBoundaryD" method="_on_body_entered"]
@@ -726,17 +756,18 @@ script = ExtResource("22_hdvik")
 [connection signal="input_event" from="Spawns/Frog" to="Spawns/Frog" method="_on_input_event"]
 [connection signal="input_event" from="Spawns/Frog1" to="Spawns/Frog1" method="_on_input_event"]
 [connection signal="input_event" from="Spawns/Frog2" to="Spawns/Frog2" method="_on_input_event"]
-[connection signal="gui_input" from="Spawns/Conveyor" to="Spawns/Conveyor" method="_on_gui_input"]
-[connection signal="gui_input" from="Spawns/Conveyor1" to="Spawns/Conveyor1" method="_on_gui_input"]
-[connection signal="gui_input" from="Spawns/Conveyor2" to="Spawns/Conveyor2" method="_on_gui_input"]
+[connection signal="gui_input" from="Spawns/ConveyorSegment" to="Spawns/ConveyorSegment" method="_on_gui_input"]
+[connection signal="gui_input" from="Spawns/ConveyorSegment1" to="Spawns/ConveyorSegment1" method="_on_gui_input"]
+[connection signal="gui_input" from="Spawns/ConveyorSegment2" to="Spawns/ConveyorSegment2" method="_on_gui_input"]
 [connection signal="input_event" from="Spawns/SwitchCrystal" to="Spawns/SwitchCrystal" method="_on_input_event"]
 [connection signal="input_event" from="Spawns/SwitchLever" to="Spawns/SwitchLever" method="_on_input_event"]
-[connection signal="gui_input" from="Spawns/Conveyor3" to="Spawns/Conveyor3" method="_on_gui_input"]
+[connection signal="gui_input" from="Spawns/ConveyorSegment3" to="Spawns/ConveyorSegment3" method="_on_gui_input"]
 [connection signal="input_event" from="Spawns/SwitchPlate" to="Spawns/SwitchPlate" method="_on_input_event"]
 [connection signal="input_event" from="Spawns/Frog3" to="Spawns/Frog3" method="_on_input_event"]
-[connection signal="gui_input" from="Spawns/Conveyor4" to="Spawns/Conveyor4" method="_on_gui_input"]
-[connection signal="gui_input" from="Spawns/Conveyor5" to="Spawns/Conveyor5" method="_on_gui_input"]
+[connection signal="gui_input" from="Spawns/ConveyorSegment4" to="Spawns/ConveyorSegment4" method="_on_gui_input"]
+[connection signal="gui_input" from="Spawns/ConveyorSegment5" to="Spawns/ConveyorSegment5" method="_on_gui_input"]
 [connection signal="input_event" from="Spawns/Frog4" to="Spawns/Frog4" method="_on_input_event"]
 [connection signal="input_event" from="Spawns/Frog5" to="Spawns/Frog5" method="_on_input_event"]
 [connection signal="input_event" from="Spawns/SwitchPlate1" to="Spawns/SwitchPlate1" method="_on_input_event"]
 [connection signal="input_event" from="Spawns/SwitchLever1" to="Spawns/SwitchLever1" method="_on_input_event"]
+[connection signal="gui_input" from="Notes/Note" to="Notes/Note" method="_on_gui_input"]

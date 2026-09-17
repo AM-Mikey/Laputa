@@ -185,6 +185,9 @@ position = Vector2(2576, 1928)
 owner_id = "bird1"
 index = 1
 
+[node name="Notes" type="Node2D" parent="." unique_id=744075731]
+visibility_layer = 2
+
 [node name="TileAnimator" type="Node2D" parent="." unique_id=1560605216]
 visibility_layer = 2
 script = ExtResource("12_obofi")

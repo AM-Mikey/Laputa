@@ -1,19 +1,14 @@
-[gd_scene format=4]
+[gd_scene format=4 uid="uid://dx3xkvhi4jrj7"]
 
-[ext_resource type="Script" path="res://src/Level/Level.gd" id="1_8vtqx"]
-[ext_resource type="PackedScene" path="res://src/Background/LevelLimiter.tscn" id="2_vv8tl"]
-[ext_resource type="Resource" path="res://src/Background/TiledPlains.tres" id="3_5iu7u"]
-[ext_resource type="Script" path="res://src/Background/LevelLimiter.gd" id="3_avdnr"]
-[ext_resource type="Texture2D" path="res://assets/Background/TiledPlainsColor.png" id="4_avdnr"]
-[ext_resource type="TileSet" path="res://src/Tile/Debug.tres" id="5_7tgdq"]
-[ext_resource type="PackedScene" path="res://src/Editor/Spawn/PropSpawn.tscn" id="7_vv8tl"]
-[ext_resource type="Script" path="res://src/Editor/Spawn/PropSpawn.gd" id="8_7tgdq"]
-[ext_resource type="PackedScene" path="res://src/Editor/Spawn/TriggerSpawn.tscn" id="9_avdnr"]
-[ext_resource type="Script" path="res://src/Editor/Spawn/TriggerSpawn.gd" id="10_c3p7m"]
-[ext_resource type="PackedScene" path="res://src/Editor/VanishingPoint.tscn" id="10_poeff"]
-[ext_resource type="PackedScene" path="res://src/Editor/SpawnPoint.tscn" id="11_g764n"]
-[ext_resource type="Script" path="res://src/Editor/VanishingPoint.gd" id="12_6ibo7"]
-[ext_resource type="Script" path="res://src/Editor/SpawnPoint.gd" id="14_b21g4"]
+[ext_resource type="Script" uid="uid://ucr1waa8u8j1" path="res://src/Level/Level.gd" id="1_8vtqx"]
+[ext_resource type="PackedScene" uid="uid://deyh6xyl8c6tr" path="res://src/Background/LevelLimiter.tscn" id="2_vv8tl"]
+[ext_resource type="Resource" uid="uid://551crugmnes0" path="res://src/Background/TiledPlains.tres" id="3_5iu7u"]
+[ext_resource type="Texture2D" uid="uid://bogxmmxvagqmt" path="res://assets/Background/TiledPlainsColor.png" id="4_avdnr"]
+[ext_resource type="TileSet" uid="uid://dct5q86qhnom8" path="res://src/Tile/Debug.tres" id="5_7tgdq"]
+[ext_resource type="PackedScene" uid="uid://beorrh1dm573t" path="res://src/Editor/Spawn/PropSpawn.tscn" id="7_vv8tl"]
+[ext_resource type="PackedScene" uid="uid://ciahlvrcyq5yt" path="res://src/Editor/Spawn/TriggerSpawn.tscn" id="9_avdnr"]
+[ext_resource type="PackedScene" uid="uid://dovj8uq00xato" path="res://src/Editor/VanishingPoint.tscn" id="10_poeff"]
+[ext_resource type="PackedScene" uid="uid://cpkdlvdxe3pdh" path="res://src/Editor/SpawnPoint.tscn" id="11_g764n"]
 
 [sub_resource type="Gradient" id="Gradient_c4qnx"]
 interpolation_mode = 2
@@ -31,14 +26,12 @@ mission_level_update = "res://src/Mission/WikiMap.json"
 debug_main_mission_stage_name = "textbox_demo"
 controller_color_gradient = SubResource("Gradient_c4qnx")
 
-[node name="LevelLimiter" type="MarginContainer" parent="." unique_id=1355825292 instance=ExtResource("2_vv8tl")]
+[node name="LevelLimiter" parent="." unique_id=1355825292 instance=ExtResource("2_vv8tl")]
 visibility_layer = 2
 offset_left = 16.0
 offset_top = -464.0
 offset_right = 1040.0
 offset_bottom = 304.0
-mouse_filter = 2
-script = ExtResource("3_avdnr")
 background_resource = ExtResource("3_5iu7u")
 texture = ExtResource("4_avdnr")
 layers = 5
@@ -100,13 +93,9 @@ visibility_layer = 2
 [node name="Spawns" type="Node2D" parent="." unique_id=1116492951]
 visibility_layer = 2
 
-[node name="ChestItem" type="Area2D" parent="Spawns" unique_id=1449282698 groups=["Entities", "PropSpawns"] instance=ExtResource("7_vv8tl")]
+[node name="ChestItem" parent="Spawns" unique_id=1449282698 instance=ExtResource("7_vv8tl")]
 visibility_layer = 2
-z_index = 999
 position = Vector2(112, 272)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("8_7tgdq")
 prop_path = "res://src/Prop/ChestItem.tscn"
 properties = {
 "do_bubble": [false, 1, ""],
@@ -115,13 +104,9 @@ properties = {
 "id": [&"ChestItem", 4, ""]
 }
 
-[node name="ChestItem1" type="Area2D" parent="Spawns" unique_id=194623370 groups=["Entities", "PropSpawns"] instance=ExtResource("7_vv8tl")]
+[node name="ChestItem1" parent="Spawns" unique_id=194623370 instance=ExtResource("7_vv8tl")]
 visibility_layer = 2
-z_index = 999
 position = Vector2(56, 144)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("8_7tgdq")
 prop_path = "res://src/Prop/ChestItem.tscn"
 properties = {
 "do_bubble": [false, 1, ""],
@@ -130,13 +115,9 @@ properties = {
 "id": [&"ChestItem1", 4, ""]
 }
 
-[node name="ChestItem2" type="Area2D" parent="Spawns" unique_id=2046179668 groups=["Entities", "PropSpawns"] instance=ExtResource("7_vv8tl")]
+[node name="ChestItem2" parent="Spawns" unique_id=2046179668 instance=ExtResource("7_vv8tl")]
 visibility_layer = 2
-z_index = 999
 position = Vector2(176, 144)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("8_7tgdq")
 prop_path = "res://src/Prop/ChestItem.tscn"
 properties = {
 "do_bubble": [false, 1, ""],
@@ -145,13 +126,9 @@ properties = {
 "id": [&"ChestItem2", 4, ""]
 }
 
-[node name="ChestItem3" type="Area2D" parent="Spawns" unique_id=396128724 groups=["Entities", "PropSpawns"] instance=ExtResource("7_vv8tl")]
+[node name="ChestItem3" parent="Spawns" unique_id=396128724 instance=ExtResource("7_vv8tl")]
 visibility_layer = 2
-z_index = 999
 position = Vector2(288, 144)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("8_7tgdq")
 prop_path = "res://src/Prop/ChestItem.tscn"
 properties = {
 "do_bubble": [false, 1, ""],
@@ -160,16 +137,12 @@ properties = {
 "id": [&"ChestItem3", 4, ""]
 }
 
-[node name="Door" type="MarginContainer" parent="Spawns" unique_id=1800792368 groups=["TriggerSpawns"] instance=ExtResource("9_avdnr")]
+[node name="Door" parent="Spawns" unique_id=1800792368 instance=ExtResource("9_avdnr")]
 visibility_layer = 2
-z_index = 999
-custom_minimum_size = Vector2(8, 8)
 offset_left = 64.0
 offset_top = 256.0
 offset_right = 80.0
 offset_bottom = 288.0
-mouse_filter = 2
-script = ExtResource("10_c3p7m")
 trigger_path = "res://src/Trigger/Door.tscn"
 properties = {
 "color": [Color(0, 0.4, 0, 1), 20, ""],
@@ -185,16 +158,12 @@ properties = {
 }
 size_is_default = false
 
-[node name="Door1" type="MarginContainer" parent="Spawns" unique_id=1101365094 groups=["TriggerSpawns"] instance=ExtResource("9_avdnr")]
+[node name="Door1" parent="Spawns" unique_id=1101365094 instance=ExtResource("9_avdnr")]
 visibility_layer = 2
-z_index = 999
-custom_minimum_size = Vector2(8, 8)
 offset_left = 32.0
 offset_top = 128.0
 offset_right = 48.0
 offset_bottom = 160.0
-mouse_filter = 2
-script = ExtResource("10_c3p7m")
 trigger_path = "res://src/Trigger/Door.tscn"
 properties = {
 "color": [Color(0, 0.4, 0, 1), 20, ""],
@@ -210,16 +179,12 @@ properties = {
 }
 size_is_default = false
 
-[node name="Door2" type="MarginContainer" parent="Spawns" unique_id=269986401 groups=["TriggerSpawns"] instance=ExtResource("9_avdnr")]
+[node name="Door2" parent="Spawns" unique_id=269986401 instance=ExtResource("9_avdnr")]
 visibility_layer = 2
-z_index = 999
-custom_minimum_size = Vector2(8, 8)
 offset_left = 112.0
 offset_top = 128.0
 offset_right = 128.0
 offset_bottom = 160.0
-mouse_filter = 2
-script = ExtResource("10_c3p7m")
 trigger_path = "res://src/Trigger/Door.tscn"
 properties = {
 "color": [Color(0, 0.4, 0, 1), 20, ""],
@@ -235,16 +200,12 @@ properties = {
 }
 size_is_default = false
 
-[node name="Door3" type="MarginContainer" parent="Spawns" unique_id=2121665784 groups=["TriggerSpawns"] instance=ExtResource("9_avdnr")]
+[node name="Door3" parent="Spawns" unique_id=2121665784 instance=ExtResource("9_avdnr")]
 visibility_layer = 2
-z_index = 999
-custom_minimum_size = Vector2(8, 8)
 offset_left = 144.0
 offset_top = 128.0
 offset_right = 160.0
 offset_bottom = 160.0
-mouse_filter = 2
-script = ExtResource("10_c3p7m")
 trigger_path = "res://src/Trigger/Door.tscn"
 properties = {
 "color": [Color(0, 0.4, 0, 1), 20, ""],
@@ -260,16 +221,12 @@ properties = {
 }
 size_is_default = false
 
-[node name="Door4" type="MarginContainer" parent="Spawns" unique_id=1488319196 groups=["TriggerSpawns"] instance=ExtResource("9_avdnr")]
+[node name="Door4" parent="Spawns" unique_id=1488319196 instance=ExtResource("9_avdnr")]
 visibility_layer = 2
-z_index = 999
-custom_minimum_size = Vector2(8, 8)
 offset_left = 224.0
 offset_top = 128.0
 offset_right = 240.0
 offset_bottom = 160.0
-mouse_filter = 2
-script = ExtResource("10_c3p7m")
 trigger_path = "res://src/Trigger/Door.tscn"
 properties = {
 "color": [Color(0, 0.4, 0, 1), 20, ""],
@@ -285,16 +242,12 @@ properties = {
 }
 size_is_default = false
 
-[node name="Door5" type="MarginContainer" parent="Spawns" unique_id=837508812 groups=["TriggerSpawns"] instance=ExtResource("9_avdnr")]
+[node name="Door5" parent="Spawns" unique_id=837508812 instance=ExtResource("9_avdnr")]
 visibility_layer = 2
-z_index = 999
-custom_minimum_size = Vector2(8, 8)
 offset_left = 256.0
 offset_top = 128.0
 offset_right = 272.0
 offset_bottom = 160.0
-mouse_filter = 2
-script = ExtResource("10_c3p7m")
 trigger_path = "res://src/Trigger/Door.tscn"
 properties = {
 "color": [Color(0, 0.4, 0, 1), 20, ""],
@@ -310,16 +263,12 @@ properties = {
 }
 size_is_default = false
 
-[node name="Door6" type="MarginContainer" parent="Spawns" unique_id=538212888 groups=["TriggerSpawns"] instance=ExtResource("9_avdnr")]
+[node name="Door6" parent="Spawns" unique_id=538212888 instance=ExtResource("9_avdnr")]
 visibility_layer = 2
-z_index = 999
-custom_minimum_size = Vector2(8, 8)
 offset_left = 336.0
 offset_top = 128.0
 offset_right = 352.0
 offset_bottom = 160.0
-mouse_filter = 2
-script = ExtResource("10_c3p7m")
 trigger_path = "res://src/Trigger/Door.tscn"
 properties = {
 "color": [Color(0, 0.4, 0, 1), 20, ""],
@@ -335,16 +284,12 @@ properties = {
 }
 size_is_default = false
 
-[node name="Door7" type="MarginContainer" parent="Spawns" unique_id=2129306187 groups=["TriggerSpawns"] instance=ExtResource("9_avdnr")]
+[node name="Door7" parent="Spawns" unique_id=2129306187 instance=ExtResource("9_avdnr")]
 visibility_layer = 2
-z_index = 999
-custom_minimum_size = Vector2(8, 8)
 offset_left = 368.0
 offset_top = 128.0
 offset_right = 384.0
 offset_bottom = 160.0
-mouse_filter = 2
-script = ExtResource("10_c3p7m")
 trigger_path = "res://src/Trigger/Door.tscn"
 properties = {
 "color": [Color(0, 0.4, 0, 1), 20, ""],
@@ -360,16 +305,12 @@ properties = {
 }
 size_is_default = false
 
-[node name="Door8" type="MarginContainer" parent="Spawns" unique_id=785410975 groups=["TriggerSpawns"] instance=ExtResource("9_avdnr")]
+[node name="Door8" parent="Spawns" unique_id=785410975 instance=ExtResource("9_avdnr")]
 visibility_layer = 2
-z_index = 999
-custom_minimum_size = Vector2(8, 8)
 offset_left = 448.0
 offset_top = 128.0
 offset_right = 464.0
 offset_bottom = 160.0
-mouse_filter = 2
-script = ExtResource("10_c3p7m")
 trigger_path = "res://src/Trigger/Door.tscn"
 properties = {
 "color": [Color(0, 0.4, 0, 1), 20, ""],
@@ -385,16 +326,12 @@ properties = {
 }
 size_is_default = false
 
-[node name="Door9" type="MarginContainer" parent="Spawns" unique_id=1166787998 groups=["TriggerSpawns"] instance=ExtResource("9_avdnr")]
+[node name="Door9" parent="Spawns" unique_id=1166787998 instance=ExtResource("9_avdnr")]
 visibility_layer = 2
-z_index = 999
-custom_minimum_size = Vector2(8, 8)
 offset_left = 416.0
 offset_top = 256.0
 offset_right = 432.0
 offset_bottom = 288.0
-mouse_filter = 2
-script = ExtResource("10_c3p7m")
 trigger_path = "res://src/Trigger/Door.tscn"
 properties = {
 "color": [Color(0, 0.4, 0, 1), 20, ""],
@@ -410,16 +347,12 @@ properties = {
 }
 size_is_default = false
 
-[node name="Sign" type="MarginContainer" parent="Spawns" unique_id=330219439 groups=["TriggerSpawns"] instance=ExtResource("9_avdnr")]
+[node name="Sign" parent="Spawns" unique_id=330219439 instance=ExtResource("9_avdnr")]
 visibility_layer = 2
-z_index = 999
-custom_minimum_size = Vector2(8, 8)
 offset_left = 416.0
 offset_top = 144.0
 offset_right = 432.0
 offset_bottom = 160.0
-mouse_filter = 2
-script = ExtResource("10_c3p7m")
 trigger_path = "res://src/Trigger/Sign.tscn"
 properties = {
 "color": [Color(0.901961, 0.74902, 0, 1), 20, ""],
@@ -431,16 +364,12 @@ has doors be unlocked", 4, ""]
 }
 size_is_default = false
 
-[node name="Sign1" type="MarginContainer" parent="Spawns" unique_id=459794407 groups=["TriggerSpawns"] instance=ExtResource("9_avdnr")]
+[node name="Sign1" parent="Spawns" unique_id=459794407 instance=ExtResource("9_avdnr")]
 visibility_layer = 2
-z_index = 999
-custom_minimum_size = Vector2(8, 8)
 offset_left = 96.0
 offset_top = 144.0
 offset_right = 112.0
 offset_bottom = 160.0
-mouse_filter = 2
-script = ExtResource("10_c3p7m")
 trigger_path = "res://src/Trigger/Sign.tscn"
 properties = {
 "color": [Color(0.901961, 0.74902, 0, 1), 20, ""],
@@ -454,38 +383,13 @@ size_is_default = false
 [node name="Waypoints" type="Node2D" parent="." unique_id=1416282546]
 visibility_layer = 2
 
-[node name="VanishingPoint" type="Area2D" parent="." unique_id=9884164 groups=["VanishingPoints"] instance=ExtResource("10_poeff")]
+[node name="Notes" type="Node2D" parent="." unique_id=1397508944]
 visibility_layer = 2
-z_index = 999
-position = Vector2(296, -152)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("12_6ibo7")
 
-[node name="SpawnPoint" type="Area2D" parent="." unique_id=422711910 groups=["SpawnPoints"] instance=ExtResource("11_g764n")]
+[node name="VanishingPoint" parent="." unique_id=9884164 instance=ExtResource("10_poeff")]
+visibility_layer = 2
+position = Vector2(296, -152)
+
+[node name="SpawnPoint" parent="." unique_id=422711910 instance=ExtResource("11_g764n")]
 visibility_layer = 2
 position = Vector2(168, 288)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("14_b21g4")
-
-[connection signal="body_entered" from="Triggers/KillBoundaryU" to="Triggers/KillBoundaryU" method="_on_body_entered"]
-[connection signal="body_entered" from="Triggers/KillBoundaryD" to="Triggers/KillBoundaryD" method="_on_body_entered"]
-[connection signal="body_entered" from="Triggers/KillBoundaryL" to="Triggers/KillBoundaryL" method="_on_body_entered"]
-[connection signal="body_entered" from="Triggers/KillBoundaryR" to="Triggers/KillBoundaryR" method="_on_body_entered"]
-[connection signal="input_event" from="Spawns/ChestItem" to="Spawns/ChestItem" method="_on_input_event"]
-[connection signal="input_event" from="Spawns/ChestItem1" to="Spawns/ChestItem1" method="_on_input_event"]
-[connection signal="input_event" from="Spawns/ChestItem2" to="Spawns/ChestItem2" method="_on_input_event"]
-[connection signal="input_event" from="Spawns/ChestItem3" to="Spawns/ChestItem3" method="_on_input_event"]
-[connection signal="gui_input" from="Spawns/Door" to="Spawns/Door" method="_on_gui_input"]
-[connection signal="gui_input" from="Spawns/Door1" to="Spawns/Door1" method="_on_gui_input"]
-[connection signal="gui_input" from="Spawns/Door2" to="Spawns/Door2" method="_on_gui_input"]
-[connection signal="gui_input" from="Spawns/Door3" to="Spawns/Door3" method="_on_gui_input"]
-[connection signal="gui_input" from="Spawns/Door4" to="Spawns/Door4" method="_on_gui_input"]
-[connection signal="gui_input" from="Spawns/Door5" to="Spawns/Door5" method="_on_gui_input"]
-[connection signal="gui_input" from="Spawns/Door6" to="Spawns/Door6" method="_on_gui_input"]
-[connection signal="gui_input" from="Spawns/Door7" to="Spawns/Door7" method="_on_gui_input"]
-[connection signal="gui_input" from="Spawns/Door8" to="Spawns/Door8" method="_on_gui_input"]
-[connection signal="gui_input" from="Spawns/Door9" to="Spawns/Door9" method="_on_gui_input"]
-[connection signal="gui_input" from="Spawns/Sign" to="Spawns/Sign" method="_on_gui_input"]
-[connection signal="gui_input" from="Spawns/Sign1" to="Spawns/Sign1" method="_on_gui_input"]
