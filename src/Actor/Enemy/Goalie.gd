@@ -33,6 +33,7 @@ func set_look_dir(val):
 	$ActiveDetector.scale.x = -look_dir.x
 	$JumpDetector.scale.x = -look_dir.x
 	$Sprite2D.flip_h = look_dir.x > 0.0
+	$Hitbox.scale.x = -look_dir.x
 
 func setup():
 	hp = 4
@@ -131,6 +132,9 @@ func enter_kick(_prev_state):
 	am.play("enemy_shoot")
 	kick_hitbox.set_deferred("monitoring", true)
 	kick_hitbox.set_deferred("monitorable", true)
+	await get_tree().create_timer(0.2).timeout
+	kick_hitbox.set_deferred("monitoring", false)
+	kick_hitbox.set_deferred("monitorable", false)
 
 func do_kick(_delta):
 	if not ap.is_playing():

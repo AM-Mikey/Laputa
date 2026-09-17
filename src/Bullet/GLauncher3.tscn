@@ -107,6 +107,10 @@ frame = 23
 process_callback = 0
 one_shot = true
 
+[node name="BounceGraceTimer" type="Timer" parent="." unique_id=1889157626]
+wait_time = 0.2
+one_shot = true
+
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1759881315]
 libraries/ = SubResource("AnimationLibrary_trxyl")
 
