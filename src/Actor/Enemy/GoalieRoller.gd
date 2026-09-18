@@ -12,6 +12,7 @@ func setup() -> void:
 ### SIGNALS ###
 func _on_DeflectHitbox_body_entered(body: Node2D) -> void:
 	if body.is_in_group("Roller") && body.get_collision_layer_value(2) && allow_to_deflect: #enemy
+
 		var player = f.pc()
 		if !player: return
 		var dir: = body.global_position.direction_to(player.global_position + Vector2(0, -15))

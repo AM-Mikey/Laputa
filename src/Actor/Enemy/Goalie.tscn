@@ -13,13 +13,13 @@ height = 15.0
 size = Vector2(5, 15)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_p2rvj"]
-size = Vector2(11, 15)
+size = Vector2(8, 15)
 
 [sub_resource type="RectangleShape2D" id="10"]
-size = Vector2(14, 13)
+size = Vector2(14, 14)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ax27h"]
-size = Vector2(16, 7)
+size = Vector2(18, 7)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_on0yn"]
 size = Vector2(20.5, 18)
@@ -163,7 +163,7 @@ collision_layer = 262144
 collision_mask = 65536
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox" unique_id=359933471]
-position = Vector2(-0.5, -7.5)
+position = Vector2(1, -7.5)
 shape = SubResource("RectangleShape2D_p2rvj")
 debug_color = Color(1, 0, 0, 0.235294)
 
@@ -181,7 +181,7 @@ collision_layer = 0
 monitorable = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="KickDetector" unique_id=1994513786]
-position = Vector2(-7, -6.5)
+position = Vector2(-7, -7)
 shape = SubResource("10")
 
 [node name="KickHitbox" type="Area2D" parent="." unique_id=1149402340]
@@ -191,13 +191,15 @@ monitoring = false
 monitorable = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="KickHitbox" unique_id=472885124]
-position = Vector2(-8, -6.5)
+position = Vector2(-7, -6.5)
 shape = SubResource("RectangleShape2D_ax27h")
 debug_color = Color(1, 0, 0, 0.235294)
 
 [node name="DeflectDetector" type="Area2D" parent="." unique_id=1783445768]
+visible = false
 collision_layer = 0
 collision_mask = 8256
+monitoring = false
 monitorable = false
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="DeflectDetector" unique_id=1529987484]
@@ -205,6 +207,7 @@ position = Vector2(-10.25, -9)
 shape = SubResource("RectangleShape2D_on0yn")
 
 [node name="DeflectHitbox" type="Area2D" parent="." unique_id=2093412947]
+visible = false
 collision_layer = 262144
 collision_mask = 8256
 monitoring = false
@@ -259,6 +262,7 @@ lock_x = true
 [connection signal="area_entered" from="Hitbox" to="." method="_on_hitbox_area_entered"]
 [connection signal="area_exited" from="Hitbox" to="." method="_on_hitbox_area_exited"]
 [connection signal="body_entered" from="KickDetector" to="." method="_on_KickDetector_body_entered"]
+[connection signal="body_exited" from="KickDetector" to="." method="_on_KickDetector_body_exited"]
 [connection signal="area_entered" from="KickHitbox" to="." method="_on_KickHitbox_area_entered"]
 [connection signal="body_entered" from="KickHitbox" to="." method="_on_KickHitbox_body_entered"]
 [connection signal="body_entered" from="DeflectDetector" to="." method="_on_DeflectDetector_body_entered"]

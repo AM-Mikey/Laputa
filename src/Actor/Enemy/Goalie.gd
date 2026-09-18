@@ -31,6 +31,7 @@ var rise_from_position: = Vector2.ZERO
 
 var player_in_jump_zone: = false
 var kicked: = false
+var kick_target = null
 
 ## Diff 1 related
 var kick_next_state: = ""
@@ -51,10 +52,9 @@ func set_look_dir(val):
 func setup():
 	hp = 4
 	damage_on_contact = 2
-	speed = Vector2(100, 200)
+	speed = Vector2(100, 210)
 	gravity = 250
 
-	reward = 3
 	is_wind_affected = true
 
 	$ActiveDetector/CollisionShape2D.shape.size.y = abs($JumpWaypoint.position.y)
@@ -76,10 +76,12 @@ func setup():
 			$Sprite2D.modulate = Color.WHITE
 			$Hurtbox/CollisionShape2D.shape.size = Vector2(11.0, 15.0)
 			$Hurtbox/CollisionShape2D.position = Vector2(-0.5, -7.5)
+			reward = 3
 		1:
 			$Sprite2D.modulate = Color(1.0, 0.45, 1.0, 1.0)
 			$Hurtbox/CollisionShape2D.shape.size = Vector2(5.0, 15.0)
 			$Hurtbox/CollisionShape2D.position = Vector2(-2.5, -7.5)
+			reward = 5
 
 	$DeflectDetector.monitoring = difficulty > 0
 	$PlayerDetector.monitoring = difficulty > 0
@@ -143,9 +145,13 @@ func do_rise(_delta):
 	if is_on_ceiling():
 		create_effect("Bonk")
 
+	if kick_target and abs(kick_target.global_position.y - global_position.y + 7.0) <= 4.0:
+		change_state("kick")
+
 	if is_on_ceiling() || position.y <= jump_pos.y || !target || position.y <= target.global_position.y:
 		change_state("fall")
 		return
+
 	velocity = calc_velocity(Vector2.UP)
 	move_and_slide()
 	velocity = velocity
@@ -206,6 +212,9 @@ func do_fall(_delta):
 	velocity = calc_velocity(Vector2.ZERO)
 	move_and_slide()
 	velocity = velocity
+
+	if kick_target and $KickGraceTimer.time_left > 0.0 and abs(kick_target.global_position.y - global_position.y + 7.0) <= 4.0:
+		change_state("kick")
 
 	if is_on_floor() || global_position.y > rise_from_position.y || $FallTimer.time_left <= 0.0:
 		am.play("enemy_land", self)
@@ -287,11 +296,12 @@ func _on_JumpDetector_body_entered(_body):
 func _on_JumpDetector_body_exited(_body):
 	player_in_jump_zone = false
 
-func _on_KickDetector_body_entered(_body):
-	if state == "rise":
-		change_state("kick")
-	elif state == "fall" && $KickGraceTimer.time_left > 0.0:
-		change_state("kick")
+func _on_KickDetector_body_entered(body):
+	kick_target = body
+
+
+func _on_KickDetector_body_exited(body: Node2D) -> void:
+	kick_target = null
 
 
 func _on_KickHitbox_area_entered(area: Area2D) -> void:
@@ -314,7 +324,7 @@ func _on_KickHitbox_body_entered(body: Node2D) -> void:
 
 func _on_DeflectDetector_body_entered(body: Node2D) -> void:
 	if difficulty == 1:
-		if state in ["idle", "active", "rise", "fall"]:
+		if state in ["idle", "active"]:
 			if body.get_collision_layer_value(7) \
 			|| (allow_to_deflect && (body.get_collision_layer_value(14) || body.get_collision_layer_value(2))):
 				change_state("kick")
