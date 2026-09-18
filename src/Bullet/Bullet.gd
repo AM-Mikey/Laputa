@@ -214,7 +214,7 @@ func change_side(to_player: bool):
 		hitbox = get_node_or_null("EnemyCollisionDetector")
 		bullet_from_player = false
 	if !hitbox: return
-	print("Change side to player: ", to_player)
+	#print("Change side to player: ", to_player)
 	set_collision_layer_value(7, to_player)
 	set_collision_layer_value(14, !to_player)
 	hitbox.set_collision_layer_value(7, to_player)

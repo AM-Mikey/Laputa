@@ -145,7 +145,7 @@ func do_rise(_delta):
 	if is_on_ceiling():
 		create_effect("Bonk")
 
-	if kick_target and abs(kick_target.global_position.y - global_position.y + 7.0) <= 4.0:
+	if kick_target && abs(kick_target.global_position.y - global_position.y + 7.0) <= 4.0:
 		change_state("kick")
 
 	if is_on_ceiling() || position.y <= jump_pos.y || !target || position.y <= target.global_position.y:
@@ -213,7 +213,7 @@ func do_fall(_delta):
 	move_and_slide()
 	velocity = velocity
 
-	if kick_target and $KickGraceTimer.time_left > 0.0 and abs(kick_target.global_position.y - global_position.y + 7.0) <= 4.0:
+	if kick_target && $KickGraceTimer.time_left > 0.0 && abs(kick_target.global_position.y - global_position.y + 7.0) <= 4.0:
 		change_state("kick")
 
 	if is_on_floor() || global_position.y > rise_from_position.y || $FallTimer.time_left <= 0.0:
@@ -337,11 +337,14 @@ func _on_DeflectHitbox_body_entered(body: Node2D) -> void:
 		if body.get_collision_layer_value(7):
 			body.change_side(false)
 		var dir: = body.global_position.direction_to(player.global_position + Vector2(0, -15))
+		 ## This make deflect bullet more reliably
+		am.play("bullet_clink", self)
+		var body_process_mode = body.process_mode
 		body.process_mode = Node.PROCESS_MODE_DISABLED
 		body.direction = dir
 		body.velocity = dir * kick_force
 		await get_tree().physics_frame
-		body.process_mode = Node.PROCESS_MODE_INHERIT
+		body.process_mode = body_process_mode
 
 
 func _on_PlayerDetector_body_entered(body: Node2D) -> void:
