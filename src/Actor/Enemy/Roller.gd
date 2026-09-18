@@ -62,15 +62,18 @@ func setup(): #Reminder: no function called can use await before emit
 
 func _on_physics_process(delta):
 	if disabled || dead: return
-	on_floor = $Floor.is_colliding() || $LWall2.is_colliding() || $RWall2.is_colliding()
+	on_floor = _check_raycast_contact($Floor) || _check_raycast_contact($LWall2) || _check_raycast_contact($RWall2)
 	var floor_raycast: RayCast2D
 	for r in [$Floor, $LWall2, $RWall2]:
-		if r.is_colliding():
+		if _check_raycast_contact(r):
 			floor_raycast = r
 			break
 
+	var lfloor_colliding: = _check_raycast_contact($LFloor)
+	var rfloor_colliding: = _check_raycast_contact($RFloor)
+
 	if difficulty == 0:
-		if on_floor && $LFloor.is_colliding() && $RFloor.is_colliding():
+		if on_floor && lfloor_colliding && rfloor_colliding:
 			var left_floor_collide_pos = $LFloor.get_collision_point()
 			var right_floor_collide_pos = $RFloor.get_collision_point()
 			var floor_pos
@@ -92,9 +95,9 @@ func _on_physics_process(delta):
 			elif is_right_floor_angle:
 				floor_normal = floor_pos.direction_to(right_floor_collide_pos).orthogonal()
 
-		elif on_floor && ($LFloor.is_colliding() || $RFloor.is_colliding()):
-			if !($LFloor.is_colliding() && floor_raycast == $RWall2) || ($RFloor.is_colliding() && floor_raycast == $LWall2):
-				var offside_raycast: RayCast2D = $LFloor if $LFloor.is_colliding() else $RFloor
+		elif on_floor && (lfloor_colliding || rfloor_colliding):
+			if !(lfloor_colliding && floor_raycast == $RWall2) || (rfloor_colliding && floor_raycast == $LWall2):
+				var offside_raycast: RayCast2D = $LFloor if lfloor_colliding else $RFloor
 				var offside_collide_pos = offside_raycast.get_collision_point()
 				var floor_pos
 				if floor_raycast == $Floor:
@@ -135,9 +138,9 @@ func _on_physics_process(delta):
 	if $TurnTimer.time_left <= 0:
 		var center_point := global_position + Vector2(0, -8)
 		var right_wall_top = last_collision != null && center_point.angle_to_point(last_collision.get_position()) <= 0.0 && center_point.angle_to_point(last_collision.get_position()) >= -max_wall_upper_angle
-		var right_wall_contact = $RWall.is_colliding() || $RWall2.is_colliding() || right_wall_top
+		var right_wall_contact = _check_raycast_contact($RWall) || _check_raycast_contact($RWall2) || right_wall_top
 		var left_wall_top = last_collision != null && center_point.angle_to_point(last_collision.get_position()) <= -PI + max_wall_upper_angle
-		var left_wall_contact = $LWall.is_colliding() || $LWall2.is_colliding() || left_wall_top
+		var left_wall_contact = _check_raycast_contact($LWall) || _check_raycast_contact($LWall2) || left_wall_top
 		var wall_contact = (move_dir.x > 0 && right_wall_contact) || (move_dir.x <= 0 && left_wall_contact)
 		var normal_contact = wall_contact && !stuck
 
@@ -151,6 +154,7 @@ func _on_physics_process(delta):
 			var spark = SPARK.instantiate()
 			spark.position = global_position
 			w.middle_front.add_child(spark)
+			knockback_velocity.x = 0.0
 			$TurnTimer.start()
 			if difficulty == 1:
 				gravity_velocity.x = -gravity_velocity.x
@@ -171,6 +175,17 @@ func _animate():
 
 
 ### HELPERS ###
+
+func _check_raycast_contact(raycast: RayCast2D) -> bool:
+	if raycast.is_colliding():
+		var collider = raycast.get_collider()
+		if collider is TileMapLayer:
+			return true
+		elif collider.get_collision_layer_value(2):
+			return collider.is_in_group("Roller")
+		else:
+			return true
+	return false
 
 func _check_stuck(delta):
 	if (prev_global_position - global_position).length() <= 0.25:
@@ -209,7 +224,10 @@ func _calc_velocity_rolling() -> Vector2:
 	var delta: = get_physics_process_delta_time()
 	var in_water_mult := Vector2.ONE if !is_in_water else Vector2(0.666, 0.666)
 
+	#if knockback_velocity.length() < speed.x * 0.5:F
 	move_velocity = speed * move_dir * in_water_mult
+	#else:
+		#move_velocity = Vector2.ZERO
 
 	if ceil_bounce_next_frame:
 		am.play("enemy_metal_thud", self, null, min(gravity_velocity.length() / 25.0, 30.0))
@@ -217,7 +235,9 @@ func _calc_velocity_rolling() -> Vector2:
 			_create_effect("Land")
 		if gravity_velocity.length() > 250.0:
 			_create_effect("Bonk")
-		gravity_velocity = -gravity_velocity * diff_1_bounce_factor
+		var collision = get_last_slide_collision()
+		knockback_velocity = knockback_velocity.bounce(collision.get_normal())  * diff_1_bounce_factor
+		gravity_velocity = gravity_velocity.bounce(collision.get_normal()) * diff_1_bounce_factor
 		ceil_bounce_next_frame = false
 	else:
 		if !on_floor || on_slope:
@@ -238,7 +258,7 @@ func _calc_velocity_rolling() -> Vector2:
 					gravity_velocity.x = move_toward(gravity_velocity.x, 0.0, 1.0)
 				gravity_velocity.x = abs(gravity_velocity.x) * move_dir.x
 				gravity_velocity.y += add_gravity
-				var collision = move_and_collide((gravity_velocity + move_velocity) * delta, true)
+				var collision = move_and_collide((gravity_velocity + move_velocity + knockback_velocity) * delta, true)
 				var ceil_angle = PI / 3.0
 				if collision != null:
 					var check_angle := (global_position + Vector2(0, -8.0)).angle_to_point(collision.get_position())
@@ -277,7 +297,9 @@ func _calc_velocity_rolling() -> Vector2:
 			gravity_velocity.y += wind_area.speed * wind_area.wind_dir.y
 			move_velocity.x += wind_area.speed * wind_area.wind_dir.x
 
-	return move_velocity + gravity_velocity
+	knockback_velocity = knockback_velocity.lerp(Vector2.ZERO, 0.025)
+
+	return move_velocity + gravity_velocity + knockback_velocity
 
 
 func _angle_to_nearest_x_axis(angle: float) -> float: # Return value in [0, PI / 2.0]

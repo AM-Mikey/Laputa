@@ -206,6 +206,22 @@ func armor_check(body) -> bool:
 		body.blocked.emit(self, body)
 		return true
 
+func change_side(to_player: bool):
+	var hitbox = get_node_or_null("PlayerCollisionDetector")
+	var bullet_from_player = !!hitbox
+	if !hitbox:
+		hitbox = get_node_or_null("EnemyCollisionDetector")
+		bullet_from_player = false
+	if !hitbox: return
+	#print("Change side to player: ", to_player)
+	set_collision_layer_value(7, to_player)
+	set_collision_layer_value(14, !to_player)
+	hitbox.set_collision_layer_value(7, to_player)
+	hitbox.set_collision_layer_value(14, !to_player)
+	hitbox.set_collision_mask_value(18, to_player)
+	hitbox.set_collision_mask_value(17, !to_player)
+
+
 
 ### SIGNALS ###
 
@@ -243,7 +259,8 @@ func _on_CollisionDetector_area_entered(area): #TODO: double check breakable pie
 		if !piercing:
 			queue_free()
 	elif area.get_collision_layer_value(17): #playerhurt
-		area.get_parent().hit(damage, get_blood_dir(area.get_parent()))
+		var blood_dir = get_blood_dir(area.get_parent())
+		area.get_parent().hit(damage, blood_dir, $EnemyCollisionDetector)
 		if !piercing:
 			queue_free()
 	elif area.get_collision_layer_value(9): #breakable
