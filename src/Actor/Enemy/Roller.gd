@@ -8,7 +8,6 @@ const LAND := preload("res://src/Effect/LandParticle.tscn")
 const SPARK := preload("res://src/Effect/Spark.tscn")
 
 @export var difficulty := 0
-@export var diff_1_bounce_factor := 0.7
 @export var start_dir = Vector2.LEFT
 
 var move_dir := Vector2.ZERO
@@ -33,6 +32,10 @@ const max_wall_upper_angle := PI / 3.0
 var ceil_bounce_next_frame := false
 const slope_detection_tolerance: float = PI / 90.0
 
+const diff_1_bounce_factor := 0.7
+const diff_0_bounce_factor := 0.2
+var bounce_factor: = diff_0_bounce_factor
+
 
 
 func setup(): #Reminder: no function called can use await before emit
@@ -50,8 +53,10 @@ func setup(): #Reminder: no function called can use await before emit
 
 	if difficulty == 0:
 		$Sprite2D.modulate = Color.WHITE
+		bounce_factor = diff_0_bounce_factor
 	elif difficulty == 1: #TODO: add sprites
 		$Sprite2D.modulate = Color.DEEP_PINK
+		bounce_factor = diff_1_bounce_factor
 
 	prev_global_position = global_position
 	set_up_direction(FLOOR_NORMAL)
@@ -154,7 +159,7 @@ func _on_physics_process(delta):
 			var spark = SPARK.instantiate()
 			spark.position = global_position
 			w.middle_front.add_child(spark)
-			knockback_velocity.x = 0.0
+			knockback_velocity.x = abs(knockback_velocity.x) * move_dir.x
 			$TurnTimer.start()
 			if difficulty == 1:
 				gravity_velocity.x = -gravity_velocity.x
@@ -224,10 +229,8 @@ func _calc_velocity_rolling() -> Vector2:
 	var delta: = get_physics_process_delta_time()
 	var in_water_mult := Vector2.ONE if !is_in_water else Vector2(0.666, 0.666)
 
-	#if knockback_velocity.length() < speed.x * 0.5:F
-	move_velocity = speed * move_dir * in_water_mult
-	#else:
-		#move_velocity = Vector2.ZERO
+	move_velocity = speed * move_dir * in_water_mult * clamp(remap(knockback_velocity.x, 0.0, speed.x, 1.0, 0.0), 0.0, 1.0)
+
 
 	if ceil_bounce_next_frame:
 		am.play("enemy_metal_thud", self, null, min(gravity_velocity.length() / 25.0, 30.0))
@@ -235,9 +238,9 @@ func _calc_velocity_rolling() -> Vector2:
 			_create_effect("Land")
 		if gravity_velocity.length() > 250.0:
 			_create_effect("Bonk")
-		var collision = get_last_slide_collision()
-		knockback_velocity = knockback_velocity.bounce(collision.get_normal())  * diff_1_bounce_factor
-		gravity_velocity = gravity_velocity.bounce(collision.get_normal()) * diff_1_bounce_factor
+		var normal = last_collision.get_normal() if last_collision else Vector2.DOWN
+		knockback_velocity = knockback_velocity.bounce(normal) * bounce_factor
+		gravity_velocity = gravity_velocity.bounce(normal) * bounce_factor
 		ceil_bounce_next_frame = false
 	else:
 		if !on_floor || on_slope:
@@ -274,7 +277,9 @@ func _calc_velocity_rolling() -> Vector2:
 							_create_effect("Land")
 						if gravity_velocity.length() > 250.0:
 							_create_effect("Bonk")
-					gravity_velocity.y = -abs(gravity_velocity.y) * 0.2
+					var normal = last_collision.get_normal() if last_collision else Vector2.UP
+					gravity_velocity = gravity_velocity.bounce(normal) * bounce_factor
+					knockback_velocity = knockback_velocity.bounce(normal) * bounce_factor
 				elif difficulty == 1:
 					if abs(gravity_velocity.y) >= 5.0:
 						am.play("enemy_metal_thud", self, null, min(gravity_velocity.length() / 50.0, 30.0))
@@ -283,7 +288,9 @@ func _calc_velocity_rolling() -> Vector2:
 								_create_effect("Land")
 							if gravity_velocity.length() > 250.0:
 								_create_effect("Bonk")
-						gravity_velocity = -gravity_velocity * diff_1_bounce_factor
+						var normal = last_collision.get_normal() if last_collision else Vector2.UP
+						gravity_velocity = gravity_velocity.bounce(normal) * bounce_factor
+						knockback_velocity = knockback_velocity.bounce(normal) * bounce_factor
 					else:
 						gravity_velocity = Vector2.ZERO
 			else:
@@ -299,6 +306,7 @@ func _calc_velocity_rolling() -> Vector2:
 
 	knockback_velocity = knockback_velocity.lerp(Vector2.ZERO, 0.025)
 
+	#print(move_velocity, " ", gravity_velocity, " ", knockback_velocity )
 	return move_velocity + gravity_velocity + knockback_velocity
 
 

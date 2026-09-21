@@ -20,6 +20,7 @@ func _on_DeflectHitbox_body_entered(body: Node2D) -> void:
 		var knockback = dir * kick_force * 2.0
 		#print("Knockback: ",  knockback)
 		body.knockback_velocity = knockback
+		body.gravity_velocity = Vector2.ZERO
 		body.move_dir.x = 1.0 if dir.x >= 0 else -1.0
 
 		var player_distance = body.global_position.distance_to(player.global_position)
