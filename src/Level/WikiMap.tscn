@@ -557,6 +557,9 @@ position = Vector2(392, 280)
 visibility_layer = 2
 position = Vector2(472, 280)
 
+[node name="Notes" type="Node2D" parent="." unique_id=1220156191]
+visibility_layer = 2
+
 [node name="VanishingPoint" parent="." unique_id=9884164 instance=ExtResource("9_if8wo")]
 visibility_layer = 2
 position = Vector2(296, -152)

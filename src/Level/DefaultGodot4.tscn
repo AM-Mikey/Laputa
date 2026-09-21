@@ -811,6 +811,9 @@ lock_x = true
 [node name="Waypoints" type="Node2D" parent="." unique_id=1140943479]
 visibility_layer = 2
 
+[node name="Notes" type="Node2D" parent="." unique_id=577013387]
+visibility_layer = 2
+
 [node name="VanishingPoint" parent="." unique_id=852042071 instance=ExtResource("7_mlr58")]
 visibility_layer = 2
 position = Vector2(2288, 1832)

@@ -49,7 +49,7 @@ func on_selected(selection, selection_type, from_set = false):
 func _do_editor_grab():
 	var mouse_pos = w.get_global_mouse_position()
 	#var grid_pos = editor.get_cell(mouse_pos)
-	if active_type in ["background", "tile_map", "trigger_spawn", "vu_rect", "level"]: return
+	if active_type in ["background", "tile_map", "trigger_spawn", "vu_rect", "level", "note"]: return
 	editor.pre_grab_tool = editor.active_tool
 	editor.pre_grab_subtool = editor.subtool
 	editor.set_tool("entity", "grab")
@@ -158,6 +158,10 @@ func display_data():
 				create_layer_button(layer_id)
 		"title_preview", "waypoint_local", "waypoint_global", "waypoint_global_spawn", "vu_vector", "vu_rect":
 			create_properties_button(active.get_property_list())
+		"note":
+			create_button("text", active.text, "multiline")
+			create_button("color", active.color, "color")
+			create_button("big_text", active.big_text, "bool")
 
 func get_property_type(type_flag, _is_load) -> String:
 	var out = ""
@@ -337,6 +341,9 @@ func on_property_changed(property_name, property_value):
 			active.setup_colors()
 		#"waypoint_local", "waypoint_global":
 			#active.set(property_name, property_value)
+		"note":
+			active.set(property_name, property_value)
+			active.update_text()
 		_:
 			active.set(property_name, property_value)
 

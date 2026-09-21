@@ -332,6 +332,9 @@ properties = {
 [node name="Waypoints" type="Node2D" parent="." unique_id=1416282546]
 visibility_layer = 2
 
+[node name="Notes" type="Node2D" parent="." unique_id=1550338718]
+visibility_layer = 2
+
 [node name="VanishingPoint" parent="." unique_id=9884164 instance=ExtResource("9_if8wo")]
 visibility_layer = 2
 position = Vector2(296, -152)

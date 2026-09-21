@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=3 uid="uid://bn801nslqu7x"]
+[gd_scene format=3 uid="uid://bn801nslqu7x"]
 
 [ext_resource type="Script" uid="uid://co1g7h6ixdgyi" path="res://src/Effect/LevelUp.gd" id="1"]
 [ext_resource type="Texture2D" uid="uid://c21j4bij77qxx" path="res://assets/Effect/0LevelUp.png" id="2"]

@@ -24,8 +24,6 @@ var time_created: Dictionary
 
 func _ready():
 	add_to_group("Levels")
-	if has_node("Notes"):
-		get_node("Notes").visible = false
 	setup_kill_box()
 	if controller_color_gradient:
 		oup.level_gradient = controller_color_gradient

@@ -1,4 +1,4 @@
-[gd_scene format=4 uid="uid://bog5k4wtp3fco"]
+[gd_scene format=4 uid="uid://df42kpjweo35n"]
 
 [ext_resource type="Script" uid="uid://ucr1waa8u8j1" path="res://src/Level/Level.gd" id="1_4uhn8"]
 [ext_resource type="TileSet" uid="uid://dct5q86qhnom8" path="res://src/Tile/Debug.tres" id="2_s4ctt"]
@@ -11,6 +11,7 @@
 [ext_resource type="PackedScene" uid="uid://bwp6sqdlvfo84" path="res://src/Editor/VisualUtility/VUVector.tscn" id="9_wiqud"]
 [ext_resource type="PackedScene" uid="uid://cs5m8mi2rih5f" path="res://src/Editor/Spawn/ActorSpawn.tscn" id="11_c6b85"]
 [ext_resource type="PackedScene" uid="uid://dhjqke0pgo21f" path="res://src/Editor/TitlePreview.tscn" id="12_71hdy"]
+[ext_resource type="PackedScene" uid="uid://cyg86p7wau0n7" path="res://src/Editor/VisualUtility/WaypointLocal.tscn" id="13_4r1a1"]
 
 [sub_resource type="Gradient" id="Gradient_s7n1r"]
 interpolation_mode = 2
@@ -95,63 +96,6 @@ visibility_layer = 2
 [node name="Spawns" type="Node2D" parent="." unique_id=993935856]
 visibility_layer = 2
 
-[node name="PhysFan" parent="Spawns" unique_id=1449282698 instance=ExtResource("7_hy5g4")]
-visibility_layer = 2
-position = Vector2(1808, 2032)
-prop_path = "res://src/Prop/PhysFan.tscn"
-properties = {
-"do_bubble": [false, 1, ""],
-"editor_hidden": [false, 1, ""],
-"id": [&"PhysFan", 4],
-"speed": [20.0, 3, ""],
-"toggled": [false, 1, ""]
-}
-
-[node name="WindVector" parent="Spawns/PhysFan" unique_id=872564127 instance=ExtResource("9_wiqud")]
-visibility_layer = 2
-position = Vector2(8, 8)
-direction = Vector2(-4.371139e-08, -1)
-snap_degrees = 90.0
-movement_locked = true
-
-[node name="PhysFan1" parent="Spawns" unique_id=1675413196 instance=ExtResource("7_hy5g4")]
-visibility_layer = 2
-position = Vector2(1936, 2016)
-prop_path = "res://src/Prop/PhysFan.tscn"
-properties = {
-"do_bubble": [false, 1, ""],
-"editor_hidden": [false, 1, ""],
-"id": ["PhysFan2", 4],
-"speed": [20.0, 3, ""],
-"toggled": [false, 1, ""]
-}
-
-[node name="WindVector" parent="Spawns/PhysFan1" unique_id=530001923 instance=ExtResource("9_wiqud")]
-visibility_layer = 2
-position = Vector2(8, 8)
-direction = Vector2(-4.371139e-08, -1)
-snap_degrees = 90.0
-movement_locked = true
-
-[node name="PhysFan2" parent="Spawns" unique_id=1350452312 instance=ExtResource("7_hy5g4")]
-visibility_layer = 2
-position = Vector2(1840, 2032)
-prop_path = "res://src/Prop/PhysFan.tscn"
-properties = {
-"do_bubble": [false, 1, ""],
-"editor_hidden": [false, 1, ""],
-"id": ["PhysFan1", 4],
-"speed": [20.0, 3, ""],
-"toggled": [false, 1, ""]
-}
-
-[node name="WindVector" parent="Spawns/PhysFan2" unique_id=775328370 instance=ExtResource("9_wiqud")]
-visibility_layer = 2
-position = Vector2(8, 8)
-direction = Vector2(-4.371139e-08, -1)
-snap_degrees = 90.0
-movement_locked = true
-
 [node name="SwitchLever" parent="Spawns" unique_id=1969184057 instance=ExtResource("7_hy5g4")]
 visibility_layer = 2
 position = Vector2(1712, 2016)
@@ -180,7 +124,7 @@ properties = {
 
 [node name="SwitchLever2" parent="Spawns" unique_id=1139234001 instance=ExtResource("7_hy5g4")]
 visibility_layer = 2
-position = Vector2(1904, 2016)
+position = Vector2(1984, 1968)
 prop_path = "res://src/Prop/SwitchLever.tscn"
 properties = {
 "connected_entity_id": ["PhysFan3", 4, ""],
@@ -191,44 +135,12 @@ properties = {
 "timer_duration": [1.0, 3, ""]
 }
 
-[node name="PhysFan3" parent="Spawns" unique_id=1189915509 instance=ExtResource("7_hy5g4")]
-visibility_layer = 2
-position = Vector2(2000, 2048)
-prop_path = "res://src/Prop/PhysFan.tscn"
-properties = {
-"do_bubble": [false, 1, ""],
-"editor_hidden": [false, 1, ""],
-"id": [&"PhysFan3", 4],
-"speed": [20.0, 3, ""],
-"toggled": [true, 1, ""]
-}
-
-[node name="WindVector" parent="Spawns/PhysFan3" unique_id=1340459842 instance=ExtResource("9_wiqud")]
-visibility_layer = 2
-position = Vector2(8, 8)
-snap_degrees = 90.0
-movement_locked = true
-
-[node name="SwitchPlate" parent="Spawns" unique_id=853266467 instance=ExtResource("7_hy5g4")]
-visibility_layer = 2
-position = Vector2(1776, 2016)
-prop_path = "res://src/Prop/SwitchPlate.tscn"
-properties = {
-"connected_entity_id": ["", 4, ""],
-"do_bubble": [false, 1, ""],
-"editor_hidden": [false, 1, ""],
-"id": [&"SwitchPlate", 4],
-"switch_type": [2, 2, "Toggle:0,Impulse:1,Timer:2"],
-"target_type": [[0], 28, ""],
-"timer_duration": [10.0, 3, ""]
-}
-
 [node name="SwitchCrystal" parent="Spawns" unique_id=775436894 instance=ExtResource("7_hy5g4")]
 visibility_layer = 2
 position = Vector2(1872, 2016)
 prop_path = "res://src/Prop/SwitchCrystal.tscn"
 properties = {
-"connected_entity_id": ["", 4, ""],
+"connected_entity_id": ["PhysFan2", 4, ""],
 "do_bubble": [false, 1, ""],
 "eats_bullet": [true, 1, ""],
 "editor_hidden": [false, 1, ""],
@@ -294,7 +206,113 @@ direction = Vector2(-4.371139e-08, -1)
 snap_degrees = 90.0
 movement_locked = true
 
+[node name="PhysFan" parent="Spawns" unique_id=1449282698 instance=ExtResource("7_hy5g4")]
+visibility_layer = 2
+position = Vector2(1808, 2032)
+prop_path = "res://src/Prop/PhysFan.tscn"
+properties = {
+"do_bubble": [false, 1, ""],
+"editor_hidden": [false, 1, ""],
+"id": [&"PhysFan", 4, ""],
+"speed": [20.0, 3, ""],
+"toggled": [true, 1, ""]
+}
+
+[node name="WindVector" parent="Spawns/PhysFan" unique_id=872564127 instance=ExtResource("9_wiqud")]
+visibility_layer = 2
+position = Vector2(8, 8)
+tag_name = "wind_dir"
+direction = Vector2(-4.371139e-08, -1)
+snap_degrees = 90.0
+movement_locked = true
+
+[node name="Distance" parent="Spawns/PhysFan" unique_id=1432238783 instance=ExtResource("13_4r1a1")]
+visibility_layer = 2
+position = Vector2(7.9999876, -272.1176)
+tag_name = "distance"
+lock_x = true
+
+[node name="PhysFan1" parent="Spawns" unique_id=1929662386 instance=ExtResource("7_hy5g4")]
+visibility_layer = 2
+position = Vector2(1840, 2032)
+prop_path = "res://src/Prop/PhysFan.tscn"
+properties = {
+"do_bubble": [false, 1, ""],
+"editor_hidden": [false, 1, ""],
+"id": [&"PhysFan1", 4, ""],
+"speed": [20.0, 3, ""],
+"toggled": [false, 1, ""]
+}
+
+[node name="WindVector" parent="Spawns/PhysFan1" unique_id=1716776236 instance=ExtResource("9_wiqud")]
+visibility_layer = 2
+position = Vector2(8, 8)
+tag_name = "wind_dir"
+direction = Vector2(-4.371139e-08, -1)
+snap_degrees = 90.0
+movement_locked = true
+
+[node name="Distance" parent="Spawns/PhysFan1" unique_id=1025778104 instance=ExtResource("13_4r1a1")]
+visibility_layer = 2
+position = Vector2(7.9999876, -272.1176)
+tag_name = "distance"
+lock_x = true
+
+[node name="PhysFan2" parent="Spawns" unique_id=748397328 instance=ExtResource("7_hy5g4")]
+visibility_layer = 2
+position = Vector2(1968, 2016)
+prop_path = "res://src/Prop/PhysFan.tscn"
+properties = {
+"do_bubble": [false, 1, ""],
+"editor_hidden": [false, 1, ""],
+"id": [&"PhysFan2", 4, ""],
+"speed": [20.0, 3, ""],
+"toggled": [true, 1, ""]
+}
+
+[node name="WindVector" parent="Spawns/PhysFan2" unique_id=690136008 instance=ExtResource("9_wiqud")]
+visibility_layer = 2
+position = Vector2(8, 8)
+tag_name = "wind_dir"
+direction = Vector2(-4.371139e-08, -1)
+snap_degrees = 90.0
+movement_locked = true
+
+[node name="Distance" parent="Spawns/PhysFan2" unique_id=1492316799 instance=ExtResource("13_4r1a1")]
+visibility_layer = 2
+position = Vector2(7.9999876, -272.1176)
+tag_name = "distance"
+lock_x = true
+
+[node name="PhysFan3" parent="Spawns" unique_id=1818399440 instance=ExtResource("7_hy5g4")]
+visibility_layer = 2
+position = Vector2(2000, 2016)
+prop_path = "res://src/Prop/PhysFan.tscn"
+properties = {
+"do_bubble": [false, 1, ""],
+"editor_hidden": [false, 1, ""],
+"id": [&"PhysFan3", 4, ""],
+"speed": [20.0, 3, ""],
+"toggled": [true, 1, ""]
+}
+
+[node name="WindVector" parent="Spawns/PhysFan3" unique_id=375801227 instance=ExtResource("9_wiqud")]
+visibility_layer = 2
+position = Vector2(8, 8)
+tag_name = "wind_dir"
+snap_degrees = 90.0
+movement_locked = true
+
+[node name="Distance" parent="Spawns/PhysFan3" unique_id=818506367 instance=ExtResource("13_4r1a1")]
+visibility_layer = 2
+position = Vector2(296.2318, 8)
+tag_name = "distance"
+lock_y = true
+
 [node name="Waypoints" type="Node2D" parent="." unique_id=1140943479]
+visibility_layer = 2
+
+[node name="Notes" type="Node2D" parent="." unique_id=78699159]
 visibility_layer = 2
 
 [node name="VanishingPoint" parent="." unique_id=852042071 instance=ExtResource("7_mlr58")]

@@ -26,7 +26,7 @@ var brush #Rect2i
 var tile_map_selection: Rect2i
 var tile_map_copy_buffer: Dictionary
 var active_tile_map_layer: int = 0
-var multi_erase = false
+var multi_erase = true
 var auto_tile = true
 
 var active_tool = "tile"
@@ -58,6 +58,7 @@ var prop_collection
 var trigger_collection
 var spawn_collection
 var waypoint_collection
+var note_collection
 var tile_map
 var editor_level_limiter
 var tile_map_cursor
@@ -82,12 +83,14 @@ func _ready():
 	#$Main/Win.move_child($Main/Win/Tab, 0) TODO: was supposed to make tabcontainer go behind resize controls, didnt work
 
 func enter(): #Call this every time the level is changed or reloaded
-	#print("enter")
+	print("enter")
 	setup_windows()
 	if f.pc():
 		f.pc().disable()
 	if f.hud():
 		f.hud().queue_free()
+	if w.dl.has_node("DebugInfo"):
+		w.dl.get_node("DebugInfo").queue_free()
 	w.ui.visible = false
 	w.bl.visible = false
 	w.clear_spawn_layers()
@@ -109,6 +112,7 @@ func enter(): #Call this every time the level is changed or reloaded
 	trigger_collection = w.current_level.get_node("Triggers")
 	spawn_collection = w.current_level.get_node("Spawns")
 	waypoint_collection = w.current_level.get_node("Waypoints")
+	note_collection = w.current_level.get_node("Notes")
 
 	tile_map = w.current_level.get_node("TileMap")
 	tile_master.setup_tile_master()
@@ -142,6 +146,8 @@ func enter(): #Call this every time the level is changed or reloaded
 		wgs.visible = true
 		wgs.input_pickable = true
 		#wgs.reinitialize()
+	for n in get_tree().get_nodes_in_group("Notes"):
+		n.visible = true
 	for tv in get_tree().get_nodes_in_group("VUVectors"):
 		tv.visible = true
 	for t in get_tree().get_nodes_in_group("VURects"):
@@ -215,7 +221,8 @@ func exit():
 
 	var visibility_change_list = ["SpawnPoints", "VanishingPoints", "TitlePreviews",\
 	"WaypointGlobalSpawns", "WaypointGlobals", "WaypointLocals", \
-	"VUVectors", "VURects", "VUActors", "ActorSpawns", "PropSpawns", "TriggerSpawns"]
+	"VUVectors", "VURects", "VUActors", "ActorSpawns", "PropSpawns", "TriggerSpawns", \
+	"Notes"]
 
 	for i in visibility_change_list:
 		for j in get_tree().get_nodes_in_group(i):
@@ -282,7 +289,7 @@ func _unhandled_input(event):
 					copy_prop_spawn()
 				elif inspector.active_type == "trigger_spawn":
 					copy_trigger_spawn()
-				elif inspector.active_type in ["waypoint_local", "waypoint_global", "waypoint_global_spawn", "vu_vector", "vu_rect", "vu_actor"]:
+				elif inspector.active_type in ["waypoint_local", "waypoint_global", "waypoint_global_spawn", "vu_vector", "vu_rect", "vu_actor", "note"]:
 					copy_misc(inspector.active_type)
 				else:
 					copy_tile_map_selection()
@@ -294,7 +301,7 @@ func _unhandled_input(event):
 					paste_prop_spawn(pos)
 				elif inspector.active_type == "trigger_spawn":
 					paste_trigger_spawn(pos)
-				elif inspector.active_type in ["waypoint_local", "waypoint_global", "waypoint_global_spawn", "vu_vector", "vu_rect", "vu_actor"]:
+				elif inspector.active_type in ["waypoint_local", "waypoint_global", "waypoint_global_spawn", "vu_vector", "vu_rect", "vu_actor", "note"]:
 					paste_misc(inspector.active_type, pos)
 				else:
 					paste_tiles_from_buffer(pos)
@@ -791,6 +798,11 @@ func set_misc(misc_path, pos):
 			misc.free()
 			return
 
+	elif misc_path == "res://src/Editor/Note/Note.tscn":
+		misc.global_position = (pos * 16) + Vector2i(8, 8)
+		note_collection.add_child(misc)
+		inspector.on_selected(misc, "misc", true)
+
 	else:
 		misc.global_position = (pos * 16) + Vector2i(8, 8)
 		w.current_level.add_child(misc)
@@ -933,6 +945,8 @@ func paste_misc(type, pos):
 		inspector.active.get_parent().add_child(misc)
 	elif type in ["waypoint_global"]:
 		waypoint_collection.add_child(misc)
+	elif type in ["note"]:
+		note_collection.add_child(misc)
 	else:
 		w.current_level.add_child(misc)
 	misc.global_position = (pos * 16) + Vector2i(8, 8)
@@ -1124,6 +1138,7 @@ func on_tab_changed(tab):
 			set_tool("tile")
 			#set_entities_pickable(false)
 			inspector.on_deselected()
+
 		"TileSet":
 			set_tool("tile_set")
 		"Levels":

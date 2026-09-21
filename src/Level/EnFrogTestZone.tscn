@@ -222,6 +222,9 @@ properties = {
 }
 size_is_default = false
 
+[node name="Notes" type="Node2D" parent="." unique_id=378660346]
+visibility_layer = 2
+
 [node name="Waypoints" type="Node2D" parent="." unique_id=1729474890]
 visibility_layer = 2
 

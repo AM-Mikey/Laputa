@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b7481ocjvat2w"
-path="res://.godot/imported/ConveyorMiddle1.png-a7c9996b1184cb96c10a25c936cba273.ctex"
+uid="uid://co1cpc0xqofkd"
+path="res://.godot/imported/NotCat.png-c2e43b963ed72134540e5e240e83f251.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/Tile/Outdated/Conveyor/ConveyorMiddle1.png"
-dest_files=["res://.godot/imported/ConveyorMiddle1.png-a7c9996b1184cb96c10a25c936cba273.ctex"]
+source_file="res://assets/Face/NotCat.png"
+dest_files=["res://.godot/imported/NotCat.png-c2e43b963ed72134540e5e240e83f251.ctex"]
 
 [params]
 
