@@ -36,6 +36,7 @@ var kick_target = null
 ## Diff 1 related
 var kick_next_state: = ""
 var allow_to_deflect: bool = false
+var just_deflect: Array = []
 
 
 func set_look_dir(val):
@@ -46,6 +47,7 @@ func set_look_dir(val):
 	$JumpDetector.scale.x = -look_dir.x
 	$Sprite2D.flip_h = look_dir.x > 0.0
 	$Hitbox.scale.x = -look_dir.x
+	$Hurtbox.scale.x = look_dir.x
 	$DeflectDetector.scale.x = -look_dir.x
 	$DeflectHitbox.scale.x = -look_dir.x
 
@@ -329,9 +331,9 @@ func _on_DeflectDetector_body_entered(body: Node2D) -> void:
 			|| (allow_to_deflect && (body.get_collision_layer_value(14) || body.get_collision_layer_value(2))):
 				change_state("kick")
 
-
 func _on_DeflectHitbox_body_entered(body: Node2D) -> void:
-	if body.get_collision_layer_value(7) || (body.get_collision_layer_value(14) && allow_to_deflect):
+	if body.name not in just_deflect && \
+		(body.get_collision_layer_value(7) || (body.get_collision_layer_value(14) && allow_to_deflect)):
 		var player = f.pc()
 		if !player: return
 		if body.get_collision_layer_value(7):
@@ -339,12 +341,18 @@ func _on_DeflectHitbox_body_entered(body: Node2D) -> void:
 		var dir: = body.global_position.direction_to(player.global_position + Vector2(0, -15))
 		 ## This make deflect bullet more reliably
 		am.play("bullet_clink", self)
+		var key = body.name
 		var body_process_mode = body.process_mode
 		body.process_mode = Node.PROCESS_MODE_DISABLED
 		body.direction = dir
 		body.velocity = dir * kick_force
-		await get_tree().physics_frame
-		body.process_mode = body_process_mode
+		just_deflect.append(key)
+		await get_tree().process_frame
+		if body:
+			body.process_mode = body_process_mode
+		await get_tree().process_frame # For preventing deflect the same bullet twice
+		await get_tree().process_frame
+		just_deflect.erase(key)
 
 
 func _on_PlayerDetector_body_entered(body: Node2D) -> void:
