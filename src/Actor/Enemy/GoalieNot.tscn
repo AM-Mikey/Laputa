@@ -1,9 +1,9 @@
-[gd_scene format=3 uid="uid://bp6f5q8b4w4dr"]
+[gd_scene format=3 uid="uid://3ev6173xsojb"]
 
-[ext_resource type="Script" uid="uid://cgnp13s3abode" path="res://src/Actor/Enemy/Goalie.gd" id="1_aho6q"]
-[ext_resource type="PackedScene" uid="uid://7hbenrfv6p3q" path="res://src/Utility/PhysicsLayerBody.tscn" id="2_17672"]
-[ext_resource type="Texture2D" uid="uid://clhrvetw6ax6h" path="res://assets/Actor/Enemy/Goalie.png" id="3_c3js0"]
-[ext_resource type="PackedScene" uid="uid://cyg86p7wau0n7" path="res://src/Editor/VisualUtility/WaypointLocal.tscn" id="12_ax27h"]
+[ext_resource type="Script" uid="uid://ckmdu017yydhf" path="res://src/Actor/Enemy/GoalieNot.gd" id="1_0munp"]
+[ext_resource type="PackedScene" uid="uid://7hbenrfv6p3q" path="res://src/Utility/PhysicsLayerBody.tscn" id="2_xuchq"]
+[ext_resource type="Texture2D" uid="uid://clhrvetw6ax6h" path="res://assets/Actor/Enemy/Goalie.png" id="3_wjjqm"]
+[ext_resource type="PackedScene" uid="uid://cyg86p7wau0n7" path="res://src/Editor/VisualUtility/WaypointLocal.tscn" id="4_1lw6g"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ax27h"]
 radius = 4.0
@@ -135,15 +135,13 @@ _data = {
 collision_layer = 2
 collision_mask = 520
 floor_max_angle = 0.6981317
-script = ExtResource("1_aho6q")
-speed = Vector2(100, 200)
-editor_hidden = false
+script = ExtResource("1_0munp")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1630901694]
 position = Vector2(0, -7.5)
 shape = SubResource("CapsuleShape2D_ax27h")
 
-[node name="PhysicsLayerBody" parent="." unique_id=307469918 instance=ExtResource("2_17672")]
+[node name="PhysicsLayerBody" parent="." unique_id=307469918 instance=ExtResource("2_xuchq")]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PhysicsLayerBody" unique_id=177726214]
 position = Vector2(0, -7.5)
@@ -248,7 +246,7 @@ debug_color = Color(1, 0.6, 0.69803923, 0.09803922)
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1138557505]
 position = Vector2(0, -16)
-texture = ExtResource("3_c3js0")
+texture = ExtResource("3_wjjqm")
 hframes = 2
 vframes = 5
 frame = 2
@@ -256,7 +254,7 @@ frame = 2
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1193424199]
 libraries/ = SubResource("AnimationLibrary_g0tk0")
 
-[node name="JumpWaypoint" parent="." unique_id=1432238783 instance=ExtResource("12_ax27h")]
+[node name="JumpWaypoint" parent="." unique_id=1432238783 instance=ExtResource("4_1lw6g")]
 position = Vector2(0, -96)
 tag_name = "jump_pos"
 lock_x = true

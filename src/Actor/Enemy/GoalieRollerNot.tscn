@@ -1,0 +1,21 @@
+[gd_scene format=3 uid="uid://ds65govsopfxp"]
+
+[ext_resource type="PackedScene" uid="uid://3ev6173xsojb" path="res://src/Actor/Enemy/GoalieNot.tscn" id="1_p42me"]
+[ext_resource type="Script" uid="uid://bwbxhcjip018u" path="res://src/Actor/Enemy/GoalieRollerNot.gd" id="2_x8fsk"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_x8fsk"]
+resource_local_to_scene = true
+size = Vector2(64, 96)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_f3h58"]
+resource_local_to_scene = true
+size = Vector2(46, 60)
+
+[node name="GoalieRoller" unique_id=883282154 instance=ExtResource("1_p42me")]
+script = ExtResource("2_x8fsk")
+
+[node name="CollisionShape2D" parent="ActiveDetector" parent_id_path=PackedInt32Array(1122222324) index="0" unique_id=1345632410]
+shape = SubResource("RectangleShape2D_x8fsk")
+
+[node name="CollisionShape2D" parent="JumpDetector" parent_id_path=PackedInt32Array(104415215) index="0" unique_id=14587079]
+shape = SubResource("RectangleShape2D_f3h58")

@@ -117,7 +117,7 @@ position = Vector2(3008, 1856)
 [node name="Goalie" parent="Spawns" unique_id=1199277091 instance=ExtResource("11_uo8bs")]
 visibility_layer = 2
 position = Vector2(3176, 1984)
-actor_path = "uid://bp6f5q8b4w4dr"
+actor_path = "uid://3ev6173xsojb"
 properties = {
 "base_gravity": [300.0, 3, ""],
 "debug": [true, 1, ""],
@@ -138,7 +138,7 @@ lock_x = true
 [node name="Goalie1" parent="Spawns" unique_id=1984945580 instance=ExtResource("11_uo8bs")]
 visibility_layer = 2
 position = Vector2(3176, 2160)
-actor_path = "uid://bp6f5q8b4w4dr"
+actor_path = "uid://3ev6173xsojb"
 properties = {
 "base_gravity": [300.0, 3, ""],
 "debug": [true, 1, ""],
@@ -159,7 +159,7 @@ lock_x = true
 [node name="Goalie2" parent="Spawns" unique_id=930545101 instance=ExtResource("11_uo8bs")]
 visibility_layer = 2
 position = Vector2(2888, 1960)
-actor_path = "uid://bp6f5q8b4w4dr"
+actor_path = "uid://3ev6173xsojb"
 properties = {
 "base_gravity": [300.0, 3, ""],
 "debug": [true, 1, ""],
@@ -180,7 +180,7 @@ lock_x = true
 [node name="Goalie3" parent="Spawns" unique_id=1368712194 instance=ExtResource("11_uo8bs")]
 visibility_layer = 2
 position = Vector2(2920, 2160)
-actor_path = "uid://bp6f5q8b4w4dr"
+actor_path = "uid://3ev6173xsojb"
 properties = {
 "base_gravity": [300.0, 3, ""],
 "debug": [true, 1, ""],
@@ -201,7 +201,7 @@ lock_x = true
 [node name="Goalie4" parent="Spawns" unique_id=1859222939 instance=ExtResource("11_uo8bs")]
 visibility_layer = 2
 position = Vector2(3760, 1952)
-actor_path = "uid://bp6f5q8b4w4dr"
+actor_path = "uid://3ev6173xsojb"
 properties = {
 "base_gravity": [300.0, 3, ""],
 "debug": [true, 1, ""],
@@ -222,7 +222,7 @@ lock_x = true
 [node name="Goalie5" parent="Spawns" unique_id=1916492263 instance=ExtResource("11_uo8bs")]
 visibility_layer = 2
 position = Vector2(3632, 1952)
-actor_path = "uid://bp6f5q8b4w4dr"
+actor_path = "uid://3ev6173xsojb"
 properties = {
 "base_gravity": [300.0, 3, ""],
 "debug": [true, 1, ""],
@@ -243,7 +243,7 @@ lock_x = true
 [node name="Goalie6" parent="Spawns" unique_id=747485573 instance=ExtResource("11_uo8bs")]
 visibility_layer = 2
 position = Vector2(3448, 1984)
-actor_path = "uid://bp6f5q8b4w4dr"
+actor_path = "uid://3ev6173xsojb"
 properties = {
 "base_gravity": [300.0, 3, ""],
 "debug": [true, 1, ""],
@@ -264,7 +264,7 @@ lock_x = true
 [node name="Goalie7" parent="Spawns" unique_id=1706834576 instance=ExtResource("11_uo8bs")]
 visibility_layer = 2
 position = Vector2(3432, 1984)
-actor_path = "uid://bp6f5q8b4w4dr"
+actor_path = "uid://3ev6173xsojb"
 properties = {
 "base_gravity": [300.0, 3, ""],
 "debug": [true, 1, ""],
@@ -285,7 +285,7 @@ lock_x = true
 [node name="Goalie8" parent="Spawns" unique_id=143919362 instance=ExtResource("11_uo8bs")]
 visibility_layer = 2
 position = Vector2(3448, 2160)
-actor_path = "uid://bp6f5q8b4w4dr"
+actor_path = "uid://3ev6173xsojb"
 properties = {
 "base_gravity": [300.0, 3, ""],
 "debug": [true, 1, ""],
@@ -306,7 +306,7 @@ lock_x = true
 [node name="Goalie9" parent="Spawns" unique_id=952797665 instance=ExtResource("11_uo8bs")]
 visibility_layer = 2
 position = Vector2(3432, 2160)
-actor_path = "uid://bp6f5q8b4w4dr"
+actor_path = "uid://3ev6173xsojb"
 properties = {
 "base_gravity": [300.0, 3, ""],
 "debug": [true, 1, ""],
@@ -327,7 +327,7 @@ lock_x = true
 [node name="Goalie10" parent="Spawns" unique_id=362673771 instance=ExtResource("11_uo8bs")]
 visibility_layer = 2
 position = Vector2(4256, 2120)
-actor_path = "uid://bp6f5q8b4w4dr"
+actor_path = "uid://3ev6173xsojb"
 properties = {
 "base_gravity": [300.0, 3, ""],
 "debug": [true, 1, ""],
@@ -348,7 +348,7 @@ lock_x = true
 [node name="Goalie11" parent="Spawns" unique_id=381324728 instance=ExtResource("11_uo8bs")]
 visibility_layer = 2
 position = Vector2(4160, 2120)
-actor_path = "uid://bp6f5q8b4w4dr"
+actor_path = "uid://3ev6173xsojb"
 properties = {
 "base_gravity": [300.0, 3, ""],
 "debug": [true, 1, ""],
@@ -369,7 +369,7 @@ lock_x = true
 [node name="Goalie12" parent="Spawns" unique_id=1491991131 instance=ExtResource("11_uo8bs")]
 visibility_layer = 2
 position = Vector2(3760, 2128)
-actor_path = "uid://bp6f5q8b4w4dr"
+actor_path = "uid://3ev6173xsojb"
 properties = {
 "base_gravity": [300.0, 3, ""],
 "debug": [true, 1, ""],
@@ -390,7 +390,7 @@ lock_x = true
 [node name="Goalie13" parent="Spawns" unique_id=811705184 instance=ExtResource("11_uo8bs")]
 visibility_layer = 2
 position = Vector2(3632, 2128)
-actor_path = "uid://bp6f5q8b4w4dr"
+actor_path = "uid://3ev6173xsojb"
 properties = {
 "base_gravity": [300.0, 3, ""],
 "debug": [true, 1, ""],
@@ -411,7 +411,7 @@ lock_x = true
 [node name="Goalie14" parent="Spawns" unique_id=1964371095 instance=ExtResource("11_uo8bs")]
 visibility_layer = 2
 position = Vector2(3704, 1872)
-actor_path = "uid://bp6f5q8b4w4dr"
+actor_path = "uid://3ev6173xsojb"
 properties = {
 "base_gravity": [300.0, 3, ""],
 "debug": [true, 1, ""],
@@ -432,7 +432,7 @@ lock_x = true
 [node name="Goalie15" parent="Spawns" unique_id=808682814 instance=ExtResource("11_uo8bs")]
 visibility_layer = 2
 position = Vector2(3688, 1872)
-actor_path = "uid://bp6f5q8b4w4dr"
+actor_path = "uid://3ev6173xsojb"
 properties = {
 "base_gravity": [300.0, 3, ""],
 "debug": [true, 1, ""],
@@ -453,7 +453,7 @@ lock_x = true
 [node name="Goalie16" parent="Spawns" unique_id=1915757733 instance=ExtResource("11_uo8bs")]
 visibility_layer = 2
 position = Vector2(3704, 2048)
-actor_path = "uid://bp6f5q8b4w4dr"
+actor_path = "uid://3ev6173xsojb"
 properties = {
 "base_gravity": [300.0, 3, ""],
 "debug": [true, 1, ""],
@@ -474,7 +474,7 @@ lock_x = true
 [node name="Goalie17" parent="Spawns" unique_id=6268043 instance=ExtResource("11_uo8bs")]
 visibility_layer = 2
 position = Vector2(3688, 2048)
-actor_path = "uid://bp6f5q8b4w4dr"
+actor_path = "uid://3ev6173xsojb"
 properties = {
 "base_gravity": [300.0, 3, ""],
 "debug": [true, 1, ""],
@@ -495,7 +495,7 @@ lock_x = true
 [node name="Goalie18" parent="Spawns" unique_id=1844965496 instance=ExtResource("11_uo8bs")]
 visibility_layer = 2
 position = Vector2(4024, 1952)
-actor_path = "uid://bp6f5q8b4w4dr"
+actor_path = "uid://3ev6173xsojb"
 properties = {
 "base_gravity": [300.0, 3, ""],
 "debug": [true, 1, ""],
@@ -516,7 +516,7 @@ lock_x = true
 [node name="Goalie19" parent="Spawns" unique_id=1263350495 instance=ExtResource("11_uo8bs")]
 visibility_layer = 2
 position = Vector2(3880, 1952)
-actor_path = "uid://bp6f5q8b4w4dr"
+actor_path = "uid://3ev6173xsojb"
 properties = {
 "base_gravity": [300.0, 3, ""],
 "debug": [true, 1, ""],
@@ -537,7 +537,7 @@ lock_x = true
 [node name="Goalie20" parent="Spawns" unique_id=1405264603 instance=ExtResource("11_uo8bs")]
 visibility_layer = 2
 position = Vector2(3960, 1776)
-actor_path = "uid://bp6f5q8b4w4dr"
+actor_path = "uid://3ev6173xsojb"
 properties = {
 "base_gravity": [300.0, 3, ""],
 "debug": [true, 1, ""],
@@ -558,7 +558,7 @@ lock_x = true
 [node name="Goalie21" parent="Spawns" unique_id=365107748 instance=ExtResource("11_uo8bs")]
 visibility_layer = 2
 position = Vector2(3944, 1776)
-actor_path = "uid://bp6f5q8b4w4dr"
+actor_path = "uid://3ev6173xsojb"
 properties = {
 "base_gravity": [300.0, 3, ""],
 "debug": [true, 1, ""],
@@ -579,7 +579,7 @@ lock_x = true
 [node name="Goalie22" parent="Spawns" unique_id=1027884295 instance=ExtResource("11_uo8bs")]
 visibility_layer = 2
 position = Vector2(3960, 2048)
-actor_path = "uid://bp6f5q8b4w4dr"
+actor_path = "uid://3ev6173xsojb"
 properties = {
 "base_gravity": [300.0, 3, ""],
 "debug": [true, 1, ""],
@@ -600,7 +600,7 @@ lock_x = true
 [node name="Goalie23" parent="Spawns" unique_id=902411160 instance=ExtResource("11_uo8bs")]
 visibility_layer = 2
 position = Vector2(3944, 2048)
-actor_path = "uid://bp6f5q8b4w4dr"
+actor_path = "uid://3ev6173xsojb"
 properties = {
 "base_gravity": [300.0, 3, ""],
 "debug": [true, 1, ""],
@@ -621,7 +621,7 @@ lock_x = true
 [node name="Goalie24" parent="Spawns" unique_id=785647807 instance=ExtResource("11_uo8bs")]
 visibility_layer = 2
 position = Vector2(4264, 1936)
-actor_path = "uid://bp6f5q8b4w4dr"
+actor_path = "uid://3ev6173xsojb"
 properties = {
 "base_gravity": [300.0, 3, ""],
 "debug": [true, 1, ""],
@@ -642,7 +642,7 @@ lock_x = true
 [node name="Goalie25" parent="Spawns" unique_id=1050618566 instance=ExtResource("11_uo8bs")]
 visibility_layer = 2
 position = Vector2(4152, 1936)
-actor_path = "uid://bp6f5q8b4w4dr"
+actor_path = "uid://3ev6173xsojb"
 properties = {
 "base_gravity": [300.0, 3, ""],
 "debug": [true, 1, ""],
@@ -663,7 +663,7 @@ lock_x = true
 [node name="Goalie26" parent="Spawns" unique_id=408057904 instance=ExtResource("11_uo8bs")]
 visibility_layer = 2
 position = Vector2(4216, 1776)
-actor_path = "uid://bp6f5q8b4w4dr"
+actor_path = "uid://3ev6173xsojb"
 properties = {
 "base_gravity": [300.0, 3, ""],
 "debug": [true, 1, ""],
@@ -684,7 +684,7 @@ lock_x = true
 [node name="Goalie27" parent="Spawns" unique_id=1611409990 instance=ExtResource("11_uo8bs")]
 visibility_layer = 2
 position = Vector2(4200, 1776)
-actor_path = "uid://bp6f5q8b4w4dr"
+actor_path = "uid://3ev6173xsojb"
 properties = {
 "base_gravity": [300.0, 3, ""],
 "debug": [true, 1, ""],
@@ -705,7 +705,7 @@ lock_x = true
 [node name="Goalie28" parent="Spawns" unique_id=1097082109 instance=ExtResource("11_uo8bs")]
 visibility_layer = 2
 position = Vector2(4024, 2128)
-actor_path = "uid://bp6f5q8b4w4dr"
+actor_path = "uid://3ev6173xsojb"
 properties = {
 "base_gravity": [300.0, 3, ""],
 "debug": [true, 1, ""],
@@ -726,7 +726,7 @@ lock_x = true
 [node name="Goalie29" parent="Spawns" unique_id=1638316154 instance=ExtResource("11_uo8bs")]
 visibility_layer = 2
 position = Vector2(3880, 2128)
-actor_path = "uid://bp6f5q8b4w4dr"
+actor_path = "uid://3ev6173xsojb"
 properties = {
 "base_gravity": [300.0, 3, ""],
 "debug": [true, 1, ""],
@@ -747,7 +747,7 @@ lock_x = true
 [node name="Goalie30" parent="Spawns" unique_id=2010360427 instance=ExtResource("11_uo8bs")]
 visibility_layer = 2
 position = Vector2(3288, 2432)
-actor_path = "uid://bp6f5q8b4w4dr"
+actor_path = "uid://3ev6173xsojb"
 properties = {
 "base_gravity": [300.0, 3, ""],
 "debug": [true, 1, ""],
@@ -1138,7 +1138,7 @@ value = Rect2(-16, -16, 48, 48)
 [node name="Goalie31" parent="Spawns" unique_id=1937231431 instance=ExtResource("11_uo8bs")]
 visibility_layer = 2
 position = Vector2(2728, 1960)
-actor_path = "res://src/Actor/Enemy/Goalie.tscn"
+actor_path = "uid://3ev6173xsojb"
 properties = {
 "base_gravity": [300.0, 3, ""],
 "debug": [false, 1, ""],
@@ -1291,7 +1291,7 @@ lock_x = true
 [node name="Goalie32" parent="Spawns" unique_id=1525549154 instance=ExtResource("11_uo8bs")]
 visibility_layer = 2
 position = Vector2(2376, 1920)
-actor_path = "res://src/Actor/Enemy/Goalie.tscn"
+actor_path = "uid://3ev6173xsojb"
 properties = {
 "base_gravity": [300.0, 3, ""],
 "debug": [false, 1, ""],
@@ -1312,7 +1312,7 @@ lock_x = true
 [node name="Goalie33" parent="Spawns" unique_id=1701481180 instance=ExtResource("11_uo8bs")]
 visibility_layer = 2
 position = Vector2(2456, 1920)
-actor_path = "res://src/Actor/Enemy/Goalie.tscn"
+actor_path = "uid://3ev6173xsojb"
 properties = {
 "base_gravity": [300.0, 3, ""],
 "debug": [false, 1, ""],
@@ -1333,7 +1333,7 @@ lock_x = true
 [node name="Goalie34" parent="Spawns" unique_id=890523783 instance=ExtResource("11_uo8bs")]
 visibility_layer = 2
 position = Vector2(2968, 1984)
-actor_path = "res://src/Actor/Enemy/Goalie.tscn"
+actor_path = "uid://3ev6173xsojb"
 properties = {
 "base_gravity": [300.0, 3, ""],
 "debug": [false, 1, ""],
@@ -1354,7 +1354,7 @@ lock_x = true
 [node name="Goalie35" parent="Spawns" unique_id=1778171287 instance=ExtResource("11_uo8bs")]
 visibility_layer = 2
 position = Vector2(3128, 1984)
-actor_path = "res://src/Actor/Enemy/Goalie.tscn"
+actor_path = "uid://3ev6173xsojb"
 properties = {
 "base_gravity": [300.0, 3, ""],
 "debug": [false, 1, ""],
@@ -1455,7 +1455,7 @@ properties = {
 [node name="GoalieRoller" parent="Spawns" unique_id=1802798015 instance=ExtResource("11_uo8bs")]
 visibility_layer = 2
 position = Vector2(2888, 2256)
-actor_path = "res://src/Actor/Enemy/GoalieRoller.tscn"
+actor_path = "uid://ds65govsopfxp"
 properties = {
 "base_gravity": [300.0, 3, ""],
 "debug": [false, 1, ""],
@@ -1476,7 +1476,7 @@ lock_x = true
 [node name="GoalieRoller1" parent="Spawns" unique_id=462869663 instance=ExtResource("11_uo8bs")]
 visibility_layer = 2
 position = Vector2(3288, 2288)
-actor_path = "res://src/Actor/Enemy/GoalieRoller.tscn"
+actor_path = "uid://ds65govsopfxp"
 properties = {
 "base_gravity": [300.0, 3, ""],
 "debug": [false, 1, ""],
@@ -1497,7 +1497,7 @@ lock_x = true
 [node name="GoalieRoller2" parent="Spawns" unique_id=982020738 instance=ExtResource("11_uo8bs")]
 visibility_layer = 2
 position = Vector2(3448, 2464)
-actor_path = "res://src/Actor/Enemy/GoalieRoller.tscn"
+actor_path = "uid://ds65govsopfxp"
 properties = {
 "base_gravity": [300.0, 3, ""],
 "debug": [false, 1, ""],
@@ -1518,7 +1518,7 @@ lock_x = true
 [node name="GoalieRoller3" parent="Spawns" unique_id=1401153247 instance=ExtResource("11_uo8bs")]
 visibility_layer = 2
 position = Vector2(3448, 2400)
-actor_path = "res://src/Actor/Enemy/GoalieRoller.tscn"
+actor_path = "uid://ds65govsopfxp"
 properties = {
 "base_gravity": [300.0, 3, ""],
 "debug": [false, 1, ""],
@@ -1539,7 +1539,7 @@ lock_x = true
 [node name="GoalieRoller4" parent="Spawns" unique_id=1209464923 instance=ExtResource("11_uo8bs")]
 visibility_layer = 2
 position = Vector2(3448, 2336)
-actor_path = "res://src/Actor/Enemy/GoalieRoller.tscn"
+actor_path = "uid://ds65govsopfxp"
 properties = {
 "base_gravity": [300.0, 3, ""],
 "debug": [false, 1, ""],
@@ -1560,7 +1560,7 @@ lock_x = true
 [node name="GoalieRoller5" parent="Spawns" unique_id=1571420511 instance=ExtResource("11_uo8bs")]
 visibility_layer = 2
 position = Vector2(3448, 2272)
-actor_path = "res://src/Actor/Enemy/GoalieRoller.tscn"
+actor_path = "uid://ds65govsopfxp"
 properties = {
 "base_gravity": [300.0, 3, ""],
 "debug": [false, 1, ""],
@@ -1581,7 +1581,7 @@ lock_x = true
 [node name="GoalieRoller6" parent="Spawns" unique_id=1107505777 instance=ExtResource("11_uo8bs")]
 visibility_layer = 2
 position = Vector2(3448, 2208)
-actor_path = "res://src/Actor/Enemy/GoalieRoller.tscn"
+actor_path = "uid://ds65govsopfxp"
 properties = {
 "base_gravity": [300.0, 3, ""],
 "debug": [false, 1, ""],
@@ -1602,7 +1602,7 @@ lock_x = true
 [node name="GoalieRoller7" parent="Spawns" unique_id=502196808 instance=ExtResource("11_uo8bs")]
 visibility_layer = 2
 position = Vector2(3800, 2464)
-actor_path = "res://src/Actor/Enemy/GoalieRoller.tscn"
+actor_path = "uid://ds65govsopfxp"
 properties = {
 "base_gravity": [300.0, 3, ""],
 "debug": [false, 1, ""],
@@ -1623,7 +1623,7 @@ lock_x = true
 [node name="GoalieRoller8" parent="Spawns" unique_id=1763372438 instance=ExtResource("11_uo8bs")]
 visibility_layer = 2
 position = Vector2(3800, 2400)
-actor_path = "res://src/Actor/Enemy/GoalieRoller.tscn"
+actor_path = "uid://ds65govsopfxp"
 properties = {
 "base_gravity": [300.0, 3, ""],
 "debug": [false, 1, ""],
@@ -1644,7 +1644,7 @@ lock_x = true
 [node name="GoalieRoller9" parent="Spawns" unique_id=900510061 instance=ExtResource("11_uo8bs")]
 visibility_layer = 2
 position = Vector2(3800, 2336)
-actor_path = "res://src/Actor/Enemy/GoalieRoller.tscn"
+actor_path = "uid://ds65govsopfxp"
 properties = {
 "base_gravity": [300.0, 3, ""],
 "debug": [false, 1, ""],
@@ -1665,7 +1665,7 @@ lock_x = true
 [node name="GoalieRoller10" parent="Spawns" unique_id=284522496 instance=ExtResource("11_uo8bs")]
 visibility_layer = 2
 position = Vector2(3800, 2272)
-actor_path = "res://src/Actor/Enemy/GoalieRoller.tscn"
+actor_path = "uid://ds65govsopfxp"
 properties = {
 "base_gravity": [300.0, 3, ""],
 "debug": [false, 1, ""],
@@ -1686,7 +1686,7 @@ lock_x = true
 [node name="GoalieRoller11" parent="Spawns" unique_id=1219044285 instance=ExtResource("11_uo8bs")]
 visibility_layer = 2
 position = Vector2(3800, 2208)
-actor_path = "res://src/Actor/Enemy/GoalieRoller.tscn"
+actor_path = "uid://ds65govsopfxp"
 properties = {
 "base_gravity": [300.0, 3, ""],
 "debug": [false, 1, ""],
@@ -1707,7 +1707,7 @@ lock_x = true
 [node name="GoalieRoller12" parent="Spawns" unique_id=349482574 instance=ExtResource("11_uo8bs")]
 visibility_layer = 2
 position = Vector2(4072, 2464)
-actor_path = "res://src/Actor/Enemy/GoalieRoller.tscn"
+actor_path = "uid://ds65govsopfxp"
 properties = {
 "base_gravity": [300.0, 3, ""],
 "debug": [false, 1, ""],
@@ -1728,7 +1728,7 @@ lock_x = true
 [node name="GoalieRoller13" parent="Spawns" unique_id=1521036981 instance=ExtResource("11_uo8bs")]
 visibility_layer = 2
 position = Vector2(4072, 2400)
-actor_path = "res://src/Actor/Enemy/GoalieRoller.tscn"
+actor_path = "uid://ds65govsopfxp"
 properties = {
 "base_gravity": [300.0, 3, ""],
 "debug": [false, 1, ""],
@@ -1749,7 +1749,7 @@ lock_x = true
 [node name="GoalieRoller14" parent="Spawns" unique_id=963856625 instance=ExtResource("11_uo8bs")]
 visibility_layer = 2
 position = Vector2(4072, 2336)
-actor_path = "res://src/Actor/Enemy/GoalieRoller.tscn"
+actor_path = "uid://ds65govsopfxp"
 properties = {
 "base_gravity": [300.0, 3, ""],
 "debug": [false, 1, ""],
@@ -1770,7 +1770,7 @@ lock_x = true
 [node name="GoalieRoller15" parent="Spawns" unique_id=601232744 instance=ExtResource("11_uo8bs")]
 visibility_layer = 2
 position = Vector2(4072, 2272)
-actor_path = "res://src/Actor/Enemy/GoalieRoller.tscn"
+actor_path = "uid://ds65govsopfxp"
 properties = {
 "base_gravity": [300.0, 3, ""],
 "debug": [false, 1, ""],
@@ -1791,7 +1791,7 @@ lock_x = true
 [node name="GoalieRoller16" parent="Spawns" unique_id=880368548 instance=ExtResource("11_uo8bs")]
 visibility_layer = 2
 position = Vector2(4072, 2208)
-actor_path = "res://src/Actor/Enemy/GoalieRoller.tscn"
+actor_path = "uid://ds65govsopfxp"
 properties = {
 "base_gravity": [300.0, 3, ""],
 "debug": [false, 1, ""],
@@ -1812,7 +1812,7 @@ lock_x = true
 [node name="GoalieRoller17" parent="Spawns" unique_id=49967194 instance=ExtResource("11_uo8bs")]
 visibility_layer = 2
 position = Vector2(3720, 2208)
-actor_path = "res://src/Actor/Enemy/GoalieRoller.tscn"
+actor_path = "uid://ds65govsopfxp"
 properties = {
 "base_gravity": [300.0, 3, ""],
 "debug": [false, 1, ""],
@@ -1833,7 +1833,7 @@ lock_x = true
 [node name="GoalieRoller18" parent="Spawns" unique_id=838142924 instance=ExtResource("11_uo8bs")]
 visibility_layer = 2
 position = Vector2(3720, 2272)
-actor_path = "res://src/Actor/Enemy/GoalieRoller.tscn"
+actor_path = "uid://ds65govsopfxp"
 properties = {
 "base_gravity": [300.0, 3, ""],
 "debug": [false, 1, ""],
@@ -1854,7 +1854,7 @@ lock_x = true
 [node name="GoalieRoller19" parent="Spawns" unique_id=920481626 instance=ExtResource("11_uo8bs")]
 visibility_layer = 2
 position = Vector2(3720, 2336)
-actor_path = "res://src/Actor/Enemy/GoalieRoller.tscn"
+actor_path = "uid://ds65govsopfxp"
 properties = {
 "base_gravity": [300.0, 3, ""],
 "debug": [false, 1, ""],
@@ -1875,7 +1875,7 @@ lock_x = true
 [node name="GoalieRoller20" parent="Spawns" unique_id=2067949395 instance=ExtResource("11_uo8bs")]
 visibility_layer = 2
 position = Vector2(3720, 2400)
-actor_path = "res://src/Actor/Enemy/GoalieRoller.tscn"
+actor_path = "uid://ds65govsopfxp"
 properties = {
 "base_gravity": [300.0, 3, ""],
 "debug": [false, 1, ""],
@@ -1896,7 +1896,7 @@ lock_x = true
 [node name="GoalieRoller21" parent="Spawns" unique_id=536390605 instance=ExtResource("11_uo8bs")]
 visibility_layer = 2
 position = Vector2(3720, 2464)
-actor_path = "res://src/Actor/Enemy/GoalieRoller.tscn"
+actor_path = "uid://ds65govsopfxp"
 properties = {
 "base_gravity": [300.0, 3, ""],
 "debug": [false, 1, ""],
@@ -2048,7 +2048,7 @@ lock_y = true
 [node name="GoalieRoller22" parent="Spawns" unique_id=1763950114 instance=ExtResource("11_uo8bs")]
 visibility_layer = 2
 position = Vector2(2360, 1920)
-actor_path = "res://src/Actor/Enemy/GoalieRoller.tscn"
+actor_path = "uid://ds65govsopfxp"
 properties = {
 "base_gravity": [300.0, 3, ""],
 "debug": [false, 1, ""],
@@ -2069,7 +2069,7 @@ lock_x = true
 [node name="GoalieRoller23" parent="Spawns" unique_id=1669294703 instance=ExtResource("11_uo8bs")]
 visibility_layer = 2
 position = Vector2(2472, 1920)
-actor_path = "res://src/Actor/Enemy/GoalieRoller.tscn"
+actor_path = "uid://ds65govsopfxp"
 properties = {
 "base_gravity": [300.0, 3, ""],
 "debug": [false, 1, ""],
