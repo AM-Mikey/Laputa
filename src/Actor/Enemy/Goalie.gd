@@ -145,19 +145,47 @@ func do_rise(_delta):
 	if is_on_ceiling():
 		create_effect("Bonk")
 
-	if kick_target && abs(kick_target.global_position.y - global_position.y + 7.0) <= 4.0:
+	if kick_target && abs(kick_target.global_position.y - global_position.y + 4.0) <= 3.0:
 		change_state("kick")
+		return
 
-	if is_on_ceiling() || position.y <= jump_pos.y || !target || position.y <= target.global_position.y:
+	if is_on_ceiling() || position.y <= jump_pos.y || !target || global_position.y <= target.global_position.y + 8.0:
 		change_state("fall")
 		return
 
-	velocity = calc_velocity(Vector2.UP)
+	velocity = calc_velocity(move_dir)
 	move_and_slide()
 	velocity = velocity
 
-func exit_rise(_prev_state):
+func exit_rise(next_state):
 	velocity = Vector2.ZERO
+
+
+func enter_fall(_prev_state):
+	ap.play("Fall")
+	$FallTimer.start()
+	if $KickGraceTimer.time_left <= 0.0:
+		$KickGraceTimer.start()
+
+func do_fall(delta):
+	move_dir = lerp(move_dir, Vector2.ZERO, 0.25)
+	if move_dir.length() < 0.05:
+		move_dir = Vector2.ZERO
+	velocity = calc_velocity(move_dir)
+	move_and_slide()
+	velocity = velocity
+
+	if kick_target && $KickGraceTimer.time_left > 0.0 && abs(kick_target.global_position.y - global_position.y + 7.0) <= 4.0:
+		change_state("kick")
+
+	if is_on_floor() || global_position.y > rise_from_position.y || $FallTimer.time_left <= 0.0:
+		am.play("enemy_land", self)
+		create_effect("Land")
+		change_state("active")
+		return
+
+func exit_fall(_prev_state):
+	kicked = false
 
 
 
@@ -182,8 +210,6 @@ func enter_kick(prev_state):
 		deflect_hitbox.set_deferred("monitoring", false)
 		deflect_hitbox.set_deferred("monitorable", false)
 
-
-
 func do_kick(_delta):
 	if not ap.is_playing():
 		if difficulty == 1:
@@ -199,31 +225,8 @@ func exit_kick(_prev_state):
 	velocity = Vector2.ZERO
 	kick_hitbox.set_deferred("monitoring", false)
 	kick_hitbox.set_deferred("monitorable", false)
+	move_dir = Vector2.ZERO
 
-
-
-func enter_fall(_prev_state):
-	ap.play("Fall")
-	$FallTimer.start()
-	if $KickGraceTimer.time_left <= 0.0:
-		$KickGraceTimer.start()
-
-func do_fall(_delta):
-	velocity = calc_velocity(Vector2.ZERO)
-	move_and_slide()
-	velocity = velocity
-
-	if kick_target && $KickGraceTimer.time_left > 0.0 && abs(kick_target.global_position.y - global_position.y + 7.0) <= 4.0:
-		change_state("kick")
-
-	if is_on_floor() || global_position.y > rise_from_position.y || $FallTimer.time_left <= 0.0:
-		am.play("enemy_land", self)
-		create_effect("Land")
-		change_state("active")
-		return
-
-func exit_fall(_prev_state):
-	kicked = false
 
 ### UTILITY ###
 func update_detector_position():
@@ -288,7 +291,7 @@ func _on_ActiveDetector_body_exited(_body):
 	target = null
 
 
-func _on_JumpDetector_body_entered(_body):
+func _on_JumpDetector_body_entered(body):
 	player_in_jump_zone = true
 	if state == "active":
 		change_state("rise")
@@ -298,7 +301,6 @@ func _on_JumpDetector_body_exited(_body):
 
 func _on_KickDetector_body_entered(body):
 	kick_target = body
-
 
 func _on_KickDetector_body_exited(body: Node2D) -> void:
 	kick_target = null

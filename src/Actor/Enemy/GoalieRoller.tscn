@@ -3,11 +3,11 @@
 [ext_resource type="PackedScene" uid="uid://3ev6173xsojb" path="res://src/Actor/Enemy/Goalie.tscn" id="1_p42me"]
 [ext_resource type="Script" uid="uid://bwbxhcjip018u" path="res://src/Actor/Enemy/GoalieRoller.gd" id="2_x8fsk"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_x8fsk"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_30xls"]
 resource_local_to_scene = true
 size = Vector2(64, 96)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_f3h58"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_rtqr6"]
 resource_local_to_scene = true
 size = Vector2(46, 60)
 
@@ -15,7 +15,7 @@ size = Vector2(46, 60)
 script = ExtResource("2_x8fsk")
 
 [node name="CollisionShape2D" parent="ActiveDetector" parent_id_path=PackedInt32Array(1122222324) index="0" unique_id=1345632410]
-shape = SubResource("RectangleShape2D_x8fsk")
+shape = SubResource("RectangleShape2D_30xls")
 
 [node name="CollisionShape2D" parent="JumpDetector" parent_id_path=PackedInt32Array(104415215) index="0" unique_id=14587079]
-shape = SubResource("RectangleShape2D_f3h58")
+shape = SubResource("RectangleShape2D_rtqr6")
