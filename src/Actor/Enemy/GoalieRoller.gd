@@ -1,4 +1,4 @@
-extends "res://src/Actor/Enemy/GoalieNot.gd"
+extends "res://src/Actor/Enemy/Goalie.gd"
 
 ## Specialized Goalie that can also kick Roller
 @onready var SPARK = preload("res://src/Effect/Spark.tscn")

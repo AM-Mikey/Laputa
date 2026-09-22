@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://ds65govsopfxp"]
 
-[ext_resource type="PackedScene" uid="uid://3ev6173xsojb" path="res://src/Actor/Enemy/GoalieNot.tscn" id="1_p42me"]
-[ext_resource type="Script" uid="uid://bwbxhcjip018u" path="res://src/Actor/Enemy/GoalieRollerNot.gd" id="2_x8fsk"]
+[ext_resource type="PackedScene" uid="uid://3ev6173xsojb" path="res://src/Actor/Enemy/Goalie.tscn" id="1_p42me"]
+[ext_resource type="Script" uid="uid://bwbxhcjip018u" path="res://src/Actor/Enemy/GoalieRoller.gd" id="2_x8fsk"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_x8fsk"]
 resource_local_to_scene = true
