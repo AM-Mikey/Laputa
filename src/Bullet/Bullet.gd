@@ -250,10 +250,9 @@ func _on_CollisionDetector_area_entered(area): #TODO: double check breakable pie
 			queue_free()
 	elif area.get_collision_layer_value(9): #breakable
 		area.get_parent().on_break(break_method)
-		#on_break(break_method) produced two fizzle particles so instead do:
 		if f.pc(): #and camera gun recoil is true
 			f.pc().get_node("PlayerCamera").impulse(f.pc().shoot_dir * -1, camera_recoil_hit_distance, camera_recoil_time, camera_recoil_curve)
-		#not neccesary to queue free as fizzle does this
+		queue_free()
 	elif area.get_collision_layer_value(4): #world
 		if f.pc(): #and camera gun recoil is true
 			f.pc().get_node("PlayerCamera").impulse(f.pc().shoot_dir * -1, camera_recoil_wall_distance, camera_recoil_time, camera_recoil_curve)
