@@ -17,6 +17,7 @@ var jump_pos: = Vector2.ZERO
 ## Diff 1: Allow to deflect buttet both from player and enemy
 @export var difficulty: int = 0
 
+var kick_player_knockback: float = 50.0
 var kick_force: float = 300.0
 var kick_damage: = 4.0
 
@@ -311,7 +312,7 @@ func _on_KickHitbox_area_entered(area: Area2D) -> void:
 		kick_hitbox.set_deferred("monitoring", false)
 		kick_hitbox.set_deferred("monitorable", false)
 	elif area.get_collision_layer_value(17): #playerhurt
-		area.get_parent().hit(kick_damage, Vector2(80 * look_dir.x, 0), kick_hitbox)
+		area.get_parent().hit(kick_damage, Vector2(kick_player_knockback * look_dir.x, 0), kick_hitbox)
 	elif area.get_collision_layer_value(9): #breakable
 		if area.name == "BreakArea":
 			area.get_parent().on_break("cut")
