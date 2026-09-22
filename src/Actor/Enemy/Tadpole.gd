@@ -1,6 +1,10 @@
 extends Enemy
 
 const ICON = preload("res://assets/Actor/Enemy/TadpoleIcon.png")
+const TOOLTIPS = [
+"Ambient Enemy",
+]
+
 
 var move_dir := Vector2.ZERO
 var idle_time_min := 1.0

@@ -4,6 +4,11 @@ const ICON = preload("res://assets/Actor/Enemy/StalagtiteIcon.png")
 const TX_0 = preload("res://assets/Actor/Enemy/Stalagtite.png")
 const TX_1 = preload("res://assets/Actor/Enemy/Stalagtite1.png")
 const TX_2 = preload("res://assets/Actor/Enemy/Stalagtite2.png")
+const TOOLTIPS = [
+"level 0 stalagtite",
+"level 1 stalagtite",
+"level 2 stalagtite",
+]
 
 var target: Node
 

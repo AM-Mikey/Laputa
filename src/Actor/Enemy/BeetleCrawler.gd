@@ -6,6 +6,10 @@ extends Enemy
 const ICON = preload("res://assets/Actor/Enemy/BeetleCrawlerIcon.png")
 const TX_0 = preload("res://assets/Actor/Enemy/BeetleCrawler.png")
 const TX_1 = preload("res://assets/Actor/Enemy/BeetleCrawler1.png")
+const TOOLTIPS = [
+"level 0 beetle crawler",
+"level 1 beetle crawler",
+]
 
 var move_dir = Vector2.LEFT
 var saved_move_dir: Vector2

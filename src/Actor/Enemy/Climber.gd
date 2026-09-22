@@ -4,6 +4,10 @@ const ICON = preload("res://assets/Actor/Enemy/ClimberIcon.png")
 const TX_0 = preload("res://assets/Actor/Enemy/Climber.png")
 const TX_1 = preload("res://assets/Actor/Enemy/Climber1.png")
 const ARM = preload("res://src/Actor/Enemy/ClimberArm.tscn")
+const TOOLTIPS = [
+"level 0 climber",
+"level 1 climber",
+]
 
 @export var climb_dir = "cw"
 @export var arm_count: int = 6

@@ -1,10 +1,14 @@
 extends Enemy
 
 const ICON = preload("res://assets/Actor/Enemy/ShieldIcon.png")
-
 const TX_0 = preload("res://assets/Actor/Enemy/Shield0.png")
 const TX_1 = preload("res://assets/Actor/Enemy/Shield1.png")
 const TX_2 = preload("res://assets/Actor/Enemy/Shield2.png")
+const TOOLTIPS = [
+"level 0 shield",
+"level 1 shield",
+"level 2 shield",
+]
 
 @export var difficulty: int = 0
 var move_dir: = Vector2.LEFT: set = set_move_dir

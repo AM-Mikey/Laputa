@@ -1,15 +1,20 @@
 extends Enemy
 
 const ICON = preload("res://assets/Actor/Enemy/SentryIcon.png")
-
 const TX_0 = preload("res://assets/Actor/Enemy/Sentry0.png")
 const TX_1 = preload("res://assets/Actor/Enemy/Sentry1.png")
 const TX_2 = preload("res://assets/Actor/Enemy/Sentry2.png")
 const TX_3 = preload("res://assets/Actor/Enemy/Sentry3.png")
 const TX_4 = preload("res://assets/Actor/Enemy/Sentry4.png")
-
 const HAIRBALL = preload("res://src/Bullet/Enemy/Hairball.tscn")
 const HAIRBALL_RAIN = preload("res://src/Bullet/Enemy/HairballRain.tscn")
+const TOOLTIPS = [
+"level 0 sentry",
+"level 1 sentry",
+"level 2 sentry",
+"level 3 sentry",
+"level 4 sentry",
+]
 
 # difficulty = 3: Shoot rapidly upward in order in the spread cone starting from player's direction then wait for cooldown_time
 # difficulty = 4: Shoot upward with random deviation defined by spread

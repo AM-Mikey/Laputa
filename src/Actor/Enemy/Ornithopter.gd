@@ -1,9 +1,12 @@
 extends Enemy
 
 const ICON = preload("res://assets/Actor/Enemy/OrnithopterIcon.png")
-
 const TX_0 = preload("res://assets/Actor/Enemy/Ornithopter.png")
 const TX_1 = preload("res://assets/Actor/Enemy/Ornithopter1.png")
+const TOOLTIPS = [
+"level 0 ornithopter",
+"level 1 ornithopter",
+]
 
 @export var dir := Vector2.LEFT
 @export var difficulty := 0

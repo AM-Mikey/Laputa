@@ -81,7 +81,7 @@ func deactivate_manual():
 func deactivate_auto():
 	pass
 
-func spawn_bullet(bullet_pos, shoot_dir, layer = w.player_front) -> Node:
+func spawn_bullet(bullet_pos, shoot_dir, layer = w.player_front, index = 0) -> Node:
 	var bullet = bullet_scene.instantiate()
 
 	bullet.damage = damage
@@ -89,6 +89,8 @@ func spawn_bullet(bullet_pos, shoot_dir, layer = w.player_front) -> Node:
 	bullet.f_time = f_time
 	bullet.speed = speed
 	bullet.spread_degrees = spread_degrees
+	bullet.bullets_in_volley = bullets_per_activate
+	bullet.index = index
 	bullet.knockback_strength = knockback_strength
 	bullet.direction = shoot_dir
 	layer.add_child(bullet)

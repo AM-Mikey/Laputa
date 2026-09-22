@@ -89,6 +89,10 @@ alignment = 1
 layout_mode = 2
 text = "Continue"
 
+[node name="DebugReload" type="Button" parent="VBox/HBox" unique_id=810381277]
+layout_mode = 2
+text = "Debug Reload"
+
 [node name="Quit" type="Button" parent="VBox/HBox" unique_id=809691355]
 layout_mode = 2
 text = "Quit"
@@ -97,4 +101,6 @@ text = "Quit"
 libraries/ = SubResource("AnimationLibrary_xys32")
 
 [connection signal="pressed" from="VBox/HBox/Continue" to="." method="_on_Continue_pressed"]
+[connection signal="pressed" from="VBox/HBox/DebugReload" to="." method="_on_Continue_pressed"]
+[connection signal="pressed" from="VBox/HBox/DebugReload" to="." method="_on_DebugReload_pressed"]
 [connection signal="pressed" from="VBox/HBox/Quit" to="." method="_on_Quit_pressed"]

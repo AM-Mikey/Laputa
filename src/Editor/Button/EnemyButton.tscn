@@ -72,6 +72,7 @@ layout_mode = 2
 mouse_filter = 2
 
 [node name="Button" type="Button" parent="." unique_id=1540029312]
+unique_name_in_owner = true
 layout_mode = 2
 button_mask = 3
 flat = true

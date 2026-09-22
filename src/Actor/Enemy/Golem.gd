@@ -1,22 +1,21 @@
 extends Enemy
 
 const ICON = preload("res://assets/Actor/Enemy/GolemIcon.png")
-#const WAYPOINT = preload("res://src/Editor/VisualUtility/WaypointGlobal.tscn")
-
 const TX_0 = preload("res://assets/Actor/Enemy/Golem.png")
+const TOOLTIPS = [
+"level 0 billy",
+"level 1 billy",
+]
 
 var move_dir = Vector2.LEFT
 @export var difficulty := 0
 var max_difficulty = 0
-#@export var charge_time := 15.0
 @export var wallslam_time := 1.2
 var walk_speed = Vector2(40, 40)
 var charge_speed = Vector2(100, 100)
 var normal_damage = 2
 var charge_damage = 6
 @export var charge_impulse_curve : Curve
-#var charge_shake_strength = 0.5
-#var slam_shake_strength = 30.0
 
 var on_floor := false
 var on_wall := false

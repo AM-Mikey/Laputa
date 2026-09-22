@@ -2,7 +2,9 @@ extends Enemy
 
 const ICON = preload("res://assets/Actor/Enemy/CrusherIcon.png")
 const TX_0 = preload("res://assets/Actor/Enemy/Crusher.png")
-
+const TOOLTIPS = [
+"level 0 crusher",
+]
 
 enum PathType {SEGMENT, RECTANGLE, ELLIPSE}
 @export var path_type = PathType.RECTANGLE
@@ -162,7 +164,7 @@ func crush_check():
 	var crush_rect_center := crush_rect.get_center()
 
 	var physics_space = get_world_2d().direct_space_state
-	
+
 	for body in nearby_bodies:
 		if body.get_collision_layer_value(1):
 			body = body.get_parent()
@@ -189,7 +191,7 @@ func crush_check():
 					var curr_body = check_body
 					if curr_body.get_collision_layer_value(1):
 						curr_body = curr_body.get_parent()
-					
+
 					var curr_body_rect: = get_body_collision_shape_rect(curr_body)
 					if curr_body_rect == Rect2(): return
 
@@ -209,12 +211,12 @@ func crush_check():
 							if collider is TileMapLayer || (collider.get_collision_layer_value(4) && !collider.has_node("BreakArea")):
 								if check_body.get_collision_layer_value(1) || check_body.get_collision_layer_value(2):
 									curr_body.hit(999, Vector2.ZERO, $Standable/Crush)
-									curr_body.die() 
+									curr_body.die()
 								elif body.has_node("BreakArea") and body.get_collision_layer_value(4):
 									success = true
 									body.on_break()
 									break
-								
+
 							elif collider.has_node("BreakArea"):
 								if !checked_bodies.has(collider):
 									body_queue.append(collider)
@@ -224,14 +226,14 @@ func crush_check():
 							elif collider.get_collision_layer_value(1):
 								if !checked_bodies.has(collider):
 									body_queue.append(collider)
-								
+
 					checked_bodies.append(check_body)
 					if success: break
 				if success: break
 		else:
 			var body_rect: = get_body_collision_shape_rect(body)
 			if body_rect == Rect2(): return
-			
+
 			var body_overlap_rect := body_rect.intersection(crush_rect)
 
 			if debug:
@@ -318,7 +320,7 @@ func get_body_collision_shape_rect(body) -> Rect2:
 
 	if !body_collision_shape || body_collision_shape.disabled:
 		return Rect2()
-	
+
 	var body_rect = Rect2()
 	if body_collision_shape is CollisionShape2D:
 		var body_size = body_collision_shape.shape.get_rect().size

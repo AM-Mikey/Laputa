@@ -6,6 +6,10 @@ const WAYPOINT = preload("res://src/Editor/VisualUtility/WaypointGlobal.tscn")
 
 const TX_0 = preload("res://assets/Actor/Enemy/Billy0.png")
 const TX_1 = preload("res://assets/Actor/Enemy/Billy1.png")
+const TOOLTIPS = [
+"level 0 billy",
+"level 1 billy",
+]
 
 var move_dir = Vector2.LEFT
 @export var difficulty := 0

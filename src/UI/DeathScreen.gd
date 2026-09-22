@@ -37,6 +37,12 @@ func _on_Continue_pressed():
 	SaveSystem.read_mission_data_from_save()
 	queue_free()
 
+func _on_DebugReload_pressed():
+	visible = false
+	w.get_node("DeathCamera").queue_free()
+	DebugHotkeys.reload_level()
+	queue_free()
+
 func _on_Quit_pressed():
 	visible = false
 	w.get_node("UILayer").add_child(TITLE.instantiate())

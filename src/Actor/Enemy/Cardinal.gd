@@ -1,6 +1,9 @@
 extends Enemy
 
 const ICON = preload("res://assets/Actor/Enemy/CardinalIcon.png")
+const TOOLTIPS = [
+"Ambient Enemy",
+]
 
 var target
 

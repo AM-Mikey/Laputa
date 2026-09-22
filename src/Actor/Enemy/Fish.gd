@@ -3,6 +3,9 @@ extends Enemy
 const ICON = preload("res://assets/Actor/Enemy/FishIcon.png")
 
 const TX_0 = preload("res://assets/Actor/Enemy/Fish.png")
+const TOOLTIPS = [
+"level 0 fish",
+]
 
 const PATH_LINE = preload("res://src/Utility/PathLine.tscn")
 const BONK = preload("res://src/Effect/BonkParticle.tscn")

@@ -1,6 +1,9 @@
 extends Enemy
 
 const ICON = preload("res://assets/Actor/Enemy/PunchingBagIcon.png")
+const TOOLTIPS = [
+"Debug Enemy",
+]
 
 func setup(): #Reminder: no function called can use await
 	self_knockback = true
