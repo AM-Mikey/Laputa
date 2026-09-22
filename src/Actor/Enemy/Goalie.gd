@@ -1,7 +1,5 @@
 extends Enemy
 
-class_name EnemyGoalie
-
 const ICON = preload("res://assets/Actor/Enemy/GoalieThumbnail.png")
 
 const TX_0 = preload("res://assets/Actor/Enemy/Goalie.png")

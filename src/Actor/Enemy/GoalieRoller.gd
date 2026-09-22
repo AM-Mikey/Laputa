@@ -1,4 +1,4 @@
-extends EnemyGoalie
+extends "res://src/Actor/Enemy/Goalie.gd"
 
 ## Specialized Goalie that can also kick Roller
 @onready var SPARK = preload("res://src/Effect/Spark.tscn")
@@ -44,9 +44,3 @@ func _on_DeflectHitbox_body_entered(body: Node2D) -> void:
 		w.farthest_front.add_child(spark)
 	else:
 		super._on_DeflectHitbox_body_entered(body)
-
-func _on_PlayerDetector_body_entered(body: Node2D) -> void:
-	allow_to_deflect = true
-
-func _on_PlayerDetector_body_exited(body: Node2D) -> void:
-	allow_to_deflect = false
