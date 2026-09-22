@@ -44,6 +44,8 @@ func _set_level(val: int) -> void:
 func activate():
 	for i in bullets_per_activate:
 		var bullet = spawn_bullet(get_origin(), pc.shoot_dir)
+		bullet.bullets_in_volley = bullets_per_activate
+		bullet.index = i
 		bullet.instant_fizzle_check()
 	var gun_smoke = GUN_SMOKE.instantiate()
 	gun_smoke.direction = Vector2(pc.shoot_dir.x, 0)

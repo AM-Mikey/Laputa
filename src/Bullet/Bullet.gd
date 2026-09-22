@@ -22,6 +22,8 @@ var f_range
 var f_time
 var speed
 var spread_degrees
+var bullets_in_volley := 1
+var index := 0
 var knockback_strength := 0.0
 var origin = Vector2.ZERO
 var direction = Vector2.ZERO
