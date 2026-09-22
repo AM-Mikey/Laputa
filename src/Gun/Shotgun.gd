@@ -2,6 +2,8 @@ extends Gun
 
 const GUN_SMOKE = preload("res://src/Effect/GunSmoke.tscn")
 
+var cock_sfx = "gun_cock_blunderbuss"
+
 func _ready():
 	display_name = "Shotgun"
 	description = "Fires a cluster of birdshot. Get close for max effect."
@@ -19,6 +21,7 @@ func _ready():
 	max_ammo = 0
 	max_level = 3
 	_set_level(level)
+	cd.connect("timeout", Callable(self, "_on_cd_timeout"))
 
 func _set_level(val: int) -> void:
 	match val:
@@ -49,3 +52,12 @@ func activate():
 	gun_smoke.direction = Vector2(pc.shoot_dir.x, 0)
 	gun_smoke.global_position = $Muzzle.global_position
 	w.player_front.add_child(gun_smoke)
+
+
+
+### SIGNALS ###
+
+func _on_cd_timeout():
+	if pc.guns.get_child(0) == self: #current gun
+		am.play(cock_sfx)
+		oup.vibrate_impulse_light(0.1, 0.1)

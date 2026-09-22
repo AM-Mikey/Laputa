@@ -49,6 +49,7 @@ func _input(event):
 
 	if event.is_action_pressed("debug_reload"):
 		if w.el.has_node("Editor"): return
+		if w.ui.has_node("DeathScreen"): return
 		if f.db():
 			await f.db().exit()
 		reload_level()

@@ -4,7 +4,7 @@ class_name Player
 
 #const POPUP = preload("res://src/UI/PopupText.tscn")
 const EXPLOSION = preload("res://src/Effect/Explosion.tscn")
-const DEATH_CAMERA = preload("res://src/Utility/DeathCamera.tscn")
+const DEATH_CAMERA = preload("res://src/UI/DeathScreen/DeathCamera.tscn")
 const EXPERIENCE_GET = preload("res://src/Effect/ExperienceGet.tscn")
 const HEART_GET = preload("res://src/Effect/HeartGet.tscn")
 const HEART_GET_MAX = preload("res://src/Effect/HeartGetMax.tscn")
@@ -200,7 +200,7 @@ func die():
 		explosion.position = global_position
 		w.middle_front.add_child(explosion)
 
-		w.ui.add_child(load("res://src/UI/DeathScreen.tscn").instantiate())
+		w.ui.add_child(load("res://src/UI/DeathScreen/DeathScreen.tscn").instantiate())
 		if f.hud():
 			f.hud().free()
 		queue_free()

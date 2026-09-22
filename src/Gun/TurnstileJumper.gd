@@ -5,6 +5,7 @@ const GUN_SMOKE = preload("res://src/Effect/GunSmoke.tscn")
 #var duration: float
 #var max_length: float
 #var max_time: float
+var cock_sfx = "gun_cock_turnstile_jumper"
 
 func _ready():
 	display_name = "Turnstile Jumper"
@@ -13,10 +14,10 @@ func _ready():
 	icon_small_texture = load("res://assets/Gun/TurnstileJumperIconSmall.png")
 	sfx = "gun_turnstile_jumper"
 	automatic = false
-	#charging = true
 	max_ammo = 0
 	max_level = 3
 	set_level(level)
+	cd.connect("timeout", Callable(self, "_on_cd_timeout"))
 
 func _set_level(val: int) -> void:
 	match val:
@@ -55,6 +56,14 @@ func activate():
 	gun_smoke.direction = Vector2(pc.shoot_dir.x, 0)
 	gun_smoke.global_position = $Muzzle.global_position
 	w.player_front.add_child(gun_smoke)
+
+
+### SIGNALS ###
+
+func _on_cd_timeout():
+	if pc.guns.get_child(0) == self: #current gun
+		am.play(cock_sfx)
+		oup.vibrate_impulse_light(0.1, 0.1)
 
 #old code for charging varient
 #func activate():

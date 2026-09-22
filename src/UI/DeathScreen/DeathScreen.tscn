@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://b3pn87gjg0qi"]
 
 [ext_resource type="Theme" uid="uid://45e84j2sj7w0" path="res://src/UI/Theme/LaputaTheme.tres" id="1"]
-[ext_resource type="Script" uid="uid://s12r4qhtyyy5" path="res://src/UI/DeathScreen.gd" id="2"]
+[ext_resource type="Script" uid="uid://s12r4qhtyyy5" path="res://src/UI/DeathScreen/DeathScreen.gd" id="2"]
 
 [sub_resource type="Animation" id="1"]
 resource_name = "In"
@@ -101,6 +101,5 @@ text = "Quit"
 libraries/ = SubResource("AnimationLibrary_xys32")
 
 [connection signal="pressed" from="VBox/HBox/Continue" to="." method="_on_Continue_pressed"]
-[connection signal="pressed" from="VBox/HBox/DebugReload" to="." method="_on_Continue_pressed"]
 [connection signal="pressed" from="VBox/HBox/DebugReload" to="." method="_on_DebugReload_pressed"]
 [connection signal="pressed" from="VBox/HBox/Quit" to="." method="_on_Quit_pressed"]
