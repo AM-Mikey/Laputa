@@ -252,7 +252,8 @@ func _on_CollisionDetector_area_entered(area): #TODO: double check breakable pie
 		area.get_parent().on_break(break_method)
 		if f.pc(): #and camera gun recoil is true
 			f.pc().get_node("PlayerCamera").impulse(f.pc().shoot_dir * -1, camera_recoil_hit_distance, camera_recoil_time, camera_recoil_curve)
-		queue_free()
+		if !piercing:
+			queue_free()
 	elif area.get_collision_layer_value(4): #world
 		if f.pc(): #and camera gun recoil is true
 			f.pc().get_node("PlayerCamera").impulse(f.pc().shoot_dir * -1, camera_recoil_wall_distance, camera_recoil_time, camera_recoil_curve)
