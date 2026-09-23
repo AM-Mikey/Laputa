@@ -35,7 +35,9 @@ var kick_target = null
 ## Diff 1 related
 var kick_next_state: = ""
 var allow_to_deflect: bool = false
+var bullet_in_deflect_zone: Array = []
 var just_deflect: Array = []
+
 
 
 func set_look_dir(val):
@@ -109,6 +111,8 @@ func do_idle(_delta):
 	update_detector_position()
 	if target:
 		change_state("active")
+	elif bullet_in_deflect_zone.size() > 0 && allow_to_deflect:
+		change_state("kick")
 
 func exit_idle(_prev_state):
 	pass
@@ -130,6 +134,8 @@ func do_active(_delta):
 		change_state("idle")
 	elif player_in_jump_zone && inp.pressed("jump"):
 		change_state("rise")
+	elif bullet_in_deflect_zone.size() > 0 && allow_to_deflect:
+		change_state("kick")
 
 func exit_active(_prev_state):
 	pass
@@ -204,7 +210,7 @@ func enter_kick(prev_state):
 		deflect_hitbox.set_deferred("monitorable", true)
 	kick_hitbox.set_deferred("monitoring", true)
 	kick_hitbox.set_deferred("monitorable", true)
-	await get_tree().create_timer(0.2).timeout
+	await get_tree().create_timer(0.3).timeout
 	kick_hitbox.set_deferred("monitoring", false)
 	kick_hitbox.set_deferred("monitorable", false)
 	if difficulty == 1:
@@ -327,14 +333,16 @@ func _on_KickHitbox_body_entered(body: Node2D) -> void:
 
 func _on_DeflectDetector_body_entered(body: Node2D) -> void:
 	if difficulty == 1:
-		if state in ["idle", "active"]:
-			if body.get_collision_layer_value(7) \
-			|| (allow_to_deflect && (body.get_collision_layer_value(14) || body.get_collision_layer_value(2))):
-				change_state("kick")
+		if body.get_collision_layer_value(7) || body.get_collision_layer_value(14):
+			bullet_in_deflect_zone.append(body)
+
+func _on_DeflectDetector_body_exited(body: Node2D) -> void:
+	if bullet_in_deflect_zone.has(body):
+		bullet_in_deflect_zone.erase(body)
 
 func _on_DeflectHitbox_body_entered(body: Node2D) -> void:
 	if body.name not in just_deflect && \
-		(body.get_collision_layer_value(7) || (body.get_collision_layer_value(14) && allow_to_deflect)):
+		(body.get_collision_layer_value(7) || body.get_collision_layer_value(14)):
 		var player = f.pc()
 		if !player: return
 		if body.get_collision_layer_value(7):

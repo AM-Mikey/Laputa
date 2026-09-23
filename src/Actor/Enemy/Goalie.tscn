@@ -176,6 +176,7 @@ wait_time = 1.5
 one_shot = true
 
 [node name="KickDetector" type="Area2D" parent="." unique_id=487697926]
+visible = false
 collision_layer = 0
 monitorable = false
 
@@ -184,6 +185,7 @@ position = Vector2(-7.5, -6.5)
 shape = SubResource("10")
 
 [node name="KickHitbox" type="Area2D" parent="." unique_id=1149402340]
+visible = false
 collision_layer = 262144
 collision_mask = 65824
 monitoring = false
@@ -195,7 +197,6 @@ shape = SubResource("RectangleShape2D_ax27h")
 debug_color = Color(1, 0, 0, 0.235294)
 
 [node name="DeflectDetector" type="Area2D" parent="." unique_id=1783445768]
-visible = false
 collision_layer = 0
 collision_mask = 8256
 monitoring = false
@@ -206,7 +207,6 @@ position = Vector2(-10.25, -9)
 shape = SubResource("RectangleShape2D_on0yn")
 
 [node name="DeflectHitbox" type="Area2D" parent="." unique_id=2093412947]
-visible = false
 collision_layer = 262144
 collision_mask = 8256
 monitoring = false
@@ -249,7 +249,7 @@ position = Vector2(0, -16)
 texture = ExtResource("3_wjjqm")
 hframes = 2
 vframes = 5
-frame = 2
+frame = 6
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1193424199]
 libraries/ = SubResource("AnimationLibrary_g0tk0")
@@ -266,6 +266,7 @@ lock_x = true
 [connection signal="area_entered" from="KickHitbox" to="." method="_on_KickHitbox_area_entered"]
 [connection signal="body_entered" from="KickHitbox" to="." method="_on_KickHitbox_body_entered"]
 [connection signal="body_entered" from="DeflectDetector" to="." method="_on_DeflectDetector_body_entered"]
+[connection signal="body_exited" from="DeflectDetector" to="." method="_on_DeflectDetector_body_exited"]
 [connection signal="body_entered" from="DeflectHitbox" to="." method="_on_DeflectHitbox_body_entered"]
 [connection signal="body_entered" from="ActiveDetector" to="." method="_on_ActiveDetector_body_entered"]
 [connection signal="body_exited" from="ActiveDetector" to="." method="_on_ActiveDetector_body_exited"]

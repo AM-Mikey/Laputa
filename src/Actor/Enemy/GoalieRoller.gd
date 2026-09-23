@@ -2,6 +2,7 @@ extends "res://src/Actor/Enemy/Goalie.gd"
 
 ## Specialized Goalie that can also kick Roller
 @onready var SPARK = preload("res://src/Effect/Spark.tscn")
+const roller_kick_force: float = 500.0
 
 func setup() -> void:
 	difficulty = 1
@@ -11,13 +12,18 @@ func setup() -> void:
 	deflect_hitbox.set_collision_mask_value(2, true)
 
 ### SIGNALS ###
+func _on_DeflectDetector_body_entered(body: Node2D) -> void:
+	super._on_DeflectDetector_body_entered(body)
+	if body.is_in_group("Roller") && body.get_collision_layer_value(2):
+		bullet_in_deflect_zone.append(body)
+
 func _on_DeflectHitbox_body_entered(body: Node2D) -> void:
-	if body.is_in_group("Roller") && body.get_collision_layer_value(2) && allow_to_deflect: #enemy
+	if body.is_in_group("Roller") && body.get_collision_layer_value(2): #enemy
 		var player = f.pc()
 		if !player: return
 		var dir: = body.global_position.direction_to(player.global_position + Vector2(0, -15))
 		#print("Kick: ", body, ": ", body.global_position, " -> ", player.global_position, " = ", dir)
-		var knockback = dir * kick_force * 2.0
+		var knockback = dir * roller_kick_force
 		#print("Knockback: ",  knockback)
 		body.knockback_velocity = knockback
 		body.gravity_velocity = Vector2.ZERO
