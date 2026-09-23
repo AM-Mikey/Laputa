@@ -342,11 +342,16 @@ func _on_DeflectHitbox_body_entered(body: Node2D) -> void:
 		var dir: = body.global_position.direction_to(player.global_position + Vector2(0, -15))
 		 ## This make deflect bullet more reliably
 		am.play("bullet_clink", self)
+		var bullet_sprite = body.get_node("Sprite2D")
+		var new_bullet_rotation = dir.angle()
+		var new_bullet_position = bullet_sprite.global_position + bullet_sprite.position.rotated(new_bullet_rotation)
 		var key = body.name
 		var body_process_mode = body.process_mode
 		body.process_mode = Node.PROCESS_MODE_DISABLED
 		body.direction = dir
 		body.velocity = dir * kick_force
+		body.global_position = new_bullet_position
+		body.rotation_degrees = body.get_rot(dir)
 		just_deflect.append(key)
 		await get_tree().process_frame
 		if body:

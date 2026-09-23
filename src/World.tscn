@@ -1,6 +1,6 @@
-[gd_scene format=3]
+[gd_scene format=3 uid="uid://dsnmiualvg4jy"]
 
-[ext_resource type="Script" path="res://src/World.gd" id="8"]
+[ext_resource type="Script" uid="uid://ct5k2fxi0u0rb" path="res://src/World.gd" id="8"]
 
 [sub_resource type="Animation" id="Animation_qbf6s"]
 resource_name = "Flash"
@@ -126,5 +126,3 @@ z_index = 3
 [node name="FarthestFront" type="Node2D" parent="." unique_id=421958040]
 visibility_layer = 2
 z_index = 4
-
-[connection signal="level_saved" from="EditorLayer/Editor" to="EditorLayer/Editor/Main/Win/Tab/Levels" method="on_save"]
