@@ -4,10 +4,13 @@ extends State
 @onready var ap = em.get_node("AnimationPlayer")
 
 func state_process():
-	if em.position.y <= em.jump_pos.y:
+	if em.is_on_ceiling():
+		em.create_effect("Bonk")
+
+	if em.is_on_ceiling() || em.position.y <= em.jump_pos.y || !em.target || em.position.y <= em.target.global_position.y:
 		sm.change_state("fall")
 		return
-	em.set_velocity(calc_velocity())
+	em.velocity = calc_velocity()
 	em.move_and_slide()
 	em.velocity = em.velocity
 
@@ -17,11 +20,11 @@ func calc_velocity() -> Vector2:
 	out.y = em.speed.y * em.move_dir.y
 	return out
 
-
-
 func enter():
 	ap.play("Rise")
+	am.play("enemy_jump", em)
 	em.move_dir = Vector2.UP
+	em.rise_from_position = em.global_position
 
 func exit():
 	em.velocity = Vector2.ZERO
