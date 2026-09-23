@@ -36,9 +36,6 @@ var kick_target = null
 var kick_next_state: = ""
 var allow_to_deflect: bool = false
 var bullet_in_deflect_zone: Array = []
-var just_deflect: Array = []
-
-
 
 func set_look_dir(val):
 	look_dir = val
@@ -341,36 +338,19 @@ func _on_DeflectDetector_body_exited(body: Node2D) -> void:
 		bullet_in_deflect_zone.erase(body)
 
 func _on_DeflectHitbox_body_entered(body: Node2D) -> void:
-	if body.name not in just_deflect && \
-		(body.get_collision_layer_value(7) || body.get_collision_layer_value(14)):
+	if (body.get_collision_layer_value(7) || body.get_collision_layer_value(14)):
 		var player = f.pc()
 		if !player: return
 		if body.get_collision_layer_value(7):
 			body.change_side(false)
 		var dir: = body.global_position.direction_to(player.global_position + Vector2(0, -15))
-		 ## This make deflect bullet more reliably
+
 		am.play("bullet_clink", self)
-		var bullet_sprite = body.get_node("Sprite2D")
-		var new_bullet_rotation = dir.angle()
-		var new_bullet_position = bullet_sprite.global_position + bullet_sprite.position.rotated(new_bullet_rotation)
-		var key = body.name
-		var body_process_mode = body.process_mode
-		body.process_mode = Node.PROCESS_MODE_DISABLED
-		body.direction = dir
-		body.velocity = dir * kick_force
-		body.global_position = new_bullet_position
-		body.rotation_degrees = body.get_rot(dir)
-		just_deflect.append(key)
-		await get_tree().process_frame
-		if body:
-			body.process_mode = body_process_mode
-		await get_tree().process_frame # For preventing deflect the same bullet twice
-		await get_tree().process_frame
-		just_deflect.erase(key)
+		body.deflect(dir * kick_force)
 
 
-func _on_PlayerDetector_body_entered(body: Node2D) -> void:
+func _on_PlayerDetector_body_entered(_body: Node2D) -> void:
 	allow_to_deflect = true
 
-func _on_PlayerDetector_body_exited(body: Node2D) -> void:
+func _on_PlayerDetector_body_exited(_body: Node2D) -> void:
 	allow_to_deflect = false

@@ -221,6 +221,15 @@ func change_side(to_player: bool):
 	hitbox.set_collision_mask_value(18, to_player)
 	hitbox.set_collision_mask_value(17, !to_player)
 
+func deflect(vel: Vector2): ## Common deflect script for bullet like BulletRevolver.tscn
+	var bullet_sprite = get_node("Sprite2D")
+	var new_bullet_rotation = vel.angle()
+	var new_bullet_position = bullet_sprite.global_position + bullet_sprite.position.rotated(new_bullet_rotation)
+	direction = vel.normalized()
+	velocity = vel
+	global_position = new_bullet_position
+	rotation_degrees = get_rot(vel)
+
 
 
 ### SIGNALS ###

@@ -111,6 +111,13 @@ func change_side(to_player: bool):
 	hitbox.set_collision_mask_value(18, to_player)
 	hitbox.set_collision_mask_value(17, !to_player)
 
+func deflect(vel: Vector2):
+	var bullet_sprite = get_node("Sprite2D")
+	var new_bullet_position = bullet_sprite.global_position
+	direction = vel.normalized()
+	velocity = vel
+	global_position = new_bullet_position
+
 ### SIGNALS ###
 
 func _on_CollisionDetector_body_entered(body):
@@ -131,10 +138,12 @@ func _on_CollisionDetector_area_entered(area): #shadows
 
 func _on_Timer_timeout():
 	$ExplosionDetector/CollisionShape2D.set_deferred("disabled", false)
+	$ExplosionDetector.top_level = true
+	$ExplosionDetector.global_position = global_position
 	$AnimationPlayer.stop()
 
 	var explosion = load("res://src/Effect/GrenadeExplosion.tscn").instantiate()
-	explosion.position = position
+	explosion.global_position = global_position
 
 	if $ExplosionDetector/CollisionShape2D.shape.radius == 32: #Brotha EWWWW
 		explosion.size = "Small"

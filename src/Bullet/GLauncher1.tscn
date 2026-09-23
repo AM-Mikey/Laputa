@@ -100,7 +100,7 @@ position = Vector2(0, 5)
 texture = ExtResource("2")
 hframes = 8
 vframes = 3
-frame = 7
+frame = 1
 
 [node name="BounceGraceTimer" type="Timer" parent="." unique_id=766296752]
 wait_time = 0.2

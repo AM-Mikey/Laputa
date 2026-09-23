@@ -70,6 +70,17 @@ func calc_velocity(projectile_speed) -> Vector2:
 
 	return out
 
+func deflect(vel: Vector2):
+	var hairball = load("res://src/Bullet/Enemy/Hairball.tscn").instantiate()
+	hairball.global_position = global_position
+	hairball.direction = vel.normalized()
+	hairball.velocity = vel
+	hairball.speed = vel.length()
+	hairball.damage = damage
+	w.player_front.add_child(hairball)
+	queue_free()
+
+
 ### SIGNAL ###
 func _on_TpTimer_timeout() -> void:
 	var screen_rect :Rect2 = vs.get_screen_global_rect()

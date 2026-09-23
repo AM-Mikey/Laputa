@@ -25,3 +25,7 @@ func calc_velocity(projectile_speed) -> Vector2:
 		if velocity.y < 0:
 			velocity.y *= 0.9
 	return out
+
+func deflect(vel: Vector2):
+	direction = vel.normalized()
+	velocity = vel
