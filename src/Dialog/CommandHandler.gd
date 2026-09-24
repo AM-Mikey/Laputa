@@ -122,6 +122,12 @@ func parse_command(string, command_is_first):
 			db.dl.text = db.dl.text.insert(db.get_raw_index(), "[/color][/b]")
 			db.character_is_bbcode_count += 12
 			#db.dl.text += "[/color][/b] "
+		"subprint":
+			db.do_force_end = true
+			db.end_via_subprint = true
+			db.subprint_conversation = argument
+
+
 
 		### Missions
 		"progress_main_mission": #/progress_main_mission

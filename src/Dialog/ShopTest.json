@@ -1,0 +1,17 @@
+{
+	"basil_options":
+	"
+	/newchar,basil,Basil Oh, did you need me? /options,What's_Up?,About_this...,Guns,Never_mind
+	/db,0 I'm still drafting this new gun design. It's not ready quite yet... /eb
+	/db,1 /subprint,basil_topics
+	/db,2 Here's where I'll open the gun menu /eb
+	/db,3 See you around! /eb
+	",
+	
+	"basil_topics":
+	"
+	/newchar,basil,Basil What about? /topics,davey,yourself
+	/db,0 About Davey... /eb
+	/db,1 About Myself... /eb
+	",
+}

@@ -29,6 +29,8 @@ const MAIN_MISSION = [ #[name, trigger_type, trigger_value, description]
 	"Entity related dialog commands demo"],
 	["camera_demo", "", "",
 	"camera related dialog commands demo"],
+	["shop_test", "", "",
+	"test of shopping features"],
 ]
 
 var main_mission_stage: Array = MAIN_MISSION[0]

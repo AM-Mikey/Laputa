@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="Item" format=3 uid="uid://3o1fgtdd4cji"]
+
+[ext_resource type="Script" uid="uid://dj0u1vtqimy4j" path="res://src/Item/Item.gd" id="1_eheas"]
+[ext_resource type="Texture2D" uid="uid://8hy6mcyyefcm" path="res://assets/Item/Blueprints.png" id="2_eheas"]
+
+[resource]
+script = ExtResource("1_eheas")
+display_name = "Legendary Blueprint"
+id = "BlueprintTurnstileJumper"
+texture = ExtResource("2_eheas")
+description = "The original blueprints for a legendary gun used by a lone cowboy."

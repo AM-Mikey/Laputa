@@ -12,6 +12,8 @@ var print_sfx = "npc_voice_normal"
 var busy = false #executing commands, ignore input
 var awaiting_merge = false
 var do_force_end = false
+var end_via_subprint = false
+var subprint_conversation
 var auto_input = false
 var active = false #actively printing
 var current_dialog_json
@@ -54,7 +56,7 @@ func _ready():
 	vs.connect("scale_changed", Callable(self, "_resolution_scale_changed"))
 	_resolution_scale_changed()
 
-func start_printing(dialog_json, conversation: String, next_state = "inspect"):
+func start_printing(dialog_json, conversation: String, next_state = "inspect", skip_align = false):
 	current_dialog_json = dialog_json
 	active = true
 	var dialog = _load_dialog_json(dialog_json)
@@ -76,7 +78,7 @@ func start_printing(dialog_json, conversation: String, next_state = "inspect"):
 		dl = $Flat/DialogFlat
 	dl.text = ""
 
-	align_box()
+	if !skip_align: align_box()
 	pc.mm.cached_state = pc.mm.current_state
 	pc.mm.change_state(next_state)
 	dl.text = text_stripped_of_commands
@@ -207,6 +209,9 @@ func get_branch_text(from_step: int) -> String:
 func run_text_array(text_array, from_input := false): #step is always the next step ready to do, not the one just done
 	if step == current_text_array.size() || do_force_end:
 		#print("reached end")
+		if end_via_subprint:
+			setup_subprint_conversation()
+			return
 		active = false
 		if !is_sign:
 			flash_type = FLASH_END
@@ -328,7 +333,10 @@ func prepare_auto_input():
 
 func progress_text():
 	if step == current_text_array.size() || do_force_end:
-		setup_next_conversation()
+		if end_via_subprint:
+			setup_subprint_conversation()
+		else:
+			setup_next_conversation()
 		return
 	do_delay = true
 	active = true
@@ -392,6 +400,17 @@ func setup_next_conversation():
 			exit()
 	else:
 		exit()
+
+func setup_subprint_conversation():
+	do_force_end = false
+	end_via_subprint = false
+	$FlashTimer.stop()
+	flash_step = 0
+	dl.text = ""
+	dl.visible_characters = 0
+	step = 0
+	start_printing(current_dialog_json, subprint_conversation, "inspect", true)
+
 
 func get_next_conversation_index(queue: Array) -> int:
 	for i in queue.size():

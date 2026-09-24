@@ -1,7 +1,7 @@
-[gd_scene load_steps=6 format=3 uid="uid://f2iylls2xinv"]
+[gd_scene format=3 uid="uid://f2iylls2xinv"]
 
 [ext_resource type="StyleBox" uid="uid://byg47wg5teo1" path="res://src/UI/StyleBox/ChromeRimmed.tres" id="1"]
-[ext_resource type="Script" uid="uid://pjx8q0yivqjx" path="res://src/UI/ShopMenu/ShopMenuItem.gd" id="2"]
+[ext_resource type="Script" uid="uid://pjx8q0yivqjx" path="res://src/UI/Outdated/ShopMenu/ShopMenuItem.gd" id="2"]
 [ext_resource type="Texture2D" uid="uid://c256cy5lf35mq" path="res://assets/Item/Items.png" id="4"]
 [ext_resource type="Resource" uid="uid://2a3f41pycu57" path="res://src/Item/Linen.tres" id="5"]
 
@@ -9,33 +9,26 @@
 atlas = ExtResource("4")
 region = Rect2(160, 0, 32, 16)
 
-[node name="ShopMenuItem" type="MarginContainer"]
+[node name="ShopMenuItem" type="MarginContainer" unique_id=1796643266]
+custom_minimum_size = Vector2(48, 48)
 offset_right = 48.0
 offset_bottom = 48.0
-custom_minimum_size = Vector2(48, 48)
 focus_mode = 2
 script = ExtResource("2")
-__meta__ = {
-"_edit_use_anchors_": false
-}
 item = ExtResource("5")
 sprite = NodePath("Sprite2D")
 shadow = NodePath("Sprite2D/Shadow")
 
-[node name="Panel" type="Panel" parent="."]
-offset_right = 48.0
-offset_bottom = 48.0
+[node name="Panel" type="Panel" parent="." unique_id=1406261927]
+layout_mode = 2
 theme_override_styles/panel = ExtResource("1")
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=747241416]
 position = Vector2(24, 24)
 scale = Vector2(2, 2)
 texture = SubResource("1")
 
-[node name="Shadow" type="Sprite2D" parent="Sprite2D"]
+[node name="Shadow" type="Sprite2D" parent="Sprite2D" unique_id=624876739]
 modulate = Color(0, 0, 0, 0.501961)
 show_behind_parent = true
 position = Vector2(1, 1)

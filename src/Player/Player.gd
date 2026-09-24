@@ -319,3 +319,13 @@ func setup_hud():
 	emit_signal("hp_updated", hp, max_hp, "set_up")
 	emit_signal("guns_updated", guns.get_children(), "set_up")
 	emit_signal("money_updated", money)
+
+func setup_topics(topic_string_array):
+	for t in topic_string_array:
+		var topic = load("res://src/Dialog/Topic/%s.tres" % t)
+		topic_array.append(topic)
+
+func setup_items(item_string_array):
+	for i in item_string_array:
+		var item = load("res://src/Item/%s.tres" % i)
+		item_array.append(item)

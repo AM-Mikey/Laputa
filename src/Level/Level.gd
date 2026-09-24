@@ -15,6 +15,8 @@ var conversation_on_enter: String
 @export var debug_main_mission_stage_name: String
 @export var side_missions_on_enter: Array[String]
 @export var debug_guns_on_enter: Array[String] = []
+@export var debug_topics_on_enter: Array[String] = []
+@export var debug_items_on_enter: Array[String] = []
 @export var controller_color_gradient: Gradient
 
 var time_created: Dictionary

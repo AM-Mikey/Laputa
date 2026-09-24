@@ -4,7 +4,7 @@ const DEBUG_INFO = preload("res://src/UI/DebugInfo/DebugInfo.tscn")
 const WIND_VISUAL = preload("res://src/UI/WindVisual.tscn")
 const LEVEL_EDITOR = preload("res://src/Editor/Editor.tscn")
 const POPUP = preload("res://src/UI/PopupText.tscn")
-const SHOP_MENU = preload("res://src/UI/ShopMenu/ShopMenu.tscn")
+#const SHOP_MENU = preload("res://src/UI/ShopMenu/ShopMenu.tscn")
 
 @onready var w = get_tree().get_root().get_node("World")
 
