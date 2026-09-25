@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b06b4p3cap1de"
-path="res://.godot/imported/Blunderbus.png-cee236175a5b5be2511d9ea2fd540295.ctex"
+uid="uid://bsmgjplvhkrjl"
+path="res://.godot/imported/TurnstileJumper.png-d403ba17c0dc3584d4703ed0bebe5bcd.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/UI/GunIcon/Blunderbus.png"
-dest_files=["res://.godot/imported/Blunderbus.png-cee236175a5b5be2511d9ea2fd540295.ctex"]
+source_file="res://assets/UI/GunIcon/TurnstileJumper.png"
+dest_files=["res://.godot/imported/TurnstileJumper.png-d403ba17c0dc3584d4703ed0bebe5bcd.ctex"]
 
 [params]
 

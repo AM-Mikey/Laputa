@@ -4,7 +4,7 @@
 	/newchar,basil,Basil Oh, did you need me? /options,What's_Up?,About_this...,Guns,Never_mind
 	/db,0 I'm still drafting this new gun design. It's not ready quite yet... /eb
 	/db,1 /subprint,basil_topics
-	/db,2 Here's where I'll open the gun menu /eb
+	/db,2 Here's what I can do for you /gun_shop
 	/db,3 See you around! /eb
 	",
 	

@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="Item" format=3 uid="uid://ctn3wwle0es21"]
+
+[ext_resource type="Script" uid="uid://dj0u1vtqimy4j" path="res://src/Item/Item.gd" id="1_vbif8"]
+[ext_resource type="Texture2D" uid="uid://8hy6mcyyefcm" path="res://assets/Item/Blueprints.png" id="2_xm585"]
+
+[resource]
+script = ExtResource("1_vbif8")
+display_name = "Elegant Blueprint"
+id = "Roberta"
+texture = ExtResource("2_xm585")
+description = "Blueprints for a strange but sleek concept gun. Looks like it has a high-capacity magazine."
+type = "blueprint"

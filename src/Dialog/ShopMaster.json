@@ -1,0 +1,48 @@
+{
+	"tab_hint_blueprints":
+	"
+	/newchar,basil,Basil /auto,on I can create new weapons using blueprints you bring to me.
+	",
+
+	"tab_hint_upgrade":
+	"
+	/newchar,basil,Basil /auto,on Upgrades will allow your weapons to reach higher levels than previously possible.
+	",
+
+	"tab_hint_fusion":
+	"
+	/newchar,basil,Basil /auto,on Some weapons can be fused together using parts from both.
+	",
+
+	"tab_hint_rebuild":
+	"
+	/newchar,basil,Basil /auto,on Your favorite guns can be rebuilt stronger if you've gotten used to them.
+	",
+
+	"tab_hint_exit":
+	"
+	/newchar,basil,Basil /auto,on A pleasure doing business!
+	",
+
+
+	"blueprint_hint_turnstile_jumper":
+	"
+	/newchar,basil,Basil /auto,on Whoa! that's an odd one.
+	That style of revolver is one that isn't made anymore.
+	",
+
+	"blueprint_hint_roberta":
+	"
+	/newchar,basil,Basil /auto,on It's very pretty isn't it.
+	I've seen this prototype before. It never made it to production.
+	",
+
+
+	"blueprint_turnstile_jumper":
+	"
+	/newchar,basil,Basil /auto,on Using this blueprint I can make the Turnstile Jumper.
+	Would you like me to do so? /yn
+	/db,0 Let's go!
+	/db,1 Let me know if you change your mind.
+	",
+}

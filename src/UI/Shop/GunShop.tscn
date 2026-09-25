@@ -1,0 +1,106 @@
+[gd_scene format=3 uid="uid://d0r1h0ck1621i"]
+
+[ext_resource type="Theme" uid="uid://45e84j2sj7w0" path="res://src/UI/Theme/LaputaTheme.tres" id="1_kgjoa"]
+[ext_resource type="Script" uid="uid://lg8l2y1ddxwt" path="res://src/UI/Shop/GunShop.gd" id="2_jkpxd"]
+
+[node name="GunShop" type="MarginContainer" unique_id=53339590]
+offset_right = 480.0
+offset_bottom = 270.0
+theme = ExtResource("1_kgjoa")
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 8
+script = ExtResource("2_jkpxd")
+
+[node name="MarginContainer" type="MarginContainer" parent="." unique_id=1103184300]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 0
+
+[node name="Panel" type="Panel" parent="MarginContainer" unique_id=1032392362]
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer" unique_id=1194525317]
+layout_mode = 2
+theme_override_constants/margin_left = 4
+theme_override_constants/margin_top = 4
+theme_override_constants/margin_right = 4
+theme_override_constants/margin_bottom = 4
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/MarginContainer" unique_id=1397359333]
+layout_mode = 2
+theme_override_constants/separation = 4
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/MarginContainer/HBoxContainer" unique_id=1817727588]
+layout_mode = 2
+theme_override_constants/separation = 4
+
+[node name="Blueprints" type="Button" parent="MarginContainer/MarginContainer/HBoxContainer/VBoxContainer" unique_id=1339487352]
+layout_mode = 2
+toggle_mode = true
+text = "Blueprints"
+
+[node name="Upgrade" type="Button" parent="MarginContainer/MarginContainer/HBoxContainer/VBoxContainer" unique_id=1866709282]
+layout_mode = 2
+toggle_mode = true
+text = "Upgrade"
+
+[node name="Fusion" type="Button" parent="MarginContainer/MarginContainer/HBoxContainer/VBoxContainer" unique_id=570872751]
+layout_mode = 2
+toggle_mode = true
+text = "Fusion"
+
+[node name="Rebuild" type="Button" parent="MarginContainer/MarginContainer/HBoxContainer/VBoxContainer" unique_id=1969450361]
+layout_mode = 2
+toggle_mode = true
+text = "Rebuild"
+
+[node name="Exit" type="Button" parent="MarginContainer/MarginContainer/HBoxContainer/VBoxContainer" unique_id=1818697859]
+layout_mode = 2
+text = "Exit"
+
+[node name="TabContainer" type="TabContainer" parent="MarginContainer/MarginContainer/HBoxContainer" unique_id=539156095]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(64, 128)
+layout_mode = 2
+current_tab = 1
+clip_tabs = false
+tabs_visible = false
+
+[node name="Blueprints" type="ItemList" parent="MarginContainer/MarginContainer/HBoxContainer/TabContainer" unique_id=1220234257]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2
+size_flags_horizontal = 3
+focus_neighbor_left = NodePath("../../VBoxContainer/Blueprints")
+allow_search = false
+auto_width = true
+max_columns = 6
+same_column_width = true
+metadata/_tab_index = 0
+
+[node name="Upgrade" type="Button" parent="MarginContainer/MarginContainer/HBoxContainer/TabContainer" unique_id=1591916915]
+layout_mode = 2
+text = "Upgrade"
+metadata/_tab_index = 1
+
+[node name="GunBox" type="ItemList" parent="MarginContainer/MarginContainer/HBoxContainer" unique_id=1405651506]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+allow_search = false
+auto_width = true
+max_columns = 6
+same_column_width = true
+
+[connection signal="focus_entered" from="MarginContainer/MarginContainer/HBoxContainer/VBoxContainer/Blueprints" to="." method="_on_Blueprints_focus_entered"]
+[connection signal="pressed" from="MarginContainer/MarginContainer/HBoxContainer/VBoxContainer/Blueprints" to="." method="_on_Blueprints_pressed"]
+[connection signal="focus_entered" from="MarginContainer/MarginContainer/HBoxContainer/VBoxContainer/Upgrade" to="." method="_on_Upgrade_focus_entered"]
+[connection signal="pressed" from="MarginContainer/MarginContainer/HBoxContainer/VBoxContainer/Upgrade" to="." method="_on_Upgrade_pressed"]
+[connection signal="focus_entered" from="MarginContainer/MarginContainer/HBoxContainer/VBoxContainer/Fusion" to="." method="_on_Fusion_focus_entered"]
+[connection signal="pressed" from="MarginContainer/MarginContainer/HBoxContainer/VBoxContainer/Fusion" to="." method="_on_Fusion_pressed"]
+[connection signal="focus_entered" from="MarginContainer/MarginContainer/HBoxContainer/VBoxContainer/Rebuild" to="." method="_on_Rebuild_focus_entered"]
+[connection signal="pressed" from="MarginContainer/MarginContainer/HBoxContainer/VBoxContainer/Rebuild" to="." method="_on_Rebuild_pressed"]
+[connection signal="pressed" from="MarginContainer/MarginContainer/HBoxContainer/VBoxContainer/Exit" to="." method="_on_Exit_pressed"]
+[connection signal="item_selected" from="MarginContainer/MarginContainer/HBoxContainer/TabContainer/Blueprints" to="." method="_on_Blueprints_item_selected"]

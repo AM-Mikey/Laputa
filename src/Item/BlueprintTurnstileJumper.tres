@@ -6,6 +6,7 @@
 [resource]
 script = ExtResource("1_eheas")
 display_name = "Legendary Blueprint"
-id = "BlueprintTurnstileJumper"
+id = "TurnstileJumper"
 texture = ExtResource("2_eheas")
 description = "The original blueprints for a legendary gun used by a lone cowboy."
+type = "blueprint"
