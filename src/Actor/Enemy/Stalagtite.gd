@@ -7,7 +7,7 @@ const TX_2 = preload("res://assets/Actor/Enemy/Stalagtite2.png")
 const TOOLTIPS = [
 "LV 0: Falls on the player and becomes platformable moments after it lands.",
 "LV 1: Falls on the player and scurries away in a random direction.",
-"LV 2: Falls on the player and chases after  the player.",
+"LV 2: Falls on the player and chases after the player.",
 ]
 
 var target: Node

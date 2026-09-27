@@ -7,8 +7,8 @@ const ICON = preload("res://assets/Actor/Enemy/BeetleCrawlerIcon.png")
 const TX_0 = preload("res://assets/Actor/Enemy/BeetleCrawler.png")
 const TX_1 = preload("res://assets/Actor/Enemy/BeetleCrawler1.png")
 const TOOLTIPS = [
-"LV 0: Crawls along walls and flips when it reaches a corner.",
-"LV 1: Crawls along walls and flips when it reaches a corner or when it sees the player.",
+"LV 0: Crawls along walls.",
+"LV 1: Crawls along walls and flies towards the player if they are within a major cadinal direction to it.",
 ]
 
 var move_dir = Vector2.LEFT

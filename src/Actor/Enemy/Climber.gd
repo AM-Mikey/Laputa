@@ -5,8 +5,8 @@ const TX_0 = preload("res://assets/Actor/Enemy/Climber.png")
 const TX_1 = preload("res://assets/Actor/Enemy/Climber1.png")
 const ARM = preload("res://src/Actor/Enemy/ClimberArm.tscn")
 const TOOLTIPS = [
-"LV 0: Climbs along walls, if all legs are shot it falls and dies.",
-"LV 1: Climbs along walls at a faster pace, if all legs are shot it falls and dies.",
+"LV 0: Climbs along walls, falls if supporting legs are shot off and dies if it lands on its core.",
+"LV 1: Climbs along walls quickly, falls if supporting legs are shot off and dies if it lands on its core.",
 ]
 
 @export var climb_dir = "cw"
