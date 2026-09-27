@@ -9,11 +9,11 @@ const TX_4 = preload("res://assets/Actor/Enemy/Sentry4.png")
 const HAIRBALL = preload("res://src/Bullet/Enemy/Hairball.tscn")
 const HAIRBALL_RAIN = preload("res://src/Bullet/Enemy/HairballRain.tscn")
 const TOOLTIPS = [
-"level 0 sentry",
-"level 1 sentry",
-"level 2 sentry",
-"level 3 sentry",
-"level 4 sentry",
+"LV 0: Shoots arcing projectiles in a predetermined direction when player is nearby.",
+"LV 1: Shoots arcing projectiles towards the player when nearby.",
+"LV 2: Shoots arcing projectiles towards the player within a greater range.",
+"LV 3: Shoots a barrage of floating spores into the air when player is nearby.",
+"LV 4: Shoots a single floating spore towards the player when nearby.",
 ]
 
 # difficulty = 3: Shoot rapidly upward in order in the spread cone starting from player's direction then wait for cooldown_time

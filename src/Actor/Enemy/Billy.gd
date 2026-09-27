@@ -7,8 +7,8 @@ const WAYPOINT = preload("res://src/Editor/VisualUtility/WaypointGlobal.tscn")
 const TX_0 = preload("res://assets/Actor/Enemy/Billy0.png")
 const TX_1 = preload("res://assets/Actor/Enemy/Billy1.png")
 const TOOLTIPS = [
-"level 0 billy",
-"level 1 billy",
+"LV 0: Keeps distance from player and shoots seeds at them.",
+"LV 1: Keeps distance from player and shoots seeds at them, cannot fall off edges.",
 ]
 
 var move_dir = Vector2.LEFT

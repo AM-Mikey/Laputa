@@ -3,7 +3,7 @@ extends Enemy
 const ICON = preload("res://assets/Actor/Enemy/CrusherIcon.png")
 const TX_0 = preload("res://assets/Actor/Enemy/Crusher.png")
 const TOOLTIPS = [
-"level 0 crusher",
+"LV 0: Moves along set path and crushes anything.",
 ]
 
 enum PathType {SEGMENT, RECTANGLE, ELLIPSE}

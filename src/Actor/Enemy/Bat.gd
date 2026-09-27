@@ -3,7 +3,7 @@ extends Enemy
 const ICON = preload("res://assets/Actor/Enemy/BatIcon.png")
 const WAYPOINT = preload("res://src/Editor/VisualUtility/WaypointGlobal.tscn") #TODO: clean up waypoint implementation to match NPC
 const TOOLTIPS = [
-"level 0 bat",
+"LV 0: Flies through set waypoints and loops through them. If player gets too close it will chase.",
 ]
 
 @export var move_dir = Vector2.ZERO

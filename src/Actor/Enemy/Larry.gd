@@ -3,7 +3,7 @@ extends Enemy
 const ICON = preload("res://assets/Actor/Enemy/LarryIcon.png")
 const TX_0 = preload("res://assets/Actor/Enemy/Larry.png")
 const TOOLTIPS = [
-"level 0 larry",
+"LV 0: Walks left and right, only deals knockback to player.",
 ]
 
 var move_dir: Vector2

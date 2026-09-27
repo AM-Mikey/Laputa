@@ -5,9 +5,9 @@ const TX_0 = preload("res://assets/Actor/Enemy/Stalagtite.png")
 const TX_1 = preload("res://assets/Actor/Enemy/Stalagtite1.png")
 const TX_2 = preload("res://assets/Actor/Enemy/Stalagtite2.png")
 const TOOLTIPS = [
-"level 0 stalagtite",
-"level 1 stalagtite",
-"level 2 stalagtite",
+"LV 0: Falls on the player and becomes platformable moments after it lands.",
+"LV 1: Falls on the player and scurries away in a random direction.",
+"LV 2: Falls on the player and chases after  the player.",
 ]
 
 var target: Node
