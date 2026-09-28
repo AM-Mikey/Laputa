@@ -10,7 +10,8 @@ var blueprint_resource_array = []
 
 func _ready():
 	_setup_blueprints()
-	_setup_guns()
+	_setup_upgrade_guns()
+	_setup_rebuild_guns()
 	%BlueprintsTabButton.grab_focus()
 	f.db().busy = true
 
@@ -22,13 +23,21 @@ func _setup_blueprints():
 			blueprint_resource_array.append(i)
 			%BlueprintBox.add_icon_item(i.texture, true)
 
-func _setup_guns():
+func _setup_upgrade_guns():
 	%UpgradeGunBox.clear()
-	%RebuildGunBox.clear()
 	for g in f.pc().get_node("GunManager/Guns").get_children():
 		var icon = load("res://assets/UI/GunIcon/%s.png" % g.name)
 		%UpgradeGunBox.add_icon_item(icon, true)
+
+
+func _setup_rebuild_guns():
+	%RebuildGunBox.clear()
+	for g in f.pc().get_node("GunManager/Guns").get_children():
+		var icon = load("res://assets/UI/GunIcon/%s.png" % g.name)
+		var can_rebuild = true if g.lifetime_xp >= g.xp_to_rebuild else false
 		%RebuildGunBox.add_icon_item(icon, true)
+		if !can_rebuild:
+			%RebuildGunBox.set_item_icon_modulate(g.get_index(), Color(0.0, 0.0, 0.0, 0.5))
 
 
 
@@ -104,7 +113,52 @@ func _on_BuildButton_pressed():
 		player.emit_signal("guns_updated", player.guns.get_children(), "get_gun")
 		player.gm.set_guns_visible()
 		player.item_array.erase(blueprint)
-		_setup_guns()
+		_setup_upgrade_guns()
+		_setup_rebuild_guns()
+		_setup_blueprints()
+
+		am.play_interrupt("get_item")
+		var got_gun = GOT_GUN.instantiate()
+		got_gun.gun_name = gun.display_name
+		w.ui.add_child(got_gun)
+
+		shop.build_blueprint()
+		%BlueprintBox.grab_focus()
+		print("added gun '", gun.name, "' to guns")
+	else:
+		print("WARNING: Gun: ", gun.name, " already in guns, ignoring")
+
+
+func _on_RebuildButton_pressed():
+	var player = f.pc()
+	var index = %RebuildGunBox.get_selected_items()[0]
+	var gun_resource_name: String = player.get_node("GunManager/Guns").get_child(index).name
+	var old_gun_in_player = player.get_node("GunManager/Guns").get_node(gun_resource_name)
+	var can_rebuild = true if old_gun_in_player.lifetime_xp >= old_gun_in_player.xp_to_rebuild else false
+	if !can_rebuild: return
+	#var old_gun = load("res://src/Gun/%s.tscn" % gun_resource_name).instantiate()
+	var mark_designation = str("M", old_gun_in_player.rebuild_count + 2)
+	var gun = load("res://src/Gun/%s%s.tscn" % [gun_resource_name, mark_designation]).instantiate()
+	if gun == null:
+		printerr("ERROR: Can't find gun at: res://src/Gun/%s%s.tscn" % [gun_resource_name, mark_designation])
+
+
+	var already_has_gun = false
+	for g in player.guns.get_children():
+		if g.name == gun.name:
+			already_has_gun = true
+	if !already_has_gun:
+		player.get_node("GunManager/Guns").add_child(gun)
+		player.get_node("GunManager/Guns").move_child(gun, 0)
+		old_gun_in_player.free()
+		var index_in_gun_order = player.get_node("GunManager").gun_order.find(old_gun_in_player)
+		player.get_node("GunManager").gun_order[index_in_gun_order] = gun #replace old with new
+		player.emit_signal("guns_updated", player.guns.get_children(), "get_gun")
+		player.gm.set_guns_visible()
+
+
+		_setup_upgrade_guns()
+		_setup_rebuild_guns()
 		_setup_blueprints()
 
 		am.play_interrupt("get_item")

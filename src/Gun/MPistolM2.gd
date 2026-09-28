@@ -9,6 +9,7 @@ func _ready():
 	bullet_scene = load("res://src/Bullet/MPistol.tscn")
 	automatic = true
 	ammo = 60
+	rebuild_count = 1
 	max_level = 3
 	set_level(level)
 

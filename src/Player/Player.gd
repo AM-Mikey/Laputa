@@ -265,6 +265,7 @@ func _on_ItemDetector_area_entered(area):
 			var active_gun = guns.get_child(0)
 			money += pickup.value
 			active_gun.xp += pickup.value
+			active_gun.lifetime_xp += pickup.value
 			if active_gun.xp >= active_gun.max_xp:
 				if active_gun.level == active_gun.max_level:
 					active_gun.xp = active_gun.max_xp
