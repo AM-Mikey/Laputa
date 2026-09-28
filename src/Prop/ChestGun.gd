@@ -1,6 +1,8 @@
 extends PhysicsProp
 
-const ICON = preload("res://assets/Prop/ChestWeaponIcon.png")
+const ICON = preload("res://assets/Prop/ChestGunIcon.png")
+const GOT_GUN = preload("res://src/UI/GotGun.tscn")
+
 var gun
 var active_players = []
 
@@ -39,6 +41,9 @@ func _input(event):
 func activate(player):
 	am.play("chest_open")
 	am.play_interrupt("get_item")
+	var got_gun = GOT_GUN.instantiate()
+	got_gun.gun_name = gun.display_name
+	w.ui.add_child(got_gun)
 	$AnimationPlayer.play("Used")
 	spent = true
 	if gun:

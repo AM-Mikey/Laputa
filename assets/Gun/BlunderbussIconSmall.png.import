@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://da2ilv264gi0u"
-path="res://.godot/imported/ChestWeaponIcon.png-5ce94a946120619683d8807bb898bc83.ctex"
+uid="uid://71f2iajpt6o3"
+path="res://.godot/imported/BlunderbussIconSmall.png-dbb4f46c6ece46f8a0cf5909305f9dc4.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/Prop/ChestWeaponIcon.png"
-dest_files=["res://.godot/imported/ChestWeaponIcon.png-5ce94a946120619683d8807bb898bc83.ctex"]
+source_file="res://assets/Gun/BlunderbussIconSmall.png"
+dest_files=["res://.godot/imported/BlunderbussIconSmall.png-dbb4f46c6ece46f8a0cf5909305f9dc4.ctex"]
 
 [params]
 

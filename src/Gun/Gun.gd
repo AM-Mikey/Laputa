@@ -7,7 +7,7 @@ const BULLET_CASING = preload("res://src/Effect/BulletCasing.tscn")
 const BULLET_CASING_PHYSICAL = preload("res://src/Effect/BulletCasingPhysical.tscn")
 
 
-var display_name: String = "Debug Gun"
+@export var display_name: String = "Debug Gun"
 var description: String = "Debug Description"
 
 var icon_texture: CompressedTexture2D = load("res://assets/Gun/RevolverIcon.png")

@@ -53,7 +53,7 @@ signal music_fadeout_finished
 	"gun_shift": preload("res://assets/SFX/Placeholder/snd_switchweapon.ogg"),
 	"gun_pistol": preload("res://assets/SFX/Placeholder/snd_polar_star_l1_2.ogg"),
 	"gun_revolver": preload("res://assets/SFX/Placeholder/snd_polar_star_l3.ogg"),
-	"gun_shotgun": preload("res://assets/SFX/Placeholder/snd_missile_hit.ogg"),
+	"gun_blunderbuss": preload("res://assets/SFX/Placeholder/snd_missile_hit.ogg"),
 	"gun_sword": preload("res://assets/SFX/Placeholder/snd_ironh_shot_fly.ogg"),
 	"gun_grenade": preload("res://assets/SFX/Placeholder/snd_expl_small.ogg"),
 	"gun_grenade_bounce": preload("res://assets/SFX/Placeholder/snd_thud.ogg"),

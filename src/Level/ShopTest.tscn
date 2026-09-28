@@ -11,6 +11,7 @@
 [ext_resource type="PackedScene" uid="uid://dovj8uq00xato" path="res://src/Editor/VanishingPoint.tscn" id="9_br5u2"]
 [ext_resource type="PackedScene" uid="uid://cpkdlvdxe3pdh" path="res://src/Editor/SpawnPoint.tscn" id="10_jqmnt"]
 [ext_resource type="PackedScene" uid="uid://dhjqke0pgo21f" path="res://src/Editor/TitlePreview.tscn" id="11_286gw"]
+[ext_resource type="PackedScene" uid="uid://beorrh1dm573t" path="res://src/Editor/Spawn/PropSpawn.tscn" id="11_vberi"]
 
 [sub_resource type="Gradient" id="Gradient_6cuym"]
 offsets = PackedFloat32Array(0, 0.25, 0.5, 0.75, 1)
@@ -26,7 +27,7 @@ music = "shop"
 dialog_json = "res://src/Dialog/ShopTest.json"
 mission_level_update = "res://src/Mission/ShopTest.json"
 debug_main_mission_stage_name = "shop_test"
-debug_guns_on_enter = Array[String](["Revolver", "Speeder", "MPistol", "GLauncher", "Shotgun", "Tsurugi", "Red7"])
+debug_guns_on_enter = Array[String](["Revolver", "Speeder", "MPistol", "GLauncher", "Blunderbuss", "Tsurugi"])
 debug_topics_on_enter = Array[String](["Davey", "Yourself"])
 debug_items_on_enter = Array[String](["BlueprintTurnstileJumper", "BlueprintRoberta"])
 controller_color_gradient = SubResource("Gradient_6cuym")
@@ -170,6 +171,27 @@ properties = {
 "id": [&"Ladder", 4, ""]
 }
 size_is_default = false
+
+[node name="AmmoRefill" parent="Spawns" unique_id=1449282698 instance=ExtResource("11_vberi")]
+visibility_layer = 2
+position = Vector2(1728, 1824)
+prop_path = "res://src/Prop/AmmoRefill.tscn"
+properties = {
+"do_bubble": [false, 1, ""],
+"editor_hidden": [null, 1, ""],
+"id": [&"AmmoRefill", 4, ""]
+}
+
+[node name="ChestGun" parent="Spawns" unique_id=934414503 instance=ExtResource("11_vberi")]
+visibility_layer = 2
+position = Vector2(1744, 1824)
+prop_path = "res://src/Prop/ChestGun.tscn"
+properties = {
+"do_bubble": [false, 1, ""],
+"editor_hidden": [false, 1, ""],
+"gun_name": ["Red7", 4, ""],
+"id": [&"ChestGun", 4, ""]
+}
 
 [node name="TileAnimator" type="Node2D" parent="." unique_id=459942112]
 visibility_layer = 2

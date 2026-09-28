@@ -5,6 +5,7 @@
 
 [node name="GLauncher" type="Node2D" unique_id=1955943416]
 script = ExtResource("1")
+display_name = "Grenade Launcher"
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=225322567]
 texture = ExtResource("2")

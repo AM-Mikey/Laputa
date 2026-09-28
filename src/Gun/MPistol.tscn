@@ -1,13 +1,14 @@
-[gd_scene load_steps=3 format=3 uid="uid://diwpy822anfc4"]
+[gd_scene format=3 uid="uid://diwpy822anfc4"]
 
 [ext_resource type="Script" uid="uid://kxxy1pa1dk13" path="res://src/Gun/MPistol.gd" id="1"]
 [ext_resource type="Texture2D" uid="uid://jjyq7h7e0qih" path="res://assets/Gun/MPistol.png" id="2"]
 
-[node name="MPistol" type="Node2D"]
+[node name="MPistol" type="Node2D" unique_id=861730290]
 script = ExtResource("1")
+display_name = "Machine Pistol"
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1707251090]
 texture = ExtResource("2")
 
-[node name="Muzzle" type="Marker2D" parent="."]
+[node name="Muzzle" type="Marker2D" parent="." unique_id=1732718902]
 position = Vector2(-7, -1)

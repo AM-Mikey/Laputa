@@ -46,7 +46,7 @@ script = ExtResource("8")
 development_stage = "alpha"
 release_version = "1.8"
 do_skip_title = true
-default_gun_array = Array[String](["Revolver", "Speeder", "MPistol", "GLauncher", "Shotgun", "Tsurugi", "Red7", "Roberta", "TurnstileJumper"])
+default_gun_array = Array[String](["Revolver", "Speeder", "MPistol", "GLauncher", "Blunderbuss", "Tsurugi", "Red7", "Roberta", "TurnstileJumper"])
 default_topic_array = Array[String](["yourself"])
 start_level_path = "res://src/Level/ShopTest.tscn"
 

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bjwvnd0w6cx4x"
-path="res://.godot/imported/ChestWeapon.png-3857b92ca742728f2bf3bc58461cad48.ctex"
+uid="uid://dnhnl1y3jdd7l"
+path="res://.godot/imported/ChestGunIcon.png-e452364610728178ccfb3b49ca3d6639.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/Prop/ChestWeapon.png"
-dest_files=["res://.godot/imported/ChestWeapon.png-3857b92ca742728f2bf3bc58461cad48.ctex"]
+source_file="res://assets/Prop/ChestGunIcon.png"
+dest_files=["res://.godot/imported/ChestGunIcon.png-e452364610728178ccfb3b49ca3d6639.ctex"]
 
 [params]
 

@@ -11,33 +11,18 @@ var wait_timer: Node
 
 
 func hint_tab(tab_name):
+	var tab_name_snake_case = tab_name.to_snake_case()
 	var db = f.db()
-	#db.busy = false
-	db.do_force_end = true
-	db.end_via_subprint = true
-	db.subprint_json = "res://src/Dialog/ShopMaster.json"
-	db.subprint_conversation = "tab_hint_%s" % tab_name
-	db.setup_subprint_conversation()
+	db.request_subprint("res://src/Dialog/ShopMaster.json", "tab_hint_%s" % tab_name_snake_case)
 
 
 func hint_blueprint(blueprint):
+	print("asdddddddddddddddd")
 	var gun_name_snake_case = blueprint.id.to_snake_case()
 	var db = f.db()
-	#db.busy = false
-	db.do_force_end = true
-	db.end_via_subprint = true
-	db.subprint_json = "res://src/Dialog/ShopMaster.json"
-	db.subprint_conversation = "blueprint_hint_%s" % gun_name_snake_case
-	db.setup_subprint_conversation()
+	db.request_subprint("res://src/Dialog/ShopMaster.json", "blueprint_hint_%s" % gun_name_snake_case)
 
 
-func process_blueprint(blueprint):
-	pass
-	#var gun_name_snake_case = blueprint.id.to_snake_case()
-#
-	#var db = f.db()
-	#db.busy = false
-	#db.do_force_end = true
-	#db.end_via_subprint = true
-	#db.subprint_json = "res://src/Dialog/ShopMaster.json"
-	#db.subprint_conversation = "blueprint_%s" % gun_name_snake_case
+func build_blueprint():
+	var db = f.db()
+	db.request_subprint("res://src/Dialog/ShopMaster.json", "build_button")
