@@ -1,0 +1,335 @@
+[gd_scene format=4]
+
+[ext_resource type="Script" path="res://src/Level/Level.gd" id="1_tj2hv"]
+[ext_resource type="PackedScene" path="res://src/Background/LevelLimiter.tscn" id="2_v7fqy"]
+[ext_resource type="Script" path="res://src/Background/LevelLimiter.gd" id="3_rxujv"]
+[ext_resource type="Resource" path="res://src/Background/iedge.tres" id="3_yfl78"]
+[ext_resource type="Texture2D" path="res://assets/Background/IslandEdge.png" id="4_ssc0f"]
+[ext_resource type="TileSet" path="res://src/Tile/Debug.tres" id="5_xa62q"]
+[ext_resource type="PackedScene" path="res://src/Editor/VanishingPoint.tscn" id="6_ed54t"]
+[ext_resource type="PackedScene" path="res://src/Editor/Spawn/ActorSpawn.tscn" id="7_btjxg"]
+[ext_resource type="PackedScene" path="res://src/Editor/Spawn/PropSpawn.tscn" id="8_0ukor"]
+[ext_resource type="Script" path="res://src/Editor/VanishingPoint.gd" id="8_hvqyn"]
+[ext_resource type="PackedScene" path="res://src/Editor/SpawnPoint.tscn" id="9_h0eb8"]
+[ext_resource type="Script" path="res://src/Editor/Spawn/PropSpawn.gd" id="10_gpb7k"]
+[ext_resource type="Script" path="res://src/Editor/Spawn/ActorSpawn.gd" id="12_3uwp1"]
+[ext_resource type="PackedScene" path="res://src/Editor/VisualUtility/VUVector.tscn" id="13_gpb7k"]
+[ext_resource type="Script" path="res://src/Editor/VisualUtility/VUVector.gd" id="14_3uwp1"]
+[ext_resource type="Script" path="res://src/Editor/SpawnPoint.gd" id="14_adi07"]
+
+[sub_resource type="Gradient" id="Gradient_e2m0l"]
+offsets = PackedFloat32Array(0, 0.25, 0.5, 0.75, 1)
+colors = PackedColorArray(1, 0.47843137, 0, 1, 0.07450981, 0.4, 0.52156866, 1, 0.84313726, 0, 0.30588236, 1, 0.07450981, 0.4, 0.52156866, 1, 1, 0.47843137, 0, 1)
+metadata/_snap_enabled = true
+metadata/_snap_count = 12
+
+[sub_resource type="Curve" id="Curve_wvikc"]
+_data = [Vector2(0, 0), 0.0, 10.229628, 0, 0, Vector2(0.22947763, 1), 0.0, 0.0, 0, 0, Vector2(0.49813432, 0), 0.0, 0.0, 0, 0, Vector2(0.7518657, 0.27721614), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 5
+
+[node name="EnStalagtiteTesting" type="Node2D" unique_id=1952135705]
+visibility_layer = 2
+script = ExtResource("1_tj2hv")
+level_name = "EnStalagtiteTesting"
+music = "train"
+dialog_json = "res://src/Dialog/Village.json"
+controller_color_gradient = SubResource("Gradient_e2m0l")
+
+[node name="LevelLimiter" type="MarginContainer" parent="." unique_id=1011068996 instance=ExtResource("2_v7fqy")]
+visibility_layer = 2
+offset_left = 1599.0
+offset_top = 1600.0
+offset_right = 4431.0
+offset_bottom = 2496.0
+mouse_filter = 2
+script = ExtResource("3_rxujv")
+background_resource = ExtResource("3_yfl78")
+texture = ExtResource("4_ssc0f")
+layers = 5
+layer_scales = {
+0: Vector2(0, 0),
+1: Vector2(0.4, 0.4),
+2: Vector2(0.7, 0.7),
+3: Vector2(1, 1),
+4: Vector2(0.9, 0.9)
+}
+layer_height_offsets = {
+0: 0.0,
+1: 0.0,
+2: 0.0,
+3: 0.0,
+4: 6.0
+}
+tile_mode = 1
+back_tile_mode = 1
+
+[node name="TileMap" type="Node2D" parent="." unique_id=1252639869]
+visibility_layer = 2
+z_index = 1
+
+[node name="FarBack" type="TileMapLayer" parent="TileMap" unique_id=270500202]
+visibility_layer = 2
+z_index = -2
+use_parent_material = true
+tile_map_data = PackedByteArray("AAC0AHEAAAAAAAAAAAC0AHIAAAAAAAAAAAC4AH0AAAAAAAAAAAC4AHsAAAAAAAAAAAC4AHoAAAAAAAAAAAC4AHkAAAAAAAAAAAC4AHgAAAAAAAAAAAC4AHcAAAAAAAAAAAC4AHYAAAAAAAAAAAC4AHUAAAAAAAAAAAC4AHQAAAAAAAAAAAC4AHMAAAAAAAAAAAC4AHIAAAAAAAAAAAC4AHEAAAAAAAAAAAC5AHEAAAAAAAAAAAC5AHIAAAAAAAAAAAC5AHMAAAAAAAAAAAC5AHQAAAAAAAAAAAC5AHUAAAAAAAAAAAC5AHYAAAAAAAAAAAC5AHcAAAAAAAAAAAC5AHgAAAAAAAAAAAC5AHkAAAAAAAAAAAC5AHoAAAAAAAAAAAC5AHsAAAAAAAAAAAC5AHwAAAAAAAAAAAC5AH0AAAAAAAAAAAC4AHwAAAAAAAAAAAC5AH4AAAAAAAAAAAC5AH8AAAAAAAAAAAC5AIAAAAAAAAAAAAC5AIEAAAAAAAAAAAC5AIIAAAAAAAAAAAC5AIMAAAAAAAAAAAC5AIQAAAAAAAAAAAC4AH4AAAAAAAAAAAC4AH8AAAAAAAAAAAC4AIAAAAAAAAAAAAC4AIEAAAAAAAAAAAC4AIIAAAAAAAAAAAC4AIMAAAAAAAAAAAC4AIQAAAAAAAAAAAC4AIUAAAAAAAAAAAC4AIYAAAAAAAAAAAC4AIcAAAAAAAAAAAC4AIgAAAAAAAAAAAC4AIkAAAAAAAAAAAC4AIoAAAAAAAAAAAC4AIsAAAAAAAAAAAC4AI0AAAAAAAAAAAC4AI4AAAAAAAAAAAC4AI8AAAAAAAAAAAC4AJAAAAAAAAAAAAC4AJEAAAAAAAAAAAC5AJEAAAAAAAAAAAC4AJIAAAAAAAAAAAC5AJIAAAAAAAAAAAC5AJAAAAAAAAAAAAC5AI8AAAAAAAAAAAC5AI4AAAAAAAAAAAC5AI0AAAAAAAAAAAC5AIwAAAAAAAAAAAC4AIwAAAAAAAAAAAC5AIsAAAAAAAAAAAC5AIoAAAAAAAAAAAC5AIkAAAAAAAAAAAC5AIgAAAAAAAAAAAC5AIcAAAAAAAAAAAC5AIYAAAAAAAAAAAC5AIUAAAAAAAAAAAC5AHAAAAAAAAAAAAC5AG8AAAAAAAAAAAC5AG4AAAAAAAAAAAC5AG0AAAAAAAAAAAC5AGwAAAAAAAAAAAC5AGsAAAAAAAAAAAC5AGoAAAAAAAAAAAC5AGkAAAAAAAAAAAC5AGgAAAAAAAAAAAC5AGcAAAAAAAAAAAC5AGYAAAAAAAAAAAC5AGUAAAAAAAAAAAC4AGUAAAAAAAAAAAC4AGYAAAAAAAAAAAC4AGcAAAAAAAAAAAC4AGgAAAAAAAAAAAC4AGkAAAAAAAAAAAC4AGoAAAAAAAAAAAC4AGsAAAAAAAAAAAC4AGwAAAAAAAAAAAC4AG0AAAAAAAAAAAC4AG4AAAAAAAAAAAC4AG8AAAAAAAAAAAC4AHAAAAAAAAAAAAC/AHcAAAAAAAAAAAA=")
+tile_set = ExtResource("5_xa62q")
+
+[node name="Back" type="TileMapLayer" parent="TileMap" unique_id=505398842]
+visibility_layer = 2
+z_index = -1
+use_parent_material = true
+tile_map_data = PackedByteArray("AADEAH0AAAAEAAQAAAC2AH0AAAAEAAQAAAA=")
+tile_set = ExtResource("5_xa62q")
+
+[node name="Front" type="TileMapLayer" parent="TileMap" unique_id=1829366578]
+visibility_layer = 2
+z_index = 1
+use_parent_material = true
+tile_map_data = PackedByteArray("AACzAG8AAAAAAAgAAAC0AG8AAAAAAAgAAAC1AG8AAAAAAAgAAAC2AG8AAAAAAAgAAAC3AG8AAAAAAAgAAAC7AG8AAAAAAAgAAAC8AG8AAAAAAAgAAAC9AG8AAAAAAAgAAAC+AG8AAAAAAAgAAAC/AG8AAAAAAAgAAADAAG8AAAAAAAgAAADBAG8AAAAAAAgAAADCAG8AAAAAAAgAAADDAG8AAAAAAAgAAADEAG8AAAAAAAgAAADFAG8AAAAAAAgAAADGAG8AAAAAAAgAAADHAG8AAAAAAAgAAACzAHAAAAAAAAgAAAC0AHAAAAAAAAgAAAC1AHAAAAAAAAgAAAC2AHAAAAAAAAgAAAC3AHAAAAAAAAgAAAC6AHAAAAAAAAgAAAC7AHAAAAAAAAgAAAC8AHAAAAAAAAgAAAC9AHAAAAAAAAgAAAC+AHAAAAAAAAgAAAC/AHAAAAAAAAgAAADAAHAAAAAAAAgAAADBAHAAAAAAAAgAAADCAHAAAAAAAAgAAADDAHAAAAAAAAgAAADEAHAAAAAAAAgAAADFAHAAAAAAAAgAAADGAHAAAAAAAAgAAADHAHAAAAAAAAgAAACzAHEAAAAAAAgAAAC0AHEAAAAAAAgAAADGAHEAAAAAAAgAAADHAHEAAAAAAAgAAACzAHIAAAAAAAgAAAC0AHIAAAAAAAgAAADGAHIAAAAAAAgAAADHAHIAAAAAAAgAAACzAHMAAAAAAAgAAAC0AHMAAAAAAAgAAADGAHMAAAAAAAgAAADHAHMAAAAAAAgAAACzAHQAAAAAAAgAAAC0AHQAAAAAAAgAAADGAHQAAAAAAAgAAADHAHQAAAAAAAgAAACzAHUAAAAAAAgAAAC0AHUAAAAAAAgAAADGAHUAAAAAAAgAAADHAHUAAAAAAAgAAACzAHYAAAAAAAgAAAC0AHYAAAAAAAgAAADGAHYAAAAAAAgAAADHAHYAAAAAAAgAAACzAHcAAAAAAAgAAAC0AHcAAAAAAAgAAADGAHcAAAAAAAgAAADHAHcAAAAAAAgAAACzAHgAAAAAAAgAAAC0AHgAAAAAAAgAAADGAHgAAAAAAAgAAADHAHgAAAAAAAgAAACzAHkAAAAAAAgAAAC0AHkAAAAAAAgAAADGAHkAAAAAAAgAAADHAHkAAAAAAAgAAACzAHoAAAAAAAgAAAC0AHoAAAAAAAgAAADGAHoAAAAAAAgAAADHAHoAAAAAAAgAAACzAHsAAAAAAAgAAAC0AHsAAAAAAAgAAADGAHsAAAAAAAgAAADHAHsAAAAAAAgAAACzAHwAAAAAAAgAAAC0AHwAAAAAAAgAAADGAHwAAAAAAAgAAADHAHwAAAAAAAgAAACzAH0AAAAAAAgAAAC0AH0AAAAAAAgAAADGAH0AAAAAAAgAAADHAH0AAAAAAAgAAACzAH4AAAAAAAgAAAC0AH4AAAAAAAgAAAC1AH4AAAAAAAgAAAC2AH4AAAAAAAgAAAC3AH4AAAAAAAgAAAC7AH4AAAAAAAgAAAC8AH4AAAAAAAgAAAC9AH4AAAAAAAgAAAC+AH4AAAAAAAgAAAC/AH4AAAAAAAgAAADAAH4AAAAAAAgAAADBAH4AAAAAAAgAAADCAH4AAAAAAAgAAADDAH4AAAAAAAgAAADEAH4AAAAAAAgAAADFAH4AAAAAAAgAAADGAH4AAAAAAAgAAADHAH4AAAAAAAgAAACzAH8AAAAAAAgAAAC0AH8AAAAAAAgAAAC1AH8AAAAAAAgAAAC2AH8AAAAAAAgAAAC3AH8AAAAAAAgAAAC7AH8AAAAAAAgAAAC8AH8AAAAAAAgAAAC9AH8AAAAAAAgAAAC+AH8AAAAAAAgAAAC/AH8AAAAAAAgAAADAAH8AAAAAAAgAAADBAH8AAAAAAAgAAADCAH8AAAAAAAgAAADDAH8AAAAAAAgAAADEAH8AAAAAAAgAAADFAH8AAAAAAAgAAADGAH8AAAAAAAgAAADHAH8AAAAAAAgAAAC1AHsAAAAAAAkAAAC2AHsAAAAAAAkAAAC3AHsAAAAAAAkAAAC1AHgAAAAAAAgAAAC2AHgAAAAAAAgAAAC3AHgAAAAAAAgAAAC6AG8AAAAAAAgAAAC6AG4AAAAAAAgAAAC6AG0AAAAAAAgAAAC6AGwAAAAAAAgAAAC6AGsAAAAAAAgAAAC6AGoAAAAAAAgAAAC6AGkAAAAAAAgAAAC6AGgAAAAAAAgAAAC6AGcAAAAAAAgAAAC6AGYAAAAAAAgAAAC6AGUAAAAAAAgAAAC6AGQAAAAAAAgAAAC5AGQAAAAAAAgAAAC4AGQAAAAAAAgAAAC3AGQAAAAAAAgAAAC3AGUAAAAAAAgAAAC3AGYAAAAAAAgAAAC3AGcAAAAAAAgAAAC3AGgAAAAAAAgAAAC3AGkAAAAAAAgAAAC3AGoAAAAAAAgAAAC3AGsAAAAAAAgAAAC3AGwAAAAAAAgAAAC3AG0AAAAAAAgAAAC3AG4AAAAAAAgAAAC6AH4AAAAAAAgAAAC6AH8AAAAAAAgAAACzAIAAAAAAAAgAAACzAIEAAAAAAAgAAACzAIIAAAAAAAgAAACzAIMAAAAAAAgAAACzAIQAAAAAAAgAAACzAIUAAAAAAAgAAACzAIYAAAAAAAgAAACzAIcAAAAAAAgAAACzAIgAAAAAAAgAAACzAIkAAAAAAAgAAACzAJIAAAAAAAgAAACzAJEAAAAAAAgAAACzAJAAAAAAAAgAAACzAIsAAAAAAAgAAACzAIoAAAAAAAgAAACzAI0AAAAAAAgAAACzAI4AAAAAAAgAAACzAI8AAAAAAAgAAACzAIwAAAAAAAgAAAC6AHgAAAAAAAgAAAC7AHgAAAAAAAgAAAC+AHoAAAAAAAgAAAC/AHoAAAAAAAgAAAC6AHwAAAAAAAgAAAC7AHwAAAAAAAgAAADAAHgAAAAAAAgAAADBAHgAAAAAAAgAAADDAHgAAAAAAAgAAADFAHgAAAAAAAgAAADEAHgAAAAAAAgAAADCAHgAAAAAAAgAAAC/AHcAAAAAAAgAAACzAJMAAAAAAAgAAAC0AJMAAAAAAAgAAAC3AJMAAAAAAAgAAAC4AJMAAAAAAAgAAAC5AJMAAAAAAAgAAAC2AJMAAAAAAAgAAAC1AJMAAAAAAAgAAAC6AIAAAAAAAAgAAAC6AIEAAAAAAAgAAAC6AIIAAAAAAAgAAAC6AIMAAAAAAAgAAAC6AIQAAAAAAAgAAAC6AIUAAAAAAAgAAAC6AIYAAAAAAAgAAAC6AIcAAAAAAAgAAAC6AIgAAAAAAAgAAAC6AIkAAAAAAAgAAAC6AIoAAAAAAAgAAAC6AIsAAAAAAAgAAAC6AIwAAAAAAAgAAAC6AI0AAAAAAAgAAAC6AI4AAAAAAAgAAAC6AI8AAAAAAAgAAAC6AJAAAAAAAAgAAAC6AJEAAAAAAAgAAAC6AJIAAAAAAAgAAAC6AJMAAAAAAAgAAAA=")
+tile_set = ExtResource("5_xa62q")
+
+[node name="FarFront" type="TileMapLayer" parent="TileMap" unique_id=1012130071]
+visibility_layer = 2
+z_index = 2
+use_parent_material = true
+tile_set = ExtResource("5_xa62q")
+
+[node name="Props" type="Node2D" parent="." unique_id=1166243052]
+visibility_layer = 2
+
+[node name="Actors" type="Node2D" parent="." unique_id=2067058648]
+visibility_layer = 2
+
+[node name="Triggers" type="Node2D" parent="." unique_id=384126198]
+visibility_layer = 2
+
+[node name="Spawns" type="Node2D" parent="." unique_id=751148410]
+visibility_layer = 2
+
+[node name="VanishingPoint" type="Area2D" parent="Spawns" unique_id=2052223351 groups=["VanishingPoints"] instance=ExtResource("6_ed54t")]
+visibility_layer = 2
+z_index = 999
+position = Vector2(3008, 1856)
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("8_hvqyn")
+
+[node name="HealthRefill" type="Area2D" parent="Spawns" unique_id=1449282698 groups=["Entities", "PropSpawns"] instance=ExtResource("8_0ukor")]
+visibility_layer = 2
+z_index = 999
+position = Vector2(3104, 2000)
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("10_gpb7k")
+prop_path = "res://src/Prop/HealthRefill.tscn"
+properties = {
+"do_bubble": [false, 1, ""],
+"editor_hidden": [false, 1, ""],
+"id": [&"HealthRefill", 4, ""]
+}
+
+[node name="AmmoRefill" type="Area2D" parent="Spawns" unique_id=408566141 groups=["Entities", "PropSpawns"] instance=ExtResource("8_0ukor")]
+visibility_layer = 2
+z_index = 999
+position = Vector2(3088, 2000)
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("10_gpb7k")
+prop_path = "res://src/Prop/AmmoRefill.tscn"
+properties = {
+"do_bubble": [false, 1, ""],
+"editor_hidden": [null, 1, ""],
+"id": [&"AmmoRefill", 4, ""]
+}
+
+[node name="Stalagtite" type="Area2D" parent="Spawns" unique_id=1747565358 groups=["ActorSpawns", "Entities"] instance=ExtResource("7_btjxg")]
+visibility_layer = 2
+z_index = 999
+position = Vector2(2920, 1944)
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("12_3uwp1")
+actor_path = "res://src/Actor/Enemy/Stalagtite.tscn"
+properties = {
+"base_gravity": [300.0, 3, ""],
+"debug": [true, 1, ""],
+"difficulty": [0, 2, ""],
+"do_bubbles": [true, 1, ""],
+"editor_hidden": [false, 1, ""],
+"id": [&"Stalagtite", 4, ""],
+"land_impulse_curve": [null, 24, ""],
+"speed": [Vector2(150, 350), 5, ""],
+"water_gravity": [150.0, 3, ""]
+}
+
+[node name="Stalagtite1" type="Area2D" parent="Spawns" unique_id=1199277091 groups=["ActorSpawns", "Entities"] instance=ExtResource("7_btjxg")]
+visibility_layer = 2
+z_index = 999
+position = Vector2(2952, 1624)
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("12_3uwp1")
+actor_path = "res://src/Actor/Enemy/Stalagtite.tscn"
+properties = {
+"base_gravity": [300.0, 3, ""],
+"debug": [true, 1, ""],
+"difficulty": [0, 2, ""],
+"do_bubbles": [true, 1, ""],
+"editor_hidden": [false, 1, ""],
+"id": [&"Stalagtite1", 4, ""],
+"land_impulse_curve": [null, 24, ""],
+"speed": [Vector2(150, 350), 5, ""],
+"water_gravity": [150.0, 3, ""]
+}
+
+[node name="Stalagtite2" type="Area2D" parent="Spawns" unique_id=263089941 groups=["ActorSpawns", "Entities"] instance=ExtResource("7_btjxg")]
+visibility_layer = 2
+z_index = 999
+position = Vector2(2920, 1816)
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("12_3uwp1")
+actor_path = "res://src/Actor/Enemy/Stalagtite.tscn"
+properties = {
+"base_gravity": [300.0, 3, ""],
+"debug": [true, 1, ""],
+"difficulty": [2, 2, ""],
+"do_bubbles": [true, 1, ""],
+"editor_hidden": [false, 1, ""],
+"id": [&"Stalagtite2", 4, ""],
+"land_impulse_curve": [null, 24, ""],
+"speed": [Vector2(150, 350), 5, ""],
+"water_gravity": [150.0, 3, ""]
+}
+
+[node name="Stalagtite3" type="Area2D" parent="Spawns" unique_id=164832786 groups=["ActorSpawns", "Entities"] instance=ExtResource("7_btjxg")]
+visibility_layer = 2
+z_index = 999
+position = Vector2(3144, 1816)
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("12_3uwp1")
+actor_path = "res://src/Actor/Enemy/Stalagtite.tscn"
+properties = {
+"base_gravity": [300.0, 3, ""],
+"debug": [true, 1, ""],
+"difficulty": [1, 2, ""],
+"do_bubbles": [true, 1, ""],
+"editor_hidden": [false, 1, ""],
+"id": [&"Stalagtite3", 4, ""],
+"land_impulse_curve": [null, 24, ""],
+"speed": [Vector2(150, 350), 5, ""],
+"water_gravity": [150.0, 3, ""]
+}
+
+[node name="PunchingBag" type="Area2D" parent="Spawns" unique_id=1823354559 groups=["ActorSpawns", "Entities"] instance=ExtResource("7_btjxg")]
+visibility_layer = 2
+z_index = 999
+position = Vector2(2920, 1920)
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("12_3uwp1")
+actor_path = "res://src/Actor/Enemy/PunchingBag.tscn"
+properties = {
+"base_gravity": [300.0, 3, ""],
+"debug": [false, 1, ""],
+"do_bubbles": [false, 1, ""],
+"editor_hidden": [false, 1, ""],
+"id": [&"PunchingBag", 4, ""],
+"speed": [Vector2(150, 350), 5, ""],
+"water_gravity": [150.0, 3, ""]
+}
+
+[node name="Golem" type="Area2D" parent="Spawns" unique_id=1301241894 groups=["ActorSpawns", "Entities"] instance=ExtResource("7_btjxg")]
+visibility_layer = 2
+z_index = 999
+position = Vector2(3136, 1920)
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("12_3uwp1")
+actor_path = "res://src/Actor/Enemy/Golem.tscn"
+properties = {
+"base_gravity": [300.0, 3, ""],
+"charge_impulse_curve": [SubResource("Curve_wvikc"), 24, ""],
+"debug": [true, 1, ""],
+"difficulty": [0, 2, ""],
+"do_bubbles": [false, 1, ""],
+"editor_hidden": [false, 1, ""],
+"id": [&"Golem", 4, ""],
+"speed": [Vector2(150, 350), 5, ""],
+"wallslam_time": [1.2, 3, ""],
+"water_gravity": [150.0, 3, ""]
+}
+
+[node name="VUVector" type="Area2D" parent="Spawns/Golem" unique_id=872564127 groups=["Entities", "VUVectors", "VisualUtilities"] instance=ExtResource("13_gpb7k")]
+visibility_layer = 2
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("14_3uwp1")
+tag_name = "move_dir"
+direction = Vector2(-1, -8.742278e-08)
+snap_degrees = 180.0
+
+[node name="PunchingBag1" type="Area2D" parent="Spawns" unique_id=1347638479 groups=["ActorSpawns", "Entities"] instance=ExtResource("7_btjxg")]
+visibility_layer = 2
+z_index = 999
+position = Vector2(2968, 2352)
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("12_3uwp1")
+actor_path = "res://src/Actor/Enemy/PunchingBag.tscn"
+properties = {
+"base_gravity": [300.0, 3, ""],
+"debug": [false, 1, ""],
+"do_bubbles": [false, 1, ""],
+"editor_hidden": [false, 1, ""],
+"id": [&"PunchingBag1", 4, ""],
+"speed": [Vector2(150, 350), 5, ""],
+"water_gravity": [150.0, 3, ""]
+}
+
+[node name="PunchingBag2" type="Area2D" parent="Spawns" unique_id=657624279 groups=["ActorSpawns", "Entities"] instance=ExtResource("7_btjxg")]
+visibility_layer = 2
+z_index = 999
+position = Vector2(2952, 2352)
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("12_3uwp1")
+actor_path = "res://src/Actor/Enemy/PunchingBag.tscn"
+properties = {
+"base_gravity": [300.0, 3, ""],
+"debug": [false, 1, ""],
+"do_bubbles": [false, 1, ""],
+"editor_hidden": [false, 1, ""],
+"id": [&"PunchingBag2", 4, ""],
+"speed": [Vector2(150, 350), 5, ""],
+"water_gravity": [150.0, 3, ""]
+}
+
+[node name="Waypoints" type="Node2D" parent="." unique_id=561693217]
+visibility_layer = 2
+
+[node name="Notes" type="Node2D" parent="." unique_id=1325264801]
+visibility_layer = 2
+
+[node name="SpawnPoint" type="Area2D" parent="." unique_id=1710023778 groups=["SpawnPoints"] instance=ExtResource("9_h0eb8")]
+visibility_layer = 2
+position = Vector2(3160, 2016)
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("14_adi07")
+
+[connection signal="body_entered" from="Triggers/KillBoundaryU" to="Triggers/KillBoundaryU" method="_on_body_entered"]
+[connection signal="body_entered" from="Triggers/KillBoundaryD" to="Triggers/KillBoundaryD" method="_on_body_entered"]
+[connection signal="body_entered" from="Triggers/KillBoundaryL" to="Triggers/KillBoundaryL" method="_on_body_entered"]
+[connection signal="body_entered" from="Triggers/KillBoundaryR" to="Triggers/KillBoundaryR" method="_on_body_entered"]
+[connection signal="input_event" from="Spawns/HealthRefill" to="Spawns/HealthRefill" method="_on_input_event"]
+[connection signal="input_event" from="Spawns/AmmoRefill" to="Spawns/AmmoRefill" method="_on_input_event"]
+[connection signal="input_event" from="Spawns/Stalagtite" to="Spawns/Stalagtite" method="_on_input_event"]
+[connection signal="input_event" from="Spawns/Stalagtite1" to="Spawns/Stalagtite1" method="_on_input_event"]
+[connection signal="input_event" from="Spawns/Stalagtite2" to="Spawns/Stalagtite2" method="_on_input_event"]
+[connection signal="input_event" from="Spawns/Stalagtite3" to="Spawns/Stalagtite3" method="_on_input_event"]
+[connection signal="input_event" from="Spawns/PunchingBag" to="Spawns/PunchingBag" method="_on_input_event"]
+[connection signal="input_event" from="Spawns/Golem" to="Spawns/Golem" method="_on_input_event"]
+[connection signal="input_event" from="Spawns/PunchingBag1" to="Spawns/PunchingBag1" method="_on_input_event"]
+[connection signal="input_event" from="Spawns/PunchingBag2" to="Spawns/PunchingBag2" method="_on_input_event"]

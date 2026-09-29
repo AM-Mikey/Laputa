@@ -1,0 +1,625 @@
+[gd_scene format=4]
+
+[ext_resource type="Script" path="res://src/Level/Level.gd" id="1_pe4vx"]
+[ext_resource type="PackedScene" path="res://src/Background/LevelLimiter.tscn" id="2_ctson"]
+[ext_resource type="Script" path="res://src/Background/LevelLimiter.gd" id="3_03yqw"]
+[ext_resource type="Resource" path="res://src/Background/iedge.tres" id="3_d7lhx"]
+[ext_resource type="Texture2D" path="res://assets/Background/IslandEdge.png" id="4_03yqw"]
+[ext_resource type="TileSet" path="res://src/Tile/Debug.tres" id="5_t778v"]
+[ext_resource type="PackedScene" path="res://src/Editor/VanishingPoint.tscn" id="6_fvifv"]
+[ext_resource type="PackedScene" path="res://src/Editor/Spawn/PropSpawn.tscn" id="8_1supn"]
+[ext_resource type="Script" path="res://src/Editor/VanishingPoint.gd" id="8_t778v"]
+[ext_resource type="PackedScene" path="res://src/Editor/SpawnPoint.tscn" id="9_t0p2q"]
+[ext_resource type="Script" path="res://src/Editor/Spawn/PropSpawn.gd" id="10_fvifv"]
+[ext_resource type="PackedScene" path="res://src/Editor/Spawn/ActorSpawn.tscn" id="11_1supn"]
+[ext_resource type="Script" path="res://src/Editor/SpawnPoint.gd" id="12_mdtcc"]
+[ext_resource type="Script" path="res://src/Editor/Spawn/ActorSpawn.gd" id="12_t0p2q"]
+[ext_resource type="PackedScene" path="res://src/Editor/VisualUtility/VUVector.tscn" id="13_nxhhp"]
+[ext_resource type="Script" path="res://src/Editor/VisualUtility/VUVector.gd" id="14_qmepk"]
+
+[sub_resource type="Gradient" id="Gradient_e2m0l"]
+offsets = PackedFloat32Array(0, 0.25, 0.5, 0.75, 1)
+colors = PackedColorArray(1, 0.47843137, 0, 1, 0.07450981, 0.4, 0.52156866, 1, 0.84313726, 0, 0.30588236, 1, 0.07450981, 0.4, 0.52156866, 1, 1, 0.47843137, 0, 1)
+metadata/_snap_enabled = true
+metadata/_snap_count = 12
+
+[node name="EnBeetleCrawlerTesting" type="Node2D" unique_id=1952135705]
+visibility_layer = 2
+script = ExtResource("1_pe4vx")
+level_name = "EnBeetleCrawlerTesting"
+music = "train"
+dialog_json = "res://src/Dialog/Village.json"
+controller_color_gradient = SubResource("Gradient_e2m0l")
+
+[node name="LevelLimiter" type="MarginContainer" parent="." unique_id=1011068996 instance=ExtResource("2_ctson")]
+visibility_layer = 2
+offset_left = 1599.0
+offset_top = 1600.0
+offset_right = 4431.0
+offset_bottom = 2496.0
+mouse_filter = 2
+script = ExtResource("3_03yqw")
+background_resource = ExtResource("3_d7lhx")
+texture = ExtResource("4_03yqw")
+layers = 5
+layer_scales = {
+0: Vector2(0, 0),
+1: Vector2(0.4, 0.4),
+2: Vector2(0.7, 0.7),
+3: Vector2(1, 1),
+4: Vector2(0.9, 0.9)
+}
+layer_height_offsets = {
+0: 0.0,
+1: 0.0,
+2: 0.0,
+3: 0.0,
+4: 6.0
+}
+tile_mode = 1
+back_tile_mode = 1
+
+[node name="TileMap" type="Node2D" parent="." unique_id=1252639869]
+visibility_layer = 2
+z_index = 1
+
+[node name="FarBack" type="TileMapLayer" parent="TileMap" unique_id=270500202]
+visibility_layer = 2
+z_index = -2
+use_parent_material = true
+tile_map_data = PackedByteArray("AAC0AHEAAAAAAAAAAAC0AHIAAAAAAAAAAAC2AHYAAAAAAAAAAAC2AHUAAAAAAAAAAAA=")
+tile_set = ExtResource("5_t778v")
+
+[node name="Back" type="TileMapLayer" parent="TileMap" unique_id=505398842]
+visibility_layer = 2
+z_index = -1
+use_parent_material = true
+tile_map_data = PackedByteArray("AADEAH0AAAAEAAQAAAA=")
+tile_set = ExtResource("5_t778v")
+
+[node name="Front" type="TileMapLayer" parent="TileMap" unique_id=1829366578]
+visibility_layer = 2
+z_index = 1
+use_parent_material = true
+tile_map_data = PackedByteArray("AACzAG8AAAAAAAgAAAC0AG8AAAAAAAgAAAC1AG8AAAAAAAgAAAC2AG8AAAAAAAgAAAC3AG8AAAAAAAgAAAC4AG8AAAAAAAgAAAC5AG8AAAAAAAgAAAC6AG8AAAAAAAgAAAC7AG8AAAAAAAgAAAC8AG8AAAAAAAgAAAC9AG8AAAAAAAgAAAC+AG8AAAAAAAgAAAC/AG8AAAAAAAgAAADAAG8AAAAAAAgAAADBAG8AAAAAAAgAAADCAG8AAAAAAAgAAADDAG8AAAAAAAgAAADEAG8AAAAAAAgAAADFAG8AAAAAAAgAAADGAG8AAAAAAAgAAADHAG8AAAAAAAgAAACzAHAAAAAAAAgAAAC0AHAAAAAAAAgAAAC1AHAAAAAAAAgAAAC2AHAAAAAAAAgAAAC3AHAAAAAAAAgAAAC4AHAAAAAAAAgAAAC5AHAAAAAAAAgAAAC6AHAAAAAAAAgAAAC7AHAAAAAAAAgAAAC8AHAAAAAAAAgAAAC9AHAAAAAAAAgAAAC+AHAAAAAAAAgAAAC/AHAAAAAAAAgAAADAAHAAAAAAAAgAAADBAHAAAAAAAAgAAADCAHAAAAAAAAgAAADDAHAAAAAAAAgAAADEAHAAAAAAAAgAAADFAHAAAAAAAAgAAADGAHAAAAAAAAgAAADHAHAAAAAAAAgAAACzAHEAAAAAAAgAAAC0AHEAAAAAAAgAAADGAHEAAAAAAAgAAADHAHEAAAAAAAgAAACzAHIAAAAAAAgAAAC0AHIAAAAAAAgAAADGAHIAAAAAAAgAAADHAHIAAAAAAAgAAACzAHMAAAAAAAgAAAC0AHMAAAAAAAgAAADGAHMAAAAAAAgAAADHAHMAAAAAAAgAAACzAHQAAAAAAAgAAAC0AHQAAAAAAAgAAADGAHQAAAAAAAgAAADHAHQAAAAAAAgAAACzAHUAAAAAAAgAAAC0AHUAAAAAAAgAAADGAHUAAAAAAAgAAADHAHUAAAAAAAgAAACzAHYAAAAAAAgAAAC0AHYAAAAAAAgAAADGAHYAAAAAAAgAAADHAHYAAAAAAAgAAACzAHcAAAAAAAgAAAC0AHcAAAAAAAgAAADGAHcAAAAAAAgAAADHAHcAAAAAAAgAAACzAHgAAAAAAAgAAAC0AHgAAAAAAAgAAADGAHgAAAAAAAgAAADHAHgAAAAAAAgAAACzAHkAAAAAAAgAAAC0AHkAAAAAAAgAAADGAHkAAAAAAAgAAADHAHkAAAAAAAgAAACzAHoAAAAAAAgAAAC0AHoAAAAAAAgAAADGAHoAAAAAAAgAAADHAHoAAAAAAAgAAACzAHsAAAAAAAgAAAC0AHsAAAAAAAgAAADGAHsAAAAAAAgAAADHAHsAAAAAAAgAAACzAHwAAAAAAAgAAAC0AHwAAAAAAAgAAADGAHwAAAAAAAgAAADHAHwAAAAAAAgAAACzAH0AAAAAAAgAAAC0AH0AAAAAAAgAAADGAH0AAAAAAAgAAADHAH0AAAAAAAgAAACzAH4AAAAAAAgAAAC0AH4AAAAAAAgAAAC1AH4AAAAAAAgAAAC2AH4AAAAAAAgAAAC3AH4AAAAAAAgAAAC4AH4AAAAAAAgAAAC5AH4AAAAAAAgAAAC6AH4AAAAAAAgAAAC7AH4AAAAAAAgAAAC8AH4AAAAAAAgAAAC9AH4AAAAAAAgAAAC+AH4AAAAAAAgAAAC/AH4AAAAAAAgAAADAAH4AAAAAAAgAAADBAH4AAAAAAAgAAADCAH4AAAAAAAgAAADDAH4AAAAAAAgAAADEAH4AAAAAAAgAAADFAH4AAAAAAAgAAADGAH4AAAAAAAgAAADHAH4AAAAAAAgAAACzAH8AAAAAAAgAAAC0AH8AAAAAAAgAAAC1AH8AAAAAAAgAAAC2AH8AAAAAAAgAAAC3AH8AAAAAAAgAAAC4AH8AAAAAAAgAAAC5AH8AAAAAAAgAAAC6AH8AAAAAAAgAAAC7AH8AAAAAAAgAAAC8AH8AAAAAAAgAAAC9AH8AAAAAAAgAAAC+AH8AAAAAAAgAAAC/AH8AAAAAAAgAAADAAH8AAAAAAAgAAADBAH8AAAAAAAgAAADCAH8AAAAAAAgAAADDAH8AAAAAAAgAAADEAH8AAAAAAAgAAADFAH8AAAAAAAgAAADGAH8AAAAAAAgAAADHAH8AAAAAAAgAAAC2AHsAAAAAAAgAAAC2AHoAAAAAAAgAAAC2AHkAAAAAAAgAAAC3AHkAAAAAAAgAAAC4AHkAAAAAAAgAAAC4AHoAAAAAAAgAAAC3AHsAAAAAAAkAAAC4AHsAAAAAAAgAAAC6AHsAAAAAAAgAAAC6AHoAAAAAAAgAAAC6AHkAAAAAAAgAAAC7AHkAAAAAAAgAAAC8AHkAAAAAAAgAAAC8AHoAAAAAAAgAAAC8AHsAAAAAAAgAAAC7AHsAAAAAAAoAAAC/AHsAAAAAAAgAAAC+AHsAAAAAAAoAAADAAHsAAAAAAAoAAADEAHoAAAACAAkAAADCAHoAAAADAAgAAADDAHsAAAAGAAoAAADDAHkAAAABAAoAAAC2AHcAAAAAAAoAAADEAHYAAAAAAAgAAADEAHUAAAAAAAgAAADEAHcAAAAAAAoAAADEAHQAAAABAAoAAAC2AHYAAAAAAAgAAAC2AHUAAAAAAAgAAAC2AHQAAAABAAoAAAC6AHYAAAAAAAkAAAC7AHYAAAAAAAkAAAC8AHYAAAAAAAkAAAC9AHYAAAAAAAkAAAC+AHYAAAAAAAkAAAC/AHYAAAAAAAkAAADAAHYAAAAAAAkAAAC6AHcAAAAAAAkAAAC9AHcAAAAAAAkAAAC+AHcAAAAAAAkAAAC/AHcAAAAAAAkAAADAAHcAAAAAAAkAAAC8AHcAAAAAAAkAAAC7AHcAAAAAAAkAAAC6AHUAAAAAAAkAAAC7AHUAAAAAAAkAAAC8AHUAAAAAAAkAAAC+AHUAAAAAAAkAAAC/AHUAAAAAAAkAAADAAHUAAAAAAAkAAAC9AHUAAAAAAAkAAAC4AHEAAAAAAAgAAAC4AHIAAAAAAAgAAAC4AHMAAAAAAAgAAADCAHEAAAAAAAgAAADCAHIAAAAAAAgAAADCAHMAAAAAAAgAAADBAHUAAAAAAAkAAADBAHYAAAAAAAkAAADBAHcAAAAAAAkAAAC5AHUAAAAAAAkAAAC5AHYAAAAAAAkAAAC5AHcAAAAAAAkAAAC5AHMAAAAAAAkAAAC6AHMAAAAAAAkAAAC7AHMAAAAAAAkAAAC8AHMAAAAAAAkAAAC9AHMAAAAAAAkAAAC+AHMAAAAAAAkAAAC/AHMAAAAAAAkAAADAAHMAAAAAAAkAAADBAHMAAAAAAAkAAAA=")
+tile_set = ExtResource("5_t778v")
+
+[node name="FarFront" type="TileMapLayer" parent="TileMap" unique_id=1012130071]
+visibility_layer = 2
+z_index = 2
+use_parent_material = true
+tile_set = ExtResource("5_t778v")
+
+[node name="Props" type="Node2D" parent="." unique_id=1166243052]
+visibility_layer = 2
+
+[node name="Actors" type="Node2D" parent="." unique_id=2067058648]
+visibility_layer = 2
+
+[node name="Triggers" type="Node2D" parent="." unique_id=384126198]
+visibility_layer = 2
+
+[node name="Spawns" type="Node2D" parent="." unique_id=751148410]
+visibility_layer = 2
+
+[node name="VanishingPoint" type="Area2D" parent="Spawns" unique_id=2052223351 groups=["VanishingPoints"] instance=ExtResource("6_fvifv")]
+visibility_layer = 2
+z_index = 999
+position = Vector2(3008, 1856)
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("8_t778v")
+
+[node name="HealthRefill" type="Area2D" parent="Spawns" unique_id=1449282698 groups=["Entities", "PropSpawns"] instance=ExtResource("8_1supn")]
+visibility_layer = 2
+z_index = 999
+position = Vector2(3104, 2000)
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("10_fvifv")
+prop_path = "res://src/Prop/HealthRefill.tscn"
+properties = {
+"do_bubble": [false, 1, ""],
+"editor_hidden": [false, 1, ""],
+"id": [&"HealthRefill", 4, ""]
+}
+
+[node name="AmmoRefill" type="Area2D" parent="Spawns" unique_id=408566141 groups=["Entities", "PropSpawns"] instance=ExtResource("8_1supn")]
+visibility_layer = 2
+z_index = 999
+position = Vector2(3088, 2000)
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("10_fvifv")
+prop_path = "res://src/Prop/AmmoRefill.tscn"
+properties = {
+"do_bubble": [false, 1, ""],
+"editor_hidden": [null, 1, ""],
+"id": [&"AmmoRefill", 4, ""]
+}
+
+[node name="BeetleCrawler" type="Area2D" parent="Spawns" unique_id=1199277091 groups=["ActorSpawns", "Entities"] instance=ExtResource("11_1supn")]
+visibility_layer = 2
+z_index = 999
+position = Vector2(3000, 1968)
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("12_t0p2q")
+actor_path = "res://src/Actor/Enemy/BeetleCrawler.tscn"
+properties = {
+"base_gravity": [300.0, 3, ""],
+"debug": [true, 1, ""],
+"difficulty": [0, 2, ""],
+"do_bubbles": [true, 1, ""],
+"editor_hidden": [false, 1, ""],
+"id": [&"BeetleCrawler", 4, ""],
+"speed": [Vector2(150, 150), 5, ""],
+"water_gravity": [150.0, 3, ""]
+}
+
+[node name="FlyVector" type="Area2D" parent="Spawns/BeetleCrawler" unique_id=872564127 groups=["Entities", "VUVectors", "VisualUtilities"] instance=ExtResource("13_nxhhp")]
+visibility_layer = 2
+position = Vector2(0, -8)
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("14_qmepk")
+tag_name = "fly"
+direction = Vector2(-4.371139e-08, -1)
+movement_locked = true
+
+[node name="CrawlVector" type="Area2D" parent="Spawns/BeetleCrawler" unique_id=2126548652 groups=["Entities", "VUVectors", "VisualUtilities"] instance=ExtResource("13_nxhhp")]
+visibility_layer = 2
+position = Vector2(0, -8)
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("14_qmepk")
+arrow_length = 24.0
+tag_name = "crawl"
+direction = Vector2(-1, -8.742278e-08)
+snap_degrees = 90.0
+movement_locked = true
+color = Color(8.061901e-07, 0.41569918, 0.11087646, 1)
+
+[node name="BeetleCrawler1" type="Area2D" parent="Spawns" unique_id=1663777614 groups=["ActorSpawns", "Entities"] instance=ExtResource("11_1supn")]
+visibility_layer = 2
+z_index = 999
+position = Vector2(3128, 1968)
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("12_t0p2q")
+actor_path = "res://src/Actor/Enemy/BeetleCrawler.tscn"
+properties = {
+"base_gravity": [300.0, 3, ""],
+"debug": [true, 1, ""],
+"difficulty": [0, 2, ""],
+"do_bubbles": [true, 1, ""],
+"editor_hidden": [false, 1, ""],
+"id": [&"BeetleCrawler3", 4, ""],
+"speed": [Vector2(150, 150), 5, ""],
+"water_gravity": [150.0, 3, ""]
+}
+
+[node name="FlyVector" type="Area2D" parent="Spawns/BeetleCrawler1" unique_id=2010720623 groups=["Entities", "VUVectors", "VisualUtilities"] instance=ExtResource("13_nxhhp")]
+visibility_layer = 2
+position = Vector2(0, -8)
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("14_qmepk")
+tag_name = "fly"
+direction = Vector2(-4.371139e-08, -1)
+movement_locked = true
+
+[node name="CrawlVector" type="Area2D" parent="Spawns/BeetleCrawler1" unique_id=1846341777 groups=["Entities", "VUVectors", "VisualUtilities"] instance=ExtResource("13_nxhhp")]
+visibility_layer = 2
+position = Vector2(0, -8)
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("14_qmepk")
+arrow_length = 24.0
+tag_name = "crawl"
+snap_degrees = 90.0
+movement_locked = true
+color = Color(8.061901e-07, 0.41569918, 0.11087646, 1)
+
+[node name="BeetleCrawler2" type="Area2D" parent="Spawns" unique_id=1453548838 groups=["ActorSpawns", "Entities"] instance=ExtResource("11_1supn")]
+visibility_layer = 2
+z_index = 999
+position = Vector2(2928, 1880)
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("12_t0p2q")
+actor_path = "res://src/Actor/Enemy/BeetleCrawler.tscn"
+properties = {
+"base_gravity": [300.0, 3, ""],
+"debug": [true, 1, ""],
+"difficulty": [1, 2, ""],
+"do_bubbles": [true, 1, ""],
+"editor_hidden": [false, 1, ""],
+"id": [&"BeetleCrawler4", 4, ""],
+"speed": [Vector2(150, 150), 5, ""],
+"water_gravity": [150.0, 3, ""]
+}
+
+[node name="FlyVector" type="Area2D" parent="Spawns/BeetleCrawler2" unique_id=1491182494 groups=["Entities", "VUVectors", "VisualUtilities"] instance=ExtResource("13_nxhhp")]
+visibility_layer = 2
+position = Vector2(0, -8)
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("14_qmepk")
+tag_name = "fly"
+movement_locked = true
+
+[node name="CrawlVector" type="Area2D" parent="Spawns/BeetleCrawler2" unique_id=1520172045 groups=["Entities", "VUVectors", "VisualUtilities"] instance=ExtResource("13_nxhhp")]
+visibility_layer = 2
+position = Vector2(0, -8)
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("14_qmepk")
+arrow_length = 24.0
+tag_name = "crawl"
+direction = Vector2(-4.371139e-08, 1)
+snap_degrees = 90.0
+movement_locked = true
+color = Color(8.061901e-07, 0.41569918, 0.11087646, 1)
+
+[node name="BeetleCrawler3" type="Area2D" parent="Spawns" unique_id=1228755015 groups=["ActorSpawns", "Entities"] instance=ExtResource("11_1supn")]
+visibility_layer = 2
+z_index = 999
+position = Vector2(3136, 1904)
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("12_t0p2q")
+actor_path = "res://src/Actor/Enemy/BeetleCrawler.tscn"
+properties = {
+"base_gravity": [300.0, 3, ""],
+"debug": [true, 1, ""],
+"difficulty": [1, 2, ""],
+"do_bubbles": [true, 1, ""],
+"editor_hidden": [false, 1, ""],
+"id": [&"BeetleCrawler5", 4, ""],
+"speed": [Vector2(150, 150), 5, ""],
+"water_gravity": [150.0, 3, ""]
+}
+
+[node name="FlyVector" type="Area2D" parent="Spawns/BeetleCrawler3" unique_id=1595850253 groups=["Entities", "VUVectors", "VisualUtilities"] instance=ExtResource("13_nxhhp")]
+visibility_layer = 2
+position = Vector2(0, -8)
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("14_qmepk")
+tag_name = "fly"
+direction = Vector2(-1, -8.742278e-08)
+movement_locked = true
+
+[node name="CrawlVector" type="Area2D" parent="Spawns/BeetleCrawler3" unique_id=477184052 groups=["Entities", "VUVectors", "VisualUtilities"] instance=ExtResource("13_nxhhp")]
+visibility_layer = 2
+position = Vector2(0, -8)
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("14_qmepk")
+arrow_length = 24.0
+tag_name = "crawl"
+direction = Vector2(-4.371139e-08, -1)
+snap_degrees = 90.0
+movement_locked = true
+color = Color(8.061901e-07, 0.41569918, 0.11087646, 1)
+
+[node name="BeetleCrawler4" type="Area2D" parent="Spawns" unique_id=658052935 groups=["ActorSpawns", "Entities"] instance=ExtResource("11_1supn")]
+visibility_layer = 2
+z_index = 999
+position = Vector2(3064, 1968)
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("12_t0p2q")
+actor_path = "res://src/Actor/Enemy/BeetleCrawler.tscn"
+properties = {
+"base_gravity": [300.0, 3, ""],
+"debug": [true, 1, ""],
+"difficulty": [0, 2, ""],
+"do_bubbles": [true, 1, ""],
+"editor_hidden": [false, 1, ""],
+"id": [&"BeetleCrawler6", 4, ""],
+"speed": [Vector2(150, 150), 5, ""],
+"water_gravity": [150.0, 3, ""]
+}
+
+[node name="FlyVector" type="Area2D" parent="Spawns/BeetleCrawler4" unique_id=1739300099 groups=["Entities", "VUVectors", "VisualUtilities"] instance=ExtResource("13_nxhhp")]
+visibility_layer = 2
+position = Vector2(0, -8)
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("14_qmepk")
+tag_name = "fly"
+direction = Vector2(-4.371139e-08, -1)
+movement_locked = true
+
+[node name="CrawlVector" type="Area2D" parent="Spawns/BeetleCrawler4" unique_id=1747691275 groups=["Entities", "VUVectors", "VisualUtilities"] instance=ExtResource("13_nxhhp")]
+visibility_layer = 2
+position = Vector2(0, -8)
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("14_qmepk")
+arrow_length = 24.0
+tag_name = "crawl"
+snap_degrees = 90.0
+movement_locked = true
+color = Color(8.061901e-07, 0.41569918, 0.11087646, 1)
+
+[node name="BeetleCrawler5" type="Area2D" parent="Spawns" unique_id=720065508 groups=["ActorSpawns", "Entities"] instance=ExtResource("11_1supn")]
+visibility_layer = 2
+z_index = 999
+position = Vector2(2936, 1960)
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("12_t0p2q")
+actor_path = "res://src/Actor/Enemy/BeetleCrawler.tscn"
+properties = {
+"base_gravity": [300.0, 3, ""],
+"debug": [true, 1, ""],
+"difficulty": [0, 2, ""],
+"do_bubbles": [true, 1, ""],
+"editor_hidden": [false, 1, ""],
+"id": [&"BeetleCrawler7", 4, ""],
+"speed": [Vector2(150, 150), 5, ""],
+"water_gravity": [150.0, 3, ""]
+}
+
+[node name="FlyVector" type="Area2D" parent="Spawns/BeetleCrawler5" unique_id=1499477785 groups=["Entities", "VUVectors", "VisualUtilities"] instance=ExtResource("13_nxhhp")]
+visibility_layer = 2
+position = Vector2(0, -8)
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("14_qmepk")
+tag_name = "fly"
+direction = Vector2(-4.371139e-08, 1)
+movement_locked = true
+
+[node name="CrawlVector" type="Area2D" parent="Spawns/BeetleCrawler5" unique_id=1788028364 groups=["Entities", "VUVectors", "VisualUtilities"] instance=ExtResource("13_nxhhp")]
+visibility_layer = 2
+position = Vector2(0, -8)
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("14_qmepk")
+arrow_length = 24.0
+tag_name = "crawl"
+snap_degrees = 90.0
+movement_locked = true
+color = Color(8.061901e-07, 0.41569918, 0.11087646, 1)
+
+[node name="BeetleCrawler6" type="Area2D" parent="Spawns" unique_id=487640672 groups=["ActorSpawns", "Entities"] instance=ExtResource("11_1supn")]
+visibility_layer = 2
+z_index = 999
+position = Vector2(3032, 1840)
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("12_t0p2q")
+actor_path = "res://src/Actor/Enemy/BeetleCrawler.tscn"
+properties = {
+"base_gravity": [300.0, 3, ""],
+"debug": [true, 1, ""],
+"difficulty": [0, 2, ""],
+"do_bubbles": [true, 1, ""],
+"editor_hidden": [false, 1, ""],
+"id": [&"BeetleCrawler6", 4, ""],
+"speed": [Vector2(150, 150), 5, ""],
+"water_gravity": [150.0, 3, ""]
+}
+
+[node name="FlyVector" type="Area2D" parent="Spawns/BeetleCrawler6" unique_id=1146230843 groups=["Entities", "VUVectors", "VisualUtilities"] instance=ExtResource("13_nxhhp")]
+visibility_layer = 2
+position = Vector2(0, -8)
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("14_qmepk")
+tag_name = "fly"
+direction = Vector2(-4.371139e-08, -1)
+movement_locked = true
+
+[node name="CrawlVector" type="Area2D" parent="Spawns/BeetleCrawler6" unique_id=1843642018 groups=["Entities", "VUVectors", "VisualUtilities"] instance=ExtResource("13_nxhhp")]
+visibility_layer = 2
+position = Vector2(0, -8)
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("14_qmepk")
+arrow_length = 24.0
+tag_name = "crawl"
+direction = Vector2(-1, -8.742278e-08)
+snap_degrees = 90.0
+movement_locked = true
+color = Color(8.061901e-07, 0.41569918, 0.11087646, 1)
+
+[node name="BeetleCrawler7" type="Area2D" parent="Spawns" unique_id=1946042109 groups=["ActorSpawns", "Entities"] instance=ExtResource("11_1supn")]
+visibility_layer = 2
+z_index = 999
+position = Vector2(2984, 1816)
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("12_t0p2q")
+actor_path = "res://src/Actor/Enemy/BeetleCrawler.tscn"
+properties = {
+"base_gravity": [300.0, 3, ""],
+"debug": [true, 1, ""],
+"difficulty": [0, 2, ""],
+"do_bubbles": [true, 1, ""],
+"editor_hidden": [false, 1, ""],
+"id": [&"BeetleCrawler7", 4, ""],
+"speed": [Vector2(150, 150), 5, ""],
+"water_gravity": [150.0, 3, ""]
+}
+
+[node name="FlyVector" type="Area2D" parent="Spawns/BeetleCrawler7" unique_id=1964556953 groups=["Entities", "VUVectors", "VisualUtilities"] instance=ExtResource("13_nxhhp")]
+visibility_layer = 2
+position = Vector2(0, -8)
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("14_qmepk")
+tag_name = "fly"
+direction = Vector2(-4.371139e-08, 1)
+movement_locked = true
+
+[node name="CrawlVector" type="Area2D" parent="Spawns/BeetleCrawler7" unique_id=511509966 groups=["Entities", "VUVectors", "VisualUtilities"] instance=ExtResource("13_nxhhp")]
+visibility_layer = 2
+position = Vector2(0, -8)
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("14_qmepk")
+arrow_length = 24.0
+tag_name = "crawl"
+snap_degrees = 90.0
+movement_locked = true
+color = Color(8.061901e-07, 0.41569918, 0.11087646, 1)
+
+[node name="BeetleCrawler8" type="Area2D" parent="Spawns" unique_id=1528934368 groups=["ActorSpawns", "Entities"] instance=ExtResource("11_1supn")]
+visibility_layer = 2
+z_index = 999
+position = Vector2(3104, 1824)
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("12_t0p2q")
+actor_path = "res://src/Actor/Enemy/BeetleCrawler.tscn"
+properties = {
+"base_gravity": [300.0, 3, ""],
+"debug": [true, 1, ""],
+"difficulty": [0, 2, ""],
+"do_bubbles": [true, 1, ""],
+"editor_hidden": [false, 1, ""],
+"id": [&"BeetleCrawler8", 4, ""],
+"speed": [Vector2(150, 150), 5, ""],
+"water_gravity": [150.0, 3, ""]
+}
+
+[node name="FlyVector" type="Area2D" parent="Spawns/BeetleCrawler8" unique_id=30853691 groups=["Entities", "VUVectors", "VisualUtilities"] instance=ExtResource("13_nxhhp")]
+visibility_layer = 2
+position = Vector2(0, -8)
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("14_qmepk")
+tag_name = "fly"
+direction = Vector2(-1, -8.742278e-08)
+movement_locked = true
+
+[node name="CrawlVector" type="Area2D" parent="Spawns/BeetleCrawler8" unique_id=1606159469 groups=["Entities", "VUVectors", "VisualUtilities"] instance=ExtResource("13_nxhhp")]
+visibility_layer = 2
+position = Vector2(0, -8)
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("14_qmepk")
+arrow_length = 24.0
+tag_name = "crawl"
+direction = Vector2(-4.371139e-08, 1)
+snap_degrees = 90.0
+movement_locked = true
+color = Color(8.061901e-07, 0.41569918, 0.11087646, 1)
+
+[node name="BeetleCrawler9" type="Area2D" parent="Spawns" unique_id=743671020 groups=["ActorSpawns", "Entities"] instance=ExtResource("11_1supn")]
+visibility_layer = 2
+z_index = 999
+position = Vector2(2960, 1840)
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("12_t0p2q")
+actor_path = "res://src/Actor/Enemy/BeetleCrawler.tscn"
+properties = {
+"base_gravity": [300.0, 3, ""],
+"debug": [true, 1, ""],
+"difficulty": [0, 2, ""],
+"do_bubbles": [true, 1, ""],
+"editor_hidden": [false, 1, ""],
+"id": [&"BeetleCrawler9", 4, ""],
+"speed": [Vector2(150, 150), 5, ""],
+"water_gravity": [150.0, 3, ""]
+}
+
+[node name="FlyVector" type="Area2D" parent="Spawns/BeetleCrawler9" unique_id=425742480 groups=["Entities", "VUVectors", "VisualUtilities"] instance=ExtResource("13_nxhhp")]
+visibility_layer = 2
+position = Vector2(0, -8)
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("14_qmepk")
+tag_name = "fly"
+direction = Vector2(-4.371139e-08, -1)
+movement_locked = true
+
+[node name="CrawlVector" type="Area2D" parent="Spawns/BeetleCrawler9" unique_id=666775107 groups=["Entities", "VUVectors", "VisualUtilities"] instance=ExtResource("13_nxhhp")]
+visibility_layer = 2
+position = Vector2(0, -8)
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("14_qmepk")
+arrow_length = 24.0
+tag_name = "crawl"
+snap_degrees = 90.0
+movement_locked = true
+color = Color(8.061901e-07, 0.41569918, 0.11087646, 1)
+
+[node name="BeetleCrawler10" type="Area2D" parent="Spawns" unique_id=609048934 groups=["ActorSpawns", "Entities"] instance=ExtResource("11_1supn")]
+visibility_layer = 2
+z_index = 999
+position = Vector2(3080, 1840)
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("12_t0p2q")
+actor_path = "res://src/Actor/Enemy/BeetleCrawler.tscn"
+properties = {
+"base_gravity": [300.0, 3, ""],
+"debug": [true, 1, ""],
+"difficulty": [0, 2, ""],
+"do_bubbles": [true, 1, ""],
+"editor_hidden": [false, 1, ""],
+"id": [&"BeetleCrawler10", 4, ""],
+"speed": [Vector2(150, 150), 5, ""],
+"water_gravity": [150.0, 3, ""]
+}
+
+[node name="FlyVector" type="Area2D" parent="Spawns/BeetleCrawler10" unique_id=1701961755 groups=["Entities", "VUVectors", "VisualUtilities"] instance=ExtResource("13_nxhhp")]
+visibility_layer = 2
+position = Vector2(0, -8)
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("14_qmepk")
+tag_name = "fly"
+direction = Vector2(-4.371139e-08, -1)
+movement_locked = true
+
+[node name="CrawlVector" type="Area2D" parent="Spawns/BeetleCrawler10" unique_id=1923328731 groups=["Entities", "VUVectors", "VisualUtilities"] instance=ExtResource("13_nxhhp")]
+visibility_layer = 2
+position = Vector2(0, -8)
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("14_qmepk")
+arrow_length = 24.0
+tag_name = "crawl"
+snap_degrees = 90.0
+movement_locked = true
+color = Color(8.061901e-07, 0.41569918, 0.11087646, 1)
+
+[node name="Waypoints" type="Node2D" parent="." unique_id=561693217]
+visibility_layer = 2
+
+[node name="Notes" type="Node2D" parent="." unique_id=1325264801]
+visibility_layer = 2
+
+[node name="SpawnPoint" type="Area2D" parent="." unique_id=1710023778 groups=["SpawnPoints"] instance=ExtResource("9_t0p2q")]
+visibility_layer = 2
+position = Vector2(3160, 2016)
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("12_mdtcc")
+
+[connection signal="body_entered" from="Triggers/KillBoundaryU" to="Triggers/KillBoundaryU" method="_on_body_entered"]
+[connection signal="body_entered" from="Triggers/KillBoundaryD" to="Triggers/KillBoundaryD" method="_on_body_entered"]
+[connection signal="body_entered" from="Triggers/KillBoundaryL" to="Triggers/KillBoundaryL" method="_on_body_entered"]
+[connection signal="body_entered" from="Triggers/KillBoundaryR" to="Triggers/KillBoundaryR" method="_on_body_entered"]
+[connection signal="input_event" from="Spawns/HealthRefill" to="Spawns/HealthRefill" method="_on_input_event"]
+[connection signal="input_event" from="Spawns/AmmoRefill" to="Spawns/AmmoRefill" method="_on_input_event"]
+[connection signal="input_event" from="Spawns/BeetleCrawler" to="Spawns/BeetleCrawler" method="_on_input_event"]
+[connection signal="input_event" from="Spawns/BeetleCrawler1" to="Spawns/BeetleCrawler1" method="_on_input_event"]
+[connection signal="input_event" from="Spawns/BeetleCrawler2" to="Spawns/BeetleCrawler2" method="_on_input_event"]
+[connection signal="input_event" from="Spawns/BeetleCrawler3" to="Spawns/BeetleCrawler3" method="_on_input_event"]
+[connection signal="input_event" from="Spawns/BeetleCrawler4" to="Spawns/BeetleCrawler4" method="_on_input_event"]
+[connection signal="input_event" from="Spawns/BeetleCrawler5" to="Spawns/BeetleCrawler5" method="_on_input_event"]
+[connection signal="input_event" from="Spawns/BeetleCrawler6" to="Spawns/BeetleCrawler6" method="_on_input_event"]
+[connection signal="input_event" from="Spawns/BeetleCrawler7" to="Spawns/BeetleCrawler7" method="_on_input_event"]
+[connection signal="input_event" from="Spawns/BeetleCrawler8" to="Spawns/BeetleCrawler8" method="_on_input_event"]
+[connection signal="input_event" from="Spawns/BeetleCrawler9" to="Spawns/BeetleCrawler9" method="_on_input_event"]
+[connection signal="input_event" from="Spawns/BeetleCrawler10" to="Spawns/BeetleCrawler10" method="_on_input_event"]
