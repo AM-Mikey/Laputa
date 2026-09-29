@@ -2,7 +2,7 @@ extends Enemy
 
 const ICON = preload("res://assets/Actor/Enemy/SphagnumIcon.png")
 const TOOLTIPS = [
-"level 0 sphagnum",
+"LV 0: WIP.",
 ]
 
 

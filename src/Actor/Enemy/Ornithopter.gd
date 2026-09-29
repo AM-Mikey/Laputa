@@ -4,8 +4,8 @@ const ICON = preload("res://assets/Actor/Enemy/OrnithopterIcon.png")
 const TX_0 = preload("res://assets/Actor/Enemy/Ornithopter.png")
 const TX_1 = preload("res://assets/Actor/Enemy/Ornithopter1.png")
 const TOOLTIPS = [
-"level 0 ornithopter",
-"level 1 ornithopter",
+"LV 0: Needs screen spawner, flies from one side of screen to the other in a straight line.",
+"Lv 1: Needs screen spawner, flies from one side of screen to the other, arcs towards the player.",
 ]
 
 @export var dir := Vector2.LEFT

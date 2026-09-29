@@ -6,7 +6,7 @@ const BONK = preload("res://src/Effect/BonkParticle.tscn")
 const LAND := preload("res://src/Effect/LandParticle.tscn")
 const SPARK := preload("res://src/Effect/Spark.tscn")
 const TOOLTIPS = [
-"level 0 roller",
+"LV 0: Rolls along the ground, bounces on walls. Can fall. Spawner reccomended.",
 ]
 
 @export var difficulty := 0

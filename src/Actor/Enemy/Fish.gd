@@ -4,7 +4,7 @@ const ICON = preload("res://assets/Actor/Enemy/FishIcon.png")
 
 const TX_0 = preload("res://assets/Actor/Enemy/Fish.png")
 const TOOLTIPS = [
-"level 0 fish",
+"LV 0: Swims lrft/right, jumps if player is overhead.",
 ]
 
 const PATH_LINE = preload("res://src/Utility/PathLine.tscn")

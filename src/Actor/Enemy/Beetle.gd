@@ -4,8 +4,8 @@ const ICON = preload("res://assets/Actor/Enemy/BeetleIcon.png")
 const TX_0 = preload("res://assets/Actor/Enemy/Beetle.png")
 const TX_1 = preload("res://assets/Actor/Enemy/Beetle1.png")
 const TOOLTIPS = [
-"level 0 beetle",
-"level 1 beetle",
+"LV 0: Flies on timer.",
+"LV 1: Flies when player opposite.",
 ]
 
 var move_dir = Vector2.LEFT

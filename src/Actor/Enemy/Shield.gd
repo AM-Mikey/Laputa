@@ -5,9 +5,9 @@ const TX_0 = preload("res://assets/Actor/Enemy/Shield0.png")
 const TX_1 = preload("res://assets/Actor/Enemy/Shield1.png")
 const TX_2 = preload("res://assets/Actor/Enemy/Shield2.png")
 const TOOLTIPS = [
-"level 0 shield",
-"level 1 shield",
-"level 2 shield",
+"LV 0: Blocks bullets from front. Lifts it's shield when shot behind",
+"LV 1: Blocks bullets from front. Lifts it's shield when shot behind. Slashes when close.",
+"LV 2: Blocks bullets from front. Lifts it's shield when shot behind. Charges with knockback when in range.",
 ]
 
 @export var difficulty: int = 0
