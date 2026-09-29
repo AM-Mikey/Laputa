@@ -25,9 +25,9 @@ func state_process(_delta):
 	if pc.move_dir.x == 0 || pc.velocity.y > -0.1 || jump_time <= 3:
 		squeezing_into_a_corridor = false
 	elif pc.move_dir.x < 0:
-		squeezing_into_a_corridor = pc.get_node("LeftJumpGroundFinder").is_colliding() && pc.get_node("LeftJumpBonkFinder").is_colliding()
+		squeezing_into_a_corridor = pc.get_node("LeftJumpGroundFinder").is_colliding() && pc.get_node("LeftJumpBonkFinder").is_colliding() && !pc.get_node("LeftJumpAntiBonkFinder").is_colliding()
 	else:
-		squeezing_into_a_corridor = pc.get_node("RightJumpGroundFinder").is_colliding() && pc.get_node("RightJumpBonkFinder").is_colliding()
+		squeezing_into_a_corridor = pc.get_node("RightJumpGroundFinder").is_colliding() && pc.get_node("RightJumpBonkFinder").is_colliding() && !pc.get_node("RightJumpAntiBonkFinder").is_colliding()
 
 	if squeezing_into_a_corridor:
 		pc.velocity.y = maxf(pc.velocity.y, 0.1)
