@@ -223,12 +223,13 @@ func change_side(to_player: bool):
 
 func deflect(vel: Vector2): ## Common deflect script for bullet like BulletRevolver.tscn
 	var bullet_sprite = get_node("Sprite2D")
-	var new_bullet_rotation = vel.angle()
-	var new_bullet_position = bullet_sprite.global_position + bullet_sprite.position.rotated(new_bullet_rotation)
-	direction = vel.normalized()
-	velocity = vel
+	direction = -direction
+	var new_bullet_rotation = get_rot(direction)
+	var new_bullet_position = bullet_sprite.global_position - Vector2(bullet_sprite.position.x, -bullet_sprite.position.y).rotated(deg_to_rad(new_bullet_rotation))
+	origin = new_bullet_position
+	velocity = direction * vel.length()
 	global_position = new_bullet_position
-	rotation_degrees = get_rot(vel)
+	rotation_degrees = get_rot(direction)
 
 
 
