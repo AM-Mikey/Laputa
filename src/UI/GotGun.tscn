@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://5mtqachsa33l"]
+[gd_scene format=3 uid="uid://5mtqachsa33l"]
 
 [ext_resource type="Theme" uid="uid://45e84j2sj7w0" path="res://src/UI/Theme/LaputaTheme.tres" id="1_ni4hj"]
 [ext_resource type="Script" uid="uid://drepx1vui3j57" path="res://src/UI/GotGun.gd" id="2_yjbs5"]
@@ -95,14 +95,14 @@ tracks/1/keys = {
 "values": [Color(1, 1, 1, 1)]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_17ptf"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ni4hj"]
 _data = {
 &"FloatIn": SubResource("Animation_v2c3i"),
 &"FloatOut": SubResource("Animation_17ptf"),
 &"RESET": SubResource("Animation_wm7dd")
 }
 
-[node name="GotGun" type="MarginContainer"]
+[node name="GotGun" type="MarginContainer" unique_id=1155231595]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -115,26 +115,32 @@ theme_override_constants/margin_right = 32
 theme_override_constants/margin_bottom = 32
 script = ExtResource("2_yjbs5")
 
-[node name="VBox" type="VBoxContainer" parent="."]
+[node name="VBox" type="VBoxContainer" parent="." unique_id=1144410131]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 0
 
-[node name="Control" type="Control" parent="VBox"]
+[node name="Control" type="Control" parent="VBox" unique_id=1125366191]
 custom_minimum_size = Vector2(0, 64)
 layout_mode = 2
 
-[node name="Label" type="Label" parent="VBox"]
+[node name="Label" type="RichTextLabel" parent="VBox" unique_id=713252238]
+unique_name_in_owner = true
+clip_contents = false
 layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 0
-text = "Got The GunName!"
-horizontal_alignment = 1
+size_flags_vertical = 3
+theme_override_colors/font_shadow_color = Color(0.11372549, 0.15686275, 0.22745098, 1)
+theme_override_constants/shadow_outline_size = 0
+bbcode_enabled = true
+text = "Got the [color=f3b131]ItemName[/color]!"
+fit_content = true
+scroll_active = false
+autowrap_mode = 0
 
-[node name="Control" type="Control" parent="."]
+[node name="Control" type="Control" parent="." unique_id=437044632]
 layout_mode = 2
 
-[node name="Panel" type="Panel" parent="Control"]
+[node name="Panel" type="Panel" parent="Control" unique_id=1260315737]
 layout_mode = 0
 offset_left = 140.0
 offset_top = 61.0
@@ -142,7 +148,7 @@ offset_right = 198.0
 offset_bottom = 97.0
 theme_override_styles/panel = ExtResource("3_y1xgp")
 
-[node name="TextureRect" type="TextureRect" parent="Control/Panel"]
+[node name="TextureRect" type="TextureRect" parent="Control/Panel" unique_id=499140868]
 layout_mode = 0
 offset_left = -23.0
 offset_top = -14.0
@@ -152,7 +158,7 @@ texture = ExtResource("4_y4u7r")
 expand_mode = 2
 stretch_mode = 3
 
-[node name="Shadow" type="TextureRect" parent="Control/Panel/TextureRect"]
+[node name="Shadow" type="TextureRect" parent="Control/Panel/TextureRect" unique_id=1312598653]
 show_behind_parent = true
 material = SubResource("ShaderMaterial_lva65")
 layout_mode = 0
@@ -164,7 +170,8 @@ texture = ExtResource("4_y4u7r")
 expand_mode = 2
 stretch_mode = 3
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-libraries = {
-&"": SubResource("AnimationLibrary_17ptf")
-}
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=611997358]
+libraries/ = SubResource("AnimationLibrary_ni4hj")
+autoplay = &"FloatIn"
+
+[connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_AnimationPlayer_animation_finished"]

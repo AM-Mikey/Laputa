@@ -1,0 +1,40 @@
+[gd_scene format=3 uid="uid://bu7apry3h8fy3"]
+
+[ext_resource type="Theme" uid="uid://45e84j2sj7w0" path="res://src/UI/Theme/LaputaTheme.tres" id="2"]
+[ext_resource type="PackedScene" uid="uid://dnp411d6d8mqr" path="res://src/UI/MoneyNumber.tscn" id="3"]
+[ext_resource type="Script" uid="uid://devpib32r2gsd" path="res://src/UI/Outdated/ShopTooltip.gd" id="4"]
+
+[node name="ShopTooltip" type="Node2D" unique_id=205172650]
+z_index = 5
+position = Vector2(-112, -176)
+script = ExtResource("4")
+
+[node name="Panel" type="Panel" parent="." unique_id=1527776295]
+offset_right = 224.0
+offset_bottom = 128.0
+theme = ExtResource("2")
+
+[node name="MarginContainer" type="MarginContainer" parent="Panel" unique_id=2014625714]
+layout_mode = 0
+offset_right = 224.0
+offset_bottom = 128.0
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 16
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Panel/MarginContainer" unique_id=260816820]
+layout_mode = 2
+theme_override_constants/separation = 16
+
+[node name="ItemName" type="Label" parent="Panel/MarginContainer/VBoxContainer" unique_id=1839566637]
+layout_mode = 2
+text = "Necklace"
+horizontal_alignment = 1
+
+[node name="ItemDescription" type="Label" parent="Panel/MarginContainer/VBoxContainer" unique_id=1112775649]
+layout_mode = 2
+text = "Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum "
+
+[node name="MoneyNumber" parent="." unique_id=614266543 instance=ExtResource("3")]
+position = Vector2(32, 24)

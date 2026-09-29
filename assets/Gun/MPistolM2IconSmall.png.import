@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bdyb1efsip70n"
-path="res://.godot/imported/TurnstyleJumper.png-62713ceb826cd5065ae2e49c41f9edeb.ctex"
+uid="uid://dj6iqjfvn5qc4"
+path="res://.godot/imported/MPistolM2IconSmall.png-eaa9a45c91f1f32dff62e9cbcf4eafb8.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/UI/GunIcon/TurnstyleJumper.png"
-dest_files=["res://.godot/imported/TurnstyleJumper.png-62713ceb826cd5065ae2e49c41f9edeb.ctex"]
+source_file="res://assets/Gun/MPistolM2IconSmall.png"
+dest_files=["res://.godot/imported/MPistolM2IconSmall.png-eaa9a45c91f1f32dff62e9cbcf4eafb8.ctex"]
 
 [params]
 

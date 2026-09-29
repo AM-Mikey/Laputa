@@ -4,7 +4,7 @@
 [ext_resource type="Theme" uid="uid://45e84j2sj7w0" path="res://src/UI/Theme/LaputaTheme.tres" id="1_a7wce"]
 [ext_resource type="StyleBox" uid="uid://djnu2b18r7r1d" path="res://src/UI/StyleBox/Cursor.tres" id="3_gnyyr"]
 
-[node name="Note" type="MarginContainer" unique_id=1359810734]
+[node name="Note" type="MarginContainer" unique_id=1359810734 groups=["Notes"]]
 z_index = 999
 clip_contents = true
 custom_minimum_size = Vector2(16, 16)

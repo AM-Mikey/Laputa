@@ -1,7 +1,8 @@
-[gd_scene load_steps=6 format=3 uid="uid://b8b35pi3fwar2"]
+[gd_scene format=3 uid="uid://b8b35pi3fwar2"]
 
-[ext_resource type="Texture2D" uid="uid://d1dwhoi5to781" path="res://assets/UI/ShopMenu/Cursor.png" id="1"]
-[ext_resource type="Script" uid="uid://driupfbhh6r4r" path="res://src/UI/ShopMenu/Cursor.gd" id="2"]
+[ext_resource type="Texture2D" uid="uid://d1dwhoi5to781" path="res://assets/UI/ShopMenu/Outdated/Cursor.png" id="1"]
+[ext_resource type="Script" uid="uid://driupfbhh6r4r" path="res://src/UI/Outdated/ShopMenu/Cursor.gd" id="2"]
+
 
 [sub_resource type="Shader" id="4"]
 code = "shader_type canvas_item;

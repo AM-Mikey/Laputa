@@ -5,6 +5,7 @@
 
 [node name="Haymaker" type="Node2D" unique_id=528872019]
 script = ExtResource("1_qpb67")
+display_name = "Haymaker"
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=221570882]
 texture = ExtResource("2_qpb67")

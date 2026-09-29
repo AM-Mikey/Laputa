@@ -39,7 +39,7 @@ shape = SubResource("1")
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=130698616]
 texture = ExtResource("3_lwqk6")
 centered = false
-hframes = 5
+hframes = 6
 frame = 4
 
 [node name="BreakArea" type="Area2D" parent="." unique_id=1617953084]

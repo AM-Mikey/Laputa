@@ -82,6 +82,7 @@ inp="*res://src/Utility/InputSystem.gd"
 RenderAlign="*res://src/RenderAlign/RenderAlign.tscn"
 ms="*res://src/Mission/MissionSystem.gd"
 oup="*uid://bv3qcgvkal0ee"
+shop="*uid://c4gtw77f5t76l"
 
 [display]
 

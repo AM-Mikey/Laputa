@@ -8,4 +8,5 @@ script = ExtResource("1_anps7")
 display_name = "Salmiakki"
 texture = ExtResource("2_camek")
 description = "A salty treat. Each bite dries out your mouth."
+type = "food"
 metadata/_custom_type_script = "uid://dj0u1vtqimy4j"

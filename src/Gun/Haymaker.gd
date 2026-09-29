@@ -1,7 +1,6 @@
 extends Gun
 
 func _ready(): #since preload, this happens on game start
-	display_name = "Haymaker"
 	description = "A weapon that shoots sleeping darts. TODO:finish."
 	icon_texture = load("res://assets/Gun/HaymakerIcon.png")
 	icon_small_texture = load("res://assets/Gun/HaymakerIconSmall.png")

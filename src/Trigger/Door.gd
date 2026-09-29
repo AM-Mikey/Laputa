@@ -29,7 +29,7 @@ func _input(event):
 				var has_key := false
 				var key_index: int
 				for i in active_pc.item_array:
-					if i.is_key && i.id == key_id:
+					if i.type == "key" && i.id == key_id:
 						has_key = true
 						key_index = active_pc.item_array.find(i)
 						continue

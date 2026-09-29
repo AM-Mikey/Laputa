@@ -9,4 +9,4 @@ display_name = "Key 1"
 id = "key1"
 texture = ExtResource("2_ggsqh")
 description = "It's just a key."
-is_key = true
+type = "key"

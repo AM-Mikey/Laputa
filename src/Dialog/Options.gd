@@ -16,6 +16,7 @@ func _ready():
 	#display_options()
 
 func display_options():
+	selected_option = -1
 	is_entering = true
 	print("displaying options")
 	$Four.visible = false

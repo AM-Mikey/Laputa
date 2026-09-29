@@ -96,7 +96,7 @@ func _on_guns_updated(guns, cause = "default", do_xp_flash = false):
 	if !cause in ["fire", "get_ammo"]:
 		if guns != []:
 			var g: Gun = guns[0]
-			_on_xp_updated(g.xp, g.max_xp, g.level, g.max_level, do_xp_flash, cause)
+			_on_xp_updated(g.xp, g.max_xp, g.level, g.max_unlocked_level, do_xp_flash, cause)
 
 	#for g in guns:
 		#if guns.find(g) == 0: #main gun
@@ -289,7 +289,7 @@ func display_hp_number(hp, max_hp):
 
 
 var xp_tween: Tween
-func _on_xp_updated(xp: float, max_xp: float, level: int, max_level: int, do_xp_flash = false, cause: String = "default") -> void:
+func _on_xp_updated(xp: float, max_xp: float, level: int, max_unlocked_level: int, do_xp_flash = false, cause: String = "default") -> void:
 	modulate = Color(1, 1, 1) #to prevent flash animation from stopping on a transparent frame
 	xp_num.frame_coords.x = level
 	var old_progress_max_value: float = xp_progress.max_value
@@ -326,8 +326,8 @@ func _on_xp_updated(xp: float, max_xp: float, level: int, max_level: int, do_xp_
 		else: #increasing, just set it
 			xp_lost.value = xp
 
-	xp_progress.visible = !(xp == max_xp and level == max_level)
-	xp_max.visible = (xp == max_xp and level == max_level)
+	xp_progress.visible = !(xp == max_xp and level == max_unlocked_level)
+	xp_max.visible = (xp == max_xp and level == max_unlocked_level)
 
 
 

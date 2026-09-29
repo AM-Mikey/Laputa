@@ -8,7 +8,6 @@ const GUN_SMOKE = preload("res://src/Effect/GunSmoke.tscn")
 var cock_sfx = "gun_cock_turnstile_jumper"
 
 func _ready():
-	display_name = "Turnstile Jumper"
 	description = "A powerful revolver once wielded by a lone cowboy."
 	icon_texture = load("res://assets/Gun/TurnstileJumperIcon.png")
 	icon_small_texture = load("res://assets/Gun/TurnstileJumperIconSmall.png")

@@ -5,11 +5,10 @@ const GUN_SMOKE = preload("res://src/Effect/GunSmoke.tscn")
 var cock_sfx = "gun_cock_blunderbuss"
 
 func _ready():
-	display_name = "Shotgun"
 	description = "Fires a cluster of birdshot. Get close for max effect."
 	icon_texture = load("res://assets/Gun/Blunderbuss.png") #need
 	icon_small_texture = load("res://assets/Gun/Blunderbuss.png") #need
-	sfx = "gun_shotgun"
+	sfx = "gun_blunderbuss"
 	do_bullet_casing = false
 	bullet_scene = load("res://src/Bullet/Birdshot.tscn")
 	damage = 1
@@ -20,6 +19,7 @@ func _ready():
 	spread_degrees = 36.0
 	max_ammo = 0
 	max_level = 3
+	max_unlocked_level = 1
 	_set_level(level)
 	cd.connect("timeout", Callable(self, "_on_cd_timeout"))
 
