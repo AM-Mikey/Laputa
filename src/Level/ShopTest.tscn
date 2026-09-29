@@ -494,6 +494,272 @@ properties = {
 "reward": [10, 2, ""]
 }
 
+[node name="BreakBlockExperience14" type="Area2D" parent="Spawns" unique_id=40445053 groups=["Entities", "PropSpawns"] instance=ExtResource("11_vberi")]
+visibility_layer = 2
+z_index = 999
+position = Vector2(1952, 1792)
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("12_dej6s")
+prop_path = "res://src/Prop/BreakBlockExperience.tscn"
+properties = {
+"break_on_fall": [false, 1, ""],
+"crush_enemies": [true, 1, ""],
+"crush_players": [false, 1, ""],
+"do_bubble": [false, 1, ""],
+"editor_hidden": [false, 1, ""],
+"has_gravity": [true, 1, ""],
+"id": [&"BreakBlockExperience14", 4, ""],
+"reward": [10, 2, ""]
+}
+
+[node name="BreakBlockExperience15" type="Area2D" parent="Spawns" unique_id=1320129892 groups=["Entities", "PropSpawns"] instance=ExtResource("11_vberi")]
+visibility_layer = 2
+z_index = 999
+position = Vector2(1968, 1792)
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("12_dej6s")
+prop_path = "res://src/Prop/BreakBlockExperience.tscn"
+properties = {
+"break_on_fall": [false, 1, ""],
+"crush_enemies": [true, 1, ""],
+"crush_players": [false, 1, ""],
+"do_bubble": [false, 1, ""],
+"editor_hidden": [false, 1, ""],
+"has_gravity": [true, 1, ""],
+"id": [&"BreakBlockExperience15", 4, ""],
+"reward": [10, 2, ""]
+}
+
+[node name="BreakBlockExperience16" type="Area2D" parent="Spawns" unique_id=868781961 groups=["Entities", "PropSpawns"] instance=ExtResource("11_vberi")]
+visibility_layer = 2
+z_index = 999
+position = Vector2(1984, 1792)
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("12_dej6s")
+prop_path = "res://src/Prop/BreakBlockExperience.tscn"
+properties = {
+"break_on_fall": [false, 1, ""],
+"crush_enemies": [true, 1, ""],
+"crush_players": [false, 1, ""],
+"do_bubble": [false, 1, ""],
+"editor_hidden": [false, 1, ""],
+"has_gravity": [true, 1, ""],
+"id": [&"BreakBlockExperience16", 4, ""],
+"reward": [10, 2, ""]
+}
+
+[node name="BreakBlockExperience17" type="Area2D" parent="Spawns" unique_id=1394233589 groups=["Entities", "PropSpawns"] instance=ExtResource("11_vberi")]
+visibility_layer = 2
+z_index = 999
+position = Vector2(2000, 1792)
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("12_dej6s")
+prop_path = "res://src/Prop/BreakBlockExperience.tscn"
+properties = {
+"break_on_fall": [false, 1, ""],
+"crush_enemies": [true, 1, ""],
+"crush_players": [false, 1, ""],
+"do_bubble": [false, 1, ""],
+"editor_hidden": [false, 1, ""],
+"has_gravity": [true, 1, ""],
+"id": [&"BreakBlockExperience17", 4, ""],
+"reward": [10, 2, ""]
+}
+
+[node name="BreakBlockExperience18" type="Area2D" parent="Spawns" unique_id=326139253 groups=["Entities", "PropSpawns"] instance=ExtResource("11_vberi")]
+visibility_layer = 2
+z_index = 999
+position = Vector2(2016, 1792)
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("12_dej6s")
+prop_path = "res://src/Prop/BreakBlockExperience.tscn"
+properties = {
+"break_on_fall": [false, 1, ""],
+"crush_enemies": [true, 1, ""],
+"crush_players": [false, 1, ""],
+"do_bubble": [false, 1, ""],
+"editor_hidden": [false, 1, ""],
+"has_gravity": [true, 1, ""],
+"id": [&"BreakBlockExperience18", 4, ""],
+"reward": [10, 2, ""]
+}
+
+[node name="BreakBlockExperience19" type="Area2D" parent="Spawns" unique_id=882258944 groups=["Entities", "PropSpawns"] instance=ExtResource("11_vberi")]
+visibility_layer = 2
+z_index = 999
+position = Vector2(2032, 1792)
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("12_dej6s")
+prop_path = "res://src/Prop/BreakBlockExperience.tscn"
+properties = {
+"break_on_fall": [false, 1, ""],
+"crush_enemies": [true, 1, ""],
+"crush_players": [false, 1, ""],
+"do_bubble": [false, 1, ""],
+"editor_hidden": [false, 1, ""],
+"has_gravity": [true, 1, ""],
+"id": [&"BreakBlockExperience19", 4, ""],
+"reward": [10, 2, ""]
+}
+
+[node name="BreakBlockExperience20" type="Area2D" parent="Spawns" unique_id=2138244444 groups=["Entities", "PropSpawns"] instance=ExtResource("11_vberi")]
+visibility_layer = 2
+z_index = 999
+position = Vector2(2048, 1792)
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("12_dej6s")
+prop_path = "res://src/Prop/BreakBlockExperience.tscn"
+properties = {
+"break_on_fall": [false, 1, ""],
+"crush_enemies": [true, 1, ""],
+"crush_players": [false, 1, ""],
+"do_bubble": [false, 1, ""],
+"editor_hidden": [false, 1, ""],
+"has_gravity": [true, 1, ""],
+"id": [&"BreakBlockExperience20", 4, ""],
+"reward": [10, 2, ""]
+}
+
+[node name="BreakBlockExperience21" type="Area2D" parent="Spawns" unique_id=178871543 groups=["Entities", "PropSpawns"] instance=ExtResource("11_vberi")]
+visibility_layer = 2
+z_index = 999
+position = Vector2(2048, 1776)
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("12_dej6s")
+prop_path = "res://src/Prop/BreakBlockExperience.tscn"
+properties = {
+"break_on_fall": [false, 1, ""],
+"crush_enemies": [true, 1, ""],
+"crush_players": [false, 1, ""],
+"do_bubble": [false, 1, ""],
+"editor_hidden": [false, 1, ""],
+"has_gravity": [true, 1, ""],
+"id": [&"BreakBlockExperience21", 4, ""],
+"reward": [10, 2, ""]
+}
+
+[node name="BreakBlockExperience22" type="Area2D" parent="Spawns" unique_id=46524730 groups=["Entities", "PropSpawns"] instance=ExtResource("11_vberi")]
+visibility_layer = 2
+z_index = 999
+position = Vector2(2032, 1776)
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("12_dej6s")
+prop_path = "res://src/Prop/BreakBlockExperience.tscn"
+properties = {
+"break_on_fall": [false, 1, ""],
+"crush_enemies": [true, 1, ""],
+"crush_players": [false, 1, ""],
+"do_bubble": [false, 1, ""],
+"editor_hidden": [false, 1, ""],
+"has_gravity": [true, 1, ""],
+"id": [&"BreakBlockExperience22", 4, ""],
+"reward": [10, 2, ""]
+}
+
+[node name="BreakBlockExperience23" type="Area2D" parent="Spawns" unique_id=879647097 groups=["Entities", "PropSpawns"] instance=ExtResource("11_vberi")]
+visibility_layer = 2
+z_index = 999
+position = Vector2(2016, 1776)
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("12_dej6s")
+prop_path = "res://src/Prop/BreakBlockExperience.tscn"
+properties = {
+"break_on_fall": [false, 1, ""],
+"crush_enemies": [true, 1, ""],
+"crush_players": [false, 1, ""],
+"do_bubble": [false, 1, ""],
+"editor_hidden": [false, 1, ""],
+"has_gravity": [true, 1, ""],
+"id": [&"BreakBlockExperience23", 4, ""],
+"reward": [10, 2, ""]
+}
+
+[node name="BreakBlockExperience24" type="Area2D" parent="Spawns" unique_id=632131744 groups=["Entities", "PropSpawns"] instance=ExtResource("11_vberi")]
+visibility_layer = 2
+z_index = 999
+position = Vector2(2000, 1776)
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("12_dej6s")
+prop_path = "res://src/Prop/BreakBlockExperience.tscn"
+properties = {
+"break_on_fall": [false, 1, ""],
+"crush_enemies": [true, 1, ""],
+"crush_players": [false, 1, ""],
+"do_bubble": [false, 1, ""],
+"editor_hidden": [false, 1, ""],
+"has_gravity": [true, 1, ""],
+"id": [&"BreakBlockExperience24", 4, ""],
+"reward": [10, 2, ""]
+}
+
+[node name="BreakBlockExperience25" type="Area2D" parent="Spawns" unique_id=728532513 groups=["Entities", "PropSpawns"] instance=ExtResource("11_vberi")]
+visibility_layer = 2
+z_index = 999
+position = Vector2(1984, 1776)
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("12_dej6s")
+prop_path = "res://src/Prop/BreakBlockExperience.tscn"
+properties = {
+"break_on_fall": [false, 1, ""],
+"crush_enemies": [true, 1, ""],
+"crush_players": [false, 1, ""],
+"do_bubble": [false, 1, ""],
+"editor_hidden": [false, 1, ""],
+"has_gravity": [true, 1, ""],
+"id": [&"BreakBlockExperience25", 4, ""],
+"reward": [10, 2, ""]
+}
+
+[node name="BreakBlockExperience26" type="Area2D" parent="Spawns" unique_id=468939807 groups=["Entities", "PropSpawns"] instance=ExtResource("11_vberi")]
+visibility_layer = 2
+z_index = 999
+position = Vector2(1968, 1776)
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("12_dej6s")
+prop_path = "res://src/Prop/BreakBlockExperience.tscn"
+properties = {
+"break_on_fall": [false, 1, ""],
+"crush_enemies": [true, 1, ""],
+"crush_players": [false, 1, ""],
+"do_bubble": [false, 1, ""],
+"editor_hidden": [false, 1, ""],
+"has_gravity": [true, 1, ""],
+"id": [&"BreakBlockExperience26", 4, ""],
+"reward": [10, 2, ""]
+}
+
+[node name="BreakBlockExperience27" type="Area2D" parent="Spawns" unique_id=606272313 groups=["Entities", "PropSpawns"] instance=ExtResource("11_vberi")]
+visibility_layer = 2
+z_index = 999
+position = Vector2(1952, 1776)
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("12_dej6s")
+prop_path = "res://src/Prop/BreakBlockExperience.tscn"
+properties = {
+"break_on_fall": [false, 1, ""],
+"crush_enemies": [true, 1, ""],
+"crush_players": [false, 1, ""],
+"do_bubble": [false, 1, ""],
+"editor_hidden": [false, 1, ""],
+"has_gravity": [true, 1, ""],
+"id": [&"BreakBlockExperience27", 4, ""],
+"reward": [10, 2, ""]
+}
+
 [node name="TileAnimator" type="Node2D" parent="." unique_id=459942112]
 visibility_layer = 2
 script = ExtResource("8_ppd8f")
@@ -572,3 +838,17 @@ script = ExtResource("18_lk15g")
 [connection signal="input_event" from="Spawns/BreakBlockExperience11" to="Spawns/BreakBlockExperience11" method="_on_input_event"]
 [connection signal="input_event" from="Spawns/BreakBlockExperience12" to="Spawns/BreakBlockExperience12" method="_on_input_event"]
 [connection signal="input_event" from="Spawns/BreakBlockExperience13" to="Spawns/BreakBlockExperience13" method="_on_input_event"]
+[connection signal="input_event" from="Spawns/BreakBlockExperience14" to="Spawns/BreakBlockExperience14" method="_on_input_event"]
+[connection signal="input_event" from="Spawns/BreakBlockExperience15" to="Spawns/BreakBlockExperience15" method="_on_input_event"]
+[connection signal="input_event" from="Spawns/BreakBlockExperience16" to="Spawns/BreakBlockExperience16" method="_on_input_event"]
+[connection signal="input_event" from="Spawns/BreakBlockExperience17" to="Spawns/BreakBlockExperience17" method="_on_input_event"]
+[connection signal="input_event" from="Spawns/BreakBlockExperience18" to="Spawns/BreakBlockExperience18" method="_on_input_event"]
+[connection signal="input_event" from="Spawns/BreakBlockExperience19" to="Spawns/BreakBlockExperience19" method="_on_input_event"]
+[connection signal="input_event" from="Spawns/BreakBlockExperience20" to="Spawns/BreakBlockExperience20" method="_on_input_event"]
+[connection signal="input_event" from="Spawns/BreakBlockExperience21" to="Spawns/BreakBlockExperience21" method="_on_input_event"]
+[connection signal="input_event" from="Spawns/BreakBlockExperience22" to="Spawns/BreakBlockExperience22" method="_on_input_event"]
+[connection signal="input_event" from="Spawns/BreakBlockExperience23" to="Spawns/BreakBlockExperience23" method="_on_input_event"]
+[connection signal="input_event" from="Spawns/BreakBlockExperience24" to="Spawns/BreakBlockExperience24" method="_on_input_event"]
+[connection signal="input_event" from="Spawns/BreakBlockExperience25" to="Spawns/BreakBlockExperience25" method="_on_input_event"]
+[connection signal="input_event" from="Spawns/BreakBlockExperience26" to="Spawns/BreakBlockExperience26" method="_on_input_event"]
+[connection signal="input_event" from="Spawns/BreakBlockExperience27" to="Spawns/BreakBlockExperience27" method="_on_input_event"]

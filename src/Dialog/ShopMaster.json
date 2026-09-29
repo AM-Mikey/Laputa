@@ -46,4 +46,9 @@
 	/newchar,basil,Basil /auto,on /voice,0.01,false,npc_voice_normal Here you go! In future versions this will use a 10-minute timer.
 	",
 
+	"deny_gun_price":
+	"
+	/newchar,basil,Basil /auto,on /voice,0.01,false,npc_voice_normal Sorry, looks like you can't afford that.
+	",
+
 }

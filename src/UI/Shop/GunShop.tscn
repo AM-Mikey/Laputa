@@ -39,6 +39,7 @@ theme_override_constants/separation = 4
 [node name="BlueprintsTabButton" type="Button" parent="MarginContainer/MarginContainer/HBoxContainer/VBoxContainer" unique_id=1339487352]
 unique_name_in_owner = true
 layout_mode = 2
+focus_neighbor_top = NodePath("../ExitButton")
 toggle_mode = true
 text = "Blueprints"
 
@@ -55,21 +56,33 @@ focus_neighbor_bottom = NodePath("../ExitButton")
 toggle_mode = true
 text = "Rebuild"
 
+[node name="MoneyLabel" type="RichTextLabel" parent="MarginContainer/MarginContainer/HBoxContainer/VBoxContainer" unique_id=138406147]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(32, 24)
+layout_mode = 2
+theme_override_colors/default_color = Color(0.9529412, 0.69411767, 0.19215687, 1)
+theme_override_colors/font_shadow_color = Color(0.14509805, 0.09411765, 0.1254902, 1)
+theme_override_constants/shadow_outline_size = 0
+text = "$120"
+horizontal_alignment = 1
+vertical_alignment = 1
+
 [node name="ExitButton" type="Button" parent="MarginContainer/MarginContainer/HBoxContainer/VBoxContainer" unique_id=1818697859]
 layout_mode = 2
 size_flags_vertical = 10
+focus_neighbor_top = NodePath("../RebuildTabButton")
+focus_neighbor_bottom = NodePath("../BlueprintsTabButton")
 text = "Exit"
 
 [node name="TabContainer" type="TabContainer" parent="MarginContainer/MarginContainer/HBoxContainer" unique_id=539156095]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(64, 128)
 layout_mode = 2
-current_tab = 1
+current_tab = 0
 clip_tabs = false
 tabs_visible = false
 
 [node name="Blueprints" type="MarginContainer" parent="MarginContainer/MarginContainer/HBoxContainer/TabContainer" unique_id=1901752528]
-visible = false
 layout_mode = 2
 metadata/_tab_index = 0
 
@@ -84,17 +97,35 @@ auto_width = true
 max_columns = 6
 same_column_width = true
 
-[node name="Corner" type="MarginContainer" parent="MarginContainer/MarginContainer/HBoxContainer/TabContainer/Blueprints" unique_id=376298588]
+[node name="LCorner" type="MarginContainer" parent="MarginContainer/MarginContainer/HBoxContainer/TabContainer/Blueprints" unique_id=361070385]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 8
+
+[node name="RCorner" type="MarginContainer" parent="MarginContainer/MarginContainer/HBoxContainer/TabContainer/Blueprints" unique_id=376298588]
 layout_mode = 2
 size_flags_horizontal = 8
 size_flags_vertical = 8
 
-[node name="BuildButton" type="Button" parent="MarginContainer/MarginContainer/HBoxContainer/TabContainer/Blueprints/Corner" unique_id=336941038]
+[node name="HBox" type="HBoxContainer" parent="MarginContainer/MarginContainer/HBoxContainer/TabContainer/Blueprints/RCorner" unique_id=1414016627]
+layout_mode = 2
+
+[node name="BlueprintsPriceLabel" type="RichTextLabel" parent="MarginContainer/MarginContainer/HBoxContainer/TabContainer/Blueprints/RCorner/HBox" unique_id=282300375]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(32, 24)
+layout_mode = 2
+theme_override_colors/font_shadow_color = Color(0.14509805, 0.09411765, 0.1254902, 1)
+theme_override_constants/shadow_outline_size = 0
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="BuildButton" type="Button" parent="MarginContainer/MarginContainer/HBoxContainer/TabContainer/Blueprints/RCorner/HBox" unique_id=336941038]
 unique_name_in_owner = true
 layout_mode = 2
 text = "Build"
 
 [node name="Upgrade" type="MarginContainer" parent="MarginContainer/MarginContainer/HBoxContainer/TabContainer" unique_id=1380326370]
+visible = false
 layout_mode = 2
 metadata/_tab_index = 1
 
@@ -115,7 +146,19 @@ layout_mode = 2
 size_flags_horizontal = 8
 size_flags_vertical = 8
 
-[node name="UpgradeButton" type="Button" parent="MarginContainer/MarginContainer/HBoxContainer/TabContainer/Upgrade/Corner" unique_id=1591916915]
+[node name="HBox" type="HBoxContainer" parent="MarginContainer/MarginContainer/HBoxContainer/TabContainer/Upgrade/Corner" unique_id=1854386110]
+layout_mode = 2
+
+[node name="UpgradePriceLabel" type="RichTextLabel" parent="MarginContainer/MarginContainer/HBoxContainer/TabContainer/Upgrade/Corner/HBox" unique_id=233406828]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(32, 24)
+layout_mode = 2
+theme_override_colors/font_shadow_color = Color(0.14509805, 0.09411765, 0.1254902, 1)
+theme_override_constants/shadow_outline_size = 0
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="UpgradeButton" type="Button" parent="MarginContainer/MarginContainer/HBoxContainer/TabContainer/Upgrade/Corner/HBox" unique_id=1591916915]
 unique_name_in_owner = true
 layout_mode = 2
 text = "Upgrade"
@@ -141,7 +184,19 @@ layout_mode = 2
 size_flags_horizontal = 8
 size_flags_vertical = 8
 
-[node name="RebuildButton" type="Button" parent="MarginContainer/MarginContainer/HBoxContainer/TabContainer/Rebuild/Corner" unique_id=432876939]
+[node name="HBox" type="HBoxContainer" parent="MarginContainer/MarginContainer/HBoxContainer/TabContainer/Rebuild/Corner" unique_id=1851988463]
+layout_mode = 2
+
+[node name="RebuildPriceLabel" type="RichTextLabel" parent="MarginContainer/MarginContainer/HBoxContainer/TabContainer/Rebuild/Corner/HBox" unique_id=277156532]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(32, 24)
+layout_mode = 2
+theme_override_colors/font_shadow_color = Color(0.14509805, 0.09411765, 0.1254902, 1)
+theme_override_constants/shadow_outline_size = 0
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="RebuildButton" type="Button" parent="MarginContainer/MarginContainer/HBoxContainer/TabContainer/Rebuild/Corner/HBox" unique_id=432876939]
 unique_name_in_owner = true
 layout_mode = 2
 text = "Rebuild"
@@ -151,6 +206,8 @@ text = "Rebuild"
 [connection signal="focus_entered" from="MarginContainer/MarginContainer/HBoxContainer/VBoxContainer/RebuildTabButton" to="." method="_on_RebuildTabButton_focus_entered"]
 [connection signal="pressed" from="MarginContainer/MarginContainer/HBoxContainer/VBoxContainer/ExitButton" to="." method="_on_ExitButton_pressed"]
 [connection signal="item_selected" from="MarginContainer/MarginContainer/HBoxContainer/TabContainer/Blueprints/BlueprintBox" to="." method="_on_Blueprints_item_selected"]
-[connection signal="pressed" from="MarginContainer/MarginContainer/HBoxContainer/TabContainer/Blueprints/Corner/BuildButton" to="." method="_on_BuildButton_pressed"]
-[connection signal="pressed" from="MarginContainer/MarginContainer/HBoxContainer/TabContainer/Upgrade/Corner/UpgradeButton" to="." method="_on_UpgradeButton_pressed"]
-[connection signal="pressed" from="MarginContainer/MarginContainer/HBoxContainer/TabContainer/Rebuild/Corner/RebuildButton" to="." method="_on_RebuildButton_pressed"]
+[connection signal="pressed" from="MarginContainer/MarginContainer/HBoxContainer/TabContainer/Blueprints/RCorner/HBox/BuildButton" to="." method="_on_BuildButton_pressed"]
+[connection signal="item_selected" from="MarginContainer/MarginContainer/HBoxContainer/TabContainer/Upgrade/UpgradeGunBox" to="." method="_on_UpgradeGunBox_item_selected"]
+[connection signal="pressed" from="MarginContainer/MarginContainer/HBoxContainer/TabContainer/Upgrade/Corner/HBox/UpgradeButton" to="." method="_on_UpgradeButton_pressed"]
+[connection signal="item_selected" from="MarginContainer/MarginContainer/HBoxContainer/TabContainer/Rebuild/RebuildGunBox" to="." method="_on_RebuildGunBox_item_selected"]
+[connection signal="pressed" from="MarginContainer/MarginContainer/HBoxContainer/TabContainer/Rebuild/Corner/HBox/RebuildButton" to="." method="_on_RebuildButton_pressed"]

@@ -9,9 +9,18 @@ var rebuild_wait_duration: float = 600
 
 var wait_timer: Node
 
+var blueprint_prices = {
+	"Roberta": 200,
+	"TurnstileJumper": 400,
+}
+
 var upgrades_per_shop_level = {
-	0: [["Revolver", 3], ["Red7", 2]],
-	1: [["Blunderbuss", 2], ["GLauncher", 2]],
+	0: [["Revolver", 3, 100], ["Red7", 2, 150]],
+	1: [["Blunderbuss", 2, 200], ["GLauncher", 2, 400]],
+}
+
+var rebuild_prices = {
+	"MPistol": 50,
 }
 
 func hint_tab(tab_name):
@@ -29,3 +38,8 @@ func hint_blueprint(blueprint):
 func build_blueprint():
 	var db = f.db()
 	db.request_subprint("res://src/Dialog/ShopMaster.json", "build_button")
+
+
+func deny_gun_price():
+	var db = f.db()
+	db.request_subprint("res://src/Dialog/ShopMaster.json", "deny_gun_price")
