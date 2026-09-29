@@ -275,10 +275,10 @@ func create_effect(vfx_name):
 				var world_physics = get_world_2d().direct_space_state
 				var result = world_physics.intersect_ray(ray_param)
 				if !result.is_empty():
-					var land_rotation = last_collision_normal.rotated(PI / 2.0).angle()
+					#var land_rotation = last_collision_normal.rotated(PI / 2.0).angle()
 					var land = LAND.instantiate()
 					land.global_position = result["position"]
-					land.rotation = land_rotation
+					#land.rotation = land_rotation
 					w.farthest_front.add_child(land)
 			"Bonk":
 				var bonk = BONK.instantiate()

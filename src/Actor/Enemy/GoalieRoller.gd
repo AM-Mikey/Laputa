@@ -2,6 +2,7 @@ extends "res://src/Actor/Enemy/Goalie.gd"
 
 ## Specialized Goalie that can also kick Roller
 @onready var SPARK = preload("res://src/Effect/Spark.tscn")
+@onready var GOALIE_ROLLER_KICK = preload("res://src/Effect/GoalieRollerKick.tscn")
 const roller_kick_force: float = 500.0
 
 func setup() -> void:
@@ -34,17 +35,11 @@ func _on_DeflectHitbox_body_entered(body: Node2D) -> void:
 		shake_pixels = clampf(shake_pixels, 0.0, 16)
 		player.get_node("PlayerCamera").shake(shake_pixels, 0.2, 8.0)
 		am.play("bullet_destroy", body, null, 6.0, 0.2)
-		var land_rotation = dir.rotated(PI / 2.0).angle()
-		var land = LAND.instantiate()
-		land.global_position = body.global_position
-		land.rotation = land_rotation
-		land.scale.x = 1.0
-		w.farthest_front.add_child(land)
-		var land_lifetime: = 0.2
-		var land_tween = land.create_tween().set_parallel()
-		land_tween.tween_property(land, "scale:x", 2.0, land_lifetime)
-		land_tween.tween_property(land, "scale:y", 2.0, land_lifetime)
-		land_tween.tween_property(land, "global_position", body.global_position - dir * 10.0, land_lifetime)
+		var goalie_roller_direction = dir
+		var goalie_roller_kick = GOALIE_ROLLER_KICK.instantiate()
+		goalie_roller_kick.global_position = body.global_position
+		goalie_roller_kick.direction = goalie_roller_direction
+		w.farthest_front.add_child(goalie_roller_kick)
 		var spark = SPARK.instantiate()
 		spark.global_position = body.global_position
 		w.farthest_front.add_child(spark)
