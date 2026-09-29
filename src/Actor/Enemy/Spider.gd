@@ -3,7 +3,7 @@ extends Enemy
 const ICON = preload("res://assets/Actor/Enemy/SpiderIcon.png")
 const A_STAR_PATH_LINE = preload("res://src/Utility/AStarPathLine.tscn")
 const TOOLTIPS = [
-"LV 0: Unfinished enemy.",
+"LV 0: WIP.",
 ]
 
 var target

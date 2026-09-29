@@ -3,7 +3,7 @@ extends Enemy
 const ICON = preload("res://assets/Actor/Enemy/JuniorIcon.png")
 const BULLET = preload("res://src/Bullet/Enemy/Carbine.tscn")
 const TOOLTIPS = [
-"LV 0: Walks left and right, if sees the player he takes aim and fires.",
+"LV 0: Walks left and right. Shoots when seeing player.",
 ]
 
 var starting_state := "walk"

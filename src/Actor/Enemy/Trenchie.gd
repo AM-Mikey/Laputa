@@ -3,7 +3,7 @@ extends Enemy
 const ICON = preload("res://assets/Actor/Enemy/TrenchieIcon.png")
 const BULLET = preload("res://src/Bullet/Enemy/Laser.tscn")
 const TOOLTIPS = [
-"LV 0: Unfinished Enemy.",
+"LV 0: WIP.",
 ]
 
 @export var look_dir: Vector2 = Vector2.LEFT

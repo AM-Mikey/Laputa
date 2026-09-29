@@ -3,7 +3,7 @@ extends Enemy
 const ICON = preload("res://assets/Actor/Enemy/GolemIcon.png")
 const TX_0 = preload("res://assets/Actor/Enemy/Golem.png")
 const TOOLTIPS = [
-"LV 0: Walks along the ground and charges when hit, wallslams when hitting a wall and the player can stand on it.",
+"LV 0: Walks along ground, charges when hit. Wall-slams when charging wall. Standable",
 ]
 
 var move_dir = Vector2.LEFT
