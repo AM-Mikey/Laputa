@@ -1,12 +1,14 @@
 extends PhysicsProp
 
-const ICON = preload("res://assets/Prop/BreakBlockIcon.png")
+const ICON = preload("res://assets/Prop/BreakBlockExperienceIcon.png")
 const EXPLOSION = preload("res://src/Effect/Explosion.tscn")
+const EXPERIENCE = preload("res://src/Actor/Pickup/Experience.tscn")
 
 var broken = false
 var crush_targets = []
 var is_grounded = true
 
+@export var reward: int = 3
 @export var break_on_fall = false
 @export var has_gravity = true
 @export var crush_players = false
@@ -19,6 +21,8 @@ func setup(): #Reminder: no function called can use await
 		base_gravity_scale = 0.0
 		water_gravity_scale = 0.0
 		gravity_scale = 0.0
+	else:
+		$Sprite2D.frame = 0
 	w.emit_signal("finished_spawn_entities_step")
 
 func on_break(method = "cut"):
@@ -40,6 +44,28 @@ func on_break(method = "cut"):
 				$Sprite2D.frame = 2
 	else:
 		$Sprite2D.visible = false
+	spawn_experience()
+
+func spawn_experience():
+		var values = [1]
+		match reward:
+			1: pass
+			2: values = [1,1]
+			3: values = [1,1,1]
+			4: values = [1,1,1,1]
+			5: values = [5]
+			6: values = [5,1]
+			7: values = [5,1,1]
+			8: values = [5,1,1,1]
+			9: values = [5,1,1,1,1]
+			10: values = [10]
+
+		for v in values:
+			var experience = EXPERIENCE.instantiate()
+			experience.value = v
+			experience.position = global_position
+			w.player_back.call_deferred("add_child", experience)
+
 
 
 func _physics_process(_delta):

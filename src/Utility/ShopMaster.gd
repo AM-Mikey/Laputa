@@ -1,7 +1,7 @@
 extends Node
 
 
-var current_shop_level: int = 0
+var shop_level: int = 0
 
 var blueprint_wait_duration: float = 600 #10 minutes
 var fusion_wait_duration: float = 600
@@ -9,6 +9,10 @@ var rebuild_wait_duration: float = 600
 
 var wait_timer: Node
 
+var upgrades_per_shop_level = {
+	0: [["Revolver", 3], ["Red7", 2]],
+	1: [["Blunderbuss", 2], ["GLauncher", 2]],
+}
 
 func hint_tab(tab_name):
 	var tab_name_snake_case = tab_name.to_snake_case()
@@ -17,7 +21,6 @@ func hint_tab(tab_name):
 
 
 func hint_blueprint(blueprint):
-	print("asdddddddddddddddd")
 	var gun_name_snake_case = blueprint.id.to_snake_case()
 	var db = f.db()
 	db.request_subprint("res://src/Dialog/ShopMaster.json", "blueprint_hint_%s" % gun_name_snake_case)

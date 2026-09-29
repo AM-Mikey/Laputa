@@ -9,6 +9,7 @@ func _ready(): #since preload, this happens on game start
 	automatic = false
 	max_ammo = 0
 	max_level = 3
+	max_unlocked_level = 2
 	set_level(level)
 
 func _set_level(val: int) -> void:

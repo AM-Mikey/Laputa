@@ -267,7 +267,7 @@ func _on_ItemDetector_area_entered(area):
 			active_gun.xp += pickup.value
 			active_gun.lifetime_xp += pickup.value
 			if active_gun.xp >= active_gun.max_xp:
-				if active_gun.level == active_gun.max_level:
+				if active_gun.level == active_gun.max_unlocked_level:
 					active_gun.xp = active_gun.max_xp
 					#TODO: Flash MAX on HUD
 				else:

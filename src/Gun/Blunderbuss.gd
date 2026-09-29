@@ -19,6 +19,7 @@ func _ready():
 	spread_degrees = 36.0
 	max_ammo = 0
 	max_level = 3
+	max_unlocked_level = 1
 	_set_level(level)
 	cd.connect("timeout", Callable(self, "_on_cd_timeout"))
 

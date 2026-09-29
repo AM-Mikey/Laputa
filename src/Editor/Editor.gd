@@ -66,6 +66,13 @@ var tile_map_cursor
 # Blacklist of node types the editor delete should be unable to destroy
 var editor_delete_blacklist = ["background", "spawn_point", "tile_map"]
 
+var visibility_change_list = ["SpawnPoints", "VanishingPoints", "TitlePreviews",\
+	"WaypointGlobalSpawns", "WaypointGlobals", "WaypointLocals", \
+	"VUVectors", "VURects", "VUActors", "ActorSpawns", "PropSpawns", "TriggerSpawns", \
+	"Notes"]
+var input_pickable_change_list = ["WaypointGlobalSpawns", "WaypointGlobals", "WaypointLocals", \
+	"ActorSpawns", "PropSpawns"] #TODO: check, not added for some reason: "TriggerSpawns"
+
 ### SETUP ###
 
 func _ready():
@@ -130,45 +137,26 @@ func enter(): #Call this every time the level is changed or reloaded
 	$Main/Win/Tab/Miscs.setup_miscs()
 
 	setup_level_editor_layer()
-	for s in get_tree().get_nodes_in_group("SpawnPoints"): #TODO: see if you can avoid this by calling a signal or something
-		s.visible = true
-	for v in get_tree().get_nodes_in_group("VanishingPoints"):
-		v.visible = true
-	for t in get_tree().get_nodes_in_group("TitlePreviews"):
-		t.visible = true
-	for wl in get_tree().get_nodes_in_group("WaypointLocals"):
-		wl.visible = true
-		wl.input_pickable = true
-	for wg in get_tree().get_nodes_in_group("WaypointGlobals"):
-		wg.visible = true
-		wg.input_pickable = true
-	for wgs in get_tree().get_nodes_in_group("WaypointGlobalSpawns"): #TODO: this actually only gets the children of actor briefly before they're freed. We want to get child of actor spawn: waypoint spawn, but that doesnt exist.
-		wgs.visible = true
-		wgs.input_pickable = true
-		#wgs.reinitialize()
-	for n in get_tree().get_nodes_in_group("Notes"):
-		n.visible = true
-	for tv in get_tree().get_nodes_in_group("VUVectors"):
-		tv.visible = true
+
+	for i in visibility_change_list:
+		for j in get_tree().get_nodes_in_group(i):
+			j.visible = true
+	for k in input_pickable_change_list:
+		for l in get_tree().get_nodes_in_group(k):
+			l.input_pickable = true
+
 	for t in get_tree().get_nodes_in_group("VURects"):
-		t.visible = true
 		t._ready()
 	for t in get_tree().get_nodes_in_group("VUActors"):
-		t.visible = true
 		t._ready()
 	for a in get_tree().get_nodes_in_group("ActorSpawns"):
-		a.visible = true
-		a.input_pickable = true
 		a.reinitialize()
 	for p in get_tree().get_nodes_in_group("PropSpawns"):
-		p.visible = true
-		p.input_pickable = true
 		p.reinitialize()
 	for t in get_tree().get_nodes_in_group("TriggerSpawns"):
-		t.visible = true
 		t.reinitialize()
-	for l in get_tree().get_nodes_in_group("SunLights"):
-		l.editor_enter()
+	for sl in get_tree().get_nodes_in_group("SunLights"):
+		sl.editor_enter()
 	for t in trigger_collection.get_children():
 		if t.has_node("TriggerController"):
 			t.get_node("TriggerController").enable()
@@ -219,17 +207,12 @@ func exit():
 	await w.finished_spawning
 	w.setup_missions(false, "code")
 
-	var visibility_change_list = ["SpawnPoints", "VanishingPoints", "TitlePreviews",\
-	"WaypointGlobalSpawns", "WaypointGlobals", "WaypointLocals", \
-	"VUVectors", "VURects", "VUActors", "ActorSpawns", "PropSpawns", "TriggerSpawns", \
-	"Notes"]
-
 	for i in visibility_change_list:
 		for j in get_tree().get_nodes_in_group(i):
 			j.visible = false
 
-	for l in get_tree().get_nodes_in_group("SunLights"):
-		l.editor_exit()
+	for sl in get_tree().get_nodes_in_group("SunLights"):
+		sl.editor_exit()
 
 
 	for t in trigger_collection.get_children():
@@ -886,11 +869,12 @@ func copy_actor_spawn():
 
 func paste_actor_spawn(pos):
 	e_log.lprint("pasted actor spawn")
-	var actor_spawn = inspector.copied_entity.duplicate() #flag 8 if this is broken
-	set_owner_recursive(actor_spawn, actor_spawn)
-	actor_spawn.global_position = (pos * 16) + Vector2i(8, 16)
+	var original = inspector.copied_entity
+	var actor_spawn = original.duplicate()
+	actor_spawn.properties = original.properties.duplicate(true)
 	spawn_collection.add_child(actor_spawn)
-	#initialize but only the parts we want to use
+	set_pasted_owner(actor_spawn)
+	actor_spawn.global_position = (pos * 16) + Vector2i(8, 16)
 	actor_spawn.properties["id"] = [actor_spawn.name, TYPE_STRING, ""]
 	var actor = load(actor_spawn.actor_path).instantiate()
 	actor_spawn.setup_vus(actor)
@@ -904,11 +888,12 @@ func copy_prop_spawn():
 
 func paste_prop_spawn(pos):
 	e_log.lprint("pasted prop spawn")
-	var prop_spawn = inspector.copied_entity.duplicate() #flag 8 if this is broken
-	set_owner_recursive(prop_spawn, prop_spawn)
+	var original = inspector.copied_entity
+	var prop_spawn = original.duplicate()
+	prop_spawn.properties = original.properties.duplicate(true)
+	spawn_collection.add_child(prop_spawn, true)
+	set_pasted_owner(prop_spawn)
 	prop_spawn.global_position = (pos * 16)
-	spawn_collection.add_child(prop_spawn)
-	#initialize but only the parts we want to use
 	prop_spawn.properties["id"] = [prop_spawn.name, TYPE_STRING, ""]
 	var prop = load(prop_spawn.prop_path).instantiate()
 	prop_spawn.setup_vus(prop)
@@ -922,16 +907,18 @@ func copy_trigger_spawn():
 
 func paste_trigger_spawn(pos):
 	e_log.lprint("pasted trigger spawn")
-	var trigger_spawn = inspector.copied_entity.duplicate() #flag 8 if this is broken
-	set_owner_recursive(trigger_spawn, trigger_spawn)
-	trigger_spawn.global_position = (pos * 16)
+	var original = inspector.copied_entity
+	var trigger_spawn = original.duplicate()
+	trigger_spawn.properties = original.properties.duplicate(true)
 	spawn_collection.add_child(trigger_spawn)
-	#initialize but only the parts we want to use
+	set_pasted_owner(trigger_spawn)
+	trigger_spawn.global_position = (pos * 16)
 	trigger_spawn.properties["id"] = [trigger_spawn.name, TYPE_STRING, ""]
 	var trigger = load(trigger_spawn.trigger_path).instantiate()
 	trigger_spawn.setup_vus(trigger)
 	trigger.free()
 	inspector.on_selected(trigger_spawn, "trigger_spawn", true)
+
 
 func copy_misc(type):
 	e_log.lprint("copied type " + type.to_lower())
@@ -939,8 +926,8 @@ func copy_misc(type):
 
 func paste_misc(type, pos):
 	e_log.lprint("pasted " + type.to_lower())
-	var misc = inspector.copied_entity.duplicate() #flag 8 if this is broken
-	set_owner_recursive(misc, misc)
+	var original = inspector.copied_entity
+	var misc = original.duplicate()
 	if type in ["waypoint_local", "vu_vector", "vu_rect", "vu_actor", "waypoint_global_spawn"]:
 		inspector.active.get_parent().add_child(misc)
 	elif type in ["waypoint_global"]:
@@ -949,8 +936,16 @@ func paste_misc(type, pos):
 		note_collection.add_child(misc)
 	else:
 		w.current_level.add_child(misc)
+	set_pasted_owner(misc)
 	misc.global_position = (pos * 16) + Vector2i(8, 8)
 	inspector.on_selected(misc, type, true)
+	#not doing any id right now or anything else
+
+func set_pasted_owner(node: Node):
+	node.owner = w.current_level
+	for child in node.get_children():
+		if child.is_in_group("VisualUtilities"):
+			child.owner = w.current_level
 
 ### GETTERS ###
 
@@ -1082,10 +1077,10 @@ func clear_tile_map_cursor(): #Warning: it still exists after!
 	tile_map_cursor.size = Vector2i.ZERO
 	tile_map_cursor.position = Vector2i.ZERO
 
-func set_owner_recursive(node: Node, new_owner: Node):
-	for child in node.get_children():
-		child.owner = new_owner
-		set_owner_recursive(child, new_owner)
+#func set_owner_recursive(node: Node, new_owner: Node):
+	#for child in node.get_children():
+		#child.owner = new_owner
+		#set_owner_recursive(child, new_owner)
 
 
 ### UI ###

@@ -1,8 +1,8 @@
-[gd_scene format=3 uid="uid://bo6wktdqx2md0"]
+[gd_scene format=3 uid="uid://me6lft364rjt"]
 
-[ext_resource type="Script" uid="uid://dntcigk2jyejb" path="res://src/Prop/BreakBlock.gd" id="1_ejag6"]
-[ext_resource type="Texture2D" uid="uid://cj748gt2c20yk" path="res://assets/Prop/BreakBlock.png" id="2_0cau2"]
-[ext_resource type="PackedScene" uid="uid://7hbenrfv6p3q" path="res://src/Utility/PhysicsLayerBody.tscn" id="2_xkehe"]
+[ext_resource type="Script" uid="uid://br0jda1hwutt3" path="res://src/Prop/BreakBlockExperience.gd" id="1_hcii2"]
+[ext_resource type="PackedScene" uid="uid://7hbenrfv6p3q" path="res://src/Utility/PhysicsLayerBody.tscn" id="2_keh3r"]
+[ext_resource type="Texture2D" uid="uid://cj748gt2c20yk" path="res://assets/Prop/BreakBlock.png" id="3_etcjy"]
 
 [sub_resource type="RectangleShape2D" id="1"]
 size = Vector2(16, 16)
@@ -16,29 +16,30 @@ size = Vector2(14, 1)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_0cau2"]
 size = Vector2(16, 16)
 
-[node name="BreakBlock" type="RigidBody2D" unique_id=1193421281 groups=["Entities", "PhysicsProps", "Props"]]
+[node name="BreakBlockExperience" type="RigidBody2D" unique_id=1193421281 groups=["Entities", "PhysicsProps", "Props"]]
 collision_layer = 24
 collision_mask = 520
 can_sleep = false
 lock_rotation = true
 freeze_mode = 1
-script = ExtResource("1_ejag6")
+script = ExtResource("1_hcii2")
 metadata/_custom_type_script = "uid://dgt1xd0pgkr67"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=145023394]
 position = Vector2(8, 8)
 shape = SubResource("1")
 
-[node name="PhysicsLayerBody" parent="." unique_id=307469918 instance=ExtResource("2_xkehe")]
+[node name="PhysicsLayerBody" parent="." unique_id=307469918 instance=ExtResource("2_keh3r")]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PhysicsLayerBody" unique_id=1097072401]
 position = Vector2(8, 8)
 shape = SubResource("1")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=130698616]
-texture = ExtResource("2_0cau2")
+texture = ExtResource("3_etcjy")
 centered = false
 hframes = 6
+frame = 5
 
 [node name="BreakArea" type="Area2D" parent="." unique_id=1617953084]
 collision_layer = 256

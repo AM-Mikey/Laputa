@@ -28,6 +28,13 @@ func _setup_upgrade_guns():
 	for g in f.pc().get_node("GunManager/Guns").get_children():
 		var icon = load("res://assets/UI/GunIcon/%s.png" % g.name)
 		%UpgradeGunBox.add_icon_item(icon, true)
+		var can_upgrade = false
+		var current_shop_level_upgrades = shop.upgrades_per_shop_level[shop.shop_level]
+		for u in current_shop_level_upgrades:
+			if g.name.capitalize() in u && g.max_unlocked_level < u[1]: #current_shop_level_upgrades gun upgrade level
+				can_upgrade = true
+		if !can_upgrade:
+			%UpgradeGunBox.set_item_icon_modulate(g.get_index(), Color(0.0, 0.0, 0.0, 0.5))
 
 
 func _setup_rebuild_guns():
@@ -84,9 +91,10 @@ func _input(event: InputEvent):
 	if event.is_action_pressed("ui_accept") && %BlueprintBox.has_focus() && %BlueprintBox.get_selected_items().size() != 0:
 		%BuildButton.grab_focus()
 		get_viewport().set_input_as_handled()
-		#var index = %BlueprintBox.get_selected_items()[0]
-		#var blueprint = blueprint_resource_array[index]
-		#shop.process_blueprint(blueprint)
+
+	if event.is_action_pressed("ui_accept") && %UpgradeGunBox.has_focus() && %UpgradeGunBox.get_selected_items().size() != 0:
+		%UpgradeButton.grab_focus()
+		get_viewport().set_input_as_handled()
 
 
 
@@ -98,10 +106,13 @@ func _on_Blueprints_item_selected(index: int):
 
 
 func _on_BuildButton_pressed():
+	var player = f.pc()
+	if %BlueprintBox.get_selected_items().size() == 0:
+		am.play("ui_deny")
+		return
 	var index = %BlueprintBox.get_selected_items()[0]
 	var blueprint = blueprint_resource_array[index]
 	var gun = load("res://src/Gun/%s.tscn" % blueprint.id).instantiate()
-	var player = f.pc()
 
 	var already_has_gun = false
 	for g in player.guns.get_children():
@@ -129,13 +140,43 @@ func _on_BuildButton_pressed():
 		print("WARNING: Gun: ", gun.name, " already in guns, ignoring")
 
 
+func _on_UpgradeButton_pressed():
+	var player = f.pc()
+	if %UpgradeGunBox.get_selected_items().size() == 0:
+		am.play("ui_deny")
+		return
+	var index = %UpgradeGunBox.get_selected_items()[0]
+	var gun_resource_name: String = player.get_node("GunManager/Guns").get_child(index).name
+	var gun_in_player = player.get_node("GunManager/Guns").get_node(gun_resource_name)
+	var can_upgrade = false
+	var current_shop_level_upgrades = shop.upgrades_per_shop_level[shop.shop_level]
+	for u in current_shop_level_upgrades:
+		if gun_in_player.name.capitalize() in u && gun_in_player.max_unlocked_level < u[1]: #current_shop_level_upgrades gun upgrade level
+			can_upgrade = true
+	if !can_upgrade:
+		am.play("ui_deny")
+		return
+	gun_in_player.max_unlocked_level += 1 #TODO: upgrade more than one level at a time later?
+	am.play_interrupt("get_item") #TODO: play a smaller jingle
+	player.emit_signal("guns_updated", player.guns.get_children())
+	_setup_upgrade_guns()
+	_setup_rebuild_guns()
+	_setup_blueprints()
+
+
+
 func _on_RebuildButton_pressed():
 	var player = f.pc()
+	if %RebuildGunBox.get_selected_items().size() == 0:
+		am.play("ui_deny")
+		return
 	var index = %RebuildGunBox.get_selected_items()[0]
 	var gun_resource_name: String = player.get_node("GunManager/Guns").get_child(index).name
 	var old_gun_in_player = player.get_node("GunManager/Guns").get_node(gun_resource_name)
 	var can_rebuild = true if old_gun_in_player.lifetime_xp >= old_gun_in_player.xp_to_rebuild else false
-	if !can_rebuild: return
+	if !can_rebuild:
+		am.play("ui_deny")
+		return
 	#var old_gun = load("res://src/Gun/%s.tscn" % gun_resource_name).instantiate()
 	var mark_designation = str("M", old_gun_in_player.rebuild_count + 2)
 	var gun = load("res://src/Gun/%s%s.tscn" % [gun_resource_name, mark_designation]).instantiate()

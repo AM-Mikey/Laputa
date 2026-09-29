@@ -152,4 +152,5 @@ text = "Rebuild"
 [connection signal="pressed" from="MarginContainer/MarginContainer/HBoxContainer/VBoxContainer/ExitButton" to="." method="_on_ExitButton_pressed"]
 [connection signal="item_selected" from="MarginContainer/MarginContainer/HBoxContainer/TabContainer/Blueprints/BlueprintBox" to="." method="_on_Blueprints_item_selected"]
 [connection signal="pressed" from="MarginContainer/MarginContainer/HBoxContainer/TabContainer/Blueprints/Corner/BuildButton" to="." method="_on_BuildButton_pressed"]
+[connection signal="pressed" from="MarginContainer/MarginContainer/HBoxContainer/TabContainer/Upgrade/Corner/UpgradeButton" to="." method="_on_UpgradeButton_pressed"]
 [connection signal="pressed" from="MarginContainer/MarginContainer/HBoxContainer/TabContainer/Rebuild/Corner/RebuildButton" to="." method="_on_RebuildButton_pressed"]

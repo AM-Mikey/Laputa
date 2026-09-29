@@ -35,6 +35,7 @@ var max_ammo: int = 0
 var xp: int = 0
 var max_xp: int = 20
 var max_level: int = 1
+var max_unlocked_level: int = 1
 var lifetime_xp: int = 0
 var xp_to_rebuild: int = 1000
 var rebuild_count = 0
