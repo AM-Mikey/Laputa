@@ -7,15 +7,29 @@ var gun_index_to_swap
 var blueprint_resource_array = []
 var selected_price: int = 0
 
+var alignment: String
+
 @onready var w = get_tree().get_root().get_node("World")
 
 func _ready():
+	vs.connect("scale_changed", Callable(self, "_resolution_scale_changed"))
+	_resolution_scale_changed(vs.resolution_scale)
+	_align_box()
 	_setup_blueprints()
 	_setup_upgrade_guns()
 	_setup_rebuild_guns()
 	_update_money()
 	%BlueprintsTabButton.grab_focus()
 	f.db().busy = true
+
+func _align_box(): #TODO: left/right alignment
+	var db = f.db()
+	if db.alignment == "top":
+		alignment = "bottom"
+		$MarginContainer.size_flags_vertical = SIZE_SHRINK_END
+	elif db.alignment == "bottom":
+		alignment = "top"
+		$MarginContainer.size_flags_vertical = SIZE_SHRINK_BEGIN
 
 func _setup_blueprints():
 	%BlueprintBox.clear()
@@ -105,7 +119,7 @@ func _input(event: InputEvent):
 func _on_Blueprints_item_selected(index: int):
 	#print("selected index %s" % index)
 	var blueprint = blueprint_resource_array[index]
-	shop.hint_blueprint(blueprint)
+	shop.gun_hint_blueprint(blueprint)
 	if !shop.blueprint_prices.has(blueprint.id):
 		%BlueprintsPriceLabel.text = ""
 		return #no price
@@ -150,7 +164,7 @@ func _on_BuildButton_pressed():
 
 	if !player.money >= selected_price:
 		am.play("ui_deny")
-		shop.deny_gun_price()
+		shop.gun_deny_price()
 		return
 	player.money -= selected_price
 
@@ -175,7 +189,7 @@ func _on_BuildButton_pressed():
 		got_gun.gun_name = gun.display_name
 		w.ui.add_child(got_gun)
 
-		shop.build_blueprint()
+		shop.gun_build_blueprint()
 		%BlueprintBox.grab_focus()
 		print("added gun '", gun.name, "' to guns")
 	else:
@@ -200,7 +214,7 @@ func _on_UpgradeButton_pressed():
 		return
 	if !player.money >= selected_price:
 		am.play("ui_deny")
-		shop.deny_gun_price()
+		shop.gun_deny_price()
 		return
 	player.money -= selected_price
 	gun_in_player.max_unlocked_level += 1 #TODO: upgrade more than one level at a time later?
@@ -227,7 +241,7 @@ func _on_RebuildButton_pressed():
 		return
 	if !player.money >= selected_price:
 		am.play("ui_deny")
-		shop.deny_gun_price()
+		shop.gun_deny_price()
 		return
 	player.money -= selected_price
 	var mark_designation = str("M", old_gun_in_player.rebuild_count + 2)
@@ -258,7 +272,7 @@ func _on_RebuildButton_pressed():
 		got_gun.gun_name = gun.display_name
 		w.ui.add_child(got_gun)
 
-		shop.build_blueprint()
+		shop.gun_build_blueprint()
 		%BlueprintBox.grab_focus()
 		print("added gun '", gun.name, "' to guns")
 	else:
@@ -268,17 +282,20 @@ func _on_RebuildButton_pressed():
 
 func _on_BlueprintsTabButton_focus_entered():
 	%TabContainer.current_tab = 0
-	shop.hint_tab("blueprints")
+	shop.gun_hint_tab("blueprints")
 
 func _on_UpgradeTabButton_focus_entered():
 	%TabContainer.current_tab = 1
-	shop.hint_tab("upgrade")
+	shop.gun_hint_tab("upgrade")
 
 func _on_RebuildTabButton_focus_entered():
 	%TabContainer.current_tab = 2
-	shop.hint_tab("rebuild")
+	shop.gun_hint_tab("rebuild")
 
 func _on_ExitButton_pressed():
 	f.db().busy = false
-	shop.hint_tab("exit")
+	shop.gun_hint_tab("exit")
 	queue_free()
+
+func _resolution_scale_changed(_resolution_scale):
+	set_deferred("size", get_tree().get_root().size / vs.menu_resolution_scale)

@@ -2,6 +2,7 @@ extends Node #TODO: this script needs major cleanup
 
 const INVENTORY_ICON = preload("res://src/UI/Inventory/InventoryIcon.tscn")
 const GUN_SHOP = preload("res://src/UI/Shop/GunShop.tscn")
+const ITEM_SHOP = preload("res://src/UI/Shop/ItemShop.tscn")
 
 @onready var w = get_tree().get_root().get_node("World")
 @onready var pc = f.pc()
@@ -204,6 +205,11 @@ func parse_command(string, command_is_first):
 			var gun_shop = GUN_SHOP.instantiate()
 			await get_tree().create_timer(0.5).timeout #wait a brief period before opening the gun shop menu so that our dialog finishes properly
 			w.ui.add_child(gun_shop)
+
+		"item_shop":
+			var item_shop = ITEM_SHOP.instantiate()
+			await get_tree().create_timer(0.5).timeout #wait a brief period before opening the gun shop menu so that our dialog finishes properly
+			w.ui.add_child(item_shop)
 
 
 ### COMMANDS ###

@@ -29,6 +29,7 @@ var character_is_bbcode_count := 0
 var is_sign = false
 var is_flavor = false
 var is_exiting = false
+var alignment: String #"top", "bottom"
 
 var scroll_tween: Tween
 var last_pushed_line := -1
@@ -465,12 +466,14 @@ func align_box():
 	var tween = create_tween()
 	var tween2 = create_tween()
 	if pc_pos.y < camera_center.y + (viewport_size.y / 6): #bottom
+		alignment = "bottom"
 		position.y = viewport_size.y
 		tween.tween_property(self, "position", Vector2(position.x, viewport_size.y - (size.y + 16)), 0.2).set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_OUT)
 		modulate = Color.TRANSPARENT
 		tween2.tween_property(self, "modulate", Color.WHITE, 0.1)
 
 	else: #top
+		alignment = "top"
 		position.y = 0 - size.y
 		tween.tween_property(self, "position", Vector2(position.x, 16), 0.2).set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_OUT)
 		modulate = Color.TRANSPARENT

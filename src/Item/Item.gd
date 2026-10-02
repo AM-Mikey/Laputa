@@ -8,3 +8,4 @@ class_name Item
 @export_multiline var description: String = "This item is null. If you're reading this, this is an error."
 @export var price: int = 0
 @export var type: String = ""
+@export var stackable: = false

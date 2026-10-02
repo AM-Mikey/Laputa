@@ -6,5 +6,7 @@
 [resource]
 script = ExtResource("2")
 display_name = "Linen"
+id = "linen"
 texture = ExtResource("2_wgnea")
 description = "A small bauble shaped like an ox."
+price = 100

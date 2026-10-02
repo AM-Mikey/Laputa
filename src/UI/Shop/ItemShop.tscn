@@ -1,0 +1,103 @@
+[gd_scene format=3 uid="uid://crkpmjpq5j0ip"]
+
+[ext_resource type="Theme" uid="uid://45e84j2sj7w0" path="res://src/UI/Theme/LaputaTheme.tres" id="1_dw8g6"]
+[ext_resource type="Script" uid="uid://bye7jfoj67m5h" path="res://src/UI/Shop/ItemShop.gd" id="2_dw8g6"]
+
+[node name="ItemShop" type="MarginContainer" unique_id=53339590]
+offset_right = 480.0
+offset_bottom = 270.0
+theme = ExtResource("1_dw8g6")
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 8
+script = ExtResource("2_dw8g6")
+
+[node name="MarginContainer" type="MarginContainer" parent="." unique_id=1103184300]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 0
+
+[node name="Panel" type="Panel" parent="MarginContainer" unique_id=1032392362]
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer" unique_id=1194525317]
+layout_mode = 2
+theme_override_constants/margin_left = 4
+theme_override_constants/margin_top = 4
+theme_override_constants/margin_right = 4
+theme_override_constants/margin_bottom = 4
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/MarginContainer" unique_id=1397359333]
+layout_mode = 2
+theme_override_constants/separation = 4
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/MarginContainer/HBoxContainer" unique_id=1817727588]
+layout_mode = 2
+size_flags_vertical = 8
+theme_override_constants/separation = 4
+
+[node name="MoneyLabel" type="RichTextLabel" parent="MarginContainer/MarginContainer/HBoxContainer/VBoxContainer" unique_id=138406147]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(32, 24)
+layout_mode = 2
+size_flags_vertical = 10
+theme_override_colors/default_color = Color(0.9529412, 0.69411767, 0.19215687, 1)
+theme_override_colors/font_shadow_color = Color(0.14509805, 0.09411765, 0.1254902, 1)
+theme_override_constants/shadow_outline_size = 0
+text = "$120"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ExitButton" type="Button" parent="MarginContainer/MarginContainer/HBoxContainer/VBoxContainer" unique_id=1818697859]
+layout_mode = 2
+size_flags_vertical = 10
+text = "Exit"
+
+[node name="TabContainer" type="TabContainer" parent="MarginContainer/MarginContainer/HBoxContainer" unique_id=539156095]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(64, 128)
+layout_mode = 2
+current_tab = 0
+clip_tabs = false
+tabs_visible = false
+
+[node name="Items" type="MarginContainer" parent="MarginContainer/MarginContainer/HBoxContainer/TabContainer" unique_id=1901752528]
+layout_mode = 2
+metadata/_tab_index = 0
+
+[node name="ItemBox" type="ItemList" parent="MarginContainer/MarginContainer/HBoxContainer/TabContainer/Items" unique_id=1220234257]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(128, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+allow_search = false
+auto_width = true
+max_columns = 6
+same_column_width = true
+
+[node name="Corner" type="MarginContainer" parent="MarginContainer/MarginContainer/HBoxContainer/TabContainer/Items" unique_id=376298588]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 8
+
+[node name="HBox" type="HBoxContainer" parent="MarginContainer/MarginContainer/HBoxContainer/TabContainer/Items/Corner" unique_id=1414016627]
+layout_mode = 2
+
+[node name="PriceLabel" type="RichTextLabel" parent="MarginContainer/MarginContainer/HBoxContainer/TabContainer/Items/Corner/HBox" unique_id=282300375]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(32, 24)
+layout_mode = 2
+theme_override_colors/font_shadow_color = Color(0.14509805, 0.09411765, 0.1254902, 1)
+theme_override_constants/shadow_outline_size = 0
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="BuyButton" type="Button" parent="MarginContainer/MarginContainer/HBoxContainer/TabContainer/Items/Corner/HBox" unique_id=336941038]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Buy"
+
+[connection signal="pressed" from="MarginContainer/MarginContainer/HBoxContainer/VBoxContainer/ExitButton" to="." method="_on_ExitButton_pressed"]
+[connection signal="item_selected" from="MarginContainer/MarginContainer/HBoxContainer/TabContainer/Items/ItemBox" to="." method="_on_ItemBox_item_selected"]
+[connection signal="pressed" from="MarginContainer/MarginContainer/HBoxContainer/TabContainer/Items/Corner/HBox/BuyButton" to="." method="_on_BuyButton_pressed"]

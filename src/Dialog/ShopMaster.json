@@ -1,54 +1,85 @@
 {
-	"tab_hint_blueprints":
+	"gun_tab_hint_blueprints":
 	"
 	/newchar,basil,Basil /auto,on /voice,0.01,false,npc_voice_normal I can create new weapons using blueprints you bring to me.
 	",
 
-	"tab_hint_upgrade":
+	"gun_tab_hint_upgrade":
 	"
 	/newchar,basil,Basil /auto,on /voice,0.01,false,npc_voice_normal Upgrades will allow your weapons to reach higher levels than previously possible.
 	",
 
-	"tab_hint_rebuild":
+	"gun_tab_hint_rebuild":
 	"
 	/newchar,basil,Basil /auto,on /voice,0.01,false,npc_voice_normal Your favorite guns can be rebuilt stronger if you've gotten used to them.
 	",
 
-	"tab_hint_exit":
+	"gun_tab_hint_exit":
 	"
 	/newchar,basil,Basil /auto,off A pleasure doing business!
 	",
 
 
-	"blueprint_hint_turnstile_jumper":
+	"gun_blueprint_hint_turnstile_jumper":
 	"
 	/newchar,basil,Basil /auto,on /voice,0.01,false,npc_voice_normal Whoa! that's an odd one.
 	That style of revolver is one that isn't made anymore.
 	",
 
-	"blueprint_hint_roberta":
+	"gun_blueprint_hint_roberta":
 	"
 	/newchar,basil,Basil /auto,on /voice,0.01,false,npc_voice_normal It's very pretty isn't it.
 	I've seen this prototype before. It never made it to production.
 	",
 
 
-	"blueprint_turnstile_jumper":
-	"
-	/newchar,basil,Basil /auto,on /voice,0.01,false,npc_voice_normal Using this blueprint I can make the Turnstile Jumper.
-	Would you like me to do so? /yn
-	/db,0 Let's go!
-	/db,1 Let me know if you change your mind.
-	",
-
-	"build_button":
+	"gun_build_button":
 	"
 	/newchar,basil,Basil /auto,on /voice,0.01,false,npc_voice_normal Here you go! In future versions this will use a 10-minute timer.
 	",
 
-	"deny_gun_price":
+	"gun_deny_price":
 	"
 	/newchar,basil,Basil /auto,on /voice,0.01,false,npc_voice_normal Sorry, looks like you can't afford that.
 	",
-
+	
+	
+	
+	
+	"item_tab_hint_exit":
+	"
+	/newchar,sage,Sage /auto,off /voice,0.01,false,npc_voice_normal Hey, spend a little more next time okay? I gotta eat too!
+	",
+	
+	
+	"item_hint_linen":
+	"
+	/newchar,sage,Sage /auto,on /voice,0.01,false,npc_voice_normal I don't know what it does, but it's cute, isn't it?
+	",
+	
+	"item_hint_salmiakki":
+	"
+	/newchar,sage,Sage /auto,on /voice,0.01,false,npc_voice_normal It's an aquired taste, but still pretty popular on Laputa.
+	",
+	
+	
+	"item_buy_button":
+	"
+	/newchar,sage,Sage /auto,on /voice,0.01,false,npc_voice_normal Thanks for doing business!
+	",
+	
+	"item_deny_price":
+	"
+	/newchar,sage,Sage /auto,on /voice,0.01,false,npc_voice_normal Not enough dinero, huh? Come back when you're a little, hmm... richer.
+	",
+	
+	"item_deny_duplicate":
+	"
+	/newchar,sage,Sage /auto,on /voice,0.01,false,npc_voice_normal Looks like you've already got one.
+	",
+	
+	"item_deny_stock":
+	"
+	/newchar,sage,Sage /auto,on /voice,0.01,false,npc_voice_normal That's out of stock.
+	",
 }

@@ -23,23 +23,51 @@ var rebuild_prices = {
 	"MPistol": 50,
 }
 
-func hint_tab(tab_name):
+#sage item shop
+var items_per_shop_level = { #ID, rebuyable, in_stock
+	0: [["Linen", false, true], ["Salmiakki", true, true]],
+}
+
+### GUN SHOP ###
+
+func gun_hint_tab(tab_name):
 	var tab_name_snake_case = tab_name.to_snake_case()
 	var db = f.db()
-	db.request_subprint("res://src/Dialog/ShopMaster.json", "tab_hint_%s" % tab_name_snake_case)
+	db.request_subprint("res://src/Dialog/ShopMaster.json", "gun_tab_hint_%s" % tab_name_snake_case)
 
-
-func hint_blueprint(blueprint):
+func gun_hint_blueprint(blueprint):
 	var gun_name_snake_case = blueprint.id.to_snake_case()
 	var db = f.db()
-	db.request_subprint("res://src/Dialog/ShopMaster.json", "blueprint_hint_%s" % gun_name_snake_case)
+	db.request_subprint("res://src/Dialog/ShopMaster.json", "gun_blueprint_hint_%s" % gun_name_snake_case)
 
-
-func build_blueprint():
+func gun_build_blueprint():
 	var db = f.db()
-	db.request_subprint("res://src/Dialog/ShopMaster.json", "build_button")
+	db.request_subprint("res://src/Dialog/ShopMaster.json", "gun_build_button")
 
-
-func deny_gun_price():
+func gun_deny_price():
 	var db = f.db()
-	db.request_subprint("res://src/Dialog/ShopMaster.json", "deny_gun_price")
+	db.request_subprint("res://src/Dialog/ShopMaster.json", "gun_deny_price")
+
+### ITEM SHOP ###
+
+func item_hint_tab(tab_name):
+	var tab_name_snake_case = tab_name.to_snake_case()
+	var db = f.db()
+	db.request_subprint("res://src/Dialog/ShopMaster.json", "item_tab_hint_%s" % tab_name_snake_case)
+
+func item_hint(item_name):
+	var item_name_snake_case = item_name.to_snake_case()
+	var db = f.db()
+	db.request_subprint("res://src/Dialog/ShopMaster.json", "item_hint_%s" % item_name_snake_case)
+
+func item_buy_button():
+	var db = f.db()
+	db.request_subprint("res://src/Dialog/ShopMaster.json", "item_buy_button")
+
+func item_deny_price():
+	var db = f.db()
+	db.request_subprint("res://src/Dialog/ShopMaster.json", "item_deny_price")
+
+func item_deny_duplicate():
+	var db = f.db()
+	db.request_subprint("res://src/Dialog/ShopMaster.json", "item_deny_duplicate")

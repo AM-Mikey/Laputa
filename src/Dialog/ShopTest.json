@@ -1,7 +1,7 @@
 {
 	"basil_options":
 	"
-	/newchar,basil,Basil Oh, did you need me? /options,What's_Up?,About_this...,Guns,Never_mind
+	/newchar,basil,Basil Oh, did you need me? /options,What's_up?,About_this...,Guns,Never_mind
 	/db,0 I'm still drafting this new gun design. It's not ready quite yet... /eb
 	/db,1 /subprint,basil_topics
 	/db,2 Here's what I can do for you /gun_shop
@@ -13,5 +13,13 @@
 	/newchar,basil,Basil What about? /topics,davey,yourself
 	/db,0 About Davey... /eb
 	/db,1 About Myself... /eb
+	",
+
+	"sage_options":
+	"
+	/newchar,sage,Sage What's up? /options,for_sale?,about...,never_mind
+	/db,0 Just some odds and ends, take a look. /item_shop
+	/db,1 Nope. Nothing about anything. /eb
+	/db,2 I guess we'll catch up later then. /eb
 	",
 }
