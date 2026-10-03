@@ -78,6 +78,8 @@ size = Vector2(6, 2)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_v6qwc"]
 size = Vector2(0.9861107, 1)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_sat3f"]
+
 [sub_resource type="ShaderMaterial" id="61"]
 shader = ExtResource("24_s1pnb")
 shader_parameter/screen_mode = false
@@ -4181,6 +4183,14 @@ collision_mask = 1048576
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Ear" unique_id=1068930771]
 position = Vector2(0, -15)
 shape = SubResource("RectangleShape2D_v6qwc")
+
+[node name="Inspect" type="Area2D" parent="." unique_id=2097421322]
+position = Vector2(0, -10)
+collision_layer = 0
+collision_mask = 144
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Inspect" unique_id=1291102354]
+shape = SubResource("RectangleShape2D_sat3f")
 
 [node name="GunManager" type="Node2D" parent="." unique_id=950056630]
 script = ExtResource("12")

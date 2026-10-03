@@ -39,7 +39,6 @@ var flash_type = FLASH_NONE
 var flash_step: int = 0
 var dl: Node
 
-
 @onready var w = get_tree().get_root().get_node("World")
 @onready var pc = f.pc()
 
@@ -313,8 +312,8 @@ func _on_flash_timer_timeout():
 
 
 func _input(event):
-	if auto_input: return
 	if event.is_action_pressed("ui_accept") && !busy: #bypass inp.can_act
+		#breakpoint
 		if $Options.is_entering || $Options.is_displaying || $Options.is_exiting: return #so it doesn't input
 		if awaiting_merge:
 			awaiting_merge = false
@@ -322,6 +321,7 @@ func _input(event):
 		elif active: #if already active, speed text up
 			do_delay = false
 		else:
+			print("Progressed text")
 			check_line_overflow(character_shown_count + 1)
 			progress_text()
 
