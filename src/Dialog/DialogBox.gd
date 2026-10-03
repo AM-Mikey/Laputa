@@ -318,7 +318,7 @@ func _input(event):
 		if awaiting_merge:
 			awaiting_merge = false
 			$CommandHandler.seek("/m")
-		elif active: #if already active, speed text up
+		elif active && !is_sign: #if already active, speed text up
 			do_delay = false
 		else:
 			print("Progressed text")
