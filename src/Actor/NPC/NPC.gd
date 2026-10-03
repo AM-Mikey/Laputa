@@ -11,7 +11,6 @@ var predialog_state: String
 
 var dialog_box: Node
 
-var active_pc = null
 var disabled = false
 var move_dir = Vector2.LEFT
 
@@ -231,9 +230,9 @@ func enter_talk(_last_state):
 
 ### MISC
 
-func _input(event):
-	if conversation_queue.size() == 0: return
-	if event.is_action_pressed("inspect") && active_pc && conversation_queue[0][0] != "" && state != "talk" && active_pc.mm.current_state == active_pc.mm.states["run"]:
+func player_interact(p: Player):
+	if conversation_queue.size() == 0: return # TODO: Don't hog up interaction stuff if we can't interact anyway xd (maybe do this, not sure!!)
+	if conversation_queue[0][0] != "" && state != "talk":
 		if inp.can_act:
 			predialog_state = state
 			change_state("talk")
@@ -294,16 +293,6 @@ func walk_to_waypoint(index):
 		dialog_box.busy = true
 	change_state("walkto")
 	return
-
-
-
-### SIGNALS
-
-func _on_PlayerDetector_body_entered(body):
-	active_pc = body.owner
-
-func _on_PlayerDetector_body_exited(_body):
-	active_pc = null
 
 #func _on_waypoint_bail_timer_timeout(): #TODO: consider reimplementing (ala child.tscn)
 	#pass

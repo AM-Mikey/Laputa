@@ -6,7 +6,7 @@
 size = Vector2(16, 16)
 
 [node name="Sign" type="Area2D" unique_id=1361037147 groups=["Triggers"]]
-collision_layer = 0
+collision_layer = 16
 script = ExtResource("2")
 editor_hidden = true
 color = Color(0.901961, 0.74902, 0, 1)

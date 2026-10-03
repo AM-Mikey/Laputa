@@ -18,6 +18,10 @@ func state_process(_delta):
 	if pc.is_on_wall():
 		new_velocity.y = max(pc.velocity.y, new_velocity.y)
 
+	#if inp.pressed("jump"):
+		#for i in get_tree().get_nodes_in_group("DialogBoxes"): #exit current db
+			#i.exit()
+
 #	if Input.is_action_pressed("move_left") \ #exit early
 #	or Input.is_action_pressed("move_right") \
 #	or Input.is_action_pressed("jump"):

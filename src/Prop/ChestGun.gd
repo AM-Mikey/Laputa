@@ -4,7 +4,6 @@ const ICON = preload("res://assets/Prop/ChestGunIcon.png")
 const GOT_GUN = preload("res://src/UI/GotGun.tscn")
 
 var gun
-var active_players = []
 
 @export var gun_name: String
 
@@ -21,24 +20,21 @@ func setup(): #Reminder: no function called can use await
 func expend_prop(): #used when loading a spent prop
 	$AnimationPlayer.play("Used")
 
-func _input(event):
+func player_interact(p: Player):
 	if !gun: return
-	if event.is_action_pressed("inspect") && !active_players.is_empty():
-		for p in active_players:
-			if !p.disabled && inp.can_act && p.mm.current_state == p.mm.states["run"]:
-				if spent:
-					am.play("prop_deny")
-					return
-				var previous_look_dir = p.look_dir
-				p.mm.change_state("inspect")
-				p.inspect_target = $CollisionShape2D
-				activate(p)
-				await get_tree().create_timer(inspect_time, false, true).timeout
-				p.mm.change_state("run")
-				p.look_dir = previous_look_dir
+	if spent:
+		am.play("prop_deny")
+		return
+	var previous_look_dir = p.look_dir
+	p.mm.change_state("inspect")
+	p.inspect_target = $CollisionShape2D
+	activate(p)
+	await get_tree().create_timer(inspect_time, false, true).timeout
+	p.mm.change_state("run")
+	p.look_dir = previous_look_dir
 
 
-func activate(player):
+func activate(player: Player):
 	am.play("chest_open")
 	am.play_interrupt("get_item")
 	var got_gun = GOT_GUN.instantiate()
@@ -67,13 +63,3 @@ func activate(player):
 
 
 #TODO: sparkle effects that descend, sparkle burst when opening
-
-
-
-### SIGNALS ###
-
-func _on_PlayerDetector_body_entered(body):
-	active_players.append(body.get_parent())
-
-func _on_PlayerDetector_body_exited(body):
-	active_players.erase(body.get_parent())
