@@ -1,0 +1,23 @@
+{
+	"npc_set_main_conversation_queue": {
+		"Main": {
+			"golem_npc": {
+				"boss_test_intro_speak": "boss_intro_dialog",
+			},
+		},
+	},
+
+	"trigger_set_spawn": {
+		"Main": {
+			"boss_room": {
+				"boss_test": true,
+				"boss_test_intro": false,
+			},
+			"boss_invis_wall": {
+				"boss_test": false,
+				"boss_test_intro": true,
+			},
+		},
+	},
+
+}

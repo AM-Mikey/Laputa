@@ -11,6 +11,8 @@
 [ext_resource type="PackedScene" uid="uid://cpkdlvdxe3pdh" path="res://src/Editor/SpawnPoint.tscn" id="10_h4mej"]
 [ext_resource type="PackedScene" uid="uid://ciahlvrcyq5yt" path="res://src/Editor/Spawn/TriggerSpawn.tscn" id="11_1n8rj"]
 [ext_resource type="PackedScene" uid="uid://dhjqke0pgo21f" path="res://src/Editor/TitlePreview.tscn" id="11_53evh"]
+[ext_resource type="PackedScene" uid="uid://bwp6sqdlvfo84" path="res://src/Editor/VisualUtility/VUVector.tscn" id="13_gby2n"]
+[ext_resource type="PackedScene" uid="uid://cyg86p7wau0n7" path="res://src/Editor/VisualUtility/WaypointLocal.tscn" id="15_k23y5"]
 
 [sub_resource type="Gradient" id="Gradient_53evh"]
 interpolation_mode = 2
@@ -26,6 +28,7 @@ level_name = "MissionTest"
 dialog_json = "res://src/Dialog/MissionTest.json"
 mission_level_update = "res://src/Mission/MissionTest.json"
 debug_main_mission_stage_name = "talk_npc_a"
+debug_guns_on_enter = Array[String](["tsurugi"])
 controller_color_gradient = SubResource("Gradient_53evh")
 
 [node name="LevelLimiter" parent="." unique_id=1355825292 instance=ExtResource("2_72to3")]
@@ -107,6 +110,8 @@ properties = {
 "id": ["npc_d", 4, ""],
 "speed": [Vector2(150, 350), 5, ""],
 "starting_state": ["idle", 4, ""],
+"voice_delay": [0.06, 3, ""],
+"voice_sfx": ["npc_voice_high", 4, ""],
 "voiced": [true, 1, ""],
 "walk_speed": [Vector2(50, 50), 5, ""],
 "water_gravity": [150.0, 3, ""]
@@ -123,6 +128,8 @@ properties = {
 "id": ["npc_a", 4, ""],
 "speed": [Vector2(150, 350), 5, ""],
 "starting_state": ["idle", 4, ""],
+"voice_delay": [0.03, 3, ""],
+"voice_sfx": ["npc_voice_normal", 4, ""],
 "voiced": [true, 1, ""],
 "walk_speed": [Vector2(50, 50), 5, ""],
 "water_gravity": [150.0, 3, ""]
@@ -139,6 +146,8 @@ properties = {
 "id": ["npc_b", 4, ""],
 "speed": [Vector2(150, 350), 5, ""],
 "starting_state": ["idle", 4, ""],
+"voice_delay": [0.03, 3, ""],
+"voice_sfx": ["npc_voice_normal", 4, ""],
 "voiced": [true, 1, ""],
 "walk_speed": [Vector2(50, 50), 5, ""],
 "water_gravity": [150.0, 3, ""]
@@ -155,6 +164,8 @@ properties = {
 "id": ["npc_c", 4, ""],
 "speed": [Vector2(150, 350), 5, ""],
 "starting_state": ["idle", 4, ""],
+"voice_delay": [0.03, 3, ""],
+"voice_sfx": ["npc_voice_normal", 4, ""],
 "voiced": [true, 1, ""],
 "walk_speed": [Vector2(50, 50), 5, ""],
 "water_gravity": [150.0, 3, ""]
@@ -176,10 +187,12 @@ visibility_layer = 2
 position = Vector2(32, 208)
 prop_path = "res://src/Prop/BreakBlock.tscn"
 properties = {
+"break_on_fall": [false, 1, ""],
 "crush_enemies": [true, 1],
 "crush_players": [false, 1],
 "do_bubble": [false, 1, ""],
 "editor_hidden": [false, 1],
+"has_gravity": [true, 1, ""],
 "id": ["box_a", 4]
 }
 
@@ -188,10 +201,12 @@ visibility_layer = 2
 position = Vector2(112, 208)
 prop_path = "res://src/Prop/BreakBlock.tscn"
 properties = {
+"break_on_fall": [false, 1, ""],
 "crush_enemies": [true, 1],
 "crush_players": [false, 1],
 "do_bubble": [false, 1, ""],
 "editor_hidden": [false, 1],
+"has_gravity": [true, 1, ""],
 "id": ["box_b", 4]
 }
 
@@ -200,10 +215,12 @@ visibility_layer = 2
 position = Vector2(192, 208)
 prop_path = "res://src/Prop/BreakBlock.tscn"
 properties = {
+"break_on_fall": [false, 1, ""],
 "crush_enemies": [true, 1],
 "crush_players": [false, 1],
 "do_bubble": [false, 1, ""],
 "editor_hidden": [false, 1],
+"has_gravity": [true, 1, ""],
 "id": ["box_c", 4]
 }
 
@@ -212,10 +229,12 @@ visibility_layer = 2
 position = Vector2(272, 208)
 prop_path = "res://src/Prop/BreakBlock.tscn"
 properties = {
+"break_on_fall": [false, 1, ""],
 "crush_enemies": [true, 1],
 "crush_players": [false, 1],
 "do_bubble": [false, 1, ""],
 "editor_hidden": [false, 1],
+"has_gravity": [true, 1, ""],
 "id": ["box_d", 4]
 }
 
@@ -230,8 +249,10 @@ trigger_path = "res://src/Trigger/Door.tscn"
 properties = {
 "color": [Color(0, 0.4, 0, 1), 20, ""],
 "door_index": [0, 2, ""],
+"eat_key": [true, 1, ""],
 "editor_hidden": [false, 1, ""],
 "id": ["door_a", 4, ""],
+"key_id": ["", 4, ""],
 "level": ["", 4, ""],
 "locked": [false, 1, ""],
 "same_level": [true, 1, ""],
@@ -250,8 +271,10 @@ trigger_path = "res://src/Trigger/Door.tscn"
 properties = {
 "color": [Color(0, 0.4, 0, 1), 20, ""],
 "door_index": [0, 2, ""],
+"eat_key": [true, 1, ""],
 "editor_hidden": [false, 1, ""],
 "id": ["door_b", 4, ""],
+"key_id": ["", 4, ""],
 "level": ["", 4, ""],
 "locked": [false, 1, ""],
 "same_level": [true, 1, ""],
@@ -270,8 +293,10 @@ trigger_path = "res://src/Trigger/Door.tscn"
 properties = {
 "color": [Color(0, 0.4, 0, 1), 20, ""],
 "door_index": [0, 2, ""],
+"eat_key": [true, 1, ""],
 "editor_hidden": [false, 1, ""],
 "id": ["door_c", 4, ""],
+"key_id": ["", 4, ""],
 "level": ["", 4, ""],
 "locked": [false, 1, ""],
 "same_level": [true, 1, ""],
@@ -290,8 +315,10 @@ trigger_path = "res://src/Trigger/Door.tscn"
 properties = {
 "color": [Color(0, 0.4, 0, 1), 20, ""],
 "door_index": [0, 2, ""],
+"eat_key": [true, 1, ""],
 "editor_hidden": [false, 1, ""],
 "id": ["door_d", 4, ""],
+"key_id": ["", 4, ""],
 "level": ["", 4, ""],
 "locked": [false, 1, ""],
 "same_level": [true, 1, ""],
@@ -310,8 +337,10 @@ trigger_path = "res://src/Trigger/Door.tscn"
 properties = {
 "color": [Color(0, 0.4, 0, 1), 20, ""],
 "door_index": [1, 2, ""],
+"eat_key": [true, 1, ""],
 "editor_hidden": [false, 1, ""],
 "id": ["", 4, ""],
+"key_id": ["", 4, ""],
 "level": ["", 4, ""],
 "locked": [false, 1, ""],
 "same_level": [true, 1, ""],
@@ -328,6 +357,130 @@ properties = {
 "editor_hidden": [false, 1],
 "id": ["ammo_refill", 4]
 }
+
+[node name="Frog" parent="Spawns" unique_id=1199277091 instance=ExtResource("7_72to3")]
+visibility_layer = 2
+position = Vector2(72, 224)
+actor_path = "res://src/Actor/Enemy/Frog.tscn"
+properties = {
+"base_gravity": [300.0, 3, ""],
+"croak_time": [1.0, 3, ""],
+"debug": [true, 1, ""],
+"difficulty": [1, 2, ""],
+"do_bubbles": [true, 1, ""],
+"editor_hidden": [false, 1, ""],
+"id": ["frog_a", 4, ""],
+"jump_delay": [3.0, 3, ""],
+"speed": [Vector2(50, 100), 5, ""],
+"tongue_damage": [2.0, 3, ""],
+"water_gravity": [150.0, 3, ""]
+}
+
+[node name="LookVector" parent="Spawns/Frog" unique_id=872564127 instance=ExtResource("13_gby2n")]
+visibility_layer = 2
+position = Vector2(0, -7)
+tag_name = "look"
+snap_degrees = 180.0
+movement_locked = true
+
+[node name="TongueRange" parent="Spawns/Frog" unique_id=1432238783 instance=ExtResource("15_k23y5")]
+visibility_layer = 2
+position = Vector2(-32, -8)
+tag_name = "tongue_range"
+lock_y = true
+
+[node name="Frog1" parent="Spawns" unique_id=938055951 instance=ExtResource("7_72to3")]
+visibility_layer = 2
+position = Vector2(152, 224)
+actor_path = "res://src/Actor/Enemy/Frog.tscn"
+properties = {
+"base_gravity": [300.0, 3, ""],
+"croak_time": [1.0, 3, ""],
+"debug": [true, 1, ""],
+"difficulty": [1, 2, ""],
+"do_bubbles": [true, 1, ""],
+"editor_hidden": [false, 1, ""],
+"id": ["frog_b", 4, ""],
+"jump_delay": [3.0, 3, ""],
+"speed": [Vector2(50, 100), 5, ""],
+"tongue_damage": [2.0, 3, ""],
+"water_gravity": [150.0, 3, ""]
+}
+
+[node name="LookVector" parent="Spawns/Frog1" unique_id=142411092 instance=ExtResource("13_gby2n")]
+visibility_layer = 2
+position = Vector2(0, -7)
+tag_name = "look"
+snap_degrees = 180.0
+movement_locked = true
+
+[node name="TongueRange" parent="Spawns/Frog1" unique_id=2114704289 instance=ExtResource("15_k23y5")]
+visibility_layer = 2
+position = Vector2(-32, -8)
+tag_name = "tongue_range"
+lock_y = true
+
+[node name="Frog2" parent="Spawns" unique_id=1064582988 instance=ExtResource("7_72to3")]
+visibility_layer = 2
+position = Vector2(232, 224)
+actor_path = "res://src/Actor/Enemy/Frog.tscn"
+properties = {
+"base_gravity": [300.0, 3, ""],
+"croak_time": [1.0, 3, ""],
+"debug": [true, 1, ""],
+"difficulty": [1, 2, ""],
+"do_bubbles": [true, 1, ""],
+"editor_hidden": [false, 1, ""],
+"id": ["frog_c", 4, ""],
+"jump_delay": [3.0, 3, ""],
+"speed": [Vector2(50, 100), 5, ""],
+"tongue_damage": [2.0, 3, ""],
+"water_gravity": [150.0, 3, ""]
+}
+
+[node name="LookVector" parent="Spawns/Frog2" unique_id=559921844 instance=ExtResource("13_gby2n")]
+visibility_layer = 2
+position = Vector2(0, -7)
+tag_name = "look"
+snap_degrees = 180.0
+movement_locked = true
+
+[node name="TongueRange" parent="Spawns/Frog2" unique_id=162325801 instance=ExtResource("15_k23y5")]
+visibility_layer = 2
+position = Vector2(-32, -8)
+tag_name = "tongue_range"
+lock_y = true
+
+[node name="Frog3" parent="Spawns" unique_id=663942273 instance=ExtResource("7_72to3")]
+visibility_layer = 2
+position = Vector2(312, 224)
+actor_path = "res://src/Actor/Enemy/Frog.tscn"
+properties = {
+"base_gravity": [300.0, 3, ""],
+"croak_time": [1.0, 3, ""],
+"debug": [true, 1, ""],
+"difficulty": [1, 2, ""],
+"do_bubbles": [true, 1, ""],
+"editor_hidden": [false, 1, ""],
+"id": ["frog_d", 4, ""],
+"jump_delay": [3.0, 3, ""],
+"speed": [Vector2(50, 100), 5, ""],
+"tongue_damage": [2.0, 3, ""],
+"water_gravity": [150.0, 3, ""]
+}
+
+[node name="LookVector" parent="Spawns/Frog3" unique_id=1379445726 instance=ExtResource("13_gby2n")]
+visibility_layer = 2
+position = Vector2(0, -7)
+tag_name = "look"
+snap_degrees = 180.0
+movement_locked = true
+
+[node name="TongueRange" parent="Spawns/Frog3" unique_id=1798658911 instance=ExtResource("15_k23y5")]
+visibility_layer = 2
+position = Vector2(-32, -8)
+tag_name = "tongue_range"
+lock_y = true
 
 [node name="Waypoints" type="Node2D" parent="." unique_id=1416282546]
 visibility_layer = 2

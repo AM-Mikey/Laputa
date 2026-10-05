@@ -5,6 +5,8 @@ extends MarginContainer
 @export var size_is_default = true
 
 var allow_spawn := true
+var spawning: = false
+
 var state = "idle"
 var active_handle = null
 var drag_offset = Vector2.ZERO
@@ -90,6 +92,18 @@ func spawn():
 		printerr("ERROR: no trigger chosen in TriggerSpawn")
 		return
 
+	# For the MissionSystem correctly spawn and despawn stuff based on mission stage
+	spawning = true
+	_deferred_spawn.call_deferred()
+
+func _deferred_spawn():
+	if !allow_spawn:
+		spawning = false
+		return
+	if trigger_path == null:
+		printerr("ERROR: no trigger chosen in TriggerSpawn")
+		spawning = false
+		return
 	var trigger = load(trigger_path).instantiate()
 	for p in properties:
 		trigger.set(p, properties[p][0])
@@ -110,7 +124,8 @@ func spawn():
 			var copy = c.duplicate()
 			trigger.add_child(copy)
 
-	w.current_level.get_node("Triggers").call_deferred("add_child", trigger)
+	w.current_level.get_node("Triggers").add_child(trigger)
+	spawning = false
 
 
 func _input(event):

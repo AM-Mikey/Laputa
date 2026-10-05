@@ -5,6 +5,7 @@ extends Area2D
 @export var tag_name: String = ""
 
 var allow_spawn := true
+var spawning: = false
 
 @onready var w = get_tree().get_root().get_node("World")
 
@@ -202,6 +203,21 @@ func spawn():
 		w.emit_signal.call_deferred("finished_spawn_entities_step")
 		return
 
+	# For the MissionSystem correctly spawn and despawn stuff based on mission stage
+	spawning = true
+	_deferred_spawn.call_deferred()
+
+func _deferred_spawn() -> void:
+	if !allow_spawn:
+		w.emit_signal.call_deferred("finished_spawn_entities_step")
+		spawning = false
+		return
+	if actor_path == "":
+		printerr("ERROR: no actor chosen in ActorSpawn")
+		w.emit_signal.call_deferred("finished_spawn_entities_step")
+		spawning = false
+		return
+
 	var actor = load(actor_path).instantiate()
 	for p in properties:
 		actor.set(p, properties[p][0])
@@ -209,7 +225,7 @@ func spawn():
 	if properties["id"][0] == "": #no given id
 		actor.id = name
 	actor.global_position = global_position
-	w.current_level.get_node("Actors").call_deferred("add_child", actor)
+	w.current_level.get_node("Actors").add_child(actor)
 
 	for ac in actor.get_children(): #clear old from actor
 		if ac.is_in_group("VisualUtilities"):
@@ -220,6 +236,8 @@ func spawn():
 		if c.is_in_group("VisualUtilities") && !c.is_in_group("WaypointGlobalSpawns"):
 			var copy = c.duplicate()
 			actor.add_child(copy)
+	print("T")
+	spawning = false
 
 ### HELPERS ###
 

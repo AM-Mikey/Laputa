@@ -14,6 +14,7 @@ const TITLECAM = preload("res://src/UI/Title/TitleCam.tscn")
 
 var current_level
 var is_in_transition := false
+var finished_spawning_entities: bool = false
 
 @export var development_stage: String = "Alpha"
 var internal_version: String = get_internal_version()
@@ -120,9 +121,7 @@ func setup_title_and_background(): #Reminder: no function called can use await
 	add_child(current_level)
 	ml.add_child(TITLE.instantiate())
 	add_child(TITLECAM.instantiate())
-	spawn_entities()
-	#await get_tree().physics_frame
-	#await get_tree().physics_frame #wait for npcs to spawn #caused by camera reset time #TODO: is this actally needed without player camera?
+	await spawn_entities()
 	setup_missions(false, "first_time")
 
 
@@ -146,7 +145,7 @@ func first_time_level_setup(): #Reminder: no function called can use await
 		f.pc().setup_items(current_level.debug_items_on_enter)
 	else:
 		f.pc().setup_items(default_item_array)
-	spawn_entities()
+	await spawn_entities()
 
 	$Juniper.global_position = get_spawn_point().global_position
 	$Juniper/PlayerCamera.reset() #TODO: REMOVE THESE AWAITS IT CAUSES SHIT TO MULTITHREAD
@@ -154,8 +153,6 @@ func first_time_level_setup(): #Reminder: no function called can use await
 	#wipe would go here if we want one
 	display_level_text(current_level)
 	run_conversation_on_enter(current_level)
-	await get_tree().physics_frame
-	await get_tree().physics_frame #wait for npcs to spawn #caused by camera reset time
 	setup_missions(false, "first_time")
 
 
@@ -200,7 +197,7 @@ func change_level_via_code(level_path, use_save_data):
 			f.pc().setup_items(default_item_array)
 	get_node("HUDLayer/HUDGroup").add_child(HUD.instantiate())
 
-	spawn_entities()
+	await spawn_entities()
 
 	$Juniper.global_position = get_spawn_point().global_position
 	$Juniper/PlayerCamera.reset()
@@ -210,11 +207,12 @@ func change_level_via_code(level_path, use_save_data):
 	run_conversation_on_enter(current_level)
 	if use_save_data:
 		SaveSystem.read_level_data_from_temp(current_level)
-	await get_tree().physics_frame
-	await get_tree().physics_frame #wait for npcs to spawn, takes 2 frames for some reason ##is it read_player_data from save related?
+	setup_missions(use_save_data, "code")
+	#await get_tree().physics_frame
+	#await get_tree().physics_frame #wait for npcs to spawn, takes 2 frames for some reason ##is it read_player_data from save related?
 	if use_save_data:
 		SaveSystem.read_dialog_data_from_temp(current_level)
-	setup_missions(use_save_data, "code")
+
 
 
 
@@ -237,17 +235,15 @@ func change_level_via_trigger(level_path, door_index):
 	current_level = load(level_path).instantiate()
 	add_child(current_level)
 
-	spawn_entities()
+	await spawn_entities()
 
 	$Juniper/PlayerCamera.reset()
 
 	do_transition(old_level_path, level_path)
 
 	SaveSystem.read_level_data_from_temp(current_level)
-	await get_tree().process_frame
-	await get_tree().process_frame #wait for npcs to spawn, takes 2 frames for some reason
-	SaveSystem.read_dialog_data_from_temp(current_level)
 	setup_missions(false, "trigger")
+	SaveSystem.read_dialog_data_from_temp(current_level)
 	setup_door(door_index, old_level_path)
 
 
@@ -411,6 +407,7 @@ func spawn_entities():
 	print("all props spawned")
 	await get_tree().physics_frame # In case the level has nothing, this ensures the caller funciton to properly receive the "finished_spawning" signal
 	emit_signal("finished_spawning")
+	finished_spawning_entities = true
 
 ### GETTERS ###
 

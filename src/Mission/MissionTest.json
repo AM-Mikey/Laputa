@@ -40,12 +40,11 @@
 		},
 	},
 
-	"enemy_allow_spawn": {
+	"enemy_set_spawn": {
 		"Main": {
 			"frog_a": {
 				"talk_npc_a": true,
-				"celebrate": true,
-				"any": false,
+				"any": false
 			},
 			"frog_b": {
 				"talk_npc_b": true,
@@ -53,6 +52,7 @@
 				"any": false,
 			},
 			"frog_c": {
+				"talk_npc_b": true,
 				"talk_npc_c": true,
 				"celebrate": true,
 				"any": false,
@@ -64,7 +64,17 @@
 			},
 		},
 	},
-	"prop_runtime_position_offset": {
+	"enemy_position_offset": {
+		"Main": {
+			"frog_a": {
+				"talk_npc_a": [160,0],
+				"talk_npc_b": [80,0],
+				"talk_npc_c": [80,0],
+				"talk_npc_d": [80,0],
+			},
+		},
+	},
+	"prop_position_offset": {
 		"Main": {
 			"box_a": {
 				"talk_npc_a": [32,0],
@@ -80,12 +90,11 @@
 			},
 		},
 	},
-	"prop_spawn_position_offset": {
+	"prop_position_offset": {
 		"Main": {
 			"ammo_refill": {
 				"talk_npc_a": [0,0],
 				"talk_npc_b": [80,0],
-				"talk_npc_c": [80,0],
 				"talk_npc_d": [80,0],
 			},
 		},

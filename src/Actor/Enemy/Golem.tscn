@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://ck6rcpgpi8c1m"]
 
-[ext_resource type="Script" uid="uid://dgx5afpu8m3bo" path="res://src/Actor/Enemy/Golem.gd" id="1_wvikc"]
+[ext_resource type="Script" path="res://src/Actor/Enemy/Golem.gd" id="1_wvikc"]
 [ext_resource type="Texture2D" uid="uid://cc8ipptje33gi" path="res://assets/Actor/Enemy/Golem.png" id="2_4jdro"]
 [ext_resource type="PackedScene" uid="uid://7hbenrfv6p3q" path="res://src/Utility/PhysicsLayerBody.tscn" id="2_ieiyb"]
 [ext_resource type="PackedScene" uid="uid://bwp6sqdlvfo84" path="res://src/Editor/VisualUtility/VUVector.tscn" id="4_tf2u3"]

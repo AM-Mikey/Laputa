@@ -31,6 +31,12 @@ const MAIN_MISSION = [ #[name, trigger_type, trigger_value, description]
 	"camera related dialog commands demo"],
 	["shop_test", "", "",
 	"test of shopping features"],
+	["boss_test", "", "",
+	"Boss Test"],
+	["boss_test_intro", "", "",
+	"Boss Intro cutscene"],
+	["boss_test_intro_speak", "", "",
+	"Boss Intro cutscene"]
 ]
 
 var main_mission_stage: Array = MAIN_MISSION[0]
@@ -139,6 +145,7 @@ func _progress_from_check(type: String, mission, stage, passed_variable):
 
 
 func setup_level_from_array(array, update_conversations, is_entering):
+	print("from array: ", array)
 	for i in array:
 		var mission_name = i[0]
 		var mission_stage = i[1]
@@ -161,55 +168,57 @@ func update_level_via_mission(mission_name = "Main", mission_stage = "current", 
 		else:
 			mission_stage = mission_name_to_mission(mission_name).current_stage
 
-
-#set_spawn
 	var enemy_spawn_dict = get_matching_entities_values(data, mission_name, mission_stage, "enemy_set_spawn", "EnemySpawns", true)
 	for k in enemy_spawn_dict.keys():
+		var enemy = get_entity_with_id("Enemies", k.properties["id"][0])
 		if enemy_spawn_dict[k]: #spawn
-			if !get_has_entity_with_id("Enemies", k.properties["id"][0]):
-				k.allow_spawn = true
+			k.allow_spawn = true
+			if !enemy and !k.spawning:
 				k.spawn()
 		else: #free
-			var enemy_free_dict = get_matching_entities_values(data, mission_name, mission_stage, "enemy_set_spawn", "Enemies", false)
-			for l in enemy_free_dict.keys():
-				l.free() #l.die(true) #TODO: poof effect? idk #free is faster for cases where we need to do it repeatedly on off, otherwise get_has_entity_with_id has a false positive when it flashes through all of the mission stages when loading a save file
 			k.allow_spawn = false
+			if enemy:
+				enemy.free()
+
 
 	var npc_spawn_dict = get_matching_entities_values(data, mission_name, mission_stage, "npc_set_spawn", "NPCSpawns", true)
 	for k in npc_spawn_dict.keys():
+		var npc = get_entity_with_id("NPCs", k.properties["id"][0])
 		if npc_spawn_dict[k]: #spawn
-			if !get_has_entity_with_id("NPCs", k.properties["id"][0]):
-				k.allow_spawn = true
+			k.allow_spawn = true
+			if !npc and !k.spawning:
 				k.spawn()
 		else: #free
-			var npc_free_dict = get_matching_entities_values(data, mission_name, mission_stage, "npc_set_spawn", "NPCs", false)
-			for l in npc_free_dict.keys():
-				l.free()
 			k.allow_spawn = false
+			if npc:
+				npc.free()
+
 
 	var prop_spawn_dict = get_matching_entities_values(data, mission_name, mission_stage, "prop_set_spawn", "PropSpawns", true)
 	for k in prop_spawn_dict.keys():
+		var prop = get_entity_with_id("Props", k.properties["id"][0])
 		if prop_spawn_dict[k]: #spawn
-			if !get_has_entity_with_id("Props", k.properties["id"][0]):
-				k.allow_spawn = true
+			k.allow_spawn = true
+			if !prop and !k.spawning:
 				k.spawn()
 		else: #free
-			var prop_free_dict = get_matching_entities_values(data, mission_name, mission_stage, "prop_set_spawn", "Props", false)
-			for l in prop_free_dict.keys():
-				l.free()
 			k.allow_spawn = false
+			if prop:
+				prop.free()
+
+
 
 	var trigger_spawn_dict = get_matching_entities_values(data, mission_name, mission_stage, "trigger_set_spawn", "TriggerSpawns", true)
 	for k in trigger_spawn_dict.keys():
+		var trigger = get_entity_with_id("Triggers", k.properties["id"][0])
 		if trigger_spawn_dict[k]: #spawn
-			if !get_has_entity_with_id("Triggers", k.properties["id"][0]):
-				k.allow_spawn = true
+			k.allow_spawn = true
+			if !trigger and !k.spawning:
 				k.spawn()
 		else: #free
-			var trigger_free_dict = get_matching_entities_values(data, mission_name, mission_stage, "trigger_set_spawn", "Triggers", false)
-			for l in trigger_free_dict.keys():
-				l.free()
 			k.allow_spawn = false
+			if trigger:
+				trigger.free()
 
 
 #position
@@ -247,8 +256,26 @@ func update_level_via_mission(mission_name = "Main", mission_stage = "current", 
 	for k in trigger_position_offset_dict.keys():
 		k.global_position += array_to_vector2(trigger_position_offset_dict[k])
 
+#level_conversation_on_enter
+	if data.has("level_conversation_on_enter"):
+		if data["level_conversation_on_enter"].has(mission_name):
+			for stage in data["level_conversation_on_enter"][mission_name]:
+				if stage == mission_stage:
+					w.current_level.conversation_on_enter = data["level_conversation_on_enter"][mission_name][stage]
+
+#camera_control_add
+	if !is_entering:
+		if data.has("camera_control_add"):
+			if data["camera_control_add"].has(mission_name):
+				for stage in data["camera_control_add"][mission_name]:
+					if stage == mission_stage:
+						#inp.can_act = false
+						for a in data["camera_control_add"][mission_name][stage]:
+							f.pc().get_node("PlayerCamera").control_add(a)
 
 	if update_conversations:
+		if !w.finished_spawning_entities:
+			await w.finished_spawning
 		#npc_set_main_conversation_queue
 		var npc_set_main_conversation_queue = get_matching_entities_values(data, mission_name, mission_stage, "npc_set_main_conversation_queue", "NPCs", false)
 		for k in npc_set_main_conversation_queue.keys():
@@ -270,23 +297,6 @@ func update_level_via_mission(mission_name = "Main", mission_stage = "current", 
 					"main": k.conversation_queue.append(a)
 					"side": k.side_conversation_queue.append(a)
 				SaveSystem.write_dialog_data_to_temp(w.current_level, k)
-
-#level_conversation_on_enter
-	if data.has("level_conversation_on_enter"):
-		if data["level_conversation_on_enter"].has(mission_name):
-			for stage in data["level_conversation_on_enter"][mission_name]:
-				if stage == mission_stage:
-					w.current_level.conversation_on_enter = data["level_conversation_on_enter"][mission_name][stage]
-
-#camera_control_add
-	if !is_entering:
-		if data.has("camera_control_add"):
-			if data["camera_control_add"].has(mission_name):
-				for stage in data["camera_control_add"][mission_name]:
-					if stage == mission_stage:
-						#inp.can_act = false
-						for a in data["camera_control_add"][mission_name][stage]:
-							f.pc().get_node("PlayerCamera").control_add(a)
 
 ### HELPER ###
 
@@ -311,12 +321,12 @@ func get_matching_entities_values(data, mission_name, mission_stage, data_key, g
 	return out
 
 
-func get_has_entity_with_id(entity_group: String, id):
+func get_entity_with_id(entity_group: String, id):
 	for e in get_tree().get_nodes_in_group(entity_group):
 		if e.id.nocasecmp_to(id) == 0:
 			printerr("ERROR: entity with id: ", id, " already exists!")
-			return true
-	return false
+			return e
+	return null
 
 
 func array_to_vector2(array) -> Vector2:

@@ -4,6 +4,8 @@ extends Area2D
 @export var properties = {}
 
 var allow_spawn := true
+var spawning: = false
+
 var physics_prop_spawn_distance = 0.001
 
 @onready var w = get_tree().get_root().get_node("World")
@@ -100,6 +102,19 @@ func spawn():
 		printerr("ERROR: no prop chosen in PropSpawn")
 		return
 
+	# For the MissionSystem correctly spawn and despawn stuff based on mission stage
+	spawning = true
+	_deferred_spawn.call_deferred()
+
+func _deferred_spawn():
+	if !allow_spawn:
+		spawning = false
+		return
+	if prop_path == null:
+		printerr("ERROR: no prop chosen in PropSpawn")
+		spawning = false
+		return
+
 	var prop = load(prop_path).instantiate()
 	for p in properties:
 		prop.set(p, properties[p][0])
@@ -119,7 +134,9 @@ func spawn():
 			var copy = c.duplicate()
 			prop.add_child(copy)
 
-	w.current_level.get_node("Props").call_deferred("add_child", prop)
+	w.current_level.get_node("Props").add_child(prop)
+	spawning = false
+
 
 
 ### HELPERS
