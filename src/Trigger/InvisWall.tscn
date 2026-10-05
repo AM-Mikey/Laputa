@@ -1,0 +1,67 @@
+[gd_scene format=3 uid="uid://by8pdka7l1kn3"]
+
+[ext_resource type="Script" uid="uid://yslmy8fg0nrb" path="res://src/Trigger/InvisWall.gd" id="1_bfw75"]
+
+[sub_resource type="RectangleShape2D" id="1"]
+size = Vector2(16, 16)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_bfw75"]
+size = Vector2(20, 2)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_tedl5"]
+size = Vector2(20, 2)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_odh4a"]
+size = Vector2(2, 20)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_xr64i"]
+size = Vector2(2, 20)
+
+[node name="InvisWall" type="Area2D" unique_id=996687710 groups=["Triggers"]]
+collision_layer = 0
+collision_mask = 0
+monitoring = false
+monitorable = false
+script = ExtResource("1_bfw75")
+color = Color(0, 0, 0, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=2084038406]
+position = Vector2(8, 8)
+shape = SubResource("1")
+disabled = true
+
+[node name="Up" type="StaticBody2D" parent="." unique_id=729004302]
+position = Vector2(8, 0)
+collision_layer = 8
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Up" unique_id=886573773]
+position = Vector2(0, -1)
+shape = SubResource("RectangleShape2D_bfw75")
+
+[node name="Down" type="StaticBody2D" parent="." unique_id=1744388653]
+position = Vector2(8, 16)
+collision_layer = 8
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Down" unique_id=1906819828]
+position = Vector2(0, 1)
+shape = SubResource("RectangleShape2D_tedl5")
+
+[node name="Left" type="StaticBody2D" parent="." unique_id=2089595304]
+position = Vector2(0, 8)
+collision_layer = 8
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Left" unique_id=1727592735]
+position = Vector2(-1, 0)
+shape = SubResource("RectangleShape2D_odh4a")
+
+[node name="Right" type="StaticBody2D" parent="." unique_id=796785503]
+position = Vector2(16, 8)
+collision_layer = 8
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Right" unique_id=927888529]
+position = Vector2(1, 0)
+shape = SubResource("RectangleShape2D_xr64i")
