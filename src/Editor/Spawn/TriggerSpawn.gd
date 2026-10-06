@@ -4,7 +4,7 @@ extends MarginContainer
 @export var properties = {}
 @export var size_is_default = true
 
-var allow_spawn := true
+@export var allow_spawn := true
 var spawning: = false
 
 var state = "idle"

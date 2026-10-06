@@ -95,6 +95,8 @@ signal music_fadeout_finished
 	"shield_charge_ready": preload("res://assets/SFX/Placeholder/snd_spur_charged.ogg"), #Placeholder
 	"shield_charge_start": preload("res://assets/SFX/Placeholder/snd_block_destroy.ogg"), #Placeholder
 	"heavy_step": preload("res://assets/SFX/Placeholder/snd_quake.ogg"), #Placeholder
+
+	"boss_die": preload("res://assets/SFX/Placeholder/snd_explosion1.ogg"),
 	#"enemy_buzz":
 
 	"npc_voice_normal": preload("res://assets/SFX/Placeholder/snd_msg.ogg"),
@@ -113,6 +115,9 @@ signal music_fadeout_finished
 	"village": preload("res://assets/Music/Placeholder/Mimiga Town.ogg"),
 	"access": preload("res://assets/Music/Placeholder/Access.ogg"),
 	"safety": preload("res://assets/Music/Placeholder/Safety.ogg"),
+
+	"boss": preload("res://assets/Music/59Squared_Boss.wav"),
+	"boss_buildup": preload("res://assets/Music/Placeholder/Access.ogg"),
 
 	"shop": preload("res://assets/Music/PhiDelta_Shop.wav"),
 	"shop_intro": preload("res://assets/Music/PhiDelta_Shop_Intro.wav"),

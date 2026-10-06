@@ -18,6 +18,7 @@ signal guns_updated(guns, cause, do_xp_flash)
 signal xp_updated(xp, max_xp, level, max_level, do_xp_flash, cause)
 signal money_updated(money)
 signal invincibility_end()
+signal end_move_to()
 
 
 @export var hp: int = 16
@@ -55,7 +56,6 @@ var move_dir := Vector2.LEFT
 var look_dir := Vector2i.LEFT
 var direction_lock := Vector2i.ZERO
 var shoot_dir := Vector2.LEFT
-
 
 
 enum SoundProfile {NORMAL, UNDERWATER}
@@ -98,6 +98,7 @@ func enable():
 ### ACTIONS ###
 
 func move_to(pos):
+	mm.is_moving_to_target = true
 	mm.move_target = pos
 	mm.change_state("moveto")
 	return

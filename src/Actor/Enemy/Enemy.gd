@@ -14,7 +14,12 @@ var state: String
 var disabled = false
 var protected = false
 
-var hp: int
+var hp: int:
+	set(val):
+		var old_val = hp
+		hp = val
+		if old_val != hp:
+			hp_changed.emit()
 var damage_on_contact: int
 var enemy_damage_on_contact: int
 var hit_enemies_on_contact := false
@@ -28,6 +33,9 @@ var reward := 1
 var heart_chance := 1
 var experience_chance := 3
 var ammo_chance := 1
+
+signal hp_changed
+signal just_die
 
 @export var debug := false
 @export var id: String
@@ -185,6 +193,7 @@ func set_damagenum(damage):
 func die(quietly = false):
 	if dead: return
 	dead = true
+	just_die.emit()
 
 	if (f.pc()):
 		f.pc().enemies_touching.erase(self)

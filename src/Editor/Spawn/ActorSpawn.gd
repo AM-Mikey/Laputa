@@ -4,7 +4,7 @@ extends Area2D
 @export var properties = {}
 @export var tag_name: String = ""
 
-var allow_spawn := true
+@export var allow_spawn := true
 var spawning: = false
 
 @onready var w = get_tree().get_root().get_node("World")
@@ -236,7 +236,6 @@ func _deferred_spawn() -> void:
 		if c.is_in_group("VisualUtilities") && !c.is_in_group("WaypointGlobalSpawns"):
 			var copy = c.duplicate()
 			actor.add_child(copy)
-	print("T")
 	spawning = false
 
 ### HELPERS ###

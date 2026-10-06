@@ -1,4 +1,4 @@
-[gd_scene format=4 uid="uid://157ooj01tm1q"]
+[gd_scene format=4 uid="uid://5f50oywjlfrf"]
 
 [ext_resource type="Script" uid="uid://ucr1waa8u8j1" path="res://src/Level/Level.gd" id="1_o0vhu"]
 [ext_resource type="PackedScene" uid="uid://deyh6xyl8c6tr" path="res://src/Background/LevelLimiter.tscn" id="2_kmn4q"]
@@ -28,6 +28,7 @@ point_count = 5
 visibility_layer = 2
 script = ExtResource("1_o0vhu")
 level_name = "BossTest"
+music = "train_intro"
 dialog_json = "res://src/Dialog/BossTest.json"
 mission_level_update = "res://src/Mission/BossTest.json"
 debug_main_mission_stage_name = "boss_test"
@@ -133,7 +134,7 @@ properties = {
 
 [node name="Golem" parent="Spawns" unique_id=1199277091 instance=ExtResource("11_4mq45")]
 visibility_layer = 2
-position = Vector2(728, 32)
+position = Vector2(880, 64)
 actor_path = "res://src/Actor/Enemy/Golem.tscn"
 properties = {
 "base_gravity": [300.0, 3, ""],
@@ -154,23 +155,29 @@ tag_name = "move_dir"
 direction = Vector2(-1, 8.742278e-08)
 snap_degrees = 180.0
 
-[node name="Aikka" parent="Spawns" unique_id=801593406 instance=ExtResource("11_4mq45")]
+[node name="Golem2" parent="Spawns" unique_id=848831012 instance=ExtResource("11_4mq45")]
 visibility_layer = 2
-position = Vector2(616, 32)
-actor_path = "res://src/Actor/NPC/Aikka.tscn"
+position = Vector2(880, 32)
+actor_path = "res://src/Actor/Enemy/Golem.tscn"
 properties = {
 "base_gravity": [300.0, 3, ""],
-"do_bubbles": [true, 1, ""],
+"charge_impulse_curve": [SubResource("Curve_wvikc"), 24, ""],
+"debug": [true, 1, ""],
+"difficulty": [0, 2, ""],
+"do_bubbles": [false, 1, ""],
 "editor_hidden": [false, 1, ""],
-"id": [&"Aikka", 4, ""],
+"id": [&"golem_cutscene", 4, ""],
 "speed": [Vector2(150, 350), 5, ""],
-"starting_state": ["idle", 4, ""],
-"voice_delay": [0.03, 3, ""],
-"voice_sfx": ["npc_voice_normal", 4, ""],
-"voiced": [true, 1, ""],
-"walk_speed": [Vector2(0, 0), 5, ""],
+"wallslam_time": [1.2, 3, ""],
 "water_gravity": [150.0, 3, ""]
 }
+allow_spawn = false
+
+[node name="VUVector" parent="Spawns/Golem2" unique_id=1049267392 instance=ExtResource("13_alsbe")]
+visibility_layer = 2
+tag_name = "move_dir"
+direction = Vector2(-1, 8.742278e-08)
+snap_degrees = 180.0
 
 [node name="BossRoom" parent="Spawns" unique_id=1998903811 instance=ExtResource("7_7g5h5")]
 visibility_layer = 2

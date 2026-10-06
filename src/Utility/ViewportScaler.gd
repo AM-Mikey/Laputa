@@ -43,7 +43,6 @@ func _viewport_size_changed():
 	var dialog_urs = min(dialog_urs_x, dialog_urs_y)
 	dialog_resolution_scale =  get_res_scale_from_urs(dialog_urs, true)
 
-
 	emit_signal("scale_changed", resolution_scale)
 
 

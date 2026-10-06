@@ -31,7 +31,12 @@ func state_process(_delta):
 		pc.move_dir.x = 0.0
 
 		#print("moveto state clear, setting to: ", mm.cached_state.name)
-		mm.change_state(mm.cached_state.name.to_lower())
+		var cached_state = mm.cached_state.name.to_lower()
+		if cached_state == "moveto":
+			cached_state = "run"
+		if cached_state != "move_to":
+			pc.end_move_to.emit()
+		mm.change_state(cached_state)
 		return
 
 
@@ -108,3 +113,4 @@ func exit(_next_state: String) -> void:
 	pc.move_dir.x = 0.0
 	pc.velocity = Vector2.ZERO
 	mm.move_target = Vector2.ZERO
+	mm.is_moving_to_target = false

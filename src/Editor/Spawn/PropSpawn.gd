@@ -3,7 +3,7 @@ extends Area2D
 @export_file var prop_path
 @export var properties = {}
 
-var allow_spawn := true
+@export var allow_spawn := true
 var spawning: = false
 
 var physics_prop_spawn_distance = 0.001

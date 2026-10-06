@@ -238,7 +238,7 @@ func control_stop(): #return to automatic camera
 
 func control_to_position(target_pos: Vector2, speed: float, do_player_drag_offset = false):
 	stop_tweens()
-	if w.dll.get_node("DialogBox"):
+	if w.dll.get_node_or_null("DialogBox"):
 		w.dll.get_node("DialogBox").busy = true
 	var overshoot_dist = (target_pos - global_position).length() / 64.0
 	var overshoot_pos = target_pos + overshoot_dist * global_position.direction_to(target_pos)
@@ -270,7 +270,7 @@ func control_to_position(target_pos: Vector2, speed: float, do_player_drag_offse
 	limit_enabled = true
 	position_smoothing_enabled = true
 
-	if w.dll.get_node("DialogBox"):
+	if w.dll.get_node_or_null("DialogBox"):
 		w.dll.get_node("DialogBox").busy = false
 	control_next(true, false)
 

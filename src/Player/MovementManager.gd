@@ -35,6 +35,7 @@ var knockback_direction: Vector2
 var knockback_velocity = Vector2.ZERO
 
 var move_target = Vector2.ZERO
+var is_moving_to_target: = false
 
 var starting_direction #for acceleration
 
@@ -66,8 +67,11 @@ func change_state(new_state: String, do_cache_state = true):
 	if current_state:
 		if do_cache_state: cached_state = current_state
 		current_state.exit(new_state)
+	var old_state = ""
+	if current_state:
+		old_state = current_state.name.to_lower()
 	current_state = states[new_state]
-	current_state.enter(current_state.name.to_lower())
+	current_state.enter(old_state)
 
 
 func _physics_process(_delta):

@@ -1,23 +1,34 @@
 {
-	"npc_set_main_conversation_queue": {
-		"Main": {
-			"golem_npc": {
-				"boss_test_intro_speak": "boss_intro_dialog",
-			},
-		},
-	},
-
 	"trigger_set_spawn": {
 		"Main": {
 			"boss_room": {
 				"boss_test": true,
-				"boss_test_intro": false,
+				"boss_test_win": false,
+				"any": false
 			},
 			"boss_invis_wall": {
-				"boss_test": false,
-				"boss_test_intro": true,
+				"boss_test_intro_drop": true,
+				"boss_test_health_bar_filled_up": true,
+				"boss_test_start": true,
+				"any": false
 			},
 		},
 	},
+
+	"enemy_set_spawn": {
+		"Main": {
+			"golem": {
+				"boss_test": false,
+				"boss_test_intro_drop": true,
+				"boss_test_win": false
+			},
+		},
+	},
+
+	"camera_control_add": {
+		"Main": {
+			"boss_test_player_to_intro_position": [["to_pos", 750, 168, 10]],
+		}
+	}
 
 }

@@ -31,12 +31,20 @@ const MAIN_MISSION = [ #[name, trigger_type, trigger_value, description]
 	"camera related dialog commands demo"],
 	["shop_test", "", "",
 	"test of shopping features"],
+	#region BossTest
 	["boss_test", "", "",
 	"Boss Test"],
-	["boss_test_intro", "", "",
+	["boss_test_player_to_intro_position", "", "",
 	"Boss Intro cutscene"],
-	["boss_test_intro_speak", "", "",
-	"Boss Intro cutscene"]
+	["boss_test_intro_drop", "", "",
+	"Boss Drop into the cutscene"],
+	["boss_test_health_bar_filled_up", "", "",
+	"Boss Health Bar filled up"],
+	["boss_test_start", "", "",
+	"Boss Start AI"],
+	["boss_test_win", "", "",
+	"Boss Test Win"]
+	#endregion
 ]
 
 var main_mission_stage: Array = MAIN_MISSION[0]
@@ -152,7 +160,7 @@ func setup_level_from_array(array, update_conversations, is_entering):
 		update_level_via_mission(mission_name, mission_stage, update_conversations, is_entering) #don't update conversations, instead we load them from save
 
 func setup_level_from_mission_progress_history():
-	print("from history")
+	print("from history: ", mission_progress_history)
 	for i in mission_progress_history:
 		var mission_name = i[0]
 		var mission_stage = i[1]
@@ -324,10 +332,16 @@ func get_matching_entities_values(data, mission_name, mission_stage, data_key, g
 func get_entity_with_id(entity_group: String, id):
 	for e in get_tree().get_nodes_in_group(entity_group):
 		if e.id.nocasecmp_to(id) == 0:
-			printerr("ERROR: entity with id: ", id, " already exists!")
+			#printerr("ERROR: entity with id: ", id, " already exists!")
 			return e
 	return null
 
+func get_spawner_with_id(entity_group: String, id):
+	for e in get_tree().get_nodes_in_group(entity_group):
+		if e.properties["id"][0].nocasecmp_to(id) == 0:
+			#printerr("ERROR: entity with id: ", id, " already exists!")
+			return e
+	return null
 
 func array_to_vector2(array) -> Vector2:
 	return Vector2(array[0], array[1])
