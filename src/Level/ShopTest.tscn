@@ -16,6 +16,8 @@
 [ext_resource type="PackedScene" path="res://src/Editor/TitlePreview.tscn" id="11_286gw"]
 [ext_resource type="PackedScene" path="res://src/Editor/Spawn/PropSpawn.tscn" id="11_vberi"]
 [ext_resource type="Script" path="res://src/Editor/Spawn/PropSpawn.gd" id="12_dej6s"]
+[ext_resource type="PackedScene" path="res://src/Editor/VisualUtility/VUVector.tscn" id="13_prgck"]
+[ext_resource type="Script" path="res://src/Editor/VisualUtility/VUVector.gd" id="14_dej6s"]
 [ext_resource type="Theme" path="res://src/UI/Theme/LaputaTheme.tres" id="15_1ef8u"]
 [ext_resource type="Script" path="res://src/Editor/Note/Note.gd" id="16_jdidk"]
 [ext_resource type="PackedScene" path="res://src/Editor/Note/Note.tscn" id="16_prgck"]
@@ -760,6 +762,126 @@ properties = {
 "reward": [10, 2, ""]
 }
 
+[node name="Gecko" type="Area2D" parent="Spawns" unique_id=2097371735 groups=["ActorSpawns", "Entities"] instance=ExtResource("7_c6oa4")]
+visibility_layer = 2
+z_index = 999
+position = Vector2(1640, 1712)
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("10_prgck")
+actor_path = "res://src/Actor/Enemy/Gecko.tscn"
+properties = {
+"base_gravity": [300.0, 3, ""],
+"debug": [true, 1, ""],
+"do_bubbles": [true, 1, ""],
+"editor_hidden": [false, 1, ""],
+"id": [&"Gecko", 4, ""],
+"speed": [Vector2(150, 350), 5, ""],
+"water_gravity": [150.0, 3, ""]
+}
+
+[node name="NormalVector" type="Area2D" parent="Spawns/Gecko" unique_id=872564127 groups=["Entities", "VUVectors", "VisualUtilities"] instance=ExtResource("13_prgck")]
+visibility_layer = 2
+position = Vector2(0, -8)
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("14_dej6s")
+tag_name = "fly"
+direction = Vector2(-4.371139e-08, -1)
+movement_locked = true
+
+[node name="CrawlVector" type="Area2D" parent="Spawns/Gecko" unique_id=2126548652 groups=["Entities", "VUVectors", "VisualUtilities"] instance=ExtResource("13_prgck")]
+visibility_layer = 2
+position = Vector2(0, -8)
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("14_dej6s")
+arrow_length = 24.0
+tag_name = "crawl"
+snap_degrees = 90.0
+movement_locked = true
+color = Color(8.061901e-07, 0.41569918, 0.11087646, 1)
+
+[node name="Gecko1" type="Area2D" parent="Spawns" unique_id=1574402202 groups=["ActorSpawns", "Entities"] instance=ExtResource("7_c6oa4")]
+visibility_layer = 2
+z_index = 999
+position = Vector2(1600, 1792)
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("10_prgck")
+actor_path = "res://src/Actor/Enemy/Gecko.tscn"
+properties = {
+"base_gravity": [300.0, 3, ""],
+"debug": [true, 1, ""],
+"do_bubbles": [true, 1, ""],
+"editor_hidden": [false, 1, ""],
+"id": [&"Gecko1", 4, ""],
+"speed": [Vector2(150, 350), 5, ""],
+"water_gravity": [150.0, 3, ""]
+}
+
+[node name="NormalVector" type="Area2D" parent="Spawns/Gecko1" unique_id=1132857776 groups=["Entities", "VUVectors", "VisualUtilities"] instance=ExtResource("13_prgck")]
+visibility_layer = 2
+position = Vector2(0, -8)
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("14_dej6s")
+tag_name = "fly"
+movement_locked = true
+
+[node name="CrawlVector" type="Area2D" parent="Spawns/Gecko1" unique_id=1241587139 groups=["Entities", "VUVectors", "VisualUtilities"] instance=ExtResource("13_prgck")]
+visibility_layer = 2
+position = Vector2(0, -8)
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("14_dej6s")
+arrow_length = 24.0
+tag_name = "crawl"
+direction = Vector2(-4.371139e-08, 1)
+snap_degrees = 90.0
+movement_locked = true
+color = Color(8.061901e-07, 0.41569918, 0.11087646, 1)
+
+[node name="Gecko2" type="Area2D" parent="Spawns" unique_id=371231189 groups=["ActorSpawns", "Entities"] instance=ExtResource("7_c6oa4")]
+visibility_layer = 2
+z_index = 999
+position = Vector2(1672, 1728)
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("10_prgck")
+actor_path = "res://src/Actor/Enemy/Gecko.tscn"
+properties = {
+"base_gravity": [300.0, 3, ""],
+"debug": [true, 1, ""],
+"do_bubbles": [true, 1, ""],
+"editor_hidden": [false, 1, ""],
+"id": [&"Gecko2", 4, ""],
+"speed": [Vector2(150, 350), 5, ""],
+"water_gravity": [150.0, 3, ""]
+}
+
+[node name="NormalVector" type="Area2D" parent="Spawns/Gecko2" unique_id=1643431786 groups=["Entities", "VUVectors", "VisualUtilities"] instance=ExtResource("13_prgck")]
+visibility_layer = 2
+position = Vector2(0, -8)
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("14_dej6s")
+tag_name = "fly"
+direction = Vector2(-4.371139e-08, 1)
+movement_locked = true
+
+[node name="CrawlVector" type="Area2D" parent="Spawns/Gecko2" unique_id=2081500646 groups=["Entities", "VUVectors", "VisualUtilities"] instance=ExtResource("13_prgck")]
+visibility_layer = 2
+position = Vector2(0, -8)
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("14_dej6s")
+arrow_length = 24.0
+tag_name = "crawl"
+snap_degrees = 90.0
+movement_locked = true
+color = Color(8.061901e-07, 0.41569918, 0.11087646, 1)
+
 [node name="TileAnimator" type="Node2D" parent="." unique_id=459942112]
 visibility_layer = 2
 script = ExtResource("8_ppd8f")
@@ -852,3 +974,6 @@ script = ExtResource("18_lk15g")
 [connection signal="input_event" from="Spawns/BreakBlockExperience25" to="Spawns/BreakBlockExperience25" method="_on_input_event"]
 [connection signal="input_event" from="Spawns/BreakBlockExperience26" to="Spawns/BreakBlockExperience26" method="_on_input_event"]
 [connection signal="input_event" from="Spawns/BreakBlockExperience27" to="Spawns/BreakBlockExperience27" method="_on_input_event"]
+[connection signal="input_event" from="Spawns/Gecko" to="Spawns/Gecko" method="_on_input_event"]
+[connection signal="input_event" from="Spawns/Gecko1" to="Spawns/Gecko1" method="_on_input_event"]
+[connection signal="input_event" from="Spawns/Gecko2" to="Spawns/Gecko2" method="_on_input_event"]
