@@ -10,7 +10,6 @@ func _ready():
 	$HBox/Button.text = level_name
 	$PanelActive.visible = active
 
-
 func on_pressed():
 	activate()
 	emit_signal("level_selected", level_path)

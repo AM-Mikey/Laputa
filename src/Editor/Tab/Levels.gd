@@ -17,35 +17,43 @@ var default_level = "res://src/Level/Default.tscn"
 func setup_levels():
 	for child in $VBox/Margin/Scroll/Buttons.get_children():
 		child.queue_free()
-
 	var index = 0
 	for l in find_level_scenes("res://src/Level/"):
+		var level_scene: PackedScene = load(l) #never gets instantiated, just reading
+		if get_root_property(level_scene, &"editor_hidden", false):
+			continue
+		var level_name = get_root_property(level_scene, &"level_name", "")
+		levels[level_name] = level_scene
 
-		var level = load(l)._bundled #never gets instantiated, just reading as a dictionary
-		if level.names.find("editor_hidden") == -1 || !level.variants[level.names.find("editor_hidden")]: #can't find property (since it's defaunt) or editor_hidden == false
-			levels[level.variants[level.names.find("level_name")]] = level
+		var level_button = LEVEL_BUTTON.instantiate()
+		level_button.level_path = l
+		level_button.level_name = level_name
+		level_button.connect("level_selected", Callable(self, "_on_level_selected"))
+		if index == 0:
+			level_button.active = true
+			active_level_path = l
+		$VBox/Margin/Scroll/Buttons.add_child(level_button)
+		index += 1
 
-			var level_button = LEVEL_BUTTON.instantiate()
-			level_button.level_path = l
-			level_button.level_name = level.variants[level.names.find("level_name")]
-			level_button.connect("level_selected", Callable(self, "_on_level_selected"))
-			if index == 0:
-				level_button.active = true
-				active_level_path = l
-			$VBox/Margin/Scroll/Buttons.add_child(level_button)
-			index += 1
+func get_root_property(scene: PackedScene, prop: StringName, default = null) -> Variant:
+	var state := scene.get_state()
+	for i in state.get_node_property_count(0):
+		if state.get_node_property_name(0, i) == prop:
+			return state.get_node_property_value(0, i)
+	return default
 
 
 func find_level_scenes(path):
 	var files = []
 	var dir = DirAccess.open(path)
-	dir.list_dir_begin() # TODOConverter3To4 fill missing arguments https://github.com/godotengine/godot/pull/40547
+	dir.list_dir_begin()
 	while true:
 		var file = dir.get_next()
 		if file == "":
 			break
 		if file.ends_with(".tscn"):
 			files.append(path + file)
+	print(files)
 	return files
 
 
@@ -99,8 +107,8 @@ func on_save(): #from editor
 	save_level(w.current_level, w.current_level.scene_file_path)
 
 func on_save_as():
-	$SaveDiae_log.current_path = "res://src/level/"
-	$SaveDiae_log.popup()
+	$SaveDialog.current_path = "res://src/level/"
+	$SaveDialog.popup()
 
 func on_load():
 	for kb in get_tree().get_nodes_in_group("KillBoxes"):
@@ -110,8 +118,8 @@ func on_load():
 	#$LoadDiae_log.popup()
 
 func on_new():
-	$NewDiae_log.current_path = "res://src/level/"
-	$NewDiae_log.popup()
+	$NewDialog.current_path = "res://src/level/"
+	$NewDialog.popup()
 
 func _on_Default_pressed():
 	w.start_level_path = w.current_level.scene_file_path
@@ -130,7 +138,7 @@ func _on_Default_pressed():
 
 func on_save_confirmed():
 	var level = w.current_level
-	var path = $SaveDiae_log.current_path.get_basename() + ".tscn"
+	var path = $SaveDialog.current_path.get_basename() + ".tscn"
 	save_level(level, path)
 
 #func on_load_selected(path):
@@ -139,6 +147,6 @@ func on_save_confirmed():
 func on_new_confirmed():
 	var level = load(default_level).instantiate()
 	level.queue_free()
-	var path = $NewDiae_log.current_path.get_basename() + ".tscn"
+	var path = $NewDialog.current_path.get_basename() + ".tscn"
 	save_level(level, path)
 	load_level(path)
