@@ -24,6 +24,8 @@ var layer_animation_offset = {} #used for moving bgs
 @onready var w = get_tree().get_root().get_node("World")
 @onready var pb = w.get_node("ParallaxBackground")
 
+var default_limit: Rect2 = Rect2()
+
 var a_star_grid: AStarGrid2D
 
 #func set_background_resouce(value): #note this goes through inspector on_changed code
@@ -44,6 +46,8 @@ func setup():
 		if (player_camera and player_camera.enabled):
 			camera = player_camera
 			camera.make_current()
+
+	default_limit = Rect2(global_position, size)
 
 	setup_background_resource()
 	setup_layers()
@@ -222,6 +226,11 @@ func setup_a_star():
 				a_star_grid.set_point_solid(cell, true)
 				a_star_grid.update()
 
+func update_blackbars():
+	emit_signal("limit_camera", offset_left, offset_right, offset_top, offset_bottom)
+	w.current_level.get_node("BlackBars").global_position = global_position
+	w.current_level.get_node("BlackBars").get_node("Right").position.x = size.x
+	w.current_level.get_node("BlackBars").get_node("Bottom").position.y = size.y
 
 ### GETTERS ###
 
@@ -245,10 +254,7 @@ func on_camera_zoom_changed():
 	update_layers()
 
 func _resolution_scale_changed(_resolution_scale):
-	emit_signal("limit_camera", offset_left, offset_right, offset_top, offset_bottom)
-	w.current_level.get_node("BlackBars").get_node("Right").position.x = size.x
-	w.current_level.get_node("BlackBars").get_node("Bottom").position.y = size.y
-	#set_focus()
+	update_blackbars()
 	update_layers()
 
 ### UTILITY ###

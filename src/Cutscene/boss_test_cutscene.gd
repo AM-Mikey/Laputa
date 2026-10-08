@@ -25,6 +25,8 @@ func setup():
 	ms.progress_main_mission.call_deferred()
 	var player = f.pc()
 	move_player_to(Vector2(592, 288))
+	var new_level_limit_rect: Rect2 = Rect2(Vector2(480, 32), Vector2(992 - 480, 272))
+	transition_level_limit(new_level_limit_rect, 1.2)
 	if !player.end_move_to.is_connected(_on_player_reach_intro_position):
 		player.end_move_to.connect(_on_player_reach_intro_position)
 
@@ -56,6 +58,7 @@ func _on_boss_finished_dropping():
 	await dialog_box.dialog_finished
 	_on_boss_dialog_finished()
 
+
 func _on_boss_dialog_finished():
 	boss_health_bar = boss_health_bar_scene.instantiate()
 	w.ui.add_child(boss_health_bar)
@@ -66,22 +69,18 @@ func _on_boss_dialog_finished():
 	await get_tree().create_timer(1.0).timeout
 	_on_boss_health_bar_animation_finsihed()
 
+
 func _on_boss_health_bar_animation_finsihed():
 	ms.progress_main_mission() # Start boss fight
 	am.pause_music(false)
 	am.play_music("boss")
 	var golem_boss = get_entity_with_id("Enemies", "golem")
-	golem_boss.just_die.connect(_on_boss_die)
+	golem_boss.killed.connect(_on_boss_killed)
 	golem_boss.process_mode = ProcessMode.PROCESS_MODE_INHERIT
-	var player_camera = get_player_camera()
-	player_camera.limit_left = 480
-	player_camera.limit_right = 992
-	player_camera.limit_top = 32
-	player_camera.limit_bottom = 304
 	enable_player_input()
 
 
-func _on_boss_die():
+func _on_boss_killed():
 	boss_health_bar.hide_ui()
 	disable_player_input()
 	var boss_die_position = get_entity_with_id("Enemies", "golem").global_position
@@ -118,17 +117,34 @@ func _on_boss_die():
 	dialog_box.start_printing(dialog_json, "boss_victory", "cutscene")
 	await dialog_box.dialog_finished
 
+	var level_limiter = get_level_limiter()
+	var level_trans_tween: Tween = transition_level_limit(level_limiter.default_limit, 1.0)
+
 	ms.progress_main_mission()
 	enable_player_input()
-	var player_camera = get_player_camera()
-	player_camera.limit_left = -1000000000
-	player_camera.limit_right = 1000000000
-	player_camera.limit_top = -1000000000
-	player_camera.limit_bottom = 1000000000
 	am.play_music("train_intro")
+
+	await level_trans_tween.finished
 	end()
 
 ## UTILITY
+func transition_level_limit(to_limit_rect: Rect2, time: float) -> Tween:
+	var ll = get_level_limiter()
+	var tween: Tween = create_tween().set_trans(Tween.TRANS_LINEAR).set_ease(Tween.EASE_OUT)
+	tween.tween_method(set_level_limit, ll.get_level_rect(), to_limit_rect, time)
+	return tween
+
+func set_level_limit(limit_rect: Rect2):
+	var ll = get_level_limiter()
+	ll.global_position = limit_rect.position
+	ll.size = limit_rect.size
+	ll.update_blackbars()
+	ll.update_layers()
+
+func get_level_limiter():
+	return w.current_level.get_node("LevelLimiter")
+
+# Player camera
 func get_player_camera() -> Camera2D:
 	var player = f.pc()
 	if player:
@@ -151,11 +167,13 @@ func disable_player_input():
 func enable_player_input():
 	inp.can_act = true
 
+
 func get_entity_with_id(group: String, id):
 	return ms.get_entity_with_id(group, id)
 
 func get_spawner_with_id(group: String, id):
 	return ms.get_spawner_with_id(group, id)
+
 
 ## Return the dialog box
 func create_dialog_box() -> Control:
@@ -164,6 +182,10 @@ func create_dialog_box() -> Control:
 	w.dll.add_child(dialog_box)
 	return dialog_box
 
-func hide_dialog_box():
-	if f.db(): #clear old dialog box if there is one
-		f.db().exit()
+## If [param=dialog_box] is null, the first dialog box (if existed) will be closed instead
+func hide_dialog_box(dialog_bos: Control = null):
+	if dialog_bos:
+		dialog_bos.exit()
+	else:
+		if f.db(): #clear old dialog box if there is one
+			f.db().exit()

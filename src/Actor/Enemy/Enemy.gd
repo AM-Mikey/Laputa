@@ -35,7 +35,7 @@ var experience_chance := 3
 var ammo_chance := 1
 
 signal hp_changed
-signal just_die
+signal killed
 
 @export var debug := false
 @export var id: String
@@ -193,7 +193,7 @@ func set_damagenum(damage):
 func die(quietly = false):
 	if dead: return
 	dead = true
-	just_die.emit()
+	killed.emit()
 
 	if (f.pc()):
 		f.pc().enemies_touching.erase(self)
