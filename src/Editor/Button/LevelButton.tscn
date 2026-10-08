@@ -3,6 +3,7 @@
 [ext_resource type="StyleBox" uid="uid://c53b3p1k47jdu" path="res://src/UI/StyleBox/SteelRound.tres" id="1"]
 [ext_resource type="Theme" uid="uid://deptsttubjnfv" path="res://src/Editor/EditorTheme.tres" id="2"]
 [ext_resource type="Script" uid="uid://c2yje638usi11" path="res://src/Editor/Button/LevelButton.gd" id="3"]
+[ext_resource type="FontFile" uid="uid://crpbt8dbs8j7a" path="res://assets/UI/Font/momo.ttf" id="4_1kbxe"]
 
 [sub_resource type="StyleBoxEmpty" id="5"]
 
@@ -15,11 +16,8 @@
 [sub_resource type="StyleBoxEmpty" id="3"]
 
 [node name="LevelButton" type="MarginContainer" unique_id=781773186 groups=["LevelButtons"]]
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_right = -352.0
-offset_bottom = -246.0
+offset_right = 46.0
+offset_bottom = 15.0
 theme = ExtResource("2")
 script = ExtResource("3")
 
@@ -36,13 +34,14 @@ theme_override_styles/panel = ExtResource("1")
 layout_mode = 2
 
 [node name="Spacer" type="Control" parent="HBox" unique_id=662031136]
-custom_minimum_size = Vector2(16, 0)
+custom_minimum_size = Vector2(2, 0)
 layout_mode = 2
 mouse_filter = 2
 
 [node name="Button" type="Button" parent="HBox" unique_id=2053349551]
 layout_mode = 2
 size_flags_horizontal = 3
+theme_override_fonts/font = ExtResource("4_1kbxe")
 theme_override_styles/normal = SubResource("5")
 theme_override_styles/pressed = SubResource("2")
 theme_override_styles/hover = SubResource("1")
@@ -50,9 +49,10 @@ theme_override_styles/disabled = SubResource("4")
 theme_override_styles/focus = SubResource("3")
 text = "Enemy"
 flat = true
+alignment = 0
 
 [node name="Spacer2" type="Control" parent="HBox" unique_id=1805706220]
-custom_minimum_size = Vector2(8, 0)
+custom_minimum_size = Vector2(2, 0)
 layout_mode = 2
 mouse_filter = 2
 

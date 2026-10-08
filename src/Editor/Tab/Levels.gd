@@ -15,25 +15,24 @@ var default_level = "res://src/Level/Default.tscn"
 
 
 func setup_levels():
-	for child in $VBox/Margin/Scroll/Buttons.get_children():
-		child.queue_free()
+	for c in %ButtonsNone.get_children(): c.queue_free()
+	for c in %ButtonsEnemyDebug.get_children(): c.queue_free()
+
 	var index = 0
 	for l in find_level_scenes("res://src/Level/"):
-		var level_scene: PackedScene = load(l) #never gets instantiated, just reading
-		if get_root_property(level_scene, &"editor_hidden", false):
-			continue
-		var level_name = get_root_property(level_scene, &"level_name", "")
-		levels[level_name] = level_scene
-
-		var level_button = LEVEL_BUTTON.instantiate()
-		level_button.level_path = l
-		level_button.level_name = level_name
-		level_button.connect("level_selected", Callable(self, "_on_level_selected"))
+		var level_button = create_button(l)
+		#if level_button == null:
+			#continue
 		if index == 0:
 			level_button.active = true
 			active_level_path = l
-		$VBox/Margin/Scroll/Buttons.add_child(level_button)
+		%ButtonsNone.add_child(level_button)
 		index += 1
+
+	for l in find_level_scenes("res://src/Level/EnemyDebug/"):
+		var level_button = create_button(l)
+		%ButtonsEnemyDebug.add_child(level_button)
+
 
 func get_root_property(scene: PackedScene, prop: StringName, default = null) -> Variant:
 	var state := scene.get_state()
@@ -53,8 +52,20 @@ func find_level_scenes(path):
 			break
 		if file.ends_with(".tscn"):
 			files.append(path + file)
-	print(files)
 	return files
+
+func create_button(path):
+	var level_scene: PackedScene = load(path) #never gets instantiated, just reading
+	if get_root_property(level_scene, &"editor_hidden", false):
+		return
+	var level_name = get_root_property(level_scene, &"level_name", "")
+	levels[level_name] = level_scene
+
+	var level_button = LEVEL_BUTTON.instantiate()
+	level_button.level_path = path
+	level_button.level_name = level_name
+	level_button.connect("level_selected", Callable(self, "_on_level_selected"))
+	return level_button
 
 
 

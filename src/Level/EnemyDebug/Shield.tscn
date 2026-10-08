@@ -14,10 +14,10 @@
 [ext_resource type="PackedScene" uid="uid://beorrh1dm573t" path="res://src/Editor/Spawn/PropSpawn.tscn" id="13_w2pfh"]
 [ext_resource type="PackedScene" uid="uid://cyg86p7wau0n7" path="res://src/Editor/VisualUtility/WaypointLocal.tscn" id="15_yvlse"]
 
-[node name="EnShieldTesting" type="Node2D" unique_id=1952135705]
+[node name="Shield" type="Node2D" unique_id=1952135705]
 visibility_layer = 2
 script = ExtResource("1_ow8td")
-level_name = "EnShieldTesting"
+level_name = "Shield"
 music = "train"
 dialog_json = "res://src/Dialog/Village.json"
 debug_guns_on_enter = Array[String](["Revolver", "Speeder", "MPistol", "GLauncher", "Blunderbuss", "Tsurugi", "Red7", "Roberta"])
