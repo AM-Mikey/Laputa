@@ -11,12 +11,12 @@ func _ready():
 	for i in get_level_array("res://src/Level"):
 		if i.rfind(".tscn"):
 			var level_button = LEVELBUTTON.instantiate()
-			level_button.level = i
+			level_button.path = i
 			$MarginContainer/ScrollContainer/VBox/HBox/None/VBox.add_child(level_button)
 	for j in get_level_array("res://src/Level/EnemyDebug"):
 		if j.rfind(".tscn"):
 			var level_button = LEVELBUTTON.instantiate()
-			level_button.level = j
+			level_button.path = j
 			$MarginContainer/ScrollContainer/VBox/HBox/EnemyDebug/VBox.add_child(level_button)
 
 	var first_button = $MarginContainer/ScrollContainer/VBox/HBox/None/VBox.get_child(0)
@@ -33,7 +33,7 @@ func get_level_array(path) -> Array:
 			break
 		elif not file.begins_with("."):
 			if file.ends_with(".tscn"):
-				out.append("res://src/Level/%s" %file)
+				out.append(path + "/" + file)
 	level_dir.list_dir_end()
 	return out
 

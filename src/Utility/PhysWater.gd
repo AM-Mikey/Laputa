@@ -53,11 +53,12 @@ func _initiate_water():
 	%SplashDetector/CollisionShape2D.shape.size = water_size
 	%SplashDetector/CollisionShape2D.position = water_size / 2.0 + Vector2(0, surface_pos_y / 2.0)
 
-func _process(delta: float) -> void:
-	update_physics(delta)
+func _process(delta: float):
+	#update_physics(delta)
+	update_physics(min(delta, 1/60.0))
 	update_visuals()
 
-func update_physics(delta) -> void:
+func update_physics(delta):
 	for i in range(segment_count):
 		var displacement = segment_data[i]["height"] - surface_pos_y
 		var acceleration = -water_restoring_force * displacement - segment_data[i]["velocity"] * wave_energy_loss
