@@ -35,6 +35,7 @@ var internal_version: String = get_internal_version()
 @onready var ml = $MenuLayer
 @onready var il = $InventoryLayer
 @onready var dll = $DialogLayer
+@onready var cl = $CutsceneLayer
 
 @onready var farthest_back = $FarthestBack
 @onready var middle_back = $MiddleBack

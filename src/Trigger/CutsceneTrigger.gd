@@ -10,5 +10,5 @@ func _on_body_entered(_body: Node2D) -> void:
 	if !spent:
 		var cutscene_scene = load(cutscene_path)
 		var cutscene = cutscene_scene.instantiate()
-		w.farthest_back.add_child(cutscene)
+		w.cl.add_child(cutscene)
 		spent = true

@@ -105,6 +105,8 @@ layer = 8
 scale = Vector2(4, 4)
 transform = Transform2D(4, 0, 0, 4, 0, 0)
 
+[node name="CutsceneLayer" type="Node" parent="." unique_id=1220918963]
+
 [node name="FarthestBack" type="Node2D" parent="." unique_id=125280429]
 visibility_layer = 2
 z_index = -1
