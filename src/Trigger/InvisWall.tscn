@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://by8pdka7l1kn3"]
 
-[ext_resource type="Script" uid="uid://yslmy8fg0nrb" path="res://src/Trigger/InvisWall.gd" id="1_bfw75"]
+[ext_resource type="Script" path="res://src/Trigger/InvisWall.gd" id="1_bfw75"]
 
 [sub_resource type="RectangleShape2D" id="1"]
 size = Vector2(16, 16)

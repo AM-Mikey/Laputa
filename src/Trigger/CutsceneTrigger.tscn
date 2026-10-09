@@ -1,13 +1,14 @@
 [gd_scene format=3 uid="uid://ry10fk73awjw"]
 
-[ext_resource type="Script" uid="uid://dpsnl6ehmu7sl" path="res://src/Trigger/BossRoom.gd" id="1_p6031"]
+[ext_resource type="Script" uid="uid://dpsnl6ehmu7sl" path="res://src/Trigger/CutsceneTrigger.gd" id="1_7wt1c"]
 
 [sub_resource type="RectangleShape2D" id="1"]
+resource_local_to_scene = true
 size = Vector2(16, 16)
 
-[node name="BossRoom" type="Area2D" unique_id=996687710 groups=["Triggers"]]
+[node name="CutsceneTrigger" type="Area2D" unique_id=996687710 groups=["Triggers"]]
 collision_layer = 0
-script = ExtResource("1_p6031")
+script = ExtResource("1_7wt1c")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=2084038406]
 position = Vector2(8, 8)

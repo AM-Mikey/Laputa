@@ -148,54 +148,27 @@ properties = {
 "wallslam_time": [1.2, 3, ""],
 "water_gravity": [150.0, 3, ""]
 }
+allow_spawn = false
 
 [node name="VUVector" parent="Spawns/Golem" unique_id=872564127 instance=ExtResource("13_alsbe")]
 visibility_layer = 2
 tag_name = "move_dir"
-direction = Vector2(-1, 8.742278e-08)
+direction = Vector2(-1, -8.742278e-08)
 snap_degrees = 180.0
 
-[node name="Golem2" parent="Spawns" unique_id=848831012 instance=ExtResource("11_4mq45")]
+[node name="AmmoRefill" parent="Spawns" unique_id=1077118265 instance=ExtResource("9_6rjeb")]
 visibility_layer = 2
-position = Vector2(880, 32)
-actor_path = "res://src/Actor/Enemy/Golem.tscn"
+position = Vector2(160, -48)
+prop_path = "res://src/Prop/AmmoRefill.tscn"
 properties = {
-"base_gravity": [300.0, 3, ""],
-"charge_impulse_curve": [SubResource("Curve_wvikc"), 24, ""],
-"debug": [true, 1, ""],
-"difficulty": [0, 2, ""],
-"do_bubbles": [false, 1, ""],
-"editor_hidden": [false, 1, ""],
-"id": [&"golem_cutscene", 4, ""],
-"speed": [Vector2(150, 350), 5, ""],
-"wallslam_time": [1.2, 3, ""],
-"water_gravity": [150.0, 3, ""]
+"do_bubble": [false, 1, ""],
+"editor_hidden": [null, 1, ""],
+"id": [&"AmmoRefill", 4, ""]
 }
-allow_spawn = false
 
-[node name="VUVector" parent="Spawns/Golem2" unique_id=1049267392 instance=ExtResource("13_alsbe")]
-visibility_layer = 2
-tag_name = "move_dir"
-direction = Vector2(-1, 8.742278e-08)
-snap_degrees = 180.0
-
-[node name="BossRoom" parent="Spawns" unique_id=1998903811 instance=ExtResource("7_7g5h5")]
+[node name="InvisWall" parent="Spawns" unique_id=930751288 instance=ExtResource("7_7g5h5")]
 visibility_layer = 2
 offset_left = 480.0
-offset_top = 32.0
-offset_right = 992.0
-offset_bottom = 304.0
-trigger_path = "res://src/Trigger/BossRoom.tscn"
-properties = {
-"color": [Color(1, 0, 0, 1), 20, ""],
-"editor_hidden": [false, 1, ""],
-"id": ["boss_room", 4, ""]
-}
-size_is_default = false
-
-[node name="InvisWall" parent="Spawns" unique_id=740423938 instance=ExtResource("7_7g5h5")]
-visibility_layer = 2
-offset_left = 496.0
 offset_top = 48.0
 offset_right = 976.0
 offset_bottom = 288.0
@@ -208,6 +181,21 @@ properties = {
 "wall_left": [true, 1, ""],
 "wall_right": [true, 1, ""],
 "wall_up": [true, 1, ""]
+}
+size_is_default = false
+
+[node name="CutsceneTrigger" parent="Spawns" unique_id=139242328 instance=ExtResource("7_7g5h5")]
+visibility_layer = 2
+offset_left = 480.0
+offset_top = 32.0
+offset_right = 992.0
+offset_bottom = 304.0
+trigger_path = "res://src/Trigger/CutsceneTrigger.tscn"
+properties = {
+"color": [Color(1, 0, 0, 1), 20, ""],
+"cutscene_path": ["res://src/Cutscene/BossTestCutscene.tscn", 4, ""],
+"editor_hidden": [false, 1, ""],
+"id": ["boss_room", 4, ""]
 }
 size_is_default = false
 

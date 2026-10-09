@@ -135,6 +135,11 @@ func display_data():
 					create_button("direction", active.properties[p][0], "enum", load(active.trigger_path).instantiate().Direction.keys())
 				elif p == "text":
 					create_button("text", active.properties[p][0], "multiline")
+				elif p == "cutscene_path":
+					var cutscene_path_str: String = active.properties[p][0]
+					if (ResourceUID.has_id(ResourceUID.text_to_id(cutscene_path_str))):
+						cutscene_path_str = ResourceUID.uid_to_path(cutscene_path_str)
+					create_button("cutscene_path", cutscene_path_str, "load")
 				else:
 					var enum_string =  active.properties[p][2]
 					if enum_string != "":
@@ -284,6 +289,10 @@ func on_property_selected(property_name):
 					$FileDialog.popup()
 		"trigger_spawn":
 			match property_name:
+				"cutscene_path":
+					$FileDialog.current_dir = "res://src/Cutscene/"
+					$FileDialog.set_filters(PackedStringArray(["*.tscn"]))
+					$FileDialog.popup()
 				"level":
 					$FileDialog.current_dir = "res://src/Level/"
 					$FileDialog.set_filters(PackedStringArray(["*.tscn"]))

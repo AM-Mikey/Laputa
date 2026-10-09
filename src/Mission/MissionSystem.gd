@@ -34,14 +34,10 @@ const MAIN_MISSION = [ #[name, trigger_type, trigger_value, description]
 	#region BossTest
 	["boss_test", "", "",
 	"Boss Test"],
-	["boss_test_player_to_intro_position", "", "",
-	"Boss Intro cutscene"],
 	["boss_test_intro_drop", "", "",
 	"Boss Drop into the cutscene"],
 	["boss_test_health_bar_filled_up", "", "",
 	"Boss Health Bar filled up"],
-	["boss_test_start", "", "",
-	"Boss Start AI"],
 	["boss_test_win", "", "",
 	"Boss Test Win"]
 	#endregion
@@ -185,7 +181,7 @@ func update_level_via_mission(mission_name = "Main", mission_stage = "current", 
 				k.spawn()
 		else: #free
 			k.allow_spawn = false
-			if enemy:
+			if enemy and !enemy.is_queued_for_deletion():
 				enemy.free()
 
 
@@ -198,7 +194,7 @@ func update_level_via_mission(mission_name = "Main", mission_stage = "current", 
 				k.spawn()
 		else: #free
 			k.allow_spawn = false
-			if npc:
+			if npc and !npc.is_queued_for_deletion():
 				npc.free()
 
 
@@ -211,7 +207,7 @@ func update_level_via_mission(mission_name = "Main", mission_stage = "current", 
 				k.spawn()
 		else: #free
 			k.allow_spawn = false
-			if prop:
+			if prop and !prop.is_queued_for_deletion():
 				prop.free()
 
 
@@ -225,7 +221,7 @@ func update_level_via_mission(mission_name = "Main", mission_stage = "current", 
 				k.spawn()
 		else: #free
 			k.allow_spawn = false
-			if trigger:
+			if trigger and !trigger.is_queued_for_deletion():
 				trigger.free()
 
 

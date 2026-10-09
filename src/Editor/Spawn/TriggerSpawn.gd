@@ -87,9 +87,12 @@ func reinitialize(): #makes sure properties are up to date and in the right orde
 
 
 func spawn():
-	if !allow_spawn: return
+	if !allow_spawn:
+		w.emit_signal.call_deferred("finished_spawn_entities_step")
+		return
 	if trigger_path == null:
 		printerr("ERROR: no trigger chosen in TriggerSpawn")
+		w.emit_signal.call_deferred("finished_spawn_entities_step")
 		return
 
 	# For the MissionSystem correctly spawn and despawn stuff based on mission stage
@@ -98,12 +101,15 @@ func spawn():
 
 func _deferred_spawn():
 	if !allow_spawn:
+		w.emit_signal.call_deferred("finished_spawn_entities_step")
 		spawning = false
 		return
 	if trigger_path == null:
 		printerr("ERROR: no trigger chosen in TriggerSpawn")
+		w.emit_signal.call_deferred("finished_spawn_entities_step")
 		spawning = false
 		return
+
 	var trigger = load(trigger_path).instantiate()
 	for p in properties:
 		trigger.set(p, properties[p][0])

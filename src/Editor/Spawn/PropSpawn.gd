@@ -97,9 +97,12 @@ func reinitialize(): #makes sure properties are up to date and in the right orde
 		on_property_changed(p, properties[p][0])
 
 func spawn():
-	if !allow_spawn: return
+	if !allow_spawn:
+		w.emit_signal.call_deferred("finished_spawn_entities_step")
+		return
 	if prop_path == null:
 		printerr("ERROR: no prop chosen in PropSpawn")
+		w.emit_signal.call_deferred("finished_spawn_entities_step")
 		return
 
 	# For the MissionSystem correctly spawn and despawn stuff based on mission stage
@@ -108,10 +111,12 @@ func spawn():
 
 func _deferred_spawn():
 	if !allow_spawn:
+		w.emit_signal.call_deferred("finished_spawn_entities_step")
 		spawning = false
 		return
 	if prop_path == null:
 		printerr("ERROR: no prop chosen in PropSpawn")
+		w.emit_signal.call_deferred("finished_spawn_entities_step")
 		spawning = false
 		return
 

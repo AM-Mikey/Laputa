@@ -8,7 +8,6 @@ extends Trigger
 const WALL_THICKNESS = 8.0
 
 func _ready() -> void:
-	trigger_type = "invis_wall"
 	var trigger_size = $CollisionShape2D.shape.size
 	var trigger_position = $CollisionShape2D.global_position - trigger_size / 2.0
 	var trigger_rect: Rect2 = Rect2(trigger_position, trigger_size)
@@ -30,4 +29,5 @@ func _ready() -> void:
 	$Right/CollisionShape2D.shape.size = Vector2(WALL_THICKNESS, trigger_rect.size.y + WALL_THICKNESS * 2.0)
 	$Right.global_position = Vector2(trigger_rect.end.x + WALL_THICKNESS / 2.0, trigger_rect_center.y)
 
+	trigger_type = "invis_wall"
 	w.emit_signal("finished_spawn_entities_step")

@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://crbkj4brdyifs"]
 
-[ext_resource type="Script" uid="uid://8xte0is27e2y" path="res://src/Cutscene/boss_test_cutscene.gd" id="1_t3j61"]
+[ext_resource type="Script" uid="uid://8xte0is27e2y" path="res://src/Cutscene/BossTestCutscene.gd" id="1_t3j61"]
 
 [node name="BossTestCutscene" type="Node" unique_id=2017263550]
 script = ExtResource("1_t3j61")

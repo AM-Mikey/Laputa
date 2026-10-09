@@ -19,6 +19,7 @@ signal xp_updated(xp, max_xp, level, max_level, do_xp_flash, cause)
 signal money_updated(money)
 signal invincibility_end()
 signal end_move_to()
+signal killed
 
 
 @export var hp: int = 16
@@ -196,6 +197,7 @@ func die():
 		disabled = true
 		w.add_child(DEATH_CAMERA.instantiate())
 		visible = false
+		killed.emit()
 
 		var explosion = EXPLOSION.instantiate()
 		explosion.position = global_position

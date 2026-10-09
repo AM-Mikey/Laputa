@@ -1,16 +1,14 @@
 {
 	"trigger_set_spawn": {
 		"Main": {
-			"boss_room": {
-				"boss_test": true,
-				"boss_test_win": false,
-				"any": false
-			},
 			"boss_invis_wall": {
 				"boss_test_intro_drop": true,
 				"boss_test_health_bar_filled_up": true,
-				"boss_test_start": true,
 				"any": false
+			},
+			"boss_room": {
+				"boss_test": true,
+				"boss_test_win": false,
 			},
 		},
 	},
@@ -24,11 +22,4 @@
 			},
 		},
 	},
-
-	"camera_control_add": {
-		"Main": {
-			"boss_test_player_to_intro_position": [["to_pos", 750, 168, 10]],
-		}
-	}
-
 }
