@@ -41,7 +41,7 @@ func set_level_limit(limit_rect: Rect2):
 func get_level_limiter():
 	return w.current_level.get_node("LevelLimiter")
 
-# Player camera
+# Camera
 func get_player_camera() -> Camera2D:
 	var player = f.pc()
 	if player:
@@ -49,10 +49,11 @@ func get_player_camera() -> Camera2D:
 		return camera
 	return null
 
-func reset_player_camera(rect: Rect2):
-	var camera = get_player_camera()
-	camera.control_stop()
-	camera.reset()
+func pan_camera_to(camera: Camera2D, global_pos: Vector2, time: float):
+	var camera_pan: Tween = camera.create_tween()
+	camera_pan.tween_property(camera, "global_position", global_pos, time)
+	await camera_pan.finished
+	return
 
 func move_player_to(pos: Vector2):
 	var player = f.pc()

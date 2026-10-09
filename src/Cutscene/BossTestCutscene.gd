@@ -6,6 +6,7 @@ func setup():
 	move_player_to(Vector2(592, 288))
 	var new_level_limit_rect: Rect2 = Rect2(Vector2(480, 32), Vector2(512, 272))
 	transition_level_limit(new_level_limit_rect, 1.2)
+	pan_camera_to(get_player_camera(), Vector2(740, 188), 0.5)
 	if !player.end_move_to.is_connected(_on_player_reach_intro_position):
 		player.end_move_to.connect(_on_player_reach_intro_position)
 

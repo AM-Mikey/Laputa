@@ -31,10 +31,11 @@ func boss_health_bar_filled_anim():
 func boss_battle_start():
 	#ms.progress_main_mission() # Start boss fight
 	am.play_music(boss_music)
+	var player = f.pc()
+	pan_camera_to(get_player_camera(), player.global_position, 0.2)
 	var golem_boss = get_entity_with_id("Enemies", boss_id)
 	golem_boss.killed.connect(_on_boss_killed)
 	golem_boss.process_mode = ProcessMode.PROCESS_MODE_INHERIT
-	var player = f.pc()
 	player.killed.connect(_on_player_killed)
 	enable_player_input()
 

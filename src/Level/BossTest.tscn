@@ -216,3 +216,6 @@ position = Vector2(184, 288)
 [node name="TitlePreview" parent="." unique_id=2052223351 instance=ExtResource("11_alsbe")]
 visibility_layer = 2
 position = Vector2(264, 168)
+
+[node name="Node2D" type="Node2D" parent="." unique_id=1102205186]
+position = Vector2(740.55237, 168.8085)
