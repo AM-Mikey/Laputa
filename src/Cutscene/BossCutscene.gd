@@ -2,12 +2,13 @@ extends Cutscene
 
 class_name BossCutscene
 
-@onready var boss_id = "golem"
-@onready var boss_health_bar_scene = preload("res://src/Cutscene/BossHealthBar.tscn")
+const BOSS_HEALTH_BAR = preload("res://src/Cutscene/BossHealthBar.tscn")
+
+var boss_id = ""
+
 var boss_health_bar = null
 var boss_arena: Rect2 = Rect2()
 var boss_music: String = "boss"
-
 
 
 func _on_boss_killed():
@@ -18,7 +19,7 @@ func _on_player_killed():
 
 ## UTILITY
 func boss_health_bar_filled_anim():
-	boss_health_bar = boss_health_bar_scene.instantiate()
+	boss_health_bar = BOSS_HEALTH_BAR.instantiate()
 	w.ui.add_child(boss_health_bar)
 	boss_health_bar.boss = get_entity_with_id("Enemies", boss_id)
 	boss_health_bar.show_ui()
