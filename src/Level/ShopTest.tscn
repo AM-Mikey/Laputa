@@ -882,6 +882,47 @@ snap_degrees = 90.0
 movement_locked = true
 color = Color(8.061901e-07, 0.41569918, 0.11087646, 1)
 
+[node name="Gecko3" type="Area2D" parent="Spawns" unique_id=1626118867 groups=["ActorSpawns", "Entities"] instance=ExtResource("7_c6oa4")]
+visibility_layer = 2
+z_index = 999
+position = Vector2(2064, 1712)
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("10_prgck")
+actor_path = "res://src/Actor/Enemy/Gecko.tscn"
+properties = {
+"base_gravity": [300.0, 3, ""],
+"debug": [true, 1, ""],
+"do_bubbles": [true, 1, ""],
+"editor_hidden": [false, 1, ""],
+"id": [&"Gecko3", 4, ""],
+"speed": [Vector2(150, 350), 5, ""],
+"water_gravity": [150.0, 3, ""]
+}
+
+[node name="NormalVector" type="Area2D" parent="Spawns/Gecko3" unique_id=2102451284 groups=["Entities", "VUVectors", "VisualUtilities"] instance=ExtResource("13_prgck")]
+visibility_layer = 2
+position = Vector2(0, -8)
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("14_dej6s")
+tag_name = "fly"
+direction = Vector2(-1, -8.742278e-08)
+movement_locked = true
+
+[node name="CrawlVector" type="Area2D" parent="Spawns/Gecko3" unique_id=837968187 groups=["Entities", "VUVectors", "VisualUtilities"] instance=ExtResource("13_prgck")]
+visibility_layer = 2
+position = Vector2(0, -8)
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("14_dej6s")
+arrow_length = 24.0
+tag_name = "crawl"
+direction = Vector2(-4.371139e-08, -1)
+snap_degrees = 90.0
+movement_locked = true
+color = Color(8.061901e-07, 0.41569918, 0.11087646, 1)
+
 [node name="TileAnimator" type="Node2D" parent="." unique_id=459942112]
 visibility_layer = 2
 script = ExtResource("8_ppd8f")
@@ -977,3 +1018,4 @@ script = ExtResource("18_lk15g")
 [connection signal="input_event" from="Spawns/Gecko" to="Spawns/Gecko" method="_on_input_event"]
 [connection signal="input_event" from="Spawns/Gecko1" to="Spawns/Gecko1" method="_on_input_event"]
 [connection signal="input_event" from="Spawns/Gecko2" to="Spawns/Gecko2" method="_on_input_event"]
+[connection signal="input_event" from="Spawns/Gecko3" to="Spawns/Gecko3" method="_on_input_event"]

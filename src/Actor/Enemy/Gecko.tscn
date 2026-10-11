@@ -9,8 +9,8 @@
 size = Vector2(16, 4)
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_qsmhk"]
-radius = 8.0
-height = 16.0
+radius = 7.0
+height = 14.0
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_mvj52"]
 radius = 2.0
@@ -20,13 +20,13 @@ height = 16.0
 size = Vector2(24, 14)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_fjd7u"]
-size = Vector2(16, 16)
+size = Vector2(14, 14)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_g4id4"]
 size = Vector2(16, 4)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_t75oa"]
-size = Vector2(14.5, 14)
+size = Vector2(14, 14)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_1jc3m"]
 size = Vector2(128, 64)
@@ -113,7 +113,6 @@ shape = SubResource("RectangleShape2D_7vcwk")
 debug_color = Color(0, 0.588235, 0.705882, 0.235294)
 
 [node name="Fall" type="CollisionShape2D" parent="." unique_id=1435893146]
-visible = false
 position = Vector2(0, -7)
 rotation = -1.57079
 shape = SubResource("CapsuleShape2D_qsmhk")
@@ -139,7 +138,6 @@ shape = SubResource("1")
 debug_color = Color(0, 1, 0, 0.235294)
 
 [node name="Fall" type="CollisionShape2D" parent="Hurtbox" unique_id=389128745]
-visible = false
 position = Vector2(0, -7)
 shape = SubResource("RectangleShape2D_fjd7u")
 disabled = true
@@ -155,8 +153,7 @@ shape = SubResource("RectangleShape2D_g4id4")
 debug_color = Color(1, 0, 0, 0.235294)
 
 [node name="Fall" type="CollisionShape2D" parent="Hitbox" unique_id=304220547]
-visible = false
-position = Vector2(-0.25, -7)
+position = Vector2(0, -7)
 shape = SubResource("RectangleShape2D_t75oa")
 disabled = true
 debug_color = Color(1, 0, 0, 0.235294)
