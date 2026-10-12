@@ -41,22 +41,27 @@ var land_time := 0.3
 var avoid_cooldown_time := 1.5
 var avoid_cooldown_left := 0.0 #wall/edge hit while this is > 0 sends avoid straight to flee
 var flee_keep_dir := false #set when move_dir was already turned around before entering flee
+var startup_flip_grace := 0.25
+const BODY_CENTER_OFFSET := 7.0 #fall shape centre is 7px off the surface (matches the (0, -7) shape positions)
 
 
 #TODO: dust particles for when running (ala minecraft cats)
 
-#stands still, scurries away when player near, crawls slowly otherwise.
-#drops off when hit?
-#walks through ssps
 
 func setup(): #Reminder: no function called can use await
-	normal_dir = $NormalVector.direction
+	normal_dir = $NormalVector.direction.normalized()
 	wall_dir = normal_dir * -1
-	var crawl_dir = Vector2(normal_dir.cross($CrawlVector.direction), 0)
 	rotation = normal_dir.angle() + deg_to_rad(90)
 	gravity = 0.0
-	move_dir = crawl_dir.rotated(rotation)
+	var tangent = normal_dir.rotated(deg_to_rad(90))
+	var crawl_x = sign($CrawlVector.direction.dot(tangent))
+	if crawl_x == 0.0:
+		crawl_x = 1.0
+	move_dir = Vector2(crawl_x, 0.0).rotated(rotation)
 	update_facing()
+
+	refresh_casts()
+	$FlipCooldown.start(startup_flip_grace)
 
 	hp = 2
 	damage_on_contact = 2
@@ -67,12 +72,16 @@ func setup(): #Reminder: no function called can use await
 
 func _on_physics_process(_delta):
 	if disabled or dead or Engine.is_editor_hint(): return
-	velocity = calc_velocity(move_dir, true)
+	if state == "fall":
+		velocity = calc_velocity(move_dir, true) #gravity + horizontal drift
+	else:
+		velocity = Vector2(move_dir.x * speed.x, move_dir.y * speed.y)
 	move_and_slide()
 
 
+
 func enter_idle(_delta):
-	$AnimationPlayer.play("Crawl")
+	$AnimationPlayer.play("Idle")
 	speed = Vector2.ZERO
 	$IdleTimer.start(randf_range(idle_min_time, idle_max_time))
 
@@ -80,7 +89,7 @@ func enter_idle(_delta):
 func enter_crawl(_last_state):
 	$AnimationPlayer.play("Crawl")
 	speed = crawl_speed
-	set_collision_shapes("crawl")
+	$AnimationPlayer.speed_scale = 0.75
 	$CrawlTimer.start(randf_range(crawl_min_time, crawl_max_time))
 
 func do_crawl(_delta):
@@ -91,25 +100,23 @@ func do_crawl(_delta):
 		if collision.get_travel().length() > 0.0001:
 			move_and_collide(wall_dir * 5)
 
-	if !%FloorCastL.is_colliding() || !%FloorCastR.is_colliding(): #At edge
-		flip_check()
-	elif %LeftCast.is_colliding() || %RightCast.is_colliding(): #At wall
-		flip_check()
+	flip_if_blocked()
 
 func exit_crawl(_next_state):
+	$AnimationPlayer.speed_scale = 1.0
 	if (!$FlipCooldown.is_stopped()):
 		$FlipCooldown.stop()
 
 
 func enter_flee(_last_state):
 	$AnimationPlayer.play("Crawl")
+	$AnimationPlayer.speed_scale = 2.0
 	speed = flee_speed
-	set_collision_shapes("crawl")
 	$FleeTimer.start(randf_range(flee_min_time, flee_max_time))
-	if flee_keep_dir: #already turned around (e.g. avoid hit a wall), don't flip back into it
+	if flee_keep_dir: #already turned around, don't flip back into it
 		flee_keep_dir = false
 	else:
-		move_dir *= -1.0 #move_dir is always along the crawl axis, so this reverses it on any surface
+		move_dir *= -1.0
 		update_facing()
 
 func do_flee(_delta):
@@ -122,6 +129,8 @@ func do_flee(_delta):
 
 	if !%FloorCastL.is_colliding() && !%FloorCastR.is_colliding(): #past edge
 		var drift = Vector2(sign(move_dir.x), 0.0)
+		if abs(move_dir.x) < 0.5: #crawling vertically on a side wall: fall away from the wall
+			drift = Vector2(-sign(wall_dir.x), 0.0)
 		fall_land_dir = drift
 		fall_drift_dir = drift
 		stop_all_timers()
@@ -138,43 +147,46 @@ func do_flee(_delta):
 			change_state("fall")
 
 func exit_flee(_next_state):
+	$AnimationPlayer.speed_scale = 1.0
 	if (!$FlipCooldown.is_stopped()):
 		$FlipCooldown.stop()
 
 
 func enter_fall(_last_state):
-	$AnimationPlayer.play("Idle")
+	$AnimationPlayer.play("Fall")
 	fall_time = 0.0
-	fall_start_y = global_position.y
+	global_position += (normal_dir * BODY_CENTER_OFFSET).round() + Vector2(0.0, BODY_CENTER_OFFSET)
+	fall_start_y = global_position.y #after the move, so the translation doesn't count as falling
 	#turn upright
 	normal_dir = Vector2.UP
 	wall_dir = Vector2.DOWN
 	rotation = 0.0
-	gravity = base_gravity #TODO: not accounting for water gravity, just sets to 90
+	gravity = base_gravity #TODO: not accounting for water gravity
 	velocity = Vector2.ZERO
 	move_dir = fall_drift_dir
+	update_facing() #sprite was flipped for the old orientation; face the drift direction in the new one
 	speed = Vector2(fall_drift_speed, fall_drift_speed)
-	set_collision_shapes("fall")
 
 func do_fall(delta):
 	fall_time += delta
 	if is_on_floor():
+		#global_position.y = round(global_position.y) #snap to the exact pixel height
 		change_state("land")
 
 
 func enter_land(_last_state):
-	set_collision_shapes("land")
-	$AnimationPlayer.play("Idle")
+	$AnimationPlayer.play("Land")
 	speed = Vector2.ZERO
 	move_dir = Vector2.ZERO
+	#velocity = Vector2.ZERO allow us to slide a bit
 	$LandTimer.start(land_time)
 
 
 
 func enter_avoid(_last_state):
 	$AnimationPlayer.play("Crawl")
+	$AnimationPlayer.speed_scale = 0.75
 	speed = avoid_speed
-	set_collision_shapes("crawl")
 	$AvoidTimer.start(randf_range(avoid_min_time, avoid_max_time))
 	avoid_cooldown_left = avoid_cooldown_time
 
@@ -195,10 +207,8 @@ func do_avoid(delta):
 		move_dir = Vector2(away_x, 0.0).rotated(global_rotation)
 		update_facing()
 
-	var at_edge = !%FloorCastL.is_colliding() || !%FloorCastR.is_colliding()
-	var at_wall = %LeftCast.is_colliding() || %RightCast.is_colliding()
-	if at_edge || at_wall:
-		force_flip() #ignore the flip cooldown: we must never keep heading into the wall/edge
+	if is_heading_off_edge() || is_heading_into_wall():
+		force_flip() #ignore the flip cooldown
 		stop_all_timers()
 		if avoid_cooldown_left > 0.0 || player_in_detector: #cornered quickly (or player still near)
 			flee_keep_dir = true #already turned around, enter_flee must not flip again
@@ -208,6 +218,7 @@ func do_avoid(delta):
 
 
 func exit_avoid(_next_state):
+	$AnimationPlayer.speed_scale = 1.0
 	if (!$FlipCooldown.is_stopped()):
 		$FlipCooldown.stop()
 
@@ -227,25 +238,38 @@ func flip_check():
 	if $FlipCooldown.is_stopped():
 		force_flip()
 
-# Reverses direction regardless of the flip cooldown (and restarts it).
 func force_flip():
-	print("flip")
 	$FlipCooldown.start(flip_cooldown_time)
 	move_dir *= -1.0
 	update_facing()
 
-# Syncs sprite flip and hurtbox offset to move_dir. Everything is computed in local space
-# (move_dir rotated back by our rotation) so it works on floors, walls and ceilings.
 func update_facing():
 	var local_x = move_dir.rotated(-rotation).x
 	if abs(local_x) < 0.01: return
 	var facing = sign(local_x) #-1 = facing local left, +1 = facing local right
 	$Sprite2D.scale.x = -facing
-	$Hurtbox/Crawl.position = Vector2(-4.0 * facing, -7.0) #(4, -7) facing left, (-4, -7) facing right
+	$Hurtbox/CollisionShape2D.position = Vector2(-4.0 * facing, -7.0) #(4, -7) facing left, (-4, -7) facing right
 
 func is_heading_into_wall() -> bool:
 	var local_x = move_dir.rotated(-rotation).x
 	return (%LeftCast.is_colliding() && local_x < 0.0) || (%RightCast.is_colliding() && local_x > 0.0)
+
+func is_heading_off_edge() -> bool:
+	var local_x = move_dir.rotated(-rotation).x
+	return (!%FloorCastL.is_colliding() && local_x < 0.0) || (!%FloorCastR.is_colliding() && local_x > 0.0)
+
+func flip_if_blocked():
+	if !(is_heading_off_edge() || is_heading_into_wall()): return
+	var boxed_in = (%LeftCast.is_colliding() && %RightCast.is_colliding()) \
+			|| (!%FloorCastL.is_colliding() && !%FloorCastR.is_colliding())
+	if boxed_in:
+		flip_check() #blocked both ways: keep the cooldown so it can't flip every frame
+	else:
+		force_flip()
+
+func refresh_casts():
+	for cast in [%LeftCast, %RightCast, %FloorCastL, %FloorCastR]:
+		cast.force_raycast_update()
 
 func get_wall_hit_away_dir() -> Vector2:
 	var side := 0.0 #local x side of the hit: -1 = left cast, +1 = right cast
@@ -259,22 +283,6 @@ func get_wall_hit_away_dir() -> Vector2:
 		away_x = -sign(wall_dir.x)
 	return Vector2(away_x, 0.0)
 
-func set_collision_shapes(shape_name):
-	match shape_name:
-		"crawl":
-			$CollisionShape2D.set_deferred("disabled", false)
-			$Hurtbox/Crawl.set_deferred("disabled", false)
-			$Hitbox/Crawl.set_deferred("disabled", false)
-			$Fall.set_deferred("disabled", true)
-			$Hurtbox/Fall.set_deferred("disabled", true)
-			$Hitbox/Fall.set_deferred("disabled", true)
-		"fall":
-			$CollisionShape2D.set_deferred("disabled", true)
-			$Hurtbox/Crawl.set_deferred("disabled", true)
-			$Hitbox/Crawl.set_deferred("disabled", true)
-			$Fall.set_deferred("disabled", false)
-			$Hurtbox/Fall.set_deferred("disabled", false)
-			$Hitbox/Fall.set_deferred("disabled", false)
 
 func stop_all_timers():
 	$IdleTimer.stop()
@@ -313,7 +321,6 @@ func _on_LandTimer_timeout():
 		dir_x = 1.0 if randf() < 0.5 else -1.0
 	move_dir = Vector2(dir_x, 0.0)
 	update_facing()
-	gravity = 0.0
 	if player_in_detector:
 		change_state("avoid")
 	else:
