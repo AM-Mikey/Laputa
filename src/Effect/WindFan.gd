@@ -18,6 +18,8 @@ func _ready():
 
 
 func update():
+	if is_stopping:
+		return
 	if tile_distance <= 0.0:
 		$Left.emitting = false
 		$Right.emitting = false
