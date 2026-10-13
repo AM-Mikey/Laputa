@@ -3,6 +3,10 @@ extends Enemy
 const ICON = preload("res://assets/Actor/Enemy/FrogIcon.png")
 const TX_0 = preload("res://assets/Actor/Enemy/Frog.png")
 const TX_1 = preload("res://assets/Actor/Enemy/Frog1.png")
+const TOOLTIPS = [
+"LV 0: Jumps when player in detection area.",
+"LV 1: Jumps low when player in detection area, toungue attack when player in front.",
+]
 
 var target
 

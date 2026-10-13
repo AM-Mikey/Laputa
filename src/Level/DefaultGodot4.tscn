@@ -9,7 +9,6 @@
 [ext_resource type="PackedScene" uid="uid://cs5m8mi2rih5f" path="res://src/Editor/Spawn/ActorSpawn.tscn" id="6_dcw0l"]
 [ext_resource type="PackedScene" uid="uid://dovj8uq00xato" path="res://src/Editor/VanishingPoint.tscn" id="7_mlr58"]
 [ext_resource type="PackedScene" uid="uid://ciahlvrcyq5yt" path="res://src/Editor/Spawn/TriggerSpawn.tscn" id="7_v7nqo"]
-[ext_resource type="PackedScene" uid="uid://bwp6sqdlvfo84" path="res://src/Editor/VisualUtility/VUVector.tscn" id="11_ug36o"]
 [ext_resource type="PackedScene" uid="uid://dhjqke0pgo21f" path="res://src/Editor/TitlePreview.tscn" id="14_iuj41"]
 [ext_resource type="PackedScene" uid="uid://b0hildwypv8q5" path="res://src/Editor/VisualUtility/VURect.tscn" id="15_7v6gq"]
 [ext_resource type="PackedScene" uid="uid://beorrh1dm573t" path="res://src/Editor/Spawn/PropSpawn.tscn" id="15_tk244"]
@@ -385,44 +384,6 @@ properties = {
 }
 size_is_default = false
 
-[node name="PhysFan" parent="Spawns" unique_id=1449282698 instance=ExtResource("15_tk244")]
-visibility_layer = 2
-position = Vector2(1840, 2048)
-prop_path = "res://src/Prop/PhysFan.tscn"
-properties = {
-"do_bubble": [false, 1, ""],
-"editor_hidden": [false, 1, ""],
-"id": [&"PhysFan", 4],
-"speed": [5.0, 3, ""],
-"toggled": [true, 1, ""]
-}
-
-[node name="WindVector" parent="Spawns/PhysFan" unique_id=195590256 instance=ExtResource("11_ug36o")]
-visibility_layer = 2
-position = Vector2(8, 8)
-direction = Vector2(-4.371139e-08, 1)
-snap_degrees = 90.0
-movement_locked = true
-
-[node name="PhysFan1" parent="Spawns" unique_id=132587828 instance=ExtResource("15_tk244")]
-visibility_layer = 2
-position = Vector2(1872, 2160)
-prop_path = "res://src/Prop/PhysFan.tscn"
-properties = {
-"do_bubble": [false, 1, ""],
-"editor_hidden": [false, 1, ""],
-"id": [&"PhysFan1", 4],
-"speed": [50.0, 3, ""],
-"toggled": [true, 1, ""]
-}
-
-[node name="WindVector" parent="Spawns/PhysFan1" unique_id=1400282246 instance=ExtResource("11_ug36o")]
-visibility_layer = 2
-position = Vector2(8, 8)
-direction = Vector2(-4.371139e-08, -1)
-snap_degrees = 90.0
-movement_locked = true
-
 [node name="Basil" parent="Spawns" unique_id=846815944 instance=ExtResource("6_dcw0l")]
 visibility_layer = 2
 position = Vector2(2360, 2272)
@@ -518,90 +479,6 @@ visibility_layer = 2
 position = Vector2(0, -64)
 tag_name = "shoot_y"
 lock_x = true
-
-[node name="Billy" parent="Spawns" unique_id=546465970 instance=ExtResource("6_dcw0l")]
-visibility_layer = 2
-position = Vector2(2456, 1936)
-actor_path = "res://src/Actor/Enemy/Billy.tscn"
-properties = {
-"base_gravity": [300.0, 3, ""],
-"bullet_damage": [2, 2, ""],
-"bullet_speed": [200, 2, ""],
-"deaggro_delay": [3.0, 3, ""],
-"debug": [true, 1, ""],
-"difficulty": [1, 2, ""],
-"do_bubbles": [true, 1, ""],
-"editor_hidden": [false, 1, ""],
-"id": [&"Billy1", 4, ""],
-"idle_max_time": [5.0, 3, ""],
-"lock_distance": [128, 2, ""],
-"lock_tolerance": [16, 2, ""],
-"move_dir": [Vector2(-1, 0), 5, ""],
-"speed": [Vector2(150, 350), 5, ""],
-"walk_max_time": [10.0, 3, ""],
-"water_gravity": [150.0, 3, ""]
-}
-
-[node name="VURect" parent="Spawns/Billy" unique_id=951928484 instance=ExtResource("15_7v6gq")]
-visibility_layer = 2
-tag_name = "player_detector"
-value = Rect2(-128, -80, 256, 160)
-
-[node name="Billy1" parent="Spawns" unique_id=1266214651 instance=ExtResource("6_dcw0l")]
-visibility_layer = 2
-position = Vector2(2408, 1984)
-actor_path = "res://src/Actor/Enemy/Billy.tscn"
-properties = {
-"base_gravity": [300.0, 3, ""],
-"bullet_damage": [2, 2, ""],
-"bullet_speed": [200, 2, ""],
-"deaggro_delay": [3.0, 3, ""],
-"debug": [true, 1, ""],
-"difficulty": [1, 2, ""],
-"do_bubbles": [true, 1, ""],
-"editor_hidden": [false, 1, ""],
-"id": [&"Billy2", 4, ""],
-"idle_max_time": [5.0, 3, ""],
-"lock_distance": [128, 2, ""],
-"lock_tolerance": [16, 2, ""],
-"move_dir": [Vector2(-1, 0), 5, ""],
-"speed": [Vector2(150, 350), 5, ""],
-"walk_max_time": [10.0, 3, ""],
-"water_gravity": [150.0, 3, ""]
-}
-
-[node name="VURect" parent="Spawns/Billy1" unique_id=1859121448 instance=ExtResource("15_7v6gq")]
-visibility_layer = 2
-tag_name = "player_detector"
-value = Rect2(-128, -80, 256, 160)
-
-[node name="Billy2" parent="Spawns" unique_id=285981885 instance=ExtResource("6_dcw0l")]
-visibility_layer = 2
-position = Vector2(2424, 2096)
-actor_path = "res://src/Actor/Enemy/Billy.tscn"
-properties = {
-"base_gravity": [300.0, 3, ""],
-"bullet_damage": [2, 2, ""],
-"bullet_speed": [200, 2, ""],
-"deaggro_delay": [3.0, 3, ""],
-"debug": [true, 1, ""],
-"difficulty": [1, 2, ""],
-"do_bubbles": [true, 1, ""],
-"editor_hidden": [false, 1, ""],
-"id": [&"Billy4", 4, ""],
-"idle_max_time": [5.0, 3, ""],
-"lock_distance": [128, 2, ""],
-"lock_tolerance": [16, 2, ""],
-"move_dir": [Vector2(-1, 0), 5, ""],
-"speed": [Vector2(150, 350), 5, ""],
-"walk_max_time": [10.0, 3, ""],
-"water_gravity": [150.0, 3, ""]
-}
-
-[node name="VURect" parent="Spawns/Billy2" unique_id=41270776 instance=ExtResource("15_7v6gq")]
-visibility_layer = 2
-tag_name = "player_detector"
-value = Rect2(-128, -80, 256, 160)
 
 [node name="Sentry1" parent="Spawns" unique_id=986853334 instance=ExtResource("6_dcw0l")]
 visibility_layer = 2

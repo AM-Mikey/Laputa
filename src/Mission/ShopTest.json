@@ -1,0 +1,12 @@
+{
+"npc_set_main_conversation_queue": {
+		"Main": {
+			"sage": {
+				"shop_test": "sage_options",
+			},
+			"basil": {
+				"shop_test": "basil_options",
+			},
+		},
+	},
+}

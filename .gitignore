@@ -1,23 +1,26 @@
-# My ignores
-.DS_Store
-.vscode/
-assets/.Obsidian/Laputa/.obsidian
+# Make sure you have Git LFS installed to use .gitattributes for large files.
+# If not simply run "git LFS install" in terminal.
 
-# Plugin Specific ignores
-default_env.tres
-icon.png
-icon.png.import
-project.godot
-scn/
-override.cfg
+# Editor-specific ignores
+.vscode/
 
 # Godot-specific ignores
-.import/
 .godot/
+.nomedia
+.import/
 export.cfg
-export_presets.cfg
+data_*/
+dist/
+*.vs
+*.tmp
+*blend1
+*.DS_Store
+~*.dll
 
 # Mono-specific ignores
 .mono/
 data_*/
-assets/.Obsidian/Laputa/.obsidian/workspace.json
+mono_crash.*.json
+
+# Export outputs
+*.exe

@@ -6,6 +6,10 @@ extends Enemy
 const ICON = preload("res://assets/Actor/Enemy/BeetleCrawlerIcon.png")
 const TX_0 = preload("res://assets/Actor/Enemy/BeetleCrawler.png")
 const TX_1 = preload("res://assets/Actor/Enemy/BeetleCrawler1.png")
+const TOOLTIPS = [
+"LV 0: Crawls along 90* walls.",
+"LV 1: Crawls along 90* walls, flies when player opposite.",
+]
 
 var move_dir = Vector2.LEFT
 var saved_move_dir: Vector2
@@ -160,12 +164,10 @@ func do_crawl(_delta):
 		flip_check()
 
 func exit_crawl(_next_state):
-	print("exit crawl")
 	if (!$FlipCooldown.is_stopped()):
 		$FlipCooldown.stop()
 
 func flip_check():
-	print("tried to flip")
 	if $FlipCooldown.is_stopped():
 		$FlipCooldown.start(flip_cooldown_time)
 		move_dir *= -1.0

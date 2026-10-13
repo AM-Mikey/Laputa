@@ -7,7 +7,6 @@ var fire_time = 0.1
 #fires in bursts of 7 bullets. you can fire less but not more before cooldown
 
 func _ready():
-	display_name = "Red 7"
 	description = "Fires in bursts of up to Seven. Looks like some kind of prototype."
 	icon_texture = load("res://assets/Gun/Red7Icon.png")
 	icon_small_texture = load("res://assets/Gun/Red7IconSmall.png")
@@ -17,6 +16,7 @@ func _ready():
 	automatic = true
 	max_ammo = 0
 	max_level = 3
+	max_unlocked_level = 1
 	set_level(level)
 
 func _set_level(val: int) -> void:

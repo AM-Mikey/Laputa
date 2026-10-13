@@ -2,8 +2,9 @@ extends Gun
 
 const GUN_SMOKE = preload("res://src/Effect/GunSmoke.tscn")
 
+var cock_sfx = "gun_cock_glauncher"
+
 func _ready():
-	display_name = "Grenade Launcher"
 	description = "Packs a punch. Hold down for a more direct arc. Extra damage if grenades don't bounce"
 	icon_texture = load("res://assets/Gun/GLauncherIcon.png")
 	icon_small_texture = load("res://assets/Gun/GLauncherIconSmall.png")
@@ -12,7 +13,9 @@ func _ready():
 	automatic = false
 	ammo = 10
 	max_level = 3
+	max_unlocked_level = 1
 	set_level(level)
+	cd.connect("timeout", Callable(self, "_on_cd_timeout"))
 
 func _set_level(val: int) -> void:
 	match val:
@@ -47,3 +50,14 @@ func activate():
 	gun_smoke.direction = Vector2(pc.shoot_dir.x, 0)
 	gun_smoke.global_position = $Muzzle.global_position
 	w.player_front.add_child(gun_smoke)
+
+
+
+### SIGNALS ###
+
+func _on_cd_timeout():
+	if pc.guns.get_child(0) == self: #current gun
+		am.play(cock_sfx)
+		oup.vibrate_impulse_light(0.1, 0.1)
+		await get_tree().create_timer(0.2).timeout
+		oup.vibrate_impulse_light(0.1, 0.1)

@@ -18,16 +18,16 @@ var jump_time : int = 0
 func state_process(_delta):
 	jump_time += 1
 	# Jump holding
-	if inp.can_act && !inp.held("jump"):
+	if inp.can_act && !Input.is_action_pressed("jump"):
 		holding_jump = false
 
 	var squeezing_into_a_corridor : bool
 	if pc.move_dir.x == 0 || pc.velocity.y > -0.1 || jump_time <= 3:
 		squeezing_into_a_corridor = false
 	elif pc.move_dir.x < 0:
-		squeezing_into_a_corridor = pc.get_node("LeftJumpGroundFinder").is_colliding() && pc.get_node("LeftJumpBonkFinder").is_colliding()
+		squeezing_into_a_corridor = pc.get_node("LeftJumpGroundFinder").is_colliding() && pc.get_node("LeftJumpBonkFinder").is_colliding() && !pc.get_node("LeftJumpAntiBonkFinder").is_colliding()
 	else:
-		squeezing_into_a_corridor = pc.get_node("RightJumpGroundFinder").is_colliding() && pc.get_node("RightJumpBonkFinder").is_colliding()
+		squeezing_into_a_corridor = pc.get_node("RightJumpGroundFinder").is_colliding() && pc.get_node("RightJumpBonkFinder").is_colliding() && !pc.get_node("RightJumpAntiBonkFinder").is_colliding()
 
 	if squeezing_into_a_corridor:
 		pc.velocity.y = maxf(pc.velocity.y, 0.1)
@@ -180,7 +180,7 @@ func enter(_prev_state: String) -> void:
 	pc.set_up_direction(mm.FLOOR_NORMAL)
 	pc.set_floor_stop_on_slope_enabled(true)
 	pc.mm.snap_vector = Vector2.ZERO
-	holding_jump = inp.can_act && inp.held("jump") && !is_dropping
+	holding_jump = inp.can_act && Input.is_action_pressed("jump") && !is_dropping
 	if holding_jump:
 		# Set the player's move dir to -1.0 to indicate a jump.
 		# It will be reset on next physics frame

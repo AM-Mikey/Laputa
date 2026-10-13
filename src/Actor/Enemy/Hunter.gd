@@ -2,6 +2,9 @@ extends Enemy
 
 const ICON = preload("res://assets/Actor/Enemy/HunterIcon.png")
 const BULLET = preload("res://src/Bullet/Enemy/Laser.tscn")
+const TOOLTIPS = [
+"WIP. Chases after the player and shoots at them, tries to keep some distance.",
+]
 
 @export var look_dir: Vector2 = Vector2.LEFT
 var move_dir: Vector2

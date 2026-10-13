@@ -41,10 +41,10 @@ func jump_processing():
 		if f.db().is_exiting:
 			return #prevent the jump while db exists and is not exiting, this does allow holdjumping, though
 
-	if inp.pressed("jump") and inp.held("look_down") and pc.is_on_ssp and inp.can_act:
+	if inp.pressed("jump") && inp.held("look_down") && pc.is_on_ssp && inp.can_act:
 		is_dropping = true
 		mm.drop()
-	elif !is_dropping and inp.can_act:
+	elif !is_dropping && inp.can_act:
 		if inp.pressed("jump"):
 			mm.jump()
 		elif inp.buttonconfig.holdjumping:

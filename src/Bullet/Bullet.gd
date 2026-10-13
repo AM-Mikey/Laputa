@@ -22,6 +22,8 @@ var f_range
 var f_time
 var speed
 var spread_degrees
+var bullets_in_volley := 1
+var index := 0
 var knockback_strength := 0.0
 var origin = Vector2.ZERO
 var direction = Vector2.ZERO
@@ -269,16 +271,15 @@ func _on_CollisionDetector_area_entered(area): #TODO: double check breakable pie
 		if !piercing:
 			queue_free()
 	elif area.get_collision_layer_value(17): #playerhurt
-		var blood_dir = get_blood_dir(area.get_parent())
-		area.get_parent().hit(damage, blood_dir, $EnemyCollisionDetector)
+		area.get_parent().hit(damage, get_blood_dir(area.get_parent()), $PlayerCollisionDetector)
 		if !piercing:
 			queue_free()
 	elif area.get_collision_layer_value(9): #breakable
 		area.get_parent().on_break(break_method)
-		#on_break(break_method) produced two fizzle particles so instead do:
 		if f.pc(): #and camera gun recoil is true
 			f.pc().get_node("PlayerCamera").impulse(f.pc().shoot_dir * -1, camera_recoil_hit_distance, camera_recoil_time, camera_recoil_curve)
-		#not neccesary to queue free as fizzle does this
+		if !piercing:
+			queue_free()
 	elif area.get_collision_layer_value(4): #world
 		if f.pc(): #and camera gun recoil is true
 			f.pc().get_node("PlayerCamera").impulse(f.pc().shoot_dir * -1, camera_recoil_wall_distance, camera_recoil_time, camera_recoil_curve)

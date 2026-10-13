@@ -15,6 +15,8 @@ var conversation_on_enter: String
 @export var debug_main_mission_stage_name: String
 @export var side_missions_on_enter: Array[String]
 @export var debug_guns_on_enter: Array[String] = []
+@export var debug_topics_on_enter: Array[String] = []
+@export var debug_items_on_enter: Array[String] = []
 @export var controller_color_gradient: Gradient
 
 var time_created: Dictionary
@@ -33,12 +35,13 @@ func _ready():
 	merge_one_way_ssp_tile()
 
 	if !ignore_music_for_title:
-		if not am.music_queue.is_empty():
+		if !am.music_queue.is_empty():
 			am.fade_music()
 			await am.music_fadeout_finished
-		if not w.has_node("UILayer/Title"):
-			if music == "":
-				pass
+		else:
+			await get_tree().process_frame #wait one frame for settings, so we can set audio volume
+		if !w.has_node("UILayer/Title"):
+			if music == "": pass
 			else:
 				am.play_music(music)
 

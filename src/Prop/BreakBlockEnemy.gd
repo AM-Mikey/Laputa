@@ -1,6 +1,6 @@
 extends PhysicsProp
 
-const ICON = preload("res://assets/Prop/BreakBlockIcon.png")
+const ICON = preload("res://assets/Prop/BreakBlockEnemyIcon.png")
 const EXPLOSION = preload("res://src/Effect/Explosion.tscn")
 
 var broken = false
@@ -28,11 +28,11 @@ func on_break(method = "cut"):
 	$CollisionShape2D.set_deferred("disabled", true)
 	$BreakArea/CollisionShape2D.set_deferred("disabled", true)
 	$CrushDetector/CollisionShape2D.set_deferred("disabled", true)
-	freeze = true
+	self.set_deferred("freeze", true)
 	am.play("block_break", self)
 	var explosion = EXPLOSION.instantiate()
 	explosion.global_position = global_position + Vector2(8.0, 8.0)
-	w.front.add_child(explosion)
+	w.middle_front.add_child(explosion)
 
 	if $GroundLeft.is_colliding() && $GroundRight.is_colliding():
 		match method:

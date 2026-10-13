@@ -24,6 +24,8 @@ func setup_enemies():
 			enemy_button.enemy_path = e
 			enemy_button.enemy_name = enemy.name
 			enemy_button.enemy_icon = enemy.ICON
+			if "TOOLTIPS" in enemy:
+				enemy_button.enemy_tooltips = enemy.TOOLTIPS
 			if "difficulty" in enemy && "max_difficulty" in enemy:
 				enemy_button.enemy_difficulty = enemy.difficulty
 				enemy_button.enemy_max_difficulty = enemy.max_difficulty

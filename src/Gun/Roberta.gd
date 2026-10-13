@@ -3,7 +3,6 @@ extends Gun
 @export var recoil_curve : Curve
 
 func _ready():
-	display_name = "Roberta"
 	description = "Provides reliable rapid fire. Its large ammo capacity is stored in its stock."
 	icon_texture = load("res://assets/Gun/RobertaIcon.png")
 	icon_small_texture = load("res://assets/Gun/RobertaIconSmall.png")

@@ -1,0 +1,105 @@
+[gd_scene format=3 uid="uid://b3pn87gjg0qi"]
+
+[ext_resource type="Theme" uid="uid://45e84j2sj7w0" path="res://src/UI/Theme/LaputaTheme.tres" id="1"]
+[ext_resource type="Script" uid="uid://s12r4qhtyyy5" path="res://src/UI/DeathScreen/DeathScreen.gd" id="2"]
+
+[sub_resource type="Animation" id="1"]
+resource_name = "In"
+length = 1.6
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("VBox:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0, -16), Vector2(0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("ColorRect:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 0.156863)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("VBox/Label:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("VBox/HBox:modulate")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0.8, 1.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_xys32"]
+_data = {
+&"In": SubResource("1")
+}
+
+[node name="DeathScreen" type="MarginContainer" unique_id=1945799975]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+theme = ExtResource("1")
+script = ExtResource("2")
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=1692930514]
+modulate = Color(1, 1, 1, 0.156863)
+layout_mode = 2
+color = Color(0, 0, 0, 1)
+
+[node name="VBox" type="VBoxContainer" parent="." unique_id=346555589]
+layout_mode = 2
+alignment = 1
+
+[node name="Label" type="Label" parent="VBox" unique_id=1168901988]
+layout_mode = 2
+text = "You are Dead"
+horizontal_alignment = 1
+
+[node name="HBox" type="HBoxContainer" parent="VBox" unique_id=2011155330]
+layout_mode = 2
+alignment = 1
+
+[node name="Continue" type="Button" parent="VBox/HBox" unique_id=2122359183]
+layout_mode = 2
+text = "Continue"
+
+[node name="DebugReload" type="Button" parent="VBox/HBox" unique_id=810381277]
+layout_mode = 2
+text = "Debug Reload"
+
+[node name="Quit" type="Button" parent="VBox/HBox" unique_id=809691355]
+layout_mode = 2
+text = "Quit"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=2054185935]
+libraries/ = SubResource("AnimationLibrary_xys32")
+
+[connection signal="pressed" from="VBox/HBox/Continue" to="." method="_on_Continue_pressed"]
+[connection signal="pressed" from="VBox/HBox/DebugReload" to="." method="_on_DebugReload_pressed"]
+[connection signal="pressed" from="VBox/HBox/Quit" to="." method="_on_Quit_pressed"]

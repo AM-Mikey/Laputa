@@ -1,17 +1,23 @@
-[gd_scene format=4 uid="uid://df42kpjweo35n"]
+[gd_scene format=4]
 
-[ext_resource type="Script" uid="uid://ucr1waa8u8j1" path="res://src/Level/Level.gd" id="1_4uhn8"]
-[ext_resource type="TileSet" uid="uid://dct5q86qhnom8" path="res://src/Tile/Debug.tres" id="2_s4ctt"]
-[ext_resource type="Resource" uid="uid://551crugmnes0" path="res://src/Background/TiledPlains.tres" id="3_abgb0"]
-[ext_resource type="PackedScene" uid="uid://deyh6xyl8c6tr" path="res://src/Background/LevelLimiter.tscn" id="3_t226a"]
-[ext_resource type="PackedScene" uid="uid://cpkdlvdxe3pdh" path="res://src/Editor/SpawnPoint.tscn" id="5_sjslv"]
-[ext_resource type="Texture2D" uid="uid://bogxmmxvagqmt" path="res://assets/Background/TiledPlainsColor.png" id="5_v7nqo"]
-[ext_resource type="PackedScene" uid="uid://beorrh1dm573t" path="res://src/Editor/Spawn/PropSpawn.tscn" id="7_hy5g4"]
-[ext_resource type="PackedScene" uid="uid://dovj8uq00xato" path="res://src/Editor/VanishingPoint.tscn" id="7_mlr58"]
-[ext_resource type="PackedScene" uid="uid://bwp6sqdlvfo84" path="res://src/Editor/VisualUtility/VUVector.tscn" id="9_wiqud"]
-[ext_resource type="PackedScene" uid="uid://cs5m8mi2rih5f" path="res://src/Editor/Spawn/ActorSpawn.tscn" id="11_c6b85"]
-[ext_resource type="PackedScene" uid="uid://dhjqke0pgo21f" path="res://src/Editor/TitlePreview.tscn" id="12_71hdy"]
-[ext_resource type="PackedScene" uid="uid://cyg86p7wau0n7" path="res://src/Editor/VisualUtility/WaypointLocal.tscn" id="13_4r1a1"]
+[ext_resource type="Script" path="res://src/Level/Level.gd" id="1_4uhn8"]
+[ext_resource type="TileSet" path="res://src/Tile/Debug.tres" id="2_s4ctt"]
+[ext_resource type="Resource" path="res://src/Background/TiledPlains.tres" id="3_abgb0"]
+[ext_resource type="Script" path="res://src/Background/LevelLimiter.gd" id="3_gh0dl"]
+[ext_resource type="PackedScene" path="res://src/Background/LevelLimiter.tscn" id="3_t226a"]
+[ext_resource type="PackedScene" path="res://src/Editor/SpawnPoint.tscn" id="5_sjslv"]
+[ext_resource type="Texture2D" path="res://assets/Background/TiledPlainsColor.png" id="5_v7nqo"]
+[ext_resource type="PackedScene" path="res://src/Editor/Spawn/PropSpawn.tscn" id="7_hy5g4"]
+[ext_resource type="PackedScene" path="res://src/Editor/VanishingPoint.tscn" id="7_mlr58"]
+[ext_resource type="Script" path="res://src/Editor/Spawn/PropSpawn.gd" id="8_410oh"]
+[ext_resource type="PackedScene" path="res://src/Editor/VisualUtility/VUVector.tscn" id="9_wiqud"]
+[ext_resource type="Script" path="res://src/Editor/Spawn/ActorSpawn.gd" id="10_c6b85"]
+[ext_resource type="PackedScene" path="res://src/Editor/Spawn/ActorSpawn.tscn" id="11_c6b85"]
+[ext_resource type="Script" path="res://src/Editor/VisualUtility/VUVector.gd" id="12_travn"]
+[ext_resource type="PackedScene" path="res://src/Editor/VisualUtility/WaypointLocal.tscn" id="13_4r1a1"]
+[ext_resource type="Script" path="res://src/Editor/VisualUtility/WaypointLocal.gd" id="14_wlrbl"]
+[ext_resource type="Script" path="res://src/Editor/VanishingPoint.gd" id="16_4r1a1"]
+[ext_resource type="Script" path="res://src/Editor/SpawnPoint.gd" id="18_a5syg"]
 
 [sub_resource type="Gradient" id="Gradient_s7n1r"]
 interpolation_mode = 2
@@ -28,12 +34,14 @@ music = "dogtown_night"
 dialog_json = "res://src/Dialog/Village.json"
 controller_color_gradient = SubResource("Gradient_s7n1r")
 
-[node name="LevelLimiter" parent="." unique_id=10937438 instance=ExtResource("3_t226a")]
+[node name="LevelLimiter" type="MarginContainer" parent="." unique_id=10937438 instance=ExtResource("3_t226a")]
 visibility_layer = 2
 offset_left = 1632.0
 offset_top = 1744.0
 offset_right = 2976.0
 offset_bottom = 2288.0
+mouse_filter = 2
+script = ExtResource("3_gh0dl")
 background_resource = ExtResource("3_abgb0")
 texture = ExtResource("5_v7nqo")
 layers = 5
@@ -73,7 +81,7 @@ tile_set = ExtResource("2_s4ctt")
 visibility_layer = 2
 z_index = 1
 use_parent_material = true
-tile_map_data = PackedByteArray("AABmAH8AAAAAAAgAAABnAH8AAAAAAAgAAABoAH8AAAAAAAgAAABpAH8AAAAAAAgAAABqAH8AAAAAAAgAAABrAH8AAAAAAAgAAABsAH8AAAAAAAgAAABtAH8AAAAAAAgAAABuAH8AAAAAAAgAAABwAH8AAAAAAAgAAAByAH8AAAAAAAgAAAB0AH8AAAAAAAgAAAB1AH8AAAAAAAgAAAB2AH8AAAAAAAgAAAB3AH8AAAAAAAgAAAB4AH8AAAAAAAgAAAB5AH8AAAAAAAgAAAB6AH8AAAAAAAgAAAB7AH8AAAAAAAgAAAB8AH8AAAAAAAgAAAB9AH8AAAAAAAgAAAB+AH8AAAAAAAgAAAB/AH8AAAAAAAgAAACAAH8AAAAAAAgAAACBAH8AAAAAAAgAAACCAH8AAAAAAAgAAACDAH8AAAAAAAgAAACEAH8AAAAAAAgAAACFAH8AAAAAAAgAAACGAH8AAAAAAAgAAACHAH8AAAAAAAgAAACIAH8AAAAAAAgAAACJAH8AAAAAAAgAAACKAH8AAAAAAAgAAACLAH8AAAAAAAgAAACMAH8AAAAAAAgAAACNAH8AAAAAAAgAAACOAH8AAAAAAAgAAACPAH8AAAAAAAgAAACQAH8AAAAAAAgAAACRAH8AAAAAAAgAAACSAH8AAAAAAAgAAACTAH8AAAAAAAgAAACUAH8AAAAAAAgAAACVAH8AAAAAAAgAAACWAH8AAAAAAAgAAACXAH8AAAAAAAgAAACYAH8AAAAAAAgAAACZAH8AAAAAAAgAAACaAH8AAAAAAAgAAACbAH8AAAAAAAgAAACcAH8AAAAAAAgAAACdAH8AAAAAAAgAAACeAH8AAAAAAAgAAACfAH8AAAAAAAgAAACgAH8AAAAAAAgAAAChAH8AAAAAAAgAAACiAH8AAAAAAAgAAACjAH8AAAAAAAgAAACkAH8AAAAAAAgAAAClAH8AAAAAAAgAAACmAH8AAAAAAAgAAACnAH8AAAAAAAgAAACoAH8AAAAAAAgAAACpAH8AAAAAAAgAAACqAH8AAAAAAAgAAACrAH8AAAAAAAgAAACsAH8AAAAAAAgAAACtAH8AAAAAAAgAAACuAH8AAAAAAAgAAACvAH8AAAAAAAgAAACwAH8AAAAAAAgAAACxAH8AAAAAAAgAAACyAH8AAAAAAAgAAACzAH8AAAAAAAgAAAC0AH8AAAAAAAgAAAC1AH8AAAAAAAgAAAC2AH8AAAAAAAgAAAC3AH8AAAAAAAgAAAC4AH8AAAAAAAgAAAC5AH8AAAAAAAgAAABtAG8AAAAAAAgAAABuAG8AAAAAAAgAAAB8AH4AAAAAAAgAAAB8AH0AAAAAAAgAAAB8AHwAAAAAAAgAAABuAHAAAAAAAAgAAABuAHEAAAAAAAgAAABuAHIAAAAAAAgAAABuAHMAAAAAAAgAAABuAHQAAAAAAAgAAABuAHUAAAAAAAgAAABuAHYAAAAAAAgAAABvAH8AAAAAAAgAAABwAIIAAAAAAAgAAABxAIIAAAAAAAgAAAByAIIAAAAAAAgAAABzAIIAAAAAAAgAAAB0AIIAAAAAAAgAAAB1AIIAAAAAAAgAAAB2AIIAAAAAAAgAAAB3AIIAAAAAAAgAAAB4AIIAAAAAAAgAAAB5AIIAAAAAAAgAAABwAIMAAAAAAAgAAABxAIMAAAAAAAgAAAByAIMAAAAAAAgAAABzAIMAAAAAAAgAAAB0AIMAAAAAAAgAAAB1AIMAAAAAAAgAAAB2AIMAAAAAAAgAAAB3AIMAAAAAAAgAAAB4AIMAAAAAAAgAAAB5AIMAAAAAAAgAAABwAIQAAAAAAAgAAABxAIQAAAAAAAgAAAByAIQAAAAAAAgAAABzAIQAAAAAAAgAAAB0AIQAAAAAAAgAAAB3AIQAAAAAAAgAAAB4AIQAAAAAAAgAAAB5AIQAAAAAAAgAAABwAIUAAAAAAAgAAABxAIUAAAAAAAgAAAByAIUAAAAAAAgAAAB3AIUAAAAAAAgAAAB4AIUAAAAAAAgAAAB5AIUAAAAAAAgAAABwAIYAAAAAAAgAAABxAIYAAAAAAAgAAAB3AIYAAAAAAAgAAAB4AIYAAAAAAAgAAAB5AIYAAAAAAAgAAABwAIcAAAAAAAgAAABxAIcAAAAAAAgAAAB2AIcAAAAAAAgAAAB4AIcAAAAAAAgAAAB5AIcAAAAAAAgAAABwAIgAAAAAAAgAAABxAIgAAAAAAAgAAAByAIgAAAAAAAgAAABzAIgAAAAAAAgAAAB0AIgAAAAAAAgAAAB1AIgAAAAAAAgAAAB2AIgAAAAAAAgAAAB3AIgAAAAAAAgAAAA=")
+tile_map_data = PackedByteArray("AABmAH8AAAAAAAgAAABnAH8AAAAAAAgAAABoAH8AAAAAAAgAAABpAH8AAAAAAAgAAABrAH8AAAAAAAgAAABsAH8AAAAAAAgAAABtAH8AAAAAAAgAAABuAH8AAAAAAAgAAABwAH8AAAAAAAgAAAByAH8AAAAAAAgAAAB0AH8AAAAAAAgAAAB1AH8AAAAAAAgAAAB2AH8AAAAAAAgAAAB3AH8AAAAAAAgAAAB4AH8AAAAAAAgAAAB5AH8AAAAAAAgAAAB6AH8AAAAAAAgAAAB7AH8AAAAAAAgAAAB8AH8AAAAAAAgAAAB9AH8AAAAAAAgAAAB+AH8AAAAAAAgAAAB/AH8AAAAAAAgAAACAAH8AAAAAAAgAAACBAH8AAAAAAAgAAACCAH8AAAAAAAgAAACDAH8AAAAAAAgAAACEAH8AAAAAAAgAAACFAH8AAAAAAAgAAACGAH8AAAAAAAgAAACHAH8AAAAAAAgAAACIAH8AAAAAAAgAAACJAH8AAAAAAAgAAACKAH8AAAAAAAgAAACLAH8AAAAAAAgAAACMAH8AAAAAAAgAAACNAH8AAAAAAAgAAACOAH8AAAAAAAgAAACPAH8AAAAAAAgAAACQAH8AAAAAAAgAAACRAH8AAAAAAAgAAACSAH8AAAAAAAgAAACTAH8AAAAAAAgAAACUAH8AAAAAAAgAAACVAH8AAAAAAAgAAACWAH8AAAAAAAgAAACXAH8AAAAAAAgAAACYAH8AAAAAAAgAAACZAH8AAAAAAAgAAACaAH8AAAAAAAgAAACbAH8AAAAAAAgAAACcAH8AAAAAAAgAAACdAH8AAAAAAAgAAACeAH8AAAAAAAgAAACfAH8AAAAAAAgAAACgAH8AAAAAAAgAAAChAH8AAAAAAAgAAACiAH8AAAAAAAgAAACjAH8AAAAAAAgAAACkAH8AAAAAAAgAAAClAH8AAAAAAAgAAACmAH8AAAAAAAgAAACnAH8AAAAAAAgAAACoAH8AAAAAAAgAAACpAH8AAAAAAAgAAACqAH8AAAAAAAgAAACrAH8AAAAAAAgAAACsAH8AAAAAAAgAAACtAH8AAAAAAAgAAACuAH8AAAAAAAgAAACvAH8AAAAAAAgAAACwAH8AAAAAAAgAAACxAH8AAAAAAAgAAACyAH8AAAAAAAgAAACzAH8AAAAAAAgAAAC0AH8AAAAAAAgAAAC1AH8AAAAAAAgAAAC2AH8AAAAAAAgAAAC3AH8AAAAAAAgAAAC4AH8AAAAAAAgAAAC5AH8AAAAAAAgAAABtAG8AAAAAAAgAAABuAG8AAAAAAAgAAAB8AH4AAAAAAAgAAAB8AH0AAAAAAAgAAAB8AHwAAAAAAAgAAABuAHAAAAAAAAgAAABuAHEAAAAAAAgAAABuAHIAAAAAAAgAAABuAHMAAAAAAAgAAABuAHQAAAAAAAgAAABuAHUAAAAAAAgAAABuAHYAAAAAAAgAAABwAIIAAAAAAAgAAABxAIIAAAAAAAgAAAByAIIAAAAAAAgAAABzAIIAAAAAAAgAAAB0AIIAAAAAAAgAAAB1AIIAAAAAAAgAAAB2AIIAAAAAAAgAAAB3AIIAAAAAAAgAAAB4AIIAAAAAAAgAAAB5AIIAAAAAAAgAAABwAIMAAAAAAAgAAABxAIMAAAAAAAgAAAByAIMAAAAAAAgAAABzAIMAAAAAAAgAAAB0AIMAAAAAAAgAAAB1AIMAAAAAAAgAAAB2AIMAAAAAAAgAAAB3AIMAAAAAAAgAAAB4AIMAAAAAAAgAAAB5AIMAAAAAAAgAAABwAIQAAAAAAAgAAABxAIQAAAAAAAgAAAByAIQAAAAAAAgAAABzAIQAAAAAAAgAAAB0AIQAAAAAAAgAAAB3AIQAAAAAAAgAAAB4AIQAAAAAAAgAAAB5AIQAAAAAAAgAAABwAIUAAAAAAAgAAABxAIUAAAAAAAgAAAByAIUAAAAAAAgAAAB3AIUAAAAAAAgAAAB4AIUAAAAAAAgAAAB5AIUAAAAAAAgAAABwAIYAAAAAAAgAAABxAIYAAAAAAAgAAAB3AIYAAAAAAAgAAAB4AIYAAAAAAAgAAAB5AIYAAAAAAAgAAABwAIcAAAAAAAgAAABxAIcAAAAAAAgAAAB2AIcAAAAAAAgAAAB4AIcAAAAAAAgAAAB5AIcAAAAAAAgAAABwAIgAAAAAAAgAAABxAIgAAAAAAAgAAAByAIgAAAAAAAgAAABzAIgAAAAAAAgAAAB0AIgAAAAAAAgAAAB1AIgAAAAAAAgAAAB2AIgAAAAAAAgAAAB3AIgAAAAAAAgAAABpAIAAAAAAAAgAAABpAIEAAAAAAAgAAABpAIIAAAAAAAgAAABqAIIAAAAAAAgAAABrAIIAAAAAAAgAAABsAIIAAAAAAAgAAABtAIIAAAAAAAgAAABuAIIAAAAAAAgAAABvAIIAAAAAAAgAAAA=")
 tile_set = ExtResource("2_s4ctt")
 
 [node name="FarFront" type="TileMapLayer" parent="TileMap" unique_id=1690667449]
@@ -96,9 +104,13 @@ visibility_layer = 2
 [node name="Spawns" type="Node2D" parent="." unique_id=993935856]
 visibility_layer = 2
 
-[node name="SwitchLever" parent="Spawns" unique_id=1969184057 instance=ExtResource("7_hy5g4")]
+[node name="SwitchLever" type="Area2D" parent="Spawns" unique_id=1969184057 groups=["Entities", "PropSpawns"] instance=ExtResource("7_hy5g4")]
 visibility_layer = 2
-position = Vector2(1712, 2016)
+z_index = 999
+position = Vector2(1728, 2016)
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("8_410oh")
 prop_path = "res://src/Prop/SwitchLever.tscn"
 properties = {
 "connected_entity_id": ["PhysFan", 4, ""],
@@ -106,12 +118,17 @@ properties = {
 "editor_hidden": [false, 1, ""],
 "id": [&"SwitchLever", 4],
 "switch_type": [0, 2, "Toggle:0,Impulse:1,Timer:2"],
-"timer_duration": [1.0, 3, ""]
+"timer_duration": [1.0, 3, ""],
+"toggled": [true, 1, ""]
 }
 
-[node name="SwitchLever1" parent="Spawns" unique_id=1774004550 instance=ExtResource("7_hy5g4")]
+[node name="SwitchLever1" type="Area2D" parent="Spawns" unique_id=1774004550 groups=["Entities", "PropSpawns"] instance=ExtResource("7_hy5g4")]
 visibility_layer = 2
-position = Vector2(1744, 2016)
+z_index = 999
+position = Vector2(1856, 2016)
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("8_410oh")
 prop_path = "res://src/Prop/SwitchLever.tscn"
 properties = {
 "connected_entity_id": ["PhysFan1", 4, ""],
@@ -119,12 +136,17 @@ properties = {
 "editor_hidden": [false, 1, ""],
 "id": [&"SwitchLever1", 4],
 "switch_type": [2, 2, "Toggle:0,Impulse:1,Timer:2"],
-"timer_duration": [12.0, 3, ""]
+"timer_duration": [5.0, 3, ""],
+"toggled": [false, 1, ""]
 }
 
-[node name="SwitchLever2" parent="Spawns" unique_id=1139234001 instance=ExtResource("7_hy5g4")]
+[node name="SwitchLever2" type="Area2D" parent="Spawns" unique_id=1139234001 groups=["Entities", "PropSpawns"] instance=ExtResource("7_hy5g4")]
 visibility_layer = 2
+z_index = 999
 position = Vector2(1984, 1968)
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("8_410oh")
 prop_path = "res://src/Prop/SwitchLever.tscn"
 properties = {
 "connected_entity_id": ["PhysFan3", 4, ""],
@@ -132,60 +154,17 @@ properties = {
 "editor_hidden": [false, 1, ""],
 "id": [&"SwitchLever2", 4],
 "switch_type": [0, 2, "Toggle:0,Impulse:1,Timer:2"],
-"timer_duration": [1.0, 3, ""]
-}
-
-[node name="SwitchCrystal" parent="Spawns" unique_id=775436894 instance=ExtResource("7_hy5g4")]
-visibility_layer = 2
-position = Vector2(1872, 2016)
-prop_path = "res://src/Prop/SwitchCrystal.tscn"
-properties = {
-"connected_entity_id": ["PhysFan2", 4, ""],
-"do_bubble": [false, 1, ""],
-"eats_bullet": [true, 1, ""],
-"editor_hidden": [false, 1, ""],
-"id": [&"SwitchCrystal", 4],
-"switch_type": [0, 2, "Toggle:0,Impulse:1,Timer:2"],
 "timer_duration": [1.0, 3, ""],
-"trigger_on_enemy_bullet": [false, 1, ""],
-"trigger_on_explosive": [true, 1, ""]
+"toggled": [false, 1, ""]
 }
 
-[node name="SwitchCrystal1" parent="Spawns" unique_id=840732635 instance=ExtResource("7_hy5g4")]
+[node name="Beetle" type="Area2D" parent="Spawns" unique_id=731612159 groups=["ActorSpawns", "Entities"] instance=ExtResource("11_c6b85")]
 visibility_layer = 2
-position = Vector2(2048, 2016)
-prop_path = "res://src/Prop/SwitchCrystal.tscn"
-properties = {
-"connected_entity_id": ["", 4, ""],
-"do_bubble": [false, 1, ""],
-"eats_bullet": [true, 1, ""],
-"editor_hidden": [false, 1, ""],
-"id": [&"SwitchCrystal1", 4],
-"switch_type": [1, 2, "Toggle:0,Impulse:1,Timer:2"],
-"timer_duration": [1.0, 3, ""],
-"trigger_on_enemy_bullet": [false, 1, ""],
-"trigger_on_explosive": [true, 1, ""]
-}
-
-[node name="SwitchCrystal2" parent="Spawns" unique_id=956928769 instance=ExtResource("7_hy5g4")]
-visibility_layer = 2
-position = Vector2(2112, 2016)
-prop_path = "res://src/Prop/SwitchCrystal.tscn"
-properties = {
-"connected_entity_id": ["", 4, ""],
-"do_bubble": [false, 1, ""],
-"eats_bullet": [true, 1, ""],
-"editor_hidden": [false, 1, ""],
-"id": [&"SwitchCrystal2", 4],
-"switch_type": [2, 2, "Toggle:0,Impulse:1,Timer:2"],
-"timer_duration": [5.0, 3, ""],
-"trigger_on_enemy_bullet": [false, 1, ""],
-"trigger_on_explosive": [true, 1, ""]
-}
-
-[node name="Beetle" parent="Spawns" unique_id=731612159 instance=ExtResource("11_c6b85")]
-visibility_layer = 2
+z_index = 999
 position = Vector2(1896, 2160)
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("10_c6b85")
 actor_path = "res://src/Actor/Enemy/Beetle.tscn"
 properties = {
 "base_gravity": [300.0, 3, ""],
@@ -199,115 +178,319 @@ properties = {
 "water_gravity": [150.0, 3, ""]
 }
 
-[node name="MoveVector" parent="Spawns/Beetle" unique_id=1121959713 instance=ExtResource("9_wiqud")]
+[node name="MoveVector" type="Area2D" parent="Spawns/Beetle" unique_id=1121959713 groups=["Entities", "VUVectors", "VisualUtilities"] instance=ExtResource("9_wiqud")]
 visibility_layer = 2
 position = Vector2(0, -8)
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("12_travn")
 direction = Vector2(-4.371139e-08, -1)
 snap_degrees = 90.0
 movement_locked = true
 
-[node name="PhysFan" parent="Spawns" unique_id=1449282698 instance=ExtResource("7_hy5g4")]
+[node name="PhysFan" type="Area2D" parent="Spawns" unique_id=1449282698 groups=["Entities", "PropSpawns"] instance=ExtResource("7_hy5g4")]
 visibility_layer = 2
+z_index = 999
 position = Vector2(1808, 2032)
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("8_410oh")
 prop_path = "res://src/Prop/PhysFan.tscn"
 properties = {
 "do_bubble": [false, 1, ""],
 "editor_hidden": [false, 1, ""],
 "id": [&"PhysFan", 4, ""],
-"speed": [20.0, 3, ""],
-"toggled": [true, 1, ""]
+"speed": [20.0, 3, ""]
 }
 
-[node name="WindVector" parent="Spawns/PhysFan" unique_id=872564127 instance=ExtResource("9_wiqud")]
+[node name="WindVector" type="Area2D" parent="Spawns/PhysFan" unique_id=872564127 groups=["Entities", "VUVectors", "VisualUtilities"] instance=ExtResource("9_wiqud")]
 visibility_layer = 2
 position = Vector2(8, 8)
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("12_travn")
 tag_name = "wind_dir"
 direction = Vector2(-4.371139e-08, -1)
 snap_degrees = 90.0
 movement_locked = true
 
-[node name="Distance" parent="Spawns/PhysFan" unique_id=1432238783 instance=ExtResource("13_4r1a1")]
+[node name="Distance" type="Area2D" parent="Spawns/PhysFan" unique_id=1432238783 groups=["Entities", "VisualUtilities", "WaypointLocals", "Waypoints"] instance=ExtResource("13_4r1a1")]
 visibility_layer = 2
 position = Vector2(7.9999876, -272.1176)
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("14_wlrbl")
 tag_name = "distance"
 lock_x = true
 
-[node name="PhysFan1" parent="Spawns" unique_id=1929662386 instance=ExtResource("7_hy5g4")]
+[node name="PhysFan1" type="Area2D" parent="Spawns" unique_id=1929662386 groups=["Entities", "PropSpawns"] instance=ExtResource("7_hy5g4")]
 visibility_layer = 2
+z_index = 999
 position = Vector2(1840, 2032)
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("8_410oh")
 prop_path = "res://src/Prop/PhysFan.tscn"
 properties = {
 "do_bubble": [false, 1, ""],
 "editor_hidden": [false, 1, ""],
 "id": [&"PhysFan1", 4, ""],
-"speed": [20.0, 3, ""],
-"toggled": [false, 1, ""]
+"speed": [20.0, 3, ""]
 }
 
-[node name="WindVector" parent="Spawns/PhysFan1" unique_id=1716776236 instance=ExtResource("9_wiqud")]
+[node name="WindVector" type="Area2D" parent="Spawns/PhysFan1" unique_id=1716776236 groups=["Entities", "VUVectors", "VisualUtilities"] instance=ExtResource("9_wiqud")]
 visibility_layer = 2
 position = Vector2(8, 8)
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("12_travn")
 tag_name = "wind_dir"
 direction = Vector2(-4.371139e-08, -1)
 snap_degrees = 90.0
 movement_locked = true
 
-[node name="Distance" parent="Spawns/PhysFan1" unique_id=1025778104 instance=ExtResource("13_4r1a1")]
+[node name="Distance" type="Area2D" parent="Spawns/PhysFan1" unique_id=1025778104 groups=["Entities", "VisualUtilities", "WaypointLocals", "Waypoints"] instance=ExtResource("13_4r1a1")]
 visibility_layer = 2
 position = Vector2(7.9999876, -272.1176)
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("14_wlrbl")
 tag_name = "distance"
 lock_x = true
 
-[node name="PhysFan2" parent="Spawns" unique_id=748397328 instance=ExtResource("7_hy5g4")]
+[node name="PhysFan2" type="Area2D" parent="Spawns" unique_id=748397328 groups=["Entities", "PropSpawns"] instance=ExtResource("7_hy5g4")]
 visibility_layer = 2
+z_index = 999
 position = Vector2(1968, 2016)
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("8_410oh")
 prop_path = "res://src/Prop/PhysFan.tscn"
 properties = {
 "do_bubble": [false, 1, ""],
 "editor_hidden": [false, 1, ""],
 "id": [&"PhysFan2", 4, ""],
-"speed": [20.0, 3, ""],
-"toggled": [true, 1, ""]
+"speed": [20.0, 3, ""]
 }
 
-[node name="WindVector" parent="Spawns/PhysFan2" unique_id=690136008 instance=ExtResource("9_wiqud")]
+[node name="WindVector" type="Area2D" parent="Spawns/PhysFan2" unique_id=690136008 groups=["Entities", "VUVectors", "VisualUtilities"] instance=ExtResource("9_wiqud")]
 visibility_layer = 2
 position = Vector2(8, 8)
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("12_travn")
 tag_name = "wind_dir"
 direction = Vector2(-4.371139e-08, -1)
 snap_degrees = 90.0
 movement_locked = true
 
-[node name="Distance" parent="Spawns/PhysFan2" unique_id=1492316799 instance=ExtResource("13_4r1a1")]
+[node name="Distance" type="Area2D" parent="Spawns/PhysFan2" unique_id=1492316799 groups=["Entities", "VisualUtilities", "WaypointLocals", "Waypoints"] instance=ExtResource("13_4r1a1")]
 visibility_layer = 2
 position = Vector2(7.9999876, -272.1176)
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("14_wlrbl")
 tag_name = "distance"
 lock_x = true
 
-[node name="PhysFan3" parent="Spawns" unique_id=1818399440 instance=ExtResource("7_hy5g4")]
+[node name="PhysFan3" type="Area2D" parent="Spawns" unique_id=1818399440 groups=["Entities", "PropSpawns"] instance=ExtResource("7_hy5g4")]
 visibility_layer = 2
+z_index = 999
 position = Vector2(2000, 2016)
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("8_410oh")
 prop_path = "res://src/Prop/PhysFan.tscn"
 properties = {
 "do_bubble": [false, 1, ""],
 "editor_hidden": [false, 1, ""],
 "id": [&"PhysFan3", 4, ""],
-"speed": [20.0, 3, ""],
-"toggled": [true, 1, ""]
+"speed": [20.0, 3, ""]
 }
 
-[node name="WindVector" parent="Spawns/PhysFan3" unique_id=375801227 instance=ExtResource("9_wiqud")]
+[node name="WindVector" type="Area2D" parent="Spawns/PhysFan3" unique_id=375801227 groups=["Entities", "VUVectors", "VisualUtilities"] instance=ExtResource("9_wiqud")]
 visibility_layer = 2
 position = Vector2(8, 8)
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("12_travn")
 tag_name = "wind_dir"
 snap_degrees = 90.0
 movement_locked = true
 
-[node name="Distance" parent="Spawns/PhysFan3" unique_id=818506367 instance=ExtResource("13_4r1a1")]
+[node name="Distance" type="Area2D" parent="Spawns/PhysFan3" unique_id=818506367 groups=["Entities", "VisualUtilities", "WaypointLocals", "Waypoints"] instance=ExtResource("13_4r1a1")]
 visibility_layer = 2
 position = Vector2(296.2318, 8)
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("14_wlrbl")
 tag_name = "distance"
 lock_y = true
+
+[node name="SwitchLever3" type="Area2D" parent="Spawns" unique_id=867231807 groups=["Entities", "PropSpawns"] instance=ExtResource("7_hy5g4")]
+visibility_layer = 2
+z_index = 999
+position = Vector2(1760, 2016)
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("8_410oh")
+prop_path = "res://src/Prop/SwitchLever.tscn"
+properties = {
+"connected_entity_id": ["PhysFan", 4, ""],
+"do_bubble": [false, 1, ""],
+"editor_hidden": [false, 1, ""],
+"id": [&"SwitchLever3", 4, ""],
+"switch_type": [0, 2, "Toggle:0,Impulse:1,Timer:2"],
+"timer_duration": [1.0, 3, ""],
+"toggled": [true, 1, ""]
+}
+
+[node name="PhysFan4" type="Area2D" parent="Spawns" unique_id=638126793 groups=["Entities", "PropSpawns"] instance=ExtResource("7_hy5g4")]
+visibility_layer = 2
+z_index = 999
+position = Vector2(1776, 2032)
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("8_410oh")
+prop_path = "res://src/Prop/PhysFan.tscn"
+properties = {
+"do_bubble": [false, 1, ""],
+"editor_hidden": [false, 1, ""],
+"id": ["PhysFan", 4, ""],
+"speed": [20.0, 3, ""]
+}
+
+[node name="WindVector" type="Area2D" parent="Spawns/PhysFan4" unique_id=418874051 groups=["Entities", "VUVectors", "VisualUtilities"] instance=ExtResource("9_wiqud")]
+visibility_layer = 2
+position = Vector2(8, 8)
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("12_travn")
+tag_name = "wind_dir"
+direction = Vector2(-4.371139e-08, -1)
+snap_degrees = 90.0
+movement_locked = true
+
+[node name="Distance" type="Area2D" parent="Spawns/PhysFan4" unique_id=949475419 groups=["Entities", "VisualUtilities", "WaypointLocals", "Waypoints"] instance=ExtResource("13_4r1a1")]
+visibility_layer = 2
+position = Vector2(7.9999876, -272.1176)
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("14_wlrbl")
+tag_name = "distance"
+lock_x = true
+
+[node name="PhysFanNoSwitch" type="Area2D" parent="Spawns" unique_id=1473097189 groups=["Entities", "PropSpawns"] instance=ExtResource("7_hy5g4")]
+visibility_layer = 2
+z_index = 999
+position = Vector2(1904, 2016)
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("8_410oh")
+prop_path = "res://src/Prop/PhysFanNoSwitch.tscn"
+properties = {
+"do_bubble": [false, 1, ""],
+"editor_hidden": [false, 1, ""],
+"id": [&"PhysFanNoSwitch", 4, ""],
+"protected_toggled": [true, 1, ""],
+"speed": [20.0, 3, ""]
+}
+
+[node name="WindVector" type="Area2D" parent="Spawns/PhysFanNoSwitch" unique_id=1961420229 groups=["Entities", "VUVectors", "VisualUtilities"] instance=ExtResource("9_wiqud")]
+visibility_layer = 2
+position = Vector2(8, 8)
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("12_travn")
+tag_name = "wind_dir"
+direction = Vector2(-4.371139e-08, -1)
+snap_degrees = 90.0
+movement_locked = true
+
+[node name="Distance" type="Area2D" parent="Spawns/PhysFanNoSwitch" unique_id=752517458 groups=["Entities", "VisualUtilities", "WaypointLocals", "Waypoints"] instance=ExtResource("13_4r1a1")]
+visibility_layer = 2
+position = Vector2(-264, 8)
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("14_wlrbl")
+tag_name = "distance"
+lock_x = true
+
+[node name="SwitchCrystal" type="Area2D" parent="Spawns" unique_id=624285957 groups=["Entities", "PropSpawns"] instance=ExtResource("7_hy5g4")]
+visibility_layer = 2
+z_index = 999
+position = Vector2(1680, 2016)
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("8_410oh")
+prop_path = "res://src/Prop/SwitchCrystal.tscn"
+properties = {
+"connected_entity_id": ["PhysFan", 4, ""],
+"do_bubble": [false, 1, ""],
+"eats_bullet": [true, 1, ""],
+"editor_hidden": [false, 1, ""],
+"id": [&"SwitchCrystal", 4, ""],
+"switch_type": [0, 2, "Toggle:0,Impulse:1,Timer:2"],
+"timer_duration": [5.0, 3, ""],
+"toggled": [true, 1, ""],
+"trigger_on_enemy_bullet": [true, 1, ""],
+"trigger_on_explosive": [true, 1, ""]
+}
+
+[node name="PhysFan5" type="Area2D" parent="Spawns" unique_id=1913172430 groups=["Entities", "PropSpawns"] instance=ExtResource("7_hy5g4")]
+visibility_layer = 2
+z_index = 999
+position = Vector2(1712, 2096)
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("8_410oh")
+prop_path = "res://src/Prop/PhysFan.tscn"
+properties = {
+"do_bubble": [false, 1, ""],
+"editor_hidden": [false, 1, ""],
+"id": [&"PhysFan5", 4, ""],
+"speed": [20.0, 3, ""]
+}
+
+[node name="WindVector" type="Area2D" parent="Spawns/PhysFan5" unique_id=784281442 groups=["Entities", "VUVectors", "VisualUtilities"] instance=ExtResource("9_wiqud")]
+visibility_layer = 2
+position = Vector2(8, 8)
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("12_travn")
+tag_name = "wind_dir"
+direction = Vector2(-4.371139e-08, 1)
+snap_degrees = 90.0
+movement_locked = true
+
+[node name="Distance" type="Area2D" parent="Spawns/PhysFan5" unique_id=1574280676 groups=["Entities", "VisualUtilities", "WaypointLocals", "Waypoints"] instance=ExtResource("13_4r1a1")]
+visibility_layer = 2
+position = Vector2(7.9999876, 288.1176)
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("14_wlrbl")
+tag_name = "distance"
+lock_x = true
+
+[node name="SwitchPlate" type="Area2D" parent="Spawns" unique_id=1470660177 groups=["Entities", "PropSpawns"] instance=ExtResource("7_hy5g4")]
+visibility_layer = 2
+z_index = 999
+position = Vector2(1712, 2064)
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("8_410oh")
+prop_path = "res://src/Prop/SwitchPlate.tscn"
+properties = {
+"connected_entity_id": ["PhysFan5", 4, ""],
+"do_bubble": [false, 1, ""],
+"editor_hidden": [false, 1, ""],
+"id": [&"SwitchPlate", 4, ""],
+"switch_type": [0, 2, "Toggle:0,Impulse:1,Timer:2"],
+"timer_duration": [1.0, 3, ""],
+"toggle_on_enemies": [false, 1, ""],
+"toggle_on_npcs": [false, 1, ""],
+"toggle_on_player": [true, 1, ""]
+}
 
 [node name="Waypoints" type="Node2D" parent="." unique_id=1140943479]
 visibility_layer = 2
@@ -315,15 +498,36 @@ visibility_layer = 2
 [node name="Notes" type="Node2D" parent="." unique_id=78699159]
 visibility_layer = 2
 
-[node name="VanishingPoint" parent="." unique_id=852042071 instance=ExtResource("7_mlr58")]
+[node name="VanishingPoint" type="Area2D" parent="." unique_id=852042071 groups=["VanishingPoints"] instance=ExtResource("7_mlr58")]
 visibility_layer = 2
+z_index = 999
 position = Vector2(2288, 1832)
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("16_4r1a1")
 
-[node name="SpawnPoint" parent="." unique_id=1505342073 instance=ExtResource("5_sjslv")]
+[node name="SpawnPoint" type="Area2D" parent="." unique_id=1505342073 groups=["SpawnPoints"] instance=ExtResource("5_sjslv")]
 visibility_layer = 2
 position = Vector2(1672, 2032)
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("18_a5syg")
 
-[node name="TitlePreview" parent="." unique_id=2052223351 instance=ExtResource("12_71hdy")]
-visibility_layer = 2
-position = Vector2(1872, 1976)
-zoom = 6.0
+[connection signal="body_entered" from="Triggers/KillBoundaryU" to="Triggers/KillBoundaryU" method="_on_body_entered"]
+[connection signal="body_entered" from="Triggers/KillBoundaryD" to="Triggers/KillBoundaryD" method="_on_body_entered"]
+[connection signal="body_entered" from="Triggers/KillBoundaryL" to="Triggers/KillBoundaryL" method="_on_body_entered"]
+[connection signal="body_entered" from="Triggers/KillBoundaryR" to="Triggers/KillBoundaryR" method="_on_body_entered"]
+[connection signal="input_event" from="Spawns/SwitchLever" to="Spawns/SwitchLever" method="_on_input_event"]
+[connection signal="input_event" from="Spawns/SwitchLever1" to="Spawns/SwitchLever1" method="_on_input_event"]
+[connection signal="input_event" from="Spawns/SwitchLever2" to="Spawns/SwitchLever2" method="_on_input_event"]
+[connection signal="input_event" from="Spawns/Beetle" to="Spawns/Beetle" method="_on_input_event"]
+[connection signal="input_event" from="Spawns/PhysFan" to="Spawns/PhysFan" method="_on_input_event"]
+[connection signal="input_event" from="Spawns/PhysFan1" to="Spawns/PhysFan1" method="_on_input_event"]
+[connection signal="input_event" from="Spawns/PhysFan2" to="Spawns/PhysFan2" method="_on_input_event"]
+[connection signal="input_event" from="Spawns/PhysFan3" to="Spawns/PhysFan3" method="_on_input_event"]
+[connection signal="input_event" from="Spawns/SwitchLever3" to="Spawns/SwitchLever3" method="_on_input_event"]
+[connection signal="input_event" from="Spawns/PhysFan4" to="Spawns/PhysFan4" method="_on_input_event"]
+[connection signal="input_event" from="Spawns/PhysFanNoSwitch" to="Spawns/PhysFanNoSwitch" method="_on_input_event"]
+[connection signal="input_event" from="Spawns/SwitchCrystal" to="Spawns/SwitchCrystal" method="_on_input_event"]
+[connection signal="input_event" from="Spawns/PhysFan5" to="Spawns/PhysFan5" method="_on_input_event"]
+[connection signal="input_event" from="Spawns/SwitchPlate" to="Spawns/SwitchPlate" method="_on_input_event"]

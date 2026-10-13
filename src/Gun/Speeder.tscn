@@ -5,6 +5,7 @@
 
 [node name="Speeder" type="Node2D" unique_id=1491287814]
 script = ExtResource("1")
+display_name = "Speeder"
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1716527845]
 texture = ExtResource("2")

@@ -1,6 +1,7 @@
 extends Node #TODO: this script needs major cleanup
 
 const INVENTORY_ICON = preload("res://src/UI/Inventory/InventoryIcon.tscn")
+const GUN_SHOP = preload("res://src/UI/Shop/GunShop.tscn")
 
 @onready var w = get_tree().get_root().get_node("World")
 @onready var pc = f.pc()
@@ -122,6 +123,12 @@ func parse_command(string, command_is_first):
 			db.dl.text = db.dl.text.insert(db.get_raw_index(), "[/color][/b]")
 			db.character_is_bbcode_count += 12
 			#db.dl.text += "[/color][/b] "
+		"subprint":
+			db.do_force_end = true
+			db.end_via_subprint = true
+			db.subprint_conversation = argument
+
+
 
 		### Missions
 		"progress_main_mission": #/progress_main_mission
@@ -165,7 +172,13 @@ func parse_command(string, command_is_first):
 				db.do_delay = true
 			else:
 				db.auto_input = false
-
+		"autoinstant":
+			if argument == "on":
+				db.auto_input = true
+				db.do_delay = false
+			else:
+				db.auto_input = false
+				db.do_delay = true
 		### Camera Control
 		"cam":
 			var a = string.split(",")
@@ -185,6 +198,12 @@ func parse_command(string, command_is_first):
 					camera.control_add(["hold"])
 				"reset":
 					camera.control_add(["reset"])
+
+		### Shops
+		"gun_shop":
+			var gun_shop = GUN_SHOP.instantiate()
+			await get_tree().create_timer(0.5).timeout #wait a brief period before opening the gun shop menu so that our dialog finishes properly
+			w.ui.add_child(gun_shop)
 
 
 ### COMMANDS ###

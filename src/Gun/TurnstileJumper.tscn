@@ -5,6 +5,7 @@
 
 [node name="TurnstileJumper" type="Node2D" unique_id=594551449]
 script = ExtResource("1")
+display_name = "Turnstile Jumper"
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=966130284]
 texture = ExtResource("2")

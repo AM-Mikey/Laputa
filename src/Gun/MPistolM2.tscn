@@ -1,0 +1,14 @@
+[gd_scene format=3 uid="uid://dieoao7ksjo81"]
+
+[ext_resource type="Script" uid="uid://maxcbs20svmu" path="res://src/Gun/MPistolM2.gd" id="1_k4opi"]
+[ext_resource type="Texture2D" uid="uid://jjyq7h7e0qih" path="res://assets/Gun/MPistol.png" id="2_be6fq"]
+
+[node name="MPistolM2" type="Node2D" unique_id=191467459]
+script = ExtResource("1_k4opi")
+display_name = "Machine Pistol Mark 2"
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1311124831]
+texture = ExtResource("2_be6fq")
+
+[node name="Muzzle" type="Marker2D" parent="." unique_id=1238097349]
+position = Vector2(-7, -1)

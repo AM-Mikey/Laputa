@@ -7,7 +7,7 @@ const BULLET_CASING = preload("res://src/Effect/BulletCasing.tscn")
 const BULLET_CASING_PHYSICAL = preload("res://src/Effect/BulletCasingPhysical.tscn")
 
 
-var display_name: String = "Debug Gun"
+@export var display_name: String = "Debug Gun"
 var description: String = "Debug Description"
 
 var icon_texture: CompressedTexture2D = load("res://assets/Gun/RevolverIcon.png")
@@ -35,6 +35,10 @@ var max_ammo: int = 0
 var xp: int = 0
 var max_xp: int = 20
 var max_level: int = 1
+var max_unlocked_level: int = 1
+var lifetime_xp: int = 0
+var xp_to_rebuild: int = 1000
+var rebuild_count = 0
 @export var level: int = 1: set = set_level
 
 @onready var w = get_tree().get_root().get_node("World")
@@ -81,7 +85,7 @@ func deactivate_manual():
 func deactivate_auto():
 	pass
 
-func spawn_bullet(bullet_pos, shoot_dir, layer = w.player_front) -> Node:
+func spawn_bullet(bullet_pos, shoot_dir, layer = w.player_front, index = 0) -> Node:
 	var bullet = bullet_scene.instantiate()
 
 	bullet.damage = damage
@@ -89,6 +93,8 @@ func spawn_bullet(bullet_pos, shoot_dir, layer = w.player_front) -> Node:
 	bullet.f_time = f_time
 	bullet.speed = speed
 	bullet.spread_degrees = spread_degrees
+	bullet.bullets_in_volley = bullets_per_activate
+	bullet.index = index
 	bullet.knockback_strength = knockback_strength
 	bullet.direction = shoot_dir
 	layer.add_child(bullet)

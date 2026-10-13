@@ -6,7 +6,7 @@ const PHYS_WIND_COLUMN = preload("res://src/Utility/PhysWindColumn.tscn")
 var wind_dir : Vector2
 var distance: = 0.0
 @export var speed := 20.0 #4 is about equal with gravity
-@export var toggled := true
+var toggled := false
 
 var phys_wind_column : Node
 var fan_start_sfx_player: Node
@@ -14,6 +14,10 @@ var fan_loop_sfx_player: Node
 var fan_vis_wind_up_duration := 3.33
 var fan_vis_wind_down_duration := 6.66
 var doing_retrigger_wind_up := false
+
+var vis_scale := 0.0
+var wind_up_from := 0.0
+var wind_down_from := 0.0
 
 func setup(): #Reminder: no function called can use await
 	wind_dir = $WindVector.direction.snapped(Vector2(1, 1)) #remove VUVector imprecision
@@ -44,18 +48,30 @@ func setup(): #Reminder: no function called can use await
 	w.emit_signal("finished_spawn_entities_step") #NOTE telling it we're done with setup early feels like cheating but this should work
 	await get_tree().physics_frame
 	await get_tree().physics_frame
+	await get_tree().physics_frame
+	await get_tree().physics_frame
+	await get_tree().physics_frame #Since level has to wait 4 frames... its gross but works
 	if toggled:
 		create_phys_wind_column()
+		$AnimationPlayer.play("On")
 
 ### HELPERS ###
 
 func create_phys_wind_column():
+	if is_instance_valid(phys_wind_column):
+		printerr("PhysFan: column already exists, creating a duplicate!")
 	phys_wind_column = PHYS_WIND_COLUMN.instantiate()
 	phys_wind_column.wind_dir = wind_dir
 	phys_wind_column.speed = speed
 	phys_wind_column.column_rect = get_column_rect()
 	phys_wind_column.global_position = global_position + get_column_pos()
 	w.current_level.add_child(phys_wind_column) #TODO: maybe put this on a custom misc layer?
+
+func destroy_phys_wind_column():
+	if is_instance_valid(phys_wind_column):
+		phys_wind_column.effect.stop()
+		phys_wind_column.queue_free()
+	phys_wind_column = null
 
 func get_column_pos() -> Vector2:
 	match wind_dir:
@@ -121,34 +137,39 @@ func _do_sfx_end():
 
 
 
+func _start_wind_up():
+	$VisWindDown.stop()
+	wind_up_from = vis_scale
+	$AnimationPlayer.play("On")
+	$VisWindUp.start(fan_vis_wind_up_duration)
+
+func _start_wind_down():
+	$VisWindUp.stop()
+	wind_down_from = vis_scale
+	$AnimationPlayer.play("On")   # restart in case a previous wind-down stopped it
+	$VisWindDown.start(fan_vis_wind_down_duration)
+
+
 func _physics_process(_delta):
 	var max_speed_scale = speed / 5.0
 
-	#wind up
 	if !$VisWindUp.is_stopped():
-		if !$VisWindDown.is_stopped():
-			$VisWindDown.stop()
-			doing_retrigger_wind_up = true
-
-		if doing_retrigger_wind_up:
-			var start_speed_scale = $AnimationPlayer.speed_scale
-			$AnimationPlayer.speed_scale = start_speed_scale + ((max_speed_scale - start_speed_scale) * (1.0 - ($VisWindUp.time_left / fan_vis_wind_up_duration)))
-		else:
-			$AnimationPlayer.speed_scale = max_speed_scale - (max_speed_scale * ($VisWindUp.time_left / fan_vis_wind_up_duration))
-	#wind down
+		var t = 1.0 - ($VisWindUp.time_left / fan_vis_wind_up_duration)
+		vis_scale = lerpf(wind_up_from, max_speed_scale, t)
 	elif !$VisWindDown.is_stopped():
-		$AnimationPlayer.speed_scale = ($VisWindDown.time_left / fan_vis_wind_down_duration) * max_speed_scale
-		if $AnimationPlayer.speed_scale <= 0.01:
+		vis_scale = wind_down_from * ($VisWindDown.time_left / fan_vis_wind_down_duration)
+		if vis_scale <= 0.01:
 			$AnimationPlayer.stop()
-	#normal
 	else:
-		doing_retrigger_wind_up = false #done winding up
-		$AnimationPlayer.speed_scale = max_speed_scale #TODO: doesnt yet have a way to play a continuous sfx, make vol scalable to speed
+		vis_scale = max_speed_scale if toggled else 0.0
 
-	#update wind hitobx
+	$AnimationPlayer.speed_scale = vis_scale
+
 	if phys_wind_column:
 		phys_wind_column.column_rect = get_column_rect()
 		phys_wind_column.update()
+
+
 
 ### SIGNALS ###
 
@@ -156,27 +177,24 @@ func on_switch_toggled(switch_toggled):
 	toggled = switch_toggled
 	$AnimationPlayer.play("On")
 	if toggled:
-		$VisWindUp.start(fan_vis_wind_up_duration)
+		_start_wind_up()
 		create_phys_wind_column()
 		_do_sfx_start()
 	else:
-		$VisWindDown.start(fan_vis_wind_down_duration)
-		phys_wind_column.effect.stop()
-		phys_wind_column.queue_free()
+		_start_wind_down()
+		destroy_phys_wind_column()
 		_do_sfx_end()
 
 
 func on_switch_timer_start():
 	toggled = true
-	$AnimationPlayer.play("On")
-	$VisWindUp.start(fan_vis_wind_up_duration)
+	_start_wind_up()
 	create_phys_wind_column()
 	_do_sfx_start()
 
 
 func on_switch_timer_timeout():
 	toggled = false
-	$VisWindDown.start(fan_vis_wind_down_duration)
-	phys_wind_column.effect.stop()
-	phys_wind_column.queue_free()
+	_start_wind_down()
+	destroy_phys_wind_column()
 	_do_sfx_end()

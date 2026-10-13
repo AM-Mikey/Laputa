@@ -1,8 +1,10 @@
 extends Enemy
 
 const ICON = preload("res://assets/Actor/Enemy/LarryIcon.png")
-
 const TX_0 = preload("res://assets/Actor/Enemy/Larry.png")
+const TOOLTIPS = [
+"LV 0: Walks left and right, deals knockback without damage.",
+]
 
 var move_dir: Vector2
 var idle = false

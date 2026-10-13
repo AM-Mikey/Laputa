@@ -4,6 +4,11 @@ const ICON = preload("res://assets/Actor/Enemy/StalagtiteIcon.png")
 const TX_0 = preload("res://assets/Actor/Enemy/Stalagtite.png")
 const TX_1 = preload("res://assets/Actor/Enemy/Stalagtite1.png")
 const TX_2 = preload("res://assets/Actor/Enemy/Stalagtite2.png")
+const TOOLTIPS = [
+"LV 0: Falls when player underneath. Becomes platform after landing.",
+"LV 1: Falls when player underneath. Runs in random direction after landing.",
+"LV 2: Falls when player underneath. Runs towards player after landing.",
+]
 
 var target: Node
 

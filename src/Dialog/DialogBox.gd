@@ -12,8 +12,12 @@ var print_sfx = "npc_voice_normal"
 var busy = false #executing commands, ignore input
 var awaiting_merge = false
 var do_force_end = false
+var end_via_subprint = false
+var subprint_json
+var subprint_conversation
 var auto_input = false
 var active = false #actively printing
+var print_session := 0 #increments every time we start printing
 var current_dialog_json
 var current_text_array
 var text_stripped_of_commands
@@ -54,7 +58,8 @@ func _ready():
 	vs.connect("scale_changed", Callable(self, "_resolution_scale_changed"))
 	_resolution_scale_changed()
 
-func start_printing(dialog_json, conversation: String, next_state = "inspect"):
+func start_printing(dialog_json, conversation: String, next_state = "inspect", skip_align = false):
+	print_session += 1
 	current_dialog_json = dialog_json
 	active = true
 	var dialog = _load_dialog_json(dialog_json)
@@ -76,15 +81,16 @@ func start_printing(dialog_json, conversation: String, next_state = "inspect"):
 		dl = $Flat/DialogFlat
 	dl.text = ""
 
-	align_box()
+	if !skip_align: align_box()
 	pc.mm.cached_state = pc.mm.current_state
 	pc.mm.change_state(next_state)
 	dl.text = text_stripped_of_commands
 	dl.visible_characters = 0
-	run_text_array(current_text_array)
+	run_text_array(current_text_array, print_session)
 
 
 func start_printing_sign(text: String):
+	print_session += 1
 	$Flat.visible = true
 	#size = Vector2(384, 78)
 	_resolution_scale_changed() #to update after size
@@ -106,6 +112,7 @@ func start_printing_sign(text: String):
 
 
 func start_printing_flavor_text(text: String):
+	print_session += 1
 	$Flat.visible = true
 	#size = Vector2(384, 78)
 	_resolution_scale_changed() #to update after size
@@ -120,7 +127,7 @@ func start_printing_flavor_text(text: String):
 	pc.mm.change_state("inspect")
 	dl.text = text_stripped_of_commands
 	dl.visible_characters = 0
-	run_text_array(current_text_array)
+	run_text_array(current_text_array, print_session)
 
 
 func _load_dialog_json(dialog_json) -> Dictionary: #loads json and converts it into a dictionary
@@ -204,9 +211,12 @@ func get_branch_text(from_step: int) -> String:
 		step_index += 1
 	return "".join(out)
 
-func run_text_array(text_array, from_input := false): #step is always the next step ready to do, not the one just done
-	if step == current_text_array.size() || do_force_end:
-		#print("reached end")
+func run_text_array(text_array, saved_print_session, from_input := false): #step is always the next step ready to do, not the one just done
+	if saved_print_session != print_session: return #avoid printing if we start a newer session
+	if step == text_array.size() || do_force_end:
+		if end_via_subprint:
+			setup_subprint_conversation()
+			return
 		active = false
 		if !is_sign:
 			flash_type = FLASH_END
@@ -218,47 +228,44 @@ func run_text_array(text_array, from_input := false): #step is always the next s
 	if string.begins_with("/"):
 		var command_is_first = true if step == 0 else false
 		await $CommandHandler.parse_command(string.lstrip("/"), command_is_first)
+		if saved_print_session != print_session: return #avoid printing if we start a newer session
 		step += 1
-		print("step: ", step)
-		run_text_array(text_array)
+		#print("step: ", step)
+		run_text_array(text_array, saved_print_session)
 
 	elif string == "\n" or string == "\r\n" or string == "":
 		if auto_input:
 			await prepare_auto_input()
+			if saved_print_session != print_session: return #avoid printing if we start a newer session
 			from_input = true
 		if from_input:
 			step += 1
 			character_shown_count += 1
 			character_is_newline_count += max(string.length() - 1, 0)
-			print("step: ", step)
-			run_text_array(text_array)
+			#print("step: ", step)
+			run_text_array(text_array, saved_print_session)
 		else:
 			active = false #otherwise it sets active == false and ends the loop
 			if !is_sign:
 				flash_type = FLASH_NORMAL
 				flash_original_text = dl.text
 				$FlashTimer.start(0.3)
-
 				dl.text = flash_original_text.insert(get_raw_index(), "  ")
 				dl.visible_characters += 2
-				#if dl.get_character_line(current_character_index) < current_character_index + character_is_newline_count + 3: #when the carat is on a new line
-					#carat_visible_character_size = 3
-				#else:
-					#carat_visible_character_size = 2
-				#dl.visible_characters += carat_visible_character_size
-				print("starting carat")
+				#print("starting carat")
 
 	else:
-		#print(string)
-		await run_text_string(string)
+		await run_text_string(string, saved_print_session)
+		if saved_print_session != print_session: return #avoid printing if we start a newer session
 		step += 1
 		print("step: ", step)
-		run_text_array(text_array)
+		run_text_array(text_array, saved_print_session)
 
 
-func run_text_string(string):
+func run_text_string(string, saved_print_session):
 	var current_character_string_index = 0
 	for character in string:
+		if saved_print_session != print_session: return #avoid printing if we start a newer session
 		var is_last_character = current_character_string_index == string.length() - 1
 		dl.visible_characters = character_shown_count + 1
 		character_shown_count += 1
@@ -328,7 +335,10 @@ func prepare_auto_input():
 
 func progress_text():
 	if step == current_text_array.size() || do_force_end:
-		setup_next_conversation()
+		if end_via_subprint:
+			setup_subprint_conversation()
+		else:
+			setup_next_conversation()
 		return
 	do_delay = true
 	active = true
@@ -336,7 +346,7 @@ func progress_text():
 	flash_step = 0
 	dl.visible_characters -= 2
 	dl.text = flash_original_text
-	run_text_array(current_text_array, true)
+	run_text_array(current_text_array, print_session, true)
 
 func setup_next_conversation():
 	var npc: Node
@@ -392,6 +402,35 @@ func setup_next_conversation():
 			exit()
 	else:
 		exit()
+
+func request_subprint(json_path: String, conversation: String): #NOTE: provides no protection against interrupted commands
+	subprint_json = json_path
+	subprint_conversation = conversation
+	do_force_end = true
+	end_via_subprint = true
+	setup_subprint_conversation()
+
+func setup_subprint_conversation():
+	print("starting subprint conversation")
+	do_force_end = false
+	end_via_subprint = false
+	$FlashTimer.stop()
+	flash_step = 0
+	dl.text = ""
+	dl.visible_characters = 0
+
+	character_shown_count = 0
+	character_is_newline_count = 0
+	character_is_bbcode_count = 0
+	step = 0
+
+	var dialog_json
+	if subprint_json != null:
+		dialog_json = subprint_json
+	else:
+		dialog_json = current_dialog_json
+	start_printing(dialog_json, subprint_conversation, "inspect", true)
+
 
 func get_next_conversation_index(queue: Array) -> int:
 	for i in queue.size():

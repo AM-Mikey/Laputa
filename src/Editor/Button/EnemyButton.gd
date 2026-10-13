@@ -5,6 +5,7 @@ signal enemy_changed(enemy_path)
 var enemy_path: String
 var enemy_name: String
 var enemy_icon: Texture2D
+var enemy_tooltips: Array
 var enemy_difficulty = 0
 var enemy_max_difficulty = 0
 var active = false
@@ -12,6 +13,8 @@ var active = false
 func _ready():
 	%Label.text = enemy_name
 	%PanelActive.visible = active
+	if enemy_tooltips != [] && enemy_tooltips[enemy_difficulty]:
+		%Button.tooltip_text = enemy_tooltips[enemy_difficulty]
 	set_icon()
 
 func activate():
@@ -50,4 +53,6 @@ func _on_Button_gui_input(event: InputEvent):
 					enemy_difficulty = 0
 				else:
 					enemy_difficulty += 1
+	if enemy_tooltips != [] && enemy_tooltips[enemy_difficulty]:
+		%Button.tooltip_text = enemy_tooltips[enemy_difficulty]
 	set_icon()

@@ -65,6 +65,14 @@ func get_direction_from_spread_degrees() -> Vector2:
 	var half_spread = spread_degrees / 2.0
 	var angular_distance = randf_range(half_spread * -1, half_spread)
 	out = out.rotated(deg_to_rad(angular_distance))
+
+	##for regular equal spread use this
+	#var out = direction
+	#var half_spread = spread_degrees / 2.0
+	#out = direction.rotated(deg_to_rad(half_spread * -1.0))
+	#var bullet_angular_separation = spread_degrees / bullets_in_volley
+	#var angular_distance = index * bullet_angular_separation
+	#out = out.rotated(deg_to_rad(angular_distance))
 	return out
 
 ### SIGNALS ###

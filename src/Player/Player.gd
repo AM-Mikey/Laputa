@@ -4,7 +4,7 @@ class_name Player
 
 #const POPUP = preload("res://src/UI/PopupText.tscn")
 const EXPLOSION = preload("res://src/Effect/Explosion.tscn")
-const DEATH_CAMERA = preload("res://src/Utility/DeathCamera.tscn")
+const DEATH_CAMERA = preload("res://src/UI/DeathScreen/DeathCamera.tscn")
 const EXPERIENCE_GET = preload("res://src/Effect/ExperienceGet.tscn")
 const HEART_GET = preload("res://src/Effect/HeartGet.tscn")
 const HEART_GET_MAX = preload("res://src/Effect/HeartGetMax.tscn")
@@ -200,7 +200,7 @@ func die():
 		explosion.position = global_position
 		w.middle_front.add_child(explosion)
 
-		w.ui.add_child(load("res://src/UI/DeathScreen.tscn").instantiate())
+		w.ui.add_child(load("res://src/UI/DeathScreen/DeathScreen.tscn").instantiate())
 		if f.hud():
 			f.hud().free()
 		queue_free()
@@ -265,8 +265,9 @@ func _on_ItemDetector_area_entered(area):
 			var active_gun = guns.get_child(0)
 			money += pickup.value
 			active_gun.xp += pickup.value
+			active_gun.lifetime_xp += pickup.value
 			if active_gun.xp >= active_gun.max_xp:
-				if active_gun.level == active_gun.max_level:
+				if active_gun.level == active_gun.max_unlocked_level:
 					active_gun.xp = active_gun.max_xp
 					#TODO: Flash MAX on HUD
 				else:
@@ -319,3 +320,13 @@ func setup_hud():
 	emit_signal("hp_updated", hp, max_hp, "set_up")
 	emit_signal("guns_updated", guns.get_children(), "set_up")
 	emit_signal("money_updated", money)
+
+func setup_topics(topic_string_array):
+	for t in topic_string_array:
+		var topic = load("res://src/Dialog/Topic/%s.tres" % t)
+		topic_array.append(topic)
+
+func setup_items(item_string_array):
+	for i in item_string_array:
+		var item = load("res://src/Item/%s.tres" % i)
+		item_array.append(item)

@@ -12,8 +12,9 @@ var time_elapsed := 0.0
 
 func vibrate_impulse(strength: float, duration: float = 0.15):
 	#if !Input.has_joy_vibration(device_index): return #TODO: 4.7 godot method
-	if inp.controller_asleep: return
-	_vibrate(strength * 0.3, strength * 0.9, duration)
+	var weak_mult = lerp(0.3, 1.0, strength)
+	var strong_mult = lerp(0.9, 1.0, strength)
+	_vibrate(strength * weak_mult, strength * strong_mult, duration)
 
 func vibrate_impulse_light(strength: float, duration: float = 0.15):
 	if inp.controller_asleep: return
