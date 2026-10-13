@@ -1,26 +1,18 @@
-[gd_scene format=4]
+[gd_scene format=4 uid="uid://lbek6hvqpd6f"]
 
-[ext_resource type="Script" path="res://src/Level/Level.gd" id="1_wmuix"]
-[ext_resource type="PackedScene" path="res://src/Background/LevelLimiter.tscn" id="2_b6beq"]
-[ext_resource type="Script" path="res://src/Background/LevelLimiter.gd" id="3_286gw"]
-[ext_resource type="Resource" path="res://src/Background/TiledPlains.tres" id="3_ctsem"]
-[ext_resource type="Texture2D" path="res://assets/Background/TiledPlainsColor.png" id="4_dmxb2"]
-[ext_resource type="TileSet" path="res://src/Tile/DogtownInterior.tres" id="5_ann6m"]
-[ext_resource type="PackedScene" path="res://src/Editor/Spawn/TriggerSpawn.tscn" id="6_tlqs8"]
-[ext_resource type="PackedScene" path="res://src/Editor/Spawn/ActorSpawn.tscn" id="7_c6oa4"]
-[ext_resource type="Script" path="res://src/Tile/DogtownInteriorAnimator.gd" id="8_ppd8f"]
-[ext_resource type="Script" path="res://src/Editor/Spawn/TriggerSpawn.gd" id="8_vberi"]
-[ext_resource type="PackedScene" path="res://src/Editor/VanishingPoint.tscn" id="9_br5u2"]
-[ext_resource type="PackedScene" path="res://src/Editor/SpawnPoint.tscn" id="10_jqmnt"]
-[ext_resource type="Script" path="res://src/Editor/Spawn/ActorSpawn.gd" id="10_prgck"]
-[ext_resource type="PackedScene" path="res://src/Editor/TitlePreview.tscn" id="11_286gw"]
-[ext_resource type="PackedScene" path="res://src/Editor/Spawn/PropSpawn.tscn" id="11_vberi"]
-[ext_resource type="Script" path="res://src/Editor/Spawn/PropSpawn.gd" id="12_dej6s"]
-[ext_resource type="Theme" path="res://src/UI/Theme/LaputaTheme.tres" id="15_1ef8u"]
-[ext_resource type="Script" path="res://src/Editor/Note/Note.gd" id="16_jdidk"]
-[ext_resource type="PackedScene" path="res://src/Editor/Note/Note.tscn" id="16_prgck"]
-[ext_resource type="Script" path="res://src/Editor/VanishingPoint.gd" id="18_lk15g"]
-[ext_resource type="Script" path="res://src/Editor/SpawnPoint.gd" id="20_4yr4h"]
+[ext_resource type="Script" uid="uid://ucr1waa8u8j1" path="res://src/Level/Level.gd" id="1_wmuix"]
+[ext_resource type="PackedScene" uid="uid://deyh6xyl8c6tr" path="res://src/Background/LevelLimiter.tscn" id="2_b6beq"]
+[ext_resource type="Resource" uid="uid://551crugmnes0" path="res://src/Background/TiledPlains.tres" id="3_ctsem"]
+[ext_resource type="Texture2D" uid="uid://bogxmmxvagqmt" path="res://assets/Background/TiledPlainsColor.png" id="4_dmxb2"]
+[ext_resource type="TileSet" uid="uid://j4ajqrgeit4t" path="res://src/Tile/DogtownInterior.tres" id="5_ann6m"]
+[ext_resource type="PackedScene" uid="uid://ciahlvrcyq5yt" path="res://src/Editor/Spawn/TriggerSpawn.tscn" id="6_tlqs8"]
+[ext_resource type="PackedScene" uid="uid://cs5m8mi2rih5f" path="res://src/Editor/Spawn/ActorSpawn.tscn" id="7_c6oa4"]
+[ext_resource type="Script" uid="uid://bkqwlyui5hbvy" path="res://src/Tile/DogtownInteriorAnimator.gd" id="8_ppd8f"]
+[ext_resource type="PackedScene" uid="uid://dovj8uq00xato" path="res://src/Editor/VanishingPoint.tscn" id="9_br5u2"]
+[ext_resource type="PackedScene" uid="uid://cpkdlvdxe3pdh" path="res://src/Editor/SpawnPoint.tscn" id="10_jqmnt"]
+[ext_resource type="PackedScene" uid="uid://dhjqke0pgo21f" path="res://src/Editor/TitlePreview.tscn" id="11_286gw"]
+[ext_resource type="PackedScene" uid="uid://beorrh1dm573t" path="res://src/Editor/Spawn/PropSpawn.tscn" id="11_vberi"]
+[ext_resource type="PackedScene" uid="uid://3qvjf720tr4r" path="res://src/Editor/Note/Note.tscn" id="16_prgck"]
 
 [sub_resource type="Gradient" id="Gradient_6cuym"]
 offsets = PackedFloat32Array(0, 0.25, 0.5, 0.75, 1)
@@ -41,14 +33,12 @@ debug_topics_on_enter = Array[String](["Davey", "Yourself"])
 debug_items_on_enter = Array[String](["BlueprintTurnstileJumper", "BlueprintRoberta"])
 controller_color_gradient = SubResource("Gradient_6cuym")
 
-[node name="LevelLimiter" type="MarginContainer" parent="." unique_id=479239004 instance=ExtResource("2_b6beq")]
+[node name="LevelLimiter" parent="." unique_id=479239004 instance=ExtResource("2_b6beq")]
 visibility_layer = 2
 offset_left = 1600.0
 offset_top = 1600.0
 offset_right = 2064.0
 offset_bottom = 1856.0
-mouse_filter = 2
-script = ExtResource("3_286gw")
 background_resource = ExtResource("3_ctsem")
 texture = ExtResource("4_dmxb2")
 layers = 5
@@ -111,17 +101,13 @@ visibility_layer = 2
 [node name="Spawns" type="Node2D" parent="." unique_id=1426214031]
 visibility_layer = 2
 
-[node name="Door" type="MarginContainer" parent="Spawns" unique_id=753343894 groups=["TriggerSpawns"] instance=ExtResource("6_tlqs8")]
+[node name="Door" parent="Spawns" unique_id=753343894 instance=ExtResource("6_tlqs8")]
 modulate = Color(1, 1, 1, 0.75)
 visibility_layer = 2
-z_index = 999
-custom_minimum_size = Vector2(8, 8)
 offset_left = 1616.0
 offset_top = 1808.0
 offset_right = 1632.0
 offset_bottom = 1840.0
-mouse_filter = 2
-script = ExtResource("8_vberi")
 trigger_path = "res://src/Trigger/Door.tscn"
 properties = {
 "color": [Color(0, 0.4, 0, 1), 20, ""],
@@ -137,13 +123,9 @@ properties = {
 }
 size_is_default = false
 
-[node name="Sage" type="Area2D" parent="Spawns" unique_id=1199277091 groups=["ActorSpawns", "Entities"] instance=ExtResource("7_c6oa4")]
+[node name="Sage" parent="Spawns" unique_id=1199277091 instance=ExtResource("7_c6oa4")]
 visibility_layer = 2
-z_index = 999
 position = Vector2(1896, 1840)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("10_prgck")
 actor_path = "res://src/Actor/NPC/Sage.tscn"
 properties = {
 "base_gravity": [300.0, 3, ""],
@@ -159,13 +141,9 @@ properties = {
 "water_gravity": [150.0, 3, ""]
 }
 
-[node name="Basil" type="Area2D" parent="Spawns" unique_id=352402513 groups=["ActorSpawns", "Entities"] instance=ExtResource("7_c6oa4")]
+[node name="Basil" parent="Spawns" unique_id=352402513 instance=ExtResource("7_c6oa4")]
 visibility_layer = 2
-z_index = 999
 position = Vector2(1752, 1712)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("10_prgck")
 actor_path = "res://src/Actor/NPC/Basil.tscn"
 properties = {
 "base_gravity": [300.0, 3, ""],
@@ -181,16 +159,12 @@ properties = {
 "water_gravity": [150.0, 3, ""]
 }
 
-[node name="Ladder" type="MarginContainer" parent="Spawns" unique_id=1800792368 groups=["TriggerSpawns"] instance=ExtResource("6_tlqs8")]
+[node name="Ladder" parent="Spawns" unique_id=1800792368 instance=ExtResource("6_tlqs8")]
 visibility_layer = 2
-z_index = 999
-custom_minimum_size = Vector2(8, 8)
 offset_left = 1792.0
 offset_top = 1712.0
 offset_right = 1808.0
 offset_bottom = 1840.0
-mouse_filter = 2
-script = ExtResource("8_vberi")
 trigger_path = "res://src/Trigger/Ladder.tscn"
 properties = {
 "color": [Color(1, 0.494118, 0, 1), 20, ""],
@@ -199,13 +173,9 @@ properties = {
 }
 size_is_default = false
 
-[node name="AmmoRefill" type="Area2D" parent="Spawns" unique_id=1449282698 groups=["Entities", "PropSpawns"] instance=ExtResource("11_vberi")]
+[node name="AmmoRefill" parent="Spawns" unique_id=1449282698 instance=ExtResource("11_vberi")]
 visibility_layer = 2
-z_index = 999
 position = Vector2(1728, 1824)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("12_dej6s")
 prop_path = "res://src/Prop/AmmoRefill.tscn"
 properties = {
 "do_bubble": [false, 1, ""],
@@ -213,13 +183,9 @@ properties = {
 "id": [&"AmmoRefill", 4, ""]
 }
 
-[node name="ChestGun" type="Area2D" parent="Spawns" unique_id=934414503 groups=["Entities", "PropSpawns"] instance=ExtResource("11_vberi")]
+[node name="ChestGun" parent="Spawns" unique_id=934414503 instance=ExtResource("11_vberi")]
 visibility_layer = 2
-z_index = 999
 position = Vector2(1744, 1824)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("12_dej6s")
 prop_path = "res://src/Prop/ChestGun.tscn"
 properties = {
 "do_bubble": [false, 1, ""],
@@ -228,13 +194,9 @@ properties = {
 "id": [&"ChestGun", 4, ""]
 }
 
-[node name="BreakBlockExperience" type="Area2D" parent="Spawns" unique_id=958790534 groups=["Entities", "PropSpawns"] instance=ExtResource("11_vberi")]
+[node name="BreakBlockExperience" parent="Spawns" unique_id=958790534 instance=ExtResource("11_vberi")]
 visibility_layer = 2
-z_index = 999
 position = Vector2(2048, 1824)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("12_dej6s")
 prop_path = "res://src/Prop/BreakBlockExperience.tscn"
 properties = {
 "break_on_fall": [false, 1, ""],
@@ -247,13 +209,9 @@ properties = {
 "reward": [10, 2, ""]
 }
 
-[node name="BreakBlockExperience1" type="Area2D" parent="Spawns" unique_id=535366862 groups=["Entities", "PropSpawns"] instance=ExtResource("11_vberi")]
+[node name="BreakBlockExperience1" parent="Spawns" unique_id=535366862 instance=ExtResource("11_vberi")]
 visibility_layer = 2
-z_index = 999
 position = Vector2(2032, 1824)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("12_dej6s")
 prop_path = "res://src/Prop/BreakBlockExperience.tscn"
 properties = {
 "break_on_fall": [false, 1, ""],
@@ -266,13 +224,9 @@ properties = {
 "reward": [10, 2, ""]
 }
 
-[node name="BreakBlockExperience2" type="Area2D" parent="Spawns" unique_id=1544809449 groups=["Entities", "PropSpawns"] instance=ExtResource("11_vberi")]
+[node name="BreakBlockExperience2" parent="Spawns" unique_id=1544809449 instance=ExtResource("11_vberi")]
 visibility_layer = 2
-z_index = 999
 position = Vector2(2016, 1824)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("12_dej6s")
 prop_path = "res://src/Prop/BreakBlockExperience.tscn"
 properties = {
 "break_on_fall": [false, 1, ""],
@@ -285,13 +239,9 @@ properties = {
 "reward": [10, 2, ""]
 }
 
-[node name="BreakBlockExperience3" type="Area2D" parent="Spawns" unique_id=84921858 groups=["Entities", "PropSpawns"] instance=ExtResource("11_vberi")]
+[node name="BreakBlockExperience3" parent="Spawns" unique_id=84921858 instance=ExtResource("11_vberi")]
 visibility_layer = 2
-z_index = 999
 position = Vector2(2000, 1824)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("12_dej6s")
 prop_path = "res://src/Prop/BreakBlockExperience.tscn"
 properties = {
 "break_on_fall": [false, 1, ""],
@@ -304,13 +254,9 @@ properties = {
 "reward": [10, 2, ""]
 }
 
-[node name="BreakBlockExperience4" type="Area2D" parent="Spawns" unique_id=3060592 groups=["Entities", "PropSpawns"] instance=ExtResource("11_vberi")]
+[node name="BreakBlockExperience4" parent="Spawns" unique_id=3060592 instance=ExtResource("11_vberi")]
 visibility_layer = 2
-z_index = 999
 position = Vector2(1984, 1824)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("12_dej6s")
 prop_path = "res://src/Prop/BreakBlockExperience.tscn"
 properties = {
 "break_on_fall": [false, 1, ""],
@@ -323,13 +269,9 @@ properties = {
 "reward": [10, 2, ""]
 }
 
-[node name="BreakBlockExperience5" type="Area2D" parent="Spawns" unique_id=1675304818 groups=["Entities", "PropSpawns"] instance=ExtResource("11_vberi")]
+[node name="BreakBlockExperience5" parent="Spawns" unique_id=1675304818 instance=ExtResource("11_vberi")]
 visibility_layer = 2
-z_index = 999
 position = Vector2(1968, 1824)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("12_dej6s")
 prop_path = "res://src/Prop/BreakBlockExperience.tscn"
 properties = {
 "break_on_fall": [false, 1, ""],
@@ -342,13 +284,9 @@ properties = {
 "reward": [10, 2, ""]
 }
 
-[node name="BreakBlockExperience6" type="Area2D" parent="Spawns" unique_id=293430499 groups=["Entities", "PropSpawns"] instance=ExtResource("11_vberi")]
+[node name="BreakBlockExperience6" parent="Spawns" unique_id=293430499 instance=ExtResource("11_vberi")]
 visibility_layer = 2
-z_index = 999
 position = Vector2(1952, 1824)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("12_dej6s")
 prop_path = "res://src/Prop/BreakBlockExperience.tscn"
 properties = {
 "break_on_fall": [false, 1, ""],
@@ -361,13 +299,9 @@ properties = {
 "reward": [10, 2, ""]
 }
 
-[node name="BreakBlockExperience7" type="Area2D" parent="Spawns" unique_id=385041422 groups=["Entities", "PropSpawns"] instance=ExtResource("11_vberi")]
+[node name="BreakBlockExperience7" parent="Spawns" unique_id=385041422 instance=ExtResource("11_vberi")]
 visibility_layer = 2
-z_index = 999
 position = Vector2(1952, 1808)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("12_dej6s")
 prop_path = "res://src/Prop/BreakBlockExperience.tscn"
 properties = {
 "break_on_fall": [false, 1, ""],
@@ -380,13 +314,9 @@ properties = {
 "reward": [10, 2, ""]
 }
 
-[node name="BreakBlockExperience8" type="Area2D" parent="Spawns" unique_id=209062002 groups=["Entities", "PropSpawns"] instance=ExtResource("11_vberi")]
+[node name="BreakBlockExperience8" parent="Spawns" unique_id=209062002 instance=ExtResource("11_vberi")]
 visibility_layer = 2
-z_index = 999
 position = Vector2(1968, 1808)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("12_dej6s")
 prop_path = "res://src/Prop/BreakBlockExperience.tscn"
 properties = {
 "break_on_fall": [false, 1, ""],
@@ -399,13 +329,9 @@ properties = {
 "reward": [10, 2, ""]
 }
 
-[node name="BreakBlockExperience9" type="Area2D" parent="Spawns" unique_id=1160587676 groups=["Entities", "PropSpawns"] instance=ExtResource("11_vberi")]
+[node name="BreakBlockExperience9" parent="Spawns" unique_id=1160587676 instance=ExtResource("11_vberi")]
 visibility_layer = 2
-z_index = 999
 position = Vector2(1984, 1808)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("12_dej6s")
 prop_path = "res://src/Prop/BreakBlockExperience.tscn"
 properties = {
 "break_on_fall": [false, 1, ""],
@@ -418,13 +344,9 @@ properties = {
 "reward": [10, 2, ""]
 }
 
-[node name="BreakBlockExperience10" type="Area2D" parent="Spawns" unique_id=1394867828 groups=["Entities", "PropSpawns"] instance=ExtResource("11_vberi")]
+[node name="BreakBlockExperience10" parent="Spawns" unique_id=1394867828 instance=ExtResource("11_vberi")]
 visibility_layer = 2
-z_index = 999
 position = Vector2(2000, 1808)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("12_dej6s")
 prop_path = "res://src/Prop/BreakBlockExperience.tscn"
 properties = {
 "break_on_fall": [false, 1, ""],
@@ -437,13 +359,9 @@ properties = {
 "reward": [10, 2, ""]
 }
 
-[node name="BreakBlockExperience11" type="Area2D" parent="Spawns" unique_id=1312514140 groups=["Entities", "PropSpawns"] instance=ExtResource("11_vberi")]
+[node name="BreakBlockExperience11" parent="Spawns" unique_id=1312514140 instance=ExtResource("11_vberi")]
 visibility_layer = 2
-z_index = 999
 position = Vector2(2016, 1808)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("12_dej6s")
 prop_path = "res://src/Prop/BreakBlockExperience.tscn"
 properties = {
 "break_on_fall": [false, 1, ""],
@@ -456,13 +374,9 @@ properties = {
 "reward": [10, 2, ""]
 }
 
-[node name="BreakBlockExperience12" type="Area2D" parent="Spawns" unique_id=374454733 groups=["Entities", "PropSpawns"] instance=ExtResource("11_vberi")]
+[node name="BreakBlockExperience12" parent="Spawns" unique_id=374454733 instance=ExtResource("11_vberi")]
 visibility_layer = 2
-z_index = 999
 position = Vector2(2032, 1808)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("12_dej6s")
 prop_path = "res://src/Prop/BreakBlockExperience.tscn"
 properties = {
 "break_on_fall": [false, 1, ""],
@@ -475,13 +389,9 @@ properties = {
 "reward": [10, 2, ""]
 }
 
-[node name="BreakBlockExperience13" type="Area2D" parent="Spawns" unique_id=662649782 groups=["Entities", "PropSpawns"] instance=ExtResource("11_vberi")]
+[node name="BreakBlockExperience13" parent="Spawns" unique_id=662649782 instance=ExtResource("11_vberi")]
 visibility_layer = 2
-z_index = 999
 position = Vector2(2048, 1808)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("12_dej6s")
 prop_path = "res://src/Prop/BreakBlockExperience.tscn"
 properties = {
 "break_on_fall": [false, 1, ""],
@@ -494,13 +404,9 @@ properties = {
 "reward": [10, 2, ""]
 }
 
-[node name="BreakBlockExperience14" type="Area2D" parent="Spawns" unique_id=40445053 groups=["Entities", "PropSpawns"] instance=ExtResource("11_vberi")]
+[node name="BreakBlockExperience14" parent="Spawns" unique_id=40445053 instance=ExtResource("11_vberi")]
 visibility_layer = 2
-z_index = 999
 position = Vector2(1952, 1792)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("12_dej6s")
 prop_path = "res://src/Prop/BreakBlockExperience.tscn"
 properties = {
 "break_on_fall": [false, 1, ""],
@@ -513,13 +419,9 @@ properties = {
 "reward": [10, 2, ""]
 }
 
-[node name="BreakBlockExperience15" type="Area2D" parent="Spawns" unique_id=1320129892 groups=["Entities", "PropSpawns"] instance=ExtResource("11_vberi")]
+[node name="BreakBlockExperience15" parent="Spawns" unique_id=1320129892 instance=ExtResource("11_vberi")]
 visibility_layer = 2
-z_index = 999
 position = Vector2(1968, 1792)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("12_dej6s")
 prop_path = "res://src/Prop/BreakBlockExperience.tscn"
 properties = {
 "break_on_fall": [false, 1, ""],
@@ -532,13 +434,9 @@ properties = {
 "reward": [10, 2, ""]
 }
 
-[node name="BreakBlockExperience16" type="Area2D" parent="Spawns" unique_id=868781961 groups=["Entities", "PropSpawns"] instance=ExtResource("11_vberi")]
+[node name="BreakBlockExperience16" parent="Spawns" unique_id=868781961 instance=ExtResource("11_vberi")]
 visibility_layer = 2
-z_index = 999
 position = Vector2(1984, 1792)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("12_dej6s")
 prop_path = "res://src/Prop/BreakBlockExperience.tscn"
 properties = {
 "break_on_fall": [false, 1, ""],
@@ -551,13 +449,9 @@ properties = {
 "reward": [10, 2, ""]
 }
 
-[node name="BreakBlockExperience17" type="Area2D" parent="Spawns" unique_id=1394233589 groups=["Entities", "PropSpawns"] instance=ExtResource("11_vberi")]
+[node name="BreakBlockExperience17" parent="Spawns" unique_id=1394233589 instance=ExtResource("11_vberi")]
 visibility_layer = 2
-z_index = 999
 position = Vector2(2000, 1792)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("12_dej6s")
 prop_path = "res://src/Prop/BreakBlockExperience.tscn"
 properties = {
 "break_on_fall": [false, 1, ""],
@@ -570,13 +464,9 @@ properties = {
 "reward": [10, 2, ""]
 }
 
-[node name="BreakBlockExperience18" type="Area2D" parent="Spawns" unique_id=326139253 groups=["Entities", "PropSpawns"] instance=ExtResource("11_vberi")]
+[node name="BreakBlockExperience18" parent="Spawns" unique_id=326139253 instance=ExtResource("11_vberi")]
 visibility_layer = 2
-z_index = 999
 position = Vector2(2016, 1792)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("12_dej6s")
 prop_path = "res://src/Prop/BreakBlockExperience.tscn"
 properties = {
 "break_on_fall": [false, 1, ""],
@@ -589,13 +479,9 @@ properties = {
 "reward": [10, 2, ""]
 }
 
-[node name="BreakBlockExperience19" type="Area2D" parent="Spawns" unique_id=882258944 groups=["Entities", "PropSpawns"] instance=ExtResource("11_vberi")]
+[node name="BreakBlockExperience19" parent="Spawns" unique_id=882258944 instance=ExtResource("11_vberi")]
 visibility_layer = 2
-z_index = 999
 position = Vector2(2032, 1792)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("12_dej6s")
 prop_path = "res://src/Prop/BreakBlockExperience.tscn"
 properties = {
 "break_on_fall": [false, 1, ""],
@@ -608,13 +494,9 @@ properties = {
 "reward": [10, 2, ""]
 }
 
-[node name="BreakBlockExperience20" type="Area2D" parent="Spawns" unique_id=2138244444 groups=["Entities", "PropSpawns"] instance=ExtResource("11_vberi")]
+[node name="BreakBlockExperience20" parent="Spawns" unique_id=2138244444 instance=ExtResource("11_vberi")]
 visibility_layer = 2
-z_index = 999
 position = Vector2(2048, 1792)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("12_dej6s")
 prop_path = "res://src/Prop/BreakBlockExperience.tscn"
 properties = {
 "break_on_fall": [false, 1, ""],
@@ -627,13 +509,9 @@ properties = {
 "reward": [10, 2, ""]
 }
 
-[node name="BreakBlockExperience21" type="Area2D" parent="Spawns" unique_id=178871543 groups=["Entities", "PropSpawns"] instance=ExtResource("11_vberi")]
+[node name="BreakBlockExperience21" parent="Spawns" unique_id=178871543 instance=ExtResource("11_vberi")]
 visibility_layer = 2
-z_index = 999
 position = Vector2(2048, 1776)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("12_dej6s")
 prop_path = "res://src/Prop/BreakBlockExperience.tscn"
 properties = {
 "break_on_fall": [false, 1, ""],
@@ -646,13 +524,9 @@ properties = {
 "reward": [10, 2, ""]
 }
 
-[node name="BreakBlockExperience22" type="Area2D" parent="Spawns" unique_id=46524730 groups=["Entities", "PropSpawns"] instance=ExtResource("11_vberi")]
+[node name="BreakBlockExperience22" parent="Spawns" unique_id=46524730 instance=ExtResource("11_vberi")]
 visibility_layer = 2
-z_index = 999
 position = Vector2(2032, 1776)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("12_dej6s")
 prop_path = "res://src/Prop/BreakBlockExperience.tscn"
 properties = {
 "break_on_fall": [false, 1, ""],
@@ -665,13 +539,9 @@ properties = {
 "reward": [10, 2, ""]
 }
 
-[node name="BreakBlockExperience23" type="Area2D" parent="Spawns" unique_id=879647097 groups=["Entities", "PropSpawns"] instance=ExtResource("11_vberi")]
+[node name="BreakBlockExperience23" parent="Spawns" unique_id=879647097 instance=ExtResource("11_vberi")]
 visibility_layer = 2
-z_index = 999
 position = Vector2(2016, 1776)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("12_dej6s")
 prop_path = "res://src/Prop/BreakBlockExperience.tscn"
 properties = {
 "break_on_fall": [false, 1, ""],
@@ -684,13 +554,9 @@ properties = {
 "reward": [10, 2, ""]
 }
 
-[node name="BreakBlockExperience24" type="Area2D" parent="Spawns" unique_id=632131744 groups=["Entities", "PropSpawns"] instance=ExtResource("11_vberi")]
+[node name="BreakBlockExperience24" parent="Spawns" unique_id=632131744 instance=ExtResource("11_vberi")]
 visibility_layer = 2
-z_index = 999
 position = Vector2(2000, 1776)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("12_dej6s")
 prop_path = "res://src/Prop/BreakBlockExperience.tscn"
 properties = {
 "break_on_fall": [false, 1, ""],
@@ -703,13 +569,9 @@ properties = {
 "reward": [10, 2, ""]
 }
 
-[node name="BreakBlockExperience25" type="Area2D" parent="Spawns" unique_id=728532513 groups=["Entities", "PropSpawns"] instance=ExtResource("11_vberi")]
+[node name="BreakBlockExperience25" parent="Spawns" unique_id=728532513 instance=ExtResource("11_vberi")]
 visibility_layer = 2
-z_index = 999
 position = Vector2(1984, 1776)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("12_dej6s")
 prop_path = "res://src/Prop/BreakBlockExperience.tscn"
 properties = {
 "break_on_fall": [false, 1, ""],
@@ -722,13 +584,9 @@ properties = {
 "reward": [10, 2, ""]
 }
 
-[node name="BreakBlockExperience26" type="Area2D" parent="Spawns" unique_id=468939807 groups=["Entities", "PropSpawns"] instance=ExtResource("11_vberi")]
+[node name="BreakBlockExperience26" parent="Spawns" unique_id=468939807 instance=ExtResource("11_vberi")]
 visibility_layer = 2
-z_index = 999
 position = Vector2(1968, 1776)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("12_dej6s")
 prop_path = "res://src/Prop/BreakBlockExperience.tscn"
 properties = {
 "break_on_fall": [false, 1, ""],
@@ -741,13 +599,9 @@ properties = {
 "reward": [10, 2, ""]
 }
 
-[node name="BreakBlockExperience27" type="Area2D" parent="Spawns" unique_id=606272313 groups=["Entities", "PropSpawns"] instance=ExtResource("11_vberi")]
+[node name="BreakBlockExperience27" parent="Spawns" unique_id=606272313 instance=ExtResource("11_vberi")]
 visibility_layer = 2
-z_index = 999
 position = Vector2(1952, 1776)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("12_dej6s")
 prop_path = "res://src/Prop/BreakBlockExperience.tscn"
 properties = {
 "break_on_fall": [false, 1, ""],
@@ -770,20 +624,12 @@ visibility_layer = 2
 [node name="Notes" type="Node2D" parent="." unique_id=3296572]
 visibility_layer = 2
 
-[node name="Note" type="MarginContainer" parent="Notes" unique_id=1359810734 groups=["Notes"] instance=ExtResource("16_prgck")]
+[node name="Note" parent="Notes" unique_id=1359810734 instance=ExtResource("16_prgck")]
 visibility_layer = 2
-z_index = 999
-clip_contents = true
-custom_minimum_size = Vector2(16, 16)
 offset_left = 1896.0
 offset_top = 1616.0
 offset_right = 2064.0
 offset_bottom = 1656.0
-size_flags_horizontal = 0
-size_flags_vertical = 0
-mouse_filter = 2
-theme = ExtResource("15_1ef8u")
-script = ExtResource("16_jdidk")
 text = "Blueprint: Turnstile, Roberta
 Upgrade: Revolver
 Rebuild: MPistol
@@ -791,64 +637,14 @@ Rebuild: MPistol
 color = Color(1, 1, 1, 1)
 big_text = false
 
-[node name="VanishingPoint" type="Area2D" parent="." unique_id=1188585786 groups=["VanishingPoints"] instance=ExtResource("9_br5u2")]
+[node name="VanishingPoint" parent="." unique_id=1188585786 instance=ExtResource("9_br5u2")]
 visibility_layer = 2
-z_index = 999
 position = Vector2(1840, 1496)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("18_lk15g")
 
-[node name="SpawnPoint" type="Area2D" parent="." unique_id=1936255300 groups=["SpawnPoints"] instance=ExtResource("10_jqmnt")]
+[node name="SpawnPoint" parent="." unique_id=1936255300 instance=ExtResource("10_jqmnt")]
 visibility_layer = 2
 position = Vector2(1720, 1840)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("20_4yr4h")
 
-[node name="TitlePreview" type="Area2D" parent="." unique_id=2052223351 groups=["TitlePreviews"] instance=ExtResource("11_286gw")]
+[node name="TitlePreview" parent="." unique_id=2052223351 instance=ExtResource("11_286gw")]
 visibility_layer = 2
-z_index = 999
 position = Vector2(1832, 1728)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("18_lk15g")
-
-[connection signal="body_entered" from="Triggers/KillBoundaryU" to="Triggers/KillBoundaryU" method="_on_body_entered"]
-[connection signal="body_entered" from="Triggers/KillBoundaryD" to="Triggers/KillBoundaryD" method="_on_body_entered"]
-[connection signal="body_entered" from="Triggers/KillBoundaryL" to="Triggers/KillBoundaryL" method="_on_body_entered"]
-[connection signal="body_entered" from="Triggers/KillBoundaryR" to="Triggers/KillBoundaryR" method="_on_body_entered"]
-[connection signal="gui_input" from="Spawns/Door" to="Spawns/Door" method="_on_gui_input"]
-[connection signal="input_event" from="Spawns/Sage" to="Spawns/Sage" method="_on_input_event"]
-[connection signal="input_event" from="Spawns/Basil" to="Spawns/Basil" method="_on_input_event"]
-[connection signal="gui_input" from="Spawns/Ladder" to="Spawns/Ladder" method="_on_gui_input"]
-[connection signal="input_event" from="Spawns/AmmoRefill" to="Spawns/AmmoRefill" method="_on_input_event"]
-[connection signal="input_event" from="Spawns/ChestGun" to="Spawns/ChestGun" method="_on_input_event"]
-[connection signal="input_event" from="Spawns/BreakBlockExperience" to="Spawns/BreakBlockExperience" method="_on_input_event"]
-[connection signal="input_event" from="Spawns/BreakBlockExperience1" to="Spawns/BreakBlockExperience1" method="_on_input_event"]
-[connection signal="input_event" from="Spawns/BreakBlockExperience2" to="Spawns/BreakBlockExperience2" method="_on_input_event"]
-[connection signal="input_event" from="Spawns/BreakBlockExperience3" to="Spawns/BreakBlockExperience3" method="_on_input_event"]
-[connection signal="input_event" from="Spawns/BreakBlockExperience4" to="Spawns/BreakBlockExperience4" method="_on_input_event"]
-[connection signal="input_event" from="Spawns/BreakBlockExperience5" to="Spawns/BreakBlockExperience5" method="_on_input_event"]
-[connection signal="input_event" from="Spawns/BreakBlockExperience6" to="Spawns/BreakBlockExperience6" method="_on_input_event"]
-[connection signal="input_event" from="Spawns/BreakBlockExperience7" to="Spawns/BreakBlockExperience7" method="_on_input_event"]
-[connection signal="input_event" from="Spawns/BreakBlockExperience8" to="Spawns/BreakBlockExperience8" method="_on_input_event"]
-[connection signal="input_event" from="Spawns/BreakBlockExperience9" to="Spawns/BreakBlockExperience9" method="_on_input_event"]
-[connection signal="input_event" from="Spawns/BreakBlockExperience10" to="Spawns/BreakBlockExperience10" method="_on_input_event"]
-[connection signal="input_event" from="Spawns/BreakBlockExperience11" to="Spawns/BreakBlockExperience11" method="_on_input_event"]
-[connection signal="input_event" from="Spawns/BreakBlockExperience12" to="Spawns/BreakBlockExperience12" method="_on_input_event"]
-[connection signal="input_event" from="Spawns/BreakBlockExperience13" to="Spawns/BreakBlockExperience13" method="_on_input_event"]
-[connection signal="input_event" from="Spawns/BreakBlockExperience14" to="Spawns/BreakBlockExperience14" method="_on_input_event"]
-[connection signal="input_event" from="Spawns/BreakBlockExperience15" to="Spawns/BreakBlockExperience15" method="_on_input_event"]
-[connection signal="input_event" from="Spawns/BreakBlockExperience16" to="Spawns/BreakBlockExperience16" method="_on_input_event"]
-[connection signal="input_event" from="Spawns/BreakBlockExperience17" to="Spawns/BreakBlockExperience17" method="_on_input_event"]
-[connection signal="input_event" from="Spawns/BreakBlockExperience18" to="Spawns/BreakBlockExperience18" method="_on_input_event"]
-[connection signal="input_event" from="Spawns/BreakBlockExperience19" to="Spawns/BreakBlockExperience19" method="_on_input_event"]
-[connection signal="input_event" from="Spawns/BreakBlockExperience20" to="Spawns/BreakBlockExperience20" method="_on_input_event"]
-[connection signal="input_event" from="Spawns/BreakBlockExperience21" to="Spawns/BreakBlockExperience21" method="_on_input_event"]
-[connection signal="input_event" from="Spawns/BreakBlockExperience22" to="Spawns/BreakBlockExperience22" method="_on_input_event"]
-[connection signal="input_event" from="Spawns/BreakBlockExperience23" to="Spawns/BreakBlockExperience23" method="_on_input_event"]
-[connection signal="input_event" from="Spawns/BreakBlockExperience24" to="Spawns/BreakBlockExperience24" method="_on_input_event"]
-[connection signal="input_event" from="Spawns/BreakBlockExperience25" to="Spawns/BreakBlockExperience25" method="_on_input_event"]
-[connection signal="input_event" from="Spawns/BreakBlockExperience26" to="Spawns/BreakBlockExperience26" method="_on_input_event"]
-[connection signal="input_event" from="Spawns/BreakBlockExperience27" to="Spawns/BreakBlockExperience27" method="_on_input_event"]

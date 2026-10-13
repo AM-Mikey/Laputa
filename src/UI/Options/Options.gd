@@ -143,13 +143,13 @@ func process_exit():
 	else:
 		exit()
 
-func _on_TabContainer_tab_changed(tab):
+func _on_TabContainer_tab_changed(_tab):
 	%LeftTimer.stop()
 	%LeftDecayTimer.stop()
 	%RightTimer.stop()
 	%RightDecayTimer.stop()
 	await get_tree().process_frame
-	focus_current_tab
+	focus_current_tab()
 
 func focus_current_tab() -> void:
 	match tabs.current_tab:
