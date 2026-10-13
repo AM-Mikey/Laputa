@@ -10,22 +10,22 @@ radius = 4.0
 height = 15.0
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_e16d4"]
-size = Vector2(5, 15)
+size = Vector2(10, 20)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_p2rvj"]
-size = Vector2(8, 15)
+size = Vector2(8, 13)
 
 [sub_resource type="RectangleShape2D" id="10"]
-size = Vector2(15, 13)
+size = Vector2(16, 10)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ax27h"]
-size = Vector2(18, 7)
+size = Vector2(16, 10)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_on0yn"]
-size = Vector2(20.5, 18)
+size = Vector2(12, 10)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_iq674"]
-size = Vector2(17.5, 12)
+size = Vector2(12, 10)
 
 [sub_resource type="RectangleShape2D" id="3"]
 resource_local_to_scene = true
@@ -33,7 +33,7 @@ size = Vector2(64, 96)
 
 [sub_resource type="RectangleShape2D" id="4"]
 resource_local_to_scene = true
-size = Vector2(46, 60)
+size = Vector2(48, 64)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_oom1o"]
 size = Vector2(600, 400)
@@ -138,10 +138,12 @@ floor_max_angle = 0.6981317
 script = ExtResource("1_0munp")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1630901694]
+visible = false
 position = Vector2(0, -7.5)
 shape = SubResource("CapsuleShape2D_ax27h")
 
 [node name="PhysicsLayerBody" parent="." unique_id=307469918 instance=ExtResource("2_xuchq")]
+visible = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PhysicsLayerBody" unique_id=177726214]
 position = Vector2(0, -7.5)
@@ -153,7 +155,7 @@ collision_mask = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox" unique_id=753131815]
 z_index = 2
-position = Vector2(2.5, -7.5)
+position = Vector2(0, -10)
 shape = SubResource("RectangleShape2D_e16d4")
 debug_color = Color(0, 1, 0, 0.235294)
 
@@ -162,7 +164,7 @@ collision_layer = 262144
 collision_mask = 65536
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox" unique_id=359933471]
-position = Vector2(1, -7.5)
+position = Vector2(0, -7.5)
 shape = SubResource("RectangleShape2D_p2rvj")
 debug_color = Color(1, 0, 0, 0.235294)
 
@@ -176,23 +178,21 @@ wait_time = 1.5
 one_shot = true
 
 [node name="KickDetector" type="Area2D" parent="." unique_id=487697926]
-visible = false
 collision_layer = 0
 monitorable = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="KickDetector" unique_id=1994513786]
-position = Vector2(-7.5, -6.5)
+position = Vector2(-8, -9)
 shape = SubResource("10")
 
 [node name="KickHitbox" type="Area2D" parent="." unique_id=1149402340]
-visible = false
 collision_layer = 262144
 collision_mask = 65824
 monitoring = false
 monitorable = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="KickHitbox" unique_id=472885124]
-position = Vector2(-7, -6.5)
+position = Vector2(-8, -9)
 shape = SubResource("RectangleShape2D_ax27h")
 debug_color = Color(1, 0, 0, 0.235294)
 
@@ -203,7 +203,7 @@ monitoring = false
 monitorable = false
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="DeflectDetector" unique_id=1529987484]
-position = Vector2(-10.25, -9)
+position = Vector2(-6, -9)
 shape = SubResource("RectangleShape2D_on0yn")
 
 [node name="DeflectHitbox" type="Area2D" parent="." unique_id=2093412947]
@@ -213,7 +213,7 @@ monitoring = false
 monitorable = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="DeflectHitbox" unique_id=1551165780]
-position = Vector2(-8.75, -9)
+position = Vector2(-6, -9)
 shape = SubResource("RectangleShape2D_iq674")
 debug_color = Color(1, 0, 0, 0.235294)
 
@@ -232,7 +232,7 @@ monitorable = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="JumpDetector" unique_id=14587079]
 modulate = Color(0, 0.0156863, 0.937255, 0.392157)
-position = Vector2(-25, -62)
+position = Vector2(-24, -64)
 shape = SubResource("4")
 
 [node name="PlayerDetector" type="Area2D" parent="." unique_id=1887303621]
