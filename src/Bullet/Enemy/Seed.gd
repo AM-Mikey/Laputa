@@ -20,6 +20,13 @@ func _on_physics_process(delta):
 		if velocity.y < 0:
 			velocity.y *= 0.9
 
+func deflect(vel: Vector2):
+	var bullet_sprite = get_node("Sprite2D")
+	var new_bullet_position = bullet_sprite.global_position
+	direction = vel.normalized()
+	velocity = vel
+	global_position = new_bullet_position
+
 ### HELPERS ###
 
 func get_initial_velocity() -> Vector2:
