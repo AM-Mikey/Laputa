@@ -35,7 +35,7 @@ var internal_version: String = get_internal_version()
 @onready var ml = $MenuLayer
 @onready var il = $InventoryLayer
 @onready var dll = $DialogLayer
-@onready var cl = $CutsceneLayer
+@onready var c = $Cutscene
 
 @onready var farthest_back = $FarthestBack
 @onready var middle_back = $MiddleBack
@@ -172,6 +172,8 @@ func change_level_via_code(level_path, use_save_data):
 		$HUDLayer/HUDAnimator.play("RESET")
 		f.hud().free()
 	clear_spawn_layers()
+	for cut in c.get_children():
+		cut.queue_free()
 	for kb in get_tree().get_nodes_in_group("KillBoxes"):
 		kb.forbid = true
 	current_level.free()
@@ -226,6 +228,8 @@ func change_level_via_trigger(level_path, door_index):
 	if f.db(): await f.db().exit()
 	if f.hud(): $HUDLayer/HUDAnimator.play("RESET")
 	clear_spawn_layers()
+	for cut in c.get_children():
+		cut.queue_free()
 	for kb in get_tree().get_nodes_in_group("KillBoxes"):
 		kb.forbid = true
 	var old_level_path = current_level.scene_file_path

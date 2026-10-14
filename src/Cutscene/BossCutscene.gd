@@ -7,7 +7,6 @@ const BOSS_HEALTH_BAR = preload("res://src/Cutscene/BossHealthBar.tscn")
 var boss_id = ""
 
 var boss_health_bar = null
-var boss_arena: Rect2 = Rect2()
 var boss_music: String = "boss"
 
 

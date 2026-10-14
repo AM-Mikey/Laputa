@@ -2,7 +2,7 @@ extends BossCutscene
 
 func setup():
 	boss_id = "golem"
-	boss_arena = Rect2(Vector2(480, 32), Vector2(512, 272))
+	var boss_arena = Rect2(Vector2(480, 32), Vector2(512, 272))
 
 	disable_player_input()
 	var player = f.pc()
