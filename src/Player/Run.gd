@@ -42,14 +42,18 @@ func state_process(delta):
 		for body: Node2D in inspect.get_overlapping_bodies():
 			if !body.has_method(&"player_interact"):
 				continue
-			var distance := body.global_position.distance_to(pc.global_position)
+			if !body.has_method(&"get_center"):
+				continue
+			var distance := pc.global_position.distance_to(body.get_center())
 			if distance < closest_thing_distance:
 				closest_thing_distance = distance
 				closest_thing = body
 		for body: Area2D in inspect.get_overlapping_areas():
 			if !body.has_method(&"player_interact"):
 				continue
-			var distance := body.global_position.distance_to(pc.global_position)
+			if !body.has_method(&"get_center"):
+				continue
+			var distance := pc.global_position.distance_to(body.get_center())
 			if distance < closest_thing_distance:
 				closest_thing_distance = distance
 				closest_thing = body

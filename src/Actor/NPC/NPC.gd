@@ -238,6 +238,8 @@ func player_interact(p: Player):
 			change_state("talk")
 			return
 
+func get_center() -> Vector2:
+	return $CollisionShape2D.global_position
 
 func look_at_node(node, inverted = false):
 	var look_dir: float

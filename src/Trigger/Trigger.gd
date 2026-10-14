@@ -29,3 +29,6 @@ func get_overlap(body) -> bool:
 
 func expend_trigger():
 	visible = false
+
+func get_center() -> Vector2:
+	return $CollisionShape2D.global_position
