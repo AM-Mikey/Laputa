@@ -39,16 +39,10 @@ func state_process(delta):
 	if inp.pressed("inspect"):
 		var closest_thing: Node2D = null
 		var closest_thing_distance: = INF
-		for body: Node2D in inspect.get_overlapping_bodies():
-			if !body.has_method(&"player_interact"):
-				continue
-			if !body.has_method(&"get_center"):
-				continue
-			var distance := pc.global_position.distance_to(body.get_center())
-			if distance < closest_thing_distance:
-				closest_thing_distance = distance
-				closest_thing = body
-		for body: Area2D in inspect.get_overlapping_areas():
+		var all_overlapping_nodes: Array [Node2D] = []
+		all_overlapping_nodes.append_array(inspect.get_overlapping_bodies())
+		all_overlapping_nodes.append_array(inspect.get_overlapping_areas())
+		for body: Node2D in all_overlapping_nodes:
 			if !body.has_method(&"player_interact"):
 				continue
 			if !body.has_method(&"get_center"):
