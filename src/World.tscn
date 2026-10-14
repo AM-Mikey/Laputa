@@ -1,6 +1,6 @@
-[gd_scene format=3]
+[gd_scene format=3 uid="uid://dsnmiualvg4jy"]
 
-[ext_resource type="Script" path="res://src/World.gd" id="8"]
+[ext_resource type="Script" uid="uid://ct5k2fxi0u0rb" path="res://src/World.gd" id="8"]
 
 [sub_resource type="Animation" id="Animation_qbf6s"]
 resource_name = "Flash"
@@ -48,7 +48,7 @@ release_version = "1.8"
 do_skip_title = true
 default_gun_array = Array[String](["Revolver", "Speeder", "MPistol", "GLauncher", "Blunderbuss", "Tsurugi", "Red7", "Roberta", "TurnstileJumper"])
 default_topic_array = Array[String](["yourself"])
-start_level_path = "res://src/Level/BossTest.tscn"
+start_level_path = "res://src/Level/DefaultGodot4.tscn"
 
 [node name="ParallaxBackground" type="ParallaxBackground" parent="." unique_id=912648782]
 scroll_offset = Vector2(-11040, -7359.4844)
@@ -129,5 +129,3 @@ z_index = 3
 [node name="FarthestFront" type="Node2D" parent="." unique_id=421958040]
 visibility_layer = 2
 z_index = 4
-
-[connection signal="level_saved" from="EditorLayer/Editor" to="EditorLayer/Editor/Main/Win/Tab/Levels" method="on_save"]
