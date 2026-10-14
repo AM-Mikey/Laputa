@@ -2,44 +2,259 @@
 extends Actor
 class_name Boss
 
+const AMMO = preload("res://src/Actor/Pickup/Ammo.tscn")
 const BLOOD = preload("res://src/Effect/EnemyBloodEffect.tscn")
+const EXPERIENCE = preload("res://src/Actor/Pickup/Experience.tscn")
+const EXPLOSION = preload("res://src/Effect/Explosion.tscn")
+const HEART = preload("res://src/Actor/Pickup/Heart.tscn")
+const STATE_LABEL = preload("res://src/Utility/StateLabel.tscn")
 
 #signal setup_ui(display_name, hp, max_hp)
 #signal health_updated(hp)
 
+@export var disabled = false
+var protected = false
+
 var display_name: String
-var hp: int
+var hp: int:
+	set(val):
+		var old_val = hp
+		hp = val
+		if old_val != hp:
+			hp_changed.emit()
 var max_hp: int
 var damage_on_contact: int
-var recent_damage_taken: int
+var enemy_damage_on_contact: int
+var hit_enemies_on_contact := false
+var self_knockback := false
+var knockback_velocity := Vector2.ZERO
+var hurt_sound = "enemy_hurt"
+var die_sound = "enemy_die"
+var damage_number = null
 
+var reward := 1
+var heart_chance := 1
+var experience_chance := 3
+var ammo_chance := 1
 
-func _ready():
+signal hp_changed
+signal killed
+
+@export var debug := false
+@export var id: String
+
+@onready var pc = f.pc()
+@onready var sm: StateMachine = $StateMachine
+
+func _ready(): #Reminder: no function called can use await
 	home = global_position
-	#hud.get_node("Boss").visible = true
+	if disabled: return
+	safe_margin = 0.001
+	setup()
 
-#	connect("setup_ui", hud, "_on_boss_setup_ui")
-#	connect("health_updated", hud, "_on_boss_health_updated")
+func setup():
+	pass
 
-func hit(damage, blood_direction, hitbox):
-	#emit_signal("health_updated", hp)
-	$PosHurt.play()
+func disable():
+	disabled = true
+
+func enable():
+	disabled = false
+
+func _physics_process(delta):
+	if disabled or dead: return
+	_on_physics_process(delta)
+	if self_knockback && knockback_velocity != Vector2.ZERO:
+		_do_self_knockback()
+	apply_wind()
+
+func _on_physics_process(_delta): #for child
+	pass
+
+## WIP: Unknown if this is necessary but just in case for later
+func _do_self_knockback():
+	#print(knockback_velocity)
+	if knockback_velocity.y != 0:
+		velocity.y += knockback_velocity.y #set velocity y to this ONCE
+		knockback_velocity.y = 0
+
+	velocity.x += knockback_velocity.x
+	knockback_velocity.x *= 0.5 #next frame it falls off
+	if abs(knockback_velocity.x) < 1:
+		knockback_velocity.x = 0
+
+func calc_velocity(move_dir, do_gravity = true, do_acceleration = true, do_friction = true) -> Vector2:
+	var out: = velocity
+	var fractional_speed = speed
+	var delta: = get_physics_process_delta_time()
+	if is_in_water:
+		fractional_speed = speed * Vector2(0.666, 0.666)
+	#X
+	if do_acceleration:
+		if move_dir.x != 0:
+			out.x = min(abs(out.x) + acceleration, fractional_speed.x)
+			out.x *= move_dir.x
+		elif do_friction:
+			if is_on_floor():
+				out.x = lerp(out.x, 0.0, ground_cof)
+			else:
+				out.x = lerp(out.x, 0.0, air_cof)
+	else: #no acceleration
+		out.x = fractional_speed.x * move_dir.x
+
+	#Y
+	if do_gravity:
+		out.y += gravity * delta
+		if move_dir.y < 0:
+			out.y = fractional_speed.y * move_dir.y
+	else:
+		out.y = fractional_speed.y * move_dir.y
+	if is_wind_affected && wind_areas_inside.size() > 0: #Inside Wind
+		if out.y < 0.0:
+			out.y *= 0.9
+	return out
+
+
+### DAMAGE/DEATH ###
+
+func hit(damage, blood_direction, hitbox, knockback_direction = Vector2.ZERO, knockback_strength = 0):
+	_on_hit(damage, blood_direction, hitbox)
 	hp -= damage
 	var blood = BLOOD.instantiate()
-	for l in get_tree().get_nodes_in_group("Levels"):
-		w.middle_front.add_child(blood)
-	blood.global_position = global_position
+	w.middle_front.add_child(blood)
+	blood.global_position = $Sprite2D.global_position #more accurate for visual
 	blood.direction = blood_direction
-	#print(blood_direction)
 
-	#if timer.is_stopped(): #if the reset time is over, then set recent damage to 0
+	if knockback_direction != Vector2.ZERO && self_knockback:
+		knockback_velocity = Vector2(knockback_direction.x * knockback_strength, -1 * knockback_strength) #up and to one side
 
-	#timer.start(damagenum_reset_time) # and restart timer again either way
-	recent_damage_taken += damage
+	set_damagenum(damage)
+
 	if hp <= 0:
 		die()
+	else:
+		am.play(hurt_sound, self)
+
+func _on_hit(_damage, _blood_direction, _hitbox): #inhereted for enemies to do something on hit
+	pass
 
 
-func die():
-	#f.hud().get_node("Boss").visible = false
-	queue_free()
+### DAMAGE NUMBER ###
+
+func set_damagenum(damage):
+	# Get an enabled col shape from the enemy, return the first collision shape if none found.
+	var col_shapes: Array = get_children().filter(func (ele): return ele is CollisionShape2D or ele is CollisionPolygon2D)
+	var enabled_col_shapes = col_shapes.filter(func (ele): return ele.disabled == false)
+	var good_collision_shape = enabled_col_shapes.front() if !enabled_col_shapes.is_empty() else col_shapes.front()
+	var y_offset = good_collision_shape.shape.get_rect().position.y - (good_collision_shape.shape.get_rect().size.y / 2.0) #Warning! this assumes that the rect2 is always centered
+
+	if damage_number == null:
+		damage_number = DAMAGE_NUMBER.instantiate()
+		damage_number.value = damage
+		damage_number.position = global_position
+		damage_number.position.y += y_offset
+		w.farthest_front.add_child(damage_number)
+	else: #add time and add values
+		damage_number.value += damage
+		damage_number.reset()
+
+
+### DEATH ###
+
+func die(quietly = false):
+	if dead: return
+	dead = true
+	killed.emit()
+
+	if (f.pc()):
+		f.pc().enemies_touching.erase(self)
+	if !quietly:
+		am.play(die_sound, self)
+		do_death_routine()
+		#do_death_drop()
+		var explosion = EXPLOSION.instantiate()
+		explosion.position = $Sprite2D.global_position #more accurate for visual
+		w.middle_front.add_child(explosion)
+	#queue_free()
+
+
+
+func do_death_routine(): #shadow this for individual enemies ##note this doesnt wait for the function to finish, so anything that requires await will be cut short
+	pass
+
+func do_drop():
+	if reward == 0: return
+
+	var heart = HEART.instantiate()
+	var ammo = AMMO.instantiate()
+
+	#ammo chance
+	var player_needs_ammo = false
+	if f.pc():
+		for g in f.pc().get_node("GunManager/Guns").get_children():
+			if g.ammo < g.max_ammo:
+				player_needs_ammo = true
+	if not player_needs_ammo: #doing it like this allows the xp_chance to stay the same
+		heart_chance += ammo_chance
+		ammo_chance = 0
+
+
+
+	var total_chance = heart_chance + experience_chance + ammo_chance
+	rng.randomize()
+	var drop = rng.randf_range(0, total_chance)
+
+	if drop <= heart_chance: # drop hp
+		heart.position = global_position
+		match reward:
+			1,2: heart.value = 2
+			3,4,5: heart.value = 4
+			6,7,8,9,10 : heart.value = 8
+		w.player_back.call_deferred("add_child", heart)
+
+	elif drop > heart_chance and drop <= heart_chance + experience_chance: #drop xp
+		var values = [1]
+
+		match reward:
+			1: pass
+			2: values = [1,1]
+			3: values = [1,1,1]
+			4: values = [1,1,1,1]
+			5: values = [5]
+			6: values = [5,1]
+			7: values = [5,1,1]
+			8: values = [5,1,1,1]
+			9: values = [5,1,1,1,1]
+			10: values = [10]
+
+		for v in values:
+			var experience = EXPERIENCE.instantiate()
+			experience.value = v
+			experience.position = global_position
+			w.player_back.call_deferred("add_child", experience)
+
+	else: #drop ammo
+		ammo.position = global_position
+		match reward:
+			1,2: ammo.value = 0.2
+			3,4,5,6,7,8,9,10: ammo.value = 0.5
+		w.player_back.call_deferred("add_child", ammo)
+
+
+
+### SIGNALS ###
+
+func _on_hitbox_area_entered(area):
+	if area.get_collision_layer_value(17): #playerhurt
+		area.get_parent().enemy_entered(self)
+	elif area.get_collision_layer_value(18) and hit_enemies_on_contact == true: #do they need iframes?
+		if area.get_parent() != self:
+			var enemy_damage = damage_on_contact
+			if enemy_damage_on_contact:
+				enemy_damage = enemy_damage_on_contact
+			area.get_parent().hit(enemy_damage, Vector2(area.global_position - global_position).normalized(), $Hitbox)
+
+func _on_hitbox_area_exited(area):
+	if area.get_collision_layer_value(17): #playerhurt
+		area.get_parent().enemy_exited(self)
+	#elif area.get_collision_layer(18) and hit_enemies_on_contact == true:

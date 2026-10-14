@@ -1,28 +1,69 @@
 extends Node2D
 
-@export var start_state: NodePath
-var current_state
+class_name StateMachine
+
+@export var main: Node = get_parent()
+@export var start_state: State = null
+
+@export_group("Debug")
+@export var debug: bool = false
+@export var debug_font: FontFile = preload("res://assets/UI/Font/welcomeback.ttf")
+@export var debug_font_size: int = 16
+@export var debug_font_color: Color = Color.WHITE
+@export var debug_font_outline_size: int = 4
+@export var debug_font_outline_color: Color = Color.BLACK
+
+var state: String = ""
+var curr_state: State = null
 
 func _ready():
-	initialize_states()
+	if !start_state:
+		push_error("Missing a start state.")
+		return
+	await main.ready
+	change_state(start_state.name)
 
-func _physics_process(_delta):
-	current_state.state_process()
-	if get_parent().debug:
-		$Label.text = current_state.name.to_lower()
+func _draw():
+	if debug:
+		var string: String =  "<null>" if !curr_state else state.to_snake_case()
+		var string_size = debug_font.get_string_size(string, HORIZONTAL_ALIGNMENT_CENTER)
+		draw_string_outline(debug_font,
+					Vector2(-string_size.x / 2.0, -5.0), string,
+					HORIZONTAL_ALIGNMENT_LEFT, -1.0, debug_font_size, debug_font_outline_size, debug_font_outline_color)
+		draw_string(debug_font,
+					Vector2(-string_size.x / 2.0, -5.0), string,
+					HORIZONTAL_ALIGNMENT_LEFT, -1.0, debug_font_size, debug_font_color)
 
 
-func initialize_states():
-	var new_state = get_node_or_null(start_state)
-	if new_state:
-		change_state(new_state.name)
-	else:
-		change_state(get_child(1).name) #first after label
+func change_state(sname: StringName):
+	var next_state_name = sname.to_pascal_case()
+	var next_state: State = get_node_or_null(next_state_name)
+	if !next_state:
+		push_warning("Cannot find state: ", next_state)
+		return false
 
+	var prev_state_name = state
+	if curr_state:
+		curr_state.state_end(next_state_name)
+	curr_state = next_state
+	state = next_state_name
+	next_state.state_start(prev_state_name)
+	return true
 
-func change_state(state_name):
-	#always enter and exit when changing states
-	if current_state:
-		current_state.exit()
-	current_state = get_node(state_name.capitalize())
-	current_state.enter()
+func _input(event: InputEvent):
+	if curr_state:
+		curr_state.state_input(event)
+
+func _unhandled_input(event: InputEvent):
+	if curr_state:
+		curr_state.state_unhandled_input(event)
+
+func _physics_process(delta: float):
+	if curr_state:
+		curr_state.state_physics_process(delta)
+	if debug:
+		queue_redraw()
+
+func _process(delta: float):
+	if curr_state:
+		curr_state.state_process(delta)

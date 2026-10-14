@@ -14,8 +14,11 @@ func setup_enemies():
 		child.queue_free()
 
 	var index = 0
-	for e in find_enemy_scenes("res://src/Actor/Enemy/"):
 
+	var targets =  find_enemy_scenes("res://src/Actor/Enemy/")
+	targets.append_array(find_enemy_scenes("res://src/Actor/Boss/"))
+
+	for e in targets:
 		var enemy = load(e).instantiate()
 		enemy.queue_free()
 		if not enemy.editor_hidden:
