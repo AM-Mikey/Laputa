@@ -1,0 +1,38 @@
+# Auto detect text files and perform LF normalization.
+* text=auto eol=lf
+*.md text eol=lf
+*.gd text eol=lf
+*.godot text eol=lf
+*.tres text eol=lf
+*.tscn text eol=lf
+*.cfg text eol=lf
+*.import text eol=lf
+
+
+# Denote all files that are truly binary and should not be modified.
+
+# Image files
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.jfif binary # gross... but somehow not that uncommon.
+*.gif binary
+*.psd binary
+*.clip binary
+*.xcf binary
+*.ase binary
+*.aseprite binary
+*.webp binary
+
+# 3D files
+*.blend binary
+*.blend1 binary
+*.obj binary
+
+# Audio files
+*.mp3 binary
+*.wav binary
+*.ogg binary
+
+# Misc
+*.svg binary

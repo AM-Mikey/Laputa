@@ -267,7 +267,7 @@ func on_property_selected(property_name):
 		"actor_spawn", "vu_actor":
 			match property_name:
 				"actor_path":
-					if (active_type == "vu_actor"):
+					if active_type == "vu_actor":
 						var start_dir = "res://src/Actor"
 						if (active.filter_team != active.ActorTeamFilter.NONE):
 							if (active.filter_team == active.ActorTeamFilter.ENEMY):
@@ -297,7 +297,6 @@ func on_property_selected(property_name):
 					$FileDialog.current_dir = "res://src/Level/"
 					$FileDialog.set_filters(PackedStringArray(["*.tscn"]))
 					$FileDialog.popup()
-
 
 func on_property_changed(property_name, property_value):
 	match active_type:

@@ -1,0 +1,44 @@
+[gd_scene format=3 uid="uid://b3snjjig7dgim"]
+
+[ext_resource type="Texture2D" uid="uid://clk1iars3y7nu" path="res://assets/Effect/GunSmoke.png" id="1_7v6cm"]
+[ext_resource type="Script" uid="uid://cxr2i26u4sg3o" path="res://src/Effect/GoalieRollerKick.gd" id="1_px38t"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_8n5dw"]
+particles_animation = true
+particles_anim_h_frames = 16
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
+[node name="GoalieRollerKick" type="Node2D" unique_id=1429337940]
+script = ExtResource("1_px38t")
+
+[node name="Left" type="CPUParticles2D" parent="." unique_id=2103415329]
+material = SubResource("CanvasItemMaterial_8n5dw")
+amount = 1
+texture = ExtResource("1_7v6cm")
+lifetime = 0.4
+explosiveness = 1.0
+direction = Vector2(-1, 0)
+spread = 0.5
+gravity = Vector2(0, 0)
+initial_velocity_min = 56.0
+initial_velocity_max = 64.0
+damping_max = 16.0
+anim_speed_min = 1.0
+anim_speed_max = 1.0
+
+[node name="Right" type="CPUParticles2D" parent="." unique_id=79217643]
+material = SubResource("CanvasItemMaterial_8n5dw")
+amount = 1
+texture = ExtResource("1_7v6cm")
+lifetime = 0.4
+explosiveness = 1.0
+spread = 0.5
+gravity = Vector2(0, 0)
+initial_velocity_min = 56.0
+initial_velocity_max = 64.0
+damping_max = 16.0
+anim_speed_min = 1.0
+anim_speed_max = 1.0
+
+[connection signal="finished" from="Left" to="." method="_on_Left_finished"]

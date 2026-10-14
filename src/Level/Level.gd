@@ -35,12 +35,13 @@ func _ready():
 	merge_one_way_ssp_tile()
 
 	if !ignore_music_for_title:
-		if not am.music_queue.is_empty():
+		if !am.music_queue.is_empty():
 			am.fade_music()
 			await am.music_fadeout_finished
-		if not w.has_node("UILayer/Title"):
-			if music == "":
-				pass
+		else:
+			await get_tree().process_frame #wait one frame for settings, so we can set audio volume
+		if !w.has_node("UILayer/Title"):
+			if music == "": pass
 			else:
 				am.play_music(music)
 

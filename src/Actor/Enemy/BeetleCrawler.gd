@@ -164,12 +164,10 @@ func do_crawl(_delta):
 		flip_check()
 
 func exit_crawl(_next_state):
-	print("exit crawl")
 	if (!$FlipCooldown.is_stopped()):
 		$FlipCooldown.stop()
 
 func flip_check():
-	print("tried to flip")
 	if $FlipCooldown.is_stopped():
 		$FlipCooldown.start(flip_cooldown_time)
 		move_dir *= -1.0

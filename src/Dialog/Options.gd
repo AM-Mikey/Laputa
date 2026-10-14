@@ -53,13 +53,13 @@ func display_options():
 
 
 func _input(event):
-	if event.is_action_pressed("ui_up") and is_displaying:
+	if event.is_action_pressed("ui_up") && is_displaying:
 		$UpDownTimer.start(up_down_cooldown_time)
 		option_up()
-	if event.is_action_pressed("ui_down") and is_displaying:
+	if event.is_action_pressed("ui_down") && is_displaying:
 		$UpDownTimer.start(up_down_cooldown_time)
 		option_down()
-	if event.is_action_pressed("ui_accept") and is_displaying and not is_exiting:
+	if event.is_action_pressed("ui_accept") && is_displaying && !is_exiting:
 		if selected_option == -1:
 			am.play("ui_deny")
 		else:

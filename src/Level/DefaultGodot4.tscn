@@ -603,13 +603,9 @@ script = ExtResource("16_ah4rl")
 tag_name = "shoot_y"
 lock_x = true
 
-[node name="Billy" type="Area2D" parent="Spawns" unique_id=546465970 groups=["ActorSpawns", "Entities"] instance=ExtResource("6_dcw0l")]
+[node name="Billy" parent="Spawns" unique_id=546465970 instance=ExtResource("6_dcw0l")]
 visibility_layer = 2
-z_index = 999
 position = Vector2(2456, 1936)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("8_hahi5")
 actor_path = "res://src/Actor/Enemy/Billy.tscn"
 properties = {
 "base_gravity": [300.0, 3, ""],
@@ -624,33 +620,20 @@ properties = {
 "idle_max_time": [5.0, 3, ""],
 "lock_distance": [128, 2, ""],
 "lock_tolerance": [16, 2, ""],
+"move_dir": [Vector2(-1, 0), 5, ""],
 "speed": [Vector2(150, 350), 5, ""],
 "walk_max_time": [10.0, 3, ""],
 "water_gravity": [150.0, 3, ""]
 }
 
-[node name="VURect" type="Node2D" parent="Spawns/Billy" unique_id=951928484 groups=["Entities", "VURects", "VisualUtilities"] instance=ExtResource("15_7v6gq")]
+[node name="VURect" parent="Spawns/Billy" unique_id=951928484 instance=ExtResource("15_7v6gq")]
 visibility_layer = 2
-script = ExtResource("14_7v6gq")
 tag_name = "player_detector"
 value = Rect2(-128, -80, 256, 160)
 
-[node name="VUVector" type="Area2D" parent="Spawns/Billy" unique_id=872564127 groups=["Entities", "VUVectors", "VisualUtilities"] instance=ExtResource("17_r87vw")]
+[node name="Billy1" parent="Spawns" unique_id=1266214651 instance=ExtResource("6_dcw0l")]
 visibility_layer = 2
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("18_bq2j0")
-tag_name = "move_dir"
-direction = Vector2(-1, -8.742278e-08)
-snap_degrees = 180.0
-
-[node name="Billy1" type="Area2D" parent="Spawns" unique_id=1266214651 groups=["ActorSpawns", "Entities"] instance=ExtResource("6_dcw0l")]
-visibility_layer = 2
-z_index = 999
 position = Vector2(2408, 1984)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("8_hahi5")
 actor_path = "res://src/Actor/Enemy/Billy.tscn"
 properties = {
 "base_gravity": [300.0, 3, ""],
@@ -665,33 +648,20 @@ properties = {
 "idle_max_time": [5.0, 3, ""],
 "lock_distance": [128, 2, ""],
 "lock_tolerance": [16, 2, ""],
+"move_dir": [Vector2(-1, 0), 5, ""],
 "speed": [Vector2(150, 350), 5, ""],
 "walk_max_time": [10.0, 3, ""],
 "water_gravity": [150.0, 3, ""]
 }
 
-[node name="VURect" type="Node2D" parent="Spawns/Billy1" unique_id=1859121448 groups=["Entities", "VURects", "VisualUtilities"] instance=ExtResource("15_7v6gq")]
+[node name="VURect" parent="Spawns/Billy1" unique_id=1859121448 instance=ExtResource("15_7v6gq")]
 visibility_layer = 2
-script = ExtResource("14_7v6gq")
 tag_name = "player_detector"
 value = Rect2(-128, -80, 256, 160)
 
-[node name="VUVector" type="Area2D" parent="Spawns/Billy1" unique_id=346547653 groups=["Entities", "VUVectors", "VisualUtilities"] instance=ExtResource("17_r87vw")]
+[node name="Billy2" parent="Spawns" unique_id=285981885 instance=ExtResource("6_dcw0l")]
 visibility_layer = 2
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("18_bq2j0")
-tag_name = "move_dir"
-direction = Vector2(-1, -8.742278e-08)
-snap_degrees = 180.0
-
-[node name="Billy2" type="Area2D" parent="Spawns" unique_id=285981885 groups=["ActorSpawns", "Entities"] instance=ExtResource("6_dcw0l")]
-visibility_layer = 2
-z_index = 999
 position = Vector2(2424, 2096)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("8_hahi5")
 actor_path = "res://src/Actor/Enemy/Billy.tscn"
 properties = {
 "base_gravity": [300.0, 3, ""],
@@ -706,14 +676,14 @@ properties = {
 "idle_max_time": [5.0, 3, ""],
 "lock_distance": [128, 2, ""],
 "lock_tolerance": [16, 2, ""],
+"move_dir": [Vector2(-1, 0), 5, ""],
 "speed": [Vector2(150, 350), 5, ""],
 "walk_max_time": [10.0, 3, ""],
 "water_gravity": [150.0, 3, ""]
 }
 
-[node name="VURect" type="Node2D" parent="Spawns/Billy2" unique_id=41270776 groups=["Entities", "VURects", "VisualUtilities"] instance=ExtResource("15_7v6gq")]
+[node name="VURect" parent="Spawns/Billy2" unique_id=41270776 instance=ExtResource("15_7v6gq")]
 visibility_layer = 2
-script = ExtResource("14_7v6gq")
 tag_name = "player_detector"
 value = Rect2(-128, -80, 256, 160)
 

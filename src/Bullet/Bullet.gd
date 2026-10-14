@@ -208,6 +208,32 @@ func armor_check(body) -> bool:
 		body.blocked.emit(self, body)
 		return true
 
+func change_side(to_player: bool):
+	var hitbox = get_node_or_null("PlayerCollisionDetector")
+	var bullet_from_player = !!hitbox
+	if !hitbox:
+		hitbox = get_node_or_null("EnemyCollisionDetector")
+		bullet_from_player = false
+	if !hitbox: return
+	#print("Change side to player: ", to_player)
+	set_collision_layer_value(7, to_player)
+	set_collision_layer_value(14, !to_player)
+	hitbox.set_collision_layer_value(7, to_player)
+	hitbox.set_collision_layer_value(14, !to_player)
+	hitbox.set_collision_mask_value(18, to_player)
+	hitbox.set_collision_mask_value(17, !to_player)
+
+func deflect(vel: Vector2): ## Common deflect script for bullet like BulletRevolver.tscn
+	var bullet_sprite = get_node("Sprite2D")
+	direction = -direction
+	var new_bullet_rotation = get_rot(direction)
+	var new_bullet_position = bullet_sprite.global_position - Vector2(bullet_sprite.position.x, -bullet_sprite.position.y).rotated(deg_to_rad(new_bullet_rotation))
+	origin = new_bullet_position
+	velocity = direction * vel.length()
+	global_position = new_bullet_position
+	rotation_degrees = get_rot(direction)
+
+
 
 ### SIGNALS ###
 
