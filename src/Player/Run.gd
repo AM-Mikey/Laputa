@@ -1,11 +1,12 @@
 extends Node
 
 @onready var w = get_tree().get_root().get_node("World")
-@onready var pc = get_parent().get_parent().get_parent()
+@onready var pc: Player = get_parent().get_parent().get_parent()
 @onready var mm = pc.get_node("MovementManager")
 @onready var sprite = pc.get_node("Sprite2D")
 @onready var guns = pc.get_node("GunManager/Guns")
 @onready var ap = pc.get_node("AnimationPlayer")
+@onready var inspect: Area2D = pc.get_node("Inspect")
 
 #var saved_move_dir := Vector2.ZERO #for the 2 frame stand
 var do_edge_turn: bool
@@ -34,6 +35,26 @@ func state_process(delta):
 		mm.do_coyote_time()
 
 	jump_processing()
+
+	if inp.pressed("inspect"):
+		var closest_thing: Node2D = null
+		var closest_thing_distance: = INF
+		var all_overlapping_nodes: Array [Node2D] = []
+		all_overlapping_nodes.append_array(inspect.get_overlapping_bodies())
+		all_overlapping_nodes.append_array(inspect.get_overlapping_areas())
+		for body: Node2D in all_overlapping_nodes:
+			if !body.has_method(&"player_interact"):
+				continue
+			if !body.has_method(&"get_center"):
+				continue
+			var distance := pc.global_position.distance_to(body.get_center())
+			if distance < closest_thing_distance:
+				closest_thing_distance = distance
+				closest_thing = body
+
+		if closest_thing != null:
+			print("Interacting with ", closest_thing, " at a distance ", closest_thing_distance)
+			closest_thing.player_interact(pc)
 
 ##Processes jumps and platform drops
 func jump_processing():

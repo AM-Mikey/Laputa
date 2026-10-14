@@ -39,3 +39,6 @@ func apply_wind():
 
 	for strong_area in strongest_by_dir.values():
 		apply_central_force(strong_area.wind_dir * strong_area.speed)
+
+func get_center() -> Vector2:
+	return $CollisionShape2D.global_position
