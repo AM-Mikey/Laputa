@@ -36,6 +36,7 @@ var ammo_chance := 1
 
 signal hp_changed
 signal killed
+signal anim_death_finished
 
 @export var debug := false
 @export var id: String
@@ -204,6 +205,7 @@ func die(quietly = false):
 		var explosion = EXPLOSION.instantiate()
 		explosion.position = $Sprite2D.global_position #more accurate for visual
 		w.middle_front.add_child(explosion)
+		anim_death_finished.emit()
 	queue_free()
 
 func do_death_routine(): #shadow this for individual enemies ##note this doesnt wait for the function to finish, so anything that requires await will be cut short

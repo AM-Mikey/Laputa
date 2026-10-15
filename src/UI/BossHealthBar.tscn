@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://bopnpt1we4pha"]
 
-[ext_resource type="Script" uid="uid://cx3t4bu5jj46x" path="res://src/UI/BossHealthBar.gd" id="1_7xmpn"]
+[ext_resource type="Script" uid="uid://cx3t4bu5jj46x" path="res://src/UI/BossHealthBar.gd" id="1_qm20l"]
 
 [node name="BossHealthBar" type="ProgressBar" unique_id=33357467]
 anchors_preset = 12
@@ -10,6 +10,7 @@ anchor_bottom = 1.0
 offset_top = -27.0
 grow_horizontal = 2
 grow_vertical = 0
-script = ExtResource("1_7xmpn")
+mouse_filter = 2
+script = ExtResource("1_qm20l")
 
 [connection signal="value_changed" from="." to="." method="_on_value_changed"]

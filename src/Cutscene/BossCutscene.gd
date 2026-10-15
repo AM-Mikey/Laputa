@@ -2,75 +2,57 @@ extends Cutscene
 
 class_name BossCutscene
 
-const BOSS_HEALTH_BAR = preload("res://src/Cutscene/BossHealthBar.tscn")
+const BOSS_HEALTH_BAR = preload("res://src/UI/BossHealthBar.tscn")
 
 var boss_id = ""
+var boss_hp_bar
 
-var boss_health_bar = null
 var boss_music: String = "boss"
 
-
+## Override this to implement custom behaviour when the boss die
 func _on_boss_killed():
 	pass
 
+## Override this to implement custom behaviour when the player die
 func _on_player_killed():
 	queue_free()
 
 ## UTILITY
 func boss_health_bar_filled_anim():
-	boss_health_bar = BOSS_HEALTH_BAR.instantiate()
-	w.ui.add_child(boss_health_bar)
-	boss_health_bar.boss = get_entity_with_id("Enemies", boss_id)
-	boss_health_bar.show_ui()
-	tree_exiting.connect(boss_health_bar.queue_free)
-	await boss_health_bar.anim_bar_filled_finished
+	#var boss = get_entity_with_id("Enemies", boss_id)
+	var boss = get_entity_with_id("Enemies", boss_id)
+	if boss is Boss:
+		boss_hp_bar = boss.hp_bar
+	elif boss:
+		boss_hp_bar = BOSS_HEALTH_BAR.instantiate()
+		boss_hp_bar.boss = boss
+		w.ui.add_child(boss_hp_bar)
+	else:
+		push_error("Cannot find boss with id: ", boss_id)
+		return
+	boss_hp_bar.show_ui()
+
+	await boss_hp_bar.anim_bar_filled_finished
 	am.pause_music(true)
 	await get_tree().create_timer(1.0).timeout
 	return
 
 func boss_battle_start():
-	#ms.progress_main_mission() # Start boss fight
 	am.play_music(boss_music)
 	var player = f.pc()
-	pan_camera_to(get_player_camera(), player.global_position, 0.2)
-	var golem_boss = get_entity_with_id("Enemies", boss_id)
-	golem_boss.killed.connect(_on_boss_killed)
-	golem_boss.process_mode = ProcessMode.PROCESS_MODE_INHERIT
 	player.killed.connect(_on_player_killed)
+	pan_camera_to(get_player_camera(), player.global_position, 0.2)
+	var boss = get_entity_with_id("Enemies", boss_id)
+	boss.killed.connect(_on_boss_killed)
+	boss.process_mode = ProcessMode.PROCESS_MODE_INHERIT
 	enable_player_input()
 
-func boss_die_anim():
-	boss_health_bar.hide_ui()
+func win_animation():
+	var boss = get_entity_with_id("Enemies", boss_id)
+	boss_hp_bar.hide_ui()
 	disable_player_input()
 
-	var boss_die_position = get_entity_with_id("Enemies", boss_id).global_position
-	var boss_cutscene_enemy_spawn = get_spawner_with_id("EnemySpawns", boss_id)
-	boss_cutscene_enemy_spawn.global_position = boss_die_position
-	await get_tree().process_frame
-	await force_spawner_spawn("EnemySpawns", boss_id)
-
-	#Spawn Smoke
-	var boss_cutscene_enemy = get_entity_with_id("Enemies", boss_id)
-	boss_cutscene_enemy.global_position = boss_die_position
-	boss_cutscene_enemy.process_mode = ProcessMode.PROCESS_MODE_DISABLED
-	var smoke_scene = preload("res://src/Effect/GunSmoke.tscn")
-	var explosion_scene = preload("res://src/Effect/GrenadeExplosion.tscn")
-	for i in range(0, 25):
-		am.play("enemy_die", null, null)
-		for j in range(0, 1 + randi() % 3):
-			var smoke = smoke_scene.instantiate()
-			smoke.global_position = boss_die_position + Vector2(20.0 * randf_range(-1.0, 1.0), 10.0 * randf_range(-1.0, 1.0))
-			w.player_front.add_child(smoke)
-		await get_tree().create_timer(0.1).timeout
-		if i in [23, 24, 25]:
-			if boss_cutscene_enemy:
-				var explosion = explosion_scene.instantiate()
-				explosion.size = "Large"
-				explosion.global_position = boss_die_position
-				w.player_front.add_child(explosion)
-				boss_cutscene_enemy.queue_free()
-				am.play("boss_die")
-	await get_tree().create_timer(1.0).timeout
+	await boss.anim_death_finished
 
 	#Make a Victory dialog
 	am.play_music("victory")

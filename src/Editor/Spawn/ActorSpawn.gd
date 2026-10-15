@@ -122,6 +122,8 @@ func _ready():
 		add_to_group("NPCSpawns")
 	elif actor_path.begins_with("res://src/Actor/Enemy/"):
 		add_to_group("EnemySpawns")
+	elif actor_path.begins_with("res://src/Actor/Boss/"):
+		add_to_group("BossSpawns")
 
 	var actor = load(actor_path).instantiate()
 	#name

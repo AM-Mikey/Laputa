@@ -1,10 +1,10 @@
 [gd_scene format=3 uid="uid://de40wavbvoq8j"]
 
-[ext_resource type="Script" uid="uid://cdviuuadkg5nh" path="res://src/Actor/Boss/ExampleBoss.gd" id="1_w5044"]
-[ext_resource type="PackedScene" uid="uid://7hbenrfv6p3q" path="res://src/Utility/PhysicsLayerBody.tscn" id="2_a0dhg"]
-[ext_resource type="Texture2D" uid="uid://dxp874vl8xdex" path="res://assets/Actor/Enemy/Billy.png" id="3_2fse5"]
-[ext_resource type="Script" uid="uid://bpn00lnksso5w" path="res://src/Utility/StateMachine.gd" id="4_uwwpo"]
-[ext_resource type="Script" uid="uid://bkttdvnxv3ulk" path="res://src/Utility/State.gd" id="5_i6mum"]
+[ext_resource type="Script" uid="uid://b42e7aluiaxeu" path="res://src/Actor/Boss/Boss.gd" id="1_6m8jy"]
+[ext_resource type="PackedScene" uid="uid://7hbenrfv6p3q" path="res://src/Utility/PhysicsLayerBody.tscn" id="2_5k7hx"]
+[ext_resource type="Texture2D" uid="uid://dxp874vl8xdex" path="res://assets/Actor/Enemy/Billy.png" id="3_5hpr4"]
+[ext_resource type="Script" uid="uid://bpn00lnksso5w" path="res://src/Utility/StateMachine.gd" id="4_dpaap"]
+[ext_resource type="Script" uid="uid://bkttdvnxv3ulk" path="res://src/Utility/State.gd" id="5_6oxho"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_sy72i"]
 size = Vector2(10, 14)
@@ -12,19 +12,18 @@ size = Vector2(10, 14)
 [sub_resource type="RectangleShape2D" id="1"]
 size = Vector2(14, 15)
 
-[node name="BossExample" type="CharacterBody2D" unique_id=147745042 groups=["Actors", "Enemies", "Entities"]]
+[node name="BossExample" type="CharacterBody2D" unique_id=147745042 groups=["Actors", "Bosses", "Enemies", "Entities"]]
 collision_layer = 2
 collision_mask = 520
 floor_max_angle = 0.87266463
-script = ExtResource("1_w5044")
-editor_hidden = false
+script = ExtResource("1_6m8jy")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1482682800]
 position = Vector2(0, -7)
 shape = SubResource("RectangleShape2D_sy72i")
 debug_color = Color(0, 0.588235, 0.705882, 0.235294)
 
-[node name="PhysicsLayerBody" parent="." unique_id=307469918 instance=ExtResource("2_a0dhg")]
+[node name="PhysicsLayerBody" parent="." unique_id=307469918 instance=ExtResource("2_5k7hx")]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PhysicsLayerBody" unique_id=2123462247]
 position = Vector2(0, -7)
@@ -51,21 +50,21 @@ debug_color = Color(1, 0, 0, 0.235294)
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1818064119]
 position = Vector2(0, -16)
-texture = ExtResource("3_2fse5")
+texture = ExtResource("3_5hpr4")
 hframes = 4
 vframes = 5
 
 [node name="StateMachine" type="Node2D" parent="." unique_id=2105703775 node_paths=PackedStringArray("main", "start_state")]
 texture_filter = 1
 position = Vector2(0, -16)
-script = ExtResource("4_uwwpo")
+script = ExtResource("4_dpaap")
 main = NodePath("..")
 start_state = NodePath("Disabled")
 debug = true
 metadata/_custom_type_script = "uid://bpn00lnksso5w"
 
 [node name="Disabled" type="Node" parent="StateMachine" unique_id=1153866327]
-script = ExtResource("5_i6mum")
+script = ExtResource("5_6oxho")
 metadata/_custom_type_script = "uid://bkttdvnxv3ulk"
 
 [connection signal="area_entered" from="Hitbox" to="." method="_on_hitbox_area_entered"]

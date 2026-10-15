@@ -1,24 +1,17 @@
-[gd_scene format=4]
+[gd_scene format=4 uid="uid://157ooj01tm1q"]
 
-[ext_resource type="Script" path="res://src/Level/Level.gd" id="1_o0vhu"]
-[ext_resource type="PackedScene" path="res://src/Background/LevelLimiter.tscn" id="2_kmn4q"]
-[ext_resource type="Script" path="res://src/Background/LevelLimiter.gd" id="3_4mq45"]
-[ext_resource type="Resource" path="res://src/Background/TiledPlains.tres" id="3_qw8am"]
-[ext_resource type="Texture2D" path="res://assets/Background/TiledPlainsColor.png" id="4_qagh1"]
-[ext_resource type="TileSet" path="res://src/Tile/Debug.tres" id="5_7g5h5"]
-[ext_resource type="PackedScene" path="res://src/Editor/Spawn/TriggerSpawn.tscn" id="7_7g5h5"]
-[ext_resource type="Script" path="res://src/Editor/Spawn/TriggerSpawn.gd" id="8_odeuk"]
-[ext_resource type="PackedScene" path="res://src/Editor/VanishingPoint.tscn" id="9_4mq45"]
-[ext_resource type="PackedScene" path="res://src/Editor/Spawn/PropSpawn.tscn" id="9_6rjeb"]
-[ext_resource type="Script" path="res://src/Editor/Spawn/PropSpawn.gd" id="10_alsbe"]
-[ext_resource type="PackedScene" path="res://src/Editor/SpawnPoint.tscn" id="10_odeuk"]
-[ext_resource type="PackedScene" path="res://src/Editor/Spawn/ActorSpawn.tscn" id="11_4mq45"]
-[ext_resource type="PackedScene" path="res://src/Editor/TitlePreview.tscn" id="11_alsbe"]
-[ext_resource type="Script" path="res://src/Editor/Spawn/ActorSpawn.gd" id="12_0krs6"]
-[ext_resource type="PackedScene" path="res://src/Editor/VisualUtility/VUVector.tscn" id="13_alsbe"]
-[ext_resource type="Script" path="res://src/Editor/VisualUtility/VUVector.gd" id="14_ln1mm"]
-[ext_resource type="Script" path="res://src/Editor/VanishingPoint.gd" id="16_ht3pu"]
-[ext_resource type="Script" path="res://src/Editor/SpawnPoint.gd" id="18_86ih8"]
+[ext_resource type="Script" uid="uid://ucr1waa8u8j1" path="res://src/Level/Level.gd" id="1_o0vhu"]
+[ext_resource type="PackedScene" uid="uid://deyh6xyl8c6tr" path="res://src/Background/LevelLimiter.tscn" id="2_kmn4q"]
+[ext_resource type="Resource" uid="uid://551crugmnes0" path="res://src/Background/TiledPlains.tres" id="3_qw8am"]
+[ext_resource type="Texture2D" uid="uid://bogxmmxvagqmt" path="res://assets/Background/TiledPlainsColor.png" id="4_qagh1"]
+[ext_resource type="TileSet" uid="uid://dct5q86qhnom8" path="res://src/Tile/Debug.tres" id="5_7g5h5"]
+[ext_resource type="PackedScene" uid="uid://ciahlvrcyq5yt" path="res://src/Editor/Spawn/TriggerSpawn.tscn" id="7_7g5h5"]
+[ext_resource type="PackedScene" uid="uid://dovj8uq00xato" path="res://src/Editor/VanishingPoint.tscn" id="9_4mq45"]
+[ext_resource type="PackedScene" uid="uid://beorrh1dm573t" path="res://src/Editor/Spawn/PropSpawn.tscn" id="9_6rjeb"]
+[ext_resource type="PackedScene" uid="uid://cpkdlvdxe3pdh" path="res://src/Editor/SpawnPoint.tscn" id="10_odeuk"]
+[ext_resource type="PackedScene" uid="uid://cs5m8mi2rih5f" path="res://src/Editor/Spawn/ActorSpawn.tscn" id="11_4mq45"]
+[ext_resource type="PackedScene" uid="uid://dhjqke0pgo21f" path="res://src/Editor/TitlePreview.tscn" id="11_alsbe"]
+[ext_resource type="PackedScene" uid="uid://bwp6sqdlvfo84" path="res://src/Editor/VisualUtility/VUVector.tscn" id="13_alsbe"]
 
 [sub_resource type="Gradient" id="Gradient_53evh"]
 interpolation_mode = 2
@@ -42,14 +35,12 @@ debug_main_mission_stage_name = "boss_test"
 debug_guns_on_enter = Array[String](["revolver", "tsurugi"])
 controller_color_gradient = SubResource("Gradient_53evh")
 
-[node name="LevelLimiter" type="MarginContainer" parent="." unique_id=1355825292 instance=ExtResource("2_kmn4q")]
+[node name="LevelLimiter" parent="." unique_id=1355825292 instance=ExtResource("2_kmn4q")]
 visibility_layer = 2
 offset_left = 16.0
 offset_top = 32.0
 offset_right = 992.0
 offset_bottom = 304.0
-mouse_filter = 2
-script = ExtResource("3_4mq45")
 background_resource = ExtResource("3_qw8am")
 texture = ExtResource("4_qagh1")
 layers = 5
@@ -111,16 +102,11 @@ visibility_layer = 2
 [node name="Spawns" type="Node2D" parent="." unique_id=1116492951]
 visibility_layer = 2
 
-[node name="Door" type="MarginContainer" parent="Spawns" unique_id=1800792368 groups=["TriggerSpawns"] instance=ExtResource("7_7g5h5")]
+[node name="Door" parent="Spawns" unique_id=1800792368 instance=ExtResource("7_7g5h5")]
 visibility_layer = 2
-z_index = 999
-custom_minimum_size = Vector2(8, 8)
 offset_left = 48.0
 offset_top = 256.0
-offset_right = 64.0
 offset_bottom = 288.0
-mouse_filter = 2
-script = ExtResource("8_odeuk")
 trigger_path = "res://src/Trigger/Door.tscn"
 properties = {
 "color": [Color(0, 0.4, 0, 1), 20, ""],
@@ -136,13 +122,9 @@ properties = {
 }
 size_is_default = false
 
-[node name="SaveDisk" type="Area2D" parent="Spawns" unique_id=1449282698 groups=["Entities", "PropSpawns"] instance=ExtResource("9_6rjeb")]
+[node name="SaveDisk" parent="Spawns" unique_id=1449282698 instance=ExtResource("9_6rjeb")]
 visibility_layer = 2
-z_index = 999
 position = Vector2(192, 272)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("10_alsbe")
 prop_path = "res://src/Prop/SaveDisk.tscn"
 properties = {
 "do_bubble": [false, 1, ""],
@@ -150,13 +132,9 @@ properties = {
 "id": [&"SaveDisk", 4, ""]
 }
 
-[node name="Golem" type="Area2D" parent="Spawns" unique_id=1199277091 groups=["ActorSpawns", "Entities"] instance=ExtResource("11_4mq45")]
+[node name="Golem" parent="Spawns" unique_id=1199277091 instance=ExtResource("11_4mq45")]
 visibility_layer = 2
-z_index = 999
 position = Vector2(880, 64)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("12_0krs6")
 actor_path = "res://src/Actor/Enemy/Golem.tscn"
 properties = {
 "base_gravity": [300.0, 3, ""],
@@ -172,22 +150,15 @@ properties = {
 }
 allow_spawn = false
 
-[node name="VUVector" type="Area2D" parent="Spawns/Golem" unique_id=872564127 groups=["Entities", "VUVectors", "VisualUtilities"] instance=ExtResource("13_alsbe")]
+[node name="VUVector" parent="Spawns/Golem" unique_id=872564127 instance=ExtResource("13_alsbe")]
 visibility_layer = 2
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("14_ln1mm")
 tag_name = "move_dir"
 direction = Vector2(-1, 8.742278e-08)
 snap_degrees = 180.0
 
-[node name="AmmoRefill" type="Area2D" parent="Spawns" unique_id=1077118265 groups=["Entities", "PropSpawns"] instance=ExtResource("9_6rjeb")]
+[node name="AmmoRefill" parent="Spawns" unique_id=1077118265 instance=ExtResource("9_6rjeb")]
 visibility_layer = 2
-z_index = 999
 position = Vector2(160, -48)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("10_alsbe")
 prop_path = "res://src/Prop/AmmoRefill.tscn"
 properties = {
 "do_bubble": [false, 1, ""],
@@ -195,16 +166,12 @@ properties = {
 "id": [&"AmmoRefill", 4, ""]
 }
 
-[node name="InvisWall" type="MarginContainer" parent="Spawns" unique_id=930751288 groups=["TriggerSpawns"] instance=ExtResource("7_7g5h5")]
+[node name="InvisWall" parent="Spawns" unique_id=930751288 instance=ExtResource("7_7g5h5")]
 visibility_layer = 2
-z_index = 999
-custom_minimum_size = Vector2(8, 8)
 offset_left = 480.0
 offset_top = 48.0
 offset_right = 976.0
 offset_bottom = 288.0
-mouse_filter = 2
-script = ExtResource("8_odeuk")
 trigger_path = "res://src/Trigger/InvisWall.tscn"
 properties = {
 "color": [Color(0, 0, 0, 1), 20, ""],
@@ -218,16 +185,12 @@ properties = {
 size_is_default = false
 allow_spawn = false
 
-[node name="CutsceneTrigger" type="MarginContainer" parent="Spawns" unique_id=139242328 groups=["TriggerSpawns"] instance=ExtResource("7_7g5h5")]
+[node name="CutsceneTrigger" parent="Spawns" unique_id=139242328 instance=ExtResource("7_7g5h5")]
 visibility_layer = 2
-z_index = 999
-custom_minimum_size = Vector2(8, 8)
 offset_left = 480.0
 offset_top = 32.0
 offset_right = 992.0
 offset_bottom = 304.0
-mouse_filter = 2
-script = ExtResource("8_odeuk")
 trigger_path = "res://src/Trigger/CutsceneTrigger.tscn"
 properties = {
 "color": [Color(1, 0, 0, 1), 20, ""],
@@ -237,14 +200,10 @@ properties = {
 }
 size_is_default = false
 
-[node name="BossExample" type="Area2D" parent="Spawns" unique_id=1535897352 groups=["ActorSpawns", "Entities"] instance=ExtResource("11_4mq45")]
+[node name="BossExample" parent="Spawns" unique_id=1535897352 instance=ExtResource("11_4mq45")]
 visibility_layer = 2
-z_index = 999
 position = Vector2(248, 288)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("12_0krs6")
-actor_path = "res://src/Actor/Boss/BossExample.tscn"
+actor_path = "uid://de40wavbvoq8j"
 properties = {
 "base_gravity": [300.0, 3, ""],
 "debug": [false, 1, ""],
@@ -262,41 +221,18 @@ visibility_layer = 2
 [node name="Notes" type="Node2D" parent="." unique_id=1550338718]
 visibility_layer = 2
 
-[node name="VanishingPoint" type="Area2D" parent="." unique_id=9884164 groups=["VanishingPoints"] instance=ExtResource("9_4mq45")]
+[node name="VanishingPoint" parent="." unique_id=9884164 instance=ExtResource("9_4mq45")]
 visibility_layer = 2
-z_index = 999
 position = Vector2(296, -152)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("16_ht3pu")
 
-[node name="SpawnPoint" type="Area2D" parent="." unique_id=422711910 groups=["SpawnPoints"] instance=ExtResource("10_odeuk")]
+[node name="SpawnPoint" parent="." unique_id=422711910 instance=ExtResource("10_odeuk")]
 visibility_layer = 2
 position = Vector2(184, 288)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("18_86ih8")
 
-[node name="TitlePreview" type="Area2D" parent="." unique_id=2052223351 groups=["TitlePreviews"] instance=ExtResource("11_alsbe")]
+[node name="TitlePreview" parent="." unique_id=2052223351 instance=ExtResource("11_alsbe")]
 visibility_layer = 2
-z_index = 999
 position = Vector2(264, 168)
-collision_layer = 16384
-collision_mask = 0
-script = ExtResource("16_ht3pu")
 
 [node name="Node2D" type="Node2D" parent="." unique_id=1102205186]
 visibility_layer = 2
 position = Vector2(740.55237, 168.8085)
-
-[connection signal="body_entered" from="Triggers/KillBoundaryU" to="Triggers/KillBoundaryU" method="_on_body_entered"]
-[connection signal="body_entered" from="Triggers/KillBoundaryD" to="Triggers/KillBoundaryD" method="_on_body_entered"]
-[connection signal="body_entered" from="Triggers/KillBoundaryL" to="Triggers/KillBoundaryL" method="_on_body_entered"]
-[connection signal="body_entered" from="Triggers/KillBoundaryR" to="Triggers/KillBoundaryR" method="_on_body_entered"]
-[connection signal="gui_input" from="Spawns/Door" to="Spawns/Door" method="_on_gui_input"]
-[connection signal="input_event" from="Spawns/SaveDisk" to="Spawns/SaveDisk" method="_on_input_event"]
-[connection signal="input_event" from="Spawns/Golem" to="Spawns/Golem" method="_on_input_event"]
-[connection signal="input_event" from="Spawns/AmmoRefill" to="Spawns/AmmoRefill" method="_on_input_event"]
-[connection signal="gui_input" from="Spawns/InvisWall" to="Spawns/InvisWall" method="_on_gui_input"]
-[connection signal="gui_input" from="Spawns/CutsceneTrigger" to="Spawns/CutsceneTrigger" method="_on_gui_input"]
-[connection signal="input_event" from="Spawns/BossExample" to="Spawns/BossExample" method="_on_input_event"]

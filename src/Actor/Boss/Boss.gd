@@ -8,6 +8,7 @@ const EXPERIENCE = preload("res://src/Actor/Pickup/Experience.tscn")
 const EXPLOSION = preload("res://src/Effect/Explosion.tscn")
 const HEART = preload("res://src/Actor/Pickup/Heart.tscn")
 const STATE_LABEL = preload("res://src/Utility/StateLabel.tscn")
+const BOSS_HEALTH_BAR = preload("res://src/UI/BossHealthBar.tscn")
 
 #signal setup_ui(display_name, hp, max_hp)
 #signal health_updated(hp)
@@ -37,8 +38,11 @@ var heart_chance := 1
 var experience_chance := 3
 var ammo_chance := 1
 
+var hp_bar
+
 signal hp_changed
 signal killed
+signal anim_death_finished
 
 @export var debug := false
 @export var id: String
@@ -50,10 +54,13 @@ func _ready(): #Reminder: no function called can use await
 	home = global_position
 	if disabled: return
 	safe_margin = 0.001
+	hp_bar = BOSS_HEALTH_BAR.instantiate()
+	hp_bar.boss = self
+	w.ui.add_child(hp_bar)
 	setup()
 
 func setup():
-	pass
+	w.emit_signal("finished_spawn_entities_step")
 
 func disable():
 	disabled = true
@@ -170,17 +177,32 @@ func die(quietly = false):
 		f.pc().enemies_touching.erase(self)
 	if !quietly:
 		am.play(die_sound, self)
-		do_death_routine()
-		#do_death_drop()
-		var explosion = EXPLOSION.instantiate()
-		explosion.position = $Sprite2D.global_position #more accurate for visual
-		w.middle_front.add_child(explosion)
-	#queue_free()
+		await do_death_animation()
+		anim_death_finished.emit()
 
 
-
-func do_death_routine(): #shadow this for individual enemies ##note this doesnt wait for the function to finish, so anything that requires await will be cut short
-	pass
+## Boss death animation. Override this to customize their behaviour
+func do_death_animation():
+	#Spawn Smoke
+	process_mode = ProcessMode.PROCESS_MODE_DISABLED
+	var smoke_scene = preload("res://src/Effect/GunSmoke.tscn")
+	var explosion_scene = preload("res://src/Effect/GrenadeExplosion.tscn")
+	for i in range(0, 25):
+		am.play("enemy_die", null, null)
+		for j in range(0, 1 + randi() % 3):
+			var smoke = smoke_scene.instantiate()
+			smoke.global_position = global_position + Vector2(20.0 * randf_range(-1.0, 1.0), 10.0 * randf_range(-1.0, 1.0))
+			w.player_front.add_child(smoke)
+		await get_tree().create_timer(0.1).timeout
+		if i in [23, 24, 25]:
+			var explosion = explosion_scene.instantiate()
+			explosion.size = "Large"
+			explosion.global_position = global_position
+			w.player_front.add_child(explosion)
+			visible = false
+			am.play("boss_die")
+	await get_tree().create_timer(1.0).timeout
+	queue_free()
 
 func do_drop():
 	if reward == 0: return
