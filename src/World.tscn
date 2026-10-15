@@ -1,5 +1,6 @@
 [gd_scene format=3 uid="uid://dsnmiualvg4jy"]
 
+[ext_resource type="Script" uid="uid://b32f0au4umara" path="res://src/CutsceneManager.gd" id="2_x6ej7"]
 [ext_resource type="Script" uid="uid://ct5k2fxi0u0rb" path="res://src/World.gd" id="8"]
 
 [sub_resource type="Animation" id="Animation_qbf6s"]
@@ -106,6 +107,7 @@ scale = Vector2(4, 4)
 transform = Transform2D(4, 0, 0, 4, 0, 0)
 
 [node name="Cutscene" type="Node" parent="." unique_id=1220918963]
+script = ExtResource("2_x6ej7")
 
 [node name="FarthestBack" type="Node2D" parent="." unique_id=125280429]
 visibility_layer = 2

@@ -1,13 +1,10 @@
 extends BossCutscene
 
-func setup():
-	boss_id = "golem"
-	var boss_arena = Rect2(Vector2(480, 32), Vector2(512, 272))
-
+func start():
 	disable_player_input()
 	var player = f.pc()
 	move_player_to(Vector2(592, 288))
-	transition_level_limit(boss_arena, 1.2)
+	transition_level_limit(boss_arena_rect, 1.2)
 	pan_camera_to(get_player_camera(), Vector2(740, 188), 0.5)
 	if !player.end_move_to.is_connected(_on_player_reach_intro_position):
 		player.end_move_to.connect(_on_player_reach_intro_position)

@@ -1,6 +1,6 @@
 extends Trigger
 
-@export_file var cutscene_path: String = "res://src/Cutscene/BossTestCutscene.tscn"
+@export_file var cutscene_path: String = "res://src/Cutscene/Cutscene.gd"
 
 func _ready():
 	trigger_type = "cutscene_trigger"
@@ -8,7 +8,6 @@ func _ready():
 
 func _on_body_entered(_body: Node2D) -> void:
 	if !spent:
-		var cutscene_scene = load(cutscene_path)
-		var cutscene = cutscene_scene.instantiate()
-		w.c.add_child(cutscene)
+		var cutscene = w.c.add_cutscene(cutscene_path)
+		cutscene.start()
 		spent = true

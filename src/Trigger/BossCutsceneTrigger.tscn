@@ -1,0 +1,23 @@
+[gd_scene format=3 uid="uid://p542v8wbbm5s"]
+
+[ext_resource type="Script" uid="uid://cj6mwale1wnml" path="res://src/Trigger/BossCutsceneTrigger.gd" id="1_imnpq"]
+[ext_resource type="PackedScene" uid="uid://b0hildwypv8q5" path="res://src/Editor/VisualUtility/VURect.tscn" id="2_imnpq"]
+
+[sub_resource type="RectangleShape2D" id="1"]
+resource_local_to_scene = true
+size = Vector2(16, 16)
+
+[node name="BossCutsceneTrigger" type="Area2D" unique_id=996687710 groups=["Triggers"]]
+collision_layer = 0
+script = ExtResource("1_imnpq")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=2084038406]
+position = Vector2(8, 8)
+shape = SubResource("1")
+
+[node name="ArenaBoundary" parent="." unique_id=688682803 instance=ExtResource("2_imnpq")]
+tag_name = "arena_boundary"
+editor_color = Color(1, 0, 0, 1)
+value = Rect2(0, 0, 32, 32)
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

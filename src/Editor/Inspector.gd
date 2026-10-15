@@ -291,7 +291,7 @@ func on_property_selected(property_name):
 			match property_name:
 				"cutscene_path":
 					$FileDialog.current_dir = "res://src/Cutscene/"
-					$FileDialog.set_filters(PackedStringArray(["*.tscn"]))
+					$FileDialog.set_filters(PackedStringArray(["*.tscn", "*.gd"]))
 					$FileDialog.popup()
 				"level":
 					$FileDialog.current_dir = "res://src/Level/"

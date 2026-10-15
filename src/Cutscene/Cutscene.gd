@@ -7,8 +7,6 @@ class_name Cutscene
 const DB = preload("res://src/Dialog/DialogBox.tscn")
 const dialog_json = "res://src/Dialog/BossTest.json"
 
-
-# Called when the node enters the scene tree for the first time.
 func _ready():
 	if !w.is_node_ready():
 		await w.ready
@@ -17,8 +15,14 @@ func _ready():
 func setup():
 	pass
 
+
+func start():
+	pass
+
+
 func end():
 	queue_free()
+	_end()
 
 func _end():
 	pass

@@ -5,6 +5,8 @@ class_name BossCutscene
 const BOSS_HEALTH_BAR = preload("res://src/UI/BossHealthBar.tscn")
 
 var boss_id = ""
+var boss_arena_rect: Rect2 = Rect2()
+
 var boss_hp_bar
 
 var boss_music: String = "boss"
