@@ -29,12 +29,18 @@ func _end():
 
 
 ## UTILITY
+
+## Used to force game's resolution to [param to_limit_rect] via a transition.[br]
+## Return the [Tween] responsible for the transition.
+## To reset the LevelLimiter back to normal, use with LevelLimiter's default_limit
 func transition_level_limit(to_limit_rect: Rect2, time: float) -> Tween:
 	var ll = get_level_limiter()
 	var tween: Tween = create_tween().set_trans(Tween.TRANS_LINEAR).set_ease(Tween.EASE_OUT)
 	tween.tween_method(set_level_limit, ll.get_level_rect(), to_limit_rect, time)
 	return tween
 
+## Used to force game's resolution to [param limit_rect] instantly. [br]
+## To reset the LevelLimiter back to normal, use with LevelLimiter's default_limit
 func set_level_limit(limit_rect: Rect2):
 	var ll = get_level_limiter()
 	ll.global_position = limit_rect.position
@@ -42,10 +48,12 @@ func set_level_limit(limit_rect: Rect2):
 	ll.update_blackbars()
 	ll.update_layers()
 
+## Get the LevelLimiter of a level.
 func get_level_limiter():
 	return w.current_level.get_node("LevelLimiter")
 
 # Camera
+## Get PlayerCamera
 func get_player_camera() -> Camera2D:
 	var player = f.pc()
 	if player:
@@ -53,12 +61,14 @@ func get_player_camera() -> Camera2D:
 		return camera
 	return null
 
-func pan_camera_to(camera: Camera2D, global_pos: Vector2, time: float):
+## Pan [param camera] to [param global_pos].[br]
+## Return the [Tween] responsible for the camera pan.
+func pan_camera_to(camera: Camera2D, global_pos: Vector2, time: float) -> Tween:
 	var camera_pan: Tween = camera.create_tween()
 	camera_pan.tween_property(camera, "global_position", global_pos, time)
-	await camera_pan.finished
-	return
+	return camera_pan
 
+## Force the player to move to [param pos]
 func move_player_to(pos: Vector2):
 	var player = f.pc()
 	player.move_to(pos)
@@ -70,18 +80,24 @@ func enable_player_input():
 	inp.can_act = true
 
 
+## Get an Entity with [param group], [param id].[br]
+## Group includes: {NPCs, Enemies, Bosses, Props, Triggers}
 func get_entity_with_id(group: String, id):
 	return ms.get_entity_with_id(group, id)
 
+## Get a Spawner with [param group], [param id].[br]
+## Group includes: {NPCSpawners, EnemySpawners, BossSpawners, PropSpawners, TriggerSpawners}
 func get_spawner_with_id(group: String, id):
 	return ms.get_spawner_with_id(group, id)
 
+## Await function. Force the spawner with [param group], [param id] to spawn.
 func force_spawner_spawn(group: String, id):
 	var spawner = get_spawner_with_id(group, id)
+	var og_allow_spawn = spawner.allow_spawn
 	spawner.allow_spawn = true
 	spawner.spawn()
 	await get_tree().process_frame
-	spawner.allow_spawn = false
+	spawner.allow_spawn = og_allow_spawn
 
 
 ## Return the dialog box
@@ -91,7 +107,7 @@ func create_dialog_box() -> Control:
 	w.dll.add_child(dialog_box)
 	return dialog_box
 
-## If [param=dialog_box] is null, the first dialog box (if existed) will be closed instead
+## If [param dialog_box] is null, the first dialog box (if existed) will be closed instead
 func hide_dialog_box(dialog_bos: Control = null):
 	if dialog_bos:
 		dialog_bos.exit()
