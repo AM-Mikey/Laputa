@@ -458,6 +458,7 @@ editor_alt={
 2d_physics/layer_9="breakable"
 2d_physics/layer_10="ssp"
 2d_physics/layer_11="pickup"
+2d_physics/layer_12="trigger"
 2d_physics/layer_14="enemybull"
 2d_physics/layer_15="editorselectable"
 2d_physics/layer_16="rigidbody"
