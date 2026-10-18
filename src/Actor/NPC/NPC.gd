@@ -230,13 +230,21 @@ func enter_talk(_last_state):
 
 ### MISC
 
-func player_interact(p: Player):
-	if conversation_queue.size() == 0: return # TODO: Don't hog up interaction stuff if we can't interact anyway xd (maybe do this, not sure!!)
-	if conversation_queue[0][0] != "" && state != "talk":
-		if inp.can_act:
-			predialog_state = state
-			change_state("talk")
-			return
+func is_interactable(_p: Player):
+	print("NPC IS INTERACTABLE CALLED")
+	if conversation_queue.is_empty():
+		return false
+	if conversation_queue[0][0] == "":
+		return false
+	if state == "talk":
+		return false
+	return true
+
+func player_interact(_p: Player):
+	if inp.can_act:
+		predialog_state = state
+		change_state("talk")
+		return
 
 func get_center() -> Vector2:
 	return $CollisionShape2D.global_position
