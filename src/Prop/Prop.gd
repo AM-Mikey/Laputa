@@ -37,6 +37,9 @@ func player_interact(p: Player):
 	p.mm.change_state("run")
 	p.look_dir = previous_look_dir
 
+func get_center() -> Vector2:
+	return $CollisionShape2D.global_position
+
 func activate(): #for children
 	pass
 
