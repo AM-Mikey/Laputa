@@ -103,6 +103,9 @@ func _do_tick():
 	am.play("switch_timer", self, null, 1.0, 0)
 	oup.vibrate_impulse_light(0.2, 0.1)
 
+func is_interactable(_p: Player):
+	return false # Should be stepped on instead of inspected!
+
 ### SIGNALS ###
 
 func _on_PlayerDetector_body_entered(body: Node2D):
