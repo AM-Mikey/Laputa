@@ -51,6 +51,7 @@ func player_interact(p: Player):
 			p.look_dir = previous_look_dir
 
 func enter_door(p: Player):
+	await get_tree().physics_frame # This await prevents a small animation flicker
 	inp.can_act = false
 	p.inspect_target = self
 	p.mm.change_state("inspect")
