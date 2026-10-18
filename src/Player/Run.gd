@@ -47,6 +47,12 @@ func state_process(delta):
 				continue
 			if !body.has_method(&"get_center"):
 				continue
+			if body.has_method(&"is_interactable"):
+				# By default, assume that the interactable can be interacted with
+				# If the interactable has a method for checking if it is currently active,
+				# then we ask!
+				if !body.is_interactable(pc):
+					continue
 			var distance := pc.global_position.distance_to(body.get_center())
 			if distance < closest_thing_distance:
 				closest_thing_distance = distance
