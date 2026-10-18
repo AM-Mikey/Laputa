@@ -1,17 +1,17 @@
-[gd_scene load_steps=3 format=3 uid="uid://dhv3w43vnh4a8"]
+[gd_scene format=3 uid="uid://dhv3w43vnh4a8"]
 
 [ext_resource type="Script" uid="uid://1y65vo2j73dc" path="res://src/Trigger/FlavorText.gd" id="1"]
 
 [sub_resource type="RectangleShape2D" id="1"]
 size = Vector2(16, 16)
 
-[node name="FlavorText" type="Area2D" groups=["Triggers"]]
-collision_layer = 0
+[node name="FlavorText" type="Area2D" unique_id=50601660 groups=["Triggers"]]
+collision_layer = 2048
 script = ExtResource("1")
 editor_hidden = true
 color = Color(0.901961, 0.74902, 0, 1)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=640387850]
 show_behind_parent = true
 position = Vector2(8, 8)
 shape = SubResource("1")
