@@ -18,7 +18,7 @@ signal guns_updated(guns, cause, do_xp_flash)
 signal xp_updated(xp, max_xp, level, max_level, do_xp_flash, cause)
 signal money_updated(money)
 signal invincibility_end()
-signal end_move_to()
+signal end_move_to
 signal killed
 
 

@@ -36,8 +36,9 @@ func _draw():
 
 
 func change_state(sname: StringName):
-	var next_state_name = sname.to_pascal_case()
-	var next_state: State = get_node_or_null(next_state_name)
+	var next_state_name = sname.to_snake_case()
+	var next_state_node_name = sname.to_pascal_case()
+	var next_state: State = get_node_or_null(next_state_node_name)
 	if !next_state:
 		push_warning("Cannot find state: ", next_state)
 		return false

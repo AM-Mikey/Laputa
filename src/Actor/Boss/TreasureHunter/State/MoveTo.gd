@@ -1,0 +1,22 @@
+extends State
+
+@export var delta_error: float = 4.0
+var target_position: Vector2 = Vector2.ZERO
+var reach_destination: bool = false
+
+
+func state_start(prev_state: StringName):
+	reach_destination = false
+	main.ap.play("fly")
+
+func state_physics_process(delta: float):
+	var distance_to_pos = main.global_position.distance_to(target_position)
+	if distance_to_pos < delta_error:
+		if !reach_destination:
+			main.end_move_to.emit()
+		reach_destination = true
+		return
+
+	var direction = main.global_position.direction_to(target_position)
+	main.velocity = direction * main.fly_speed
+	main.move_and_slide()

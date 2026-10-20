@@ -1,0 +1,22 @@
+{
+	"trigger_set_spawn": {
+		"Main": {
+			"boss_invis_wall": {
+				"boss_treasure_hunter_talking": true,
+				"any": false
+			},
+			"boss_room": {
+				"boss_treasure_hunter": true,
+				"any": false,
+			},
+		},
+	},
+
+	"enemy_set_spawn": {
+		"Main": {
+			"treasure_hunter": {
+				"any": false
+			},
+		},
+	},
+}

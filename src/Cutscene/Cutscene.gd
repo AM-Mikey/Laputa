@@ -90,6 +90,11 @@ func get_entity_with_id(group: String, id):
 func get_spawner_with_id(group: String, id):
 	return ms.get_spawner_with_id(group, id)
 
+## Get a Waypoint with [param group], [param id].[br]
+## Group includes: {WaypointLocals, WaypointGlobals, WaypointGlobalSpawns}
+func get_waypoint_with_id(group: String, id):
+	return ms.get_waypoint_with_id(group, id)
+
 ## Await function. Force the spawner with [param group], [param id] to spawn.
 func force_spawner_spawn(group: String, id):
 	var spawner = get_spawner_with_id(group, id)

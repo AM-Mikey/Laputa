@@ -15,7 +15,7 @@ func setup_enemies():
 
 	var index = 0
 
-	var targets =  find_enemy_scenes("res://src/Actor/Enemy/")
+	var targets = find_enemy_scenes("res://src/Actor/Enemy/")
 	targets.append_array(find_enemy_scenes("res://src/Actor/Boss/"))
 
 	for e in targets:

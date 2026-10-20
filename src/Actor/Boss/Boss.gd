@@ -43,6 +43,7 @@ var hp_bar
 signal hp_changed
 signal killed
 signal anim_death_finished
+signal end_move_to
 
 @export var debug := false
 @export var id: String
@@ -67,6 +68,10 @@ func disable():
 
 func enable():
 	disabled = false
+
+func move_to(global_pos: Vector2) -> void:
+	sm.get
+	sm.change_state("move_to")
 
 func _physics_process(delta):
 	if disabled or dead: return

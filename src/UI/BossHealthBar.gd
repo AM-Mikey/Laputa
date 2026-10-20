@@ -67,5 +67,4 @@ func _on_value_changed(value: float) -> void:
 		am.play("npc_voice_normal")
 
 func _on_viewport_scale_changed(rs_scale) -> void:
-	print(rs_scale)
 	set_anchors_preset(Control.PRESET_BOTTOM_WIDE)

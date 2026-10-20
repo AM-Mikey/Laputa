@@ -39,8 +39,14 @@ const MAIN_MISSION = [ #[name, trigger_type, trigger_value, description]
 	["boss_test_health_bar_filled_up", "", "",
 	"Boss Health Bar filled up"],
 	["boss_test_win", "", "",
-	"Boss Test Win"]
+	"Boss Test Win"],
 	#endregion
+	["boss_treasure_hunter", "", "",
+	"Treasure Hunter"],
+	["boss_treasure_hunter_talking", "", "",
+	"Treasure Hunter Health Bar filled up"],
+	["boss_treasure_hunter_win", "", "",
+	"Treasure Hunter Test Win"],
 ]
 
 var main_mission_stage: Array = MAIN_MISSION[0]
@@ -325,14 +331,21 @@ func get_matching_entities_values(data, mission_name, mission_stage, data_key, g
 	return out
 
 
-func get_entity_with_id(entity_group: String, id):
+func get_waypoint_with_id(waypoint_group: String, id: String):
+	for e in get_tree().get_nodes_in_group(waypoint_group):
+		if e.tag_name.nocasecmp_to(id) == 0:
+			#printerr("ERROR: entity with id: ", id, " already exists!")
+			return e
+	return null
+
+func get_entity_with_id(entity_group: String, id: String):
 	for e in get_tree().get_nodes_in_group(entity_group):
 		if e.id.nocasecmp_to(id) == 0:
 			#printerr("ERROR: entity with id: ", id, " already exists!")
 			return e
 	return null
 
-func get_spawner_with_id(entity_group: String, id):
+func get_spawner_with_id(entity_group: String, id: String):
 	for e in get_tree().get_nodes_in_group(entity_group):
 		if e.properties["id"][0].nocasecmp_to(id) == 0:
 			#printerr("ERROR: entity with id: ", id, " already exists!")

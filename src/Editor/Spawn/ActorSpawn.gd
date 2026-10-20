@@ -118,6 +118,9 @@ func _ready():
 		return
 
 	#groups
+	if actor_path.begins_with("uid://"):
+		actor_path = ResourceUID.uid_to_path(actor_path)
+
 	if actor_path.begins_with("res://src/Actor/NPC/"):
 		add_to_group("NPCSpawns")
 	elif actor_path.begins_with("res://src/Actor/Enemy/"):
@@ -245,15 +248,20 @@ func _deferred_spawn() -> void:
 func set_sprite():
 	var actor = load(actor_path).instantiate()
 	actor.queue_free()
-	if "difficulty" in actor:
-		var texture_const_string = "TX_%s" % properties["difficulty"][0]
-		$Sprite2D.texture = actor.get(texture_const_string)
-	else:
-		$Sprite2D.texture = actor.get_node("Sprite2D").texture
-	$Sprite2D.hframes = actor.get_node("Sprite2D").hframes
-	$Sprite2D.vframes = actor.get_node("Sprite2D").vframes
-	$Sprite2D.frame = actor.get_node("Sprite2D").frame
-	$Sprite2D.position = actor.get_node("Sprite2D").position
+	var actor_sprite_node = actor.get_node("Sprite2D")
+	if actor_sprite_node is Sprite2D:
+		if "difficulty" in actor:
+			var texture_const_string = "TX_%s" % properties["difficulty"][0]
+			$Sprite2D.texture = actor.get(texture_const_string)
+		else:
+			$Sprite2D.texture = actor_sprite_node.texture
+		$Sprite2D.hframes = actor_sprite_node.hframes
+		$Sprite2D.vframes = actor_sprite_node.vframes
+		$Sprite2D.frame = actor_sprite_node.frame
+		$Sprite2D.position = actor_sprite_node.position
+	elif actor_sprite_node is AnimatedSprite2D:
+		$Sprite2D.texture = actor_sprite_node.sprite_frames.get_frame_texture("idle", 0)
+
 
 
 func setup_vus(actor):
