@@ -7,6 +7,8 @@
 [ext_resource type="Script" uid="uid://c83g571rji4wp" path="res://src/Actor/Boss/TreasureHunter/State/Ground.gd" id="4_lvjic"]
 [ext_resource type="Script" uid="uid://bkttdvnxv3ulk" path="res://src/Utility/State.gd" id="5_lnuvq"]
 [ext_resource type="Script" uid="uid://cb1iern4sbflb" path="res://src/Actor/Boss/TreasureHunter/State/MoveTo.gd" id="6_q4fg5"]
+[ext_resource type="Script" uid="uid://gm2x0u0kc8hi" path="res://src/Actor/Boss/TreasureHunter/State/GroundShoot.gd" id="7_flare"]
+[ext_resource type="Script" uid="uid://d326o8757ie8h" path="res://src/Actor/Boss/TreasureHunter/State/Melee.gd" id="8_melee"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_sy72i"]
 size = Vector2(10, 14)
@@ -622,6 +624,12 @@ _data = {
 [sub_resource type="RectangleShape2D" id="1"]
 size = Vector2(14, 15)
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_PlayerDetector"]
+radius = 27.018513
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_SwingHitbox"]
+size = Vector2(13, 25)
+
 [node name="TreasureHunter" type="CharacterBody2D" unique_id=147745042 groups=["Actors", "Bosses", "Enemies", "Entities"]]
 collision_layer = 2
 collision_mask = 520
@@ -647,7 +655,7 @@ texture_filter = 1
 position = Vector2(0, -27)
 script = ExtResource("4_6rjg4")
 main = NodePath("..")
-start_state = NodePath("Cutscene")
+start_state = NodePath("Ground")
 debug = true
 metadata/_custom_type_script = "uid://bpn00lnksso5w"
 
@@ -657,7 +665,25 @@ metadata/_custom_type_script = "uid://bkttdvnxv3ulk"
 
 [node name="Timer" type="Timer" parent="StateMachine/Ground" unique_id=674287737]
 wait_time = 2.0
-autostart = true
+one_shot = true
+
+[node name="GroundShoot" type="Node" parent="StateMachine" unique_id=1133531667]
+script = ExtResource("7_flare")
+
+[node name="FireTimer" type="Timer" parent="StateMachine/GroundShoot" unique_id=2100161569]
+wait_time = 0.3
+one_shot = true
+
+[node name="FinishTimer" type="Timer" parent="StateMachine/GroundShoot" unique_id=1553835919]
+wait_time = 0.5
+one_shot = true
+
+[node name="Melee" type="Node" parent="StateMachine" unique_id=1507651336]
+script = ExtResource("8_melee")
+
+[node name="Timer" type="Timer" parent="StateMachine/Melee" unique_id=288004899]
+wait_time = 0.5
+one_shot = true
 
 [node name="Cutscene" type="Node" parent="StateMachine" unique_id=1153866327]
 script = ExtResource("5_lnuvq")
@@ -697,6 +723,31 @@ position = Vector2(0, -7.5)
 shape = SubResource("1")
 debug_color = Color(1, 0, 0, 0.235294)
 
+[node name="PlayerDetector" type="Area2D" parent="." unique_id=736450444]
+position = Vector2(0, -15)
+collision_layer = 0
+monitorable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerDetector" unique_id=1005903294]
+shape = SubResource("CircleShape2D_PlayerDetector")
+debug_color = Color(0.2, 0.6, 1, 0.2)
+
+[node name="SwingHitbox" type="Area2D" parent="." unique_id=1852258479]
+collision_layer = 262144
+collision_mask = 65536
+monitoring = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="SwingHitbox" unique_id=632701527]
+position = Vector2(-9.5, -17.5)
+shape = SubResource("RectangleShape2D_SwingHitbox")
+debug_color = Color(1, 0, 0, 0.235294)
+
 [connection signal="timeout" from="StateMachine/Ground/Timer" to="StateMachine/Ground" method="_on_Timer_timeout"]
+[connection signal="timeout" from="StateMachine/GroundShoot/FireTimer" to="StateMachine/GroundShoot" method="_on_FireTimer_timeout"]
+[connection signal="timeout" from="StateMachine/GroundShoot/FinishTimer" to="StateMachine/GroundShoot" method="_on_FinishTimer_timeout"]
+[connection signal="timeout" from="StateMachine/Melee/Timer" to="StateMachine/Melee" method="_on_Timer_timeout"]
 [connection signal="area_entered" from="Hitbox" to="." method="_on_hitbox_area_entered"]
 [connection signal="area_exited" from="Hitbox" to="." method="_on_hitbox_area_exited"]
+[connection signal="body_entered" from="PlayerDetector" to="." method="_on_PlayerDetector_body_entered"]
+[connection signal="body_exited" from="PlayerDetector" to="." method="_on_PlayerDetector_body_exited"]
+[connection signal="area_entered" from="SwingHitbox" to="." method="_on_SwingHitbox_area_entered"]

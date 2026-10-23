@@ -47,6 +47,8 @@ func boss_battle_start():
 	var boss = get_entity_with_id("Enemies", boss_id)
 	boss.killed.connect(_on_boss_killed)
 	boss.process_mode = ProcessMode.PROCESS_MODE_INHERIT
+	if boss.has_method("start_ai"):
+		boss.start_ai()
 	enable_player_input()
 
 func win_animation():
