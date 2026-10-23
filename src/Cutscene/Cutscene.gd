@@ -5,7 +5,6 @@ class_name Cutscene
 @onready var w = get_tree().get_root().get_node("World")
 
 const DB = preload("res://src/Dialog/DialogBox.tscn")
-const dialog_json = "res://src/Dialog/BossTest.json"
 
 func _ready():
 	if !w.is_node_ready():

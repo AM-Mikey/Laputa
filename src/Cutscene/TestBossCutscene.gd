@@ -28,7 +28,7 @@ func _on_boss_finished_dropping():
 	var golem_boss = get_entity_with_id("Enemies", boss_id)
 	golem_boss.process_mode = ProcessMode.PROCESS_MODE_DISABLED
 	var dialog_box = create_dialog_box()
-	dialog_box.start_printing(dialog_json, "boss_intro_dialog", "cutscene")
+	dialog_box.start_printing("res://src/Dialog/TreasureHunterBossTest.json", "boss_intro_dialog", "cutscene")
 	await dialog_box.dialog_finished
 	await boss_health_bar_filled_anim()
 	boss_battle_start()

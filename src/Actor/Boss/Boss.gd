@@ -56,9 +56,9 @@ func _ready(): #Reminder: no function called can use await
 	if disabled: return
 	safe_margin = 0.001
 	hp_bar = BOSS_HEALTH_BAR.instantiate()
-	hp_bar.boss = self
 	w.ui.add_child(hp_bar)
 	setup()
+	hp_bar.boss = self
 
 func setup():
 	w.emit_signal("finished_spawn_entities_step")
@@ -70,8 +70,11 @@ func enable():
 	disabled = false
 
 func move_to(global_pos: Vector2) -> void:
-	sm.get
+	sm.get_node("MoveTo").target_position = global_pos
 	sm.change_state("move_to")
+
+func start_ai():
+	pass
 
 func _physics_process(delta):
 	if disabled or dead: return

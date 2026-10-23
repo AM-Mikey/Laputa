@@ -59,7 +59,7 @@ func win_animation():
 	#Make a Victory dialog
 	am.play_music("victory")
 	var dialog_box = create_dialog_box()
-	dialog_box.start_printing(dialog_json, "boss_victory", "cutscene")
+	dialog_box.start_printing("res://src/Dialog/BossTest.json", "boss_victory", "cutscene")
 	await dialog_box.dialog_finished
 
 	var level = w.current_level

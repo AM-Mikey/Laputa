@@ -1,0 +1,77 @@
+[gd_scene format=3 uid="uid://bchvyj3ul5sce"]
+
+[ext_resource type="Script" uid="uid://bbjcfv3fpfnln" path="res://src/Effect/FlareExplosion.gd" id="1_f4ur8"]
+[ext_resource type="Texture2D" uid="uid://bouenluspymaw" path="res://assets/Effect/0GrenadeExplosion.png" id="2_1vwxs"]
+[ext_resource type="AudioStream" uid="uid://88muarxd303c" path="res://assets/SFX/Placeholder/snd_big_crash.ogg" id="3_mjtgj"]
+
+[sub_resource type="Animation" id="1"]
+resource_name = "Large"
+length = 0.4
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.4),
+"transitions": PackedFloat32Array(0.5, 1),
+"update": 0,
+"values": [16, 23]
+}
+
+[sub_resource type="Animation" id="2"]
+resource_name = "Medium"
+length = 0.4
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = false
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.4),
+"transitions": PackedFloat32Array(0.5, 1),
+"update": 0,
+"values": [8, 15]
+}
+
+[sub_resource type="Animation" id="3"]
+resource_name = "Small"
+length = 0.4
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = false
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.4),
+"transitions": PackedFloat32Array(0.5, -0.5),
+"update": 0,
+"values": [0, 7]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_k5xv5"]
+_data = {
+&"Large": SubResource("1"),
+&"Medium": SubResource("2"),
+&"Small": SubResource("3")
+}
+
+[node name="FlareExplosion" type="Node2D" unique_id=1674150648]
+script = ExtResource("1_f4ur8")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=719778939]
+self_modulate = Color(1, 0.6392157, 0, 1)
+texture = ExtResource("2_1vwxs")
+hframes = 8
+vframes = 3
+frame = 23
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1106721091]
+libraries/ = SubResource("AnimationLibrary_k5xv5")
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="." unique_id=140407941]
+stream = ExtResource("3_mjtgj")
+bus = &"SFX"

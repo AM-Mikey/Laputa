@@ -1,11 +1,14 @@
 {
 	"boss_intro_dialog":
 	"
-	/newchar,scrum,golem: WRYYYYYYYYYYYYYYYYY!!!!
+	/newchar,basil,Treasure_Hunter There you are!
+	/clear Nothing personal but you will have to go down right now.
 	",
 
 	"boss_victory":
 	"
-	VICTORY
+	/newchar,basil,Treasure_Hunter Tch!
+	/clear This will not be the last time, Juniper!
+	/clear We will meet again.
 	",
 }

@@ -4,6 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://7hbenrfv6p3q" path="res://src/Utility/PhysicsLayerBody.tscn" id="2_q4fg5"]
 [ext_resource type="Texture2D" uid="uid://b32y4n7npcaqr" path="res://assets/Actor/Boss/TreasureHunter.png" id="3_f2ibc"]
 [ext_resource type="Script" uid="uid://bpn00lnksso5w" path="res://src/Utility/StateMachine.gd" id="4_6rjg4"]
+[ext_resource type="Script" uid="uid://c83g571rji4wp" path="res://src/Actor/Boss/TreasureHunter/State/Ground.gd" id="4_lvjic"]
 [ext_resource type="Script" uid="uid://bkttdvnxv3ulk" path="res://src/Utility/State.gd" id="5_lnuvq"]
 [ext_resource type="Script" uid="uid://cb1iern4sbflb" path="res://src/Actor/Boss/TreasureHunter/State/MoveTo.gd" id="6_q4fg5"]
 
@@ -643,20 +644,33 @@ libraries/ = SubResource("AnimationLibrary_tf65y")
 
 [node name="StateMachine" type="Node2D" parent="." unique_id=2105703775 node_paths=PackedStringArray("main", "start_state")]
 texture_filter = 1
-position = Vector2(0, -16)
+position = Vector2(0, -27)
 script = ExtResource("4_6rjg4")
 main = NodePath("..")
-start_state = NodePath("Disabled")
+start_state = NodePath("Cutscene")
 debug = true
 metadata/_custom_type_script = "uid://bpn00lnksso5w"
 
-[node name="Disabled" type="Node" parent="StateMachine" unique_id=1153866327]
+[node name="Ground" type="Node" parent="StateMachine" unique_id=1427873403]
+script = ExtResource("4_lvjic")
+metadata/_custom_type_script = "uid://bkttdvnxv3ulk"
+
+[node name="Timer" type="Timer" parent="StateMachine/Ground" unique_id=674287737]
+wait_time = 2.0
+autostart = true
+
+[node name="Cutscene" type="Node" parent="StateMachine" unique_id=1153866327]
 script = ExtResource("5_lnuvq")
 metadata/_custom_type_script = "uid://bkttdvnxv3ulk"
 
 [node name="MoveTo" type="Node" parent="StateMachine" unique_id=656279263]
 script = ExtResource("6_q4fg5")
 metadata/_custom_type_script = "uid://bkttdvnxv3ulk"
+
+[node name="Hotspot" type="Node2D" parent="." unique_id=1205734841]
+
+[node name="GunNozzle" type="Marker2D" parent="Hotspot" unique_id=1193765223]
+position = Vector2(-13, -19)
 
 [node name="PhysicsLayerBody" parent="." unique_id=307469918 instance=ExtResource("2_q4fg5")]
 
@@ -683,5 +697,6 @@ position = Vector2(0, -7.5)
 shape = SubResource("1")
 debug_color = Color(1, 0, 0, 0.235294)
 
+[connection signal="timeout" from="StateMachine/Ground/Timer" to="StateMachine/Ground" method="_on_Timer_timeout"]
 [connection signal="area_entered" from="Hitbox" to="." method="_on_hitbox_area_entered"]
 [connection signal="area_exited" from="Hitbox" to="." method="_on_hitbox_area_exited"]
