@@ -8,7 +8,7 @@ const TITLE = preload("res://src/UI//Title/Title.tscn")
 func _ready():
 	visible = false
 	am.play("pc_die")
-	f.hud().visible = false
+	#f.hud().visible = false
 	#TODO: wait and fix camera
 	do_focus()
 	visible = true

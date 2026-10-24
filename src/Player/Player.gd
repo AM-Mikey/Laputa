@@ -123,7 +123,8 @@ func enemy_exited(enemy):
 
 
 func hit(damage, knockback_direction, _hitbox):
-	if not disabled and not invincible:
+	if !disabled && !invincible:
+		mm.knockback_direction = knockback_direction
 		if damage > 0:
 			hp -= damage
 			am.play("pc_hurt")
@@ -163,7 +164,7 @@ func hit(damage, knockback_direction, _hitbox):
 					$GunManager.level_down(false)
 				emit_signal("guns_updated", guns.get_children(), "take_damage")
 
-		if knockback_direction != Vector2.ZERO:
+		if knockback_direction != Vector2.ZERO && !dead:
 			#print("Knockback in Dir: " + str(knockback_direction))
 			mm.knockback_direction = knockback_direction
 			mm.snap_vector = Vector2.ZERO
@@ -190,20 +191,17 @@ func hit_again(): #TODO: prioritize this for all forms of damage, not just enemi
 
 
 func die():
-	if not dead:
+	if !dead:
 		dead = true
-		disabled = true
+		mm.change_state("death")
 		w.add_child(DEATH_CAMERA.instantiate())
-		visible = false
-
+		invincible = true
 		var explosion = EXPLOSION.instantiate()
 		explosion.position = global_position
 		w.middle_front.add_child(explosion)
 
-		w.ui.add_child(load("res://src/UI/DeathScreen/DeathScreen.tscn").instantiate())
 		if f.hud():
 			f.hud().free()
-		queue_free()
 
 
 

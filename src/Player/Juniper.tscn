@@ -12,12 +12,14 @@
 [ext_resource type="Script" uid="uid://cubhnhyu064a0" path="res://src/Player/Cutscene.gd" id="12_x1gsf"]
 [ext_resource type="Script" uid="uid://c4ogd5866m3uu" path="res://src/Player/PlayerSprite.gd" id="13"]
 [ext_resource type="Script" uid="uid://cqho5rvdldsw5" path="res://src/Player/Player.gd" id="14"]
+[ext_resource type="Script" uid="uid://w6dbrpcmg2mv" path="res://src/Player/Death.gd" id="14_sat3f"]
 [ext_resource type="Script" uid="uid://cwfo2x3kl4tkp" path="res://src/Player/MovementManager.gd" id="15"]
 [ext_resource type="Script" uid="uid://5j8mlgvadx1f" path="res://src/Player/GunPos.gd" id="16_adexv"]
 [ext_resource type="Shader" uid="uid://d4doa1vf12lkt" path="res://src/Shader/JuniperRecolor.gdshader" id="24_s1pnb"]
 [ext_resource type="Texture2D" uid="uid://mkfrxk3djlu1" path="res://assets/Player/Palette/Normal.png" id="25_3o18d"]
 [ext_resource type="Script" uid="uid://cn112wea32cdx" path="res://src/Player/Inspect.gd" id="27"]
 [ext_resource type="Texture2D" uid="uid://b6mfl184pisc1" path="res://assets/Player/Palette/Mono.png" id="27_cn5rl"]
+[ext_resource type="Texture2D" uid="uid://c07otoiolidjc" path="res://assets/Player/Death.png" id="28_7jab8"]
 [ext_resource type="Script" uid="uid://cjgn7e5vfg20e" path="res://src/Player/Jump.gd" id="29"]
 [ext_resource type="Script" uid="uid://dtadf671wpvdq" path="res://src/Player/Run.gd" id="30"]
 [ext_resource type="Texture2D" uid="uid://cw8igq2ymupx3" path="res://assets/Player/Aerial.png" id="30_ypuil"]
@@ -1360,6 +1362,240 @@ tracks/8/keys = {
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
 "update": 1,
 "values": [Vector2(3, -4), Vector2(3, -3), Vector2(3, -4), Vector2(3, -4), Vector2(3, -5), Vector2(3, -5), Vector2(3, -4), Vector2(3, -3), Vector2(3, -4), Vector2(3, -4), Vector2(3, -5), Vector2(3, -5)]
+}
+
+[sub_resource type="Animation" id="Animation_hfpv4"]
+resource_name = "death_back"
+length = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("28_7jab8")]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(),
+"transitions": PackedFloat32Array(),
+"values": []
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprite2D:hframe")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [5]
+}
+
+[sub_resource type="Animation" id="Animation_22wdk"]
+resource_name = "death_fall_back"
+length = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("28_7jab8")]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(),
+"transitions": PackedFloat32Array(),
+"values": []
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprite2D:hframe")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [3]
+}
+
+[sub_resource type="Animation" id="Animation_nno4d"]
+resource_name = "death_fall_front"
+length = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("28_7jab8")]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(),
+"transitions": PackedFloat32Array(),
+"values": []
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprite2D:hframe")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_asknc"]
+resource_name = "death_front"
+length = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("28_7jab8")]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(),
+"transitions": PackedFloat32Array(),
+"values": []
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprite2D:hframe")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [2]
+}
+
+[sub_resource type="Animation" id="Animation_5ql3f"]
+resource_name = "death_mid_back"
+length = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("28_7jab8")]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(),
+"transitions": PackedFloat32Array(),
+"values": []
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprite2D:hframe")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [4]
+}
+
+[sub_resource type="Animation" id="Animation_rjtg7"]
+resource_name = "death_mid_front"
+length = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("28_7jab8")]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(),
+"transitions": PackedFloat32Array(),
+"values": []
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprite2D:hframe")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [1]
 }
 
 [sub_resource type="Animation" id="Animation_l3dey"]
@@ -3728,6 +3964,12 @@ _data = {
 &"climb": SubResource("Animation_cd6iy"),
 &"crouch": SubResource("Animation_d83qu"),
 &"crouch_run": SubResource("64"),
+&"death_back": SubResource("Animation_hfpv4"),
+&"death_fall_back": SubResource("Animation_22wdk"),
+&"death_fall_front": SubResource("Animation_nno4d"),
+&"death_front": SubResource("Animation_asknc"),
+&"death_mid_back": SubResource("Animation_5ql3f"),
+&"death_mid_front": SubResource("Animation_rjtg7"),
 &"down_push": SubResource("Animation_l3dey"),
 &"down_slope": SubResource("Animation_6utdb"),
 &"down_slope_to_stand": SubResource("Animation_oh11f"),
@@ -4138,6 +4380,9 @@ script = ExtResource("8")
 
 [node name="Cutscene" type="Node" parent="MovementManager/States" unique_id=396950407]
 script = ExtResource("12_x1gsf")
+
+[node name="Death" type="Node" parent="MovementManager/States" unique_id=203505922]
+script = ExtResource("14_sat3f")
 
 [node name="MinDirTimer" type="Timer" parent="MovementManager" unique_id=851777814]
 process_callback = 0
