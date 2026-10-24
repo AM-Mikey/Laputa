@@ -9,6 +9,10 @@
 [ext_resource type="Script" uid="uid://cb1iern4sbflb" path="res://src/Actor/Boss/TreasureHunter/State/MoveTo.gd" id="6_q4fg5"]
 [ext_resource type="Script" uid="uid://gm2x0u0kc8hi" path="res://src/Actor/Boss/TreasureHunter/State/GroundShoot.gd" id="7_flare"]
 [ext_resource type="Script" uid="uid://d326o8757ie8h" path="res://src/Actor/Boss/TreasureHunter/State/Melee.gd" id="8_melee"]
+[ext_resource type="Script" uid="uid://bvcukiknnc8y0" path="res://src/Actor/Boss/TreasureHunter/State/GroundRush.gd" id="9_ground_rush"]
+[ext_resource type="Script" uid="uid://nesb8uaupdav" path="res://src/Actor/Boss/TreasureHunter/State/TakeOff.gd" id="10_take_off"]
+[ext_resource type="Script" uid="uid://brk7rbnuu6omh" path="res://src/Actor/Boss/TreasureHunter/State/Air.gd" id="11_air"]
+[ext_resource type="Script" uid="uid://m1lqjufg0bce" path="res://src/Actor/Boss/TreasureHunter/State/Landing.gd" id="12_landing"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_sy72i"]
 size = Vector2(10, 14)
@@ -398,6 +402,35 @@ tracks/1/keys = {
 "values": [0]
 }
 
+[sub_resource type="Animation" id="Animation_8kthc"]
+resource_name = "propeller_close"
+length = 0.30001
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"propeller_open"]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.099999994, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [2, 1, 0]
+}
+
 [sub_resource type="Animation" id="Animation_qtma2"]
 resource_name = "propeller_lunge"
 length = 0.10001
@@ -612,6 +645,7 @@ _data = {
 &"fly_shoot_down": SubResource("Animation_bgbn8"),
 &"gun_swing": SubResource("Animation_kxyrx"),
 &"idle": SubResource("Animation_lvjic"),
+&"propeller_close": SubResource("Animation_8kthc"),
 &"propeller_lunge": SubResource("Animation_qtma2"),
 &"propeller_lunge_air": SubResource("Animation_xhv8j"),
 &"propeller_open": SubResource("Animation_tf65y"),
@@ -655,7 +689,7 @@ texture_filter = 1
 position = Vector2(0, -27)
 script = ExtResource("4_6rjg4")
 main = NodePath("..")
-start_state = NodePath("Ground")
+start_state = NodePath("Cutscene")
 debug = true
 metadata/_custom_type_script = "uid://bpn00lnksso5w"
 
@@ -664,7 +698,7 @@ script = ExtResource("4_lvjic")
 metadata/_custom_type_script = "uid://bkttdvnxv3ulk"
 
 [node name="Timer" type="Timer" parent="StateMachine/Ground" unique_id=674287737]
-wait_time = 2.0
+wait_time = 0.8
 one_shot = true
 
 [node name="GroundShoot" type="Node" parent="StateMachine" unique_id=1133531667]
@@ -684,6 +718,33 @@ script = ExtResource("8_melee")
 [node name="Timer" type="Timer" parent="StateMachine/Melee" unique_id=288004899]
 wait_time = 0.5
 one_shot = true
+
+[node name="GroundRush" type="Node" parent="StateMachine" unique_id=1579110370]
+script = ExtResource("9_ground_rush")
+
+[node name="TakeOff" type="Node" parent="StateMachine" unique_id=1056875138]
+script = ExtResource("10_take_off")
+
+[node name="Air" type="Node" parent="StateMachine" unique_id=1469252419]
+script = ExtResource("11_air")
+
+[node name="DurationTimer" type="Timer" parent="StateMachine/Air" unique_id=1495604015]
+wait_time = 10.0
+one_shot = true
+
+[node name="FlareTimer" type="Timer" parent="StateMachine/Air" unique_id=2130845497]
+one_shot = true
+
+[node name="ReloadTimer" type="Timer" parent="StateMachine/Air" unique_id=750025505]
+wait_time = 0.5
+one_shot = true
+
+[node name="SweepFireTimer" type="Timer" parent="StateMachine/Air" unique_id=75274493]
+wait_time = 0.5
+one_shot = true
+
+[node name="Landing" type="Node" parent="StateMachine" unique_id=690660678]
+script = ExtResource("12_landing")
 
 [node name="Cutscene" type="Node" parent="StateMachine" unique_id=1153866327]
 script = ExtResource("5_lnuvq")
@@ -742,10 +803,16 @@ position = Vector2(-9.5, -17.5)
 shape = SubResource("RectangleShape2D_SwingHitbox")
 debug_color = Color(1, 0, 0, 0.235294)
 
+[connection signal="animation_finished" from="AnimationPlayer" to="StateMachine/TakeOff" method="_on_AnimationPlayer_animation_finished"]
+[connection signal="animation_finished" from="AnimationPlayer" to="StateMachine/Landing" method="_on_AnimationPlayer_animation_finished"]
 [connection signal="timeout" from="StateMachine/Ground/Timer" to="StateMachine/Ground" method="_on_Timer_timeout"]
 [connection signal="timeout" from="StateMachine/GroundShoot/FireTimer" to="StateMachine/GroundShoot" method="_on_FireTimer_timeout"]
 [connection signal="timeout" from="StateMachine/GroundShoot/FinishTimer" to="StateMachine/GroundShoot" method="_on_FinishTimer_timeout"]
 [connection signal="timeout" from="StateMachine/Melee/Timer" to="StateMachine/Melee" method="_on_Timer_timeout"]
+[connection signal="timeout" from="StateMachine/Air/DurationTimer" to="StateMachine/Air" method="_on_DurationTimer_timeout"]
+[connection signal="timeout" from="StateMachine/Air/FlareTimer" to="StateMachine/Air" method="_on_FlareTimer_timeout"]
+[connection signal="timeout" from="StateMachine/Air/ReloadTimer" to="StateMachine/Air" method="_on_ReloadTimer_timeout"]
+[connection signal="timeout" from="StateMachine/Air/SweepFireTimer" to="StateMachine/Air" method="_on_SweepFireTimer_timeout"]
 [connection signal="area_entered" from="Hitbox" to="." method="_on_hitbox_area_entered"]
 [connection signal="area_exited" from="Hitbox" to="." method="_on_hitbox_area_exited"]
 [connection signal="body_entered" from="PlayerDetector" to="." method="_on_PlayerDetector_body_entered"]

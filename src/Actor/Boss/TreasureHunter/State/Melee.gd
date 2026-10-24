@@ -15,4 +15,4 @@ func state_physics_process(delta: float):
 	main.keep_grounded(delta)
 
 func _on_Timer_timeout():
-	sm.change_state("ground")
+	sm.change_state("ground_rush")

@@ -13,6 +13,7 @@ func setup():
 	speed = 300.0
 	rotation_degrees = get_rot(direction)
 	$TrailSpawnTimer.start()
+	create_flare_trail()
 
 func _physics_process(delta):
 	velocity = speed * direction
@@ -25,10 +26,16 @@ func _physics_process(delta):
 	if state == "set_off":
 		$AnimationPlayer.speed_scale += delta
 
+func create_flare_trail():
+	var flare_trail = FLARE_TRAIL.instantiate()
+	flare_trail.global_position = $End.global_position
+	w.player_front.add_child(flare_trail)
 
 func explode():
 	set_physics_process(false)
 	$TrailSpawnTimer.stop()
+	$DetectExplosionTimer.stop()
+	$PlayerDetectionZone.set_deferred("monitoring", false)
 	$ExplosionDetector.set_deferred("monitoring", true)
 	$ExplosionDetector.top_level = true
 	var explosion = FLARE_EXPLOSION.instantiate()
@@ -62,13 +69,60 @@ func is_world_blocking(target) -> bool:
 		return false
 
 ### SIGNALS ###
+func _on_CollisionDetector_body_entered(body):
+	if body is TileMapLayer:
+		if body.tile_set.get_physics_layer_collision_layer(0) == 8: #world (layer value)
+			if f.pc(): #and camera gun recoil is true
+				f.pc().get_node("PlayerCamera").impulse(f.pc().shoot_dir * -1, camera_recoil_wall_distance, camera_recoil_time, camera_recoil_curve)
+			explode()
+
+	else: #not TileMapLayer
+		#breakable
+		if body.get_collision_layer_value(9):
+			if f.pc(): #and camera gun recoil is true
+				f.pc().get_node("PlayerCamera").impulse(f.pc().shoot_dir * -1, camera_recoil_hit_distance, camera_recoil_time, camera_recoil_curve)
+			explode()
+		#armor
+		elif body.get_collision_layer_value(6):
+			if f.pc(): #and camera gun recoil is true
+				f.pc().get_node("PlayerCamera").impulse(f.pc().shoot_dir * -1, camera_recoil_wall_distance, camera_recoil_time, camera_recoil_curve)
+			explode()
+		#Movable platform
+		if body.get_collision_layer_value(4):
+			if f.pc(): #and camera gun recoil is true
+				f.pc().get_node("PlayerCamera").impulse(f.pc().shoot_dir * -1, camera_recoil_wall_distance, camera_recoil_time, camera_recoil_curve)
+			explode()
+
+
+func _on_CollisionDetector_area_entered(area): #TODO: double check breakable piercing
+	if area.get_collision_layer_value(18): #enemyhurt
+		var blood_dir = get_blood_dir(area.get_parent())
+		area.get_parent().hit(damage, blood_dir, $PlayerCollisionDetector, blood_dir, knockback_strength)
+		explode()
+		if f.pc(): #and camera gun recoil is true
+			f.pc().get_node("PlayerCamera").impulse(f.pc().shoot_dir * -1, camera_recoil_hit_distance, camera_recoil_time, camera_recoil_curve)
+	elif area.get_collision_layer_value(17): #playerhurt
+		area.get_parent().hit(damage, get_blood_dir(area.get_parent()), $PlayerCollisionDetector)
+		explode()
+	elif area.get_collision_layer_value(9): #breakable
+		area.get_parent().on_break(break_method)
+		if f.pc(): #and camera gun recoil is true
+			f.pc().get_node("PlayerCamera").impulse(f.pc().shoot_dir * -1, camera_recoil_hit_distance, camera_recoil_time, camera_recoil_curve)
+			explode()
+	elif area.get_collision_layer_value(4): #world
+		if f.pc(): #and camera gun recoil is true
+			f.pc().get_node("PlayerCamera").impulse(f.pc().shoot_dir * -1, camera_recoil_wall_distance, camera_recoil_time, camera_recoil_curve)
+		explode()
+	elif area.get_collision_layer_value(6): #armor
+		if f.pc(): #and camera gun recoil is true
+			f.pc().get_node("PlayerCamera").impulse(f.pc().shoot_dir * -1, camera_recoil_wall_distance, camera_recoil_time, camera_recoil_curve)
+		explode()
+
 func _on_DetectExplosionTimer_timeout() -> void:
 	explode()
 
 func _on_TrailSpawnTimer_timeout() -> void:
-	var flare_trail = FLARE_TRAIL.instantiate()
-	flare_trail.global_position = $End.global_position
-	w.player_front.add_child(flare_trail)
+	create_flare_trail()
 
 func _on_ExplosionDetector_body_entered(body):
 	#breakable

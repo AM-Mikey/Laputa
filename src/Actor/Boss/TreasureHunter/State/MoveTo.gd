@@ -5,11 +5,11 @@ var target_position: Vector2 = Vector2.ZERO
 var reach_destination: bool = false
 
 
-func state_start(prev_state: StringName):
+func state_start(_prev_state: StringName):
 	reach_destination = false
 	main.ap.play("fly")
 
-func state_physics_process(delta: float):
+func state_physics_process(_delta: float):
 	var distance_to_pos = main.global_position.distance_to(target_position)
 	if distance_to_pos < delta_error:
 		if !reach_destination:
