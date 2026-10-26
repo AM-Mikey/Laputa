@@ -67,4 +67,8 @@ func _on_value_changed(value: float) -> void:
 		am.play("npc_voice_normal")
 
 func _on_viewport_scale_changed(rs_scale) -> void:
+	var viewport_size = get_tree().get_root().size
+	var bottom_pos = viewport_size / rs_scale
 	set_anchors_preset(Control.PRESET_BOTTOM_WIDE)
+	scale = Vector2.ONE / rs_scale
+	position.y = bottom_pos.y - size.y * scale.y
