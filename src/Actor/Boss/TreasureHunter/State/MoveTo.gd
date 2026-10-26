@@ -3,6 +3,7 @@ extends State
 @export var delta_error: float = 4.0
 var target_position: Vector2 = Vector2.ZERO
 var reach_destination: bool = false
+var move_speed: float = 60.0
 
 
 func state_start(_prev_state: StringName):
@@ -18,5 +19,5 @@ func state_physics_process(_delta: float):
 		return
 
 	var direction = main.global_position.direction_to(target_position)
-	main.velocity = direction * main.fly_speed
+	main.velocity = direction * move_speed
 	main.move_and_slide()

@@ -18,7 +18,7 @@ func start():
 	am.stop_music()
 	var boss = get_entity_with_id("Bosses", boss_id)
 	var boss_move_to_hotspot = get_waypoint_with_id("WaypointGlobals", "cutscene_boss_intro_pos")
-	boss.move_to(boss_move_to_hotspot.global_position)
+	boss.move_to(boss_move_to_hotspot.global_position, 60.0)
 
 	await boss.end_move_to
 
@@ -36,8 +36,7 @@ func start():
 
 func _on_boss_killed():
 	ms.progress_main_mission.call_deferred()
-	await win_animation()
-	end()
+	win_animation()
 
 func win_animation():
 	var boss = get_entity_with_id("Enemies", boss_id)
@@ -46,9 +45,25 @@ func win_animation():
 
 	await boss.anim_death_finished
 
+	## Move to the outtro position
+	var out_waypoint = get_waypoint_with_id("WaypointGlobals", "cutscene_boss_intro_pos")
+	boss.move_to(out_waypoint.global_position, 60.0)
+	await boss.end_move_to
+	boss.face_player()
+
+	## Boss Final word
+	var dialog_box = create_dialog_box()
+	dialog_box.start_printing("res://src/Dialog/TreasureHunterBossTest.json", "boss_out_dialog", "cutscene")
+	await dialog_box.dialog_finished
+
+	## Boss fly away
+	var out_cutscene_waypoint = get_waypoint_with_id("WaypointGlobals", "cutscene_boss_get_out")
+	boss.move_to(out_cutscene_waypoint.global_position, 60.0)
+	await boss.end_move_to
+
 	#Make a Victory dialog
 	am.play_music("victory")
-	var dialog_box = create_dialog_box()
+	dialog_box = create_dialog_box()
 	dialog_box.start_printing("res://src/Dialog/TreasureHunterBossTest.json", "boss_victory", "cutscene")
 	await dialog_box.dialog_finished
 
@@ -61,4 +76,4 @@ func win_animation():
 	am.play_music(level.music)
 
 	await level_trans_tween.finished
-	return
+	end()

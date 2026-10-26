@@ -9,6 +9,7 @@ const EXPLOSION = preload("res://src/Effect/Explosion.tscn")
 const HEART = preload("res://src/Actor/Pickup/Heart.tscn")
 const STATE_LABEL = preload("res://src/Utility/StateLabel.tscn")
 const BOSS_HEALTH_BAR = preload("res://src/UI/BossHealthBar.tscn")
+const FIZZLE_ARMOR = preload("res://src/Effect/BulletFizzleArmor.tscn")
 
 #signal setup_ui(display_name, hp, max_hp)
 #signal health_updated(hp)
@@ -27,6 +28,7 @@ var max_hp: int
 var damage_on_contact: int
 var enemy_damage_on_contact: int
 var hit_enemies_on_contact := false
+var invincible: = false
 var self_knockback := false
 var knockback_velocity := Vector2.ZERO
 var hurt_sound = "enemy_hurt"
@@ -69,8 +71,9 @@ func disable():
 func enable():
 	disabled = false
 
-func move_to(global_pos: Vector2) -> void:
+func move_to(global_pos: Vector2, s: float = speed.length()) -> void:
 	sm.get_node("MoveTo").target_position = global_pos
+	sm.get_node("MoveTo").move_speed = s
 	sm.change_state("move_to")
 
 func start_ai():
@@ -133,6 +136,15 @@ func calc_velocity(move_dir, do_gravity = true, do_acceleration = true, do_frict
 ### DAMAGE/DEATH ###
 
 func hit(damage, blood_direction, hitbox, knockback_direction = Vector2.ZERO, knockback_strength = 0):
+	if invincible:
+		var fizzle = FIZZLE_ARMOR.instantiate()
+		var hitbox_owner = hitbox.owner
+		if hitbox_owner.has_node("End"):
+			fizzle.global_position = hitbox_owner.get_node("End").global_position
+		else:
+			fizzle.global_position = hitbox.global_position
+		w.player_front.add_child(fizzle)
+		return
 	_on_hit(damage, blood_direction, hitbox)
 	hp -= damage
 	var blood = BLOOD.instantiate()
@@ -186,6 +198,7 @@ func die(quietly = false):
 	if !quietly:
 		am.play(die_sound, self)
 		await do_death_animation()
+		print("Finish dying")
 		anim_death_finished.emit()
 
 

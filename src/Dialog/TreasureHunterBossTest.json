@@ -5,10 +5,13 @@
 	/clear Nothing personal but you will have to go down right now.
 	",
 
-	"boss_victory":
+	"boss_out_dialog":
 	"
 	/newchar,basil,Treasure_Hunter Tch!
 	/clear This will not be the last time, Juniper!
 	/clear We will meet again.
 	",
+
+	"boss_victory":
+	"You defeated Treasure Hunter!"
 }

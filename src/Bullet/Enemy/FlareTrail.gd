@@ -51,12 +51,12 @@ func _on_CollisionDetector_body_entered(body):
 func _on_CollisionDetector_area_entered(area): #TODO: double check breakable piercing
 	if area.get_collision_layer_value(18): #enemyhurt
 		var blood_dir = get_blood_dir(area.get_parent())
-		area.get_parent().hit(damage, blood_dir, $PlayerCollisionDetector, blood_dir, knockback_strength)
+		area.get_parent().hit(damage, blood_dir, $EnemyCollisionDetector, blood_dir, knockback_strength)
 		if f.pc(): #and camera gun recoil is true
 			f.pc().get_node("PlayerCamera").impulse(f.pc().shoot_dir * -1, camera_recoil_hit_distance, camera_recoil_time, camera_recoil_curve)
 		queue_free()
 	elif area.get_collision_layer_value(17): #playerhurt
-		area.get_parent().hit(damage, get_blood_dir(area.get_parent()), $PlayerCollisionDetector)
+		area.get_parent().hit(damage, get_blood_dir(area.get_parent()), $EnemyCollisionDetector)
 		queue_free()
 	elif area.get_collision_layer_value(9): #breakable
 		area.get_parent().on_break(break_method)

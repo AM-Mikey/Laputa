@@ -7,6 +7,7 @@ var next_explosion_time := 0.0
 var was_grounded := false
 
 func state_start(_prev_state: StringName):
+	main.invincible = true
 	was_grounded = main.is_on_floor()
 	elapsed = 0.0
 	next_explosion_time = 0.0
@@ -15,6 +16,9 @@ func state_start(_prev_state: StringName):
 
 func state_physics_process(_delta: float):
 	main.velocity = Vector2.ZERO
+
+func state_end(_next_state: StringName):
+	main.invincible = false
 
 func state_process(delta: float):
 	elapsed += delta

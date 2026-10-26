@@ -2,10 +2,15 @@ extends State
 
 var propeller_opened: = false
 
-func state_start(_prev_state: StringName):
+func state_start(prev_state: StringName):
+	if prev_state == "trans_to_phase_2":
+		main.invincible = true
 	main.velocity = Vector2.ZERO
 	propeller_opened = false
 	main.ap.play("propeller_open")
+
+func state_end(next_state: StringName):
+	main.invincible = false
 
 func state_physics_process(_delta: float):
 	if propeller_opened:

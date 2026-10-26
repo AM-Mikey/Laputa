@@ -45,6 +45,23 @@ func _on_hit(damage, _blood_direction, _hitbox):
 		phase_2_active = true
 		sm.change_state("trans_to_phase_2")
 
+func do_death_animation():
+	#Spawn Smoke
+	process_mode = ProcessMode.PROCESS_MODE_DISABLED
+	for i in range(0, 25):
+		var sound = am.play("enemy_die", null, null)
+		for j in range(0, 1 + randi() % 3):
+			create_vfx("smoke", global_position + Vector2(20.0 * randf_range(-1.0, 1.0), 10.0 * randf_range(-1.0, 1.0)))
+		await get_tree().create_timer(0.1).timeout
+		if i in [23, 24, 25]:
+			var offset = Vector2(randf_range(-18.0, 18.0), randf_range(-30.0, -4.0))
+			create_vfx("explosion", global_position + offset)
+			if sound:
+				sound.volume_db = 5.0
+
+	process_mode = ProcessMode.PROCESS_MODE_INHERIT
+
+
 ### UTILITY ###
 func face_player():
 	if pc == null:
