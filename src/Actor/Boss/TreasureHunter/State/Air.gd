@@ -67,6 +67,7 @@ func state_end(_next_state: StringName):
 	$ReloadTimer.stop()
 	$SweepFireTimer.stop()
 	$Phase2SmokeTimer.stop()
+	$Phase2SparkTimer.stop()
 	propeller_phase_2_spark_times = 0
 	if propeller_sound:
 		am.stop_sfx()

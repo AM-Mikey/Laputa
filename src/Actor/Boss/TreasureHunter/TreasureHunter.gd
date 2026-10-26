@@ -82,7 +82,7 @@ func get_opposite_arena_side() -> float:
 
 func get_hover_height() -> float:
 	var arena_rect = get_arena_rect()
-	return arena_rect.position.y + arena_rect.size.y * 0.5
+	return arena_rect.position.y + arena_rect.size.y * 0.55
 
 func fire(dir):
 	var flare_shot = FLARE_BULLET.instantiate()

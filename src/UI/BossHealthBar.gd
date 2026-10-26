@@ -37,6 +37,7 @@ func set_boss(val: Actor):
 func _ready():
 	visible = false
 	vs.scale_changed.connect(_on_viewport_scale_changed)
+	update_ui()
 
 func show_ui():
 	visible = true
@@ -58,17 +59,20 @@ func hide_ui():
 	await get_tree().process_frame
 	anim_bar_hide_finished.emit()
 
-
-func _on_hp_changed() -> void:
-	value = boss.hp
-
-func _on_value_changed(value: float) -> void:
-	if in_show_animation:
-		am.play("npc_voice_normal")
-
-func _on_viewport_scale_changed(rs_scale) -> void:
+func update_ui():
+	var rs_scale = vs.resolution_scale
 	var viewport_size = get_tree().get_root().size
 	var bottom_pos = viewport_size / rs_scale
 	set_anchors_preset(Control.PRESET_BOTTOM_WIDE)
 	scale = Vector2.ONE / rs_scale
 	position.y = bottom_pos.y - size.y * scale.y
+
+func _on_hp_changed():
+	value = boss.hp
+
+func _on_value_changed(value: float):
+	if in_show_animation:
+		am.play("npc_voice_normal")
+
+func _on_viewport_scale_changed(rs_scale) -> void:
+	update_ui()
