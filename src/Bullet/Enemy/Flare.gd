@@ -27,22 +27,28 @@ func _physics_process(delta):
 		$AnimationPlayer.speed_scale += delta
 
 func create_flare_trail():
-	var flare_trail = FLARE_TRAIL.instantiate()
-	flare_trail.global_position = $End.global_position
-	w.player_front.add_child(flare_trail)
+	if state != "explode":
+		var flare_trail = FLARE_TRAIL.instantiate()
+		flare_trail.global_position = $End.global_position
+		w.player_front.add_child(flare_trail)
 
 func explode():
-	set_physics_process(false)
-	$TrailSpawnTimer.stop()
-	$DetectExplosionTimer.stop()
-	$PlayerDetectionZone.set_deferred("monitoring", false)
-	$ExplosionDetector.set_deferred("monitoring", true)
-	$ExplosionDetector.top_level = true
-	var explosion = FLARE_EXPLOSION.instantiate()
-	explosion.global_position = global_position
-	w.middle_front.add_child(explosion)
-	await get_tree().create_timer(0.3).timeout
-	queue_free()
+	if state != "explode":
+		set_physics_process(false)
+		state = "explode"
+		$TrailSpawnTimer.stop()
+		$DetectExplosionTimer.stop()
+		$PlayerDetectionZone.set_deferred("monitoring", false)
+		$ExplosionDetector.set_deferred("monitorable", true)
+		$ExplosionDetector.set_deferred("monitoring", true)
+		$ExplosionDetector.top_level = true
+		$ExplosionDetector.global_position = global_position
+
+		var explosion = FLARE_EXPLOSION.instantiate()
+		explosion.global_position = global_position
+		w.middle_front.add_child(explosion)
+		await get_tree().create_timer(0.2).timeout
+		queue_free()
 
 func is_world_blocking(target) -> bool:
 	var target_center_global_position: Vector2
@@ -145,7 +151,8 @@ func _on_ExplosionDetector_area_entered(area):
 
 
 func _on_PlayerDetectionZone_body_entered(body: Node2D) -> void:
-	$DetectExplosionTimer.start()
-	state = "set_off"
-	$AnimationPlayer.play("Blinking")
-	$AnimationPlayer.speed_scale = 1.0
+	if state ==  "normal":
+		$DetectExplosionTimer.start()
+		state = "set_off"
+		$AnimationPlayer.play("Blinking")
+		$AnimationPlayer.speed_scale = 1.0

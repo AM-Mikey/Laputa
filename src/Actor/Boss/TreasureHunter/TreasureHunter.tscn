@@ -13,6 +13,7 @@
 [ext_resource type="Script" uid="uid://nesb8uaupdav" path="res://src/Actor/Boss/TreasureHunter/State/TakeOff.gd" id="10_take_off"]
 [ext_resource type="Script" uid="uid://brk7rbnuu6omh" path="res://src/Actor/Boss/TreasureHunter/State/Air.gd" id="11_air"]
 [ext_resource type="Script" uid="uid://m1lqjufg0bce" path="res://src/Actor/Boss/TreasureHunter/State/Landing.gd" id="12_landing"]
+[ext_resource type="Script" uid="uid://cwvp2n5a0iofu" path="res://src/Actor/Boss/TreasureHunter/State/TransToPhase2.gd" id="13_0ri4u"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_sy72i"]
 size = Vector2(10, 14)
@@ -129,6 +130,11 @@ animations = [{
 }],
 "loop": true,
 "name": &"idle",
+"speed": 5.0
+}, {
+"frames": [],
+"loop": true,
+"name": &"new_animation",
 "speed": 5.0
 }, {
 "frames": [{
@@ -743,6 +749,16 @@ one_shot = true
 wait_time = 0.5
 one_shot = true
 
+[node name="Phase2SmokeTimer" type="Timer" parent="StateMachine/Air" unique_id=2112720123]
+process_callback = 0
+wait_time = 0.3
+one_shot = true
+
+[node name="Phase2SparkTimer" type="Timer" parent="StateMachine/Air" unique_id=2005418511]
+process_callback = 0
+wait_time = 0.3
+one_shot = true
+
 [node name="Landing" type="Node" parent="StateMachine" unique_id=690660678]
 script = ExtResource("12_landing")
 
@@ -752,6 +768,10 @@ metadata/_custom_type_script = "uid://bkttdvnxv3ulk"
 
 [node name="MoveTo" type="Node" parent="StateMachine" unique_id=656279263]
 script = ExtResource("6_q4fg5")
+metadata/_custom_type_script = "uid://bkttdvnxv3ulk"
+
+[node name="TransToPhase2" type="Node" parent="StateMachine" unique_id=895384569]
+script = ExtResource("13_0ri4u")
 metadata/_custom_type_script = "uid://bkttdvnxv3ulk"
 
 [node name="Hotspot" type="Node2D" parent="." unique_id=1205734841]
@@ -813,6 +833,8 @@ debug_color = Color(1, 0, 0, 0.235294)
 [connection signal="timeout" from="StateMachine/Air/FlareTimer" to="StateMachine/Air" method="_on_FlareTimer_timeout"]
 [connection signal="timeout" from="StateMachine/Air/ReloadTimer" to="StateMachine/Air" method="_on_ReloadTimer_timeout"]
 [connection signal="timeout" from="StateMachine/Air/SweepFireTimer" to="StateMachine/Air" method="_on_SweepFireTimer_timeout"]
+[connection signal="timeout" from="StateMachine/Air/Phase2SmokeTimer" to="StateMachine/Air" method="_on_Phase2SmokeTimer_timeout"]
+[connection signal="timeout" from="StateMachine/Air/Phase2SparkTimer" to="StateMachine/Air" method="_on_Phase2SparkTimer_timeout"]
 [connection signal="area_entered" from="Hitbox" to="." method="_on_hitbox_area_entered"]
 [connection signal="area_exited" from="Hitbox" to="." method="_on_hitbox_area_exited"]
 [connection signal="body_entered" from="PlayerDetector" to="." method="_on_PlayerDetector_body_entered"]

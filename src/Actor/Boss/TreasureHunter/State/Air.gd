@@ -23,6 +23,19 @@ var sweep_target_x := 0.0
 var sweep_attack_finished := false
 
 var propeller_sound = null
+var propeller_phase_2_spark_times: int = 0
+var propeller_malfunction_timer := 0.0
+var propeller_malfunction_elapsed := 0.0
+var propeller_malfunctioning := false
+
+const PHASE_2_SPARK_INTERVAL_MIN := 1.2
+const PHASE_2_SPARK_INTERVAL_MAX := 1.8
+const PROPELLER_MALFUNCTION_INTERVAL_MIN := 1.2
+const PROPELLER_MALFUNCTION_INTERVAL_MAX := 1.8
+const PROPELLER_MALFUNCTION_DURATION := 0.9
+const PROPELLER_ALTITUDE_DROP := 24.0
+const SMOKE_TIMER_MIN: = 0.1
+const SMOKE_TIMER_MAX: = 0.3
 
 func state_start(_prev_state: StringName):
 	arena_rect = main.get_arena_rect()
@@ -37,6 +50,14 @@ func state_start(_prev_state: StringName):
 	sweep_attack_finished = false
 	main.ap.play("fly")
 	propeller_sound = am.play("boss_treasure_hunter_flare_propeller_loop", main, null, 0.8, 0.0)
+	if main.phase_2_active:
+		propeller_phase_2_spark_times = 0
+		propeller_malfunction_timer = randf_range(PROPELLER_MALFUNCTION_INTERVAL_MIN, PROPELLER_MALFUNCTION_INTERVAL_MAX)
+		propeller_malfunction_elapsed = 0.0
+		propeller_malfunctioning = false
+		$Phase2SmokeTimer.start(randf_range(SMOKE_TIMER_MIN, SMOKE_TIMER_MAX))
+		$Phase2SparkTimer.start(randf_range(PHASE_2_SPARK_INTERVAL_MIN, PHASE_2_SPARK_INTERVAL_MAX))
+		return
 	$DurationTimer.start(hover_duration)
 	start_flare_timer()
 
@@ -45,10 +66,16 @@ func state_end(_next_state: StringName):
 	$FlareTimer.stop()
 	$ReloadTimer.stop()
 	$SweepFireTimer.stop()
+	$Phase2SmokeTimer.stop()
+	propeller_phase_2_spark_times = 0
 	if propeller_sound:
 		am.stop_sfx()
 
 func state_physics_process(delta: float):
+	if main.phase_2_active:
+		process_phase_2(delta)
+		return
+
 	match flight_mode:
 		FlightMode.HOVERING:
 			phase += phase_speed * delta
@@ -80,17 +107,34 @@ func state_physics_process(delta: float):
 				if can_land():
 					sm.change_state("landing")
 
+func process_phase_2(delta: float):
+	phase += phase_speed * delta
+	var altitude = hover_height + hover_vertical_amplitude * sin(phase * 2.0)
+	main.look_dir = Vector2(sign(cos(phase)), 0.0)
+
+	var altitude_offset := 0.0
+	if propeller_malfunctioning:
+		propeller_malfunction_elapsed += delta
+		var progress = clampf(propeller_malfunction_elapsed / PROPELLER_MALFUNCTION_DURATION, 0.0, 1.0)
+		altitude_offset = PROPELLER_ALTITUDE_DROP * sin(progress * PI)
+		if progress >= 1.0:
+			propeller_malfunctioning = false
+			propeller_malfunction_timer = randf_range(PROPELLER_MALFUNCTION_INTERVAL_MIN, PROPELLER_MALFUNCTION_INTERVAL_MAX)
+	else:
+		propeller_malfunction_timer -= delta
+		if propeller_malfunction_timer <= 0.0:
+			propeller_malfunctioning = true
+			propeller_malfunction_elapsed = 0.0
+			main.create_vfx("explosion", main.global_position + Vector2(0.0, -32.0))
+
+	main.global_position = Vector2(
+		arena_center_x + horizontal_radius * sin(phase),
+		altitude + altitude_offset
+	)
+
 ### UTILITY ###
 func start_flare_timer():
 	$FlareTimer.start(randf_range(flare_interval_min, flare_interval_max))
-
-func start_sweep():
-	flight_mode = FlightMode.SWEEPING
-	sweep_target_x = right_end_x if main.global_position.x <= arena_center_x else left_end_x
-	main.look_dir = Vector2(sign(sweep_target_x - main.global_position.x), 0.0)
-	main.ap.play("fly")
-	main.fire(Vector2.DOWN)
-	$SweepFireTimer.start(sweep_shot_interval)
 
 func move_straight_toward(target_x: float, delta: float):
 	var direction = sign(target_x - main.global_position.x)
@@ -103,18 +147,15 @@ func can_land() -> bool:
 		main.is_at_x(left_end_x) or main.is_at_x(right_end_x)
 	)
 
-
+func start_sweep():
+	flight_mode = FlightMode.SWEEPING
+	sweep_target_x = right_end_x if main.global_position.x <= arena_center_x else left_end_x
+	main.look_dir = Vector2(sign(sweep_target_x - main.global_position.x), 0.0)
+	main.ap.play("fly")
+	main.fire(Vector2.DOWN)
+	$SweepFireTimer.start(sweep_shot_interval)
 
 ### SIGNALS ###
-func _on_DurationTimer_timeout():
-	$FlareTimer.stop()
-	$ReloadTimer.stop()
-	#main.ap.play("fly")
-	#var nearest_end = left_end_x if abs(main.global_position.x - left_end_x) < abs(main.global_position.x - right_end_x) else right_end_x
-	#flight_mode = FlightMode.MOVING_TO_SWEEP_START
-	#sweep_target_x = nearest_end
-	#main.look_dir = Vector2(sign(sweep_target_x - main.global_position.x), 0.0)
-
 func _on_FlareTimer_timeout():
 	if flight_mode != FlightMode.HOVERING:
 		return
@@ -140,3 +181,32 @@ func _on_SweepFireTimer_timeout():
 func _on_ReloadTimer_timeout():
 	if flight_mode != FlightMode.HOVERING or !$FlareTimer.is_stopped():
 		main.ap.play("fly")
+
+func _on_DurationTimer_timeout():
+	$FlareTimer.stop()
+	$ReloadTimer.stop()
+	#main.ap.play("fly")
+	#var nearest_end = left_end_x if abs(main.global_position.x - left_end_x) < abs(main.global_position.x - right_end_x) else right_end_x
+	#flight_mode = FlightMode.MOVING_TO_SWEEP_START
+	#sweep_target_x = nearest_end
+	#main.look_dir = Vector2(sign(sweep_target_x - main.global_position.x), 0.0)
+
+func _on_Phase2SmokeTimer_timeout():
+	var rand: = randi_range(1, 3)
+	for i in range(0, rand):
+		var offset = Vector2(randf_range(-18.0, 18.0), randf_range(-30.0, -4.0))
+		var smoke_pos = main.global_position + offset
+		main.create_vfx("smoke", smoke_pos)
+	$Phase2SmokeTimer.start(randf_range(SMOKE_TIMER_MIN, SMOKE_TIMER_MAX))
+
+
+func _on_Phase2SparkTimer_timeout():
+	if propeller_phase_2_spark_times % 4 == 3:
+		for index in range(8):
+			main.fire_spark(Vector2.RIGHT.rotated(TAU * index / 8.0))
+			$Phase2SparkTimer.start(randf_range(PHASE_2_SPARK_INTERVAL_MIN, PHASE_2_SPARK_INTERVAL_MAX)  * 1.5)
+	else:
+		for index in range(0, randi() % 3 + 1):
+			main.fire_spark(Vector2.RIGHT.rotated(randf_range(0, TAU)))
+		$Phase2SparkTimer.start(randf_range(PHASE_2_SPARK_INTERVAL_MIN, PHASE_2_SPARK_INTERVAL_MAX))
+	propeller_phase_2_spark_times += 1

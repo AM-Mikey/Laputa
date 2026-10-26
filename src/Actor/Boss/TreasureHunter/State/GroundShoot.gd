@@ -16,6 +16,7 @@ func state_end(_next_state: StringName):
 func state_physics_process(delta: float):
 	main.keep_grounded(delta)
 
+### SIGNALS ###
 func _on_FireTimer_timeout():
 	if main.player_in_close_range:
 		sm.change_state("melee")

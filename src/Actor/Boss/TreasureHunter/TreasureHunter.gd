@@ -2,6 +2,8 @@ extends Boss
 
 const ICON = preload("res://assets/Icon/BossIcon.png")
 const FLARE_BULLET = preload("res://src/Bullet/Enemy/Flare.tscn")
+const SPARK = preload("res://src/Bullet/Enemy/Spark.tscn")
+const SMOKE = preload("res://src/Effect/GunSmoke.tscn")
 
 @onready var ap = $AnimationPlayer
 
@@ -14,6 +16,10 @@ var look_dir: = Vector2.LEFT:
 		update_animation()
 var move_dir: = Vector2.LEFT
 var player_in_close_range := false
+
+signal change_to_phase_2
+var phase_2_threshold: float = 20.0
+var phase_2_active := false
 
 var reloading: = false
 
@@ -33,22 +39,11 @@ func keep_grounded(delta):
 		velocity.y += gravity * delta
 	move_and_slide()
 
-func fire(dir):
-	var flare_shot = FLARE_BULLET.instantiate()
-	flare_shot.direction = dir
-	flare_shot.global_position = $Hotspot/GunNozzle.global_position
-	am.play("boss_treasure_hunter_flare_shot", self, null, 0.0)
-	w.player_front.add_child(flare_shot)
-
-func update_animation():
-	match look_dir.x:
-		-1.0:
-			$Sprite2D.flip_h = false
-			$Hotspot/GunNozzle.position = Vector2(-13, -19)
-		1.0:
-			$Sprite2D.flip_h = true
-			$Hotspot/GunNozzle.position = Vector2(13, -19)
-
+func _on_hit(damage, _blood_direction, _hitbox):
+	var remaining_hp = hp - damage
+	if not phase_2_active and hp > phase_2_threshold and remaining_hp > 0 and remaining_hp <= phase_2_threshold:
+		phase_2_active = true
+		sm.change_state("trans_to_phase_2")
 
 ### UTILITY ###
 func face_player():
@@ -72,9 +67,46 @@ func get_hover_height() -> float:
 	var arena_rect = get_arena_rect()
 	return arena_rect.position.y + arena_rect.size.y * 0.5
 
+func fire(dir):
+	var flare_shot = FLARE_BULLET.instantiate()
+	flare_shot.direction = dir
+	flare_shot.global_position = $Hotspot/GunNozzle.global_position
+	am.play("boss_treasure_hunter_flare_shot", self, null, 2.0)
+	w.player_front.add_child(flare_shot)
+
+func fire_spark(dir: Vector2):
+	var spark = SPARK.instantiate()
+	spark.velocity = 120.0 * dir
+	spark.direction = dir
+	spark.global_position = global_position + Vector2(0.0, -24.0)
+	w.player_front.add_child(spark)
+
+func create_vfx(effect_name: String, pos: Vector2):
+	match effect_name:
+		"explosion":
+			var explosion = EXPLOSION.instantiate()
+			explosion.global_position = pos
+			var explode_sound = am.play("explode", self, null, 3.0)
+			if explode_sound:
+				explode_sound.volume_db = 5.0
+				explode_sound.max_distance = 2000.0
+			w.middle_front.add_child(explosion)
+		"smoke":
+			var smoke = SMOKE.instantiate()
+			smoke.global_position = pos
+			w.middle_front.add_child(smoke)
+
+func update_animation():
+	match look_dir.x:
+		-1.0:
+			$Sprite2D.flip_h = false
+			$Hotspot/GunNozzle.position = Vector2(-13, -19)
+		1.0:
+			$Sprite2D.flip_h = true
+			$Hotspot/GunNozzle.position = Vector2(13, -19)
+
 func is_at_x(target_x: float) -> bool:
 	return abs(global_position.x - target_x) <= 0.5
-
 
 ### SIGNALS ###
 func _on_PlayerDetector_body_entered(_body: Node2D):

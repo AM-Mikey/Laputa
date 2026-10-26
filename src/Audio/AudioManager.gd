@@ -102,7 +102,7 @@ signal music_fadeout_finished
 	"boss_treasure_hunter_flare_shot": preload("res://assets/SFX/FlareGun.mp3"),
 	"boss_treasure_hunter_flare_reload": preload("res://assets/SFX/TurnstileJumperCock.ogg"),
 	"boss_treasure_hunter_flare_propeller_loop": preload("res://assets/SFX/FanLoop.ogg"),
-	"flare_explode": preload("res://assets/SFX/FanLoop.ogg"),
+	#"flare_explode": preload("res://assets/SFX/Placeholder/snd_big_crash.ogg"),
 	#"enemy_buzz":
 
 	"npc_voice_normal": preload("res://assets/SFX/Placeholder/snd_msg.ogg"),
