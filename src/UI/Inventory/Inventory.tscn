@@ -1,6 +1,5 @@
 [gd_scene format=3 uid="uid://b7ilah41ye7yl"]
 
-[ext_resource type="Theme" uid="uid://45e84j2sj7w0" path="res://src/UI/Theme/LaputaTheme.tres" id="2"]
 [ext_resource type="StyleBox" uid="uid://byg47wg5teo1" path="res://src/UI/StyleBox/ChromeRimmed.tres" id="3"]
 [ext_resource type="Shader" uid="uid://d3lkwynjfk4hg" path="res://src/Shader/SimpleBlur.gdshader" id="3_4pdh5"]
 [ext_resource type="StyleBox" uid="uid://deshi6r488bxi" path="res://src/UI/StyleBox/SteelRoundRiveted.tres" id="4_1ly47"]
@@ -16,10 +15,13 @@
 [ext_resource type="Script" uid="uid://bortbtb5j1u0t" path="res://src/UI/Inventory/Weapons.gd" id="9_knvwb"]
 [ext_resource type="Texture2D" uid="uid://el0mgxf4lb6s" path="res://assets/UI/Inventory/Items/WeaponWheelSide.png" id="9_lmga8"]
 [ext_resource type="Texture2D" uid="uid://bnoxbd4fv78ux" path="res://assets/UI/Inventory/Items/WeaponWheel.png" id="10_ebj88"]
+[ext_resource type="StyleBox" uid="uid://bpq27uwrkvyxy" path="res://src/UI/Slider/VScrollBarGrabber.tres" id="11_13m3q"]
 [ext_resource type="Texture2D" uid="uid://dyhiddbqi3lk2" path="res://assets/UI/Inventory/Items/StarFull.png" id="11_frhsn"]
 [ext_resource type="Texture2D" uid="uid://d7gfc5xk2jjn" path="res://assets/UI/Inventory/Items/Selector.png" id="11_j0w38"]
+[ext_resource type="StyleBox" uid="uid://dg61mwvkb31v3" path="res://src/UI/Slider/VScrollBarGrabberHighlight.tres" id="12_210e4"]
 [ext_resource type="StyleBox" uid="uid://djnu2b18r7r1d" path="res://src/UI/StyleBox/Cursor.tres" id="12_vxl58"]
 [ext_resource type="Texture2D" uid="uid://bhlo7pyv1e1g8" path="res://assets/Gun/GLauncherIcon.png" id="12_y48ww"]
+[ext_resource type="StyleBox" uid="uid://cr1nw0a6yivfy" path="res://src/UI/Slider/VScrollBarSlider.tres" id="13_3w7lq"]
 [ext_resource type="StyleBox" uid="uid://b2eysynpuqm3n" path="res://src/UI/StyleBox/RustTabs.tres" id="13_4huqx"]
 [ext_resource type="Texture2D" uid="uid://biemb4gcelr1x" path="res://assets/UI/Inventory/Items/IconCooldown.png" id="13_frhsn"]
 [ext_resource type="Texture2D" uid="uid://cdpcddq6jqnts" path="res://assets/UI/Inventory/Items/IconDamage.png" id="14_ynejs"]
@@ -37,12 +39,13 @@
 [ext_resource type="Texture2D" uid="uid://clvfvevpam8ef" path="res://assets/Gun/TsurugiIcon.png" id="20_l780j"]
 [ext_resource type="Texture2D" uid="uid://dx2f0s7evdyou" path="res://assets/UI/GunIcon/MPistol.png" id="20_mrnct"]
 [ext_resource type="Texture2D" uid="uid://k8gtyy865rl0" path="res://assets/Gun/Red7Icon.png" id="21_dn5nk"]
+[ext_resource type="Script" uid="uid://bvrlksrtimcxv" path="res://src/UI/Inventory/MissionMenu.gd" id="36_k1ny3"]
 [ext_resource type="Texture2D" uid="uid://c5w2d48ep2vp3" path="res://assets/UI/Inventory/Mission/Notepad.png" id="36_uc3h4"]
+[ext_resource type="AudioStream" uid="uid://gea5ukm01i2o" path="res://assets/SFX/Placeholder/snd_stamp.ogg" id="37_4ptxt"]
 [ext_resource type="Texture2D" uid="uid://nqjy3p0on2qe" path="res://assets/UI/Inventory/Mission/Book.png" id="37_nj2vu"]
 [ext_resource type="Texture2D" uid="uid://h4f3pmhs4168" path="res://assets/UI/Inventory/Mission/MailStamp.png" id="38_rpy03"]
 [ext_resource type="Texture2D" uid="uid://2nnik23r4sue" path="res://assets/UI/Inventory/Mission/StampBase.png" id="39_0skjx"]
 [ext_resource type="Texture2D" uid="uid://cfkxg66mmk1vh" path="res://assets/UI/Inventory/Mission/Stamp.png" id="40_rcdsb"]
-[ext_resource type="PackedScene" uid="uid://ft0bdyg0ncic" path="res://src/UI/Inventory/MissionBookmark.tscn" id="41_2nf8i"]
 [ext_resource type="Texture2D" uid="uid://b1updbyxexqfn" path="res://assets/UI/Inventory/Mission/StampImprint.png" id="41_eylai"]
 [ext_resource type="Texture2D" uid="uid://d225wkvgvnapo" path="res://assets/UI/Inventory/Mission/Arrow.png" id="42_dr7bi"]
 [ext_resource type="Texture2D" uid="uid://csmkuryqmrx68" path="res://assets/UI/Inventory/Mission/MissionCompleted.png" id="42_k1ny3"]
@@ -54,6 +57,109 @@
 [ext_resource type="StyleBox" uid="uid://cc3ivdery0b8x" path="res://src/UI/StyleBox/RustRound.tres" id="48_4ptxt"]
 [ext_resource type="StyleBox" uid="uid://tcccnpc1013o" path="res://src/UI/Slider/NotepadVScrollBarGrabber.tres" id="49_4u3g2"]
 [ext_resource type="StyleBox" uid="uid://crslp6oirdgee" path="res://src/UI/Slider/NotepadVScrollBarSlider.tres" id="50_13m3q"]
+[ext_resource type="PackedScene" uid="uid://dqi2kkacc0nnb" path="res://src/UI/Inventory/MissionBookmark.tscn" id="52_xcne2"]
+[ext_resource type="Texture2D" uid="uid://cwe1s2lr4sjjy" path="res://assets/UI/Inventory/Mission/BookmarkAlt.png" id="56_13m3q"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ryfn6"]
+
+[sub_resource type="StyleBoxEmpty" id="9"]
+
+[sub_resource type="StyleBoxEmpty" id="10"]
+
+[sub_resource type="Theme" id="Theme_ysmfa"]
+default_font = ExtResource("7_y7abv")
+BookmarkTextBlue/base_type = &"RichTextLabel"
+BookmarkTextBlue/colors/default_color = Color(5.198121e-06, 0.8374814, 0.9573576, 1)
+BookmarkTextBlue/colors/font_shadow_color = Color(0.6431373, 0.03529412, 0.03529412, 1)
+BookmarkTextRed/base_type = &"RichTextLabel"
+BookmarkTextRed/colors/default_color = Color(1, 0.6666667, 0.21568628, 1)
+BookmarkTextRed/colors/font_shadow_color = Color(0.6431373, 0.03529412, 0.03529412, 1)
+Button/colors/font_color = Color(0.964706, 0.964706, 0.964706, 1)
+Button/colors/font_color_disabled = Color(0.901961, 0.901961, 0.901961, 0.2)
+Button/colors/font_color_hover = Color(1, 1, 1, 1)
+Button/colors/font_color_pressed = Color(1, 1, 1, 1)
+Button/constants/hseparation = 2
+Button/styles/disabled = ExtResource("43_lnikm")
+Button/styles/focus = ExtResource("43_lnikm")
+Button/styles/hover = ExtResource("43_lnikm")
+Button/styles/normal = ExtResource("44_7y7ip")
+Button/styles/pressed = ExtResource("43_lnikm")
+CheckBox/colors/font_color = Color(0.88, 0.88, 0.88, 1)
+CheckBox/colors/font_color_disabled = Color(0.9, 0.9, 0.9, 0.2)
+CheckBox/colors/font_color_hover = Color(0.94, 0.94, 0.94, 1)
+CheckBox/colors/font_color_hover_pressed = Color(1, 1, 1, 1)
+CheckBox/colors/font_color_pressed = Color(1, 1, 1, 1)
+CheckBox/constants/check_vadjust = 0
+CheckBox/constants/hseparation = 4
+CheckBox/icons/checked = null
+CheckBox/icons/unchecked = null
+CheckButton/colors/font_color = Color(0.88, 0.88, 0.88, 1)
+CheckButton/colors/font_color_disabled = Color(0.9, 0.9, 0.9, 0.2)
+CheckButton/colors/font_color_hover = Color(0.94, 0.94, 0.94, 1)
+CheckButton/colors/font_color_hover_pressed = Color(1, 1, 1, 1)
+CheckButton/colors/font_color_pressed = Color(1, 1, 1, 1)
+CheckButton/constants/check_vadjust = 0
+CheckButton/constants/hseparation = 4
+CheckButton/icons/off = null
+CheckButton/icons/on = null
+HScrollBar/styles/grabber = ExtResource("45_eylai")
+HScrollBar/styles/grabber_highlight = ExtResource("46_k1ny3")
+HScrollBar/styles/grabber_pressed = ExtResource("46_k1ny3")
+HScrollBar/styles/scroll = ExtResource("47_xcne2")
+HSlider/icons/grabber = null
+HSlider/icons/grabber_highlight = null
+HSlider/icons/tick = null
+HSlider/styles/slider = ExtResource("47_xcne2")
+ItemList/colors/font_color = Color(1, 1, 1, 1)
+ItemList/colors/font_color_selected = Color(1, 1, 1, 1)
+ItemList/colors/guide_color = Color(0, 0, 0, 0.1)
+ItemList/constants/hseparation = 4
+ItemList/constants/icon_margin = 4
+ItemList/constants/line_separation = 2
+ItemList/constants/vseparation = 2
+ItemList/styles/bg = ExtResource("6_4pdh5")
+ItemList/styles/bg_focus = ExtResource("6_4pdh5")
+Label/colors/font_color = Color(1, 1, 1, 1)
+Label/colors/font_color_shadow = Color(0, 0, 0, 1)
+Label/colors/font_outline_modulate = Color(1, 1, 1, 1)
+Label/constants/line_spacing = 3
+Label/constants/shadow_as_outline = 0
+Label/constants/shadow_offset_x = 1
+Label/constants/shadow_offset_y = 1
+LineEdit/styles/focus = ExtResource("6_4pdh5")
+LineEdit/styles/normal = ExtResource("6_4pdh5")
+LineEdit/styles/read_only = ExtResource("6_4pdh5")
+OptionButton/colors/font_color = Color(0.2, 0.168627, 0.176471, 1)
+OptionButton/colors/font_color_disabled = Color(0.901961, 0.901961, 0.901961, 0.2)
+OptionButton/colors/font_color_hover = Color(0.2, 0.168627, 0.176471, 1)
+OptionButton/colors/font_color_pressed = Color(0.2, 0.168627, 0.176471, 1)
+OptionButton/constants/arrow_margin = 2
+OptionButton/constants/hseparation = 2
+OptionButton/icons/arrow = null
+Panel/styles/panel = ExtResource("48_4ptxt")
+TabContainer/constants/hseparation = 4
+TabContainer/constants/label_valign_bg = 2
+TabContainer/constants/label_valign_fg = 0
+TabContainer/constants/side_margin = 8
+TabContainer/constants/top_margin = 24
+TabContainer/styles/panel = SubResource("StyleBoxEmpty_ryfn6")
+TabContainer/styles/tab_focus = ExtResource("6_vxl58")
+TabContainer/styles/tab_hovered = ExtResource("6_vxl58")
+TabContainer/styles/tab_selected = ExtResource("13_4huqx")
+TabContainer/styles/tab_unselected = ExtResource("4_2n62p")
+TextEdit/styles/completion = ExtResource("6_4pdh5")
+TextEdit/styles/focus = ExtResource("6_4pdh5")
+TextEdit/styles/normal = ExtResource("6_4pdh5")
+TextEdit/styles/read_only = ExtResource("6_4pdh5")
+Tree/styles/bg = ExtResource("6_4pdh5")
+VScrollBar/styles/grabber = ExtResource("11_13m3q")
+VScrollBar/styles/grabber_highlight = ExtResource("12_210e4")
+VScrollBar/styles/grabber_pressed = ExtResource("12_210e4")
+VScrollBar/styles/scroll = ExtResource("13_3w7lq")
+VSlider/icons/grabber = null
+VSlider/styles/grabber_area = SubResource("9")
+VSlider/styles/grabber_area_highlight = SubResource("10")
+VSlider/styles/slider = ExtResource("47_xcne2")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_l1q3b"]
 shader = ExtResource("3_4pdh5")
@@ -743,12 +849,72 @@ _data = {
 &"RESET": SubResource("Animation_dn5nk")
 }
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_eylai"]
+shader = ExtResource("19_mrnct")
+shader_parameter/color = Color(0.086637296, 0.11695983, 0.12908593, 1)
+
+[sub_resource type="Animation" id="Animation_eylai"]
+resource_name = "CLICK"
+length = 0.2
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.19999999),
+"transitions": PackedFloat32Array(1, 1.2311444),
+"update": 0,
+"values": [Vector2(62, 31), Vector2(66, 31)]
+}
+
+[sub_resource type="Animation" id="Animation_k1ny3"]
+resource_name = "FLOAT"
+loop_mode = 1
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1.2311443),
+"update": 0,
+"values": [Vector2(62, 31), Vector2(66, 31)]
+}
+
+[sub_resource type="Animation" id="Animation_xcne2"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(66, 31)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_4ptxt"]
+_data = {
+&"CLICK": SubResource("Animation_eylai"),
+&"FLOAT": SubResource("Animation_k1ny3"),
+&"RESET": SubResource("Animation_xcne2")
+}
+
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_knvwb"]
 load_path = "res://.godot/imported/StarFull.png-c909cfa62abcb7bcecd462c91f28cc4f.ctex"
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_knvwb"]
 shader = ExtResource("19_mrnct")
-shader_parameter/color = Color(0.2, 0.25490198, 0.27058825, 1)
+shader_parameter/color = Color(0.10353274, 0.13841024, 0.14836884, 1)
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_l1q3b"]
 
@@ -764,11 +930,322 @@ shader_parameter/color = Color(0.2, 0.25490198, 0.27058825, 1)
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_vxl58"]
 
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ryfn6"]
+[sub_resource type="Animation" id="Animation_13m3q"]
+resource_name = "BACK"
+length = 0.2
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("StampBase/Path2D/PathFollow2D:progress_ratio")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 0.4061262),
+"update": 0,
+"values": [0.5, 1.0]
+}
+tracks/1/type = "bezier"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("%Stamp/Node2D/ShadowRect:modulate:a")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"handle_modes": PackedInt32Array(1, 0),
+"points": PackedFloat32Array(1, 0, 0, 0, 0, 0, 0, 0, 0, 0),
+"times": PackedFloat32Array(0, 0.2)
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("%Stamp/Node2D/ShadowRect:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(-0.045, 15), Vector2(-0.045, 0)]
+}
 
-[sub_resource type="StyleBoxEmpty" id="9"]
+[sub_resource type="Animation" id="Animation_3w7lq"]
+resource_name = "FADE_SIDE_MISSION"
+length = 0.3
+step = 0.1
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("%MissionCompletedText:modulate:a")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0, 0),
+"points": PackedFloat32Array(1, -0.19980001, 0.001380086, 0, 0, 0, -0.16095002, 0.1663949, 0, 0),
+"times": PackedFloat32Array(0, 0.29999995)
+}
+tracks/1/type = "bezier"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("%SideMissionBody:modulate:a")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"handle_modes": PackedInt32Array(0, 0),
+"points": PackedFloat32Array(1, -0.0333, 0, 0, 0, 0, -0.21645002, 0.16666667, 0, 0),
+"times": PackedFloat32Array(0, 0.29999995)
+}
+tracks/2/type = "bezier"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("%StampImprint:modulate:a")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"handle_modes": PackedInt32Array(0, 0),
+"points": PackedFloat32Array(1.0134231, -0.033300012, -0.009032249, 0, 0, 0, -0.16650002, 0.16890386, 0, 0),
+"times": PackedFloat32Array(0, 0.29999995)
+}
 
-[sub_resource type="StyleBoxEmpty" id="10"]
+[sub_resource type="Animation" id="Animation_210e4"]
+resource_name = "FORWARD"
+length = 0.2
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("StampBase/Path2D/PathFollow2D:progress_ratio")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 0.4061262),
+"update": 0,
+"values": [0.0, 0.5]
+}
+tracks/1/type = "bezier"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("%Stamp/Node2D/ShadowRect:modulate:a")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"handle_modes": PackedInt32Array(1, 0),
+"points": PackedFloat32Array(-0.0072167357, 0, 0, 0, 0, 1, 0, 0, 0, 0),
+"times": PackedFloat32Array(0, 0.2)
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("%Stamp/Node2D/ShadowRect:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(-0.045, 0), Vector2(-0.045, 15)]
+}
+
+[sub_resource type="Animation" id="Animation_4u3g2"]
+length = 0.001
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("StampBase/Path2D/PathFollow2D:progress_ratio")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/1/type = "bezier"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("%MissionCompletedText:modulate:a")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/2/type = "bezier"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("%SideMissionBody:modulate:a")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/3/type = "bezier"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("%StampImprint:modulate:a")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(0, -0.0005, 0, 0.0005, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/4/type = "bezier"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("%Stamp/Node2D/ShadowRect:modulate:a")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("%Stamp/Node2D/ShadowRect:position")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-0.045013428, 14.830677)]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("%Stamp:position")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-11, -12.5)]
+}
+
+[sub_resource type="Animation" id="Animation_4ptxt"]
+resource_name = "STAMP"
+length = 0.5
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("StampBase/Path2D/PathFollow2D:progress_ratio")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.5]
+}
+tracks/1/type = "audio"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("%StampAudio")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"clips": [{
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource("37_4ptxt")
+}],
+"times": PackedFloat32Array(0.2)
+}
+tracks/1/use_blend = true
+tracks/2/type = "bezier"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("%MissionCompletedText:modulate:a")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"handle_modes": PackedInt32Array(1, 0, 1),
+"points": PackedFloat32Array(-0.0042059394, 0, 0, 0, 0, -0.0042059394, 0, 0, 0, 0, 1, 0, 0, 0, 0),
+"times": PackedFloat32Array(0, 0.1, 0.3)
+}
+tracks/3/type = "bezier"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("%SideMissionBody:modulate:a")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"handle_modes": PackedInt32Array(1),
+"points": PackedFloat32Array(1, 0, 0, 0, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/4/type = "bezier"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("%StampImprint:modulate:a")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"handle_modes": PackedInt32Array(1, 0, 0),
+"points": PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1.0134231, 0, 0, 0, 0),
+"times": PackedFloat32Array(0, 0.099999994, 0.2)
+}
+tracks/5/type = "bezier"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("%Stamp/Node2D/ShadowRect:modulate:a")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"handle_modes": PackedInt32Array(0, 1, 0, 0),
+"points": PackedFloat32Array(1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0),
+"times": PackedFloat32Array(0, 0.1, 0.3, 0.5)
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("%Stamp/Node2D/ShadowRect:position")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.3, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(-0.045, 15), Vector2(-0.045, 0), Vector2(-0.045, 0), Vector2(-0.045, 15)]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("%Stamp:position")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.3, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(-11, -12.5), Vector2(-11, 2), Vector2(-11, 2), Vector2(-11, -12.5)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_4u3g2"]
+_data = {
+&"BACK": SubResource("Animation_13m3q"),
+&"FADE_SIDE_MISSION": SubResource("Animation_3w7lq"),
+&"FORWARD": SubResource("Animation_210e4"),
+&"RESET": SubResource("Animation_4u3g2"),
+&"STAMP": SubResource("Animation_4ptxt")
+}
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_txmip"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_qcwrg"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_22ob0"]
 
 [sub_resource type="Theme" id="Theme_3w7lq"]
 default_font = ExtResource("7_y7abv")
@@ -840,7 +1317,7 @@ TabContainer/constants/label_valign_bg = 2
 TabContainer/constants/label_valign_fg = 0
 TabContainer/constants/side_margin = 8
 TabContainer/constants/top_margin = 24
-TabContainer/styles/panel = SubResource("StyleBoxEmpty_ryfn6")
+TabContainer/styles/panel = SubResource("StyleBoxEmpty_txmip")
 TabContainer/styles/tab_focus = ExtResource("6_vxl58")
 TabContainer/styles/tab_hovered = ExtResource("6_vxl58")
 TabContainer/styles/tab_selected = ExtResource("13_4huqx")
@@ -855,9 +1332,15 @@ VScrollBar/constants/padding_right = 0
 VScrollBar/styles/grabber = ExtResource("49_4u3g2")
 VScrollBar/styles/scroll = ExtResource("50_13m3q")
 VSlider/icons/grabber = null
-VSlider/styles/grabber_area = SubResource("9")
-VSlider/styles/grabber_area_highlight = SubResource("10")
+VSlider/styles/grabber_area = SubResource("StyleBoxEmpty_qcwrg")
+VSlider/styles/grabber_area_highlight = SubResource("StyleBoxEmpty_22ob0")
 VSlider/styles/slider = ExtResource("47_xcne2")
+
+[sub_resource type="Curve2D" id="Curve2D_4ptxt"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 11, 12, 0, 0, 0, 0, 9, 7, 0, 0, 0, 0, 6.029949, 0.9834213, 0, 0, 0, 0, 3, -4, 0, 0, 0, 0, -2, -11, 0, 0, 0, 0, -6, -14, 0, 0, 0, 0, -13, -17, 0, 0, 0, 0, -17, -18, 0, 0, 0, 0, -22, -19, 0, 0, 0, 0, -19, -14, 0, 0, 0, 0, -16, -9, 0, 0, 0, 0, -13, -4, 0, 0, 0, 0, -11, 0, 0, 0, 0, 0, -7, 6, 0, 0, 0, 0, -3, 8, 0, 0, 0, 0, 0, 10, 0, 0, 0, 0, 5, 12, 0, 0, 0, 0, 11, 12)
+}
+point_count = 18
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_lmyv0"]
 
@@ -871,15 +1354,70 @@ VSlider/styles/slider = ExtResource("47_xcne2")
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_pkrle"]
 
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_4ptxt"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_k1ny3"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_13m3q"]
+atlas = ExtResource("56_13m3q")
+region = Rect2(0, 0, 10, 17)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_210e4"]
+texture = SubResource("AtlasTexture_13m3q")
+texture_margin_left = 6.0
+texture_margin_right = 3.0
+axis_stretch_horizontal = 2
+axis_stretch_vertical = 2
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3w7lq"]
+atlas = ExtResource("56_13m3q")
+region = Rect2(0, 17, 10, 17)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_txmip"]
+texture = SubResource("AtlasTexture_3w7lq")
+texture_margin_left = 6.0
+texture_margin_right = 3.0
+axis_stretch_horizontal = 2
+axis_stretch_vertical = 2
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qcwrg"]
+atlas = ExtResource("56_13m3q")
+region = Rect2(0, 17, 10, 17)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_22ob0"]
+texture = SubResource("AtlasTexture_qcwrg")
+texture_margin_left = 6.0
+texture_margin_right = 3.0
+axis_stretch_horizontal = 2
+axis_stretch_vertical = 2
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pr84n"]
+atlas = ExtResource("56_13m3q")
+region = Rect2(0, 17, 10, 17)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_hybdj"]
+texture = SubResource("AtlasTexture_pr84n")
+texture_margin_left = 6.0
+texture_margin_right = 3.0
+axis_stretch_horizontal = 2
+axis_stretch_vertical = 2
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_k1ny3"]
+atlas = ExtResource("42_dr7bi")
+region = Rect2(0, 0, 9, 7)
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_xcne2"]
+
 [node name="Inventory" type="CenterContainer" unique_id=2030748233]
 process_mode = 3
 offset_right = 480.0
 offset_bottom = 270.0
-theme = ExtResource("2")
+theme = SubResource("Theme_ysmfa")
 script = ExtResource("6")
 
 [node name="Blur" type="Polygon2D" parent="." unique_id=1728504874]
 material = SubResource("ShaderMaterial_l1q3b")
+position = Vector2(38, -8)
 polygon = PackedVector2Array(0, 0, 480, 0, 480, 270, 0, 270)
 
 [node name="VBox" type="VBoxContainer" parent="." unique_id=117969254]
@@ -1161,9 +1699,19 @@ unique_name_in_owner = true
 libraries/ = SubResource("AnimationLibrary_mrnct")
 
 [node name="Selector" type="Sprite2D" parent="VBox/Background/Inventory/Weapons" unique_id=134563625]
-position = Vector2(65, 31)
+position = Vector2(66, 31)
 texture = ExtResource("11_j0w38")
 centered = false
+
+[node name="Shadow" type="Sprite2D" parent="VBox/Background/Inventory/Weapons/Selector" unique_id=1239993129]
+show_behind_parent = true
+material = SubResource("ShaderMaterial_eylai")
+position = Vector2(9, 11)
+texture = ExtResource("11_j0w38")
+
+[node name="SelectorAnimator" type="AnimationPlayer" parent="VBox/Background/Inventory/Weapons/Selector" unique_id=666806868]
+unique_name_in_owner = true
+libraries/ = SubResource("AnimationLibrary_4ptxt")
 
 [node name="OneStar" type="Node2D" parent="VBox/Background/Inventory/Weapons" unique_id=2133602971]
 unique_name_in_owner = true
@@ -1297,7 +1845,7 @@ centered = false
 offset_left = 192.0
 offset_right = 288.0
 offset_bottom = 80.0
-theme = ExtResource("2")
+theme = SubResource("Theme_ysmfa")
 theme_override_constants/margin_left = 20
 theme_override_constants/margin_top = 4
 theme_override_constants/margin_right = 3
@@ -1456,6 +2004,7 @@ horizontal_alignment = 2
 clip_text = true
 
 [node name="VBox" type="VBoxContainer" parent="VBox/Background/Inventory" unique_id=610653170]
+visible = false
 layout_mode = 2
 theme_override_constants/separation = 8
 
@@ -1551,123 +2100,124 @@ unique_name_in_owner = true
 anchors_preset = 0
 offset_right = 288.0
 offset_bottom = 232.0
+script = ExtResource("36_k1ny3")
 
-[node name="Notepad" type="Sprite2D" parent="VBox/Background/Mission" unique_id=1659218826]
-position = Vector2(182, 8)
+[node name="StampAnimator" type="AnimationPlayer" parent="VBox/Background/Mission" unique_id=920649144]
+unique_name_in_owner = true
+libraries/ = SubResource("AnimationLibrary_4u3g2")
+
+[node name="StampAudio" type="AudioStreamPlayer" parent="VBox/Background/Mission" unique_id=1679463362]
+unique_name_in_owner = true
+
+[node name="Nodepad" type="TextureRect" parent="VBox/Background/Mission" unique_id=1007516431]
+layout_mode = 0
+offset_left = 182.0
+offset_top = 8.0
+offset_right = 264.0
+offset_bottom = 224.0
 texture = ExtResource("36_uc3h4")
-centered = false
 
-[node name="Book" type="Sprite2D" parent="VBox/Background/Mission" unique_id=465811711]
-position = Vector2(24, 8)
-texture = ExtResource("37_nj2vu")
-centered = false
-
-[node name="MailStamp" type="Sprite2D" parent="VBox/Background/Mission" unique_id=2004521325]
-position = Vector2(135, 21)
-texture = ExtResource("38_rpy03")
-centered = false
-
-[node name="StampBase" type="Sprite2D" parent="VBox/Background/Mission" unique_id=1860416678]
-position = Vector2(268, 8)
-texture = ExtResource("39_0skjx")
-centered = false
-
-[node name="Stamp" type="Sprite2D" parent="VBox/Background/Mission" unique_id=1331799153]
-position = Vector2(271, 38)
-texture = ExtResource("40_rcdsb")
-centered = false
-
-[node name="StampImprint" type="Sprite2D" parent="VBox/Background/Mission" unique_id=487335247]
-position = Vector2(239, 26)
-texture = ExtResource("41_eylai")
-centered = false
-
-[node name="MissionCompleted" type="Sprite2D" parent="VBox/Background/Mission" unique_id=1587157012]
-position = Vector2(189, 27)
+[node name="MissionCompletedText" type="TextureRect" parent="VBox/Background/Mission/Nodepad" unique_id=525645634]
+unique_name_in_owner = true
+modulate = Color(1, 1, 1, 0)
+layout_mode = 0
+offset_left = 6.0
+offset_top = 19.0
+offset_right = 50.0
+offset_bottom = 34.0
 texture = ExtResource("42_k1ny3")
-centered = false
 
-[node name="VBox" type="VBoxContainer" parent="VBox/Background/Mission" unique_id=1777726323]
+[node name="StampImprint" type="TextureRect" parent="VBox/Background/Mission/Nodepad" unique_id=1899313374]
+unique_name_in_owner = true
+modulate = Color(1, 1, 1, 0)
 layout_mode = 0
-offset_left = 39.0
-offset_top = 109.0
-offset_right = 176.0
-offset_bottom = 189.0
-theme_override_constants/separation = 21
-
-[node name="MissionBookmark0" parent="VBox/Background/Mission/VBox" unique_id=259960228 instance=ExtResource("41_2nf8i")]
-layout_mode = 2
-
-[node name="MissionBookmark1" parent="VBox/Background/Mission/VBox" unique_id=155973909 instance=ExtResource("41_2nf8i")]
-layout_mode = 2
-
-[node name="MissionBookmark2" parent="VBox/Background/Mission/VBox" unique_id=2131255572 instance=ExtResource("41_2nf8i")]
-layout_mode = 2
-
-[node name="MissionBookmark3" parent="VBox/Background/Mission/VBox" unique_id=2005994272 instance=ExtResource("41_2nf8i")]
-layout_mode = 2
-
-[node name="ArrowLeft" type="Sprite2D" parent="VBox/Background/Mission" unique_id=1243003905]
-position = Vector2(77, 200)
-texture = ExtResource("42_dr7bi")
-centered = false
-hframes = 2
-
-[node name="ArrowRight" type="Sprite2D" parent="VBox/Background/Mission" unique_id=1896625884]
-position = Vector2(113, 200)
-texture = ExtResource("42_dr7bi")
-centered = false
-flip_h = true
-hframes = 2
-
-[node name="MainMissionTitle" type="RichTextLabel" parent="VBox/Background/Mission" unique_id=1000297582]
-layout_mode = 0
-offset_left = 48.0
+offset_left = 57.0
 offset_top = 18.0
-offset_right = 128.0
-offset_bottom = 47.0
-theme_override_colors/default_color = Color(0.5176471, 0.25490198, 0.13333334, 1)
-theme_override_colors/font_shadow_color = Color(0.96862745, 0.8862745, 0.7176471, 1)
-theme_override_constants/line_separation = -2
-theme_override_constants/shadow_outline_size = 0
-theme_override_constants/shadow_offset_x = 0
-theme_override_constants/shadow_offset_y = 1
-text = "Main Mission Full Title"
+offset_right = 75.0
+offset_bottom = 36.0
+texture = ExtResource("41_eylai")
 
-[node name="MainMissionBody" type="RichTextLabel" parent="VBox/Background/Mission" unique_id=17085908]
+[node name="SideMissionBody" type="RichTextLabel" parent="VBox/Background/Mission/Nodepad" unique_id=1112561301]
+unique_name_in_owner = true
+modulate = Color(1, 1, 1, 0)
 layout_mode = 0
-offset_left = 48.0
-offset_top = 46.0
-offset_right = 152.0
-offset_bottom = 93.0
-theme_override_colors/default_color = Color(0.5176471, 0.25490198, 0.13333334, 1)
-theme_override_constants/line_separation = -1
-theme_override_fonts/normal_font = ExtResource("8_1e805")
-text = "Main mission full description written here."
-
-[node name="SideMissionBody" type="RichTextLabel" parent="VBox/Background/Mission" unique_id=1112561301]
-layout_mode = 0
-offset_left = 188.0
-offset_top = 47.0
-offset_right = 258.0
-offset_bottom = 208.0
+offset_left = 6.0
+offset_top = 39.0
+offset_right = 76.0
+offset_bottom = 200.0
 theme = SubResource("Theme_3w7lq")
 theme_override_colors/default_color = Color(0.4627451, 0.4862745, 0.43137255, 1)
 theme_override_fonts/normal_font = ExtResource("8_1e805")
-text = "Side mission details explained here. Side mission details explained here. Side mission details explained here. Side mission details explained here.fcxeeeeedrraaq"
+text = "Side mission details explained here. Side mission details explained here. Side mission details explained here. Side mission details explained here."
 
-[node name="PageNumber" type="RichTextLabel" parent="VBox/Background/Mission" unique_id=906194973]
+[node name="StampBase" type="TextureRect" parent="VBox/Background/Mission" unique_id=721002773]
 layout_mode = 0
-offset_left = 92.0
-offset_top = 196.0
-offset_right = 108.0
-offset_bottom = 211.0
-theme = SubResource("Theme_3w7lq")
-theme_override_colors/default_color = Color(0.4627451, 0.4862745, 0.43137255, 1)
-theme_override_fonts/normal_font = ExtResource("8_1e805")
-text = "1/3"
-fit_content = true
-scroll_active = false
+offset_left = 267.0
+offset_top = 7.0
+offset_right = 295.0
+offset_bottom = 72.0
+texture = ExtResource("39_0skjx")
+
+[node name="Path2D" type="Path2D" parent="VBox/Background/Mission/StampBase" unique_id=1396088463]
+position = Vector2(3, 30)
+curve = SubResource("Curve2D_4ptxt")
+
+[node name="PathFollow2D" type="PathFollow2D" parent="VBox/Background/Mission/StampBase/Path2D" unique_id=16073045]
+position = Vector2(11, 12)
+rotates = false
+
+[node name="Stamp" type="TextureRect" parent="VBox/Background/Mission/StampBase/Path2D/PathFollow2D" unique_id=610190920]
+unique_name_in_owner = true
+z_index = 20
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -11.0
+offset_top = -12.5
+offset_right = 11.0
+offset_bottom = 12.5
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 6
+size_flags_vertical = 6
+texture = ExtResource("40_rcdsb")
+metadata/_edit_use_anchors_ = true
+
+[node name="Node2D" type="Node2D" parent="VBox/Background/Mission/StampBase/Path2D/PathFollow2D/Stamp" unique_id=379666955]
+
+[node name="ShadowRect" type="ColorRect" parent="VBox/Background/Mission/StampBase/Path2D/PathFollow2D/Stamp/Node2D" unique_id=1834208371]
+modulate = Color(1, 1, 1, 0)
+z_as_relative = false
+offset_left = -0.045013428
+offset_top = 14.830677
+offset_right = 21.954987
+offset_bottom = 38.661236
+color = Color(0.16745102, 0.16745102, 0.16745102, 0.5176471)
+
+[node name="Shadow" type="TextureRect" parent="VBox/Background/Mission/StampBase/Path2D/PathFollow2D/Stamp/Node2D" unique_id=1541972168]
+visible = false
+modulate = Color(1, 1, 1, 0.0018154979)
+show_behind_parent = true
+z_as_relative = false
+material = SubResource("ShaderMaterial_knvwb")
+offset_left = -0.045013428
+offset_top = 24.830677
+offset_right = 21.954987
+offset_bottom = 49.830677
+texture = ExtResource("40_rcdsb")
+expand_mode = 1
+
+[node name="ShadowControl" type="Control" parent="VBox/Background/Mission/StampBase/Path2D/PathFollow2D/Stamp" unique_id=2071506518]
+modulate = Color(1, 0.51948744, 0.6909005, 1)
+z_index = 20
+z_as_relative = false
+anchors_preset = 0
+offset_left = 23.954987
+offset_top = 59.830677
+offset_right = 45.909973
+offset_bottom = 80.661354
 
 [node name="VBoxOLD" type="HBoxContainer" parent="VBox/Background/Mission" unique_id=836684017]
 visible = false
@@ -1701,7 +2251,7 @@ theme_override_constants/margin_top = 6
 theme_override_constants/margin_right = 6
 theme_override_constants/margin_bottom = 6
 
-[node name="MainMissionBody" type="Label" parent="VBox/Background/Mission/VBoxOLD/Missions/HBoxContainer/Panel/MarginContainer" unique_id=988650954]
+[node name="MainMissionBody2" type="Label" parent="VBox/Background/Mission/VBoxOLD/Missions/HBoxContainer/Panel/MarginContainer" unique_id=988650954]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_vertical = 0
@@ -1777,6 +2327,159 @@ theme_override_colors/font_color = Color(0.784314, 0.784314, 0.639216, 1)
 theme_override_colors/font_shadow_color = Color(0.113725, 0.156863, 0.227451, 1)
 theme_override_fonts/font = ExtResource("8_1e805")
 autowrap_mode = 3
+
+[node name="BookContainer" type="PanelContainer" parent="VBox/Background/Mission" unique_id=1234301382]
+layout_mode = 0
+offset_left = 23.0
+offset_top = 7.0
+offset_right = 174.0
+offset_bottom = 222.0
+theme_override_styles/panel = SubResource("StyleBoxEmpty_4ptxt")
+
+[node name="Book" type="TextureRect" parent="VBox/Background/Mission/BookContainer" unique_id=1308910751]
+layout_mode = 2
+texture = ExtResource("37_nj2vu")
+
+[node name="MarginContainer" type="MarginContainer" parent="VBox/Background/Mission/BookContainer/Book" unique_id=1796546456]
+clip_children = 2
+layout_mode = 0
+offset_left = 5.0
+offset_top = 5.0
+offset_right = 149.0
+offset_bottom = 205.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBox/Background/Mission/BookContainer/Book/MarginContainer" unique_id=2120677208]
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="VBox/Background/Mission/BookContainer/Book/MarginContainer/VBoxContainer" unique_id=1374559673]
+custom_minimum_size = Vector2(100, 70)
+layout_mode = 2
+theme_override_constants/margin_left = 18
+theme_override_constants/margin_top = 2
+theme_override_constants/margin_right = 10
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBox/Background/Mission/BookContainer/Book/MarginContainer/VBoxContainer/MarginContainer" unique_id=1515892884]
+layout_mode = 2
+theme_override_constants/separation = 4
+
+[node name="MainMissionTitle" type="RichTextLabel" parent="VBox/Background/Mission/BookContainer/Book/MarginContainer/VBoxContainer/MarginContainer/VBoxContainer" unique_id=1000297582]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 25)
+layout_mode = 2
+theme_override_colors/default_color = Color(0.5176471, 0.25490198, 0.13333334, 1)
+theme_override_colors/font_shadow_color = Color(0.96862745, 0.8862745, 0.7176471, 1)
+theme_override_constants/line_separation = -2
+theme_override_constants/shadow_outline_size = 0
+theme_override_constants/shadow_offset_x = 0
+theme_override_constants/shadow_offset_y = 1
+text = "Main Mission Full Title"
+
+[node name="MainMissionBody" type="RichTextLabel" parent="VBox/Background/Mission/BookContainer/Book/MarginContainer/VBoxContainer/MarginContainer/VBoxContainer" unique_id=17085908]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+theme_override_colors/default_color = Color(0.5176471, 0.25490198, 0.13333334, 1)
+theme_override_constants/line_separation = -1
+theme_override_fonts/normal_font = ExtResource("8_1e805")
+text = "Main mission full description written here."
+
+[node name="Spacer" type="HSeparator" parent="VBox/Background/Mission/BookContainer/Book/MarginContainer/VBoxContainer" unique_id=1042866368]
+layout_mode = 2
+theme_override_constants/separation = 7
+theme_override_styles/separator = SubResource("StyleBoxEmpty_k1ny3")
+
+[node name="SideMissionContainer" type="VBoxContainer" parent="VBox/Background/Mission/BookContainer/Book/MarginContainer/VBoxContainer" unique_id=1777726323]
+unique_name_in_owner = true
+clip_contents = true
+custom_minimum_size = Vector2(0, 80)
+layout_direction = 2
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 4
+theme_override_constants/separation = 3
+
+[node name="Bookmarked" parent="VBox/Background/Mission/BookContainer/Book/MarginContainer/VBoxContainer/SideMissionContainer" unique_id=945415685 instance=ExtResource("52_xcne2")]
+custom_minimum_size = Vector2(79.08, 17)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_210e4")
+banner_color = 0
+
+[node name="Bookmarked2" parent="VBox/Background/Mission/BookContainer/Book/MarginContainer/VBoxContainer/SideMissionContainer" unique_id=1845697132 instance=ExtResource("52_xcne2")]
+custom_minimum_size = Vector2(133, 17)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_txmip")
+
+[node name="Bookmarked3" parent="VBox/Background/Mission/BookContainer/Book/MarginContainer/VBoxContainer/SideMissionContainer" unique_id=609408790 instance=ExtResource("52_xcne2")]
+custom_minimum_size = Vector2(133, 17)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_22ob0")
+
+[node name="Bookmarked4" parent="VBox/Background/Mission/BookContainer/Book/MarginContainer/VBoxContainer/SideMissionContainer" unique_id=839823990 instance=ExtResource("52_xcne2")]
+custom_minimum_size = Vector2(133, 17)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_hybdj")
+
+[node name="PageNumber" type="HBoxContainer" parent="VBox/Background/Mission/BookContainer/Book/MarginContainer" unique_id=1123152933]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 8
+theme_override_constants/separation = 8
+
+[node name="LeftArrow" type="TextureButton" parent="VBox/Background/Mission/BookContainer/Book/MarginContainer/PageNumber" unique_id=1424194505]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 4
+texture_normal = SubResource("AtlasTexture_k1ny3")
+
+[node name="Fraction" type="RichTextLabel" parent="VBox/Background/Mission/BookContainer/Book/MarginContainer/PageNumber" unique_id=906194973]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(20, 0)
+layout_mode = 2
+theme = SubResource("Theme_3w7lq")
+theme_override_colors/default_color = Color(0.4627451, 0.4862745, 0.43137255, 1)
+theme_override_fonts/normal_font = ExtResource("8_1e805")
+text = "1/3"
+fit_content = true
+scroll_active = false
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="RightArrow" type="TextureButton" parent="VBox/Background/Mission/BookContainer/Book/MarginContainer/PageNumber" unique_id=74513265]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture_normal = SubResource("AtlasTexture_k1ny3")
+flip_h = true
+
+[node name="Panel" type="Panel" parent="VBox/Background/Mission/BookContainer/Book" unique_id=801333213]
+visible = false
+modulate = Color(1, 1, 1, 0)
+layout_mode = 0
+offset_right = 151.0
+offset_bottom = 214.0
+
+[node name="MailStamp" type="Sprite2D" parent="VBox/Background/Mission/BookContainer/Book/Panel" unique_id=2004521325]
+position = Vector2(113, 11)
+texture = ExtResource("38_rpy03")
+centered = false
+
+[node name="PanelContainer" type="PanelContainer" parent="VBox/Background/Mission/BookContainer/Book" unique_id=454562229]
+visible = false
+modulate = Color(1, 1, 1, 0)
+clip_children = 2
+layout_mode = 0
+offset_left = 4.0
+offset_top = 4.0
+offset_right = 150.0
+offset_bottom = 209.0
+
+[node name="Panel2" type="Panel" parent="VBox/Background/Mission/BookContainer/Book" unique_id=679871513]
+visible = false
+layout_mode = 0
+offset_right = 142.0
+offset_bottom = 197.0
+theme_override_styles/panel = SubResource("StyleBoxEmpty_xcne2")
 
 [node name="Book" type="MarginContainer" parent="VBox/Background" unique_id=2118501264]
 unique_name_in_owner = true

@@ -1,27 +1,65 @@
-[gd_scene format=3 uid="uid://ft0bdyg0ncic"]
+[gd_scene format=3 uid="uid://dqi2kkacc0nnb"]
 
-[ext_resource type="Texture2D" uid="uid://dhjx46b61lu8p" path="res://assets/UI/Inventory/Mission/Bookmark.png" id="1_rrcqg"]
+[ext_resource type="Script" uid="uid://c0lfloe84qgnr" path="res://src/UI/Inventory/MissionBookmark.gd" id="1_u6fpj"]
+[ext_resource type="Texture2D" uid="uid://cwe1s2lr4sjjy" path="res://assets/UI/Inventory/Mission/BookmarkAlt.png" id="2_8ghv8"]
 [ext_resource type="Theme" uid="uid://45e84j2sj7w0" path="res://src/UI/Theme/LaputaTheme.tres" id="2_u6fpj"]
 
-[node name="Bookmark" type="Control" unique_id=155973909]
-layout_mode = 3
-anchors_preset = 0
+[sub_resource type="AtlasTexture" id="AtlasTexture_g2byc"]
+atlas = ExtResource("2_8ghv8")
+region = Rect2(0, 0, 10, 17)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_csjwd"]
+texture = SubResource("AtlasTexture_g2byc")
+texture_margin_left = 6.0
+texture_margin_right = 3.0
+axis_stretch_horizontal = 2
+axis_stretch_vertical = 2
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_g7gce"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_g2byc"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_csjwd"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_hn1aw"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_24ktd"]
+
+[node name="Panel" type="PanelContainer" unique_id=977172188]
+clip_contents = true
 offset_right = 133.0
 offset_bottom = 17.0
-
-[node name="Sprite" type="Sprite2D" parent="." unique_id=259960228]
-texture = ExtResource("1_rrcqg")
-centered = false
-vframes = 2
-frame = 1
-
-[node name="Label" type="RichTextLabel" parent="." unique_id=600078387]
-layout_mode = 0
-offset_left = 9.0
-offset_right = 129.0
-offset_bottom = 15.0
+size_flags_horizontal = 8
 theme = ExtResource("2_u6fpj")
-theme_override_colors/default_color = Color(0.9529412, 0.69411767, 0.19215687, 1)
-theme_override_colors/font_shadow_color = Color(0.6431373, 0.03529412, 0.03529412, 1)
-theme_override_constants/shadow_outline_size = 0
-text = "Side Mission Title"
+theme_override_styles/panel = SubResource("StyleBoxTexture_csjwd")
+script = ExtResource("1_u6fpj")
+banner_color = 0
+
+[node name="MarginContainer" type="MarginContainer" parent="." unique_id=1037717271]
+layout_mode = 2
+theme_override_constants/margin_left = 3
+
+[node name="Label" type="RichTextLabel" parent="MarginContainer" unique_id=2007024399]
+layout_mode = 2
+theme = ExtResource("2_u6fpj")
+theme_type_variation = &"BookmarkTextBlue"
+text = "Testing Bookmark"
+autowrap_mode = 0
+
+[node name="ColorRect" type="ColorRect" parent="MarginContainer/Label" unique_id=998862091]
+visible = false
+layout_mode = 0
+offset_top = 8.0
+offset_bottom = 9.0
+color = Color(0.53814226, 0.736414, 0.99999446, 1)
+
+[node name="Button" type="Button" parent="." unique_id=945415685]
+custom_minimum_size = Vector2(0, 17)
+layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxEmpty_g7gce")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_g2byc")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_csjwd")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_hn1aw")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_24ktd")
+
+[connection signal="pressed" from="Button" to="." method="_on_Button_pressed"]

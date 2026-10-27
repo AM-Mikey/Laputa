@@ -1,3 +1,5 @@
+class_name MissionSystem
+
 extends Node
 
 const INVENTORY_ICON = preload("res://src/UI/Inventory/InventoryIcon.tscn")
@@ -32,10 +34,53 @@ const MAIN_MISSION = [ #[name, trigger_type, trigger_value, description]
 ]
 
 var main_mission_stage: Array = MAIN_MISSION[0]
-var side_missions: Array[SideMission]
+
 var mission_progress_history: Array = [["Main", MAIN_MISSION[0][0]]] #[[MissionName, stage_string]] ##start with first main mission
 
+# Stores the queue of animation
+var resolved_side_mission_queue: Array[SideMission] = []
+
+# Side missions in the order they were completed or failed.
+# Ex: side_missions [A, B, C] finished as B, C, A -> [B, C, A]
+var resolved_side_mission_order: Array[SideMission] = []
+
+
 @onready var w = get_tree().get_root().get_node("World")
+
+
+var _base_mission: SideMission = preload("res://src/Mission/SideMissionExample.tres")
+
+var _base_mission_test: SideMission = preload("res://src/Mission/SideMissionSecondExample.tres")
+
+# TODO: Clean this up... this is just for testing
+var side_missions: Array[SideMission] = [
+	_base_mission,
+	_base_mission_test,
+	_base_mission_test.duplicate(true),
+	_base_mission_test.duplicate(true),
+	_base_mission_test.duplicate(true),
+	_base_mission.duplicate(true),
+	_base_mission.duplicate(true),
+	_base_mission_test.duplicate(true),
+	_base_mission_test.duplicate(true),
+	_base_mission_test.duplicate(true),
+	_base_mission.duplicate(true),
+	_base_mission_test.duplicate(true),
+	_base_mission_test.duplicate(true),
+]
+
+func _init() -> void:
+	side_missions[1].status = SideMission.Status.IN_PROGRESS
+	side_missions[1].display_name = "YEP"
+	side_missions[1].description = "YEP YEP"
+	complete_side_mission(side_missions[1])
+	
+	side_missions[2].status = SideMission.Status.IN_PROGRESS
+	side_missions[2].display_name = "PIZZA PARTY"
+	side_missions[2].description = "It's pizza time"
+	complete_side_mission(side_missions[2])
+	
+
 
 func progress_main_mission(): #no protection for index > # of stages
 	var current_index = MAIN_MISSION.find(main_mission_stage)
@@ -44,10 +89,6 @@ func progress_main_mission(): #no protection for index > # of stages
 	print("Main mission progress, new stage: " + main_mission_stage[0])
 	update_level_via_mission()
 
-#func seek_main_mission(seek_value): #no protection for correct seek_value #TODO: needs to iterate through all middle stages for this to work
-	#main_mission_stage = seek_value
-	#print("Main mission seek, new stage: " + main_mission_stage[0])
-	#update_level_via_mission()
 
 func progress_side_mission(mission_name): #no protection for index > # of stages
 	var mission = mission_name_to_mission(mission_name)
@@ -85,13 +126,49 @@ func start_side_mission(mission_name):
 	#update_level_via_mission(mission_name)
 	#mission_progress_check()
 
+# TODO: Find a place where to complete the side mission?
+func complete_side_mission(mission: SideMission) -> void:
+	_resolve_side_mission(mission, SideMission.Status.COMPLETE)
+
+# TODO: Find also a place where to fail the side mission?
+func fail_side_mission(mission: SideMission) -> void:
+	_resolve_side_mission(mission, SideMission.Status.FAILED)
+
+func _resolve_side_mission(mission: SideMission, result: SideMission.Status) -> void:
+	if mission.status != SideMission.Status.IN_PROGRESS:
+		return
+	mission.status = result
+	resolved_side_mission_order.append(mission)
+	resolved_side_mission_queue.append(mission)
+	print("Side mission %s %s, queued for book animation" % [
+		mission.resource_path.get_file().trim_suffix(".tres"),
+		"complete" if result == SideMission.Status.COMPLETE else "failed"
+	])
+
 func end_side_mission(mission_name):
 	var mission = mission_name_to_mission(mission_name)
-	mission.current_stage = "complete"
-	print("Side mission %s completed" %mission_name)
-
+	complete_side_mission(mission)
+	print("Side mission %s completed" % mission_name)
 	update_level_via_mission(mission_name)
 
+
+# Returns side_missions split into [in-progress..., resolved...], where resolved
+# is a completed or failed mission. Not sure if best practice or best way, but
+# `pending_animation` are all side_missions in the animation queue aka resolved_side_mission_queue
+func get_partitioned_side_missions(pending_animation: Array = []) -> Array[SideMission]:
+	var in_progress: Array[SideMission] = []
+	var resolved: Array[SideMission] = []
+	for msn in side_missions:
+
+		# if the mission is completed or failed and is not queued up for animation, then it will not be in the top of the list!
+		var is_done := msn.status != SideMission.Status.IN_PROGRESS and msn not in pending_animation
+		if is_done:
+			resolved.append(msn)
+		else:
+			in_progress.append(msn)
+	resolved.sort_custom(func(a, b):
+		return resolved_side_mission_order.find(a) < resolved_side_mission_order.find(b))
+	return in_progress + resolved
 
 func mission_progress_check(passed_variable = null):
 	#side missions

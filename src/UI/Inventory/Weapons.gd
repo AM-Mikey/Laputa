@@ -12,9 +12,12 @@ const STAR_FULL_TEXTURE = preload("res://assets/UI/Inventory/Items/StarFull.png"
 
 @onready var weapon_wheel_animator = %WeaponWheelAnimator
 @onready var weapon_side_animator = %WeaponSideAnimator
+@onready var selector_animator = %SelectorAnimator
 
 func _ready():
 	pc.guns_updated.connect(_on_guns_updated)
+
+	
 	refresh_icons(pc.guns.get_children())
 
 func refresh_icons(guns):
@@ -31,6 +34,7 @@ func refresh_icons(guns):
 		gun_sprites.get_node("5").texture = guns[-1].icon_texture
 
 func rotate_gun(guns, rot_dir: String):
+	selector_animator.play("CLICK")
 	match rot_dir:
 		"CW":
 			weapon_wheel_animator.play("CW")

@@ -46,9 +46,6 @@ func display_topics():
 	for t in pc.topic_array:
 		%TopicList.add_item(t.topic_name)
 
-func display_main_mission():
-	%MainMissionBody.text = ms.main_mission_stage[1] #description
-
 func display_side_missions():
 	for m in ms.side_missions:
 		%SideMissionList.add_item(m.display_name)
@@ -60,7 +57,7 @@ func enter():
 	display_items()
 	display_topics()
 	display_side_missions()
-	display_main_mission()
+	#display_main_mission()
 
 func exit():
 	get_tree().paused = false

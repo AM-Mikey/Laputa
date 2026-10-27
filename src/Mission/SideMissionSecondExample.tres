@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="SideMission" format=3 uid="uid://b7l1fm30w7n3p"]
+
+[ext_resource type="Script" uid="uid://diqvc33oc8rqv" path="res://src/Mission/SideMission.gd" id="1_7kb1w"]
+
+[resource]
+script = ExtResource("1_7kb1w")
+display_name = "Mysterious Dungeon"
+description = "A spooky dungeon indeed"
+current_stage = "find"
+status = 1
+metadata/_custom_type_script = "uid://diqvc33oc8rqv"
