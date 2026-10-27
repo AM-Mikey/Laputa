@@ -12,7 +12,7 @@ var homing_camera = false
 @export var v_pan_time := 1.5
 @export var h_pan_delay := 0.0
 @export var v_pan_delay := 0.0
-@export var h_pan_distance := 2.0
+@export var h_pan_distance := 1.0
 @export var v_pan_distance := 2.0
 @export var curve_elastic: Curve
 #@export var control_overshoot_distance = 4.0

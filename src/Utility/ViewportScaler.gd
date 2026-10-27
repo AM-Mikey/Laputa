@@ -22,7 +22,7 @@ func _viewport_size_changed():
 			camera.reset()
 	#basic
 	var viewport_size = get_tree().get_root().size
-	var tiles_visible_y = 15.0
+	var tiles_visible_y = 13.5
 	var urs = viewport_size.y / (16.0 * tiles_visible_y)
 	resolution_scale = get_res_scale_from_urs(urs)
 	#menu
