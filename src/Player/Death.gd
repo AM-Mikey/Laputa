@@ -13,13 +13,17 @@ const BOUNCE_X_DAMPING := 0.7 #fraction of horizontal speed kept after each floo
 const WALL_DAMPING := 0.5
 const MIN_BOUNCE_SPEED := 40.0 #below this vertical speed we stop bouncing and land
 const MAX_BOUNCES := 3
+const BAIL_TIME := 4.0
 
+var die_via_kill_box = false
 var facing := "front"
 var bounces := 0
 var landed := false
 var death_screen_displayed = false
+var bailing = false
 
 func state_process(_delta):
+	if bailing: return
 	pc.velocity = calc_velocity()
 	var pre_velocity = pc.velocity
 	pc.move_and_slide()
@@ -43,6 +47,19 @@ func state_process(_delta):
 		w.ui.add_child(load("res://src/UI/DeathScreen/DeathScreen.tscn").instantiate())
 
 	animate()
+
+
+func bail(do_explosion = true):
+	bailing = true
+	pc.velocity = Vector2.ZERO
+	pc.visible = false
+	if do_explosion:
+		var explosion = pc.EXPLOSION.instantiate()
+		explosion.position = pc.global_position
+		w.middle_front.add_child(explosion)
+	death_screen_displayed = true
+	w.ui.add_child(load("res://src/UI/DeathScreen/DeathScreen.tscn").instantiate())
+
 
 func set_move_dir():
 	var move_dir = Vector2.ZERO
@@ -121,6 +138,12 @@ func get_launch_velocity() -> Vector2:
 ### STATE ###
 
 func enter(_prev_state: String):
+	if die_via_kill_box:
+		print("awye")
+		bail(false)
+		return
+
+
 	var disable = [
 		pc.get_node("CollisionShape2D"),
 		pc.get_node("CrouchingCollision")]
@@ -141,6 +164,11 @@ func enter(_prev_state: String):
 	mm.knockback_velocity = get_launch_velocity()
 	pc.velocity = mm.knockback_velocity
 	facing = "front" if sign(pc.velocity.x) == sign(pc.look_dir.x) or pc.velocity.x == 0.0 else "back"
+
+	await get_tree().create_timer(BAIL_TIME).timeout
+	if !death_screen_displayed:
+		bail()
+
 
 func exit(_next_state: String):
 	pass

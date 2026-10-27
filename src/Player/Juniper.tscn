@@ -4384,10 +4384,6 @@ script = ExtResource("12_x1gsf")
 [node name="Death" type="Node" parent="MovementManager/States" unique_id=203505922]
 script = ExtResource("14_sat3f")
 
-[node name="MinDirTimer" type="Timer" parent="MovementManager" unique_id=851777814]
-process_callback = 0
-one_shot = true
-
 [node name="CoyoteTimer" type="Timer" parent="MovementManager" unique_id=852056551]
 process_callback = 0
 one_shot = true

@@ -22,7 +22,13 @@ func _viewport_size_changed():
 			camera.reset()
 	#basic
 	var viewport_size = get_tree().get_root().size
-	var tiles_visible_y = 13.5
+	#if maximized or max height, use the monitor's height
+	var window_size = get_window().get_size_with_decorations()
+	var usable_rect = DisplayServer.screen_get_usable_rect(get_window().current_screen)
+	if window_size.y >= usable_rect.size.y - 1:
+		viewport_size.y = DisplayServer.screen_get_size().y
+
+	var tiles_visible_y = 13
 	var urs = viewport_size.y / (16.0 * tiles_visible_y)
 	resolution_scale = get_res_scale_from_urs(urs)
 	#menu
@@ -43,6 +49,8 @@ func _viewport_size_changed():
 	var dialog_urs = min(dialog_urs_x, dialog_urs_y)
 	dialog_resolution_scale =  get_res_scale_from_urs(dialog_urs, true)
 
+	###TODO: dialog, inventory, menu, hud, bk, should use a shared UI resolution size.
+	###debug and editor can be any res scale
 
 	emit_signal("scale_changed", resolution_scale)
 
@@ -50,7 +58,7 @@ func _viewport_size_changed():
 
 ### HELPERS ###
 
-func get_res_scale_from_urs(urs, always_round_down = false) -> float:
+func get_res_scale_from_urs(urs, always_round_down = true) -> float:
 	var out = urs
 	if always_round_down:
 		out = floor(out) #round down

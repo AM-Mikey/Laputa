@@ -1,13 +1,17 @@
 PNG with layers going from back to front in a vertical sprite sheet
 
 
-Scale = 0: Moves with Camera
-Scale = 1: Moves with Level
+<Scale = 0>: Moves with Camera
+<Scale = 1>: Moves with Level
 
 
--background height will need to change based on the level it's in. Min height: 368px
-	-at scale = 0 (which the farthest back layer usually is, you should only draw with a height of 368px, centered.
+-background height will need to change based on the level it's in. Min height: 324px
+	-at <scale = 0> (which the farthest back layer usually is, you should only draw with a height of 324px, centered.
 	Anything outside of that height won't be shown
 
--for single-layer backgrounds (i.e. interiors) just create a single-layer background of any size and tile: both
+- Important information on <scale = 0> layers should be within 13.5 tiles (216px) in height
+- Overscan on <scale = 0> should be 20.25 tiles (324px) in height
+
+
+-for single-layer backgrounds (i.e. interiors) just create a single-layer background of any size and set <tile: both>
 

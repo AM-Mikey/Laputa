@@ -50,7 +50,6 @@ var is_debug = true
 @onready var sp = get_node("States")
 
 @onready var coyote_timer: Timer = get_node("CoyoteTimer")
-@onready var min_dir_timer = get_node("MinDirTimer")
 
 func _ready():
 	initialize_states()

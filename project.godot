@@ -86,8 +86,8 @@ shop="*res://src/Utility/ShopMaster.gd"
 
 [display]
 
-window/size/viewport_width=480
-window/size/viewport_height=270
+window/size/viewport_width=960
+window/size/viewport_height=540
 
 [editor]
 

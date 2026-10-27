@@ -190,9 +190,11 @@ func hit_again(): #TODO: prioritize this for all forms of damage, not just enemi
 	hit(toughtest_damage, knockback_direction, toughest_enemy.get_node("Hitbox"))
 
 
-func die():
+func die(via_kill_box = false):
 	if !dead:
+		inp.can_act = false
 		dead = true
+		mm.get_node("States/Death").die_via_kill_box = via_kill_box
 		mm.change_state("death")
 		w.add_child(DEATH_CAMERA.instantiate())
 		invincible = true

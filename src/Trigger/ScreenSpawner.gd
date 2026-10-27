@@ -126,8 +126,8 @@ func _exit_tree() -> void:
 		sample_enemy.queue_free()
 
 func _on_body_entered(body: Node2D):
-	if (!stop_on_player_exit and player_in_trigger):
-		return
+	if f.pc().dead: return
+	if (!stop_on_player_exit and player_in_trigger): return
 
 	var detection_rect: Rect2 = Rect2($CollisionShape2D.global_position - $CollisionShape2D.shape.size / 2.0 , $CollisionShape2D.shape.size)
 	var player_x_percent: float = (body.global_position.x - detection_rect.position.x) / detection_rect.size.x

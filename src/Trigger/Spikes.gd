@@ -14,6 +14,7 @@ func _do_damage():
 ### SIGNALS
 
 func _on_body_entered(body):
+	if f.pc().dead: return
 	active_pc = body.get_parent()
 	_do_damage()
 
