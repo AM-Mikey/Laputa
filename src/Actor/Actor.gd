@@ -24,11 +24,26 @@ var rng = RandomNumberGenerator.new()
 
 @onready var gravity := water_gravity if is_in_water else base_gravity
 
-@onready var world = get_tree().get_root().get_node("World")
+@onready var w = get_tree().get_root().get_node("World")
 
 func set_is_in_water(val):
 	gravity = base_gravity if !val else water_gravity
 	is_in_water = val
+
+func apply_wind():
+	if !is_wind_affected: return
+	var strongest_by_dir := {}
+
+	for area in wind_areas_inside:
+		var key: Vector2 = area.wind_dir
+		if not strongest_by_dir.has(key) or area.speed > strongest_by_dir[key].speed:
+			strongest_by_dir[key] = area
+
+	for strong_area in strongest_by_dir.values():
+		if is_on_floor() && (strong_area.wind_dir == Vector2.DOWN || (strong_area.wind_dir == Vector2.UP && strong_area.speed <= 4.0)):
+			continue
+		#print(strongest_by_dir.values().size(), " strong wind : ", strong_area.wind_dir, " , ", strong_area.speed)
+		velocity += strong_area.wind_dir * strong_area.speed
 
 #do not _ready() as it will be shadowed
 

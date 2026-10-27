@@ -2,6 +2,9 @@ extends Enemy
 
 const ICON = preload("res://assets/Actor/Enemy/TrenchieIcon.png")
 const BULLET = preload("res://src/Bullet/Enemy/Laser.tscn")
+const TOOLTIPS = [
+"LV 0: WIP.",
+]
 
 @export var look_dir: Vector2 = Vector2.LEFT
 var move_dir: Vector2
@@ -19,6 +22,7 @@ var peeking = false
 
 
 func setup(): #Reminder: no function called can use await
+	self_knockback = true
 	hp = 4
 	damage_on_contact = 1
 	speed = Vector2(100, 200)

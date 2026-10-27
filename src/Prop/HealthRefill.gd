@@ -33,7 +33,7 @@ func activate(player):
 		player.emit_signal("hp_updated", player.hp, player.max_hp, "refill_terminal")
 		var heart_get_max = HEART_GET_MAX.instantiate()
 		heart_get_max.global_position = $CollisionShape2D.global_position
-		w.middle.add_child(heart_get_max)
+		w.farthest_front.add_child(heart_get_max)
 		am.play("hp_refill")
 		ms.mission_progress_check(id)
 

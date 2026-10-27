@@ -3,10 +3,11 @@ extends Node2D
 class_name Gun
 
 const MUZZLE_FLASH = preload("res://src/Effect/MuzzleFlashEffect.tscn")
+const BULLET_CASING = preload("res://src/Effect/BulletCasing.tscn")
+const BULLET_CASING_PHYSICAL = preload("res://src/Effect/BulletCasingPhysical.tscn")
 
 
-
-var display_name: String = "Debug Gun"
+@export var display_name: String = "Debug Gun"
 var description: String = "Debug Description"
 
 var icon_texture: CompressedTexture2D = load("res://assets/Gun/RevolverIcon.png")
@@ -20,10 +21,13 @@ var damage: int = 1
 var f_range: int = 60
 var f_time: float
 var speed: int = 200
-
 var cooldown_time: float = 0.2
+var recoil: float = 0.0
+var knockback_strength := 0.0
+
 var automatic: bool = false
-var do_muzzle_flash: bool = true
+var do_muzzle_flash := true
+var do_bullet_casing := true
 var charging: bool = false
 var bullets_per_activate: int = 1
 var spread_degrees: float = 0.0
@@ -36,6 +40,10 @@ var has_lifetime: bool = false # Note: A gun has a lifetime if the bullet has a 
 var xp: int = 0
 var max_xp: int = 20
 var max_level: int = 1
+var max_unlocked_level: int = 1
+var lifetime_xp: int = 0
+var xp_to_rebuild: int = 1000
+var rebuild_count = 0
 @export var level: int = 1: set = set_level
 
 @onready var w = get_tree().get_root().get_node("World")
@@ -56,6 +64,7 @@ func fire(_type):
 				ammo -= 1
 			pc.emit_signal("guns_updated", pc.get_node("GunManager/Guns").get_children(), "fire")
 			am.play(sfx)
+			pc.velocity += (pc.shoot_dir * -1) * recoil
 			activate()
 		else:
 			print("out of ammo")
@@ -81,7 +90,7 @@ func deactivate_manual():
 func deactivate_auto():
 	pass
 
-func spawn_bullet(bullet_pos, shoot_dir, layer = w.middle) -> Node:
+func spawn_bullet(bullet_pos, shoot_dir, layer = w.player_front, index = 0) -> Node:
 	var bullet = bullet_scene.instantiate()
 
 	bullet.damage = damage
@@ -89,6 +98,9 @@ func spawn_bullet(bullet_pos, shoot_dir, layer = w.middle) -> Node:
 	bullet.f_time = f_time
 	bullet.speed = speed
 	bullet.spread_degrees = spread_degrees
+	bullet.bullets_in_volley = bullets_per_activate
+	bullet.index = index
+	bullet.knockback_strength = knockback_strength
 	bullet.direction = shoot_dir
 	layer.add_child(bullet)
 	bullet.global_position = bullet_pos
@@ -97,7 +109,14 @@ func spawn_bullet(bullet_pos, shoot_dir, layer = w.middle) -> Node:
 	if do_muzzle_flash:
 		var muzzle_flash = MUZZLE_FLASH.instantiate()
 		$Muzzle.add_child(muzzle_flash)
+	if do_bullet_casing:
+		var bullet_casing = BULLET_CASING_PHYSICAL.instantiate()
+		bullet_casing.direction = Vector2(shoot_dir.x * -1, -1)
+		bullet_casing.global_position = get_origin()
+		w.middle_front.add_child(bullet_casing)
 	return bullet
+
+
 
 ### GETTERS
 

@@ -33,7 +33,7 @@ func activate(player):
 	player.emit_signal("guns_updated", player.guns.get_children())
 	var ammo_get_max = AMMO_GET_MAX.instantiate()
 	ammo_get_max.global_position = $CollisionShape2D.global_position
-	w.middle.add_child(ammo_get_max)
+	w.farthest_front.add_child(ammo_get_max)
 	am.play("ammo_refill")
 	ms.mission_progress_check(id)
 

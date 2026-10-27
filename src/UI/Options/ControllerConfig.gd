@@ -5,6 +5,7 @@ extends Control
 enum TooltipIconType {GENERIC, NINTENDO, XBOX, PLAYSTATION}
 var tooltip_icon_type : TooltipIconType
 var after_settings_ready = false #dont set settings unless this is true
+var listening_for_controller = false
 
 var input_icon_joy = {
 	JOY_BUTTON_Y: 0,
@@ -37,6 +38,7 @@ var input_icon_joy_analog = {
 @onready var w = get_tree().get_root().get_node("World")
 @onready var settings = get_parent().get_node("Settings")
 @onready var rm = %RemapManager
+@onready var active_controller_node = %ActiveController
 @onready var action_selections = %ActionSelections
 @onready var tooltip_icon_type_node = %TooltipIconType
 @onready var jump_on_hold_node = %JumpOnHold
@@ -81,7 +83,14 @@ func input_button_pressed(button):
 
 
 func _input(event):
-	if (event is InputEventJoypadButton || event is InputEventJoypadMotion) && rm.current_listening_action != null:
+	if listening_for_controller:
+		if event is InputEventJoypadButton || (event is InputEventJoypadMotion && event.axis in [4, 5]): #triggers
+			get_viewport().set_input_as_handled()
+			listening_for_controller = false
+			inp.set_active_controller_index(event.device)
+			%ActiveController.get_node("Button").text = Input.get_joy_info(event.device)["raw_name"]
+			settings.save_setting("PreferredControllerGUID", Input.get_joy_guid(event.device))
+	elif (event is InputEventJoypadButton || event is InputEventJoypadMotion) && rm.current_listening_action != null:
 		get_viewport().set_input_as_handled()
 		rm.set_temp_action_input(event, "controller")
 		rm.current_listening_action = null
@@ -148,6 +157,10 @@ func do_focus():
 	get_node(ui_focus).grab_focus()
 
 ### SETTINGS ###
+
+func on_active_controller_button_pressed():
+	%ActiveController.get_node("Button").text = "Press any button"
+	listening_for_controller = true
 
 func on_disable_analog(toggled_on: bool):
 	var input_left = InputEventJoypadMotion.new()

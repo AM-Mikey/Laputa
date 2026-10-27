@@ -16,7 +16,7 @@ func _ready():
 
 
 func _input(event):
-	if event.is_action_pressed("pause") and get_tree().paused and not w.has_node("MenuLayer/Options"):
+	if event.is_action_pressed("pause") && get_tree().paused && !w.has_node("MenuLayer/Options"):
 		exit()
 
 func do_focus():
@@ -33,10 +33,6 @@ func exit():
 	w.ui.visible = true
 	w.hl.visible = true
 	queue_free()
-	var camera = get_viewport().get_camera_2d()
-	if camera:
-		if camera.is_in_group("PlayerCameras"):
-			camera.reset()
 
 ### SIGNALS ###
 

@@ -65,7 +65,7 @@ func _physics_process(delta):
 				am.play("xp", self)
 
 	if wind_areas_inside.size() != 0: #Inside Wind
-		print("inside")
+		#print("inside")
 		if velocity.y < 0.0:
 			velocity.y *= 0.9
 
@@ -80,7 +80,7 @@ func _physics_process(delta):
 		$AnimationPlayer.speed_scale = ave_velocity / start_velocity
 		if $AnimationPlayer.speed_scale > 1:
 			$AnimationPlayer.speed_scale = 1
-
+	apply_wind()
 
 
 func calc_starting_velocity(dir) -> Vector2:

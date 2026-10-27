@@ -66,9 +66,12 @@ func _physics_process(_delta):
 		$VBox/HBox/C2/A/Water.text = str(pc.is_in_water)
 		$VBox/HBox/C2/A/Winds.text = str(pc.wind_areas_inside.size())
 
-		$VBox/HBox/C2/A/Front.text = str(w.get_node("Front").get_child_count())
-		$VBox/HBox/C2/A/Middle.text = str(w.get_node("Middle").get_child_count())
-		$VBox/HBox/C2/A/Back.text = str(w.get_node("Back").get_child_count())
+		$VBox/HBox/C2/A/FarthestFront.text = str(w.farthest_front.get_child_count())
+		$VBox/HBox/C2/A/MiddleFront.text = str(w.middle_front.get_child_count())
+		$VBox/HBox/C2/A/PlayerFront.text = str(w.player_front.get_child_count())
+		$VBox/HBox/C2/A/PlayerBack.text = str(w.player_back.get_child_count())
+		$VBox/HBox/C2/A/MiddleBack.text = str(w.middle_back.get_child_count())
+		$VBox/HBox/C2/A/FarthestBack.text = str(w.farthest_back.get_child_count())
 
 		$VBox/HBox/C2/A/Main.text = str(ms.main_mission_stage[0])
 

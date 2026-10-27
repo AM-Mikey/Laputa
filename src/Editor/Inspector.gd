@@ -5,15 +5,20 @@ const LAYER_BUTTON = preload("res://src/Editor/Button/LayerButton.tscn")
 const SAVE_BUTTON = preload("res://src/Editor/Button/SaveButton.tscn")
 const EXPORT = PropertyUsageFlags.PROPERTY_USAGE_SCRIPT_VARIABLE + PropertyUsageFlags.PROPERTY_USAGE_STORAGE + PropertyUsageFlags.PROPERTY_USAGE_EDITOR
 
+@onready var w = get_tree().get_root().get_node("World")
 @onready var editor = get_parent().get_parent().get_parent()
 
 var active = null
 var active_type: String
 var active_property: String #only use for referencing file dialog's user
+var has_selected_this_frame = false
 
+var copied_entity = null
 
 func _physics_process(_delta):
 	display_tool_labels()
+	if has_selected_this_frame:
+		has_selected_this_frame = false
 
 func exit():
 	on_deselected()
@@ -21,9 +26,11 @@ func exit():
 
 ### SELECTING
 
-func on_selected(selection, selection_type):
-	#print(selection, selection_type)
+func on_selected(selection, selection_type, from_set = false):
 	if selection.is_in_group("Previews"): return
+	if has_selected_this_frame: return
+	#if active == selection: return #don't reselect
+	has_selected_this_frame = true
 
 	if active: #deselect old
 		if active.has_method("on_editor_deselect"): active.on_editor_deselect()
@@ -35,6 +42,19 @@ func on_selected(selection, selection_type):
 	if active: #select new
 		if active.has_method("on_editor_select"): active.on_editor_select()
 	display_data()
+	if !from_set:
+		_do_editor_grab()
+
+
+func _do_editor_grab():
+	var mouse_pos = w.get_global_mouse_position()
+	#var grid_pos = editor.get_cell(mouse_pos)
+	if active_type in ["background", "tile_map", "trigger_spawn", "vu_rect", "level", "note"]: return
+	editor.pre_grab_tool = editor.active_tool
+	editor.pre_grab_subtool = editor.subtool
+	editor.set_tool("entity", "grab")
+	editor.grab_offset = active.global_position - mouse_pos
+
 
 
 func on_deselected():
@@ -48,7 +68,7 @@ func on_deselected():
 	active_property = ""
 	clear_data()
 	if editor.get_node("Main/Win/Tab").current_tab == 0: #tiles
-		on_selected(editor.w.current_level.get_node("TileMap").get_node("Front"), "tile_map")
+		on_selected(w.current_level.get_node("TileMap").get_node("Front"), "tile_map")
 
 
 ### DISPLAY DATA
@@ -138,6 +158,10 @@ func display_data():
 				create_layer_button(layer_id)
 		"title_preview", "waypoint_local", "waypoint_global", "waypoint_global_spawn", "vu_vector", "vu_rect":
 			create_properties_button(active.get_property_list())
+		"note":
+			create_button("text", active.text, "multiline")
+			create_button("color", active.color, "color")
+			create_button("big_text", active.big_text, "bool")
 
 func get_property_type(type_flag, _is_load) -> String:
 	var out = ""
@@ -238,7 +262,7 @@ func on_property_selected(property_name):
 		"actor_spawn", "vu_actor":
 			match property_name:
 				"actor_path":
-					if (active_type == "vu_actor"):
+					if active_type == "vu_actor":
 						var start_dir = "res://src/Actor"
 						if (active.filter_team != active.ActorTeamFilter.NONE):
 							if (active.filter_team == active.ActorTeamFilter.ENEMY):
@@ -264,7 +288,6 @@ func on_property_selected(property_name):
 					$FileDialog.current_dir = "res://src/Level/"
 					$FileDialog.set_filters(PackedStringArray(["*.tscn"]))
 					$FileDialog.popup()
-
 
 func on_property_changed(property_name, property_value):
 	match active_type:
@@ -317,6 +340,9 @@ func on_property_changed(property_name, property_value):
 			active.setup_colors()
 		#"waypoint_local", "waypoint_global":
 			#active.set(property_name, property_value)
+		"note":
+			active.set(property_name, property_value)
+			active.update_text()
 		_:
 			active.set(property_name, property_value)
 
@@ -342,7 +368,7 @@ func on_target_saved(save_target):
 func _on_SaveDialog_file_selected(path: String):
 	if path.begins_with("res://src/Background/"):
 		var new = Background.new()
-		var ll = editor.w.current_level.get_node("LevelLimiter")
+		var ll = w.current_level.get_node("LevelLimiter")
 		new.texture = ll.texture
 		new.layers = ll.layers
 		new.layer_scales = ll.layer_scales

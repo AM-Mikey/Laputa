@@ -48,11 +48,9 @@ var brush_one_way = false
 ### SETUP
 
 func setup_tile_set():
-	#editor.connect("tab_changed", Callable(self, "on_tab_changed")) already connected
+	editor.connect("tab_changed", Callable(self, "on_tab_changed"))
 	tile_master.setup_tile_buttons(self, normal_buttons)
 	tile_master.setup_tile_buttons(self, collision_buttons)
-
-
 
 func setup_brushes():
 	for c in get_node(brushes).get_children():

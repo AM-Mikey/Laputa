@@ -22,6 +22,8 @@ var internal_version: String = get_internal_version()
 @export var do_skip_title = false
 @export var debug_visible = false
 @export var default_gun_array: Array[String]
+@export var default_topic_array: Array[String]
+@export var default_item_array: Array[String]
 
 @export var start_level_path: String
 @onready var ui = $UILayer
@@ -32,9 +34,13 @@ var internal_version: String = get_internal_version()
 @onready var ml = $MenuLayer
 @onready var il = $InventoryLayer
 @onready var dll = $DialogLayer
-@onready var front = $Front
-@onready var middle = $Middle
-@onready var back = $Back
+
+@onready var farthest_back = $FarthestBack
+@onready var middle_back = $MiddleBack
+@onready var player_back = $PlayerBack
+@onready var player_front = $PlayerFront
+@onready var middle_front = $MiddleFront
+@onready var farthest_front = $FarthestFront
 
 
 
@@ -42,7 +48,7 @@ func _ready():
 	get_tree().get_root().connect("close_requested", Callable(self, "on_root_window_close_requested"))
 	self.visibility_layer = 2
 	self.child_entered_tree.connect(child_layer_set)
-	for node: Node in [front, middle, back]:
+	for node: Node in [farthest_back, middle_back, player_back, player_front, middle_front, farthest_front]:
 		if node is CanvasItem:
 			node.visibility_layer = 2
 		node.child_entered_tree.connect(child_layer_set)
@@ -128,7 +134,18 @@ func first_time_level_setup(): #Reminder: no function called can use await
 	get_node("HUDLayer/HUDGroup").add_child(HUD.instantiate())
 	current_level = load(start_level_path).instantiate()
 	add_child(current_level)
-
+	if current_level.debug_guns_on_enter != []:
+		f.pc().gm.setup_guns(current_level.debug_guns_on_enter)
+	else:
+		f.pc().gm.setup_guns(default_gun_array)
+	if current_level.debug_topics_on_enter != []:
+		f.pc().setup_topics(current_level.debug_topics_on_enter)
+	else:
+		f.pc().setup_topics(default_topic_array)
+	if current_level.debug_items_on_enter != []:
+		f.pc().setup_items(current_level.debug_items_on_enter)
+	else:
+		f.pc().setup_items(default_item_array)
 	spawn_entities()
 
 	$Juniper.global_position = get_spawn_point().global_position
@@ -147,6 +164,10 @@ func change_level_via_code(level_path, use_save_data):
 	inp.can_act = true
 	if ml.has_node("Title"): ml.get_node("Title").exit()
 	if ml.has_node("PauseMenu"): ml.get_node("PauseMenu").exit()
+	if ui.has_node("Title"): ui.get_node("Title").queue_free()
+	if ui.has_node("LevelSelect"): ui.get_node("LevelSelect").queue_free()
+	if ui.has_node("GunShop"): ui.get_node("GunShop").queue_free()
+	if has_node("DeathCamera"): get_node("DeathCamera").queue_free()
 	if has_node("MenuLayer/LevelSelect"): get_node("MenuLayer/LevelSelect").queue_free()
 	if f.db(): await f.db().exit()
 	if f.hud():
@@ -169,6 +190,14 @@ func change_level_via_code(level_path, use_save_data):
 			f.pc().gm.setup_guns(current_level.debug_guns_on_enter)
 		else:
 			f.pc().gm.setup_guns(default_gun_array)
+		if current_level.debug_topics_on_enter != []:
+			f.pc().setup_topics(current_level.debug_topics_on_enter)
+		else:
+			f.pc().setup_topics(default_topic_array)
+		if current_level.debug_items_on_enter != []:
+			f.pc().setup_items(current_level.debug_items_on_enter)
+		else:
+			f.pc().setup_items(default_item_array)
 	get_node("HUDLayer/HUDGroup").add_child(HUD.instantiate())
 
 	spawn_entities()
@@ -351,12 +380,9 @@ func run_conversation_on_enter(level):
 			level.do_conversation_on_enter(false)
 
 func clear_spawn_layers():
-	for c in back.get_children():
-		c.free()
-	for c in middle.get_children():
-		c.free()
-	for c in front.get_children():
-		c.free()
+	for sl in [farthest_back, middle_back, player_back, player_front, middle_front, farthest_front]:
+		for c in sl.get_children():
+			c.free()
 
 func spawn_entities():
 	#TODO: Timing for setting allow_spawn (mission system) goes up here)
@@ -373,9 +399,11 @@ func spawn_entities():
 		a.spawn()
 		await finished_spawn_entities_step
 	print("all actors spawned")
-	for w in get_tree().get_nodes_in_group("WaypointGlobalSpawns"):
-		w.spawn()
-		await finished_spawn_entities_step
+	#var group = get_tree().get_nodes_in_group("WaypointGlobalSpawns")
+	for wgs in get_tree().get_nodes_in_group("WaypointGlobalSpawns"):
+		if wgs != null: #TODO i dont know why there are two null ones, is this a memory leak?
+			wgs.spawn()
+			await finished_spawn_entities_step
 	print("all waypoint globals spawned")
 	for p in get_tree().get_nodes_in_group("PropSpawns"):
 		p.spawn()

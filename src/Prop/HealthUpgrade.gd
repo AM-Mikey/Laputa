@@ -21,14 +21,14 @@ func on_break(_method = "cut"): #prevent from breaking midair?
 	$AnimationPlayer.play("Break")
 	var explosion = EXPLOSION.instantiate()
 	explosion.global_position = global_position + Vector2(8.0, 8.0)
-	w.back.add_child(explosion)
+	w.middle_back.add_child(explosion)
 
 func spawn_crystal():
 	var crystal = CRYSTAL.instantiate()
 	crystal.global_position = $CrystalPos.global_position
 	crystal.value = value
 	crystal.prop_owner = self
-	w.middle.add_child(crystal)
+	w.player_back.add_child(crystal)
 
 func _physics_process(_delta):
 	if !broken && !spent:

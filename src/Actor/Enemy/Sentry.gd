@@ -1,15 +1,20 @@
 extends Enemy
 
 const ICON = preload("res://assets/Actor/Enemy/SentryIcon.png")
-
 const TX_0 = preload("res://assets/Actor/Enemy/Sentry0.png")
 const TX_1 = preload("res://assets/Actor/Enemy/Sentry1.png")
 const TX_2 = preload("res://assets/Actor/Enemy/Sentry2.png")
 const TX_3 = preload("res://assets/Actor/Enemy/Sentry3.png")
 const TX_4 = preload("res://assets/Actor/Enemy/Sentry4.png")
-
 const HAIRBALL = preload("res://src/Bullet/Enemy/Hairball.tscn")
 const HAIRBALL_RAIN = preload("res://src/Bullet/Enemy/HairballRain.tscn")
+const TOOLTIPS = [
+"LV 0: Shoots in set arc when player nearby.",
+"LV 1: Shoots in arc towards player when nearby.",
+"LV 2: Shoots in arc towards player with greater range.",
+"LV 3: Shoots barrage of floating cotton into the air when player nearby.",
+"LV 4: Shoots single floating cotton towards the player when nearby.",
+]
 
 # difficulty = 3: Shoot rapidly upward in order in the spread cone starting from player's direction then wait for cooldown_time
 # difficulty = 4: Shoot upward with random deviation defined by spread
@@ -164,7 +169,7 @@ func prepare_bullet():
 
 		bullet.speed = Vector2(bullet_vel_x, bullet_vel_y).length()
 		bullet.direction = Vector2(bullet_vel_x, bullet_vel_y).normalized()
-		w.middle.add_child(bullet)
+		w.player_front.add_child(bullet)
 
 	elif difficulty == 3:
 		var bullet = HAIRBALL_RAIN.instantiate()
@@ -174,7 +179,7 @@ func prepare_bullet():
 		bullet.speed = fountain_force
 		var deviation_idx = curr_bullet_idx if rapid_fire_from_left else fountain_bullet_in_spread - 1 - curr_bullet_idx
 		bullet.direction = Vector2.UP.rotated(-fountain_spread / 2.0 + deviation_idx * fountain_spread / (fountain_bullet_in_spread - 1))
-		w.middle.add_child(bullet)
+		w.player_front.add_child(bullet)
 		curr_bullet_idx += 1
 
 	elif difficulty == 4:
@@ -183,7 +188,7 @@ func prepare_bullet():
 		bullet.position = global_position + bullet_origin
 		bullet.speed = fountain_force
 		bullet.direction = Vector2.UP.rotated(randf_range(-fountain_spread / 2.0, fountain_spread / 2.0))
-		w.middle.add_child(bullet)
+		w.player_front.add_child(bullet)
 		curr_bullet_idx += 1
 
 	am.play("enemy_shoot", self)

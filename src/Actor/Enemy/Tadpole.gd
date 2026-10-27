@@ -1,6 +1,10 @@
 extends Enemy
 
 const ICON = preload("res://assets/Actor/Enemy/TadpoleIcon.png")
+const TOOLTIPS = [
+"Ambient Enemy.",
+]
+
 
 var move_dir := Vector2.ZERO
 var idle_time_min := 1.0
@@ -37,6 +41,7 @@ var scatter_to_flock_cooldown_duration := 5.0
 var threats := []
 
 func setup(): #Reminder: no function called can use await
+	self_knockback = true
 	hp = 1
 	damage_on_contact = 0
 	reward = 0

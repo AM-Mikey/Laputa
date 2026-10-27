@@ -2,12 +2,15 @@
 LukaLop: Creator, Designer, Programmer, Artist, Writer, Etc.
 
 Developers: SanpoNeko, Soru, Neropatti, CrystalWarrior
-Programming Assistance: Parzivail, Daedily
+Programming Assistance: Parzivail, Daedily, Rainy
+Systems Documentation: Daedily
 
 Lead Composer: FiveNineSquared
 Additional Tracks: Curelapse, PhiDelta
 
+Level Design: Luka, Daedily
 UI Design Assistance, Pixel Art Assistance: Toastie
+UI Programming Assistance: Trio
 Additional Backgrounds: Katt
 Additional Concept Art, Additional Character Design: Daedily
 Bat Sprites, Shrimp Design: Yobonnie

@@ -6,7 +6,7 @@ const LEVELDOWN = preload("res://src/Effect/LevelDown.tscn")
 var gun_order = []
 var disabled = false #this is only because of a func in pc.ladder?
 
-@onready var world = get_tree().get_root().get_node("World")
+@onready var w = get_tree().get_root().get_node("World")
 @onready var pc = get_parent()
 
 #func _ready():
@@ -17,13 +17,13 @@ func _process(_delta: float) -> void:
 		return
 	var active_gun = $Guns.get_child(0)
 
-	if Input.is_action_just_pressed("fire_manual"):
+	if inp.pressed("fire_manual"):
 		active_gun.fire("manual")
-	if Input.is_action_pressed("fire_automatic") and active_gun.automatic:
+	if inp.held("fire_automatic") and active_gun.automatic:
 		active_gun.fire("automatic")
-	if Input.is_action_just_released("fire_manual"):
+	if inp.released("fire_manual"):
 		active_gun.release_manual_fire()
-	if Input.is_action_just_released("fire_automatic"):
+	if inp.released("fire_automatic"):
 		active_gun.release_auto_fire()
 
 	if $Guns.get_child_count() > 1: #only swap if more than one gun
@@ -125,7 +125,7 @@ func level_up(debug):
 	get_parent().emit_signal("guns_updated", $Guns.get_children(), "level_up")
 
 	var effect = LEVELUP.instantiate()
-	world.get_node("Front").add_child(effect)
+	w.farthest_front.add_child(effect)
 	effect.position = pc.global_position
 
 
@@ -136,7 +136,7 @@ func level_down(debug):
 	get_parent().emit_signal("guns_updated", $Guns.get_children(), "level_down")
 
 	var effect = LEVELDOWN.instantiate()
-	world.get_node("Front").add_child(effect)
+	w.farthest_front.add_child(effect)
 	effect.position = pc.global_position
 
 

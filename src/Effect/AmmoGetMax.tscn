@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://bm36aeicfq5o2"]
+[gd_scene format=3 uid="uid://bm36aeicfq5o2"]
 
 [ext_resource type="Texture2D" uid="uid://bads2c6iwrr7y" path="res://assets/Effect/AmmoGet.png" id="1_6mxog"]
 [ext_resource type="Script" uid="uid://dx5l6p7c3ejl5" path="res://src/Effect/GetMax.gd" id="1_saf52"]
@@ -27,10 +27,10 @@ _data = [Vector2(0, 1), 0.0, 3.7321355, 0, 0, Vector2(1, 2), 0.20224713, 0.0, 0,
 point_count = 2
 metadata/_snap_enabled = true
 
-[node name="AmmoGetMax" type="Node2D"]
+[node name="AmmoGetMax" type="Node2D" unique_id=957385002]
 script = ExtResource("1_saf52")
 
-[node name="TopLeft" type="CPUParticles2D" parent="."]
+[node name="TopLeft" type="CPUParticles2D" parent="." unique_id=428249570]
 light_mask = 2
 material = SubResource("1")
 amount = 1
@@ -50,7 +50,7 @@ anim_speed_min = 1.0
 anim_speed_max = 1.0
 anim_speed_curve = SubResource("Curve_uvlvd")
 
-[node name="TopRight" type="CPUParticles2D" parent="."]
+[node name="TopRight" type="CPUParticles2D" parent="." unique_id=1674055502]
 light_mask = 2
 material = SubResource("1")
 amount = 1
@@ -70,7 +70,7 @@ anim_speed_min = 1.0
 anim_speed_max = 1.0
 anim_speed_curve = SubResource("Curve_uvlvd")
 
-[node name="BottomLeft" type="CPUParticles2D" parent="."]
+[node name="BottomLeft" type="CPUParticles2D" parent="." unique_id=1121546739]
 light_mask = 2
 material = SubResource("1")
 amount = 1
@@ -90,7 +90,7 @@ anim_speed_min = 1.0
 anim_speed_max = 1.0
 anim_speed_curve = SubResource("Curve_uvlvd")
 
-[node name="BottomRight" type="CPUParticles2D" parent="."]
+[node name="BottomRight" type="CPUParticles2D" parent="." unique_id=1878401731]
 light_mask = 2
 material = SubResource("1")
 amount = 1
@@ -110,7 +110,7 @@ anim_speed_min = 1.0
 anim_speed_max = 1.0
 anim_speed_curve = SubResource("Curve_uvlvd")
 
-[node name="Top" type="CPUParticles2D" parent="."]
+[node name="Top" type="CPUParticles2D" parent="." unique_id=1521513858]
 light_mask = 2
 material = SubResource("1")
 amount = 1
@@ -130,7 +130,7 @@ anim_speed_min = 1.0
 anim_speed_max = 1.0
 anim_speed_curve = SubResource("Curve_uvlvd")
 
-[node name="Right" type="CPUParticles2D" parent="."]
+[node name="Right" type="CPUParticles2D" parent="." unique_id=581679864]
 light_mask = 2
 material = SubResource("1")
 amount = 1
@@ -149,7 +149,7 @@ anim_speed_min = 1.0
 anim_speed_max = 1.0
 anim_speed_curve = SubResource("Curve_uvlvd")
 
-[node name="Bottom" type="CPUParticles2D" parent="."]
+[node name="Bottom" type="CPUParticles2D" parent="." unique_id=2035659230]
 light_mask = 2
 material = SubResource("1")
 amount = 1
@@ -169,7 +169,7 @@ anim_speed_min = 1.0
 anim_speed_max = 1.0
 anim_speed_curve = SubResource("Curve_uvlvd")
 
-[node name="Left" type="CPUParticles2D" parent="."]
+[node name="Left" type="CPUParticles2D" parent="." unique_id=1662517465]
 light_mask = 2
 material = SubResource("1")
 amount = 1

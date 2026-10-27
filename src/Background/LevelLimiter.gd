@@ -250,3 +250,7 @@ func _resolution_scale_changed(_resolution_scale):
 	w.current_level.get_node("BlackBars").get_node("Bottom").position.y = size.y
 	#set_focus()
 	update_layers()
+
+### UTILITY ###
+func get_level_rect() -> Rect2:
+	return Rect2(global_position, size)

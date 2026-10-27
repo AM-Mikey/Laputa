@@ -3,11 +3,12 @@
 [ext_resource type="Script" uid="uid://chx65a42yhp5e" path="res://src/Gun/GLauncher.gd" id="1"]
 [ext_resource type="Texture2D" uid="uid://60d7h1gue2ph" path="res://assets/Gun/GLauncher.png" id="2"]
 
-[node name="GLauncher" type="Node2D" unique_id=608526459]
+[node name="GLauncher" type="Node2D" unique_id=1955943416]
 script = ExtResource("1")
+display_name = "Grenade Launcher"
 
-[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1160690922]
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=225322567]
 texture = ExtResource("2")
 
-[node name="Muzzle" type="Marker2D" parent="." unique_id=792027069]
+[node name="Muzzle" type="Marker2D" parent="." unique_id=1151260494]
 position = Vector2(-8, 0)

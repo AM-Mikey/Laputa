@@ -1,18 +1,20 @@
 extends Gun
 
 func _ready(): #since preload, this happens on game start
-	display_name = "Haymaker"
 	description = "A weapon that shoots sleeping darts. TODO:finish."
 	icon_texture = load("res://assets/Gun/HaymakerIcon.png")
 	icon_small_texture = load("res://assets/Gun/HaymakerIconSmall.png")
 	icon_round_texture = load("res://assets/UI/GunIcon/Haymaker.png")
 	
 	sfx = "gun_pistol"
+	do_bullet_casing = false
 	cooldown_time = 0.1
 	automatic = false
 	max_ammo = 0
 	max_level = 3
 	set_level(level)
+
+#only one level, freezes enemies/puts them to sleep. no damage just freezes non-boss enemy code
 
 func _set_level(val: int) -> void:
 	match val:

@@ -10,7 +10,9 @@ var active_trigger_path
 
 
 func setup_triggers():
-	editor.connect("tab_changed", Callable(self, "on_tab_changed"))
+	for child in $VBox/Margin/Scroll/Buttons.get_children():
+		child.queue_free()
+
 	var index = 0
 	for p in find_trigger_scenes("res://src/Trigger/"):
 

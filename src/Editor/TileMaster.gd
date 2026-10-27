@@ -16,8 +16,8 @@ var rows: int
 ### SETUP ###
 func setup_tile_master():
 	texture = w.current_level.get_node("TileMap").get_node("Front").tile_set.get_source(0).texture
-	columns = floor(texture.get_width()/16)
-	rows = floor(texture.get_height()/16)
+	columns = floor(texture.get_width()/16.0)
+	rows = floor(texture.get_height()/16.0)
 
 	tiles_tab.setup_options()
 	#tiles.setup_tiles() already done in editor

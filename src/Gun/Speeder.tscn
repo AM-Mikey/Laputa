@@ -3,11 +3,12 @@
 [ext_resource type="Script" uid="uid://crh6nuab7qxaq" path="res://src/Gun/Speeder.gd" id="1"]
 [ext_resource type="Texture2D" uid="uid://curoteu21cbu6" path="res://assets/Gun/Speeder.png" id="2"]
 
-[node name="Speeder" type="Node2D" unique_id=759469017]
+[node name="Speeder" type="Node2D" unique_id=1491287814]
 script = ExtResource("1")
+display_name = "Speeder"
 
-[node name="Sprite2D" type="Sprite2D" parent="." unique_id=305739781]
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1716527845]
 texture = ExtResource("2")
 
-[node name="Muzzle" type="Marker2D" parent="." unique_id=1589541311]
+[node name="Muzzle" type="Marker2D" parent="." unique_id=1102972549]
 position = Vector2(-6, -1)

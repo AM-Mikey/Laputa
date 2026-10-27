@@ -11,7 +11,7 @@ var touched_floor = false
 
 @onready var pc = f.pc()
 @onready var pc_on_floor = pc.is_on_floor()
-@onready var pc_held_down = Input.is_action_pressed("look_down") and inp.can_act
+@onready var pc_held_down = Input.is_action_pressed("look_down") && inp.can_act
 
 func setup():
 	$FizzleTimer.start(f_time)
@@ -65,30 +65,21 @@ func get_initial_velocity() -> Vector2:
 
 func _on_CollisionDetector_body_entered(body): #shadows
 	if not body is TileMapLayer:
-		#enemy
-		if body.get_collision_layer_value(2):
+		#armor
+		if body.get_collision_layer_value(6):
+			if armor_check(body):
+				do_fizzle("armor")
+		#enemys
+		elif body.get_collision_layer_value(2):
+			var blood_dir = get_blood_dir(body)
 			if not touched_floor:
-				body.hit(damage, get_blood_dir(body))
+				body.hit(damage, blood_dir, $PlayerCollisionDetector)
 			else:
-				body.hit(int(damage / 2.0), get_blood_dir(body))
+				body.hit(int(damage / 2.0), blood_dir, $PlayerCollisionDetector)
 			queue_free()
-
-func _on_CollisionDetector_area_entered(area): #shadows
-	if area.get_collision_layer_value(18): #enemyhurt
-		area.get_parent().hit(damage, get_blood_dir(area.get_parent()))
-		queue_free()
-	elif area.get_collision_layer_value(17): #playerhurt
-		area.get_parent().hit(damage, get_blood_dir(area.get_parent()))
-		queue_free()
-	elif area.get_collision_layer_value(9): #breakable
-		area.get_parent().on_break(break_method)
-		#on_break(break_method) produced two fizzle particles so instead do:
-		queue_free()
-	elif area.get_collision_layer_value(4): #world
-		do_fizzle("world")
-	elif area.get_collision_layer_value(6): #armor
-		print("armor")
-		do_fizzle("armor")
+		#breakable
+		elif body.get_collision_layer_value(9):
+			on_break(break_method)
 
 func _on_FizzleTimer_timeout():
 	do_fizzle("range")

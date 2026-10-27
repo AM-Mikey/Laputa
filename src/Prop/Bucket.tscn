@@ -17,6 +17,7 @@ can_sleep = false
 lock_rotation = true
 freeze_mode = 1
 script = ExtResource("1_bh5vf")
+editor_hidden = true
 metadata/_custom_type_script = "uid://dgt1xd0pgkr67"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1907040936]

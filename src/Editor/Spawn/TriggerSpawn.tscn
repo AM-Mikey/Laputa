@@ -70,7 +70,6 @@ layout_mode = 2
 size_flags_horizontal = 3
 mouse_filter = 1
 mouse_default_cursor_shape = 13
-disabled = true
 button_mask = 2
 
 [node name="Right" type="TextureButton" parent="Handles/Mid" unique_id=1814608975]
@@ -135,3 +134,5 @@ text = "Trigger Name"
 horizontal_alignment = 2
 clip_text = true
 uppercase = true
+
+[connection signal="gui_input" from="." to="." method="_on_gui_input"]

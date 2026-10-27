@@ -2,6 +2,9 @@ extends Enemy
 
 const ICON = preload("res://assets/Actor/Enemy/JuniorIcon.png")
 const BULLET = preload("res://src/Bullet/Enemy/Carbine.tscn")
+const TOOLTIPS = [
+"LV 0: Walks left and right. Shoots when seeing player.",
+]
 
 var starting_state := "walk"
 @export var move_dir := Vector2.LEFT
@@ -16,6 +19,7 @@ var target: Node
 @onready var st = $StateTimer
 
 func setup(): #Reminder: no function called can use await
+	self_knockback = true
 	hp = 12
 	reward = 8
 	damage_on_contact = 3
@@ -68,7 +72,7 @@ func enter_shoot(_last_state):
 	bullet.position = $BulletOrigin.global_position
 	bullet.origin = bullet.position #TODO: WHY not just have it set origin on ready?
 	bullet.direction = move_dir
-	w.middle.add_child(bullet)
+	w.player_front.add_child(bullet)
 	st.start(reload_time)
 
 
@@ -87,7 +91,7 @@ func do_flip_check():
 
 ### SIGNALS ###
 
-func _on_hit(_damage, blood_direction):
+func _on_hit(_damage, blood_direction, _hitbox):
 	if sign(blood_direction.x) == sign(move_dir.x): #shot from behind
 		ap.play("Shock")
 		await ap.animation_finished

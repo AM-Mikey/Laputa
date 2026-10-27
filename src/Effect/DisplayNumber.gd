@@ -35,12 +35,15 @@ func reset():
 func display_number():
 	if value >= 0 and value < 10:
 		$Layer/Num1.frame_coords.x = value
+		$Layer/Num1.visible = true
 		$Layer/Num2.visible = false
 		$Layer/Num3.visible = false
 	elif value >= 10 and value < 100:
 # warning-ignore:integer_division
 		$Layer/Num1.frame_coords.x = int((value % 100) / 10.0)
 		$Layer/Num2.frame_coords.x = value % 10
+		$Layer/Num1.visible = true
+		$Layer/Num2.visible = true
 		$Layer/Num3.visible = false
 	elif value >= 100 and value < 1000:
 # warning-ignore:integer_division
@@ -48,10 +51,16 @@ func display_number():
 # warning-ignore:integer_division
 		$Layer/Num2.frame_coords.x = int((value % 100) / 10.0)
 		$Layer/Num3.frame_coords.x = value % 10
+		$Layer/Num1.visible = true
+		$Layer/Num2.visible = true
+		$Layer/Num3.visible = true
 	elif value >= 1000:
 		$Layer/Num1.frame_coords.x = 9
 		$Layer/Num2.frame_coords.x = 9
 		$Layer/Num3.frame_coords.x = 9
+		$Layer/Num1.visible = true
+		$Layer/Num2.visible = true
+		$Layer/Num3.visible = true
 	else:
 		printerr("ERROR: No value applied to display number")
 

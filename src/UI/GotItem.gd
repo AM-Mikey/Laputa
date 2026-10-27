@@ -2,7 +2,7 @@ extends Control
 
 var item_name: String
 var wait_time = 2.4
-@onready var world = get_tree().get_root().get_node("World")
+@onready var w = get_tree().get_root().get_node("World")
 
 func _ready():
 	%Label.text = "Got the [color=f3b131]%s[/color]!" %item_name

@@ -15,7 +15,7 @@ signal music_fadeout_finished
 	"ui_move": preload("res://assets/SFX/Placeholder/snd_menu_move.ogg"),
 
 	"door": preload("res://assets/SFX/Placeholder/snd_door.ogg"),
-	"locked": preload("res://assets/SFX/Placeholder/snd_gun_click.ogg"),
+	"door_locked": preload("res://assets/SFX/Placeholder/snd_gun_click.ogg"),
 	"click": preload("res://assets/SFX/Placeholder/snd_gun_click.ogg"),
 	"ammo_refill": preload("res://assets/SFX/Placeholder/snd_get_missile.ogg"),
 	"hp_refill": preload("res://assets/SFX/Placeholder/snd_health_refill.ogg"),
@@ -53,11 +53,15 @@ signal music_fadeout_finished
 	"gun_shift": preload("res://assets/SFX/Placeholder/snd_switchweapon.ogg"),
 	"gun_pistol": preload("res://assets/SFX/Placeholder/snd_polar_star_l1_2.ogg"),
 	"gun_revolver": preload("res://assets/SFX/Placeholder/snd_polar_star_l3.ogg"),
-	"gun_shotgun": preload("res://assets/SFX/Placeholder/snd_missile_hit.ogg"),
+	"gun_blunderbuss": preload("res://assets/SFX/Placeholder/snd_missile_hit.ogg"),
 	"gun_sword": preload("res://assets/SFX/Placeholder/snd_ironh_shot_fly.ogg"),
 	"gun_grenade": preload("res://assets/SFX/Placeholder/snd_expl_small.ogg"),
 	"gun_grenade_bounce": preload("res://assets/SFX/Placeholder/snd_thud.ogg"),
 	"gun_star_bounce": preload("res://assets/SFX/Placeholder/snd_splash.ogg"),
+	"gun_turnstile_jumper": preload("res://assets/SFX/TurnstileJumper.ogg"),
+	"gun_cock_turnstile_jumper": preload("res://assets/SFX/TurnstileJumperCock.ogg"),
+	"gun_cock_blunderbuss": preload("res://assets/SFX/BlunderbussCock.ogg"),
+	"gun_cock_glauncher": preload("res://assets/SFX/GLauncherCock.ogg"),
 
 	"bullet_thud": preload("res://assets/SFX/Placeholder/snd_shot_hit.ogg"),
 	"bullet_clink": preload("res://assets/SFX/Placeholder/snd_shot_bounce.ogg"),
@@ -81,8 +85,17 @@ signal music_fadeout_finished
 	"enemy_thud_1": preload("res://assets/SFX/EnemyThud1.ogg"),
 	"enemy_metal_thud": preload("res://assets/SFX/DrumMetal.ogg"),
 	"enemy_slam": preload("res://assets/SFX/GunHeavy.ogg"),
+	"enemy_stomp": preload("res://assets/SFX/Placeholder/snd_quake.ogg"),
+	"enemy_land": preload("res://assets/SFX/Placeholder/snd_thud.ogg"),
 
 	"ornithopter": preload("res://assets/SFX/Ornithopter.ogg"),
+	"surprise": preload("res://assets/SFX/Placeholder/alert.mp3"),
+
+	"shield_charge": preload("res://assets/SFX/Placeholder/snd_block_destroy.ogg"), #Placeholder
+	"shield_sword_rise": preload("res://assets/SFX/Placeholder/snd_spur_charge2.ogg"), #Placeholder
+	"shield_charge_ready": preload("res://assets/SFX/Placeholder/snd_spur_charged.ogg"), #Placeholder
+	"shield_charge_start": preload("res://assets/SFX/Placeholder/snd_block_destroy.ogg"), #Placeholder
+	"heavy_step": preload("res://assets/SFX/Placeholder/snd_quake.ogg"), #Placeholder
 	#"enemy_buzz":
 
 	"npc_voice_normal": preload("res://assets/SFX/Placeholder/snd_msg.ogg"),

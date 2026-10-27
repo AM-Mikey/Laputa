@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://bg715nunngytq"]
+[gd_scene format=3 uid="uid://bg715nunngytq"]
 
 [ext_resource type="StyleBox" uid="uid://djnu2b18r7r1d" path="res://src/UI/StyleBox/Cursor.tres" id="1"]
 [ext_resource type="Script" uid="uid://ce2moo6lnjdkn" path="res://src/Editor/Tab/Tiles.gd" id="2"]
@@ -12,7 +12,7 @@
 [ext_resource type="StyleBox" uid="uid://85vca5s565c4" path="res://src/UI/StyleBox/GridRoundInset.tres" id="11_ibnax"]
 [ext_resource type="Texture2D" uid="uid://ct5jgsuemvjmu" path="res://assets/Editor/ModePaint.png" id="12"]
 
-[node name="Tiles" type="MarginContainer"]
+[node name="Tiles" type="MarginContainer" unique_id=2140945592]
 offset_right = 480.0
 offset_bottom = 270.0
 mouse_filter = 0
@@ -21,86 +21,88 @@ script = ExtResource("2")
 buttons = NodePath("VBox/Scroll/Buttons")
 cursor = NodePath("VBox/Scroll/Control/Cursor")
 
-[node name="VBox" type="VBoxContainer" parent="."]
+[node name="VBox" type="VBoxContainer" parent="." unique_id=300158913]
 layout_mode = 2
 mouse_filter = 2
 
-[node name="Label" type="Label" parent="VBox"]
+[node name="Label" type="Label" parent="VBox" unique_id=1438722949]
 layout_mode = 2
 size_flags_vertical = 0
 theme_override_colors/font_color = Color(0.878431, 0.784314, 0.345098, 1)
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 text = "Tiles"
 
-[node name="HBox" type="HBoxContainer" parent="VBox"]
+[node name="HBox" type="HBoxContainer" parent="VBox" unique_id=1222863604]
 layout_mode = 2
 mouse_filter = 2
 
-[node name="MultiErase" type="Button" parent="VBox/HBox"]
+[node name="MultiErase" type="Button" parent="VBox/HBox" unique_id=1633156739]
 layout_mode = 2
 toggle_mode = true
+button_pressed = true
 icon = ExtResource("10")
 
-[node name="AutoTile" type="Button" parent="VBox/HBox"]
+[node name="AutoTile" type="Button" parent="VBox/HBox" unique_id=43958196]
 layout_mode = 2
 toggle_mode = true
 icon = ExtResource("11")
 
-[node name="Mode" type="Button" parent="VBox/HBox"]
+[node name="Mode" type="Button" parent="VBox/HBox" unique_id=358926975]
 layout_mode = 2
 toggle_mode = true
 icon = ExtResource("12")
 
-[node name="Options" type="HBoxContainer" parent="VBox"]
+[node name="Options" type="HBoxContainer" parent="VBox" unique_id=1525934225]
 visible = false
 layout_mode = 2
 
-[node name="FlipH" type="Button" parent="VBox/Options"]
+[node name="FlipH" type="Button" parent="VBox/Options" unique_id=321452448]
 layout_mode = 2
 size_flags_vertical = 0
 tooltip_text = "Flip Horizontal"
 toggle_mode = true
 icon = ExtResource("6")
 
-[node name="FlipV" type="Button" parent="VBox/Options"]
+[node name="FlipV" type="Button" parent="VBox/Options" unique_id=635769019]
 layout_mode = 2
 size_flags_vertical = 0
 tooltip_text = "Flip Vertical"
 toggle_mode = true
 icon = ExtResource("7")
 
-[node name="RotateC" type="Button" parent="VBox/Options"]
+[node name="RotateC" type="Button" parent="VBox/Options" unique_id=1833207161]
 layout_mode = 2
 size_flags_vertical = 0
 tooltip_text = "Rotate Clockwise"
 icon = ExtResource("8")
 
-[node name="RotateCC" type="Button" parent="VBox/Options"]
+[node name="RotateCC" type="Button" parent="VBox/Options" unique_id=1246681124]
 layout_mode = 2
 size_flags_vertical = 0
 tooltip_text = "Rotate Counterclockwise"
 icon = ExtResource("5")
 
-[node name="Scroll" type="ScrollContainer" parent="VBox"]
+[node name="Scroll" type="ScrollContainer" parent="VBox" unique_id=98276693]
 layout_mode = 2
 size_flags_vertical = 3
 mouse_filter = 2
 theme_override_styles/panel = ExtResource("11_ibnax")
 
-[node name="Buttons" type="VBoxContainer" parent="VBox/Scroll"]
+[node name="Buttons" type="VBoxContainer" parent="VBox/Scroll" unique_id=2009473391]
+unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 mouse_filter = 0
 theme_override_constants/separation = 0
 
-[node name="Control" type="Control" parent="VBox/Scroll"]
+[node name="Control" type="Control" parent="VBox/Scroll" unique_id=1438866755]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 mouse_filter = 2
 
-[node name="Cursor" type="Panel" parent="VBox/Scroll/Control"]
+[node name="Cursor" type="Panel" parent="VBox/Scroll/Control" unique_id=232892084]
 layout_mode = 0
 mouse_filter = 2
 theme_override_styles/panel = ExtResource("1")

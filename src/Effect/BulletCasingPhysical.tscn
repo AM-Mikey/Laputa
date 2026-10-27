@@ -1,0 +1,108 @@
+[gd_scene format=3 uid="uid://cqckfpe78v8d6"]
+
+[ext_resource type="Script" uid="uid://b5o2lcwy6afnf" path="res://src/Effect/BulletCasingPhysical.gd" id="1_jvdrb"]
+[ext_resource type="Texture2D" uid="uid://b55nlk68h5r7l" path="res://assets/Effect/Casing.png" id="2_dwr7x"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_8n5dw"]
+particles_animation = true
+particles_anim_h_frames = 4
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_skc2y"]
+radius = 0.5
+
+[sub_resource type="Animation" id="Animation_skik2"]
+resource_name = "Burnout"
+length = 0.4
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame_coords:x")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3]
+}
+
+[sub_resource type="Animation" id="Animation_jvdrb"]
+resource_name = "Fadeout"
+length = 0.2
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_ujfdw"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame_coords:x")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_lf6k5"]
+_data = {
+&"Burnout": SubResource("Animation_skik2"),
+&"Fadeout": SubResource("Animation_jvdrb"),
+&"RESET": SubResource("Animation_ujfdw")
+}
+
+[node name="BulletCasingPhysical" type="CharacterBody2D" unique_id=1404253809]
+material = SubResource("CanvasItemMaterial_8n5dw")
+collision_layer = 0
+collision_mask = 520
+script = ExtResource("1_jvdrb")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=2120575821]
+position = Vector2(0.5, 0.5)
+shape = SubResource("CircleShape2D_skc2y")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=218109295]
+texture = ExtResource("2_dwr7x")
+hframes = 4
+
+[node name="End" type="Marker2D" parent="." unique_id=340287011]
+position = Vector2(-4, 0)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=65246860]
+libraries/ = SubResource("AnimationLibrary_lf6k5")
+autoplay = &"Burnout"
+
+[node name="FreeTimer" type="Timer" parent="." unique_id=226085857]
+process_callback = 0
+one_shot = true
+
+[connection signal="timeout" from="FreeTimer" to="." method="_on_FreeTimer_timeout"]

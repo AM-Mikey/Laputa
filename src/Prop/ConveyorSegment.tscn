@@ -1,0 +1,187 @@
+[gd_scene format=3 uid="uid://b2csxme36y7j0"]
+
+[ext_resource type="Script" uid="uid://b22mtyegbn31i" path="res://src/Prop/ConveyorSegment.gd" id="1_skuxr"]
+[ext_resource type="Texture2D" uid="uid://bgupnrlej7cco" path="res://assets/Prop/Conveyor.png" id="2_pcqp0"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ktx01"]
+size = Vector2(16, 16)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_5yyxg"]
+size = Vector2(16, 16)
+
+[sub_resource type="Animation" id="Animation_kvohs"]
+resource_name = "LeftCCW"
+length = 0.4
+loop_mode = 1
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.099999994, 0.19999999, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [3, 2, 1, 0]
+}
+
+[sub_resource type="Animation" id="Animation_yws23"]
+resource_name = "LeftCW"
+length = 0.4
+loop_mode = 1
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3]
+}
+
+[sub_resource type="Animation" id="Animation_ry8id"]
+resource_name = "MidCCW"
+length = 0.4
+loop_mode = 1
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.099999994, 0.19999999, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [7, 6, 5, 4]
+}
+
+[sub_resource type="Animation" id="Animation_vbmr5"]
+resource_name = "MidCW"
+length = 0.4
+loop_mode = 1
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [4, 5, 6, 7]
+}
+
+[sub_resource type="Animation" id="Animation_pl6rd"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_qwkqe"]
+resource_name = "RightCCW"
+length = 0.4
+loop_mode = 1
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.099999994, 0.19999999, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [11, 10, 9, 8]
+}
+
+[sub_resource type="Animation" id="Animation_1dqld"]
+resource_name = "RightCW"
+length = 0.4
+loop_mode = 1
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.099999994, 0.19999999, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [8, 9, 10, 11]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_br4o6"]
+_data = {
+&"LeftCCW": SubResource("Animation_kvohs"),
+&"LeftCW": SubResource("Animation_yws23"),
+&"MidCCW": SubResource("Animation_ry8id"),
+&"MidCW": SubResource("Animation_vbmr5"),
+&"RESET": SubResource("Animation_pl6rd"),
+&"RightCCW": SubResource("Animation_qwkqe"),
+&"RightCW": SubResource("Animation_1dqld")
+}
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_53f7g"]
+size = Vector2(16, 2)
+
+[node name="ConveyorSegment" type="CharacterBody2D" unique_id=2100588871 groups=["Entities", "Props"]]
+collision_layer = 16
+collision_mask = 0
+script = ExtResource("1_skuxr")
+editor_hidden = true
+metadata/_custom_type_script = "uid://dkko72kbbon8e"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=363097463]
+position = Vector2(8, 8)
+shape = SubResource("RectangleShape2D_ktx01")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="." unique_id=61048584]
+collision_layer = 8
+collision_mask = 0
+constant_linear_velocity = Vector2(10, 0)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D" unique_id=1585072303]
+position = Vector2(8, 8)
+shape = SubResource("RectangleShape2D_5yyxg")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1935880406]
+light_mask = 0
+texture = ExtResource("2_pcqp0")
+centered = false
+hframes = 4
+vframes = 3
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1237380352]
+libraries/ = SubResource("AnimationLibrary_br4o6")
+
+[node name="PlayerDetector" type="Area2D" parent="." unique_id=789075418]
+collision_layer = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerDetector" unique_id=507506921]
+position = Vector2(8, -1)
+shape = SubResource("RectangleShape2D_53f7g")
+
+[connection signal="body_entered" from="PlayerDetector" to="." method="_on_PlayerDetector_body_entered"]
+[connection signal="body_exited" from="PlayerDetector" to="." method="_on_PlayerDetector_body_exited"]

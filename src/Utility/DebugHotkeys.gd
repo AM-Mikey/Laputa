@@ -4,7 +4,7 @@ const DEBUG_INFO = preload("res://src/UI/DebugInfo/DebugInfo.tscn")
 const WIND_VISUAL = preload("res://src/UI/WindVisual.tscn")
 const LEVEL_EDITOR = preload("res://src/Editor/Editor.tscn")
 const POPUP = preload("res://src/UI/PopupText.tscn")
-const SHOP_MENU = preload("res://src/UI/ShopMenu/ShopMenu.tscn")
+#const SHOP_MENU = preload("res://src/UI/ShopMenu/ShopMenu.tscn")
 
 @onready var w = get_tree().get_root().get_node("World")
 
@@ -34,7 +34,7 @@ func _input(event):
 			editor_tab = w.el.get_node("Editor/Main/Win/Tab").current_tab
 			w.el.get_node("Editor").exit()
 		else:
-			print("showing level editor")
+			#print("showing level editor")
 			w.el.add_child(LEVEL_EDITOR.instantiate())
 			w.el.get_node("Editor/Main/Win/Tab").current_tab = editor_tab
 			w.el.get_node("Editor").on_tab_changed(editor_tab)
@@ -49,6 +49,7 @@ func _input(event):
 
 	if event.is_action_pressed("debug_reload"):
 		if w.el.has_node("Editor"): return
+		if w.ui.has_node("DeathScreen"): return
 		if f.db():
 			await f.db().exit()
 		reload_level()

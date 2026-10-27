@@ -1,0 +1,63 @@
+extends Gun
+
+const GUN_SMOKE = preload("res://src/Effect/GunSmoke.tscn")
+
+var cock_sfx = "gun_cock_blunderbuss"
+
+func _ready():
+	description = "Fires a cluster of birdshot. Get close for max effect."
+	icon_texture = load("res://assets/Gun/Blunderbuss.png") #need
+	icon_small_texture = load("res://assets/Gun/Blunderbuss.png") #need
+	sfx = "gun_blunderbuss"
+	do_bullet_casing = false
+	bullet_scene = load("res://src/Bullet/Birdshot.tscn")
+	damage = 1
+	f_range = 0
+	cooldown_time = 1.0
+	automatic = false
+	do_muzzle_flash = false
+	spread_degrees = 36.0
+	max_ammo = 0
+	max_level = 3
+	max_unlocked_level = 1
+	_set_level(level)
+	cd.connect("timeout", Callable(self, "_on_cd_timeout"))
+
+func _set_level(val: int) -> void:
+	match val:
+		1:
+			recoil = 10
+			bullets_per_activate = 4
+			knockback_strength = 16
+			speed = 512
+			max_xp = 10
+		2:
+			recoil = 20
+			bullets_per_activate = 8
+			knockback_strength = 16
+			speed = 640
+			max_xp = 15
+		3:
+			recoil = 30 #NOTE: this level of recoil allows jp to reach up +1 and over +0, don't allow more than this.
+			bullets_per_activate = 16
+			knockback_strength = 16
+			speed = 748
+			max_xp = 20
+
+func activate():
+	for i in bullets_per_activate:
+		var bullet = spawn_bullet(get_origin(), pc.shoot_dir, w.player_front, i)
+		bullet.instant_fizzle_check()
+	var gun_smoke = GUN_SMOKE.instantiate()
+	gun_smoke.direction = Vector2(pc.shoot_dir.x, 0)
+	gun_smoke.global_position = $Muzzle.global_position
+	w.player_front.add_child(gun_smoke)
+
+
+
+### SIGNALS ###
+
+func _on_cd_timeout():
+	if pc.guns.get_child(0) == self: #current gun
+		am.play(cock_sfx)
+		oup.vibrate_impulse_light(0.1, 0.1)

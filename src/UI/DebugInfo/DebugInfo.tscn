@@ -426,23 +426,41 @@ theme_override_colors/font_color = Color(0.5, 0.5, 0.5, 1)
 theme_override_fonts/font = ExtResource("3_d57kx")
 text = "OBJ"
 
-[node name="Front" type="Label" parent="VBox/HBox/C2/Q" unique_id=622275432]
+[node name="FarthestFront" type="Label" parent="VBox/HBox/C2/Q" unique_id=622275432]
 layout_mode = 2
 theme = ExtResource("2")
 theme_override_fonts/font = ExtResource("3_d57kx")
-text = "Front: "
+text = "FFront: "
 
-[node name="Middle" type="Label" parent="VBox/HBox/C2/Q" unique_id=1000316348]
+[node name="MiddleFront" type="Label" parent="VBox/HBox/C2/Q" unique_id=1072009084]
 layout_mode = 2
 theme = ExtResource("2")
 theme_override_fonts/font = ExtResource("3_d57kx")
-text = "Middle: "
+text = "MFront: "
 
-[node name="Back" type="Label" parent="VBox/HBox/C2/Q" unique_id=902905608]
+[node name="PlayerFront" type="Label" parent="VBox/HBox/C2/Q" unique_id=1000316348]
 layout_mode = 2
 theme = ExtResource("2")
 theme_override_fonts/font = ExtResource("3_d57kx")
-text = "Back: "
+text = "PFront: "
+
+[node name="PlayerBack" type="Label" parent="VBox/HBox/C2/Q" unique_id=1911085006]
+layout_mode = 2
+theme = ExtResource("2")
+theme_override_fonts/font = ExtResource("3_d57kx")
+text = "PBack: "
+
+[node name="MiddleBack" type="Label" parent="VBox/HBox/C2/Q" unique_id=902905608]
+layout_mode = 2
+theme = ExtResource("2")
+theme_override_fonts/font = ExtResource("3_d57kx")
+text = "MBack: "
+
+[node name="FarthestBack" type="Label" parent="VBox/HBox/C2/Q" unique_id=1353714945]
+layout_mode = 2
+theme = ExtResource("2")
+theme_override_fonts/font = ExtResource("3_d57kx")
+text = "FBack: "
 
 [node name="Mission" type="Label" parent="VBox/HBox/C2/Q" unique_id=226646423]
 layout_mode = 2
@@ -554,19 +572,37 @@ theme = ExtResource("2")
 theme_override_colors/font_color = Color(0.5, 0.5, 0.5, 1)
 theme_override_fonts/font = ExtResource("5_osv66")
 
-[node name="Front" type="Label" parent="VBox/HBox/C2/A" unique_id=1276399958]
+[node name="FarthestFront" type="Label" parent="VBox/HBox/C2/A" unique_id=1276399958]
 layout_mode = 2
 theme = ExtResource("2")
 theme_override_fonts/font = ExtResource("5_osv66")
 text = "-"
 
-[node name="Middle" type="Label" parent="VBox/HBox/C2/A" unique_id=1848430436]
+[node name="MiddleFront" type="Label" parent="VBox/HBox/C2/A" unique_id=2082713488]
 layout_mode = 2
 theme = ExtResource("2")
 theme_override_fonts/font = ExtResource("5_osv66")
 text = "-"
 
-[node name="Back" type="Label" parent="VBox/HBox/C2/A" unique_id=2081709187]
+[node name="PlayerFront" type="Label" parent="VBox/HBox/C2/A" unique_id=1848430436]
+layout_mode = 2
+theme = ExtResource("2")
+theme_override_fonts/font = ExtResource("5_osv66")
+text = "-"
+
+[node name="PlayerBack" type="Label" parent="VBox/HBox/C2/A" unique_id=1806855432]
+layout_mode = 2
+theme = ExtResource("2")
+theme_override_fonts/font = ExtResource("5_osv66")
+text = "-"
+
+[node name="MiddleBack" type="Label" parent="VBox/HBox/C2/A" unique_id=2081709187]
+layout_mode = 2
+theme = ExtResource("2")
+theme_override_fonts/font = ExtResource("5_osv66")
+text = "-"
+
+[node name="FarthestBack" type="Label" parent="VBox/HBox/C2/A" unique_id=1695060918]
 layout_mode = 2
 theme = ExtResource("2")
 theme_override_fonts/font = ExtResource("5_osv66")

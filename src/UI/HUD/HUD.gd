@@ -4,7 +4,7 @@ const GUNICON = preload("res://src/UI/HUD/GunIcon.tscn")
 const UI_BULLET_FLY = preload("res://src/UI/HUD/UIBulletFly.tscn")
 
 #onready var pc = f.pc()
-@onready var world = get_tree().get_root().get_node("World")
+@onready var w = get_tree().get_root().get_node("World")
 
 @export var gun: Node
 @export var ao: Node
@@ -72,7 +72,7 @@ func _ready():
 func _process(_delta):
 	if f.pc():
 		var pc = f.pc()
-		if pc.guns.get_child(0) != null: #TODO: make this connected via signal
+		if pc.guns.get_children().size() != 0:
 			cd_progress.visible = true
 			cd_progress.value = 100 - ((pc.get_node("GunManager/CooldownTimer").time_left / pc.guns.get_child(0).cooldown_time) * 100)
 		else: cd_progress.visible = false
@@ -96,7 +96,7 @@ func _on_guns_updated(guns, cause = "default", do_xp_flash = false):
 	if !cause in ["fire", "get_ammo"]:
 		if guns != []:
 			var g: Gun = guns[0]
-			_on_xp_updated(g.xp, g.max_xp, g.level, g.max_level, do_xp_flash, cause)
+			_on_xp_updated(g.xp, g.max_xp, g.level, g.max_unlocked_level, do_xp_flash, cause)
 
 	#for g in guns:
 		#if guns.find(g) == 0: #main gun
@@ -250,8 +250,8 @@ func _on_hp_updated(hp: int, max_hp: int, cause: String) -> void:
 	else:
 		if hp < hp_lost.value:
 			if hp > 0:
-				world.get_node("HUDLayer/HUDAnimator").stop()
-				world.get_node("HUDLayer/HUDAnimator").play("Flash")
+				w.get_node("HUDLayer/HUDAnimator").stop()
+				w.get_node("HUDLayer/HUDAnimator").play("Flash")
 				var tween = get_tree().create_tween()
 				tween.tween_property(hp_lost, "value", hp, 0.4).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT).set_delay(0.4)
 		else: #increasing, just set it
@@ -289,7 +289,7 @@ func display_hp_number(hp, max_hp):
 
 
 var xp_tween: Tween
-func _on_xp_updated(xp: float, max_xp: float, level: int, max_level: int, do_xp_flash = false, cause: String = "default") -> void:
+func _on_xp_updated(xp: float, max_xp: float, level: int, max_unlocked_level: int, do_xp_flash = false, cause: String = "default") -> void:
 	modulate = Color(1, 1, 1) #to prevent flash animation from stopping on a transparent frame
 	xp_num.frame_coords.x = level
 	var old_progress_max_value: float = xp_progress.max_value
@@ -326,8 +326,8 @@ func _on_xp_updated(xp: float, max_xp: float, level: int, max_level: int, do_xp_
 		else: #increasing, just set it
 			xp_lost.value = xp
 
-	xp_progress.visible = !(xp == max_xp and level == max_level)
-	xp_max.visible = (xp == max_xp and level == max_level)
+	xp_progress.visible = !(xp == max_xp and level == max_unlocked_level)
+	xp_max.visible = (xp == max_xp and level == max_unlocked_level)
 
 
 
@@ -364,7 +364,7 @@ func _on_money_updated(money):
 		printerr("ERROR: hud cannot display money value of: " + money)
 
 func _on_invincibility_ended():
-	world.get_node("HUDLayer/HUDAnimator").stop()
+	w.get_node("HUDLayer/HUDAnimator").stop()
 
 ### HELPER ###
 

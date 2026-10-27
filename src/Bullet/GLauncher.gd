@@ -13,7 +13,7 @@ var touched_floor = false
 
 @onready var pc = f.pc()
 @onready var pc_on_floor = pc.is_on_floor()
-@onready var pc_held_down = Input.is_action_pressed("look_down") and inp.can_act
+@onready var pc_held_down = Input.is_action_pressed("look_down") && inp.can_act
 
 
 
@@ -37,7 +37,12 @@ func _on_physics_process(delta):
 		if abs(velocity.y) > minimum_speed:
 			velocity *= bounciness
 			velocity = velocity.bounce(collision.get_normal())
+			touched_floor = true
+			$BounceGraceTimer.start()
 			am.play("gun_grenade_bounce", self)
+			var collider = collision.get_collider()
+			if collider is not TileMapLayer and collider.get_collision_layer_value(6):
+				collider.blocked.emit(self, collider)
 		else:
 			velocity = Vector2.ZERO
 		if velocity.x < 0:
@@ -86,35 +91,59 @@ func is_world_blocking(target) -> bool:
 	$WorldCast.target_position = to_local(target_center_global_position)
 	$WorldCast.force_raycast_update()
 	if $WorldCast.is_colliding():
-		print("World in way of grenade")
-		return true
+		var collider = $WorldCast.get_collider()
+		if collider is not TileMapLayer and collider.get_collision_layer_value(6):
+			print("Armor in the way of explosion")
+			collider.blocked.emit($ExplosionDetector, collider)
+			return true
+		else:
+			print("World in way of grenade")
+			return true
 	else:
 		return false
 
+func change_side(to_player: bool):
+	var hitbox = get_node_or_null("PlayerCollisionDetector")
+	set_collision_layer_value(7, to_player)
+	set_collision_layer_value(14, !to_player)
+	hitbox.set_collision_layer_value(7, to_player)
+	hitbox.set_collision_layer_value(14, !to_player)
+	hitbox.set_collision_mask_value(18, to_player)
+	hitbox.set_collision_mask_value(17, !to_player)
 
+func deflect(vel: Vector2):
+	var bullet_sprite = get_node("Sprite2D")
+	var new_bullet_position = bullet_sprite.global_position
+	direction = vel.normalized()
+	velocity = vel
+	global_position = new_bullet_position
 
 ### SIGNALS ###
 
 func _on_CollisionDetector_body_entered(body):
-	if body is TileMapLayer:
-		if body.tile_set.get_physics_layer_collision_layer(0) == 8: #world (layer value)
-			touched_floor = true
+	if body is not TileMapLayer:
+		if body.get_collision_layer_value(6): #armor
+			armor_check(body)
 
 func _on_CollisionDetector_area_entered(area): #shadows
 	#enemyhurt
 	if area.get_collision_layer_value(18):
-		if not touched_floor:
-			area.get_parent().hit(damage, get_blood_dir(area.get_parent()))
-		else:
-			area.get_parent().hit(int(damage/2.0), get_blood_dir(area.get_parent()))
-		queue_free()
+		if $BounceGraceTimer.time_left <= 0.0:
+			var blood_dir = get_blood_dir(area.get_parent())
+			if not touched_floor:
+				area.get_parent().hit(damage, blood_dir, $PlayerCollisionDetector, blood_dir, knockback_strength)
+			else:
+				area.get_parent().hit(int(damage/2.0), blood_dir, $PlayerCollisionDetector, blood_dir, knockback_strength)
+			queue_free()
 
 func _on_Timer_timeout():
 	$ExplosionDetector/CollisionShape2D.set_deferred("disabled", false)
+	$ExplosionDetector.top_level = true
+	$ExplosionDetector.global_position = global_position
 	$AnimationPlayer.stop()
 
 	var explosion = load("res://src/Effect/GrenadeExplosion.tscn").instantiate()
-	explosion.position = position
+	explosion.global_position = global_position
 
 	if $ExplosionDetector/CollisionShape2D.shape.radius == 32: #Brotha EWWWW
 		explosion.size = "Small"
@@ -122,7 +151,7 @@ func _on_Timer_timeout():
 		explosion.size = "Medium"
 	if $ExplosionDetector/CollisionShape2D.shape.radius == 64:
 		explosion.size = "Large"
-	get_tree().get_root().get_node("World/Front").add_child(explosion)
+	get_tree().get_root().get_node("World").middle_front.add_child(explosion)
 	var tween = get_tree().create_tween()
 	tween.tween_property($ExplosionDetector, "scale", Vector2.ONE, 0.1).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
 	await tween.finished
@@ -141,8 +170,9 @@ func _on_ExplosionDetector_area_entered(area):
 	if area.get_collision_layer_value(17):
 		if !is_world_blocking(area):
 			var knockback_direction = Vector2(sign(area.get_parent().global_position.x - global_position.x), 0)
-			area.get_parent().hit(int(damage/4.0), knockback_direction)
+			area.get_parent().hit(int(damage/4.0), knockback_direction, $ExplosionDetector)
 	#enemyhurt
 	elif area.get_collision_layer_value(18):
 		if !is_world_blocking(area):
-			area.get_parent().hit(int(damage/4.0), get_blood_dir(area.get_parent()))
+			var blood_dir = get_blood_dir(area.get_parent())
+			area.get_parent().hit(int(damage/4.0), blood_dir, $ExplosionDetector, blood_dir, knockback_strength)

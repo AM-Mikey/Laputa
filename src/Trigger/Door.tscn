@@ -5,7 +5,7 @@
 [sub_resource type="RectangleShape2D" id="1"]
 size = Vector2(16, 32)
 
-[node name="Door" type="Area2D" unique_id=996687710 groups=["Doors", "LevelTriggers", "Triggers"]]
+[node name="Door" type="Area2D" unique_id=996687710 groups=["Doors", "LevelTriggers", "LimitedTriggers", "Triggers"]]
 collision_layer = 0
 script = ExtResource("1")
 color = Color(0, 0.4, 0, 1)

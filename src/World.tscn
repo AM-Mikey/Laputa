@@ -1,6 +1,6 @@
-[gd_scene format=3 uid="uid://dm8a87nno5lvo"]
+[gd_scene format=3]
 
-[ext_resource type="Script" uid="uid://ct5k2fxi0u0rb" path="res://src/World.gd" id="8"]
+[ext_resource type="Script" path="res://src/World.gd" id="8"]
 
 [sub_resource type="Animation" id="Animation_qbf6s"]
 resource_name = "Flash"
@@ -45,23 +45,13 @@ visibility_layer = 2
 script = ExtResource("8")
 development_stage = "alpha"
 release_version = "1.8"
-default_gun_array = Array[String](["Revolver", "Speeder", "MPistol", "GLauncher", "Shotgun", "Tsurugi", "Red7", "Roberta"])
-start_level_path = "res://src/Level/WikiMap.tscn"
+do_skip_title = true
+default_gun_array = Array[String](["Revolver", "Speeder", "MPistol", "GLauncher", "Blunderbuss", "Tsurugi", "Red7", "Roberta", "TurnstileJumper"])
+default_topic_array = Array[String](["yourself"])
+start_level_path = "res://src/Level/EnemyDebug/Goalie.tscn"
 
 [node name="ParallaxBackground" type="ParallaxBackground" parent="." unique_id=912648782]
-scroll_offset = Vector2(-9760, -6975.5)
-
-[node name="Back" type="Node2D" parent="." unique_id=1451941770]
-visibility_layer = 2
-scale = Vector2(4, 4)
-
-[node name="Middle" type="Node2D" parent="." unique_id=906505202]
-visibility_layer = 2
-z_index = 1
-
-[node name="Front" type="Node2D" parent="." unique_id=448726191]
-visibility_layer = 2
-z_index = 2
+scroll_offset = Vector2(-11040, -7359.4844)
 
 [node name="InventoryLayer" type="CanvasLayer" parent="." unique_id=1283144760]
 scale = Vector2(4, 4)
@@ -114,3 +104,28 @@ process_mode = 3
 layer = 8
 scale = Vector2(4, 4)
 transform = Transform2D(4, 0, 0, 4, 0, 0)
+
+[node name="FarthestBack" type="Node2D" parent="." unique_id=125280429]
+visibility_layer = 2
+z_index = -1
+
+[node name="MiddleBack" type="Node2D" parent="." unique_id=1451941770]
+visibility_layer = 2
+
+[node name="PlayerBack" type="Node2D" parent="." unique_id=906505202]
+visibility_layer = 2
+z_index = 1
+
+[node name="PlayerFront" type="Node2D" parent="." unique_id=892020458]
+visibility_layer = 2
+z_index = 2
+
+[node name="MiddleFront" type="Node2D" parent="." unique_id=448726191]
+visibility_layer = 2
+z_index = 3
+
+[node name="FarthestFront" type="Node2D" parent="." unique_id=421958040]
+visibility_layer = 2
+z_index = 4
+
+[connection signal="level_saved" from="EditorLayer/Editor" to="EditorLayer/Editor/Main/Win/Tab/Levels" method="on_save"]

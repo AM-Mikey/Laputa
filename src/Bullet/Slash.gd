@@ -5,6 +5,7 @@ extends Bullet
 #var collision_shape: RectangleShape2D
 
 func setup():
+	velocity = direction
 	if direction == Vector2.LEFT or direction == Vector2.RIGHT:
 		scale.x = direction.x *-1
 		$Sprite2D.scale = Vector2.ONE

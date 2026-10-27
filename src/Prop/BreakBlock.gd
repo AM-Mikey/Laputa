@@ -7,11 +7,18 @@ var broken = false
 var crush_targets = []
 var is_grounded = true
 
+@export var break_on_fall = false
+@export var has_gravity = true
 @export var crush_players = false
 @export var crush_enemies = true
 
 
 func setup(): #Reminder: no function called can use await
+	if !has_gravity:
+		$Sprite2D.frame = 3
+		base_gravity_scale = 0.0
+		water_gravity_scale = 0.0
+		gravity_scale = 0.0
 	w.emit_signal("finished_spawn_entities_step")
 
 func on_break(method = "cut"):
@@ -19,11 +26,11 @@ func on_break(method = "cut"):
 	$CollisionShape2D.set_deferred("disabled", true)
 	$BreakArea/CollisionShape2D.set_deferred("disabled", true)
 	$CrushDetector/CollisionShape2D.set_deferred("disabled", true)
-	freeze = true
+	self.set_deferred("freeze", true)
 	am.play("block_break", self)
 	var explosion = EXPLOSION.instantiate()
 	explosion.global_position = global_position + Vector2(8.0, 8.0)
-	w.front.add_child(explosion)
+	w.middle_front.add_child(explosion)
 
 	if $GroundLeft.is_colliding() && $GroundRight.is_colliding():
 		match method:
@@ -41,6 +48,8 @@ func _physics_process(_delta):
 			if !is_grounded:
 				is_grounded = true
 				am.play("block_thud", self)
+				if break_on_fall:
+					on_break()
 		else:
 			is_grounded = false
 	else:
@@ -49,7 +58,7 @@ func _physics_process(_delta):
 
 	if !($GroundLeft.is_colliding() || $GroundRight.is_colliding()) && broken:
 		$Sprite2D.visible = false
-	if linear_velocity.length_squared() > 1.0 && !broken && !crush_targets.is_empty():
+	if !broken && linear_velocity.length_squared() > 1.0 && !broken && !crush_targets.is_empty():
 		for t in crush_targets:
 			crush(t[0], t[1])
 			print("BreakBlock Crushed", t)
@@ -61,12 +70,12 @@ func crush(type, target):
 		"player":
 			if crush_players:
 				f.pc().invincible = false
-				target.hit(999, Vector2.ZERO)
+				target.hit(999, Vector2.ZERO, $CrushDetector)
 			else:
 				on_break()
 		"enemy":
 			if crush_enemies:
-				target.hit(999, Vector2.ZERO)
+				target.hit(999, Vector2.ZERO, $CrushDetector)
 			else:
 				on_break()
 

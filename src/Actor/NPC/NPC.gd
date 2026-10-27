@@ -36,7 +36,6 @@ var next_conversation_index: int
 
 var camera_forgiveness = 16
 
-@onready var w = get_tree().get_root().get_node("World")
 
 func _ready(): #Reminder: no function called can use await
 	home = global_position
@@ -61,6 +60,7 @@ func _physics_process(_delta):
 
 	velocity = calc_velocity()
 	move_and_slide()
+	apply_wind()
 
 
 func change_animation(animation: String): #, random_start = false): TODO: random start doesnt work with discrete animations because we could randomly start inbetween changing frames, thus keeping the old animation going until we hit a keyframe
@@ -111,6 +111,9 @@ func change_state(new):
 
 
 ### STATES ###
+func enter_idle(_prev_state):
+	speed = Vector2.ZERO
+
 #func do_idle():
 	#if target_waypoint:
 		#change_state("walkto")
@@ -249,27 +252,29 @@ func look_at_node(node, inverted = false):
 func calc_velocity(do_gravity = true) -> Vector2:
 	var out: = velocity
 	var fractional_speed = speed
+	var delta: = get_physics_process_delta_time()
 	if is_in_water:
 		fractional_speed = speed * Vector2(0.666, 0.666)
 	out.x = fractional_speed.x * move_dir.x
 	if do_gravity:
-		out.y += gravity * get_physics_process_delta_time()
+		out.y += gravity * delta
 		if move_dir.y < 0:
 			out.y = fractional_speed.y * move_dir.y
 	else:
 		out.y = fractional_speed.y * move_dir.y
-	if wind_areas_inside.size() != 0: #Inside Wind
+	if is_wind_affected && wind_areas_inside.size() > 0: #Inside Wind
 		if out.y < 0.0:
 			out.y *= 0.9
 	return out
+
 
 ### NEW PATHFINDING
 
 func find_waypoints():
 	for wp in get_tree().get_nodes_in_group("WaypointGlobals"):
 		if wp.owner_id.nocasecmp_to(id) == 0:
-			waypoints[w.index] = wp
-	if not waypoints.is_empty():
+			waypoints[wp.index] = wp
+	if !waypoints.is_empty():
 		set_target(waypoints[0])
 
 func set_target(new_target):
@@ -277,7 +282,7 @@ func set_target(new_target):
 		target_waypoint.deactivate()
 	target_waypoint = new_target
 	target_waypoint.activate()
-	$WaypointBailTimer.start(bail_time)
+	#$WaypointBailTimer.start(bail_time)
 
 func get_next_waypoint() -> Node:
 	return(waypoints[(target_waypoint.index + 1) % waypoints.size()])
@@ -300,10 +305,10 @@ func _on_PlayerDetector_body_entered(body):
 func _on_PlayerDetector_body_exited(_body):
 	active_pc = null
 
-func _on_waypoint_bail_timer_timeout(): #TODO: consider reimplementing (ala child.tscn)
-	pass
-	#if disabled or waypoints.is_empty(): return
-	#set_target(get_next_waypoint())
+#func _on_waypoint_bail_timer_timeout(): #TODO: consider reimplementing (ala child.tscn)
+	#pass
+	##if disabled or waypoints.is_empty(): return
+	##set_target(get_next_waypoint())
 
 func on_dialog_finished():
 	change_state(predialog_state)

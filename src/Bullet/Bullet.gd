@@ -10,6 +10,11 @@ const FIZZLE_ARMOR = preload("res://src/Effect/BulletFizzleArmor.tscn")
 @export var base_gravity := 300.0
 @export var water_gravity := 150.0
 @export var damage := 0.0
+@export var camera_recoil_distance := 0.0
+@export var camera_recoil_hit_distance : float
+@export var camera_recoil_wall_distance : float
+@export var camera_recoil_curve : Curve
+@export var camera_recoil_time := 0.1
 
 @onready var gravity := water_gravity if is_in_water else base_gravity
 
@@ -17,14 +22,19 @@ var f_range
 var f_time
 var speed
 var spread_degrees
+var bullets_in_volley := 1
+var index := 0
+var knockback_strength := 0.0
 var origin = Vector2.ZERO
 var direction = Vector2.ZERO
-var instant_fizzle = true
+var instant_fizzle := true
+var already_fizzle := false
 
 var break_method = "cut"
 @export var is_water_affected := false
 @export var is_wind_affected := false
 @export var is_enemy_bullet := false
+@export var piercing := false
 
 var wind_areas_inside := []
 var is_in_water := false:
@@ -42,8 +52,14 @@ const TIMEOUT_TIME: float = 60.0
 const level_exit_safe_distance: float = 512.0
 
 
+
 func _ready():
 	setup_timeout()
+	if f.pc():
+		if camera_recoil_distance > 0.0:
+			f.pc().get_node("PlayerCamera").impulse(f.pc().shoot_dir * -1, camera_recoil_distance, camera_recoil_time, camera_recoil_curve)
+		else: #do simple vibrate instead
+			oup.vibrate_impulse(0.1, 0.075)
 	setup()
 
 func setup(): #for children
@@ -52,9 +68,24 @@ func setup(): #for children
 func _physics_process(delta):
 	level_exit_check()
 	_on_physics_process(delta)
+	apply_wind()
 
 func _on_physics_process(_delta): #for children
 	pass
+
+func apply_wind():
+	if !is_wind_affected: return
+	var strongest_by_dir := {}
+
+	for area in wind_areas_inside:
+		var key: Vector2 = area.wind_dir
+		if not strongest_by_dir.has(key) or area.speed > strongest_by_dir[key].speed:
+			strongest_by_dir[key] = area
+
+	for strong_area in strongest_by_dir.values():
+		if is_on_floor() && (strong_area.wind_dir == Vector2.DOWN || (strong_area.wind_dir == Vector2.UP && strong_area.speed <= 4.0)):
+			continue
+		velocity += strong_area.wind_dir * strong_area.speed
 
 func setup_timeout():
 	await get_tree().create_timer(TIMEOUT_TIME, false, true).timeout
@@ -75,6 +106,7 @@ func on_break(_method):
 
 func do_fizzle(type: String):
 	#print("fizzling bullet")
+	if already_fizzle: return
 
 	var fizzle
 	match type:
@@ -88,8 +120,6 @@ func do_fizzle(type: String):
 		"bullet":
 			fizzle = FIZZLE_ARMOR.instantiate()
 
-
-	w.get_node("Middle").add_child(fizzle)
 	fizzle.position = $End.global_position if has_node("End") else global_position
 	if instant_fizzle and not is_enemy_bullet and f.pc():
 		var gun = f.pc().guns.get_child(0)
@@ -107,6 +137,8 @@ func do_fizzle(type: String):
 		var result = space_state.intersect_ray(query)
 		if result:
 			fizzle.position = result.position
+	w.player_front.add_child(fizzle)
+	already_fizzle = true
 	queue_free()
 
 func instant_fizzle_check():
@@ -143,6 +175,64 @@ func get_blood_dir(body) -> Vector2: #TODO this update changed knockback dir cal
 		out = Vector2.ZERO
 	return out
 
+### UTILITY ###
+func armor_check(body) -> bool:
+	if body.block_dir != Vector2.ZERO:
+		var block_dir = body.block_dir * body.scale
+		var valid_collision_shape = null
+		for child in body.get_children():
+			if child is CollisionShape2D and !child.disabled and child.shape is RectangleShape2D:
+				valid_collision_shape = child
+				break
+		if valid_collision_shape:
+			var collision_rect_center = valid_collision_shape.global_position
+			match block_dir:
+				Vector2.LEFT:
+					if global_position.x <= collision_rect_center.x:
+						body.blocked.emit(self, body)
+						return true
+				Vector2.RIGHT:
+					if global_position.x >= collision_rect_center.x:
+						body.blocked.emit(self, body)
+						return true
+				Vector2.DOWN:
+					if global_position.y >= collision_rect_center.y:
+						body.blocked.emit(self, body)
+						return true
+				Vector2.UP:
+					if global_position.y <= collision_rect_center.y:
+						body.blocked.emit(self, body)
+						return true
+		return false
+	else:
+		body.blocked.emit(self, body)
+		return true
+
+func change_side(to_player: bool):
+	var hitbox = get_node_or_null("PlayerCollisionDetector")
+	var bullet_from_player = !!hitbox
+	if !hitbox:
+		hitbox = get_node_or_null("EnemyCollisionDetector")
+		bullet_from_player = false
+	if !hitbox: return
+	#print("Change side to player: ", to_player)
+	set_collision_layer_value(7, to_player)
+	set_collision_layer_value(14, !to_player)
+	hitbox.set_collision_layer_value(7, to_player)
+	hitbox.set_collision_layer_value(14, !to_player)
+	hitbox.set_collision_mask_value(18, to_player)
+	hitbox.set_collision_mask_value(17, !to_player)
+
+func deflect(vel: Vector2): ## Common deflect script for bullet like BulletRevolver.tscn
+	var bullet_sprite = get_node("Sprite2D")
+	direction = -direction
+	var new_bullet_rotation = get_rot(direction)
+	var new_bullet_position = bullet_sprite.global_position - Vector2(bullet_sprite.position.x, -bullet_sprite.position.y).rotated(deg_to_rad(new_bullet_rotation))
+	origin = new_bullet_position
+	velocity = direction * vel.length()
+	global_position = new_bullet_position
+	rotation_degrees = get_rot(direction)
+
 
 
 ### SIGNALS ###
@@ -150,30 +240,51 @@ func get_blood_dir(body) -> Vector2: #TODO this update changed knockback dir cal
 func _on_CollisionDetector_body_entered(body):
 	if body is TileMapLayer:
 		if body.tile_set.get_physics_layer_collision_layer(0) == 8: #world (layer value)
+			if f.pc(): #and camera gun recoil is true
+				f.pc().get_node("PlayerCamera").impulse(f.pc().shoot_dir * -1, camera_recoil_wall_distance, camera_recoil_time, camera_recoil_curve)
 			do_fizzle("world")
 
 	else: #not TileMapLayer
 		#breakable
 		if body.get_collision_layer_value(9):
+			if f.pc(): #and camera gun recoil is true
+				f.pc().get_node("PlayerCamera").impulse(f.pc().shoot_dir * -1, camera_recoil_hit_distance, camera_recoil_time, camera_recoil_curve)
 			on_break(break_method)
 		#armor
 		elif body.get_collision_layer_value(6):
+			if f.pc(): #and camera gun recoil is true
+				f.pc().get_node("PlayerCamera").impulse(f.pc().shoot_dir * -1, camera_recoil_wall_distance, camera_recoil_time, camera_recoil_curve)
 			do_fizzle("armor")
+		#Movable platform
+		if body.get_collision_layer_value(4):
+			if f.pc(): #and camera gun recoil is true
+				f.pc().get_node("PlayerCamera").impulse(f.pc().shoot_dir * -1, camera_recoil_wall_distance, camera_recoil_time, camera_recoil_curve)
+			do_fizzle("world")
 
 
-func _on_CollisionDetector_area_entered(area):
+func _on_CollisionDetector_area_entered(area): #TODO: double check breakable piercing
 	if area.get_collision_layer_value(18): #enemyhurt
-		area.get_parent().hit(damage, get_blood_dir(area.get_parent()))
-		queue_free()
+		var blood_dir = get_blood_dir(area.get_parent())
+		area.get_parent().hit(damage, blood_dir, $PlayerCollisionDetector, blood_dir, knockback_strength)
+		if f.pc(): #and camera gun recoil is true
+			f.pc().get_node("PlayerCamera").impulse(f.pc().shoot_dir * -1, camera_recoil_hit_distance, camera_recoil_time, camera_recoil_curve)
+		if !piercing:
+			queue_free()
 	elif area.get_collision_layer_value(17): #playerhurt
-		area.get_parent().hit(damage, get_blood_dir(area.get_parent()))
-		queue_free()
+		area.get_parent().hit(damage, get_blood_dir(area.get_parent()), $PlayerCollisionDetector)
+		if !piercing:
+			queue_free()
 	elif area.get_collision_layer_value(9): #breakable
 		area.get_parent().on_break(break_method)
-		#on_break(break_method) produced two fizzle particles so instead do:
-		queue_free()
+		if f.pc(): #and camera gun recoil is true
+			f.pc().get_node("PlayerCamera").impulse(f.pc().shoot_dir * -1, camera_recoil_hit_distance, camera_recoil_time, camera_recoil_curve)
+		if !piercing:
+			queue_free()
 	elif area.get_collision_layer_value(4): #world
+		if f.pc(): #and camera gun recoil is true
+			f.pc().get_node("PlayerCamera").impulse(f.pc().shoot_dir * -1, camera_recoil_wall_distance, camera_recoil_time, camera_recoil_curve)
 		do_fizzle("world")
 	elif area.get_collision_layer_value(6): #armor
-		print("armor")
+		if f.pc(): #and camera gun recoil is true
+			f.pc().get_node("PlayerCamera").impulse(f.pc().shoot_dir * -1, camera_recoil_wall_distance, camera_recoil_time, camera_recoil_curve)
 		do_fizzle("armor")

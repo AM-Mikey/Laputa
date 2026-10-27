@@ -1,0 +1,32 @@
+[gd_scene format=3 uid="uid://ceykfaosx3ghj"]
+
+[ext_resource type="Texture2D" uid="uid://b55nlk68h5r7l" path="res://assets/Effect/Casing.png" id="1_oxeyy"]
+[ext_resource type="Script" uid="uid://cw1bcyj65k2dg" path="res://src/Effect/BasicParticle.gd" id="2_t6xwe"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_8n5dw"]
+particles_animation = true
+particles_anim_h_frames = 4
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
+[sub_resource type="Curve" id="Curve_t6xwe"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), -3.0388653, 0.0, 0, 0]
+point_count = 2
+
+[node name="BulletCasing" type="CPUParticles2D" unique_id=2103415329]
+material = SubResource("CanvasItemMaterial_8n5dw")
+amount = 1
+texture = ExtResource("1_oxeyy")
+explosiveness = 0.97
+randomness = 1.0
+direction = Vector2(1, -1)
+spread = 30.0
+gravity = Vector2(0, 300)
+initial_velocity_min = 60.0
+initial_velocity_max = 120.0
+anim_speed_min = 2.5
+anim_speed_max = 5.0
+anim_speed_curve = SubResource("Curve_t6xwe")
+script = ExtResource("2_t6xwe")
+
+[connection signal="finished" from="." to="." method="_on_finished"]

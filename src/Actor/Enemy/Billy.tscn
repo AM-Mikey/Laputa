@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://d7hgcoq0lmkd" path="res://src/Actor/Enemy/Billy.gd" id="1"]
 [ext_resource type="Texture2D" uid="uid://dxp874vl8xdex" path="res://assets/Actor/Enemy/Billy.png" id="2"]
 [ext_resource type="PackedScene" uid="uid://7hbenrfv6p3q" path="res://src/Utility/PhysicsLayerBody.tscn" id="2_aysxk"]
-[ext_resource type="PackedScene" uid="uid://b0hildwypv8q5" path="res://src/Editor/VisualUtility/VURect.tscn" id="4_bgd16"]
+[ext_resource type="PackedScene" uid="uid://bwp6sqdlvfo84" path="res://src/Editor/VisualUtility/VUVector.tscn" id="5_wqu6o"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_sy72i"]
 size = Vector2(10, 14)
@@ -186,7 +186,7 @@ collision_layer = 0
 modulate = Color(0.992157, 0.992157, 0.992157, 0.156863)
 position = Vector2(0, -16)
 shape = SubResource("2")
-debug_color = Color(0, 0.627451, 0.27451, 0.0784314)
+debug_color = Color(0, 0.627451, 0.27450982, 1)
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1818064119]
 position = Vector2(0, -16)
@@ -253,9 +253,10 @@ one_shot = true
 wait_time = 0.1
 one_shot = true
 
-[node name="VURect" parent="." unique_id=688682803 instance=ExtResource("4_bgd16")]
-tag_name = "player_detector"
-value = Rect2(-128, -80, 256, 160)
+[node name="VUVector" parent="." unique_id=872564127 instance=ExtResource("5_wqu6o")]
+tag_name = "move_dir"
+direction = Vector2(-1, 0)
+snap_degrees = 180.0
 
 [connection signal="area_entered" from="Hitbox" to="." method="_on_hitbox_area_entered"]
 [connection signal="area_exited" from="Hitbox" to="." method="_on_hitbox_area_exited"]

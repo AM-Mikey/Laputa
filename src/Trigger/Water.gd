@@ -66,7 +66,7 @@ func _on_Water_body_entered(body):
 			var splash = DROPLET_SPLASH.instantiate()
 			splash.position.x = body.global_position.x
 			splash.position.y = global_position.y - 4
-			get_tree().get_root().get_node("World/Front").add_child(splash)
+			get_tree().get_root().get_node("World").middle_front.add_child(splash)
 
 
 func _on_Water_body_exited(body):

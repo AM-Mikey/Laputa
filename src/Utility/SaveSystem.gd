@@ -2,6 +2,7 @@ extends Node
 
 const OPTIONS = preload("res://src/UI/Options/Options.tscn")
 
+var first_time_loading_settings := true
 var save_path = "user://save.dat"
 var temp_path = "user://temp.dat"
 var data = {
@@ -32,7 +33,7 @@ func write_player_data_to_save(current_level):
 			gun_data[g.name]["ammo"] = g.ammo
 
 	for i in pc.item_array:
-		item_data.append(i.item_name)
+		item_data.append(i.resource_path)
 
 	data["player_data"] = {
 		"current_level" : current_level.scene_file_path,
@@ -164,7 +165,7 @@ func read_player_data_from_save():
 
 	pc.item_array.clear()
 	for i in player_data["item_data"]:
-		var item_resource = load("res://src/Item/%s.tres" % i)
+		var item_resource = load(i)
 		pc.item_array.append(item_resource)
 
 

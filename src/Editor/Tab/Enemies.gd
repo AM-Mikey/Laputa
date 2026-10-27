@@ -10,7 +10,9 @@ var active_enemy_path
 
 
 func setup_enemies():
-	editor.connect("tab_changed", Callable(self, "_on_tab_changed"))
+	for child in $VBox/Margin/Scroll/Buttons.get_children():
+		child.queue_free()
+
 	var index = 0
 	for e in find_enemy_scenes("res://src/Actor/Enemy/"):
 
@@ -22,6 +24,8 @@ func setup_enemies():
 			enemy_button.enemy_path = e
 			enemy_button.enemy_name = enemy.name
 			enemy_button.enemy_icon = enemy.ICON
+			if "TOOLTIPS" in enemy:
+				enemy_button.enemy_tooltips = enemy.TOOLTIPS
 			if "difficulty" in enemy && "max_difficulty" in enemy:
 				enemy_button.enemy_difficulty = enemy.difficulty
 				enemy_button.enemy_max_difficulty = enemy.max_difficulty

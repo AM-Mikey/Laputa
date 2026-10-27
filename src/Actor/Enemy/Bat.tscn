@@ -90,7 +90,16 @@ _data = {
 collision_layer = 2
 collision_mask = 8
 script = ExtResource("1")
+move_dir = null
+flap_time = null
+idle_time = null
+start_waypoint = null
 debug = true
+id = null
+do_bubbles = null
+base_gravity = null
+water_gravity = null
+speed = null
 editor_hidden = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=61209783]

@@ -37,7 +37,8 @@ func setup():
 		$NotOnScreenTimer.start()
 
 func _on_physics_process(_delta):
-	velocity = calc_velocity(speed)
+	if wind_areas_inside.size() == 0:
+		velocity = calc_velocity(speed)
 	move_and_slide()
 
 func calc_velocity(projectile_speed) -> Vector2:
@@ -68,6 +69,17 @@ func calc_velocity(projectile_speed) -> Vector2:
 			velocity.y *= 0.9
 
 	return out
+
+func deflect(vel: Vector2):
+	var hairball = load("res://src/Bullet/Enemy/Hairball.tscn").instantiate()
+	hairball.global_position = global_position
+	hairball.direction = vel.normalized()
+	hairball.velocity = vel
+	hairball.speed = vel.length()
+	hairball.damage = damage
+	w.player_front.add_child(hairball)
+	queue_free()
+
 
 ### SIGNAL ###
 func _on_TpTimer_timeout() -> void:

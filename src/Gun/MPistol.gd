@@ -1,7 +1,6 @@
 extends Gun
 
 func _ready():
-	display_name = "Machine Pistol"
 	description = "A swift and powerful automatic weapon. It runs out of ammo rather quickly."
 	icon_texture = load("res://assets/Gun/MPistolIcon.png")
 	icon_small_texture = load("res://assets/Gun/MPistolIconSmall.png")
@@ -11,6 +10,7 @@ func _ready():
 	bullet_scene = load("res://src/Bullet/MPistol.tscn")
 	automatic = true
 	ammo = 30
+	xp_to_rebuild = 10 #TODO: for debug this is 10, edit this later
 	max_level = 3
 	set_level(level)
 
@@ -21,20 +21,25 @@ func _set_level(val: int) -> void:
 			f_range = 150
 			speed = 400
 			cooldown_time = 0.2
+			recoil = 6
+			knockback_strength = 16
 			max_ammo = 30
 			max_xp = 20
 		2:
-
 			damage = 1
 			f_range = 150
 			speed = 400
 			cooldown_time = 0.15
+			recoil = 6
+			knockback_strength = 16
 			max_ammo = 50
 			max_xp = 20
 		3:
 			damage = 2
 			speed = 400
 			cooldown_time = 0.15
+			recoil = 6
+			knockback_strength = 16
 			max_ammo = 70
 			max_xp = 10
 

@@ -8,18 +8,18 @@ signal switch_timer_timeout
 
 const ICON = preload("res://assets/Prop/SwitchPlateIcon.png")
 enum SwitchType {TOGGLE, IMPULSE, TIMER}
-enum TargetType {PLAYERS, NPCS, ENEMIES}
-
 
 @export var connected_entity_id : String
 var toggled = false
 @export var switch_type := SwitchType.TOGGLE
-@export var target_type := [TargetType.PLAYERS]
+@export var toggle_on_player := true
+@export var toggle_on_enemies := false
+@export var toggle_on_npcs := false
 @export var timer_duration := 1.0
 
 var triggering_entities := []
-
-var connected_entity : Node
+var connected_entities := []
+var switch_siblings := [] #NOTE this only works for toggle switches right now
 
 
 func setup(): #Reminder: no function called can use await before finishing entities step
@@ -33,50 +33,56 @@ func setup(): #Reminder: no function called can use await before finishing entit
 			return
 		if "id" in e:
 			if e.id.nocasecmp_to(connected_entity_id) == 0:
-				connected_entity = e
-				set_switch_toggled_from_connected_entity()
-	match switch_type:
-		SwitchType.TOGGLE:
-			connect("switch_toggled", Callable(connected_entity, "on_switch_toggled"))
-		SwitchType.IMPULSE:
-			connect("switch_activated", Callable(connected_entity, "on_switch_activated"))
-		SwitchType.TIMER:
-			connect("switch_timer_start", Callable(connected_entity, "on_switch_timer_start"))
-			connect("switch_timer_timeout", Callable(connected_entity, "on_switch_timer_timeout"))
+				connected_entities.append(e)
+	for c in connected_entities:
+		match switch_type:
+			SwitchType.TOGGLE:
+				connect("switch_toggled", Callable(c, "on_switch_toggled"))
+			SwitchType.IMPULSE:
+				connect("switch_activated", Callable(c, "on_switch_activated"))
+			SwitchType.TIMER:
+				connect("switch_timer_start", Callable(c, "on_switch_timer_start"))
+				connect("switch_timer_timeout", Callable(c, "on_switch_timer_timeout"))
 
-	if _has_switch_connection_duplicates(): breakpoint
+	await get_tree().process_frame #to set connected entity
+	switch_siblings = get_switch_siblings()
 
 
-func _has_switch_connection_duplicates() -> bool:
+func get_switch_siblings() -> Array:
+	var out = []
 	for s in get_tree().get_nodes_in_group("Switches"):
-		if s != self && s.connected_entity == connected_entity && connected_entity != null:
-			printerr("ERROR, switch ", self, " and switch ", s, " have same connected_entity: ", connected_entity)
-			return true
-	return false
-
-func set_switch_toggled_from_connected_entity(): #only do this kinda level setup for toggle switches
-	toggled = connected_entity.toggled
-	match switch_type:
-		SwitchType.TOGGLE:
-			if toggled:
-				$AnimationPlayer.play("PresetDown")
+		if s != self && s.connected_entity_id == connected_entity_id && connected_entity_id != null:
+			if s.is_in_group("SwitchLevers") ||  s.is_in_group("SwitchCrystals"):
+				printerr("ERROR: CANNOT USE MIXED PLATE + LEVER OR CRYSTAL AS SWITCH SIBLINGS")
+			if switch_type == SwitchType.TOGGLE:
+				out.append(s)
 			else:
-				$AnimationPlayer.play("PresetUp")
+				printerr("ERROR, switch ", self, " and switch ", s, " have same connected_entity_id: ", connected_entity_id)
+				breakpoint
+	return out
 
-func activate():
+
+func activate(stepping_on = true):
 	ms.mission_progress_check(id)
 	var pushed_down = !triggering_entities.is_empty()
 
 	match switch_type:
 		SwitchType.TOGGLE:
-			if pushed_down:
-				$AnimationPlayer.play("Down")
-			else:
-				$AnimationPlayer.play("Up")
+			#sibling code
+			for s in switch_siblings:
+				s.toggled = toggled
+				if s.is_in_group("SwitchPlates"):
+					if pushed_down: s.get_node("AnimationPlayer").play("Down")
+					else: s.get_node("AnimationPlayer").play("Up")
+			#self code
+			if pushed_down: $AnimationPlayer.play("Down")
+			else: $AnimationPlayer.play("Up")
 			toggled = pushed_down
 			emit_signal("switch_toggled", toggled)
 		SwitchType.IMPULSE:
-			emit_signal("switch_activated")
+			if stepping_on:
+				$AnimationPlayer.play("Impulse")
+				emit_signal("switch_activated")
 		SwitchType.TIMER:
 			if pushed_down && $Timer.is_stopped():
 				toggled = true
@@ -88,11 +94,14 @@ func activate():
 
 func _do_click():
 	am.play("switch_lever_down", null, null, 0.8, 0)
+	if f.pc():
+		f.pc().get_node("PlayerCamera").shake(2, 0.4, 0.2)
 func _do_release():
 	am.play("switch_lever_up", null, null, 0.4, 0)
-
+	oup.vibrate_impulse(0.2, 0.2)
 func _do_tick():
 	am.play("switch_timer", self, null, 1.0, 0)
+	oup.vibrate_impulse_light(0.2, 0.1)
 
 ### SIGNALS ###
 
@@ -111,17 +120,17 @@ func _on_Timer_timeout():
 		activate()
 
 func _on_EntityDetector_body_entered(body: Node2D):
-	if (body.get_collision_layer_value(1) && target_type.has(TargetType.PLAYERS)) \
-	|| (body.get_collision_layer_value(2) && target_type.has(TargetType.ENEMIES)) \
-	|| (body.get_collision_layer_value(8) && target_type.has(TargetType.NPCS)):
+	if (body.get_collision_layer_value(1) && toggle_on_player) \
+	|| (body.get_collision_layer_value(2) && toggle_on_enemies) \
+	|| (body.get_collision_layer_value(8) && toggle_on_npcs):
 		var entities_before = triggering_entities.size()
 		triggering_entities.append(body.get_parent())
 		if entities_before == 0:
 			activate()
 
 func _on_EntityDetector_body_exited(body: Node2D):
-	if (body.get_collision_layer_value(1) && target_type.has(TargetType.PLAYERS)) \
-	|| (body.get_collision_layer_value(2) && target_type.has(TargetType.ENEMIES)) \
-	|| (body.get_collision_layer_value(8) && target_type.has(TargetType.NPCS)):
+	if (body.get_collision_layer_value(1) && toggle_on_player) \
+	|| (body.get_collision_layer_value(2) && toggle_on_enemies) \
+	|| (body.get_collision_layer_value(8) && toggle_on_npcs):
 		triggering_entities.erase(body.get_parent())
-		activate()
+		activate(false)

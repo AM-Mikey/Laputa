@@ -3,6 +3,10 @@ extends Enemy
 const ICON = preload("res://assets/Actor/Enemy/FrogIcon.png")
 const TX_0 = preload("res://assets/Actor/Enemy/Frog.png")
 const TX_1 = preload("res://assets/Actor/Enemy/Frog1.png")
+const TOOLTIPS = [
+"LV 0: Jumps when player in detection area.",
+"LV 1: Jumps low when player in detection area, toungue attack when player in front.",
+]
 
 var target
 
@@ -22,10 +26,9 @@ var tongue_unready_time := 1.0
 var tongue_cooldown_time := 6.0
 
 func setup(): #Reminder: no function called can use await
+	self_knockback = true
 	look_dir = $LookVector.direction
 	tongue_max_length = abs($TongueRange.position.x)
-	$PlayerDetector/CollisionShape2D.shape.size = $VURect.value.size
-	$PlayerDetector/CollisionShape2D.position = $VURect.value.position + $VURect.value.size / 2.0
 
 	$TonguePlayerCast.target_position = Vector2($TongueRange.position.x, 0.0)
 	$Tongue/WorldCast.target_position = Vector2($TongueRange.position.x, 0.0)
@@ -101,6 +104,14 @@ func enter_jump(_last_state):
 func do_jump(_delta):
 	if is_on_floor():
 		move_dir = Vector2.ZERO
+
+		if f.pc():
+			var player_distance = f.pc().global_position.distance_to(global_position)
+			var max_distance = 128
+			var max_shake = 0.15
+			var shake = remap(player_distance, 0, max_distance, max_shake, 0.0)
+			oup.vibrate_impulse_light(shake)
+
 		$AnimationPlayer.play("Stand")
 		$JumpTimer.start(jump_delay)
 		$CroakTimer.start(croak_time)
@@ -154,7 +165,7 @@ func do_tongue_out(_delta):
 func enter_tongue_in(_prev_state):
 	var tween = create_tween()
 	var tongue_duration = tongue_max_length / tongue_speed
-	tween.tween_property(self, "tongue_length", 16.0, tongue_duration).set_trans(Tween.TRANS_EXPO).set_ease(Tween.EASE_IN)
+	tween.tween_property(self, "tongue_length", 0.0, tongue_duration).set_trans(Tween.TRANS_EXPO).set_ease(Tween.EASE_IN)
 	await tween.finished
 	$AnimationPlayer.play("TongueIn")
 	await $AnimationPlayer.animation_finished
@@ -216,9 +227,9 @@ func _on_croak_timer_timeout():
 
 func _on_Tongue_area_entered(area: Area2D):
 	if area.get_collision_layer_value(18): #enemyhurt
-		area.get_parent().hit(tongue_damage, $Tongue.global_position.direction_to(area.global_position))
+		area.get_parent().hit(tongue_damage, $Tongue.global_position.direction_to(area.global_position), $Tongue)
 	elif area.get_collision_layer_value(17): #playerhurt
-		area.get_parent().hit(tongue_damage,  $Tongue.global_position.direction_to(area.global_position))
+		area.get_parent().hit(tongue_damage,  $Tongue.global_position.direction_to(area.global_position), $Tongue)
 	elif area.get_collision_layer_value(9): #breakable
 		#NOTE: this doesn't actually work, it's not desirable behavior anyways so it doesn't need to
 		area.get_parent().on_break("cut")

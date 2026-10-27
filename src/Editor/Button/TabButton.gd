@@ -37,13 +37,21 @@ func set_collection_visibility(visibility):
 		0: cl.get_node("TileMap").visible = visibility
 		1: pass
 		2: pass
-		3: for a in cl.get_node("Spawns").get_children():
-			if a.is_in_group("EnemySpawns"):
-				a.visible = visibility
-		4: for a in cl.get_node("Spawns").get_children():
-			if a.is_in_group("NPCSpawns"):
-				a.visible = visibility
+		3:
+			for a in cl.get_node("Spawns").get_children():
+				if a.is_in_group("EnemySpawns"):
+					a.visible = visibility
+		4:
+			for a in cl.get_node("Spawns").get_children():
+				if a.is_in_group("NPCSpawns"):
+					a.visible = visibility
 		5: cl.get_node("Props").visible = visibility
-		6: for a in cl.get_node("Spawns").get_children():
-			if a.is_in_group("TriggerSpawns"):
-				a.visible = visibility
+		6:
+			for a in cl.get_node("Spawns").get_children():
+				if a.is_in_group("TriggerSpawns"):
+					a.visible = visibility
+		7:
+			for wp in cl.get_node("Waypoints").get_children():
+				wp.visible = visibility
+			for n in cl.get_node("Notes").get_children():
+				n.visible = visibility

@@ -1,6 +1,7 @@
 extends MarginContainer
 
 @onready var main = get_parent()
+@onready var w = get_tree().get_root().get_node("World")
 
 var buttons = []
 
@@ -30,8 +31,8 @@ func _ready() -> void:
 			buttons.append(button)
 
 func _input(event: InputEvent):
-	if !main.w.has_node("EditorLayer/Editor"): return
-	var editor = main.w.get_node("EditorLayer/Editor")
+	if !main || !main.is_node_ready() || w.el.get_child_count() == 0: return
+	var editor = w.get_node("EditorLayer/Editor")
 	if editor.active_tool == "tile": return
 
 	if event.is_action_released("editor_rmb") && state != "idle":
@@ -91,22 +92,23 @@ func _input(event: InputEvent):
 		main.value = Rect2(position, size)
 
 func on_handle(handle):
+	await get_tree().physics_frame
+	await get_tree().physics_frame #wait for any other grab first
 	var editor = main.w.get_node("EditorLayer/Editor")
-	if editor.active_tool == "tile": return
+	if editor.subtool == "grab": return #dont if we're already grabbing something else
+	var inspector = main.w.get_node("EditorLayer/Editor").inspector
+	inspector.on_selected(main, "vu_rect")
 
 	if handle.name != "Mid":
 		state = "resize"
-		#editor.pre_grab_tool = editor.active_tool
-		#editor.pre_grab_subtool = editor.subtool
-		#editor.set_tool("entity", "triggerresize")
+		editor.pre_grab_tool = editor.active_tool
+		editor.pre_grab_subtool = editor.subtool
+		editor.set_tool("entity", "vurectresize")
 		active_handle = handle
 		drag_offset = handle.global_position - get_global_mouse_position()
 	else:
 		state = "drag"
-		#editor.pre_grab_tool = editor.active_tool
-		#editor.pre_grab_subtool = editor.subtool
-		#editor.set_tool("entity", "triggergrab")
+		editor.pre_grab_tool = editor.active_tool
+		editor.pre_grab_subtool = editor.subtool
+		editor.set_tool("entity", "vurectgrab")
 		drag_offset = global_position - get_global_mouse_position()
-
-	var inspector = main.w.get_node("EditorLayer/Editor").inspector
-	inspector.on_selected(main, "vu_rect")

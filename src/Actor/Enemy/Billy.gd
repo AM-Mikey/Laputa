@@ -6,8 +6,12 @@ const WAYPOINT = preload("res://src/Editor/VisualUtility/WaypointGlobal.tscn")
 
 const TX_0 = preload("res://assets/Actor/Enemy/Billy0.png")
 const TX_1 = preload("res://assets/Actor/Enemy/Billy1.png")
+const TOOLTIPS = [
+"LV 0: Keeps distance from player, shoots seeds.",
+"LV 1: Keeps distance from player, shoots seeds, cannot fall.",
+]
 
-@export var move_dir = Vector2.LEFT
+var move_dir = Vector2.LEFT
 @export var difficulty := 0
 var max_difficulty = 1
 @export var idle_max_time := 5.0
@@ -47,6 +51,7 @@ var gravity_velocity := Vector2.ZERO
 @onready var ap = $AnimationPlayer
 
 func setup(): #Reminder: no function called can use await
+	self_knockback = true
 	match difficulty:
 		0:
 			$Sprite2D.texture = TX_0
@@ -67,8 +72,8 @@ func setup(): #Reminder: no function called can use await
 
 	is_wind_affected = true
 	$DeaggroTimer.wait_time = deaggro_delay
-	$PlayerDetector/CollisionShape2D.shape.size = $VURect.value.size
-	$PlayerDetector/CollisionShape2D.position = $VURect.value.position + $VURect.value.size / 2.0
+	move_dir = $VUVector.direction.snappedf(1.0)
+	look_dir = move_dir
 
 	waypoint = WAYPOINT.instantiate()
 	waypoint.owner_id = id
@@ -87,14 +92,17 @@ func enter_walk(_last_state):
 	await $StateTimer.timeout
 	change_state("idle")
 
-func do_walk(delta):
+func do_walk(_delta):
 	if on_wall || \
-		(!$FloorDetectorL.is_colliding() && move_dir.x < 0) || \
-		(!$FloorDetectorR.is_colliding() && move_dir.x > 0):
+		(on_floor && !$FloorDetectorL.is_colliding() && move_dir.x < 0) || \
+		(on_floor && !$FloorDetectorR.is_colliding() && move_dir.x > 0):
+		if name == "Billy38":
+			print("A, ", on_wall, " ", $FloorDetectorL.is_colliding(), " ", $FloorDetectorR.is_colliding())
 		move_dir.x = -move_dir.x
 		look_dir.x = move_dir.x
 	velocity = calc_velocity(move_dir)
-	last_collision = move_and_collide(velocity * delta)
+	move_and_slide()
+	last_collision = get_last_slide_collision()
 	update_animation()
 
 func enter_idle(_last_state):
@@ -107,15 +115,16 @@ func enter_idle(_last_state):
 		await $StateTimer.timeout
 		change_state("walk")
 
-func do_idle(delta):
+func do_idle(_delta):
 	velocity = calc_velocity(Vector2.ZERO)
-	last_collision = move_and_collide(velocity * delta)
+	move_and_slide()
+	last_collision = get_last_slide_collision()
 
 func enter_aggro(_prev_state):
 	add_to_group("BillyAggro")
 	aggro_dir = move_dir
 
-func do_aggro(delta):
+func do_aggro(_delta):
 	var reach_point = waypoint.global_position
 	var approach_slow: bool = false
 	if pc:
@@ -186,7 +195,8 @@ func do_aggro(delta):
 				ap.play("Walk")
 
 	velocity = calc_velocity(aggro_dir)
-	last_collision = move_and_collide(velocity * delta)
+	move_and_slide()
+	last_collision = get_last_slide_collision()
 
 	var floor_collision := move_and_collide(Vector2.DOWN, true)
 	if floor_collision:
@@ -283,6 +293,11 @@ func calc_velocity(dir, do_gravity = true, do_acceleration = true, do_friction =
 				jump_dir_x = 0.0
 				is_jumping = false
 
+
+	if is_wind_affected && wind_areas_inside.size() > 0:
+		for wind_area in wind_areas_inside:
+			gravity_velocity += wind_area.speed * wind_area.wind_dir
+
 	out = move_velocity + gravity_velocity
 	return out
 
@@ -314,7 +329,7 @@ func fire():
 		bullet.speed = Vector2(b_speed_x, b_speed_y).length()
 		bullet.direction = Vector2(b_speed_x, b_speed_y).normalized()
 
-	world.get_node("Middle").add_child(bullet)
+	w.player_front.add_child(bullet)
 	am.play("enemy_shoot", self)
 
 func update_animation():

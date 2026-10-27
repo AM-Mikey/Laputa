@@ -131,16 +131,32 @@ alignment = 2
 deselect_on_focus_loss_enabled = false
 script = ExtResource("6_yjys0")
 
-[node name="Multiline" type="TextEdit" parent="HBox/HBox" unique_id=736469035]
+[node name="Multiline" type="VBoxContainer" parent="HBox/HBox" unique_id=1959380687]
 unique_name_in_owner = true
 visible = false
 custom_minimum_size = Vector2(64, 0)
 layout_mode = 2
 size_flags_horizontal = 3
+
+[node name="MultilineText" type="TextEdit" parent="HBox/HBox/Multiline" unique_id=736469035]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(64, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
 mouse_filter = 1
 theme_override_fonts/font = ExtResource("4_sdg3t")
 placeholder_text = "Null"
 deselect_on_focus_loss_enabled = false
+
+[node name="MultilineSave" type="Button" parent="HBox/HBox/Multiline" unique_id=1365842000]
+unique_name_in_owner = true
+layout_mode = 2
+disabled = true
+text = "Save"
+
+[node name="spacer" type="Control" parent="HBox/HBox/Multiline" unique_id=815000491]
+layout_mode = 2
 
 [node name="Int" type="LineEdit" parent="HBox/HBox" unique_id=458342607]
 unique_name_in_owner = true
@@ -211,7 +227,8 @@ mouse_filter = 2
 [connection signal="item_selected" from="HBox/HBox/Enum" to="." method="on_enum_selected"]
 [connection signal="focus_exited" from="HBox/HBox/String" to="." method="_on_string_complete"]
 [connection signal="text_submitted" from="HBox/HBox/String" to="." method="_on_string_complete"]
-[connection signal="focus_exited" from="HBox/HBox/Multiline" to="." method="_on_multiline_complete"]
+[connection signal="text_changed" from="HBox/HBox/Multiline/MultilineText" to="." method="_on_multiline_text_changed"]
+[connection signal="pressed" from="HBox/HBox/Multiline/MultilineSave" to="." method="_on_multiline_save"]
 [connection signal="focus_exited" from="HBox/HBox/Int" to="." method="_on_int_complete"]
 [connection signal="text_submitted" from="HBox/HBox/Int" to="." method="_on_int_complete"]
 [connection signal="focus_exited" from="HBox/HBox/Float" to="." method="_on_float_complete"]

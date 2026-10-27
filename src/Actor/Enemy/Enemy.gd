@@ -18,6 +18,8 @@ var hp: int
 var damage_on_contact: int
 var enemy_damage_on_contact: int
 var hit_enemies_on_contact := false
+var self_knockback := false
+var knockback_velocity := Vector2.ZERO
 var hurt_sound = "enemy_hurt"
 var die_sound = "enemy_die"
 var damage_number = null
@@ -30,7 +32,6 @@ var ammo_chance := 1
 @export var debug := false
 @export var id: String
 
-@onready var w = get_tree().get_root().get_node("World")
 @onready var pc = f.pc()
 
 
@@ -60,13 +61,28 @@ func _physics_process(delta):
 	if has_node("StateLabel"):
 		get_node("StateLabel").text = state
 	_on_physics_process(delta)
+	if self_knockback && knockback_velocity != Vector2.ZERO:
+		_do_self_knockback()
+	apply_wind()
 
 func _on_physics_process(_delta): #for child
 	pass
 
+func _do_self_knockback():
+	print(knockback_velocity)
+	if knockback_velocity.y != 0:
+		velocity.y += knockback_velocity.y #set velocity y to this ONCE
+		knockback_velocity.y = 0
+
+	velocity.x += knockback_velocity.x
+	knockback_velocity.x *= 0.5 #next frame it falls off
+	if abs(knockback_velocity.x) < 1:
+		knockback_velocity.x = 0
+
 func calc_velocity(move_dir, do_gravity = true, do_acceleration = true, do_friction = true) -> Vector2:
 	var out: = velocity
 	var fractional_speed = speed
+	var delta: = get_physics_process_delta_time()
 	if is_in_water:
 		fractional_speed = speed * Vector2(0.666, 0.666)
 	#X
@@ -84,12 +100,12 @@ func calc_velocity(move_dir, do_gravity = true, do_acceleration = true, do_frict
 
 	#Y
 	if do_gravity:
-		out.y += gravity * get_physics_process_delta_time()
+		out.y += gravity * delta
 		if move_dir.y < 0:
 			out.y = fractional_speed.y * move_dir.y
 	else:
 		out.y = fractional_speed.y * move_dir.y
-	if wind_areas_inside.size() != 0: #Inside Wind
+	if is_wind_affected && wind_areas_inside.size() > 0: #Inside Wind
 		if out.y < 0.0:
 			out.y *= 0.9
 	return out
@@ -122,13 +138,16 @@ func change_state(new):
 
 ### DAMAGE/DEATH ###
 
-func hit(damage, blood_direction):
-	_on_hit(damage, blood_direction)
+func hit(damage, blood_direction, hitbox, knockback_direction = Vector2.ZERO, knockback_strength = 0):
+	_on_hit(damage, blood_direction, hitbox)
 	hp -= damage
 	var blood = BLOOD.instantiate()
-	get_tree().get_root().get_node("World/Front").add_child(blood)
+	w.middle_front.add_child(blood)
 	blood.global_position = $Sprite2D.global_position #more accurate for visual
 	blood.direction = blood_direction
+
+	if knockback_direction != Vector2.ZERO && self_knockback:
+		knockback_velocity = Vector2(knockback_direction.x * knockback_strength, -1 * knockback_strength) #up and to one side
 
 	set_damagenum(damage)
 
@@ -137,7 +156,7 @@ func hit(damage, blood_direction):
 	else:
 		am.play(hurt_sound, self)
 
-func _on_hit(_damage, _blood_direction): #inhereted for enemies to do something on hit
+func _on_hit(_damage, _blood_direction, _hitbox): #inhereted for enemies to do something on hit
 	pass
 
 
@@ -155,7 +174,7 @@ func set_damagenum(damage):
 		damage_number.value = damage
 		damage_number.position = global_position
 		damage_number.position.y += y_offset
-		get_tree().get_root().get_node("World/Front").add_child(damage_number)
+		w.farthest_front.add_child(damage_number)
 	else: #add time and add values
 		damage_number.value += damage
 		damage_number.reset()
@@ -175,7 +194,7 @@ func die(quietly = false):
 		do_death_drop()
 		var explosion = EXPLOSION.instantiate()
 		explosion.position = $Sprite2D.global_position #more accurate for visual
-		world.front.add_child(explosion)
+		w.middle_front.add_child(explosion)
 	queue_free()
 
 func do_death_routine(): #shadow this for individual enemies ##note this doesnt wait for the function to finish, so anything that requires await will be cut short
@@ -209,7 +228,7 @@ func do_death_drop():
 			1,2: heart.value = 2
 			3,4,5: heart.value = 4
 			6,7,8,9,10 : heart.value = 8
-		world.middle.call_deferred("add_child", heart)
+		w.player_back.call_deferred("add_child", heart)
 
 	elif drop > heart_chance and drop <= heart_chance + experience_chance: #drop xp
 		var values = [1]
@@ -230,14 +249,14 @@ func do_death_drop():
 			var experience = EXPERIENCE.instantiate()
 			experience.value = v
 			experience.position = global_position
-			world.middle.call_deferred("add_child", experience)
+			w.player_back.call_deferred("add_child", experience)
 
 	else: #drop ammo
 		ammo.position = global_position
 		match reward:
 			1,2: ammo.value = 0.2
 			3,4,5,6,7,8,9,10: ammo.value = 0.5
-		world.middle.call_deferred("add_child", ammo)
+		w.player_back.call_deferred("add_child", ammo)
 
 
 
@@ -251,7 +270,7 @@ func _on_hitbox_area_entered(area):
 			var enemy_damage = damage_on_contact
 			if enemy_damage_on_contact:
 				enemy_damage = enemy_damage_on_contact
-			area.get_parent().hit(enemy_damage, Vector2(area.global_position - global_position).normalized())
+			area.get_parent().hit(enemy_damage, Vector2(area.global_position - global_position).normalized(), $Hitbox)
 
 func _on_hitbox_area_exited(area):
 	if area.get_collision_layer_value(17): #playerhurt

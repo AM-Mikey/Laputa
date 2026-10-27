@@ -10,7 +10,9 @@ var active_prop_path
 
 
 func setup_props():
-	editor.connect("tab_changed", Callable(self, "_on_tab_changed"))
+	for child in $VBox/Margin/Scroll/Buttons.get_children():
+		child.queue_free()
+
 	var index = 0
 	for p in find_prop_scenes("res://src/Prop/"):
 

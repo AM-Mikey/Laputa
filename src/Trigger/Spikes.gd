@@ -1,13 +1,13 @@
 extends Trigger
 
-var damage = 2
+@export var damage = 2
 
 func _ready(): #Reminder: no function called can use await
 	trigger_type = "spikes"
 	w.emit_signal("finished_spawn_entities_step")
 
 func _do_damage():
-	active_pc.hit(damage, Vector2.ZERO)
+	active_pc.hit(damage, Vector2.ZERO, self)
 
 
 
