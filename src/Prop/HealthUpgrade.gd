@@ -38,6 +38,9 @@ func _physics_process(_delta):
 		else:
 			has_left_ground = true
 
+func is_interactable(_player: Player):
+	return false # Should never be interacted with the "inspect" button, but instead shot with a gun!
+
 func expend_prop():
 	spent = true
 	visible = false
