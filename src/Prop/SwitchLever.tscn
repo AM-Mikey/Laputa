@@ -213,7 +213,7 @@ _data = {
 }
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_qexbl"]
-size = Vector2(16, 24)
+size = Vector2(9, 24)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_egoxq"]
 size = Vector2(16, 16)
@@ -240,7 +240,7 @@ libraries/ = SubResource("AnimationLibrary_qexbl")
 collision_layer = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerDetector" unique_id=1994630025]
-position = Vector2(8, 12)
+position = Vector2(8.5, 12)
 shape = SubResource("RectangleShape2D_qexbl")
 
 [node name="EditorArea" type="Area2D" parent="." unique_id=1494438291]
