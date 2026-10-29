@@ -195,12 +195,19 @@ func die(via_kill_box = false):
 		inp.can_act = false
 		dead = true
 		mm.get_node("States/Death").die_via_kill_box = via_kill_box
-		mm.change_state("death")
-		w.add_child(DEATH_CAMERA.instantiate())
 		invincible = true
+		w.add_child(DEATH_CAMERA.instantiate())
 		var explosion = EXPLOSION.instantiate()
 		explosion.position = global_position
+		explosion.process_mode = Node.PROCESS_MODE_ALWAYS
 		w.middle_front.add_child(explosion)
+		if !via_kill_box:
+			get_tree().paused = true
+			await get_tree().create_timer(0.5).timeout
+			get_tree().paused = false
+		mm.change_state("death")
+
+
 
 		if f.hud():
 			f.hud().free()
@@ -213,7 +220,7 @@ func _on_IframeTimer_timeout() -> void:
 	invincible = false
 	emit_signal("invincibility_end")
 	$EffectPlayer.stop()
-	if not enemies_touching.is_empty():
+	if !enemies_touching.is_empty() && !dead:
 		hit_again()
 
 

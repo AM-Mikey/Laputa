@@ -32,13 +32,13 @@ func _viewport_size_changed():
 	var urs = viewport_size.y / (16.0 * tiles_visible_y)
 	resolution_scale = get_res_scale_from_urs(urs)
 	#menu
-	var menu_size = Vector2(160, 256) #TODO: estimate this better, per menu
+	var menu_size = Vector2(320, 256)
 	var menu_urs_x = viewport_size.x / menu_size.x
 	var menu_urs_y = viewport_size.y / menu_size.y
 	var menu_urs = min(menu_urs_x, menu_urs_y)
 	menu_resolution_scale = get_res_scale_from_urs(menu_urs, true)
 	#inventory
-	var inventory_size = Vector2(288, 232)
+	var inventory_size = Vector2(320, 256)
 	var inventory_urs_x = viewport_size.x / inventory_size.x
 	var inventory_urs_y = viewport_size.y / inventory_size.y
 	var inventory_urs = min(inventory_urs_x, inventory_urs_y)

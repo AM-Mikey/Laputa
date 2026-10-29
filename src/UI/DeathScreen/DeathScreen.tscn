@@ -68,6 +68,7 @@ theme = ExtResource("1")
 script = ExtResource("2")
 
 [node name="ColorRect" type="ColorRect" parent="." unique_id=1692930514]
+visible = false
 modulate = Color(1, 1, 1, 0.156863)
 layout_mode = 2
 color = Color(0, 0, 0, 1)
@@ -80,6 +81,10 @@ alignment = 1
 layout_mode = 2
 text = "You are Dead"
 horizontal_alignment = 1
+
+[node name="Control" type="Control" parent="VBox" unique_id=772826966]
+custom_minimum_size = Vector2(16, 64)
+layout_mode = 2
 
 [node name="HBox" type="HBoxContainer" parent="VBox" unique_id=2011155330]
 layout_mode = 2

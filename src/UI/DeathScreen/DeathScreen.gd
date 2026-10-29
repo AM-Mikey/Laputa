@@ -30,6 +30,7 @@ func do_focus():
 func _on_Continue_pressed():
 	visible = false
 	w.get_node("DeathCamera").queue_free()
+	w.get_node("DeathTransition").queue_free()
 	SaveSystem.read_player_data_from_save()
 	SaveSystem.read_level_data_from_save(w.current_level)
 	SaveSystem.read_dialog_data_from_save(w.current_level)
@@ -40,6 +41,7 @@ func _on_Continue_pressed():
 func _on_DebugReload_pressed():
 	visible = false
 	w.get_node("DeathCamera").queue_free()
+	w.get_node("DeathTransition").queue_free()
 	DebugHotkeys.reload_level()
 	queue_free()
 

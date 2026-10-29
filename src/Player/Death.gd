@@ -1,5 +1,7 @@
 extends Node
 
+const DEATH_TRANSITION = preload("res://src/Effect/Transition/DeathTransition.tscn")
+
 @onready var w = get_tree().get_root().get_node("World")
 @onready var pc = get_parent().get_parent().get_parent()
 @onready var mm = pc.get_node("MovementManager")
@@ -14,6 +16,7 @@ const WALL_DAMPING := 0.5
 const MIN_BOUNCE_SPEED := 40.0 #below this vertical speed we stop bouncing and land
 const MAX_BOUNCES := 3
 const BAIL_TIME := 4.0
+const SLOWDOWN_DURATION := 1.5
 
 var die_via_kill_box = false
 var facing := "front"
@@ -24,9 +27,10 @@ var bailing = false
 
 func state_process(_delta):
 	if bailing: return
-	pc.velocity = calc_velocity()
 	var pre_velocity = pc.velocity
-	pc.move_and_slide()
+	if !death_screen_displayed:
+		pc.velocity = calc_velocity()
+		pc.move_and_slide()
 
 	if !landed:
 		if pc.is_on_wall():
@@ -43,11 +47,31 @@ func state_process(_delta):
 				pc.velocity.y = 0.0
 				mm.snap_vector = mm.SNAP_DIRECTION * mm.SNAP_LENGTH
 	elif !death_screen_displayed:
+		wipe()
+		slowdown()
 		death_screen_displayed = true
 		w.ui.add_child(load("res://src/UI/DeathScreen/DeathScreen.tscn").instantiate())
 
+
 	animate()
 
+func wipe():
+	if death_screen_displayed: return
+	pc.z_index = 999
+	w.clear_spawn_layers
+	var transition = DEATH_TRANSITION.instantiate()
+	transition.z_index = 2
+	transition.process_mode = Node.PROCESS_MODE_ALWAYS
+	w.add_child(transition)
+
+func slowdown():
+	if death_screen_displayed: return
+	var tween = create_tween()
+	tween.set_process_mode(Tween.TWEEN_PROCESS_IDLE)
+	tween.set_ignore_time_scale(true)
+	tween.tween_property(Engine, "time_scale", 0.001, SLOWDOWN_DURATION)
+	await tween.finished
+	get_tree().paused = true
 
 func bail(do_explosion = true):
 	bailing = true
@@ -139,7 +163,6 @@ func get_launch_velocity() -> Vector2:
 
 func enter(_prev_state: String):
 	if die_via_kill_box:
-		print("awye")
 		bail(false)
 		return
 
