@@ -26,19 +26,16 @@ func setup_length():
 			duplicated_sprite.frame = 0
 			sprites.append(duplicated_sprite)
 
-func _input(event):
-	if event.is_action_pressed("inspect") && !active_players.is_empty():
-		for p in active_players:
-			if !p.disabled && inp.can_act && p.mm.current_state == p.mm.states["run"]:
-				if spent:
-					return
-				#var previous_look_dir = p.look_dir
-				#p.mm.change_state("inspect")
-				#p.inspect_target = $CollisionShape2D
-				activate()
-				#await get_tree().create_timer(inspect_time, false, true).timeout
-				#p.mm.change_state("run")
-				#p.look_dir = previous_look_dir
+func player_interact(p: Player):
+	if spent:
+		return
+	#var previous_look_dir = p.look_dir
+	#p.mm.change_state("inspect")
+	#p.inspect_target = $CollisionShape2D
+	activate()
+	#await get_tree().create_timer(inspect_time, false, true).timeout
+	#p.mm.change_state("run")
+	#p.look_dir = previous_look_dir
 
 func activate():
 	am.play("rope_loose", self)
@@ -66,11 +63,3 @@ func setup_ladder_trigger():
 	ladder_trigger.get_node("CollisionShape2D").position = Vector2(8.0, length / 2.0)
 	ladder_trigger.global_position = global_position + Vector2(0, 16)
 	w.current_level.get_node("Triggers").add_child(ladder_trigger)
-
-### SIGNALS ###
-
-func _on_PlayerDetector_body_entered(body: Node2D):
-	active_players.append(body.get_parent())
-
-func _on_PlayerDetector_body_exited(body: Node2D):
-	active_players.erase(body.get_parent())
