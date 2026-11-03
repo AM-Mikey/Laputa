@@ -67,6 +67,7 @@ func enter_aim(_last_state):
 	change_state("shoot")
 
 func enter_shoot(_last_state):
+	if f.pc().dead: return
 	am.play("enemy_shoot", self)
 	var bullet = BULLET.instantiate()
 	bullet.position = $BulletOrigin.global_position

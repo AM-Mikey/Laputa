@@ -24,6 +24,7 @@ signal invincibility_end()
 @export var max_hp: int = 16
 @export var money: int = 0
 @export var iframe_time: float = 1.5
+@export var controller_death_gradient: Gradient
 
 #STATES
 
@@ -172,6 +173,7 @@ func hit(damage, knockback_direction, _hitbox):
 
 
 func do_iframes():
+	if dead: return
 	invincible = true
 	$EffectPlayer.play("FlashIframe")
 	iframe_timer.start(iframe_time)
@@ -196,7 +198,13 @@ func die(via_kill_box = false):
 		dead = true
 		mm.get_node("States/Death").die_via_kill_box = via_kill_box
 		invincible = true
-		w.add_child(DEATH_CAMERA.instantiate())
+
+		$EffectPlayer.play("RESET")
+		#$Sprite2D.modulate = Color.WHITE
+		#$GunManager/Guns.modulate = Color.WHITE
+
+		var dc = DEATH_CAMERA.instantiate()
+		w.add_child(dc)
 		var explosion = EXPLOSION.instantiate()
 		explosion.position = global_position
 		explosion.process_mode = Node.PROCESS_MODE_ALWAYS
@@ -206,6 +214,9 @@ func die(via_kill_box = false):
 			await get_tree().create_timer(0.5).timeout
 			get_tree().paused = false
 		mm.change_state("death")
+		am.play("pc_die")
+		am.play_music("gameover")
+		oup.fade_to_gradient(controller_death_gradient, 0.1)
 
 
 
@@ -217,10 +228,11 @@ func die(via_kill_box = false):
 ### SIGNALS ###
 
 func _on_IframeTimer_timeout() -> void:
+	if dead: return
 	invincible = false
 	emit_signal("invincibility_end")
 	$EffectPlayer.stop()
-	if !enemies_touching.is_empty() && !dead:
+	if !enemies_touching.is_empty():
 		hit_again()
 
 

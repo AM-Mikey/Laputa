@@ -31,6 +31,7 @@ func state_process(_delta):
 	if !death_screen_displayed:
 		pc.velocity = calc_velocity()
 		pc.move_and_slide()
+		#oup.vibrate_shake(0.3, 0.15)
 
 	if !landed:
 		if pc.is_on_wall():
@@ -42,9 +43,12 @@ func state_process(_delta):
 				pc.velocity.y = -bounce_speed
 				pc.velocity.x = pre_velocity.x * BOUNCE_X_DAMPING
 				am.play("pc_land")
+				oup.vibrate_impulse(1.0, 0.2)
 			else: #out of bounces, settle on the ground
 				landed = true
 				pc.velocity.y = 0.0
+				am.play("pc_land")
+				oup.vibrate_impulse(1.0, 0.2)
 				mm.snap_vector = mm.SNAP_DIRECTION * mm.SNAP_LENGTH
 	elif !death_screen_displayed:
 		wipe()
@@ -58,9 +62,9 @@ func state_process(_delta):
 func wipe():
 	if death_screen_displayed: return
 	pc.z_index = 999
-	w.clear_spawn_layers
+	w.clear_spawn_layers()
 	var transition = DEATH_TRANSITION.instantiate()
-	transition.z_index = 2
+	transition.z_index = 5
 	transition.process_mode = Node.PROCESS_MODE_ALWAYS
 	w.add_child(transition)
 
@@ -70,8 +74,8 @@ func slowdown():
 	tween.set_process_mode(Tween.TWEEN_PROCESS_IDLE)
 	tween.set_ignore_time_scale(true)
 	tween.tween_property(Engine, "time_scale", 0.001, SLOWDOWN_DURATION)
-	await tween.finished
-	get_tree().paused = true
+	#await tween.finished
+	#get_tree().paused = true #don't do this. stuff on process_mode = always will stop too
 
 func bail(do_explosion = true):
 	bailing = true

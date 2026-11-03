@@ -129,6 +129,7 @@ func exit_shoot(_next_state):
 ### HELPERS ###
 
 func prepare_bullet():
+	if f.pc().dead: return
 	if difficulty == 2 && !target:
 		return
 
@@ -251,5 +252,6 @@ func _on_AnimationPlayer_animation_finished(anim_name: StringName) -> void:
 							ap.play("Shoot", -1.0, shoot_anim_speed)
 
 func _on_ShootDelay_timeout() -> void:
+	if f.pc().dead: return
 	if state == "shoot":
 		ap.play("Shoot", -1.0, shoot_anim_speed)

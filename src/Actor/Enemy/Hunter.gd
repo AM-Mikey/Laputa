@@ -75,6 +75,7 @@ func wander():
 		await $AnimationPlayer.animation_finished
 
 func fire():
+	if f.pc().dead: return
 	if not shooting:
 		shooting = true
 		if $FireCooldown.is_stopped():

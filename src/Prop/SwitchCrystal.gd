@@ -71,7 +71,6 @@ func get_switch_siblings() -> Array:
 				printerr("ERROR: CANNOT USE MIXED PLATE + LEVER OR CRYSTAL AS SWITCH SIBLINGS")
 			if switch_type == SwitchType.TOGGLE:
 				out.append(s)
-				print("POG CRYSTAL")
 			else:
 				printerr("ERROR, switch ", self, " and switch ", s, " have same connected_entity_id: ", connected_entity_id)
 				breakpoint

@@ -303,6 +303,7 @@ func calc_velocity(dir, do_gravity = true, do_acceleration = true, do_friction =
 
 ### HELPERS ###
 func fire():
+	if f.pc().dead: return
 	var bullet = SEED.instantiate()
 
 	bullet.damage = bullet_damage

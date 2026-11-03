@@ -63,7 +63,7 @@ func _ready():
 		pc.xp_updated.connect(_on_xp_updated)
 		pc.money_updated.connect(_on_money_updated)
 		pc.invincibility_end.connect(_on_invincibility_ended)
-		pc.setup_hud()
+		#pc.setup_hud() we're doing this in world now
 		if pc.guns.get_child_count() > 0:
 			setup_bars(pc.hp, pc.max_hp, pc.guns.get_child(0).xp, pc.guns.get_child(0).max_xp)
 	vs.connect("scale_changed", Callable(self, "_resolution_scale_changed"))
@@ -261,7 +261,7 @@ func _on_hp_updated(hp: int, max_hp: int, cause: String) -> void:
 func display_hp_number(hp, max_hp):
 	hp_1.visible = true
 	hp_2.visible = true
-	if hp > 0 and hp < 10:
+	if hp >= 0 and hp < 10:
 		hp_1.visible = false
 		hp_2.visible = true
 		hp_2.frame_coords.x = hp

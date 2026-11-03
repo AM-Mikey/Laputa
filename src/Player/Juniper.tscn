@@ -52,6 +52,11 @@
 [ext_resource type="Texture2D" uid="uid://bmongaecnluww" path="res://assets/Player/Peak.png" id="54_l3dey"]
 [ext_resource type="Texture2D" uid="uid://ctie48enj37yb" path="res://assets/Player/Valley.png" id="55_v6qwc"]
 
+[sub_resource type="Gradient" id="Gradient_sat3f"]
+offsets = PackedFloat32Array(0, 0.5, 1)
+colors = PackedColorArray(1, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0, 1)
+metadata/_snap_enabled = true
+
 [sub_resource type="CapsuleShape2D" id="72"]
 radius = 1.0
 height = 2.0
@@ -4001,6 +4006,7 @@ collision_layer = 0
 collision_mask = 520
 floor_constant_speed = true
 script = ExtResource("14")
+controller_death_gradient = SubResource("Gradient_sat3f")
 
 [node name="PhysicsLayerBody" parent="." unique_id=307469918 instance=ExtResource("2_dha32")]
 

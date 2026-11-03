@@ -2,6 +2,6 @@
 
 [ext_resource type="Script" uid="uid://eadbkt60gwwc" path="res://src/UI/DeathScreen/DeathCamera.gd" id="1"]
 
-
 [node name="DeathCamera" type="Camera2D" unique_id=129475180]
+process_mode = 3
 script = ExtResource("1")

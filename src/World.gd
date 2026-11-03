@@ -24,6 +24,7 @@ var internal_version: String = get_internal_version()
 @export var default_gun_array: Array[String]
 @export var default_topic_array: Array[String]
 @export var default_item_array: Array[String]
+@export var default_hp: int
 
 @export var start_level_path: String
 @onready var ui = $UILayer
@@ -96,7 +97,7 @@ func _input(event):
 			il.add_child(INVENTORY.instantiate())
 
 	if event.is_action_pressed("pause") && !ml.has_node("Title") && !el.has_node("Editor"):
-		if not ml.has_node("PauseMenu") and not get_tree().paused:
+		if !ml.has_node("PauseMenu") && !get_tree().paused && !f.pc().dead:
 			ml.add_child(PAUSEMENU.instantiate())
 
 	if event.is_action_pressed("window_maximize"):
@@ -130,22 +131,30 @@ func first_time_level_setup(): #Reminder: no function called can use await
 	bl.visible = true #TODO: this is a bandaid solution to saving in editor causing world.gd to have some layers invisible. since it's only supposed to save the current level, I'm not sure why this is affecting the world node
 	ui.visible = true
 	print("first time level setup")
-	add_child(JUNIPER.instantiate())
+	var pc = JUNIPER.instantiate()
+	add_child(pc)
 	get_node("HUDLayer/HUDGroup").add_child(HUD.instantiate())
 	current_level = load(start_level_path).instantiate()
 	add_child(current_level)
 	if current_level.debug_guns_on_enter != []:
-		f.pc().gm.setup_guns(current_level.debug_guns_on_enter)
+		pc.gm.setup_guns(current_level.debug_guns_on_enter)
 	else:
-		f.pc().gm.setup_guns(default_gun_array)
+		pc.gm.setup_guns(default_gun_array)
 	if current_level.debug_topics_on_enter != []:
-		f.pc().setup_topics(current_level.debug_topics_on_enter)
+		pc.setup_topics(current_level.debug_topics_on_enter)
 	else:
-		f.pc().setup_topics(default_topic_array)
+		pc.setup_topics(default_topic_array)
 	if current_level.debug_items_on_enter != []:
-		f.pc().setup_items(current_level.debug_items_on_enter)
+		pc.setup_items(current_level.debug_items_on_enter)
 	else:
-		f.pc().setup_items(default_item_array)
+		pc.setup_items(default_item_array)
+	if current_level.debug_hp_on_enter != 0:
+		pc.max_hp = current_level.debug_hp_on_enter
+		pc.hp = pc.max_hp
+	else:
+		pc.max_hp = default_hp
+		pc.hp = pc.max_hp
+	pc.setup_hud()
 	spawn_entities()
 
 	$Juniper.global_position = get_spawn_point().global_position
@@ -170,8 +179,8 @@ func change_level_via_code(level_path, use_save_data):
 	if has_node("DeathCamera"): get_node("DeathCamera").queue_free()
 	if has_node("MenuLayer/LevelSelect"): get_node("MenuLayer/LevelSelect").queue_free()
 	if f.db(): await f.db().exit()
+	$HUDLayer/HUDAnimator.play("RESET")
 	if f.hud():
-		$HUDLayer/HUDAnimator.play("RESET")
 		f.hud().free()
 	clear_spawn_layers()
 	for kb in get_tree().get_nodes_in_group("KillBoxes"):
@@ -179,26 +188,34 @@ func change_level_via_code(level_path, use_save_data):
 	current_level.free()
 	current_level = null
 	am.stop_sfx()
-	if f.pc() != null: $Juniper.free()
+	if f.pc() != null: f.pc().free()
 
-	add_child(JUNIPER.instantiate())
-	$Juniper.velocity = Vector2.ZERO
+	var pc = JUNIPER.instantiate()
+	add_child(pc)
+	pc.velocity = Vector2.ZERO
+	get_node("HUDLayer/HUDGroup").add_child(HUD.instantiate())
 	current_level = load(level_path).instantiate()
 	add_child(current_level)
 	if !use_save_data:
 		if current_level.debug_guns_on_enter != []:
-			f.pc().gm.setup_guns(current_level.debug_guns_on_enter)
+			pc.gm.setup_guns(current_level.debug_guns_on_enter)
 		else:
-			f.pc().gm.setup_guns(default_gun_array)
+			pc.gm.setup_guns(default_gun_array)
 		if current_level.debug_topics_on_enter != []:
-			f.pc().setup_topics(current_level.debug_topics_on_enter)
+			pc.setup_topics(current_level.debug_topics_on_enter)
 		else:
-			f.pc().setup_topics(default_topic_array)
+			pc.setup_topics(default_topic_array)
 		if current_level.debug_items_on_enter != []:
-			f.pc().setup_items(current_level.debug_items_on_enter)
+			pc.setup_items(current_level.debug_items_on_enter)
 		else:
-			f.pc().setup_items(default_item_array)
-	get_node("HUDLayer/HUDGroup").add_child(HUD.instantiate())
+			pc.setup_items(default_item_array)
+		if current_level.debug_hp_on_enter != 0:
+			pc.max_hp = current_level.debug_hp_on_enter
+			pc.hp = pc.max_hp
+		else:
+			pc.max_hp = default_hp
+			pc.hp = pc.max_hp
+	pc.setup_hud()
 
 	spawn_entities()
 
@@ -225,7 +242,7 @@ func change_level_via_trigger(level_path, door_index):
 	for n in get_tree().get_nodes_in_group("NPCs"):
 		SaveSystem.write_dialog_data_to_temp(current_level, n)
 	if f.db(): await f.db().exit()
-	if f.hud(): $HUDLayer/HUDAnimator.play("RESET")
+	$HUDLayer/HUDAnimator.play("RESET")
 	clear_spawn_layers()
 	for kb in get_tree().get_nodes_in_group("KillBoxes"):
 		kb.forbid = true
