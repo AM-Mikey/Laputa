@@ -7,6 +7,7 @@ func _ready(): #Reminder: no function called can use await
 	w.emit_signal("finished_spawn_entities_step")
 
 func _on_EnemyCue_body_entered(_body):
+	if f.pc().dead: return
 	var enemies = get_tree().get_nodes_in_group("Enemies")
 	for e in enemies:
 		if e.id.nocasecmp_to(id) == 0:

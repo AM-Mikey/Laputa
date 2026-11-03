@@ -77,7 +77,7 @@ func set_active_controller_index(index):
 	set_input_map_index(active_controller_index)
 	for j in Input.get_connected_joypads():
 		if j == active_controller_index:
-			oup.set_controller_light_color(j, oup.active_controller_color)
+			oup.level_gradient = get_tree().get_root().get_node("World").current_level.controller_color_gradient
 		else:
 			oup.set_controller_light_color(j, oup.inactive_controller_color)
 
