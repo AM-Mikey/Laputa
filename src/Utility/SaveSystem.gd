@@ -3,14 +3,19 @@ extends Node
 const OPTIONS = preload("res://src/UI/Options/Options.tscn")
 
 var first_time_loading_settings := true
-var save_path = "user://save.dat"
+var save_path: String:
+	get: return "user://save_%d.dat" % current_slot
 var temp_path = "user://temp.dat"
+var save_slot_pointer_path = "user://save_slot_pointer.dat"
 var data = {
 	"player_data" : {},
 	"level_data" : {},
 	"mission_data" : {},
 	"dialog_data" : {},
+	"other_data" : {},
 	}
+var current_slot := -1 #set by world.gd/first_time_level_setup and /setup_title_and_background
+var has_save := false
 
 @onready var w = get_tree().get_root().get_node("World")
 
@@ -96,6 +101,13 @@ func write_dialog_data_to_temp(current_level, npc):
 	data["dialog_data"][current_level.level_name][npc.id] = [npc.conversation_queue, npc.side_conversation_queue]
 	write_to_file(temp_path, data)
 	print("dialog data saved to temp")
+
+
+
+func write_other_data_to_save(): #misc system data, not saved in temp
+	data["other_data"]["unix_time"] = Time.get_unix_time_from_system()
+	data["other_data"]["uptime"] = Uptime.get_total_uptime()
+	write_to_file(save_path, data)
 
 
 
@@ -196,8 +208,8 @@ func read_player_data_from_save():
 
 
 func read_level_data_from_temp(current_level):
-	check_dat_file_presence("save")
-	check_dat_file_presence("temp")
+	#check_dat_file_presence("save")
+	#check_dat_file_presence("temp")
 	var scoped_data = read_from_file(temp_path)
 	if !scoped_data["level_data"].has(current_level.level_name):
 		print("no previous level data in temp")
@@ -221,8 +233,8 @@ func read_level_data_from_save(current_level):
 
 
 func read_dialog_data_from_temp(current_level):
-	check_dat_file_presence("save")
-	check_dat_file_presence("temp")
+	#check_dat_file_presence("save")
+	#check_dat_file_presence("temp")
 	var scoped_data = read_from_file(temp_path)
 	if !scoped_data["dialog_data"].has(current_level.level_name):
 		print("no previous dialog data in temp")
@@ -249,6 +261,12 @@ func read_dialog_data_from_save(current_level):
 				npc.side_conversation_queue = current_level_data[id][1]
 	print("dialog data loaded from save")
 
+
+func read_other_data_from_save(): #misc system data, not saved in temp
+	var scoped_data = read_from_file(save_path)
+	Uptime.start_tracking_uptime(scoped_data["other_data"]["uptime"])
+	print("other data loaded from save")
+
 #### HELPER ###
 
 func read_from_file(file_path):
@@ -271,22 +289,61 @@ func write_to_file(file_path, written_data):
 
 
 ##checks if the given file exists, if not duplicate from res://defaults/
-func check_dat_file_presence(filename:String) -> void:
-		#temp file
-	var defaultfile_path = "res://defaults/" + filename + ".dat"
-	var userfile_path = "user://" + filename + ".dat"
+#func check_dat_file_presence(filename:String) -> void:
+		##temp file
+	#var defaultfile_path = "res://defaults/" + filename + ".dat"
+	#var userfile_path = "user://" + filename + ".dat"
+#
+	#if FileAccess.file_exists(userfile_path):
+		#return
+	#else:
+		#DirAccess.copy_absolute(defaultfile_path,userfile_path)
 
-	if FileAccess.file_exists(userfile_path):
-		return
-	else:
-		DirAccess.copy_absolute(defaultfile_path,userfile_path)
+func get_save_file_indices() -> Array[int]:
+	var out: Array[int] = []
+	var prefix =  "save_"
+	var dir := DirAccess.open("user://")
+	if dir == null:
+		printerr("ERROR: Could not open user folder")
+		return([-1])
+	dir.list_dir_begin()
+	var file_name := dir.get_next()
+	while file_name != "":
+		if !dir.current_is_dir():
+			if file_name.begins_with(prefix):
+				var index: int = int(file_name.get_basename().trim_prefix(prefix))
+				out.append(index)
+		file_name = dir.get_next()
+	dir.list_dir_end()
+	return out
 
-#checks if there is a save file
-func has_save_file() -> bool:
-	if FileAccess.file_exists("user://save.dat"):
-			return true
-	else:
-		return false
+func get_last_valid_slot() -> int:
+	var out := -1
+	var latest_unix_time := 0
+	if !FileAccess.file_exists(save_slot_pointer_path):
+		var save_file_indices = get_save_file_indices()
+		if save_file_indices.size() == 0:
+			print("no save files found")
+			return out #-1, no save files
+		else:
+			print("no save slot pointer file found, getting highest index save slot")
+			out = get_save_file_indices()[-1] #last one
+			return out
+
+	var save_slot_pointer_array = read_from_file(save_slot_pointer_path)
+	for i in save_slot_pointer_array:
+		if int(i[1]) >= latest_unix_time:
+			latest_unix_time = int(i[1])
+			out = int(i[0])
+	return out
+
+func write_save_slot_pointer():
+	var save_slot_pointer_data = {}
+	save_slot_pointer_data["current_slot"] = current_slot
+	save_slot_pointer_data["utc_time"] = Time.get_unix_time_from_system()
+	write_to_file(save_slot_pointer_path, save_slot_pointer_data)
+	print("wrote save slot pointer")
+
 
 func set_props_spent(limited_props):
 	await get_tree().create_timer(0.01, true, false).timeout #wait for props to spawn #TODO: check if these flags are correct

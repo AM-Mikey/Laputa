@@ -895,8 +895,22 @@ collision_layer = 16384
 collision_mask = 0
 script = ExtResource("18_bq2j0")
 tag_name = "move_dir"
-direction = Vector2(-1, -8.742278e-08)
+direction = Vector2(-1, 8.742278e-08)
 snap_degrees = 180.0
+
+[node name="SaveDisk" type="Area2D" parent="Spawns" unique_id=1449282698 groups=["Entities", "PropSpawns"] instance=ExtResource("15_tk244")]
+visibility_layer = 2
+z_index = 999
+position = Vector2(2304, 2064)
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("12_k26mr")
+prop_path = "res://src/Prop/SaveDisk.tscn"
+properties = {
+"do_bubble": [false, 1, ""],
+"editor_hidden": [false, 1, ""],
+"id": [&"SaveDisk", 4, ""]
+}
 
 [node name="Waypoints" type="Node2D" parent="." unique_id=1140943479]
 visibility_layer = 2
@@ -960,3 +974,4 @@ zoom = 2.0
 [connection signal="input_event" from="Spawns/Sentry4" to="Spawns/Sentry4" method="_on_input_event"]
 [connection signal="input_event" from="Spawns/Sentry5" to="Spawns/Sentry5" method="_on_input_event"]
 [connection signal="input_event" from="Spawns/Golem" to="Spawns/Golem" method="_on_input_event"]
+[connection signal="input_event" from="Spawns/SaveDisk" to="Spawns/SaveDisk" method="_on_input_event"]

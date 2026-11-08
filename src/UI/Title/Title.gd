@@ -14,11 +14,10 @@ func _ready():
 		$VersionLabel.text = "Release Version: " + w.development_stage + "-" + w.release_version
 	else:
 		$VersionLabel.text = "Internal Version: " + w.development_stage + "-" + w.internal_version
-										#LOAD BUTTON STUFF
-	if not FileAccess.file_exists(SaveSystem.save_path):
+	#
+	if !SaveSystem.has_save:
+		$VBox/Continue.queue_free()
 		$VBox/Load.queue_free()
-
-	####
 	am.play_music("title")
 	do_focus()
 	vs.connect("scale_changed", Callable(self, "_resolution_scale_changed"))
@@ -27,8 +26,8 @@ func _ready():
 
 func do_focus():
 	print("focusing on title screen")
-	if $VBox.has_node("Load"):
-		$VBox/Load.grab_focus()
+	if $VBox.has_node("Continue"):
+		$VBox/Continue.grab_focus()
 	else:
 		$VBox/New.grab_focus()
 
@@ -44,20 +43,28 @@ func exit():
 		if camera.is_in_group("PlayerCameras"):
 			camera.reset()
 
+### GETTERS ###
+
+
+
+
 ### SIGNALS ###
 
-func _on_new():
-	w.change_level_via_code(w.start_level_path, false)
-	exit()
-
-
-func _on_load():
+func _on_continue():
 	SaveSystem.read_player_data_from_save()
 	SaveSystem.read_level_data_from_save(w.current_level)
 	SaveSystem.read_dialog_data_from_save(w.current_level)
 	SaveSystem.copy_level_and_dialog_data_from_save_to_temp()
 	SaveSystem.read_mission_data_from_save()
+	SaveSystem.read_other_data_from_save()
 	exit()
+
+func _on_new():
+	w.change_level_via_code(w.start_level_path, false)
+	exit()
+
+func _on_load():
+	pass
 
 func _on_options():
 	get_parent().add_child(OPTIONS.instantiate())

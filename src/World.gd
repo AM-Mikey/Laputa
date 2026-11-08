@@ -19,7 +19,7 @@ var is_in_transition := false
 var internal_version: String = get_internal_version()
 @export var release_version: String
 @export var is_release = false
-@export var do_skip_title = false
+@export var do_skip_title = false #skipping title just loads the start_level without loading a save
 @export var debug_visible = false
 @export var default_gun_array: Array[String]
 @export var default_topic_array: Array[String]
@@ -54,7 +54,7 @@ func _ready():
 			node.visibility_layer = 2
 		node.child_entered_tree.connect(child_layer_set)
 
-	if not do_skip_title:
+	if !do_skip_title:
 		setup_title_and_background()
 	else:
 		first_time_level_setup()
@@ -110,13 +110,18 @@ func _input(event):
 ### LEVEL CHANGE ###
 
 func setup_title_and_background(): #Reminder: no function called can use await
+	SaveSystem.current_slot = SaveSystem.get_last_valid_slot()
+	if SaveSystem.current_slot == -1:
+		SaveSystem.current_slot = 0
+		current_level = load(start_level_path).instantiate()
+
+	else:
+		SaveSystem.has_save = true
+		var data = SaveSystem.read_from_file(SaveSystem.save_path)
+		current_level = load(data["player_data"]["current_level"]).instantiate()
+
 	bl.visible = true #TODO: this is a bandaid solution to saving in editor causing world.gd to have some layers invisible. since it's only supposed to save the current level, I'm not sure why this is affecting the world node
 	ui.visible = true
-	if SaveSystem.has_save_file():
-		var data = SaveSystem.read_from_file("user://save.dat")
-		current_level = load(data["player_data"]["current_level"]).instantiate()
-	else:
-		current_level = load(start_level_path).instantiate()
 	current_level.ignore_music_for_title = true
 	add_child(current_level)
 	ml.add_child(TITLE.instantiate())
@@ -128,9 +133,14 @@ func setup_title_and_background(): #Reminder: no function called can use await
 
 
 func first_time_level_setup(): #Reminder: no function called can use await
+	print("first time level setup")
+	SaveSystem.current_slot = SaveSystem.get_last_valid_slot()
+	if SaveSystem.current_slot == -1:
+		SaveSystem.current_slot = 0
+	else:
+		SaveSystem.has_save = true
 	bl.visible = true #TODO: this is a bandaid solution to saving in editor causing world.gd to have some layers invisible. since it's only supposed to save the current level, I'm not sure why this is affecting the world node
 	ui.visible = true
-	print("first time level setup")
 	var pc = JUNIPER.instantiate()
 	add_child(pc)
 	get_node("HUDLayer/HUDGroup").add_child(HUD.instantiate())
@@ -485,3 +495,6 @@ func on_root_window_close_requested():
 	print("Closing Window")
 	for kb in get_tree().get_nodes_in_group("KillBoxes"):
 		kb.forbid = true
+	#delete temp on game exit
+	if FileAccess.file_exists(SaveSystem.temp_path):
+		DirAccess.remove_absolute(SaveSystem.temp_path)

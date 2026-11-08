@@ -62,6 +62,10 @@ func activate():
 	SaveSystem.write_level_data_to_temp(w.current_level)
 	SaveSystem.write_player_data_to_save(w.current_level)
 	SaveSystem.copy_level_and_dialog_data_from_temp_to_save()
+	SaveSystem.write_other_data_to_save()
+	SaveSystem.write_save_slot_pointer()
+	SaveSystem.has_save = true
+
 
 func sparkle_on_land():
 	var sparkle_speeds
