@@ -7,7 +7,7 @@ const TOOLTIPS = [
 
 
 
-func setup(): #Reminder: no function called can use await
+func setup():
 	hp = 4
 	damage_on_contact = 2
 	reward = 2

@@ -2,7 +2,7 @@ extends Trigger
 
 signal cue
 
-func _ready(): #Reminder: no function called can use await
+func setup():
 	trigger_type = "enemy_cue"
 	w.emit_signal("finished_spawn_entities_step")
 

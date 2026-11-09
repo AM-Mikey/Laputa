@@ -35,15 +35,18 @@ var next_conversation_index: int
 
 var camera_forgiveness = 16
 
+func _ready():
+	setup()
 
-func _ready(): #Reminder: no function called can use await
+func setup():
 	home = global_position
-	find_waypoints()
 	speed = Vector2.ZERO
 	setup_states()
 	w.emit_signal("finished_spawn_entities_step")
-	change_state(starting_state)
 
+func link():
+	find_waypoints()
+	change_state(starting_state)
 
 
 func disable():

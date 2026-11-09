@@ -24,12 +24,10 @@ var sprite_tween: Tween
 
 
 
-func setup(): #Reminder: no function called can use await before finishing entities step
-	w.emit_signal("finished_spawn_entities_step") #NOTE we say this is finished immediately so we can be the LAST loaded props, this is why we then need to await four times
-	await get_tree().physics_frame
-	await get_tree().physics_frame
-	await get_tree().physics_frame
-	await get_tree().physics_frame
+func setup():
+	w.emit_signal("finished_spawn_entities_step")
+
+func link():
 	for e in get_tree().get_nodes_in_group("Entities"):
 		if e.is_in_group("EditorEntities"):
 			return

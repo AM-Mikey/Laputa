@@ -48,7 +48,7 @@ const BODY_CENTER_OFFSET := 7.0 #fall shape centre is 7px off the surface (match
 #TODO: dust particles for when running (ala minecraft cats)
 
 
-func setup(): #Reminder: no function called can use await
+func setup():
 	normal_dir = $NormalVector.direction.normalized()
 	wall_dir = normal_dir * -1
 	rotation = normal_dir.angle() + deg_to_rad(90)
@@ -59,16 +59,15 @@ func setup(): #Reminder: no function called can use await
 		crawl_x = 1.0
 	move_dir = Vector2(crawl_x, 0.0).rotated(rotation)
 	update_facing()
-
 	refresh_casts()
 	$FlipCooldown.start(startup_flip_grace)
-
 	hp = 2
 	damage_on_contact = 2
 	w.emit_signal("finished_spawn_entities_step")
 
-	change_state("crawl")
 
+func link():
+	change_state("crawl")
 
 func _on_physics_process(_delta):
 	if disabled or dead or Engine.is_editor_hint(): return

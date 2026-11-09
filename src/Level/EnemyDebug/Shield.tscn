@@ -1912,17 +1912,6 @@ properties = {
 "id": [&"BreakBlock37", 4, ""]
 }
 
-[node name="ChestWeapon" parent="Spawns" unique_id=226869357 instance=ExtResource("13_w2pfh")]
-visibility_layer = 2
-position = Vector2(3280, 2432)
-prop_path = "res://src/Prop/ChestWeapon.tscn"
-properties = {
-"do_bubble": [false, 1, ""],
-"editor_hidden": [false, 1, ""],
-"gun_name": ["", 4, ""],
-"id": [&"ChestWeapon", 4, ""]
-}
-
 [node name="ChestItem" parent="Spawns" unique_id=155510835 instance=ExtResource("13_w2pfh")]
 visibility_layer = 2
 position = Vector2(3312, 2432)

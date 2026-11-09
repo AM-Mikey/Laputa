@@ -11,7 +11,7 @@ var idle = false
 var idle_time: float
 var active_time: float
 
-func setup(): #Reminder: no function called can use await
+func setup():
 	self_knockback = true
 	hp = 1
 	damage_on_contact = 0
@@ -26,6 +26,7 @@ func setup(): #Reminder: no function called can use await
 	$Timer.start(active_time)
 	is_wind_affected = true
 	w.emit_signal("finished_spawn_entities_step")
+
 
 func _physics_process(_delta):
 	if disabled or dead: return

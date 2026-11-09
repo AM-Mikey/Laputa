@@ -15,7 +15,7 @@ var spinup_speed_scale = 12.0
 var spinup_spin_time = 0.5
 var tween
 
-func setup(): #Reminder: no function called can use await
+func setup():
 	inspect_time = 1.0
 	base_gravity_scale = 0.5
 	water_gravity_scale = 0.5

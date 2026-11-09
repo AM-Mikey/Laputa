@@ -144,7 +144,7 @@ func _get_body_velocity_y(body: Node) -> float:
 
 func _on_SplashDetector_body_entered(body: Node2D): #always rigidbody
 	if body.just_spawned:
-		print("body just spawned in water, ignoring splash")
+		#print("body just spawned in water, ignoring splash")
 		return
 	var target = body.get_parent()
 	var vy := _get_body_velocity_y(target)
@@ -153,7 +153,7 @@ func _on_SplashDetector_body_entered(body: Node2D): #always rigidbody
 
 func _on_SplashDetector_body_exited(body: Node2D): #always rigidbody
 	if body.is_exiting_tree:
-		print("body is exiting tree, ignoring splash")
+		#print("body is exiting tree, ignoring splash")
 		return
 	var target = body.get_parent()
 	var vy := _get_body_velocity_y(target)

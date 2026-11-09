@@ -13,7 +13,11 @@ var spent = false
 
 @onready var w = get_tree().get_root().get_node("World")
 
+func _ready():
+	setup()
 
+func setup(): #for children
+	pass
 
 func get_overlap(body) -> bool:
 	var body_in_triggers = 0

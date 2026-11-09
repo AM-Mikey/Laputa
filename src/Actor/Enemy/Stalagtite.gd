@@ -28,7 +28,7 @@ func set_is_in_water(val):
 		super.set_is_in_water(val)
 	is_in_water = val
 
-func setup(): #Reminder: no function called can use await
+func setup():
 	match difficulty:
 		0:
 			hp = 2
@@ -53,6 +53,8 @@ func setup(): #Reminder: no function called can use await
 	speed = Vector2.ZERO
 	gravity = 0
 	w.emit_signal("finished_spawn_entities_step")
+
+func link():
 	change_state("hang")
 
 

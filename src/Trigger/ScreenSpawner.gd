@@ -46,7 +46,7 @@ var sample_enemy = null
 var sample_enemy_og_visible = false
 var sample_enemy_og_process_mode = ProcessMode.PROCESS_MODE_INHERIT
 
-func _ready():
+func setup():
 	trigger_type = "screen_spawner"
 	$SpawnTimer.wait_time = spawn_interval
 	$StartTimer.wait_time = spawn_start_grace
@@ -81,10 +81,8 @@ func _ready():
 	else:
 		collision_shape = sample_enemy.get_child(0)
 	enemy_size = collision_shape.shape.get_rect().size
-
 	if (spawn_limit != -1):
 		spawn_left = spawn_limit
-
 	w.emit_signal("finished_spawn_entities_step")
 
 ### UTILITY

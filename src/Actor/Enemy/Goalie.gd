@@ -86,14 +86,10 @@ func setup():
 	$DeflectDetector.monitoring = difficulty > 0
 	$PlayerDetector.monitoring = difficulty > 0
 	jump_pos = $JumpWaypoint.global_position
-	_setup()
 	w.emit_signal("finished_spawn_entities_step")
 
+func link():
 	change_state("idle")
-
-func _setup():
-	pass
-
 
 ### STATE ###
 func enter_idle(_prev_state):

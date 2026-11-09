@@ -11,7 +11,7 @@ var splash_targets = []
 		gravity = ProjectSettings.get_setting("physics/2d/default_gravity") * val
 		velocity_dropoff = val
 
-func _ready(): #Reminder: no function called can use await
+func setup():
 	trigger_type = "water"
 	velocity_dropoff = velocity_dropoff
 	var phys_water = PHYS_WATER.instantiate()

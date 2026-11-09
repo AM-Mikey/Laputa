@@ -19,7 +19,7 @@ var vis_scale := 0.0
 var wind_up_from := 0.0
 var wind_down_from := 0.0
 
-func setup(): #Reminder: no function called can use await
+func setup():
 	wind_dir = $WindVector.direction.snapped(Vector2(1, 1)) #remove VUVector imprecision
 	distance = ($Distance.position - Vector2(8.0, 8.0) - 8.0 * wind_dir).length()
 	$WorldCast.target_position.x = -distance
@@ -44,13 +44,9 @@ func setup(): #Reminder: no function called can use await
 	else:
 		$AnimationPlayer.speed_scale = 1.0
 		$AnimationPlayer.play("Off")
-
 	w.emit_signal("finished_spawn_entities_step") #NOTE telling it we're done with setup early feels like cheating but this should work
-	await get_tree().physics_frame
-	await get_tree().physics_frame
-	await get_tree().physics_frame
-	await get_tree().physics_frame
-	await get_tree().physics_frame #Since level has to wait 4 frames... its gross but works
+
+func link():
 	if protected_toggled:
 		create_phys_wind_column()
 		$AnimationPlayer.play("On")
