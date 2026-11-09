@@ -75,6 +75,9 @@ func _on_level():
 func _on_quit():
 	for kb in get_tree().get_nodes_in_group("KillBoxes"):
 		kb.forbid = true
+	#delete temp on game exit
+	if FileAccess.file_exists(SaveSystem.temp_path):
+		DirAccess.remove_absolute(SaveSystem.temp_path)
 	get_tree().quit()
 
 func _on_keyguide():

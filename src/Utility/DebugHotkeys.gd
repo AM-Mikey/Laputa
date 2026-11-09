@@ -61,6 +61,11 @@ func _input(event):
 
 	if event.is_action_pressed("debug_quit"):
 		print("quitting...")
+		for kb in get_tree().get_nodes_in_group("KillBoxes"):
+			kb.forbid = true
+		#delete temp on game exit
+		if FileAccess.file_exists(SaveSystem.temp_path):
+			DirAccess.remove_absolute(SaveSystem.temp_path)
 		get_tree().quit()
 
 	if not w.el.has_node("Editor"): #non-editor only commands
