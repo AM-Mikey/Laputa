@@ -125,7 +125,6 @@ func update_visuals() -> void:
 	fill_polygon.polygon = final_points
 
 func splash(splash_pos: Vector2, splash_velocity: float):
-	print("doing_splash")
 	var local_x_pos: float = to_local(splash_pos).x
 	var segment_width: float = water_size.x / (segment_count - 1)
 	var index := int(clamp(local_x_pos / segment_width, 0, segment_count - 1))
