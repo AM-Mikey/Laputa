@@ -6,7 +6,7 @@ const AMMO_GET_MAX = preload("res://src/Effect/AmmoGetMax.tscn")
 var active_players = []
 
 
-func setup(): #Reminder: no function called can use await
+func setup():
 	inspect_time = 0.4
 	w.emit_signal("finished_spawn_entities_step")
 

@@ -2,7 +2,7 @@ extends Trigger
 
 @export var damage = 2
 
-func _ready(): #Reminder: no function called can use await
+func setup():
 	trigger_type = "spikes"
 	w.emit_signal("finished_spawn_entities_step")
 

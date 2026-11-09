@@ -15,7 +15,7 @@ var spinup_speed_scale = 12.0
 var spinup_spin_time = 0.5
 var tween
 
-func setup(): #Reminder: no function called can use await
+func setup():
 	inspect_time = 1.0
 	base_gravity_scale = 0.5
 	water_gravity_scale = 0.5
@@ -62,6 +62,10 @@ func activate():
 	SaveSystem.write_level_data_to_temp(w.current_level)
 	SaveSystem.write_player_data_to_save(w.current_level)
 	SaveSystem.copy_level_and_dialog_data_from_temp_to_save()
+	SaveSystem.write_other_data_to_save()
+	SaveSystem.write_save_slot_pointer()
+	SaveSystem.has_save = true
+
 
 func sparkle_on_land():
 	var sparkle_speeds

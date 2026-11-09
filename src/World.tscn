@@ -1,4 +1,4 @@
-[gd_scene format=3 uid="uid://cockvruomjgqg"]
+[gd_scene format=3 uid="uid://s7kmc4b70107"]
 
 [ext_resource type="Script" uid="uid://ct5k2fxi0u0rb" path="res://src/World.gd" id="8"]
 
@@ -45,7 +45,6 @@ visibility_layer = 2
 script = ExtResource("8")
 development_stage = "alpha"
 release_version = "1.8"
-do_skip_title = true
 default_gun_array = Array[String](["Revolver", "Speeder", "MPistol", "GLauncher", "Blunderbuss", "Tsurugi", "Red7", "Roberta", "TurnstileJumper"])
 default_topic_array = Array[String](["yourself"])
 default_hp = 8

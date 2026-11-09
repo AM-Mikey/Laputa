@@ -35,7 +35,7 @@ var gravity_velocity := Vector2.ZERO
 #charge wallslam causes damage? and shakes screen and forces golem to recoil?
 
 
-func setup(): #Reminder: no function called can use await
+func setup():
 	self_knockback = true
 	match difficulty:
 		0:
@@ -50,6 +50,8 @@ func setup(): #Reminder: no function called can use await
 	move_dir = $VUVector.direction.snappedf(1.0)
 	add_collision_exception_with($Standable)
 	w.emit_signal("finished_spawn_entities_step")
+
+func link():
 	change_state("walk")
 
 ### STATES ###

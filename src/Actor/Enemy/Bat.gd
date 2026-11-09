@@ -28,7 +28,7 @@ var bail_time = 6.0
 
 
 
-func setup(): #Reminder: no function called can use await
+func setup():
 	self_knockback = true
 	hp = 4
 	reward = 2
@@ -36,9 +36,11 @@ func setup(): #Reminder: no function called can use await
 	speed = Vector2(100, 50)
 	is_wind_affected = true
 	w.emit_signal("finished_spawn_entities_step")
-	await w.finished_spawning #wait for global_waypoints
+
+func link():
 	find_waypoints()
 	change_state(starting_state)
+
 
 func find_waypoints():
 	for wp in get_tree().get_nodes_in_group("WaypointGlobals"):

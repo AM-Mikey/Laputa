@@ -7,7 +7,7 @@ const DB = preload("res://src/Dialog/DialogBox.tscn")
 var reading = false
 var db
 
-func _ready(): #Reminder: no function called can use await
+func setup():
 	trigger_type = "flavor_text"
 	w.emit_signal("finished_spawn_entities_step")
 

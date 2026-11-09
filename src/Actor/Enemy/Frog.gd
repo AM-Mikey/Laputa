@@ -25,7 +25,7 @@ var tongue_ready_time := 0.5
 var tongue_unready_time := 1.0
 var tongue_cooldown_time := 6.0
 
-func setup(): #Reminder: no function called can use await
+func setup():
 	self_knockback = true
 	look_dir = $LookVector.direction
 	tongue_max_length = abs($TongueRange.position.x)
@@ -54,6 +54,8 @@ func setup(): #Reminder: no function called can use await
 			$Sprite2D.texture = TX_1
 			speed = Vector2(35, 100)
 	w.emit_signal("finished_spawn_entities_step")
+
+func link():
 	change_state("idle")
 
 

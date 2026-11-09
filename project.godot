@@ -83,6 +83,7 @@ RenderAlign="*res://src/RenderAlign/RenderAlign.tscn"
 ms="*res://src/Mission/MissionSystem.gd"
 oup="*res://src/Utility/OutputSystem.gd"
 shop="*res://src/Utility/ShopMaster.gd"
+Uptime="*uid://dbn2eq3dixm8u"
 
 [display]
 

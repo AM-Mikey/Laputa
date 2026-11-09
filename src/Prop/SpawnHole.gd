@@ -41,9 +41,9 @@ func setup():
 	sample_actor.process_mode = ProcessMode.PROCESS_MODE_DISABLED
 	sample_actor.visible = false
 	sample_actor.global_position = Vector2(-1000000000, -1000000000)
-
 	w.emit_signal("finished_spawn_entities_step")
 
+func link():
 	if (always_active):
 		$StartTimer.start()
 

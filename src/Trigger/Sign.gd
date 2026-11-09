@@ -8,7 +8,7 @@ var reading = false
 var db
 
 
-func _ready(): #Reminder: no function called can use await
+func setup():
 	trigger_type = "sign"
 	w.emit_signal("finished_spawn_entities_step")
 

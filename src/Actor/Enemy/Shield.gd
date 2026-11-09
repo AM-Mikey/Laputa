@@ -32,7 +32,7 @@ var prev_global_position := Vector2.ZERO
 
 @onready var ap = $AnimationPlayer
 
-func setup(): #Reminder: no function called can use await
+func setup():
 	speed = walk_speed
 	is_wind_affected = true
 	match difficulty:
@@ -60,9 +60,9 @@ func setup(): #Reminder: no function called can use await
 	$ShieldChargeDetection/CollisionShape2D.position = -$ShieldChargeDetection/CollisionShape2D.shape.size / 2.0
 	$Armor.add_collision_exception_with(self)
 	move_dir = $MoveDir.direction.snappedf(1.0)
-
 	w.emit_signal("finished_spawn_entities_step")
 
+func link():
 	change_state("idle")
 	prev_global_position = global_position
 

@@ -15,7 +15,7 @@ var is_grounded = true
 @export var crush_enemies = true
 
 
-func setup(): #Reminder: no function called can use await
+func setup():
 	if !has_gravity:
 		$Sprite2D.frame = 3
 		base_gravity_scale = 0.0

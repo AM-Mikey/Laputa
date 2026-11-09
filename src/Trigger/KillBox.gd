@@ -2,10 +2,10 @@ extends Trigger
 
 var forbid = false
 
-func _ready():
+func setup():
 	trigger_type = "kill_box"
-	w.emit_signal("finished_spawn_entities_step")
 	visible = false
+	w.emit_signal("finished_spawn_entities_step")
 
 func _on_body_entered(body: Node2D) -> void:
 	if forbid: return

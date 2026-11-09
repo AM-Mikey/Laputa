@@ -8,7 +8,7 @@ var gun
 @export var gun_name: String
 
 
-func setup(): #Reminder: no function called can use await
+func setup():
 	inspect_time = 4.0 #got item interrupt length
 	var gun_scene = load("res://src/Gun/%s" % gun_name.to_pascal_case() + ".tscn")
 	if gun_scene != null:

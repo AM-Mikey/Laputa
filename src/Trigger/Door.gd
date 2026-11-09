@@ -15,7 +15,7 @@ signal level_change(level, door_index)
 
 var inspect_time = 0.5
 
-func _ready():
+func setup():
 	var _err = connect("level_change", Callable(w, "change_level_via_trigger"))
 	trigger_type = "door"
 	w.emit_signal("finished_spawn_entities_step")

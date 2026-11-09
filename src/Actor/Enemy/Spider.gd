@@ -21,13 +21,15 @@ var a_star_line
 var a_star_grid
 
 
-func setup(): #Reminder: no function called can use await
+func setup():
 	reward = 5
 	hp = 8
 	speed = Vector2(100, 100)
 	setup_a_star()
 	is_wind_affected = true
 	w.emit_signal("finished_spawn_entities_step")
+
+func link():
 	change_state("chase")
 
 #func _input(event: InputEvent) -> void:

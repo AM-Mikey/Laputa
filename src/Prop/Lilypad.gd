@@ -12,7 +12,7 @@ var speed = 4
 @onready var starting_pos = global_position
 @onready var min_pos = global_position + Vector2(0, stop_distance)
 
-func setup(): #Reminder: no function called can use await
+func setup():
 	$Sprite2D.frame = sprite
 	w.emit_signal("finished_spawn_entities_step")
 

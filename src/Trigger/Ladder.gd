@@ -3,7 +3,7 @@ extends Trigger
 var bodies_allow_down: Array = []
 
 
-func _ready():
+func setup():
 	trigger_type = "ladder"
 	#Set shape sizes
 	$CollisionShape2D.shape.size.x = 8.0

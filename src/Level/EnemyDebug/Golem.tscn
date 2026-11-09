@@ -357,19 +357,6 @@ properties = {
 "trigger_on_explosive": [true, 1, ""]
 }
 
-[node name="SwitchLever" parent="Spawns" unique_id=877124822 instance=ExtResource("17_h8b7i")]
-visibility_layer = 2
-position = Vector2(3552, 2112)
-prop_path = "res://src/Prop/SwitchLever.tscn"
-properties = {
-"connected_entity_id": ["Conveyor", 4, ""],
-"do_bubble": [false, 1, ""],
-"editor_hidden": [false, 1, ""],
-"id": [&"SwitchLever", 4, ""],
-"switch_type": [0, 2, "Toggle:0,Impulse:1,Timer:2"],
-"timer_duration": [1.0, 3, ""]
-}
-
 [node name="ConveyorSegment3" parent="Spawns" unique_id=1674863348 instance=ExtResource("15_l44av")]
 visibility_layer = 2
 offset_left = 3568.0

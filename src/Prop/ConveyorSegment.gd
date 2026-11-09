@@ -15,7 +15,7 @@ var segment: = "middle"
 var trigger_parent: Node
 
 
-func setup(): #Reminder: no function called can use await
+func setup():
 	target_speed = _get_target_speed()
 	current_speed = target_speed
 	animation_direction = direction

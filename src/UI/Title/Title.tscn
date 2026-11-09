@@ -35,31 +35,45 @@ stretch_mode = 2
 
 [node name="VBox" type="VBoxContainer" parent="." unique_id=1745499973]
 layout_mode = 2
+size_flags_horizontal = 8
 
 [node name="Spacer" type="Control" parent="VBox" unique_id=539599292]
+visible = false
 custom_minimum_size = Vector2(0, 48)
 layout_mode = 2
 
+[node name="Continue" parent="VBox" unique_id=439565389 instance=ExtResource("4_n14jg")]
+modulate = Color(1.353256, 0.35212612, 0.35212612, 1)
+layout_mode = 2
+size_flags_horizontal = 8
+text = "Continue"
+
 [node name="New" parent="VBox" unique_id=1082688312 instance=ExtResource("4_n14jg")]
 layout_mode = 2
+size_flags_horizontal = 8
 text = "New Game"
 
 [node name="Load" parent="VBox" unique_id=949136124 instance=ExtResource("4_n14jg")]
 layout_mode = 2
+size_flags_horizontal = 8
 text = "Load Game"
 
 [node name="Options" parent="VBox" unique_id=910375674 instance=ExtResource("4_n14jg")]
 layout_mode = 2
+size_flags_horizontal = 8
 text = "Options"
 
 [node name="KeyGuide" parent="VBox" unique_id=1175018240 instance=ExtResource("4_n14jg")]
 layout_mode = 2
+size_flags_horizontal = 8
 text = "How To Play"
 
 [node name="Level" parent="VBox" unique_id=2112246992 instance=ExtResource("4_n14jg")]
 layout_mode = 2
+size_flags_horizontal = 8
 text = "Level Select"
 
 [node name="Quit" parent="VBox" unique_id=388169599 instance=ExtResource("4_n14jg")]
 layout_mode = 2
+size_flags_horizontal = 8
 text = "Quit"

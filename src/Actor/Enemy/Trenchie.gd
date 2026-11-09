@@ -21,7 +21,7 @@ var hiding = false
 var peeking = false
 
 
-func setup(): #Reminder: no function called can use await
+func setup():
 	self_knockback = true
 	hp = 4
 	damage_on_contact = 1

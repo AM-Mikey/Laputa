@@ -7,7 +7,7 @@ const GOT_ITEM = preload("res://src/UI/GotItem.tscn")
 
 var held_item: Item
 
-func setup(): #Reminder: no function called can use await #TODO:check if items are orphaned or not
+func setup(): #TODO:check if items are orphaned or not
 	inspect_time = 4.0 #got item interrupt length
 	held_item = load("res://src/Item/%s.tres" % held_item_name.to_pascal_case())
 	if !held_item:

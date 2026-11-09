@@ -10,6 +10,8 @@ func _ready():
 	do_focus()
 	vs.connect("scale_changed", Callable(self, "_resolution_scale_changed"))
 	_resolution_scale_changed(vs.resolution_scale)
+	if !SaveSystem.has_save:
+		$VBox/HBox/Continue.visible = false
 
 
 func do_focus():

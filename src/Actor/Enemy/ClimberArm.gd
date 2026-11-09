@@ -4,7 +4,7 @@ var index: int
 
 signal arm_die(arm)
 
-func setup(): #Reminder: no function called can use await
+func setup():
 	hp = 2
 	reward = 1
 	damage_on_contact = 1

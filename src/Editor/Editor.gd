@@ -203,8 +203,7 @@ func exit():
 		f.pc().get_node("PlayerCamera").make_current()
 		f.pc().get_node("PlayerCamera").reset()
 	#set_entities_pickable(false)
-	w.spawn_entities()
-	await w.finished_spawning
+	await w.spawn_entities()
 	w.setup_missions(false, "code")
 
 	for i in visibility_change_list:
