@@ -24,7 +24,7 @@ func setup():
 func link():
 	for e in get_tree().get_nodes_in_group("Entities"):
 		if e.is_in_group("EditorEntities"):
-			return
+			break
 		if "id" in e:
 			if e.id.nocasecmp_to(connected_entity_id) == 0:
 				connected_entities.append(e)
