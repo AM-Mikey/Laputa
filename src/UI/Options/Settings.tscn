@@ -259,6 +259,7 @@ layout_mode = 2
 size_flags_horizontal = 2
 
 [node name="DeleteSave" type="HBoxContainer" parent="Margin/Scroll/VBox" unique_id=869168218]
+visible = false
 custom_minimum_size = Vector2(0, 24)
 layout_mode = 2
 
@@ -320,11 +321,10 @@ icon_alignment = 1
 
 [connection signal="value_changed" from="Margin/Scroll/VBox/MasterVolume/Slider" to="." method="on_mastervolume_changed"]
 [connection signal="value_changed" from="Margin/Scroll/VBox/HBox/VBoxContainer/MusicVolume/Slider" to="." method="on_musicvolume_changed"]
-[connection signal="value_changed" from="Margin/Scroll/VBox/HBox/VBoxContainer/SFXVolume/Slider" to="." method="on_sfxvolume_changed"]
-[connection signal="value_changed" from="Margin/Scroll/VBox/VBox/GunScreenShake/Slider" to="." method="on_gunscreenshake_value_changed"]
-[connection signal="value_changed" from="Margin/Scroll/VBox/VBox/OtherScreenShake/Slider" to="." method="on_otherscreenshake_value_changed"]
 [connection signal="value_changed" from="Margin/Scroll/VBox/HBox/VBoxContainer/CameraPanSpeed/Slider" to="." method="_on_camera_pan_speed_changed"]
 [connection signal="value_changed" from="Margin/Scroll/VBox/HBox/VBoxContainer2/SFXVolume/Slider" to="." method="on_sfxvolume_changed"]
+[connection signal="value_changed" from="Margin/Scroll/VBox/VBox/GunScreenShake/Slider" to="." method="on_gunscreenshake_value_changed"]
+[connection signal="value_changed" from="Margin/Scroll/VBox/VBox/OtherScreenShake/Slider" to="." method="on_otherscreenshake_value_changed"]
 [connection signal="item_selected" from="Margin/Scroll/VBox/DisplayMode/OptionButton" to="." method="on_displaymode_changed"]
 [connection signal="item_selected" from="Margin/Scroll/VBox/ResolutionScale/OptionButton" to="." method="on_resolutionscale_changed"]
 [connection signal="toggled" from="Margin/Scroll/VBox/MouseLock/CheckButton" to="." method="on_mouselock"]
