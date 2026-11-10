@@ -28,10 +28,10 @@ func _draw():
 		var string: String =  "<null>" if !curr_state else state.to_snake_case()
 		var string_size = debug_font.get_string_size(string, HORIZONTAL_ALIGNMENT_CENTER)
 		draw_string_outline(debug_font,
-					Vector2(-string_size.x / 2.0, -5.0) + Vector2(1, 1), string,
+					Vector2(int(-string_size.x / 2.0), -5) + Vector2(1, 1), string,
 					HORIZONTAL_ALIGNMENT_LEFT, -1.0, debug_font_size, debug_font_shadow_size, debug_font_shadow_color)
 		draw_string(debug_font,
-					Vector2(-string_size.x / 2.0, -5.0), string,
+					Vector2(int(-string_size.x / 2.0), -5), string,
 					HORIZONTAL_ALIGNMENT_LEFT, -1.0, debug_font_size, debug_font_color)
 
 

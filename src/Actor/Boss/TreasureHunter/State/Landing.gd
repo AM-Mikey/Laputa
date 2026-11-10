@@ -5,6 +5,7 @@ func state_start(_prev_state: StringName):
 	if not air_state.can_land():
 		sm.change_state("air")
 		return
+	main.look_dir = Vector2(sign(main.get_arena_rect().get_center().x - main.global_position.x), 0.0)
 	main.velocity = Vector2.ZERO
 	main.ap.play("fly")
 

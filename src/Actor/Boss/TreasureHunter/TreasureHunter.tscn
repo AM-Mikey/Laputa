@@ -691,7 +691,6 @@ animation = &"idle"
 libraries/ = SubResource("AnimationLibrary_tf65y")
 
 [node name="StateMachine" type="Node2D" parent="." unique_id=2105703775 node_paths=PackedStringArray("main", "start_state")]
-texture_filter = 1
 position = Vector2(0, -27)
 script = ExtResource("4_6rjg4")
 main = NodePath("..")

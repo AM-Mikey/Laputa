@@ -84,7 +84,10 @@ func state_physics_process(delta: float):
 				arena_center_x + horizontal_radius * sin(phase),
 				hover_height + hover_vertical_amplitude * sin(phase * 2.0)
 			)
-			main.look_dir = Vector2(sign(cos(phase)), 0.0)
+			if main.pc:
+				main.look_dir = Vector2(sign(main.pc.global_position.x - main.global_position.x), 0.0)
+			else:
+				main.look_dir = Vector2(sign(cos(phase)), 0.0)
 			if $DurationTimer.time_left <= 1.0:
 				if $FlareTimer.time_left > 0.0:
 					$FlareTimer.stop()
