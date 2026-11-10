@@ -12,7 +12,7 @@
 [ext_resource type="Script" uid="uid://cubhnhyu064a0" path="res://src/Player/Cutscene.gd" id="12_x1gsf"]
 [ext_resource type="Script" uid="uid://c4ogd5866m3uu" path="res://src/Player/PlayerSprite.gd" id="13"]
 [ext_resource type="Script" uid="uid://cqho5rvdldsw5" path="res://src/Player/Player.gd" id="14"]
-[ext_resource type="Script" uid="uid://w6dbrpcmg2mv" path="res://src/Player/Death.gd" id="14_sat3f"]
+[ext_resource type="Script" path="res://src/Player/Death.gd" id="14_sat3f"]
 [ext_resource type="Script" uid="uid://cwfo2x3kl4tkp" path="res://src/Player/MovementManager.gd" id="15"]
 [ext_resource type="Script" uid="uid://5j8mlgvadx1f" path="res://src/Player/GunPos.gd" id="16_adexv"]
 [ext_resource type="Shader" uid="uid://d4doa1vf12lkt" path="res://src/Shader/JuniperRecolor.gdshader" id="24_s1pnb"]
