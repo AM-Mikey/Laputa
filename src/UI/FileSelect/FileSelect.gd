@@ -13,7 +13,8 @@ var save_file_indices: Array[int]
 func _ready():
 	vs.connect("scale_changed", Callable(self, "_resolution_scale_changed"))
 	_resolution_scale_changed(vs.resolution_scale)
-	load_files()
+	await load_files()
+	%FilePreviews.get_child(0).grab_focus()
 
 
 func load_files():
@@ -22,6 +23,7 @@ func load_files():
 		var file_preview = FILE_PREVIEW.instantiate()
 		file_preview.save_file_path = "user://save_%d.dat" % i
 		file_preview.slot_index = i
+		file_preview.file_select = self
 		%FilePreviews.add_child(file_preview)
 
 

@@ -9,6 +9,9 @@ var gun_names: Array
 var unix_time: int
 var uptime: int
 
+var file_select: Node
+@onready var w = get_tree().get_root().get_node("World")
+
 func _ready():
 	display_data()
 
@@ -51,3 +54,14 @@ func display_data():
 	var uptime_minutes: int = (uptime_total_seconds % 3600) / 60.0
 	var uptime_seconds: int = uptime_total_seconds % 60
 	%UptimeLabel.text = "%02d:%02d:%02d" % [uptime_hours, uptime_minutes, uptime_seconds]
+
+
+func _on_Button_pressed():
+	SaveSystem.current_slot = slot_index
+	SaveSystem.read_player_data_from_save()
+	SaveSystem.read_level_data_from_save(w.current_level)
+	SaveSystem.read_dialog_data_from_save(w.current_level)
+	SaveSystem.copy_level_and_dialog_data_from_save_to_temp()
+	SaveSystem.read_mission_data_from_save()
+	SaveSystem.read_other_data_from_save()
+	file_select.exit()

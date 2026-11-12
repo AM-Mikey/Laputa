@@ -165,3 +165,9 @@ unique_name_in_owner = true
 layout_mode = 2
 text = "15:04"
 horizontal_alignment = 2
+
+[node name="Button" type="Button" parent="." unique_id=659756156]
+layout_mode = 2
+flat = true
+
+[connection signal="pressed" from="Button" to="." method="_on_Button_pressed"]
