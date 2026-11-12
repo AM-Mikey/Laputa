@@ -122,7 +122,10 @@ func setup_title_and_background():
 	else:
 		SaveSystem.has_save = true
 		var data = SaveSystem.read_from_file(SaveSystem.save_path)
-		current_level = load(data["player_data"]["current_level"]).instantiate()
+		var preview_level = "res://src/Level/DefaultGodot4.tscn"
+		if data && data["player_data"]["current_level"]:
+			preview_level = data["player_data"]["current_level"]
+		current_level = load(preview_level).instantiate()
 
 	bl.visible = true #TODO: this is a bandaid solution to saving in editor causing world.gd to have some layers invisible. since it's only supposed to save the current level, I'm not sure why this is affecting the world node
 	ui.visible = true
@@ -323,26 +326,24 @@ func setup_missions(use_save_data: bool, type = "first_time"):
 		if type != "trigger": #Don't if we're moving thru a door or loadzone
 			if current_level.debug_main_mission_stage_name: #add all stages until we get to the one that matches.
 				var main_array = []
-				var main_array_completed = false
 				for s in ms.MAIN_MISSION:
-					if !main_array_completed:
-						main_array.append(["Main", s[0]])
-						if s[0] == current_level.debug_main_mission_stage_name:
-							ms.main_mission_stage = s
-							main_array_completed = true
+					main_array.append(["Main", s[0]])
+					if s[0] == current_level.debug_main_mission_stage_name:
+						ms.main_mission_stage = s
+						break
+				ms.mission_progress_history = main_array
 				ms.setup_level_from_array(main_array, update_conversations, is_entering)
 			else: #start with the very first main mission stage
 				ms.main_mission_stage = ms.MAIN_MISSION[0]
 				ms.update_level_via_mission("Main", "current", update_conversations, is_entering)
 		else: #trigger
 			var main_array = []
-			var main_array_completed = false
 			for s in ms.MAIN_MISSION:
-				if !main_array_completed:
-					main_array.append(["Main", s[0]])
-					if s[0] == ms.main_mission_stage[0]:
-						ms.main_mission_stage = s
-						main_array_completed = true
+				main_array.append(["Main", s[0]])
+				if s[0] == ms.main_mission_stage[0]:
+					ms.main_mission_stage = s
+					break
+			ms.mission_progress_history = main_array
 			ms.setup_level_from_array(main_array, update_conversations, is_entering)
 
 
@@ -351,14 +352,12 @@ func setup_missions(use_save_data: bool, type = "first_time"):
 			ms.start_side_mission(m) #Note: this does runtime updates for these missions
 
 		var side_array = []
-		var side_array_completed = false
 		for m in ms.side_missions:
-			if !side_array_completed:
-				for s in m.stages:
-					if !side_array_completed:
-						side_array.append([m.resource_path.get_file().trim_suffix(".tres"), s[0]])
-						if s[0] == m.current_stage:
-							side_array_completed = true
+			for s in m.stages:
+				side_array.append([m.resource_path.get_file().trim_suffix(".tres"), s[0]])
+				if s[0] == m.current_stage:
+					break
+		ms.mission_progress_history.append_array(side_array)
 		ms.setup_level_from_array(side_array, update_conversations, is_entering)
 		ms.mission_progress_check()
 
