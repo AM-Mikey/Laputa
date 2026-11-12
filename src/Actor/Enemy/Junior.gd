@@ -18,7 +18,7 @@ var target: Node
 @onready var ap = $AnimationPlayer
 @onready var st = $StateTimer
 
-func setup(): #Reminder: no function called can use await
+func setup():
 	self_knockback = true
 	hp = 12
 	reward = 8
@@ -26,6 +26,8 @@ func setup(): #Reminder: no function called can use await
 	speed = Vector2(50, 50)
 	is_wind_affected = true
 	w.emit_signal("finished_spawn_entities_step")
+
+func link():
 	change_state(starting_state)
 
 ### STATES ###
@@ -67,6 +69,7 @@ func enter_aim(_last_state):
 	change_state("shoot")
 
 func enter_shoot(_last_state):
+	if f.pc().dead: return
 	am.play("enemy_shoot", self)
 	var bullet = BULLET.instantiate()
 	bullet.position = $BulletOrigin.global_position

@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://bvvxaveawy1n7"]
+[gd_scene format=3 uid="uid://bvvxaveawy1n7"]
 
 [ext_resource type="Script" uid="uid://bel8i5oa8s60p" path="res://src/Prop/Lantern.gd" id="1"]
 [ext_resource type="Texture2D" uid="uid://61dsqlrafjlj" path="res://assets/Prop/Lantern.png" id="2"]
@@ -63,44 +63,42 @@ _data = {
 }
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_5hvfc"]
-size = Vector2(16, 24)
+size = Vector2(9, 24)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_7a8mr"]
 size = Vector2(16, 16)
 
-[node name="Lantern" type="CharacterBody2D" groups=["Entities", "Props"]]
+[node name="Lantern" type="CharacterBody2D" unique_id=552275266 groups=["Entities", "Props"]]
 collision_layer = 16
 collision_mask = 0
 script = ExtResource("1")
 metadata/_custom_type_script = "uid://dkko72kbbon8e"
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1921537180]
 position = Vector2(8, 8)
 shape = SubResource("RectangleShape2D_ly3he")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=475811252]
 texture = ExtResource("2")
 centered = false
 hframes = 4
 vframes = 4
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-libraries = {
-&"": SubResource("AnimationLibrary_bd6tw")
-}
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=806417674]
+libraries/ = SubResource("AnimationLibrary_bd6tw")
 
-[node name="PlayerDetector" type="Area2D" parent="."]
+[node name="PlayerDetector" type="Area2D" parent="." unique_id=1267320209]
 collision_layer = 0
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerDetector"]
-position = Vector2(8, 12)
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerDetector" unique_id=1397700862]
+position = Vector2(8.5, 12)
 shape = SubResource("RectangleShape2D_5hvfc")
 
-[node name="EditorArea" type="Area2D" parent="."]
+[node name="EditorArea" type="Area2D" parent="." unique_id=1375401607]
 collision_layer = 0
 collision_mask = 0
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="EditorArea"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="EditorArea" unique_id=1279131647]
 position = Vector2(8, 8)
 shape = SubResource("RectangleShape2D_7a8mr")
 debug_color = Color(0, 0.6, 0.69803923, 0)

@@ -45,7 +45,7 @@ signal anim_death_finished
 
 
 
-func _ready(): #Reminder: no function called can use await
+func _ready():
 	home = global_position
 	if disabled: return
 	var state_label = STATE_LABEL.instantiate()
@@ -73,6 +73,7 @@ func _physics_process(delta):
 	if self_knockback && knockback_velocity != Vector2.ZERO:
 		_do_self_knockback()
 	apply_wind()
+
 
 func _on_physics_process(_delta): #for child
 	pass

@@ -313,10 +313,11 @@ func _on_flash_timer_timeout():
 
 
 func _input(event):
-	if auto_input: return
 	if event.is_action_pressed("ui_accept") && !busy: #bypass inp.can_act
 		if $Options.is_entering || $Options.is_displaying || $Options.is_exiting: return #so it doesn't input
-		if awaiting_merge:
+		if is_sign:
+			exit()
+		elif awaiting_merge:
 			awaiting_merge = false
 			$CommandHandler.seek("/m")
 		elif active: #if already active, speed text up

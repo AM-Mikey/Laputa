@@ -9,7 +9,7 @@ var broken = false
 var has_left_ground = false
 var value := 2
 
-func setup(): #Reminder: no function called can use await
+func setup():
 	w.emit_signal("finished_spawn_entities_step")
 
 func on_break(_method = "cut"): #prevent from breaking midair?
@@ -37,6 +37,9 @@ func _physics_process(_delta):
 				on_break()
 		else:
 			has_left_ground = true
+
+func is_interactable(_player: Player):
+	return false # Should never be interacted with the "inspect" button, but instead shot with a gun!
 
 func expend_prop():
 	spent = true

@@ -50,7 +50,7 @@ var gravity_velocity := Vector2.ZERO
 
 @onready var ap = $AnimationPlayer
 
-func setup(): #Reminder: no function called can use await
+func setup():
 	self_knockback = true
 	match difficulty:
 		0:
@@ -81,6 +81,8 @@ func setup(): #Reminder: no function called can use await
 	waypoint.visible = true
 	w.current_level.get_node("Waypoints").add_child(waypoint)
 	w.emit_signal("finished_spawn_entities_step")
+
+func link():
 	change_state("walk")
 
 ### STATES ###
@@ -303,6 +305,7 @@ func calc_velocity(dir, do_gravity = true, do_acceleration = true, do_friction =
 
 ### HELPERS ###
 func fire():
+	if f.pc().dead: return
 	var bullet = SEED.instantiate()
 
 	bullet.damage = bullet_damage

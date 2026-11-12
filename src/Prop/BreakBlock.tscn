@@ -32,6 +32,7 @@ shape = SubResource("1")
 [node name="PhysicsLayerBody" parent="." unique_id=307469918 instance=ExtResource("2_xkehe")]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PhysicsLayerBody" unique_id=1097072401]
+visible = false
 position = Vector2(8, 8)
 shape = SubResource("1")
 

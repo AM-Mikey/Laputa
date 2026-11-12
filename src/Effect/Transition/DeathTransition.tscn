@@ -1,0 +1,59 @@
+[gd_scene format=3 uid="uid://b8w466ihyvddg"]
+
+[ext_resource type="Script" uid="uid://c7vbc7h8smlj4" path="res://src/Effect/Transition/DeathTransition.gd" id="1_ja8km"]
+[ext_resource type="Shader" uid="uid://qqdiqns4qyou" path="res://src/Effect/Transition/IrisStar.gdshader" id="2_ja8km"]
+[ext_resource type="Texture2D" uid="uid://c671ekepy20hi" path="res://assets/Effect/Transition/IrisStar.png" id="3_7vda0"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_onhs0"]
+shader = ExtResource("2_ja8km")
+shader_parameter/cutoff = 1.0
+shader_parameter/mask = ExtResource("3_7vda0")
+
+[sub_resource type="Animation" id="2"]
+resource_name = "IrisStarContract"
+length = 0.4
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("IrisStar:material:shader_parameter/cutoff")
+tracks/0/interp = 1
+tracks/0/loop_wrap = false
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [1.0, 0.0]
+}
+
+[sub_resource type="Animation" id="1"]
+resource_name = "IrisStarExpand"
+length = 0.4
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("IrisStar:material:shader_parameter/cutoff")
+tracks/0/interp = 1
+tracks/0/loop_wrap = false
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.40000004),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 1.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_xwqiy"]
+_data = {
+&"IrisStarContract": SubResource("2"),
+&"IrisStarExpand": SubResource("1")
+}
+
+[node name="DeathTransition" type="MarginContainer" unique_id=469751953]
+script = ExtResource("1_ja8km")
+
+[node name="IrisStar" type="ColorRect" parent="." unique_id=2038351618]
+material = SubResource("ShaderMaterial_onhs0")
+layout_mode = 2
+color = Color(0, 0, 0, 1)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1753258733]
+libraries/ = SubResource("AnimationLibrary_xwqiy")

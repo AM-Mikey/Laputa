@@ -5,7 +5,7 @@ var toggled = true
 
 @export var style: int = 0
 
-func setup(): #Reminder: no function called can use await
+func setup():
 	$Sprite2D.frame_coords.y = style
 	if toggled:
 		$AnimationPlayer.play("On")

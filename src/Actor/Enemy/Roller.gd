@@ -40,7 +40,7 @@ var bounce_factor: = diff_0_bounce_factor
 
 
 
-func setup(): #Reminder: no function called can use await before emit
+func setup():
 	hp = 3
 	reward = 2
 	damage_on_contact = 2

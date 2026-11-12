@@ -21,7 +21,7 @@ var hiding = false
 var peeking = false
 
 
-func setup(): #Reminder: no function called can use await
+func setup():
 	self_knockback = true
 	hp = 4
 	damage_on_contact = 1
@@ -88,6 +88,7 @@ func jump():
 
 
 func fire():
+	if f.pc().dead: return
 	if not shooting:
 			shooting = true
 			if $FireCooldown.is_stopped():

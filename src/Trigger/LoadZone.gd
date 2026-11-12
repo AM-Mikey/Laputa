@@ -10,7 +10,7 @@ enum Direction {LEFT, RIGHT, UP, DOWN}
 @export var door_index: int = 0
 @export var direction: Direction = Direction.RIGHT
 
-func _ready(): #Reminder: no function called can use await
+func setup():
 	var _err = connect("level_change", Callable(w, "change_level_via_trigger"))
 	trigger_type = "load_zone"
 	w.emit_signal("finished_spawn_entities_step")
@@ -24,6 +24,7 @@ func _on_body_exited(_body):
 
 
 func enter_load_zone(): #see if you need the inspect state
+	if f.pc().dead: return
 	inp.can_act = false
 	match direction:
 		Direction.LEFT:

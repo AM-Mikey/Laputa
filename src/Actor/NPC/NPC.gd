@@ -11,7 +11,6 @@ var predialog_state: String
 
 var dialog_box: Node
 
-var active_pc = null
 var disabled = false
 var move_dir = Vector2.LEFT
 
@@ -36,15 +35,18 @@ var next_conversation_index: int
 
 var camera_forgiveness = 16
 
+func _ready():
+	setup()
 
-func _ready(): #Reminder: no function called can use await
+func setup():
 	home = global_position
-	find_waypoints()
 	speed = Vector2.ZERO
 	setup_states()
 	w.emit_signal("finished_spawn_entities_step")
-	change_state(starting_state)
 
+func link():
+	find_waypoints()
+	change_state(starting_state)
 
 
 func disable():
@@ -231,14 +233,24 @@ func enter_talk(_last_state):
 
 ### MISC
 
-func _input(event):
-	if conversation_queue.size() == 0: return
-	if event.is_action_pressed("inspect") && active_pc && conversation_queue[0][0] != "" && state != "talk" && active_pc.mm.current_state == active_pc.mm.states["run"]:
-		if inp.can_act:
-			predialog_state = state
-			change_state("talk")
-			return
+func is_interactable(_p: Player):
+	print("NPC IS INTERACTABLE CALLED")
+	if conversation_queue.is_empty():
+		return false
+	if conversation_queue[0][0] == "":
+		return false
+	if state == "talk":
+		return false
+	return true
 
+func player_interact(_p: Player):
+	if inp.can_act:
+		predialog_state = state
+		change_state("talk")
+		return
+
+func get_center() -> Vector2:
+	return $CollisionShape2D.global_position
 
 func look_at_node(node, inverted = false):
 	var look_dir: float
@@ -294,16 +306,6 @@ func walk_to_waypoint(index):
 		dialog_box.busy = true
 	change_state("walkto")
 	return
-
-
-
-### SIGNALS
-
-func _on_PlayerDetector_body_entered(body):
-	active_pc = body.owner
-
-func _on_PlayerDetector_body_exited(_body):
-	active_pc = null
 
 #func _on_waypoint_bail_timer_timeout(): #TODO: consider reimplementing (ala child.tscn)
 	#pass

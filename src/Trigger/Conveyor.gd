@@ -9,7 +9,7 @@ const CONVEYOR_SEGMENT = preload("res://src/Prop/ConveyorSegment.tscn")
 
 var segments = []
 
-func _ready(): #Reminder: no function called can use await
+func setup():
 	trigger_type = "conveyor"
 
 	var points := get_grid_points()

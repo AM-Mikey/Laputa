@@ -1,16 +1,17 @@
 extends Node2D
 
 signal finished_spawn_entities_step
-signal finished_spawning
 
 const HUD = preload("res://src/UI/HUD/HUD.tscn")
 const INVENTORY = preload("res://src/UI/Inventory/Inventory.tscn")
 const LEVEL_TEXT = preload("res://src/UI/LevelText.tscn")
-
 const PAUSEMENU = preload("res://src/UI/PauseMenu.tscn")
 const JUNIPER = preload("res://src/Player/Juniper.tscn")
 const TITLE = preload("res://src/UI/Title/Title.tscn")
 const TITLECAM = preload("res://src/UI/Title/TitleCam.tscn")
+
+const SPAWN_STEP_TIMEOUT_MS := 3000
+var _spawned_entity_count := 0
 
 var current_level
 var is_in_transition := false
@@ -20,11 +21,12 @@ var finished_spawning_entities: bool = false
 var internal_version: String = get_internal_version()
 @export var release_version: String
 @export var is_release = false
-@export var do_skip_title = false
+@export var do_skip_title = false #skipping title just loads the start_level without loading a save
 @export var debug_visible = false
 @export var default_gun_array: Array[String]
 @export var default_topic_array: Array[String]
 @export var default_item_array: Array[String]
+@export var default_hp: int
 
 @export var start_level_path: String
 @onready var ui = $UILayer
@@ -44,6 +46,7 @@ var internal_version: String = get_internal_version()
 @onready var middle_front = $MiddleFront
 @onready var farthest_front = $FarthestFront
 
+signal finished_spawning
 
 
 func _ready():
@@ -55,7 +58,7 @@ func _ready():
 			node.visibility_layer = 2
 		node.child_entered_tree.connect(child_layer_set)
 
-	if not do_skip_title:
+	if !do_skip_title:
 		setup_title_and_background()
 	else:
 		first_time_level_setup()
@@ -98,7 +101,7 @@ func _input(event):
 			il.add_child(INVENTORY.instantiate())
 
 	if event.is_action_pressed("pause") && !ml.has_node("Title") && !el.has_node("Editor"):
-		if not ml.has_node("PauseMenu") and not get_tree().paused:
+		if !ml.has_node("PauseMenu") && !get_tree().paused && !f.pc().dead:
 			ml.add_child(PAUSEMENU.instantiate())
 
 	if event.is_action_pressed("window_maximize"):
@@ -110,42 +113,62 @@ func _input(event):
 
 ### LEVEL CHANGE ###
 
-func setup_title_and_background(): #Reminder: no function called can use await
+func setup_title_and_background():
+	SaveSystem.current_slot = SaveSystem.get_last_valid_slot()
+	if SaveSystem.current_slot == -1:
+		SaveSystem.current_slot = 0
+		current_level = load(start_level_path).instantiate()
+
+	else:
+		SaveSystem.has_save = true
+		var data = SaveSystem.read_from_file(SaveSystem.save_path)
+		current_level = load(data["player_data"]["current_level"]).instantiate()
+
 	bl.visible = true #TODO: this is a bandaid solution to saving in editor causing world.gd to have some layers invisible. since it's only supposed to save the current level, I'm not sure why this is affecting the world node
 	ui.visible = true
-	if SaveSystem.has_save_file():
-		var data = SaveSystem.read_from_file("user://save.dat")
-		current_level = load(data["player_data"]["current_level"]).instantiate()
-	else:
-		current_level = load(start_level_path).instantiate()
 	current_level.ignore_music_for_title = true
 	add_child(current_level)
 	ml.add_child(TITLE.instantiate())
 	add_child(TITLECAM.instantiate())
 	await spawn_entities()
+	#await get_tree().physics_frame
+	#await get_tree().physics_frame #wait for npcs to spawn #caused by camera reset time #TODO: is this actally needed without player camera?
 	setup_missions(false, "first_time")
 
 
-func first_time_level_setup(): #Reminder: no function called can use await
+func first_time_level_setup():
+	print("first time level setup")
+	SaveSystem.current_slot = SaveSystem.get_last_valid_slot()
+	if SaveSystem.current_slot == -1:
+		SaveSystem.current_slot = 0
+	else:
+		SaveSystem.has_save = true
 	bl.visible = true #TODO: this is a bandaid solution to saving in editor causing world.gd to have some layers invisible. since it's only supposed to save the current level, I'm not sure why this is affecting the world node
 	ui.visible = true
-	print("first time level setup")
-	add_child(JUNIPER.instantiate())
+	var pc = JUNIPER.instantiate()
+	add_child(pc)
 	get_node("HUDLayer/HUDGroup").add_child(HUD.instantiate())
 	current_level = load(start_level_path).instantiate()
 	add_child(current_level)
 	if current_level.debug_guns_on_enter != []:
-		f.pc().gm.setup_guns(current_level.debug_guns_on_enter)
+		pc.gm.setup_guns(current_level.debug_guns_on_enter)
 	else:
-		f.pc().gm.setup_guns(default_gun_array)
+		pc.gm.setup_guns(default_gun_array)
 	if current_level.debug_topics_on_enter != []:
-		f.pc().setup_topics(current_level.debug_topics_on_enter)
+		pc.setup_topics(current_level.debug_topics_on_enter)
 	else:
-		f.pc().setup_topics(default_topic_array)
+		pc.setup_topics(default_topic_array)
 	if current_level.debug_items_on_enter != []:
-		f.pc().setup_items(current_level.debug_items_on_enter)
+		pc.setup_items(current_level.debug_items_on_enter)
 	else:
-		f.pc().setup_items(default_item_array)
+		pc.setup_items(default_item_array)
+	if current_level.debug_hp_on_enter != 0:
+		pc.max_hp = current_level.debug_hp_on_enter
+		pc.hp = pc.max_hp
+	else:
+		pc.max_hp = default_hp
+		pc.hp = pc.max_hp
+	pc.setup_hud()
 	await spawn_entities()
 
 	$Juniper.global_position = get_spawn_point().global_position
@@ -168,8 +191,8 @@ func change_level_via_code(level_path, use_save_data):
 	if has_node("DeathCamera"): get_node("DeathCamera").queue_free()
 	if has_node("MenuLayer/LevelSelect"): get_node("MenuLayer/LevelSelect").queue_free()
 	if f.db(): await f.db().exit()
+	$HUDLayer/HUDAnimator.play("RESET")
 	if f.hud():
-		$HUDLayer/HUDAnimator.play("RESET")
 		f.hud().free()
 	clear_spawn_layers()
 	for cut in c.get_children():
@@ -179,26 +202,34 @@ func change_level_via_code(level_path, use_save_data):
 	current_level.free()
 	current_level = null
 	am.stop_sfx()
-	if f.pc() != null: $Juniper.free()
+	if f.pc() != null: f.pc().free()
 
-	add_child(JUNIPER.instantiate())
-	$Juniper.velocity = Vector2.ZERO
+	var pc = JUNIPER.instantiate()
+	add_child(pc)
+	pc.velocity = Vector2.ZERO
+	get_node("HUDLayer/HUDGroup").add_child(HUD.instantiate())
 	current_level = load(level_path).instantiate()
 	add_child(current_level)
 	if !use_save_data:
 		if current_level.debug_guns_on_enter != []:
-			f.pc().gm.setup_guns(current_level.debug_guns_on_enter)
+			pc.gm.setup_guns(current_level.debug_guns_on_enter)
 		else:
-			f.pc().gm.setup_guns(default_gun_array)
+			pc.gm.setup_guns(default_gun_array)
 		if current_level.debug_topics_on_enter != []:
-			f.pc().setup_topics(current_level.debug_topics_on_enter)
+			pc.setup_topics(current_level.debug_topics_on_enter)
 		else:
-			f.pc().setup_topics(default_topic_array)
+			pc.setup_topics(default_topic_array)
 		if current_level.debug_items_on_enter != []:
-			f.pc().setup_items(current_level.debug_items_on_enter)
+			pc.setup_items(current_level.debug_items_on_enter)
 		else:
-			f.pc().setup_items(default_item_array)
-	get_node("HUDLayer/HUDGroup").add_child(HUD.instantiate())
+			pc.setup_items(default_item_array)
+		if current_level.debug_hp_on_enter != 0:
+			pc.max_hp = current_level.debug_hp_on_enter
+			pc.hp = pc.max_hp
+		else:
+			pc.max_hp = default_hp
+			pc.hp = pc.max_hp
+	pc.setup_hud()
 
 	await spawn_entities()
 
@@ -226,7 +257,7 @@ func change_level_via_trigger(level_path, door_index):
 	for n in get_tree().get_nodes_in_group("NPCs"):
 		SaveSystem.write_dialog_data_to_temp(current_level, n)
 	if f.db(): await f.db().exit()
-	if f.hud(): $HUDLayer/HUDAnimator.play("RESET")
+	$HUDLayer/HUDAnimator.play("RESET")
 	clear_spawn_layers()
 	for cut in c.get_children():
 		cut.queue_free()
@@ -385,34 +416,83 @@ func clear_spawn_layers():
 		for c in sl.get_children():
 			c.free()
 
+
+### SPAWN ENITITES ###
+
 func spawn_entities():
 	#TODO: Timing for setting allow_spawn (mission system) goes up here)
 	#cleanup
 	for wg in get_tree().get_nodes_in_group("WaypointGlobals"):
 		if wg.uses_spawn:
 			wg.queue_free()
-	#spawn
-	for t in get_tree().get_nodes_in_group("TriggerSpawns"):
-		t.spawn()
-		await finished_spawn_entities_step
+
+	var level = current_level
+	await _run_spawn_group("TriggerSpawns", "trigger")
 	print("all triggers spawned")
-	for a in get_tree().get_nodes_in_group("ActorSpawns"):
-		a.spawn()
-		await finished_spawn_entities_step
+	if current_level != level: return
+	await _run_spawn_group("ActorSpawns", "actor")
 	print("all actors spawned")
-	#var group = get_tree().get_nodes_in_group("WaypointGlobalSpawns")
-	for wgs in get_tree().get_nodes_in_group("WaypointGlobalSpawns"):
-		if wgs != null: #TODO i dont know why there are two null ones, is this a memory leak?
-			wgs.spawn()
-			await finished_spawn_entities_step
+	if current_level != level: return
+	await _run_spawn_group("WaypointGlobalSpawns", "waypoint_global") #NOTE: some wpg were null at a point, might cause issues
 	print("all waypoint globals spawned")
-	for p in get_tree().get_nodes_in_group("PropSpawns"):
-		p.spawn()
-		await finished_spawn_entities_step
+	if current_level != level: return
+	await _run_spawn_group("PropSpawns", "prop")
 	print("all props spawned")
-	await get_tree().physics_frame # In case the level has nothing, this ensures the caller funciton to properly receive the "finished_spawning" signal
-	emit_signal("finished_spawning")
-	finished_spawning_entities = true
+	if current_level != level: return
+
+
+	for t in get_tree().get_nodes_in_group("Triggers"):
+		if t.has_method("link"): t.link()
+	for a in get_tree().get_nodes_in_group("Actors"):
+		if a.has_method("link"): a.link()
+	for wg in get_tree().get_nodes_in_group("WaypointGlobals"):
+		if wg.has_method("link"): wg.link()
+	for p in get_tree().get_nodes_in_group("Props"):
+		if p.has_method("link"): p.link()
+	print("link step completed")
+	finished_spawning.emit()
+
+func _run_spawn_group(group: String, label: String) -> void:
+	var level = current_level
+	var spawners = get_tree().get_nodes_in_group(group).filter(func(s): return is_instance_valid(s))
+	_spawned_entity_count = 0
+	finished_spawn_entities_step.connect(_on_step_finished)
+	for s in spawners:
+		s.spawn()
+	var deadline := Time.get_ticks_msec() + SPAWN_STEP_TIMEOUT_MS
+	while _spawned_entity_count < spawners.size():
+		if current_level != level:
+			break
+		if Time.get_ticks_msec() > deadline:
+			printerr("Spawn group '%s' timed out: %d/%d finished" % [label, _spawned_entity_count, spawners.size()])
+			breakpoint
+			break
+		await get_tree().process_frame
+	finished_spawn_entities_step.disconnect(_on_step_finished)
+
+
+func _run_spawn_step(spawner: Node, label: String, level):
+	var desc = "%s (%s)" % [spawner.name, spawner.get_path()]
+	var state := {"done": false}
+	var on_done := func(): state.done = true
+	finished_spawn_entities_step.connect(on_done, CONNECT_ONE_SHOT)
+	spawner.spawn()
+	var deadline := Time.get_ticks_msec() + SPAWN_STEP_TIMEOUT_MS
+	while !state.done: #skipped entirely if setup() emitted synchronously
+		if current_level != level: # level was swapped out, abandon quietly
+			if finished_spawn_entities_step.is_connected(on_done):
+				finished_spawn_entities_step.disconnect(on_done)
+			return
+		if Time.get_ticks_msec() > deadline:
+			if finished_spawn_entities_step.is_connected(on_done):
+				finished_spawn_entities_step.disconnect(on_done)
+			printerr("ERROR: Spawn step '%s' timed out on %s" % [label, desc])
+			breakpoint
+			return
+		await get_tree().process_frame
+
+func _on_step_finished():
+	_spawned_entity_count += 1
 
 ### GETTERS ###
 
@@ -459,7 +539,7 @@ func _resolution_scale_changed(resolution_scale):
 	ui.scale = Vector2(resolution_scale, resolution_scale)
 	hl.scale = Vector2(resolution_scale, resolution_scale)
 	bl.scale = Vector2(resolution_scale, resolution_scale)
-	var half_scale = max(ceil(resolution_scale / 2.0), 1)
+	var half_scale = max(ceil(vs.menu_resolution_scale / 2.0), 1)
 	el.scale = Vector2(half_scale, half_scale)
 	dl.scale = Vector2(half_scale, half_scale)
 	ml.scale = Vector2(vs.menu_resolution_scale, vs.menu_resolution_scale)
@@ -470,3 +550,6 @@ func on_root_window_close_requested():
 	print("Closing Window")
 	for kb in get_tree().get_nodes_in_group("KillBoxes"):
 		kb.forbid = true
+	#delete temp on game exit
+	if FileAccess.file_exists(SaveSystem.temp_path):
+		DirAccess.remove_absolute(SaveSystem.temp_path)

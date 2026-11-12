@@ -125,7 +125,6 @@ func update_visuals() -> void:
 	fill_polygon.polygon = final_points
 
 func splash(splash_pos: Vector2, splash_velocity: float):
-	print("doing_splash")
 	var local_x_pos: float = to_local(splash_pos).x
 	var segment_width: float = water_size.x / (segment_count - 1)
 	var index := int(clamp(local_x_pos / segment_width, 0, segment_count - 1))
@@ -144,7 +143,7 @@ func _get_body_velocity_y(body: Node) -> float:
 
 func _on_SplashDetector_body_entered(body: Node2D): #always rigidbody
 	if body.just_spawned:
-		print("body just spawned in water, ignoring splash")
+		#print("body just spawned in water, ignoring splash")
 		return
 	var target = body.get_parent()
 	var vy := _get_body_velocity_y(target)
@@ -153,7 +152,7 @@ func _on_SplashDetector_body_entered(body: Node2D): #always rigidbody
 
 func _on_SplashDetector_body_exited(body: Node2D): #always rigidbody
 	if body.is_exiting_tree:
-		print("body is exiting tree, ignoring splash")
+		#print("body is exiting tree, ignoring splash")
 		return
 	var target = body.get_parent()
 	var vy := _get_body_velocity_y(target)

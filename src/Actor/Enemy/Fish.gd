@@ -28,7 +28,7 @@ var did_bonk: bool = false
 @onready var rc: RayCast2D = get_node("RayCast2D")
 
 
-func setup(): #Reminder: no function called can use await
+func setup():
 	do_bubbles = false
 	speed = Vector2(20, 150)
 	hp = 3
@@ -36,7 +36,7 @@ func setup(): #Reminder: no function called can use await
 	update_path_lines()
 	w.emit_signal("finished_spawn_entities_step")
 
-	await w.finished_spawning #wait for global_waypoints
+func link():
 	for c in get_children():
 		if c.is_in_group("Waypoints"):
 			match c.tag_name:
@@ -49,7 +49,6 @@ func setup(): #Reminder: no function called can use await
 					x_min = c.position.x - start_pos.x
 				"right":
 					x_max = c.position.x - start_pos.x
-
 	change_state("idle")
 
 func on_swim_dir_x_changed(new):

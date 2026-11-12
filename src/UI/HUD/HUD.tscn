@@ -1014,6 +1014,21 @@ tracks/0/keys = {
 "values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
 }
 
+[sub_resource type="Animation" id="Animation_ufagq"]
+resource_name = "RESET"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Base/Xp/Flash:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0, 0, 0, 0)]
+}
+
 [sub_resource type="Animation" id="2"]
 resource_name = "XpFlash"
 length = 0.2
@@ -1033,6 +1048,7 @@ tracks/0/keys = {
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_2a4ya"]
 _data = {
 &"HPFlash": SubResource("Animation_jqh7y"),
+&"RESET": SubResource("Animation_ufagq"),
 &"XpFlash": SubResource("2")
 }
 
@@ -1152,7 +1168,7 @@ position = Vector2(19, 2)
 texture = ExtResource("13_kgt4n")
 
 [node name="Flash" type="Sprite2D" parent="Base/Xp" unique_id=936401765]
-modulate = Color(1, 1, 1, 0)
+modulate = Color(0, 0, 0, 0)
 position = Vector2(28, 11)
 texture = ExtResource("6")
 centered = false
@@ -1377,6 +1393,7 @@ grow_vertical = 1
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1437919840]
 unique_name_in_owner = true
 libraries/ = SubResource("AnimationLibrary_2a4ya")
+autoplay = &"RESET"
 
 [connection signal="value_changed" from="Base/Hp/Lost" to="." method="_on_hp_lost_value_changed"]
 [connection signal="value_changed" from="Base/Hp/Progress" to="." method="_on_hp_progress_value_changed"]

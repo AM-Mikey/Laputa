@@ -18,15 +18,13 @@ var connected_entities := []
 var switch_siblings := [] #NOTE this only works for toggle switches right now
 
 
-func setup(): #Reminder: no function called can use await before finishing entities step
-	w.emit_signal("finished_spawn_entities_step") #NOTE we say this is finished immediately so we can be the LAST loaded props, this is why we then need to await four times
-	await get_tree().physics_frame
-	await get_tree().physics_frame
-	await get_tree().physics_frame
-	await get_tree().physics_frame
+func setup():
+	w.emit_signal("finished_spawn_entities_step")
+
+func link():
 	for e in get_tree().get_nodes_in_group("Entities"):
 		if e.is_in_group("EditorEntities"):
-			return
+			break
 		if "id" in e:
 			if e.id.nocasecmp_to(connected_entity_id) == 0:
 				connected_entities.append(e)

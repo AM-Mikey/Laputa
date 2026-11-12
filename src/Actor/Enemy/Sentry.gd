@@ -46,7 +46,7 @@ var rapid_fire_from_left := false
 
 @onready var ap = $AnimationPlayer
 
-func setup(): #Reminder: no function called can use await
+func setup():
 	face_dir = Vector2(sign($ShootX.position.x), 0.0)
 	$Sprite2D.flip_h = true if face_dir.x == 1.0 else false
 
@@ -91,6 +91,8 @@ func setup(): #Reminder: no function called can use await
 	shoot_anim_speed = max(1.0, shoot_anim_speed)
 
 	w.emit_signal("finished_spawn_entities_step")
+
+func link():
 	change_state("idle")
 
 
@@ -129,6 +131,7 @@ func exit_shoot(_next_state):
 ### HELPERS ###
 
 func prepare_bullet():
+	if f.pc().dead: return
 	if difficulty == 2 && !target:
 		return
 
@@ -251,5 +254,6 @@ func _on_AnimationPlayer_animation_finished(anim_name: StringName) -> void:
 							ap.play("Shoot", -1.0, shoot_anim_speed)
 
 func _on_ShootDelay_timeout() -> void:
+	if f.pc().dead: return
 	if state == "shoot":
 		ap.play("Shoot", -1.0, shoot_anim_speed)

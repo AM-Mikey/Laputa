@@ -2,7 +2,7 @@ extends Trigger
 
 @export var damage = 2
 
-func _ready(): #Reminder: no function called can use await
+func setup():
 	trigger_type = "spikes"
 	w.emit_signal("finished_spawn_entities_step")
 
@@ -14,6 +14,7 @@ func _do_damage():
 ### SIGNALS
 
 func _on_body_entered(body):
+	if f.pc().dead: return
 	active_pc = body.get_parent()
 	_do_damage()
 

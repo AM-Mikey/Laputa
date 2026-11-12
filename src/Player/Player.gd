@@ -26,6 +26,7 @@ signal killed
 @export var max_hp: int = 16
 @export var money: int = 0
 @export var iframe_time: float = 1.5
+@export var controller_death_gradient: Gradient
 
 #STATES
 
@@ -125,7 +126,8 @@ func enemy_exited(enemy):
 
 
 func hit(damage, knockback_direction, _hitbox):
-	if not disabled and not invincible:
+	if !disabled && !invincible:
+		mm.knockback_direction = knockback_direction
 		if damage > 0:
 			hp -= damage
 			am.play("pc_hurt")
@@ -165,7 +167,7 @@ func hit(damage, knockback_direction, _hitbox):
 					$GunManager.level_down(false)
 				emit_signal("guns_updated", guns.get_children(), "take_damage")
 
-		if knockback_direction != Vector2.ZERO:
+		if knockback_direction != Vector2.ZERO && !dead:
 			#print("Knockback in Dir: " + str(knockback_direction))
 			mm.knockback_direction = knockback_direction
 			mm.snap_vector = Vector2.ZERO
@@ -173,6 +175,7 @@ func hit(damage, knockback_direction, _hitbox):
 
 
 func do_iframes():
+	if dead: return
 	invincible = true
 	$EffectPlayer.play("FlashIframe")
 	iframe_timer.start(iframe_time)
@@ -191,32 +194,48 @@ func hit_again(): #TODO: prioritize this for all forms of damage, not just enemi
 	hit(toughtest_damage, knockback_direction, toughest_enemy.get_node("Hitbox"))
 
 
-func die():
-	if not dead:
+func die(via_kill_box = false):
+	if !dead:
+		inp.can_act = false
 		dead = true
-		disabled = true
-		w.add_child(DEATH_CAMERA.instantiate())
-		visible = false
-		killed.emit()
+		mm.get_node("States/Death").die_via_kill_box = via_kill_box
+		invincible = true
 
+		$EffectPlayer.play("RESET")
+		#$Sprite2D.modulate = Color.WHITE
+		#$GunManager/Guns.modulate = Color.WHITE
+
+		var dc = DEATH_CAMERA.instantiate()
+		w.add_child(dc)
+		killed.emit()
 		var explosion = EXPLOSION.instantiate()
 		explosion.position = global_position
+		explosion.process_mode = Node.PROCESS_MODE_ALWAYS
 		w.middle_front.add_child(explosion)
+		if !via_kill_box:
+			get_tree().paused = true
+			await get_tree().create_timer(0.5).timeout
+			get_tree().paused = false
+		mm.change_state("death")
+		am.play("pc_die")
+		am.play_music("gameover")
+		oup.fade_to_gradient(controller_death_gradient, 0.1)
 
-		w.ui.add_child(load("res://src/UI/DeathScreen/DeathScreen.tscn").instantiate())
+
+
 		if f.hud():
 			f.hud().free()
-		queue_free()
 
 
 
 ### SIGNALS ###
 
 func _on_IframeTimer_timeout() -> void:
+	if dead: return
 	invincible = false
 	emit_signal("invincibility_end")
 	$EffectPlayer.stop()
-	if not enemies_touching.is_empty():
+	if !enemies_touching.is_empty():
 		hit_again()
 
 

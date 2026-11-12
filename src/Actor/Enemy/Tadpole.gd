@@ -40,7 +40,7 @@ var scatter_cooldown_duration := 5.0
 var scatter_to_flock_cooldown_duration := 5.0
 var threats := []
 
-func setup(): #Reminder: no function called can use await
+func setup():
 	self_knockback = true
 	hp = 1
 	damage_on_contact = 0
@@ -49,6 +49,8 @@ func setup(): #Reminder: no function called can use await
 	do_bubbles = false
 	_find_water_trigger() #make sure triggers are spawned first for this to work
 	w.emit_signal("finished_spawn_entities_step")
+
+func link():
 	change_state("swim")
 
 

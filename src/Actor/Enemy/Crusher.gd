@@ -96,7 +96,7 @@ func setup(): #no awaits!
 
 	w.emit_signal("finished_spawn_entities_step")
 
-	await w.finished_spawning
+func link():
 	for node in get_tree().get_nodes_in_group("PhysicsProps"):
 		if !node.has_node("BreakArea"): #Ignore all non-breakable prop
 			$Standable.add_collision_exception_with(node)

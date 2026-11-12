@@ -22,7 +22,7 @@ var shooting = false
 var walk_time = 1
 
 
-func setup(): #Reminder: no function called can use await
+func setup():
 	self_knockback = true
 	rng.randomize()
 	hp = 20
@@ -30,10 +30,8 @@ func setup(): #Reminder: no function called can use await
 	speed = Vector2(80, 100)
 	gravity = 250
 	reward = 4
-
 	$FireCooldown.start(cooldown_time)
 	w.emit_signal("finished_spawn_entities_step")
-	#wander()
 
 func _physics_process(_delta):
 	if disabled or dead:
@@ -75,6 +73,7 @@ func wander():
 		await $AnimationPlayer.animation_finished
 
 func fire():
+	if f.pc().dead: return
 	if not shooting:
 		shooting = true
 		if $FireCooldown.is_stopped():

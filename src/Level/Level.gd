@@ -17,6 +17,7 @@ var conversation_on_enter: String
 @export var debug_guns_on_enter: Array[String] = []
 @export var debug_topics_on_enter: Array[String] = []
 @export var debug_items_on_enter: Array[String] = []
+@export var debug_hp_on_enter: int
 @export var controller_color_gradient: Gradient
 
 var time_created: Dictionary
@@ -28,7 +29,7 @@ func _ready():
 	add_to_group("Levels")
 	setup_kill_box()
 	if controller_color_gradient:
-		oup.level_gradient = controller_color_gradient
+		oup.fade_to_gradient(controller_color_gradient) #fade directly to next gradient
 
 	for i in $TileMap.get_children():
 		i.fix_invalid_tiles()

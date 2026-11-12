@@ -28,6 +28,9 @@ func set_gun_pos():
 
 	var gun_index = 0
 
+	#if vframes == 2: #no gun
+		#match frame_coords.y:
+			#0,1
 	if vframes == 8:
 		match frame_coords.y:
 			0,3:
@@ -95,6 +98,6 @@ func set_gun_pos():
 
 	guns.global_position += gun_pos_offset
 
-	if not Engine.is_editor_hint():
+	if !Engine.is_editor_hint():
 		gun_index += get_index()
 		get_parent().move_child.call_deferred(gun_manager, gun_index)
