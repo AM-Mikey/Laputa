@@ -11,6 +11,7 @@ func _ready():
 	ammo = 60
 	rebuild_count = 1
 	max_level = 3
+	xp_loss_multiplier = 20
 	set_level(level)
 
 func _set_level(val: int) -> void:

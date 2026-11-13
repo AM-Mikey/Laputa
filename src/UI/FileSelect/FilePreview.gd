@@ -65,3 +65,11 @@ func _on_Button_pressed():
 	SaveSystem.read_mission_data_from_save()
 	SaveSystem.read_other_data_from_save()
 	file_select.exit()
+
+
+func _on_Button_focus_entered():
+	$Panel.modulate = Color(1.353, 1.353, 1.353)
+
+
+func _on_Button_focus_exited():
+	$Panel.modulate = Color.WHITE

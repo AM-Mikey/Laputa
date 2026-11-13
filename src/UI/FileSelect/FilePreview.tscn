@@ -19,6 +19,7 @@ theme_override_constants/margin_right = 4
 script = ExtResource("2_fospn")
 
 [node name="Panel" type="Panel" parent="." unique_id=2024776791]
+modulate = Color(1.353256, 1.353256, 1.353256, 1)
 custom_minimum_size = Vector2(0, 64)
 layout_mode = 2
 theme_override_styles/panel = ExtResource("1")
@@ -167,7 +168,10 @@ text = "15:04"
 horizontal_alignment = 2
 
 [node name="Button" type="Button" parent="." unique_id=659756156]
+modulate = Color(1, 1, 1, 0)
 layout_mode = 2
 flat = true
 
+[connection signal="focus_entered" from="Button" to="." method="_on_Button_focus_entered"]
+[connection signal="focus_exited" from="Button" to="." method="_on_Button_focus_exited"]
 [connection signal="pressed" from="Button" to="." method="_on_Button_pressed"]

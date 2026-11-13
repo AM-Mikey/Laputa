@@ -158,7 +158,9 @@ func hit(damage, knockback_direction, _hitbox):
 
 			var active_gun = guns.get_child(0)
 			if active_gun != null:
-				active_gun.xp = active_gun.xp - (damage * 2)
+				#print(roundi(1.5 * (damage / float(max_hp)) * active_gun.xp_loss_multiplier))
+				active_gun.xp -= roundi(1.5 * (damage / float(max_hp)) * active_gun.xp_loss_multiplier) #NOTE: if we have an issue here put a cap to the loss to the bottom of the previous level (can't lose two levels then)
+
 				if active_gun.level == 1:
 					active_gun.xp = max(active_gun.xp, 0)
 				if active_gun.xp < 0:

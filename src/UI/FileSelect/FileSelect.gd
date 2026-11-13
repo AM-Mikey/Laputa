@@ -14,7 +14,7 @@ func _ready():
 	vs.connect("scale_changed", Callable(self, "_resolution_scale_changed"))
 	_resolution_scale_changed(vs.resolution_scale)
 	await load_files()
-	%FilePreviews.get_child(0).grab_focus()
+	%FilePreviews.get_child(0).get_node("Button").grab_focus()
 
 
 func load_files():

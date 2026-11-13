@@ -14,6 +14,7 @@ func _ready():
 	ammo = 10
 	max_level = 3
 	max_unlocked_level = 1
+	xp_loss_multiplier = 20
 	set_level(level)
 	cd.connect("timeout", Callable(self, "_on_cd_timeout"))
 
