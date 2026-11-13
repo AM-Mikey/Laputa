@@ -28,20 +28,21 @@ signal invincibility_end()
 
 #STATES
 
-var invincible = false
-var disabled = false
-@export var die_from_falling = true
+var invincible: bool = false
+var disabled: bool = false
+@export var die_from_falling: bool = true
 
 #var is_on_conveyor = false
-var enemies_touching = []
-var is_on_ssp = false
-var is_crouching = false
-var forbid_crouching = false
-var is_in_water = false
-var is_in_coyote = false
-var wind_areas_inside := []
-var dead = false
-var do_bubbles = true
+var enemies_touching: Array = []
+var is_on_ssp: bool = false
+var is_crouching: bool = false
+var forbid_crouching: bool = false
+var is_in_water: bool = false
+var is_in_coyote: bool = false
+var load_zones_inside: Array = []
+var wind_areas_inside: Array = []
+var dead: bool = false
+var do_bubbles: bool = true
 @export var controller_id: int = 0
 
 
