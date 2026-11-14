@@ -146,7 +146,7 @@ func debug_pivot() -> void:
 func get_arm_angular_distance() -> float:
 	return (2 * PI) / float(arm_count)
 
-func check_more_than_half_is_consecutively_mising() -> bool:
+func check_more_than_half_is_consecutively_missing() -> bool:
 	var arms: Array = $Arms.get_children().filter(func (ele): return !ele.dead)
 	arms = arms.map(func (ele): return ele.index)
 	if arms.size() <= 1:

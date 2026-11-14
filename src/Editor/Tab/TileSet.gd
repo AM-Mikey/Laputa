@@ -77,7 +77,7 @@ func setup_brushes():
 
 		button.toggle_mode = true
 		button.action_mode = BaseButton.ACTION_MODE_BUTTON_PRESS
-		button.connect("pressed", Callable(self, "on_brush_selected").bind(i))
+		#button.connect("pressed", Callable(self, "on_brush_selected").bind(i))
 		get_node(brushes).add_child(button)
 		if brush_id == 0:
 			button.button_pressed = true

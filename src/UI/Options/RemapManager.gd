@@ -13,7 +13,7 @@ var action_button_panel_tween_time = 0.1
 var button_text_color_temp = Color(0.988, 0.22, 0.22)
 
 #note, combination inputs are not remapped using this system, such as ui_text_caret_word_left
-#note2, some of these actions may need a default input along with the remapped one (ui_acept on enter for example) right now we don't do this.
+#note2, some of these actions may need a default input along with the remapped one (ui_accept on enter for example) right now we don't do this.
 #structure: "main_action": ["grouped_action_one"]
 var action_groups = {
 	"move_left": ["ui_left", "ui_text_caret_left"],
