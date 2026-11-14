@@ -171,6 +171,7 @@ func read_player_data_from_save():
 	var guns = pc.guns
 	pc.get_node("PlayerCamera").reset()
 	pc.position = player_data["position"]
+	pc.reset_physics_interpolation() #teleport: don't interpolate from the old position
 	pc.hp = player_data["hp"]
 	pc.max_hp = player_data["max_hp"]
 	pc.money = player_data["money"]

@@ -5,6 +5,8 @@
 
 [node name="RenderAlign" type="Control" unique_id=1936090496]
 process_mode = 3
+process_priority = 100
+physics_interpolation_mode = 2
 visibility_layer = 2
 z_index = 100
 layout_mode = 3
@@ -37,8 +39,10 @@ render_target_update_mode = 4
 
 [node name="BasePosition" type="Node2D" parent="CanvasLayer/SubViewportContainer/SubViewport" unique_id=1202863280]
 unique_name_in_owner = true
+physics_interpolation_mode = 2
 
 [node name="Rounder" type="Node2D" parent="CanvasLayer/SubViewportContainer/SubViewport/BasePosition" unique_id=234404576]
+process_priority = 100
 script = ExtResource("2_6g3t1")
 
 [node name="Camera2D" type="Camera2D" parent="CanvasLayer/SubViewportContainer/SubViewport/BasePosition/Rounder" unique_id=165561027]
