@@ -1,124 +1,177 @@
-[gd_scene load_steps=8 format=3 uid="uid://yo1em0ayby23"]
+[gd_scene format=3 uid="uid://yo1em0ayby23"]
 
 [ext_resource type="StyleBox" uid="uid://byg47wg5teo1" path="res://src/UI/StyleBox/ChromeRimmed.tres" id="1"]
 [ext_resource type="Texture2D" uid="uid://becycyqrw4heh" path="res://assets/Icon/GameIcon.png" id="2"]
+[ext_resource type="Script" uid="uid://brcksj46k47r6" path="res://src/UI/FileSelect/FilePreview.gd" id="2_fospn"]
 [ext_resource type="Theme" uid="uid://45e84j2sj7w0" path="res://src/UI/Theme/LaputaTheme.tres" id="3"]
 [ext_resource type="Texture2D" uid="uid://p42f67tuxymb" path="res://assets/UI/FileSelect/HpIcon.png" id="5"]
 [ext_resource type="Texture2D" uid="uid://cjfpnens1b2im" path="res://assets/UI/FileSelect/XpIcon.png" id="6"]
-[ext_resource type="FontFile" uid="uid://blfj3547rxpe8" path="res://assets/UI/Font/momo.ttf" id="7_tg7ve"]
+[ext_resource type="FontFile" uid="uid://crpbt8dbs8j7a" path="res://assets/UI/Font/momo.ttf" id="7_tg7ve"]
 [ext_resource type="PackedScene" uid="uid://bf3lvcu6ts2nr" path="res://src/UI/HUD/GunIcon.tscn" id="17"]
 
-[node name="FilePreview" type="MarginContainer"]
-offset_right = 360.0
-offset_bottom = 72.0
+[node name="FilePreview" type="MarginContainer" unique_id=741469014]
+offset_right = 384.0
+offset_bottom = 70.0
 theme = ExtResource("3")
 theme_override_constants/margin_left = 4
 theme_override_constants/margin_top = 4
 theme_override_constants/margin_right = 4
+script = ExtResource("2_fospn")
 
-[node name="Panel" type="Panel" parent="."]
+[node name="Panel" type="Panel" parent="." unique_id=2024776791]
+modulate = Color(1.353256, 1.353256, 1.353256, 1)
 custom_minimum_size = Vector2(0, 64)
 layout_mode = 2
 theme_override_styles/panel = ExtResource("1")
 
-[node name="Margin" type="MarginContainer" parent="."]
+[node name="Margin" type="MarginContainer" parent="." unique_id=1570734864]
 layout_mode = 2
-theme_override_constants/margin_left = 4
-theme_override_constants/margin_top = 4
-theme_override_constants/margin_right = 4
-theme_override_constants/margin_bottom = 4
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 8
 
-[node name="HBox" type="HBoxContainer" parent="Margin"]
+[node name="HBox" type="HBoxContainer" parent="Margin" unique_id=1510646801]
 layout_mode = 2
 
-[node name="HBoxContainer" type="HBoxContainer" parent="Margin/HBox"]
+[node name="HBoxContainer" type="HBoxContainer" parent="Margin/HBox" unique_id=1041806728]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="Sprite2D" type="Sprite2D" parent="Margin/HBox/HBoxContainer"]
-position = Vector2(34.257, 30.0525)
+[node name="CenterContainer" type="CenterContainer" parent="Margin/HBox/HBoxContainer" unique_id=165341708]
+custom_minimum_size = Vector2(48, 0)
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="Margin/HBox/HBoxContainer/CenterContainer" unique_id=729848570]
+layout_mode = 2
 texture = ExtResource("2")
 
-[node name="Control" type="Control" parent="Margin/HBox/HBoxContainer"]
-custom_minimum_size = Vector2(64, 0)
-layout_mode = 2
-
-[node name="VBoxContainer" type="VBoxContainer" parent="Margin/HBox/HBoxContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="Margin/HBox/HBoxContainer" unique_id=706965859]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="Top" type="HBoxContainer" parent="Margin/HBox/HBoxContainer/VBoxContainer"]
+[node name="Stats" type="HBoxContainer" parent="Margin/HBox/HBoxContainer/VBoxContainer" unique_id=255391348]
 layout_mode = 2
 theme_override_constants/separation = 16
 
-[node name="Stats" type="HBoxContainer" parent="Margin/HBox/HBoxContainer/VBoxContainer/Top"]
-layout_mode = 2
-theme_override_constants/separation = 16
-
-[node name="Hp" type="HBoxContainer" parent="Margin/HBox/HBoxContainer/VBoxContainer/Top/Stats"]
+[node name="Hp" type="HBoxContainer" parent="Margin/HBox/HBoxContainer/VBoxContainer/Stats" unique_id=598591380]
 layout_mode = 2
 
-[node name="Icon" type="TextureRect" parent="Margin/HBox/HBoxContainer/VBoxContainer/Top/Stats/Hp"]
+[node name="Icon" type="TextureRect" parent="Margin/HBox/HBoxContainer/VBoxContainer/Stats/Hp" unique_id=995475744]
 layout_mode = 2
 texture = ExtResource("5")
-stretch_mode = 4
+stretch_mode = 3
 
-[node name="Label" type="Label" parent="Margin/HBox/HBoxContainer/VBoxContainer/Top/Stats/Hp"]
+[node name="HpLabel" type="Label" parent="Margin/HBox/HBoxContainer/VBoxContainer/Stats/Hp" unique_id=2083131831]
+unique_name_in_owner = true
 layout_mode = 2
+theme_override_colors/font_color = Color(0.62352943, 0.7607843, 0.7647059, 1)
 text = "5"
 
-[node name="Xp" type="HBoxContainer" parent="Margin/HBox/HBoxContainer/VBoxContainer/Top/Stats"]
+[node name="Xp" type="HBoxContainer" parent="Margin/HBox/HBoxContainer/VBoxContainer/Stats" unique_id=1340130637]
 layout_mode = 2
 
-[node name="Icon" type="TextureRect" parent="Margin/HBox/HBoxContainer/VBoxContainer/Top/Stats/Xp"]
+[node name="Icon" type="TextureRect" parent="Margin/HBox/HBoxContainer/VBoxContainer/Stats/Xp" unique_id=764981404]
 layout_mode = 2
 texture = ExtResource("6")
-stretch_mode = 4
+stretch_mode = 3
 
-[node name="Label" type="Label" parent="Margin/HBox/HBoxContainer/VBoxContainer/Top/Stats/Xp"]
+[node name="XpLabel" type="Label" parent="Margin/HBox/HBoxContainer/VBoxContainer/Stats/Xp" unique_id=5555370]
+unique_name_in_owner = true
 layout_mode = 2
+theme_override_colors/font_color = Color(0.62352943, 0.7607843, 0.7647059, 1)
 text = "256"
 
-[node name="Guns" type="HBoxContainer" parent="Margin/HBox/HBoxContainer/VBoxContainer/Top"]
-layout_mode = 2
-size_flags_horizontal = 3
-
-[node name="WeaponIcon" parent="Margin/HBox/HBoxContainer/VBoxContainer/Top/Guns" instance=ExtResource("17")]
+[node name="VBoxContainer" type="VBoxContainer" parent="Margin/HBox/HBoxContainer/VBoxContainer" unique_id=2096165797]
 layout_mode = 2
 
-[node name="WeaponIcon2" parent="Margin/HBox/HBoxContainer/VBoxContainer/Top/Guns" instance=ExtResource("17")]
+[node name="SlotLabel" type="Label" parent="Margin/HBox/HBoxContainer/VBoxContainer/VBoxContainer" unique_id=1351320208]
+unique_name_in_owner = true
 layout_mode = 2
+text = "Slot 1"
 
-[node name="WeaponIcon3" parent="Margin/HBox/HBoxContainer/VBoxContainer/Top/Guns" instance=ExtResource("17")]
-layout_mode = 2
-
-[node name="HBoxContainer" type="HBoxContainer" parent="Margin/HBox/HBoxContainer/VBoxContainer"]
-layout_mode = 2
-theme_override_constants/separation = 16
-
-[node name="VBox" type="VBoxContainer" parent="Margin/HBox/HBoxContainer/VBoxContainer/HBoxContainer"]
-layout_mode = 2
-
-[node name="Label" type="Label" parent="Margin/HBox/HBoxContainer/VBoxContainer/HBoxContainer/VBox"]
-layout_mode = 2
-text = "Recruit"
-
-[node name="VBoxContainer" type="VBoxContainer" parent="Margin/HBox/HBoxContainer/VBoxContainer/HBoxContainer"]
-layout_mode = 2
-
-[node name="Label2" type="Label" parent="Margin/HBox/HBoxContainer/VBoxContainer/HBoxContainer/VBoxContainer"]
+[node name="LevelLabel" type="Label" parent="Margin/HBox/HBoxContainer/VBoxContainer/VBoxContainer" unique_id=232650742]
+unique_name_in_owner = true
 layout_mode = 2
 theme_override_fonts/font = ExtResource("7_tg7ve")
 text = "Sanctuary"
 
-[node name="VBox2" type="VBoxContainer" parent="Margin/HBox/HBoxContainer/VBoxContainer/HBoxContainer"]
+[node name="Guns" type="GridContainer" parent="Margin/HBox/HBoxContainer" unique_id=2006812261]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+columns = 3
+
+[node name="Gun0" parent="Margin/HBox/HBoxContainer/Guns" unique_id=293931115 instance=ExtResource("17")]
+unique_name_in_owner = true
+layout_mode = 2
+stretch_mode = 3
+
+[node name="Gun1" parent="Margin/HBox/HBoxContainer/Guns" unique_id=1732815072 instance=ExtResource("17")]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 4
+stretch_mode = 3
+
+[node name="Gun2" parent="Margin/HBox/HBoxContainer/Guns" unique_id=2107202774 instance=ExtResource("17")]
+unique_name_in_owner = true
+layout_mode = 2
+stretch_mode = 3
+
+[node name="Gun3" parent="Margin/HBox/HBoxContainer/Guns" unique_id=996216330 instance=ExtResource("17")]
+unique_name_in_owner = true
+layout_mode = 2
+stretch_mode = 3
+
+[node name="Gun4" parent="Margin/HBox/HBoxContainer/Guns" unique_id=483525555 instance=ExtResource("17")]
+unique_name_in_owner = true
+layout_mode = 2
+stretch_mode = 3
+
+[node name="Gun5" parent="Margin/HBox/HBoxContainer/Guns" unique_id=1964559008 instance=ExtResource("17")]
+unique_name_in_owner = true
+layout_mode = 2
+stretch_mode = 3
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Margin/HBox/HBoxContainer" unique_id=919361172]
+layout_mode = 2
+theme_override_constants/separation = 16
+
+[node name="VBox" type="VBoxContainer" parent="Margin/HBox/HBoxContainer/HBoxContainer" unique_id=785527767]
+visible = false
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Margin/HBox/HBoxContainer/HBoxContainer/VBox" unique_id=1914719031]
+layout_mode = 2
+text = "Recruit"
+
+[node name="VBox2" type="VBoxContainer" parent="Margin/HBox/HBoxContainer/HBoxContainer" unique_id=1710900498]
 layout_mode = 2
 size_flags_horizontal = 10
 
-[node name="Label" type="Label" parent="Margin/HBox/HBoxContainer/VBoxContainer/HBoxContainer/VBox2"]
+[node name="DateLabel" type="Label" parent="Margin/HBox/HBoxContainer/HBoxContainer/VBox2" unique_id=2094617393]
+unique_name_in_owner = true
 layout_mode = 2
 text = "12/29/2021"
+horizontal_alignment = 2
 
-[node name="Label2" type="Label" parent="Margin/HBox/HBoxContainer/VBoxContainer/HBoxContainer/VBox2"]
+[node name="TimeLabel" type="Label" parent="Margin/HBox/HBoxContainer/HBoxContainer/VBox2" unique_id=1399165312]
+unique_name_in_owner = true
 layout_mode = 2
 text = "5:14 PM"
+horizontal_alignment = 2
+
+[node name="UptimeLabel" type="Label" parent="Margin/HBox/HBoxContainer/HBoxContainer/VBox2" unique_id=1622604185]
+unique_name_in_owner = true
+layout_mode = 2
+text = "15:04"
+horizontal_alignment = 2
+
+[node name="Button" type="Button" parent="." unique_id=659756156]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 2
+flat = true
+
+[connection signal="focus_entered" from="Button" to="." method="_on_Button_focus_entered"]
+[connection signal="focus_exited" from="Button" to="." method="_on_Button_focus_exited"]
+[connection signal="pressed" from="Button" to="." method="_on_Button_pressed"]

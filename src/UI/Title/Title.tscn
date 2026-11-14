@@ -37,11 +37,6 @@ stretch_mode = 2
 layout_mode = 2
 size_flags_horizontal = 8
 
-[node name="Spacer" type="Control" parent="VBox" unique_id=539599292]
-visible = false
-custom_minimum_size = Vector2(0, 48)
-layout_mode = 2
-
 [node name="Continue" parent="VBox" unique_id=439565389 instance=ExtResource("4_n14jg")]
 modulate = Color(1.353256, 0.35212612, 0.35212612, 1)
 layout_mode = 2

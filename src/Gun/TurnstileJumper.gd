@@ -15,6 +15,7 @@ func _ready():
 	automatic = false
 	max_ammo = 0
 	max_level = 3
+	xp_loss_multiplier = 15
 	set_level(level)
 	cd.connect("timeout", Callable(self, "_on_cd_timeout"))
 

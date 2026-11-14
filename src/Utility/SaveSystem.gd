@@ -288,17 +288,6 @@ func write_to_file(file_path, written_data):
 		printerr("ERROR: cannot write data to " + file_path)
 
 
-##checks if the given file exists, if not duplicate from res://defaults/
-#func check_dat_file_presence(filename:String) -> void:
-		##temp file
-	#var defaultfile_path = "res://defaults/" + filename + ".dat"
-	#var userfile_path = "user://" + filename + ".dat"
-#
-	#if FileAccess.file_exists(userfile_path):
-		#return
-	#else:
-		#DirAccess.copy_absolute(defaultfile_path,userfile_path)
-
 func get_save_file_indices() -> Array[int]:
 	var out: Array[int] = []
 	var prefix =  "save_"
@@ -310,7 +299,7 @@ func get_save_file_indices() -> Array[int]:
 	var file_name := dir.get_next()
 	while file_name != "":
 		if !dir.current_is_dir():
-			if file_name.begins_with(prefix):
+			if file_name.begins_with(prefix) && !file_name.contains("save_slot_pointer"):
 				var index: int = int(file_name.get_basename().trim_prefix(prefix))
 				out.append(index)
 		file_name = dir.get_next()
@@ -319,7 +308,7 @@ func get_save_file_indices() -> Array[int]:
 
 func get_last_valid_slot() -> int:
 	var out := -1
-	var latest_unix_time := 0
+	#var latest_unix_time := 0
 	if !FileAccess.file_exists(save_slot_pointer_path):
 		var save_file_indices = get_save_file_indices()
 		if save_file_indices.size() == 0:
@@ -331,16 +320,18 @@ func get_last_valid_slot() -> int:
 			return out
 
 	var save_slot_pointer_array = read_from_file(save_slot_pointer_path)
-	for i in save_slot_pointer_array:
-		if int(i[1]) >= latest_unix_time:
-			latest_unix_time = int(i[1])
-			out = int(i[0])
+	var pointed_index = int(save_slot_pointer_array["current_slot"])
+	if pointed_index in get_save_file_indices():
+		out = pointed_index
+	else:
+		print("no save file at where pointer points, getting highest index save slot")
+		out = get_save_file_indices()[-1] #last one
 	return out
 
 func write_save_slot_pointer():
 	var save_slot_pointer_data = {}
 	save_slot_pointer_data["current_slot"] = current_slot
-	save_slot_pointer_data["utc_time"] = Time.get_unix_time_from_system()
+	save_slot_pointer_data["unix_time"] = Time.get_unix_time_from_system()
 	write_to_file(save_slot_pointer_path, save_slot_pointer_data)
 	print("wrote save slot pointer")
 

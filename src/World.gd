@@ -115,6 +115,7 @@ func _input(event):
 
 func setup_title_and_background():
 	SaveSystem.current_slot = SaveSystem.get_last_valid_slot()
+	print(SaveSystem.get_last_valid_slot())
 	if SaveSystem.current_slot == -1:
 		SaveSystem.current_slot = 0
 		current_level = load(start_level_path).instantiate()
