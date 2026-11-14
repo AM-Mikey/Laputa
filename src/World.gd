@@ -85,6 +85,21 @@ func child_layer_set(c: Node): #set the visibility layer of all children to laye
 	if c is CanvasItem:
 		c.visibility_layer = 2
 
+#the layer above is runtime-only. call these around PackedScene.pack() so it doesn't get saved onto every node in the scene file
+func strip_visibility_layers(root: Node) -> Array:
+	var nodes: Array = root.find_children("*", "CanvasItem", true, false)
+	nodes.append(root)
+	var stripped: Array = []
+	for n in nodes:
+		if n is CanvasItem and n.visibility_layer == 2:
+			n.visibility_layer = 1
+			stripped.append(n)
+	return stripped
+
+func restore_visibility_layers(stripped: Array):
+	for n in stripped:
+		n.visibility_layer = 2
+
 
 #func set_debug_visible(vis = !debug_visible): #makes triggers and visutils visible #TODO redo this system
 	#debug_visible = vis
