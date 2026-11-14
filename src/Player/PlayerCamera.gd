@@ -55,6 +55,13 @@ func _ready():
 	_resolution_scale_changed(vs.resolution_scale)
 	control_processing()
 
+func _physics_process(_delta):
+	#don't eat presses meant for ladders/inspect
+	if !control_active and !pc.disabled and inp.can_act and !pc.mm.current_state == pc.mm.states["inspect"]:
+		if inp.just_pressed("look_up") or inp.just_pressed("look_down") \
+		or inp.just_released("look_up") or inp.just_released("look_down"):
+			pan_vertical(get_v_dir())
+
 func _process(delta):
 	#print("offset: ", offset, "limit left: ", limit_left)
 	if !control_active: #regular camera
@@ -66,10 +73,6 @@ func _process(delta):
 			if h_tween.is_running():
 				h_tween.set_speed_scale(max(abs(pc.velocity.x)/mm.speed.x, h_pan_min_speed))
 
-		if !pc.disabled and inp.can_act and !pc.mm.current_state == pc.mm.states["inspect"]:
-			if inp.pressed("look_up",1) or inp.pressed("look_down",1) \
-			or inp.released("look_up") or inp.released("look_down"):
-				pan_vertical(get_v_dir())
 
 		process_shake(delta)
 	#else:

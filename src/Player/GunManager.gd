@@ -12,7 +12,7 @@ var disabled = false #this is only because of a func in pc.ladder?
 #func _ready():
 	#set_guns_visible()
 
-func _process(_delta: float) -> void:
+func _physics_process(_delta: float):
 	if not can_shoot():
 		return
 	var active_gun = $Guns.get_child(0)
