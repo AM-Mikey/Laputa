@@ -19,7 +19,6 @@ theme_override_constants/margin_right = 4
 script = ExtResource("2_fospn")
 
 [node name="Panel" type="Panel" parent="." unique_id=2024776791]
-modulate = Color(1.353256, 1.353256, 1.353256, 1)
 custom_minimum_size = Vector2(0, 64)
 layout_mode = 2
 theme_override_styles/panel = ExtResource("1")

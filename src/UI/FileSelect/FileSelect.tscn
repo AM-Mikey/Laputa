@@ -54,7 +54,7 @@ theme_override_styles/panel = ExtResource("5_23oca")
 
 [node name="Margin" type="MarginContainer" parent="Corner" unique_id=348519125]
 layout_mode = 0
-offset_left = 8.0
+offset_left = -260.0
 offset_top = 8.0
 offset_right = 124.0
 offset_bottom = 44.0
@@ -64,6 +64,15 @@ theme_override_constants/margin_top = 4
 [node name="HBox" type="HBoxContainer" parent="Corner/Margin" unique_id=1890464377]
 layout_mode = 2
 theme_override_constants/separation = 8
+alignment = 2
+
+[node name="Copy" type="Button" parent="Corner/Margin/HBox" unique_id=106613300]
+layout_mode = 2
+text = "Copy"
+
+[node name="Delete" type="Button" parent="Corner/Margin/HBox" unique_id=62621110]
+layout_mode = 2
+text = "Delete"
 
 [node name="Return" type="Button" parent="Corner/Margin/HBox" unique_id=1662288376]
 unique_name_in_owner = true
@@ -87,5 +96,19 @@ one_shot = true
 unique_name_in_owner = true
 one_shot = true
 
+[node name="DeleteConfirmation" type="ConfirmationDialog" parent="." unique_id=1719729940]
+oversampling_override = 1.0
+initial_position = 1
+size = Vector2i(280, 100)
+exclusive = false
+unresizable = true
+borderless = true
+ok_button_text = "Yes"
+dialog_text = "Are you sure you'd like to delete this save? 
+This action cannot be undone."
+cancel_button_text = "No"
+
+[connection signal="pressed" from="Corner/Margin/HBox/Copy" to="." method="_on_Copy_pressed"]
+[connection signal="pressed" from="Corner/Margin/HBox/Delete" to="." method="_on_Delete_pressed"]
 [connection signal="pressed" from="Corner/Margin/HBox/Return" to="." method="_on_Return_pressed"]
 [connection signal="timeout" from="ExitTimer" to="." method="_process_exit"]

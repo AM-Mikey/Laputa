@@ -1,5 +1,9 @@
 extends MarginContainer
 
+const LOAD_COLOR = Color(1.3, 1.3, 1.3, 1.0)
+const COPY_COLOR = Color(0.0, 1.0, 0.0, 1.0)
+const DELETE_COLOR = Color(1.0, 0.0, 0.0, 1.0)
+
 var save_file_path: String
 var data: Dictionary
 var slot_index: int
@@ -57,18 +61,39 @@ func display_data():
 
 
 func _on_Button_pressed():
-	SaveSystem.current_slot = slot_index
-	SaveSystem.read_player_data_from_save()
-	SaveSystem.read_level_data_from_save(w.current_level)
-	SaveSystem.read_dialog_data_from_save(w.current_level)
-	SaveSystem.copy_level_and_dialog_data_from_save_to_temp()
-	SaveSystem.read_mission_data_from_save()
-	SaveSystem.read_other_data_from_save()
-	file_select.exit()
+	match file_select.mode:
+		file_select.Modes.LOAD:
+			SaveSystem.current_slot = slot_index
+			SaveSystem.read_player_data_from_save()
+			SaveSystem.read_level_data_from_save(w.current_level)
+			SaveSystem.read_dialog_data_from_save(w.current_level)
+			SaveSystem.copy_level_and_dialog_data_from_save_to_temp()
+			SaveSystem.read_mission_data_from_save()
+			SaveSystem.read_other_data_from_save()
+			file_select.exit()
+		file_select.Modes.COPY:
+			var new_slot = SaveSystem.file_select_copy_save(slot_index)
+			file_select.mode = file_select.Modes.LOAD
+			file_select.reload_previews(new_slot)
+			#copy file to next available slot
+			#change mode to load
+		file_select.Modes.DELETE:
+			file_select.prompt_delete(slot_index)
+			#prompt popup, grab_focus on no
+			#delete file on yes pressed
+			#renumber remaining files
+			#change pointer file
+			#change mode to load
 
 
 func _on_Button_focus_entered():
-	$Panel.modulate = Color(1.353, 1.353, 1.353)
+	match file_select.mode:
+		file_select.Modes.LOAD:
+			$Panel.modulate = LOAD_COLOR
+		file_select.Modes.COPY:
+			$Panel.modulate = COPY_COLOR
+		file_select.Modes.DELETE:
+			$Panel.modulate = DELETE_COLOR
 
 
 func _on_Button_focus_exited():
