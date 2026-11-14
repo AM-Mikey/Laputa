@@ -22,7 +22,10 @@ func state_process(_delta):
 		#print("changing from kb to cached")
 		var next_state: String = mm.cached_state.name.to_lower()
 		if (next_state in ["ladder", "knockback"]):
-			next_state = "run"
+			if pc.is_on_floor():
+				next_state = "run"
+			else:
+				next_state = "jump"
 
 		mm.change_state(next_state)
 		return
