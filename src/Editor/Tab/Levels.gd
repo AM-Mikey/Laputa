@@ -86,7 +86,9 @@ func save_level(level, path):
 		print("Saved over File")
 
 	var packed_scene = PackedScene.new()
+	var stripped = w.strip_visibility_layers(level)
 	packed_scene.pack(level)
+	w.restore_visibility_layers(stripped)
 	var err = ResourceSaver.save(packed_scene, path)
 
 	if err == OK:
@@ -140,7 +142,9 @@ func on_new():
 func _on_Default_pressed():
 	w.start_level_path = w.current_level.scene_file_path
 	var packed_scene = PackedScene.new()
+	var stripped = w.strip_visibility_layers(w)
 	packed_scene.pack(w) #packing world is a bad idea, we need to be sure nothing else gets saved along with default level
+	w.restore_visibility_layers(stripped)
 	var err = ResourceSaver.save(packed_scene, "res://src/World.tscn")
 
 	if err == OK:

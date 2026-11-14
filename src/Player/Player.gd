@@ -170,7 +170,6 @@ func hit(damage, knockback_direction, _hitbox):
 		if knockback_direction != Vector2.ZERO && !dead:
 			#print("Knockback in Dir: " + str(knockback_direction))
 			mm.knockback_direction = knockback_direction
-			mm.snap_vector = Vector2.ZERO
 			mm.change_state("knockback")
 
 

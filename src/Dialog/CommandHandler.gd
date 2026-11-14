@@ -88,7 +88,6 @@ func parse_command(string, command_is_first):
 					var x_dir = sign(pc.global_position.x - found_npcs[0].global_position.x)
 					pc.mm.knockback_direction = Vector2(x_dir, 0)
 			pc.mm.knockback_speed = Vector2(25, 40)
-			pc.mm.snap_vector = Vector2.ZERO
 			pc.mm.change_state("knockback")
 
 

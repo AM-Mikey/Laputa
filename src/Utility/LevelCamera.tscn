@@ -15,5 +15,6 @@ func _resolution_scale_changed(resolution_scale):
 "
 
 [node name="LevelCamera" type="Camera2D" unique_id=1139048462 groups=["Cameras"]]
+physics_interpolation_mode = 2
 z_index = 100
 script = SubResource("GDScript_qedt4")
