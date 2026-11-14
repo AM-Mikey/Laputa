@@ -6,7 +6,6 @@
 [node name="RenderAlign" type="Control" unique_id=1936090496]
 process_mode = 3
 process_priority = 100
-physics_interpolation_mode = 2
 visibility_layer = 2
 z_index = 100
 layout_mode = 3

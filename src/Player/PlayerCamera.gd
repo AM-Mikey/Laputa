@@ -42,6 +42,8 @@ var control_active := false
 var control_target: Node = null #reference to a node, not strictly necessary but saves performance
 
 func _ready():
+	#physics interpolation runs update on beginning and whenever camera is transformed on a tick. remove the update on transform
+	set_notify_transform(false)
 	noise.frequency = 1.0  #baseline shake
 	default_impulse_curve = Curve.new()
 	default_impulse_curve.add_point(Vector2(0.0, 0.0))
