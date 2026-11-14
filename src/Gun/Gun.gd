@@ -50,7 +50,7 @@ func set_level(val: int) -> void:
 	_set_level(val)
 	level = val
 
-func _set_level(_val: int) -> void: #Virtual funciton for derived classes
+func _set_level(_val: int) -> void: #Virtual function for derived classes
 	pass
 
 func fire(_type):

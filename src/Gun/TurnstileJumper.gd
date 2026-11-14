@@ -65,7 +65,7 @@ func _on_cd_timeout():
 		am.play(cock_sfx)
 		oup.vibrate_impulse_light(0.1, 0.1)
 
-#old code for charging varient
+#old code for charging variant
 #func activate():
 	#$ChargeTimer.start(max_time)
 	##print("start_charge", max_time)

@@ -6,31 +6,35 @@ const LEVEL_BUTTON = preload("res://src/Editor/Button/LevelButton.tscn")
 
 signal level_selected(level_path) #never used
 
+const LEVEL_DIR = "res://src/Level/"
+const DEFAULT_LEVEL = "res://src/Level/Default.tscn" #template for new levels, editor_hidden
+
 var levels = {}
 var active_level_path
-var default_level = "res://src/Level/Default.tscn"
 
 @onready var w = get_tree().get_root().get_node("World")
 @onready var editor = get_parent().get_parent().get_parent().get_parent()
 
 
-func setup_levels():
+func setup_levels(select_path := ""):
 	for c in %ButtonsNone.get_children(): c.queue_free()
 	for c in %ButtonsEnemyDebug.get_children(): c.queue_free()
 
 	var index = 0
-	for l in find_level_scenes("res://src/Level/"):
+	for l in find_level_scenes(LEVEL_DIR):
 		var level_button = create_button(l)
-		#if level_button == null:
-			#continue
-		if index == 0:
+		if level_button == null: #editor_hidden levels
+			continue
+		if (select_path == "" and index == 0) or l == select_path:
 			level_button.active = true
 			active_level_path = l
 		%ButtonsNone.add_child(level_button)
 		index += 1
 
-	for l in find_level_scenes("res://src/Level/EnemyDebug/"):
+	for l in find_level_scenes(LEVEL_DIR + "EnemyDebug/"):
 		var level_button = create_button(l)
+		if level_button == null:
+			continue
 		%ButtonsEnemyDebug.add_child(level_button)
 
 
@@ -118,7 +122,7 @@ func on_save(): #from editor
 	save_level(w.current_level, w.current_level.scene_file_path)
 
 func on_save_as():
-	$SaveDialog.current_path = "res://src/level/"
+	$SaveDialog.current_dir = LEVEL_DIR
 	$SaveDialog.popup()
 
 func on_load():
@@ -129,7 +133,8 @@ func on_load():
 	#$LoadDiae_log.popup()
 
 func on_new():
-	$NewDialog.current_path = "res://src/level/"
+	$NewDialog.current_dir = LEVEL_DIR
+	$NewDialog.current_file = ""
 	$NewDialog.popup()
 
 func _on_Default_pressed():
@@ -155,9 +160,18 @@ func on_save_confirmed():
 #func on_load_selected(path):
 	#load_level(path)
 
-func on_new_confirmed():
-	var level = load(default_level).instantiate()
-	level.queue_free()
-	var path = $NewDialog.current_path.get_basename() + ".tscn"
+func on_new_selected(path: String): #connected to NewDialog file_selected
+	var level_name = path.get_file().get_basename()
+	if not level_name.is_valid_ascii_identifier(): #root node name must be valid, and keeps file names consistent
+		editor.e_log.lprint(str("ERROR: Invalid level name \"", level_name, "\". Use only letters, numbers and _, not starting with a number"))
+		printerr("ERROR: Invalid level name: ", level_name)
+		return
+	path = path.get_base_dir().path_join(level_name + ".tscn")
+
+	var level = load(DEFAULT_LEVEL).instantiate()
+	level.editor_hidden = false #template is hidden, new level should not be
 	save_level(level, path)
+	level.free()
+
+	setup_levels(path)
 	load_level(path)
