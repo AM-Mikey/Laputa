@@ -44,14 +44,17 @@ func stick_clamp_zone_X(stick:Vector2, clampX:float=Xaxis_clampzone) -> Vector2:
 
 ### BUFFER ###
 
-# Raw stick/trigger travel (0-1) needed before an action counts as pressed.
-# Uses raw strength, so the InputMap action deadzones do not stack on top of this.
 var input_strength: float = 0.5
-# Raw travel an action has to drop below before it counts as released.
-# Lower than inputstrength so a stick resting near the threshold doesn't flicker (hysteresis).
 var release_strength: float = 0.3
-# Optional per-action thresholds, e.g. {"fire_automatic": {"press": 0.6, "release": 0.4}}
-var strength_overrides: Dictionary = {}
+#Stick up/down actions need a more deliberate push than the default so brushing the stick while running doesn't inspect or grab ladders.
+var strength_overrides: Dictionary = {
+	"inspect": {"press": 0.8},
+	"look_down": {"press": 0.8},
+	"look_up": {"press": 0.8},
+	}
+# Actions that only count a left-stick press when the stick points mostly straight up/down. D-pad and keys are unaffected.
+var vertical_stick_actions: Array[String] = ["inspect", "look_down", "look_up"]
+var vertical_stick_max_angle: float = 30.0 # Max degrees away from straight up/down the left stick may point for those actions.
 var pressbuffer: int = 4
 var releasebuffer: int = 1
 
@@ -67,7 +70,6 @@ class BufferedAction:
 	var release_read_frame := -1
 	var pressed_while_can_act := false
 
-#A button needs to be added to this to be bufferable
 const BUFFERED_ACTIONS: Array[String] = [
 	"look_up",
 	"look_down",
@@ -150,7 +152,10 @@ func write_buffer():
 		b.frames_since_press = mini(b.frames_since_press + 1, NEVER)
 		b.frames_since_release = mini(b.frames_since_release + 1, NEVER)
 		var was_held := b.held_frames > 0
-		var is_held := Input.get_action_raw_strength(action) >= _threshold(action, was_held)
+		var threshold := _threshold(action, was_held)
+		var is_held := Input.get_action_raw_strength(action) >= threshold
+		if is_held and not was_held and action in vertical_stick_actions and _is_diagonal_stick_press(threshold):
+			is_held = false
 		if is_held:
 			if not was_held:
 				b.frames_since_press = 0
@@ -161,6 +166,16 @@ func write_buffer():
 			b.held_frames = 0
 			b.frames_since_release = 0
 			b.release_read_frame = UNREAD
+
+#True when the left stick is what's pushing the action past threshold but it's pointing too far sideways (i.e. dipping down while running).
+#If the stick isn't far enough down to be the source, the press came from the d-pad/keyboard and is allowed.
+func _is_diagonal_stick_press(threshold: float) -> bool:
+	if active_controller_index < 0:
+		return false
+	var stick := Vector2(Input.get_joy_axis(active_controller_index, JOY_AXIS_LEFT_X), Input.get_joy_axis(active_controller_index, JOY_AXIS_LEFT_Y))
+	if abs(stick.y) < threshold:
+		return false
+	return abs(stick.x) > abs(stick.y) * tan(deg_to_rad(vertical_stick_max_angle))
 
 func discard_presses():
 	for action in buffer:
