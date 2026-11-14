@@ -134,7 +134,7 @@ properties = {
 "door_index": [0, 2, ""],
 "editor_hidden": [false, 1, ""],
 "id": [&"LoadZone4", 4, ""],
-"level": ["res://src/Level/OrnithhopterTesting.tscn", 4, ""]
+"level": ["res://src/Level/EnemyDebug/Ornithopter.tscn", 4, ""]
 }
 size_is_default = false
 
@@ -152,7 +152,7 @@ properties = {
 "door_index": [1, 2, ""],
 "editor_hidden": [false, 1, ""],
 "id": [&"LoadZone5", 4, ""],
-"level": ["res://src/Level/OrnithhopterTesting.tscn", 4, ""]
+"level": ["res://src/Level/EnemyDebug/Ornithopter.tscn", 4, ""]
 }
 size_is_default = false
 
@@ -170,7 +170,7 @@ properties = {
 "door_index": [2, 2, ""],
 "editor_hidden": [false, 1, ""],
 "id": [&"LoadZone6", 4, ""],
-"level": ["res://src/Level/OrnithhopterTesting.tscn", 4, ""]
+"level": ["res://src/Level/EnemyDebug/Ornithopter.tscn", 4, ""]
 }
 size_is_default = false
 
@@ -188,7 +188,7 @@ properties = {
 "door_index": [3, 2, ""],
 "editor_hidden": [false, 1, ""],
 "id": [&"LoadZone7", 4, ""],
-"level": ["res://src/Level/OrnithhopterTesting.tscnc", 4, ""]
+"level": ["res://src/Level/EnemyDebug/Ornithopter.tscn", 4, ""]
 }
 size_is_default = false
 
