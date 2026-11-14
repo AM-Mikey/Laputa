@@ -63,7 +63,7 @@ _data = {
 collision_layer = 8192
 collision_mask = 0
 script = ExtResource("1_r1qhw")
-damage = 4.0
+damage = 3.0
 is_water_affected = true
 is_wind_affected = true
 is_enemy_bullet = true
@@ -97,6 +97,7 @@ position = Vector2(-5, 0)
 
 [node name="TrailSpawnTimer" type="Timer" parent="." unique_id=1405609106]
 wait_time = 0.2
+one_shot = true
 
 [node name="DetectExplosionTimer" type="Timer" parent="." unique_id=1810892786]
 wait_time = 0.2

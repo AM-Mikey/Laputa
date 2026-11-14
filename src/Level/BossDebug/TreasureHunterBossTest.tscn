@@ -29,11 +29,13 @@ music = "train"
 dialog_json = "res://src/Dialog/Village.json"
 mission_level_update = "res://src/Mission/TreasureHunterBossTest.json"
 debug_main_mission_stage_name = "boss_treasure_hunter"
+debug_guns_on_enter = Array[String](["revolver", "speeder", "mpistol", "glauncher"])
+debug_hp_on_enter = 16
 controller_color_gradient = SubResource("Gradient_nkisl")
 
 [node name="LevelLimiter" parent="." unique_id=752739957 instance=ExtResource("2_eg67x")]
 visibility_layer = 2
-offset_left = 1232.0
+offset_left = 1992.0
 offset_top = 1584.0
 offset_right = 3856.0
 offset_bottom = 2224.0
@@ -235,5 +237,5 @@ position = Vector2(2976, 2176)
 
 [node name="TitlePreview" parent="." unique_id=2052223351 instance=ExtResource("11_nup1p")]
 visibility_layer = 2
-position = Vector2(1928, 1952)
+position = Vector2(2512, 2040)
 zoom = 2.0

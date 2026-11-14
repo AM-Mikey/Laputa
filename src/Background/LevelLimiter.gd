@@ -214,17 +214,18 @@ func setup_a_star():
 					tiles_with_collision.append(Vector2i(column, row))
 	for tile_map_layer: TileMapLayer in tile_map.get_children():
 		for cell in tile_map_layer.get_used_cells():
-			var tile = tile_map_layer.get_cell_atlas_coords(cell)
-			if tiles_with_collision.has(tile):
+			if used_region.has_point(cell):
+				var tile = tile_map_layer.get_cell_atlas_coords(cell)
+				if tile != Vector2i(-1, -1) && tiles_with_collision.has(tile):
 
-				#var sprite = Sprite2D.new()
-				#sprite.texture = load("res://assets/Icon/EnemyIcon.png")
-				#sprite.position = (cell * 16) + Vector2i(8,8)
-				#sprite.z_index = 999
-				#w.add_child(sprite)
+					#var sprite = Sprite2D.new()
+					#sprite.texture = load("res://assets/Icon/EnemyIcon.png")
+					#sprite.position = (cell * 16) + Vector2i(8,8)
+					#sprite.z_index = 999
+					#w.add_child(sprite)
 
-				a_star_grid.set_point_solid(cell, true)
-				a_star_grid.update()
+					a_star_grid.set_point_solid(cell, true)
+					a_star_grid.update()
 
 func update_blackbars():
 	emit_signal("limit_camera", offset_left, offset_right, offset_top, offset_bottom)

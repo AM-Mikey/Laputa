@@ -4,6 +4,7 @@ extends Bullet
 @onready var FLARE_EXPLOSION = preload("res://src/Effect/FlareExplosion.tscn")
 
 @export var explosion_damage: = 2.0
+@export var trail_timer: float = 0.2
 
 
 var state = "normal"
@@ -12,8 +13,7 @@ var state = "normal"
 func setup():
 	speed = 300.0
 	rotation_degrees = get_rot(direction)
-	$TrailSpawnTimer.start()
-	create_flare_trail()
+	$TrailSpawnTimer.start(0.05)
 
 func _physics_process(delta):
 	velocity = speed * direction
@@ -129,6 +129,7 @@ func _on_DetectExplosionTimer_timeout() -> void:
 
 func _on_TrailSpawnTimer_timeout() -> void:
 	create_flare_trail()
+	$TrailSpawnTimer.start(trail_timer)
 
 func _on_ExplosionDetector_body_entered(body):
 	#breakable

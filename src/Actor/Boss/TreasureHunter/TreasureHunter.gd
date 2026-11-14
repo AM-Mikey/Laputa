@@ -82,7 +82,7 @@ func get_opposite_arena_side() -> float:
 
 func get_hover_height() -> float:
 	var arena_rect = get_arena_rect()
-	return arena_rect.position.y + arena_rect.size.y * 0.55
+	return arena_rect.position.y + arena_rect.size.y * 0.6
 
 func fire(dir):
 	var flare_shot = FLARE_BULLET.instantiate()
@@ -91,11 +91,11 @@ func fire(dir):
 	am.play("boss_treasure_hunter_flare_shot", self, null, 2.0)
 	w.player_front.add_child(flare_shot)
 
-func fire_spark(dir: Vector2):
+func fire_spark(force: Vector2):
 	var spark = SPARK.instantiate()
-	spark.velocity = 120.0 * dir
-	spark.direction = dir
-	spark.global_position = global_position + Vector2(0.0, -24.0)
+	spark.velocity = force
+	spark.direction = force.normalized()
+	spark.global_position = $Hotspot/PropellerTop.global_position
 	w.player_front.add_child(spark)
 
 func create_vfx(effect_name: String, pos: Vector2):
@@ -124,6 +124,9 @@ func update_animation():
 
 func is_at_x(target_x: float) -> bool:
 	return abs(global_position.x - target_x) <= 0.5
+
+func is_near_x(target_x: float) -> bool:
+	return abs(global_position.x - target_x) <= 20.0
 
 ### SIGNALS ###
 func _on_PlayerDetector_body_entered(_body: Node2D):

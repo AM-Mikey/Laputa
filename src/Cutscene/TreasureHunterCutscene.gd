@@ -48,6 +48,9 @@ func win_animation():
 	## Move to the outtro position
 	var out_waypoint = get_waypoint_with_id("WaypointGlobals", "cutscene_boss_intro_pos")
 	boss.move_to(out_waypoint.global_position, 60.0)
+	boss.look_dir.x = signf(f.pc().global_position.x - boss.global_position.x)
+	if boss.look_dir.x == 0.0:
+		boss.look_dir.x = -1.0
 	await boss.end_move_to
 	boss.face_player()
 

@@ -769,6 +769,11 @@ metadata/_custom_type_script = "uid://bkttdvnxv3ulk"
 script = ExtResource("6_q4fg5")
 metadata/_custom_type_script = "uid://bkttdvnxv3ulk"
 
+[node name="Phase2SmokeTimer" type="Timer" parent="StateMachine/MoveTo" unique_id=1436073217]
+process_callback = 0
+wait_time = 0.3
+one_shot = true
+
 [node name="TransToPhase2" type="Node" parent="StateMachine" unique_id=895384569]
 script = ExtResource("13_0ri4u")
 metadata/_custom_type_script = "uid://bkttdvnxv3ulk"
@@ -777,6 +782,12 @@ metadata/_custom_type_script = "uid://bkttdvnxv3ulk"
 
 [node name="GunNozzle" type="Marker2D" parent="Hotspot" unique_id=1193765223]
 position = Vector2(-13, -19)
+
+[node name="PropellerTop" type="Marker2D" parent="Hotspot" unique_id=1693351999]
+position = Vector2(0, -32)
+
+[node name="MoveToPhase2Pos" type="Marker2D" parent="Hotspot" unique_id=2064976798]
+top_level = true
 
 [node name="PhysicsLayerBody" parent="." unique_id=307469918 instance=ExtResource("2_q4fg5")]
 
@@ -834,6 +845,7 @@ debug_color = Color(1, 0, 0, 0.235294)
 [connection signal="timeout" from="StateMachine/Air/SweepFireTimer" to="StateMachine/Air" method="_on_SweepFireTimer_timeout"]
 [connection signal="timeout" from="StateMachine/Air/Phase2SmokeTimer" to="StateMachine/Air" method="_on_Phase2SmokeTimer_timeout"]
 [connection signal="timeout" from="StateMachine/Air/Phase2SparkTimer" to="StateMachine/Air" method="_on_Phase2SparkTimer_timeout"]
+[connection signal="timeout" from="StateMachine/MoveTo/Phase2SmokeTimer" to="StateMachine/MoveTo" method="_on_Phase2SmokeTimer_timeout"]
 [connection signal="area_entered" from="Hitbox" to="." method="_on_hitbox_area_entered"]
 [connection signal="area_exited" from="Hitbox" to="." method="_on_hitbox_area_exited"]
 [connection signal="body_entered" from="PlayerDetector" to="." method="_on_PlayerDetector_body_entered"]
