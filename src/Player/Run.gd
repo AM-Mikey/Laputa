@@ -66,7 +66,7 @@ func state_process(delta):
 func jump_processing():
 	if f.db():
 		if f.db().is_exiting:
-			return #prevent the jump while db exists and is not exiting, this does allow holdjumping, though
+			return #prevent the jump while the db is exiting, so the ui_accept press that closed it doesn't also jump
 
 	if inp.pressed("jump") && inp.held("look_down") && pc.is_on_ssp && inp.can_act:
 		is_dropping = true
