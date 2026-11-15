@@ -71,10 +71,10 @@ size = Vector2(12, 15)
 size = Vector2(12, 7)
 
 [sub_resource type="RectangleShape2D" id="1"]
-size = Vector2(12, 14)
+size = Vector2(10, 14)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_7jab8"]
-size = Vector2(12, 7)
+size = Vector2(10, 7)
 
 [sub_resource type="RectangleShape2D" id="2"]
 size = Vector2(16, 21)
@@ -4042,7 +4042,6 @@ disabled = true
 debug_color = Color(0, 0.588235, 0.705882, 0.501961)
 
 [node name="JumpCollision" type="CollisionPolygon2D" parent="." unique_id=49247692]
-visible = false
 modulate = Color(1, 1, 1, 0.501961)
 z_index = 1
 position = Vector2(-6, 0)
@@ -4334,7 +4333,6 @@ target_position = Vector2(0, 1)
 collision_mask = 8
 
 [node name="Hurtbox" type="Area2D" parent="." unique_id=1189893987]
-visible = false
 collision_layer = 65536
 collision_mask = 0
 
@@ -4345,7 +4343,6 @@ shape = SubResource("1")
 debug_color = Color(0, 1, 0, 0.235294)
 
 [node name="CrouchingCollision" type="CollisionShape2D" parent="Hurtbox" unique_id=533153243]
-visible = false
 position = Vector2(0, -5)
 shape = SubResource("RectangleShape2D_7jab8")
 disabled = true
