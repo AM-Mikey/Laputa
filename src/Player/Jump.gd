@@ -166,7 +166,7 @@ func get_vframe() -> int:
 
 ### STATES ###			#TODO: juniper's hurtbox becomes much smaller when jumping
 
-func enter(_prev_state: String) -> void:
+func enter(prev_state: String):
 	jump_time = 0
 	var disable = [
 		pc.get_node("CollisionShape2D"),
@@ -178,10 +178,8 @@ func enter(_prev_state: String) -> void:
 
 	pc.set_up_direction(mm.FLOOR_NORMAL)
 	pc.set_floor_stop_on_slope_enabled(true)
-	holding_jump = inp.can_act && Input.is_action_pressed("jump") && !is_dropping
+	holding_jump = inp.can_act && Input.is_action_pressed("jump") && !is_dropping && prev_state != "knockback"
 	if holding_jump:
-		# Set the player's move dir to -1.0 to indicate a jump.
-		# It will be reset on next physics frame
 		pc.move_dir.y = -1.0
 		am.play("pc_jump")
 	did_bonk = false
