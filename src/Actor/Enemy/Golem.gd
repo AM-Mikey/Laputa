@@ -110,7 +110,7 @@ func do_fall(_delta):
 func exit_fall(_next_state):
 	land_shake()
 
-func _on_hit(_damage, _blood_direction, _hitbox):
+func _on_hit(_damage, _blood_direction, _hitnox):
 	if !state in ["charge", "wallslam", "fall"]:
 		change_state("charge")
 

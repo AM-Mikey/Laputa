@@ -86,7 +86,6 @@ size = Vector2(6, 2)
 size = Vector2(0.9861107, 1)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_sat3f"]
-size = Vector2(16, 20)
 
 [sub_resource type="ShaderMaterial" id="61"]
 shader = ExtResource("24_s1pnb")

@@ -23,6 +23,7 @@ metadata/_snap_enabled = true
 metadata/_snap_count = 12
 
 [node name="DoorTesting" type="Node2D" unique_id=734148647]
+visibility_layer = 2
 script = ExtResource("1_8vtqx")
 level_name = "DoorTesting"
 dialog_json = "res://src/Dialog/WikiMap.json"
@@ -31,6 +32,7 @@ debug_main_mission_stage_name = "textbox_demo"
 controller_color_gradient = SubResource("Gradient_c4qnx")
 
 [node name="LevelLimiter" type="MarginContainer" parent="." unique_id=1355825292 instance=ExtResource("2_vv8tl")]
+visibility_layer = 2
 offset_left = 16.0
 offset_top = -464.0
 offset_right = 1040.0
@@ -57,40 +59,50 @@ layer_height_offsets = {
 tile_mode = 1
 
 [node name="TileMap" type="Node2D" parent="." unique_id=1251495005]
+visibility_layer = 2
 z_index = 1
 
 [node name="FarBack" type="TileMapLayer" parent="TileMap" unique_id=390810820]
+visibility_layer = 2
 z_index = -2
 use_parent_material = true
 tile_map_data = PackedByteArray("AAAHABEAAAAAAAAAAAA=")
 tile_set = ExtResource("5_7tgdq")
 
 [node name="Back" type="TileMapLayer" parent="TileMap" unique_id=54725277]
+visibility_layer = 2
 z_index = -1
 use_parent_material = true
 tile_map_data = PackedByteArray("AAAFABIAAAAAAAUAAAAEABAAAAAAAAQAAAAEABEAAAAAAAUAAAAHAAgAAAAAAAQAAAAHAAkAAAAAAAUAAAAOAAgAAAAAAAQAAAAOAAkAAAAAAAUAAAAVAAgAAAAAAAQAAAAVAAkAAAAAAAUAAAAaABAAAAAAAAQAAAAaABEAAAAAAAUAAAAJAAgAAAAAAAQAAAAJAAkAAAAAAAUAAAACAAgAAAAAAAQAAAACAAkAAAAAAAUAAAAQAAgAAAAAAAQAAAAQAAkAAAAAAAUAAAAXAAgAAAAAAAQAAAAXAAkAAAAAAAUAAAAcAAgAAAAAAAQAAAAcAAkAAAAAAAUAAAAaAAkAAAADAAQAAAAGAAkAAAADAAQAAAA=")
 tile_set = ExtResource("5_7tgdq")
 
 [node name="Front" type="TileMapLayer" parent="TileMap" unique_id=1369203978]
+visibility_layer = 2
 z_index = 1
 use_parent_material = true
 tile_map_data = PackedByteArray("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AAAiAAIAAAAAAAgAAAAjAAIAAAAAAAgAAAAkAAIAAAAAAAgAAAAlAAIAAAAAAAgAAAAmAAIAAAAAAAgAAAAnAAIAAAAAAAgAAAAoAAIAAAAAAAgAAAApAAIAAAAAAAgAAAAqAAIAAAAAAAgAAAArAAIAAAAAAAgAAAARAAoAAAAAAAgAAAASAAoAAAAAAAgAAAATAAoAAAAAAAgAAAAUAAoAAAAAAAgAAAAVAAoAAAAAAAgAAAAWAAoAAAAAAAgAAAAXAAoAAAAAAAgAAAAYAAoAAAAAAAgAAAAIAAMAAAAAAAgAAAAIAAQAAAAAAAgAAAAIAAUAAAAAAAgAAAAIAAYAAAAAAAgAAAAIAAcAAAAAAAgAAAAIAAgAAAAAAAgAAAAIAAkAAAAAAAgAAAAWAAMAAAAAAAgAAAAWAAQAAAAAAAgAAAAWAAUAAAAAAAgAAAAWAAYAAAAAAAgAAAAWAAcAAAAAAAgAAAAWAAgAAAAAAAgAAAAWAAkAAAAAAAgAAAAdAAMAAAAAAAgAAAAdAAQAAAAAAAgAAAAdAAUAAAAAAAgAAAAdAAYAAAAAAAgAAAAdAAcAAAAAAAgAAAAdAAgAAAAAAAgAAAAdAAkAAAAAAAgAAAAdAAoAAAAAAAgAAAAZAAoAAAAAAAgAAAAaAAoAAAAAAAgAAAAbAAoAAAAAAAgAAAAcAAoAAAAAAAgAAAArAAMAAAAAAAgAAAArAAQAAAAAAAgAAAArAAUAAAAAAAgAAAArAAYAAAAAAAgAAAArAAcAAAAAAAgAAAArAAgAAAAAAAgAAAArAAkAAAAAAAgAAAArAAoAAAAAAAgAAAAqAAoAAAAAAAgAAAAaABIAAAAAAAgAAAASABEAAAAAAAkAAAASAA8AAAAAAAkAAAASAA4AAAAAAAkAAAA=")
 tile_set = ExtResource("5_7tgdq")
 
 [node name="FarFront" type="TileMapLayer" parent="TileMap" unique_id=444515251]
+visibility_layer = 2
 z_index = 2
 use_parent_material = true
 tile_set = ExtResource("5_7tgdq")
 
 [node name="Props" type="Node2D" parent="." unique_id=319539188]
+visibility_layer = 2
 
 [node name="Actors" type="Node2D" parent="." unique_id=681899524]
+visibility_layer = 2
 
 [node name="Triggers" type="Node2D" parent="." unique_id=1134904630]
+visibility_layer = 2
 
 [node name="Spawns" type="Node2D" parent="." unique_id=1116492951]
+visibility_layer = 2
 
 [node name="ChestItem" type="Area2D" parent="Spawns" unique_id=1449282698 groups=["Entities", "PropSpawns"] instance=ExtResource("7_vv8tl")]
+visibility_layer = 2
 z_index = 999
 position = Vector2(112, 272)
 collision_layer = 16384
@@ -105,6 +117,7 @@ properties = {
 }
 
 [node name="ChestItem1" type="Area2D" parent="Spawns" unique_id=194623370 groups=["Entities", "PropSpawns"] instance=ExtResource("7_vv8tl")]
+visibility_layer = 2
 z_index = 999
 position = Vector2(56, 144)
 collision_layer = 16384
@@ -119,6 +132,7 @@ properties = {
 }
 
 [node name="ChestItem2" type="Area2D" parent="Spawns" unique_id=2046179668 groups=["Entities", "PropSpawns"] instance=ExtResource("7_vv8tl")]
+visibility_layer = 2
 z_index = 999
 position = Vector2(176, 144)
 collision_layer = 16384
@@ -133,6 +147,7 @@ properties = {
 }
 
 [node name="ChestItem3" type="Area2D" parent="Spawns" unique_id=396128724 groups=["Entities", "PropSpawns"] instance=ExtResource("7_vv8tl")]
+visibility_layer = 2
 z_index = 999
 position = Vector2(288, 144)
 collision_layer = 16384
@@ -147,6 +162,7 @@ properties = {
 }
 
 [node name="Door" type="MarginContainer" parent="Spawns" unique_id=1800792368 groups=["TriggerSpawns"] instance=ExtResource("9_avdnr")]
+visibility_layer = 2
 z_index = 999
 custom_minimum_size = Vector2(8, 8)
 offset_left = 64.0
@@ -171,6 +187,7 @@ properties = {
 size_is_default = false
 
 [node name="Door1" type="MarginContainer" parent="Spawns" unique_id=1101365094 groups=["TriggerSpawns"] instance=ExtResource("9_avdnr")]
+visibility_layer = 2
 z_index = 999
 custom_minimum_size = Vector2(8, 8)
 offset_left = 32.0
@@ -195,6 +212,7 @@ properties = {
 size_is_default = false
 
 [node name="Door2" type="MarginContainer" parent="Spawns" unique_id=269986401 groups=["TriggerSpawns"] instance=ExtResource("9_avdnr")]
+visibility_layer = 2
 z_index = 999
 custom_minimum_size = Vector2(8, 8)
 offset_left = 112.0
@@ -219,6 +237,7 @@ properties = {
 size_is_default = false
 
 [node name="Door3" type="MarginContainer" parent="Spawns" unique_id=2121665784 groups=["TriggerSpawns"] instance=ExtResource("9_avdnr")]
+visibility_layer = 2
 z_index = 999
 custom_minimum_size = Vector2(8, 8)
 offset_left = 144.0
@@ -243,6 +262,7 @@ properties = {
 size_is_default = false
 
 [node name="Door4" type="MarginContainer" parent="Spawns" unique_id=1488319196 groups=["TriggerSpawns"] instance=ExtResource("9_avdnr")]
+visibility_layer = 2
 z_index = 999
 custom_minimum_size = Vector2(8, 8)
 offset_left = 224.0
@@ -267,6 +287,7 @@ properties = {
 size_is_default = false
 
 [node name="Door5" type="MarginContainer" parent="Spawns" unique_id=837508812 groups=["TriggerSpawns"] instance=ExtResource("9_avdnr")]
+visibility_layer = 2
 z_index = 999
 custom_minimum_size = Vector2(8, 8)
 offset_left = 256.0
@@ -291,6 +312,7 @@ properties = {
 size_is_default = false
 
 [node name="Door6" type="MarginContainer" parent="Spawns" unique_id=538212888 groups=["TriggerSpawns"] instance=ExtResource("9_avdnr")]
+visibility_layer = 2
 z_index = 999
 custom_minimum_size = Vector2(8, 8)
 offset_left = 336.0
@@ -315,6 +337,7 @@ properties = {
 size_is_default = false
 
 [node name="Door7" type="MarginContainer" parent="Spawns" unique_id=2129306187 groups=["TriggerSpawns"] instance=ExtResource("9_avdnr")]
+visibility_layer = 2
 z_index = 999
 custom_minimum_size = Vector2(8, 8)
 offset_left = 368.0
@@ -339,6 +362,7 @@ properties = {
 size_is_default = false
 
 [node name="Door8" type="MarginContainer" parent="Spawns" unique_id=785410975 groups=["TriggerSpawns"] instance=ExtResource("9_avdnr")]
+visibility_layer = 2
 z_index = 999
 custom_minimum_size = Vector2(8, 8)
 offset_left = 448.0
@@ -363,6 +387,7 @@ properties = {
 size_is_default = false
 
 [node name="Door9" type="MarginContainer" parent="Spawns" unique_id=1166787998 groups=["TriggerSpawns"] instance=ExtResource("9_avdnr")]
+visibility_layer = 2
 z_index = 999
 custom_minimum_size = Vector2(8, 8)
 offset_left = 416.0
@@ -387,6 +412,7 @@ properties = {
 size_is_default = false
 
 [node name="Sign" type="MarginContainer" parent="Spawns" unique_id=330219439 groups=["TriggerSpawns"] instance=ExtResource("9_avdnr")]
+visibility_layer = 2
 z_index = 999
 custom_minimum_size = Vector2(8, 8)
 offset_left = 416.0
@@ -407,6 +433,7 @@ has doors be unlocked", 4, ""]
 size_is_default = false
 
 [node name="Sign1" type="MarginContainer" parent="Spawns" unique_id=459794407 groups=["TriggerSpawns"] instance=ExtResource("9_avdnr")]
+visibility_layer = 2
 z_index = 999
 custom_minimum_size = Vector2(8, 8)
 offset_left = 96.0
@@ -426,6 +453,7 @@ from june's inventory.", 4, ""]
 size_is_default = false
 
 [node name="ChestGun" type="Area2D" parent="Spawns" unique_id=1040040400 groups=["Entities", "PropSpawns"] instance=ExtResource("7_vv8tl")]
+visibility_layer = 2
 z_index = 999
 position = Vector2(144, 272)
 collision_layer = 16384
@@ -440,6 +468,7 @@ properties = {
 }
 
 [node name="Fan" type="Area2D" parent="Spawns" unique_id=2000916746 groups=["Entities", "PropSpawns"] instance=ExtResource("7_vv8tl")]
+visibility_layer = 2
 z_index = 999
 position = Vector2(176, 272)
 collision_layer = 16384
@@ -454,6 +483,7 @@ properties = {
 }
 
 [node name="HealthRefill" type="Area2D" parent="Spawns" unique_id=775633785 groups=["Entities", "PropSpawns"] instance=ExtResource("7_vv8tl")]
+visibility_layer = 2
 z_index = 999
 position = Vector2(192, 272)
 collision_layer = 16384
@@ -467,6 +497,7 @@ properties = {
 }
 
 [node name="HealthUpgrade" type="Area2D" parent="Spawns" unique_id=1067809836 groups=["Entities", "PropSpawns"] instance=ExtResource("7_vv8tl")]
+visibility_layer = 2
 z_index = 999
 position = Vector2(224, 272)
 collision_layer = 16384
@@ -480,6 +511,7 @@ properties = {
 }
 
 [node name="Lamp" type="Area2D" parent="Spawns" unique_id=1043900445 groups=["Entities", "PropSpawns"] instance=ExtResource("7_vv8tl")]
+visibility_layer = 2
 z_index = 999
 position = Vector2(240, 272)
 collision_layer = 16384
@@ -494,6 +526,7 @@ properties = {
 }
 
 [node name="Lantern" type="Area2D" parent="Spawns" unique_id=945074194 groups=["Entities", "PropSpawns"] instance=ExtResource("7_vv8tl")]
+visibility_layer = 2
 z_index = 999
 position = Vector2(256, 272)
 collision_layer = 16384
@@ -508,6 +541,7 @@ properties = {
 }
 
 [node name="Lilypad" type="Area2D" parent="Spawns" unique_id=621933818 groups=["Entities", "PropSpawns"] instance=ExtResource("7_vv8tl")]
+visibility_layer = 2
 z_index = 999
 position = Vector2(272, 272)
 collision_layer = 16384
@@ -523,6 +557,7 @@ properties = {
 }
 
 [node name="RopeLadder" type="Area2D" parent="Spawns" unique_id=615195037 groups=["Entities", "PropSpawns"] instance=ExtResource("7_vv8tl")]
+visibility_layer = 2
 z_index = 999
 position = Vector2(288, 224)
 collision_layer = 16384
@@ -536,6 +571,7 @@ properties = {
 }
 
 [node name="SaveDisk" type="Area2D" parent="Spawns" unique_id=184768466 groups=["Entities", "PropSpawns"] instance=ExtResource("7_vv8tl")]
+visibility_layer = 2
 z_index = 999
 position = Vector2(304, 272)
 collision_layer = 16384
@@ -549,6 +585,7 @@ properties = {
 }
 
 [node name="SwitchCrystal" type="Area2D" parent="Spawns" unique_id=894526453 groups=["Entities", "PropSpawns"] instance=ExtResource("7_vv8tl")]
+visibility_layer = 2
 z_index = 999
 position = Vector2(320, 272)
 collision_layer = 16384
@@ -569,6 +606,7 @@ properties = {
 }
 
 [node name="SwitchLever" type="Area2D" parent="Spawns" unique_id=752646257 groups=["Entities", "PropSpawns"] instance=ExtResource("7_vv8tl")]
+visibility_layer = 2
 z_index = 999
 position = Vector2(336, 272)
 collision_layer = 16384
@@ -586,6 +624,7 @@ properties = {
 }
 
 [node name="SwitchPlate" type="Area2D" parent="Spawns" unique_id=283413529 groups=["Entities", "PropSpawns"] instance=ExtResource("7_vv8tl")]
+visibility_layer = 2
 z_index = 999
 position = Vector2(352, 272)
 collision_layer = 16384
@@ -605,6 +644,7 @@ properties = {
 }
 
 [node name="ConveyorSegment" type="MarginContainer" parent="Spawns" unique_id=254985566 groups=["TriggerSpawns"] instance=ExtResource("9_avdnr")]
+visibility_layer = 2
 z_index = 999
 custom_minimum_size = Vector2(8, 8)
 offset_left = 80.0
@@ -626,6 +666,7 @@ properties = {
 size_is_default = false
 
 [node name="Ladder" type="MarginContainer" parent="Spawns" unique_id=1908323157 groups=["TriggerSpawns"] instance=ExtResource("9_avdnr")]
+visibility_layer = 2
 z_index = 999
 custom_minimum_size = Vector2(8, 8)
 offset_left = 32.0
@@ -643,6 +684,7 @@ properties = {
 size_is_default = false
 
 [node name="Ladder1" type="MarginContainer" parent="Spawns" unique_id=1458935375 groups=["TriggerSpawns"] instance=ExtResource("9_avdnr")]
+visibility_layer = 2
 z_index = 999
 custom_minimum_size = Vector2(8, 8)
 offset_left = 48.0
@@ -660,6 +702,7 @@ properties = {
 size_is_default = false
 
 [node name="Sign2" type="MarginContainer" parent="Spawns" unique_id=443345647 groups=["TriggerSpawns"] instance=ExtResource("9_avdnr")]
+visibility_layer = 2
 z_index = 999
 custom_minimum_size = Vector2(8, 8)
 offset_left = 160.0
@@ -678,6 +721,7 @@ properties = {
 size_is_default = false
 
 [node name="FlavorText" type="MarginContainer" parent="Spawns" unique_id=193991667 groups=["TriggerSpawns"] instance=ExtResource("9_avdnr")]
+visibility_layer = 2
 z_index = 999
 custom_minimum_size = Vector2(8, 8)
 offset_left = 144.0
@@ -696,10 +740,13 @@ properties = {
 size_is_default = false
 
 [node name="Waypoints" type="Node2D" parent="." unique_id=1416282546]
+visibility_layer = 2
 
 [node name="Notes" type="Node2D" parent="." unique_id=1397508944]
+visibility_layer = 2
 
 [node name="VanishingPoint" type="Area2D" parent="." unique_id=9884164 groups=["VanishingPoints"] instance=ExtResource("10_poeff")]
+visibility_layer = 2
 z_index = 999
 position = Vector2(296, -152)
 collision_layer = 16384
@@ -707,6 +754,7 @@ collision_mask = 0
 script = ExtResource("12_6ibo7")
 
 [node name="SpawnPoint" type="Area2D" parent="." unique_id=422711910 groups=["SpawnPoints"] instance=ExtResource("11_g764n")]
+visibility_layer = 2
 position = Vector2(168, 288)
 collision_layer = 16384
 collision_mask = 0

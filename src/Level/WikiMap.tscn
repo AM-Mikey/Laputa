@@ -20,6 +20,7 @@ metadata/_snap_enabled = true
 metadata/_snap_count = 12
 
 [node name="WikiMap" type="Node2D" unique_id=734148647]
+visibility_layer = 2
 script = ExtResource("1_53evh")
 level_name = "WikiMap"
 dialog_json = "res://src/Dialog/WikiMap.json"
@@ -28,6 +29,7 @@ debug_main_mission_stage_name = "textbox_demo"
 controller_color_gradient = SubResource("Gradient_c4qnx")
 
 [node name="LevelLimiter" parent="." unique_id=1355825292 instance=ExtResource("2_72to3")]
+visibility_layer = 2
 offset_left = 16.0
 offset_top = -464.0
 offset_right = 1040.0
@@ -52,41 +54,51 @@ layer_height_offsets = {
 tile_mode = 1
 
 [node name="TileMap" type="Node2D" parent="." unique_id=1251495005]
+visibility_layer = 2
 z_index = 1
 
 [node name="FarBack" type="TileMapLayer" parent="TileMap" unique_id=390810820]
+visibility_layer = 2
 z_index = -2
 use_parent_material = true
 tile_set = ExtResource("5_5uu0q")
 
 [node name="Back" type="TileMapLayer" parent="TileMap" unique_id=54725277]
+visibility_layer = 2
 z_index = -1
 use_parent_material = true
 tile_map_data = PackedByteArray("AAACABAAAAAAAAQAAAACABEAAAAAAAUAAAA+AAMAAAAAAAQAAAA+AAQAAAAAAAUAAAAPAAcAAAAEAAQAAAASABEAAAAEAAQAAAAMABEAAAADAAQAAAA=")
 tile_set = ExtResource("5_5uu0q")
 
 [node name="Front" type="TileMapLayer" parent="TileMap" unique_id=1369203978]
+visibility_layer = 2
 z_index = 1
 use_parent_material = true
 tile_map_data = PackedByteArray("AAABAAIAAAAAAAgAAAABAAMAAAAAAAgAAAABAAQAAAAAAAgAAAABAAYAAAAAAAgAAAABAAUAAAAAAAgAAAABAAcAAAAAAAgAAAABAAgAAAAAAAgAAAABAAkAAAAAAAgAAAABAAoAAAAAAAgAAAABAAsAAAAAAAgAAAABAAwAAAAAAAgAAAABAA0AAAAAAAgAAAABAA4AAAAAAAgAAAABAA8AAAAAAAgAAAABABAAAAAAAAgAAAABABEAAAAAAAgAAAABABIAAAAAAAgAAAACABIAAAAAAAgAAAADABIAAAAAAAgAAAAEABIAAAAAAAgAAAAFABIAAAAAAAgAAAAGABIAAAAAAAgAAAAHABIAAAAAAAgAAAAIABIAAAAAAAgAAAAJABIAAAAAAAgAAAAKABIAAAAAAAgAAAALABIAAAAAAAgAAAAMABIAAAAAAAgAAAANABIAAAAAAAgAAAAOABIAAAAAAAgAAAAPABIAAAAAAAgAAAAQABIAAAAAAAgAAAARABIAAAAAAAgAAAASABIAAAAAAAgAAAATABIAAAAAAAgAAAAUABIAAAAAAAgAAAAVABIAAAAAAAgAAAAWABIAAAAAAAgAAAAXABIAAAAAAAgAAAAYABIAAAAIAAgAAAAZABIAAAAAAAgAAAAaABIAAAAAAAgAAAAbABIAAAAAAAgAAAAcABIAAAAAAAgAAAAdABIAAAAAAAgAAAAeABIAAAAIAAgAAAAfABIAAAAAAAgAAAAgABIAAAAAAAgAAAAhABIAAAAAAAgAAAAiABIAAAAAAAgAAAAjABIAAAAAAAgAAAAkABIAAAAAAAgAAAAlABIAAAAAAAgAAAAmABIAAAAAAAgAAAAnABIAAAAAAAgAAAAoABIAAAAAAAgAAAApABIAAAAAAAgAAAAqABIAAAAAAAgAAAArABIAAAAAAAgAAAAsABIAAAAAAAgAAAAtABIAAAAAAAgAAAAuABIAAAAAAAgAAAAvABIAAAAAAAgAAAAwABIAAAAAAAgAAAAxABIAAAAAAAgAAAAyABIAAAAAAAgAAAAzABIAAAAAAAgAAAA0ABIAAAAAAAgAAAA1ABIAAAAAAAgAAAA2ABIAAAAAAAgAAAA3ABIAAAAAAAgAAAA4ABIAAAAAAAgAAAA5ABIAAAAAAAgAAAA6ABIAAAAAAAgAAAA7ABIAAAAAAAgAAAA8ABIAAAAAAAgAAAA9ABIAAAAAAAgAAAA/ABIAAAAAAAgAAAA+ABIAAAAAAAgAAABAABIAAAAAAAgAAAAFABAAAAAAAAkAAAAGABAAAAAAAAkAAAAHABAAAAAAAAkAAAALABAAAAAAAAkAAAAMABAAAAAAAAkAAAANABAAAAAAAAkAAAARABAAAAAAAAkAAAASABAAAAAAAAkAAAATABAAAAAAAAkAAAAXABAAAAAAAAkAAAAYABAAAAAAAAkAAAAZABAAAAAAAAkAAAAXAA0AAAAAAAkAAAAYAA0AAAAAAAkAAAAZAA0AAAAAAAkAAAARAA0AAAAAAAkAAAASAA0AAAAAAAkAAAATAA0AAAAAAAkAAAALAA0AAAAAAAkAAAAMAA0AAAAAAAkAAAANAA0AAAAAAAkAAAAFAA0AAAAAAAkAAAAGAA0AAAAAAAkAAAAHAA0AAAAAAAkAAAAFAAoAAAAAAAkAAAAHAAoAAAAAAAkAAAAGAAoAAAAAAAkAAAALAAoAAAAAAAkAAAAMAAoAAAAAAAkAAAANAAoAAAAAAAkAAAARAAoAAAAAAAkAAAASAAoAAAAAAAkAAAATAAoAAAAAAAkAAAAXAAoAAAAAAAkAAAAYAAoAAAAAAAkAAAAZAAoAAAAAAAkAAAAFAAcAAAAAAAkAAAAGAAcAAAAAAAkAAAAHAAcAAAAAAAkAAAALAAcAAAAAAAkAAAAMAAcAAAAAAAkAAAANAAcAAAAAAAkAAAARAAcAAAAAAAkAAAASAAcAAAAAAAkAAAATAAcAAAAAAAkAAAAXAAcAAAAAAAkAAAAYAAcAAAAAAAkAAAAZAAcAAAAAAAkAAAAFAAQAAAAAAAkAAAAGAAQAAAAAAAkAAAAHAAQAAAAAAAkAAAAdABAAAAAAAAkAAAAeABAAAAAAAAkAAAAfABAAAAAAAAkAAAAdAA0AAAAAAAkAAAAeAA0AAAAAAAkAAAAfAA0AAAAAAAkAAAAdAAoAAAAAAAkAAAAeAAoAAAAAAAkAAAAfAAoAAAAAAAkAAAAdAAcAAAAAAAkAAAAeAAcAAAAAAAkAAAAfAAcAAAAAAAkAAAALAAQAAAAAAAkAAAAMAAQAAAAAAAkAAAANAAQAAAAAAAkAAAARAAQAAAAAAAkAAAASAAQAAAAAAAkAAAATAAQAAAAAAAkAAAAXAAQAAAAAAAkAAAAYAAQAAAAAAAkAAAAZAAQAAAAAAAkAAAAdAAQAAAAAAAkAAAAeAAQAAAAAAAkAAAAfAAQAAAAAAAkAAABAABEAAAAAAAgAAABAABAAAAAAAAgAAABAAA8AAAAAAAgAAABAAA4AAAAAAAgAAABAAA0AAAAAAAgAAABAAAwAAAAAAAgAAABAAAsAAAAAAAgAAABAAAoAAAAAAAgAAABAAAkAAAAAAAgAAABAAAgAAAAAAAgAAABAAAcAAAAAAAgAAABAAAYAAAAAAAgAAABAAAIAAAAAAAgAAABAAAMAAAAAAAgAAABAAAQAAAAAAAgAAABAAAUAAAAAAAgAAAA/AAUAAAAAAAoAAAA+AAUAAAAAAAoAAAA9AAUAAAAAAAoAAAA=")
 tile_set = ExtResource("5_5uu0q")
 
 [node name="FarFront" type="TileMapLayer" parent="TileMap" unique_id=444515251]
+visibility_layer = 2
 z_index = 2
 use_parent_material = true
 tile_map_data = PackedByteArray("AAAIAA4AAAAAAAwAAAAEAA4AAAAAAAwAAAAEAA8AAAAAAAwAAAAIAA8AAAAAAAwAAAAQAA8AAAAAAAwAAAAQAA4AAAAAAAwAAAAUAA4AAAAAAAwAAAAUAA8AAAAAAAwAAAAWAA8AAAAAAAwAAAAWAA4AAAAAAAwAAAAaAA4AAAAAAAwAAAAaAA8AAAAAAAwAAAAIAAwAAAAAAAwAAAAIAAsAAAAAAAwAAAAEAAsAAAAAAAwAAAAEAAwAAAAAAAwAAAAQAAwAAAAAAAwAAAAQAAsAAAAAAAwAAAAUAAwAAAAAAAwAAAAUAAsAAAAAAAwAAAAWAAwAAAAAAAwAAAAWAAsAAAAAAAwAAAAaAAwAAAAAAAwAAAAaAAsAAAAAAAwAAAAIAAkAAAAAAAwAAAAIAAgAAAAAAAwAAAAEAAkAAAAAAAwAAAAEAAgAAAAAAAwAAAAQAAkAAAAAAAwAAAAQAAgAAAAAAAwAAAAUAAkAAAAAAAwAAAAUAAgAAAAAAAwAAAAWAAkAAAAAAAwAAAAWAAgAAAAAAAwAAAAaAAkAAAAAAAwAAAAaAAgAAAAAAAwAAAAIAAYAAAAAAAwAAAAIAAUAAAAAAAwAAAAEAAYAAAAAAAwAAAAEAAUAAAAAAAwAAAAQAAYAAAAAAAwAAAAQAAUAAAAAAAwAAAAUAAYAAAAAAAwAAAAUAAUAAAAAAAwAAAAWAAYAAAAAAAwAAAAWAAUAAAAAAAwAAAAaAAYAAAAAAAwAAAAaAAUAAAAAAAwAAAAcAAUAAAAAAAwAAAAcAAYAAAAAAAwAAAAgAAUAAAAAAAwAAAAgAAYAAAAAAAwAAAAgAAgAAAAAAAwAAAAgAAkAAAAAAAwAAAAgAAsAAAAAAAwAAAAgAAwAAAAAAAwAAAAgAA4AAAAAAAwAAAAgAA8AAAAAAAwAAAAcAA4AAAAAAAwAAAAcAA8AAAAAAAwAAAAcAAsAAAAAAAwAAAAcAAwAAAAAAAwAAAAcAAgAAAAAAAwAAAAcAAkAAAAAAAwAAAAKAA4AAAAAAAwAAAAKAA8AAAAAAAwAAAAKAAwAAAAAAAwAAAAKAAsAAAAAAAwAAAAKAAgAAAAAAAwAAAAKAAkAAAAAAAwAAAAKAAUAAAAAAAwAAAAKAAYAAAAAAAwAAAAOAAUAAAAAAAwAAAAOAAYAAAAAAAwAAAAOAAkAAAAAAAwAAAAOAAgAAAAAAAwAAAAOAAwAAAAAAAwAAAAOAA4AAAAAAAwAAAAOAA8AAAAAAAwAAAAOAAsAAAAAAAwAAAA=")
 tile_set = ExtResource("5_5uu0q")
 
 [node name="Props" type="Node2D" parent="." unique_id=319539188]
+visibility_layer = 2
 
 [node name="Actors" type="Node2D" parent="." unique_id=681899524]
+visibility_layer = 2
 
 [node name="Triggers" type="Node2D" parent="." unique_id=1134904630]
+visibility_layer = 2
 
 [node name="Spawns" type="Node2D" parent="." unique_id=1116492951]
+visibility_layer = 2
 
 [node name="Door" parent="Spawns" unique_id=1797776311 instance=ExtResource("11_1n8rj")]
 modulate = Color(1, 1, 1, 0.75)
+visibility_layer = 2
 offset_left = 32.0
 offset_top = 256.0
 offset_right = 48.0
@@ -105,6 +117,7 @@ properties = {
 size_is_default = false
 
 [node name="Aikka" parent="Spawns" unique_id=1199277091 instance=ExtResource("9_cowyq")]
+visibility_layer = 2
 position = Vector2(104, 240)
 actor_path = "res://src/Actor/NPC/Aikka.tscn"
 properties = {
@@ -122,6 +135,7 @@ properties = {
 }
 
 [node name="Basil" parent="Spawns" unique_id=1274148112 instance=ExtResource("9_cowyq")]
+visibility_layer = 2
 position = Vector2(200, 240)
 actor_path = "res://src/Actor/NPC/Basil.tscn"
 properties = {
@@ -139,6 +153,7 @@ properties = {
 }
 
 [node name="Ben" parent="Spawns" unique_id=844841359 instance=ExtResource("9_cowyq")]
+visibility_layer = 2
 position = Vector2(104, 200)
 actor_path = "res://src/Actor/NPC/Ben.tscn"
 properties = {
@@ -156,6 +171,7 @@ properties = {
 }
 
 [node name="Child" parent="Spawns" unique_id=1120650293 instance=ExtResource("9_cowyq")]
+visibility_layer = 2
 position = Vector2(200, 200)
 actor_path = "res://src/Actor/NPC/Child.tscn"
 properties = {
@@ -173,6 +189,7 @@ properties = {
 }
 
 [node name="Dola" parent="Spawns" unique_id=1750972848 instance=ExtResource("9_cowyq")]
+visibility_layer = 2
 position = Vector2(296, 248)
 actor_path = "res://src/Actor/NPC/Dola.tscn"
 properties = {
@@ -190,6 +207,7 @@ properties = {
 }
 
 [node name="Fuuka" parent="Spawns" unique_id=503623607 instance=ExtResource("9_cowyq")]
+visibility_layer = 2
 position = Vector2(304, 208)
 actor_path = "res://src/Actor/NPC/Fuuka.tscn"
 properties = {
@@ -207,6 +225,7 @@ properties = {
 }
 
 [node name="Gote" parent="Spawns" unique_id=1768550464 instance=ExtResource("9_cowyq")]
+visibility_layer = 2
 position = Vector2(392, 200)
 actor_path = "res://src/Actor/NPC/Gote.tscn"
 properties = {
@@ -224,6 +243,7 @@ properties = {
 }
 
 [node name="Grandma" parent="Spawns" unique_id=1853839356 instance=ExtResource("9_cowyq")]
+visibility_layer = 2
 position = Vector2(392, 248)
 actor_path = "res://src/Actor/NPC/Grandma.tscn"
 properties = {
@@ -241,6 +261,7 @@ properties = {
 }
 
 [node name="Hermit" parent="Spawns" unique_id=1824199142 instance=ExtResource("9_cowyq")]
+visibility_layer = 2
 position = Vector2(104, 144)
 actor_path = "res://src/Actor/NPC/Hermit.tscn"
 properties = {
@@ -258,6 +279,7 @@ properties = {
 }
 
 [node name="Jackal" parent="Spawns" unique_id=1721627652 instance=ExtResource("9_cowyq")]
+visibility_layer = 2
 position = Vector2(200, 144)
 actor_path = "res://src/Actor/NPC/Jackal.tscn"
 properties = {
@@ -275,6 +297,7 @@ properties = {
 }
 
 [node name="Lucille" parent="Spawns" unique_id=1476943517 instance=ExtResource("9_cowyq")]
+visibility_layer = 2
 position = Vector2(296, 160)
 actor_path = "res://src/Actor/NPC/Lucille.tscn"
 properties = {
@@ -292,6 +315,7 @@ properties = {
 }
 
 [node name="Mink" parent="Spawns" unique_id=406948610 instance=ExtResource("9_cowyq")]
+visibility_layer = 2
 position = Vector2(392, 144)
 actor_path = "res://src/Actor/NPC/Mink.tscn"
 properties = {
@@ -309,6 +333,7 @@ properties = {
 }
 
 [node name="Nun" parent="Spawns" unique_id=165022813 instance=ExtResource("9_cowyq")]
+visibility_layer = 2
 position = Vector2(104, 96)
 actor_path = "res://src/Actor/NPC/Nun.tscn"
 properties = {
@@ -326,6 +351,7 @@ properties = {
 }
 
 [node name="Quincy" parent="Spawns" unique_id=1304566032 instance=ExtResource("9_cowyq")]
+visibility_layer = 2
 position = Vector2(200, 96)
 actor_path = "res://src/Actor/NPC/Quincy.tscn"
 properties = {
@@ -343,6 +369,7 @@ properties = {
 }
 
 [node name="Sage" parent="Spawns" unique_id=1593077351 instance=ExtResource("9_cowyq")]
+visibility_layer = 2
 position = Vector2(296, 96)
 actor_path = "res://src/Actor/NPC/Sage.tscn"
 properties = {
@@ -360,6 +387,7 @@ properties = {
 }
 
 [node name="Sasuke" parent="Spawns" unique_id=602425215 instance=ExtResource("9_cowyq")]
+visibility_layer = 2
 position = Vector2(392, 96)
 actor_path = "res://src/Actor/NPC/Sasuke.tscn"
 properties = {
@@ -377,6 +405,7 @@ properties = {
 }
 
 [node name="Tabith" parent="Spawns" unique_id=835460141 instance=ExtResource("9_cowyq")]
+visibility_layer = 2
 position = Vector2(488, 288)
 actor_path = "res://src/Actor/NPC/Tabith.tscn"
 properties = {
@@ -395,6 +424,7 @@ properties = {
 
 [node name="Door1" parent="Spawns" unique_id=1800792368 instance=ExtResource("11_1n8rj")]
 modulate = Color(1, 1, 1, 0.75)
+visibility_layer = 2
 offset_left = 992.0
 offset_top = 48.0
 offset_right = 1008.0
@@ -413,6 +443,7 @@ properties = {
 size_is_default = false
 
 [node name="Sign" parent="Spawns" unique_id=788296705 instance=ExtResource("11_1n8rj")]
+visibility_layer = 2
 offset_left = 192.0
 offset_top = 272.0
 offset_right = 208.0
@@ -429,6 +460,7 @@ But I can only print three!", 4, ""]
 size_is_default = false
 
 [node name="FlavorText" parent="Spawns" unique_id=690933644 instance=ExtResource("11_1n8rj")]
+visibility_layer = 2
 offset_left = 288.0
 offset_top = 272.0
 offset_right = 304.0
@@ -446,6 +478,7 @@ A forth?", 4, ""]
 size_is_default = false
 
 [node name="Aikka1" parent="Spawns" unique_id=1959399737 instance=ExtResource("9_cowyq")]
+visibility_layer = 2
 position = Vector2(152, 288)
 actor_path = "res://src/Actor/NPC/Aikka.tscn"
 properties = {
@@ -463,6 +496,7 @@ properties = {
 }
 
 [node name="Aikka2" parent="Spawns" unique_id=483181597 instance=ExtResource("9_cowyq")]
+visibility_layer = 2
 position = Vector2(264, 288)
 actor_path = "res://src/Actor/NPC/Aikka.tscn"
 properties = {
@@ -480,6 +514,7 @@ properties = {
 }
 
 [node name="AmmoRefill" parent="Spawns" unique_id=1449282698 instance=ExtResource("13_516th")]
+visibility_layer = 2
 position = Vector2(136, 216)
 prop_path = "res://src/Prop/AmmoRefill.tscn"
 properties = {
@@ -489,6 +524,7 @@ properties = {
 }
 
 [node name="Basil1" parent="Spawns" unique_id=385201492 instance=ExtResource("9_cowyq")]
+visibility_layer = 2
 position = Vector2(264, 48)
 actor_path = "res://src/Actor/NPC/Basil.tscn"
 properties = {
@@ -506,21 +542,28 @@ properties = {
 }
 
 [node name="Waypoints" type="Node2D" parent="." unique_id=1416282546]
+visibility_layer = 2
 
 [node name="WaypointGlobal" parent="Waypoints" unique_id=1432238783 instance=ExtResource("11_2x06w")]
+visibility_layer = 2
 position = Vector2(56, -312)
 tag_name = "Camera0"
 
 [node name="WaypointGlobal1" parent="Waypoints" unique_id=1035375471 instance=ExtResource("11_2x06w")]
+visibility_layer = 2
 position = Vector2(392, 280)
 
 [node name="WaypointGlobal2" parent="Waypoints" unique_id=37205092 instance=ExtResource("11_2x06w")]
+visibility_layer = 2
 position = Vector2(472, 280)
 
 [node name="Notes" type="Node2D" parent="." unique_id=1220156191]
+visibility_layer = 2
 
 [node name="VanishingPoint" parent="." unique_id=9884164 instance=ExtResource("9_if8wo")]
+visibility_layer = 2
 position = Vector2(296, -152)
 
 [node name="SpawnPoint" parent="." unique_id=422711910 instance=ExtResource("10_h4mej")]
+visibility_layer = 2
 position = Vector2(88, 288)

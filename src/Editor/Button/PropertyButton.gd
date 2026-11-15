@@ -141,7 +141,7 @@ func _on_multiline_save():
 	button_multiline_save.disabled = true
 	button_multiline_save.text = "Save"
 	# This is a bit redundant as all of the buttons are re-created
-	# every time a property is saved... Or at least this happened with multilines
+	# every time a property is saved... Or at least this happend with multilines
 	# Leaving this in here just in case the behaviour is changed so that
 	# this doesn't break. -nero
 func _on_multiline_text_changed() -> void:

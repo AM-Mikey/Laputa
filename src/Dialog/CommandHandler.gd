@@ -57,7 +57,7 @@ func parse_command(string, command_is_first):
 		"voice":
 			voice(argument)
 		"uvoice":
-			voice("%s,%s,%s" % [db.print_delay, db.do_print_sfx, db.print_sfx])
+			voice([db.print_delay, db.do_print_sfx, db.print_sfx])
 
 		"waypoint":#			/waypoint, (string: npc_id), (int: waypoint_index)
 			waypoint(argument)
@@ -88,6 +88,7 @@ func parse_command(string, command_is_first):
 					var x_dir = sign(pc.global_position.x - found_npcs[0].global_position.x)
 					pc.mm.knockback_direction = Vector2(x_dir, 0)
 			pc.mm.knockback_speed = Vector2(25, 40)
+			pc.mm.snap_vector = Vector2.ZERO
 			pc.mm.change_state("knockback")
 
 
@@ -133,7 +134,7 @@ func parse_command(string, command_is_first):
 		"progress_main_mission": #/progress_main_mission
 			ms.progress_main_mission()
 		"seek_main_mission": #/seek_main_mission, (string: seek_value)
-			ms.seek_main_mission(argument)
+			ms.seek_main_misssion(argument)
 		"start_side_mission": #/start_side_mission, (string: mission_name(filename))
 			ms.start_side_mission(argument)
 		"progress_side_mission": #/progress_side_mission, (string: mission_name(filename))
@@ -236,11 +237,11 @@ func face(string, command_is_first):
 
 
 
-func flip_face(argument):
-	if not argument:
+func flip_face(arguement):
+	if not arguement:
 		db.flip_face()
 	else:
-		db.flip_face(argument)
+		db.flip_face(arguement)
 
 func hide_face():
 	db.change_background(db.get_node("Flat"))

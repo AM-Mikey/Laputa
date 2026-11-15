@@ -19,9 +19,6 @@ var Y_axis_shoot_deadzone:float = 0.25
 var can_act:= true
 
 func _ready():
-	process_mode = Node.PROCESS_MODE_ALWAYS #keep the buffer accurate while the tree is paused (menus, inventory)
-	for action in BUFFERED_ACTIONS:
-		buffer[action] = BufferedAction.new()
 	Input.joy_connection_changed.connect(_on_joypad_connection_changed)
 
 func rawstick() -> Vector2:
@@ -35,59 +32,35 @@ func stick_deadzone(stick:Vector2,deadzoneX:float=Xaxis_deadzone,deadzoneY:float
 	if abs(result.y) < deadzoneY: result.y = 0.0
 	return result
 
-func stick_clamp_zone_X(stick:Vector2, clampX:float=Xaxis_clampzone) -> Vector2:
+func stick_clampzoneX(stick:Vector2,clampX:float=Xaxis_clampzone) -> Vector2:
 	var result:Vector2 = stick
 	if abs(result.x) >= clampX:
 		result.x = sign(result.x)
 	return result
 
 
-### BUFFER ###
+			#####BUFFER
 
-var input_strength: float = 0.5
-var release_strength: float = 0.3
-#Stick up/down actions need a more deliberate push than the default so brushing the stick while running doesn't inspect or grab ladders.
-var strength_overrides: Dictionary = {
-	"inspect": {"press": 0.8},
-	"look_down": {"press": 0.8},
-	"look_up": {"press": 0.8},
-	}
-# Actions that only count a left-stick press when the stick points mostly straight up/down. D-pad and keys are unaffected.
-var vertical_stick_actions: Array[String] = ["inspect", "look_down", "look_up"]
-var vertical_stick_max_angle: float = 30.0 # Max degrees away from straight up/down the left stick may point for those actions.
-var pressbuffer: int = 4
-var releasebuffer: int = 1
+var inputstrength:float = 0.5 #for assigning buttons to analog sticks
+var pressbuffer:int = 4
+var releasebuffer:int = 1
 
-const NEVER := 9000
-const UNREAD := -1
-const DISCARDED := -2
-
-class BufferedAction:
-	var held_frames := 0
-	var frames_since_press := 9000
-	var frames_since_release := 9000
-	var press_read_frame := -1
-	var release_read_frame := -1
-	var pressed_while_can_act := false
-
-const BUFFERED_ACTIONS: Array[String] = [
-	"look_up",
-	"look_down",
-	"move_left",
-	"move_right",
-	"jump",
-	"fire_manual",
-	"fire_automatic",
-	"inspect",
-	"inventory",
-	"ui_up",
-	"ui_down",
-	"ui_left",
-	"ui_right",
+##A button needs to be added to this to be bufferable
+var buffer:Array=[
+	["look_up",0,9000,9000],
+	["look_down",0,9000,9000],
+	["move_left",0,9000,9000],
+	["move_right",0,9000,9000],
+	["jump",0,9000,9000],
+	["fire_manual",0,9000,9000],
+	["fire_automatic",0,9000,9000],
+	["inspect",0,9000,9000],
+	["inventory",0,9000,9000],
+	["ui_up",0,9000,9000],
+	["ui_down",0,9000,9000],
+	["ui_left",0,9000,9000],
+	["ui_right",0,9000,9000],
 	]
-
-var buffer: Dictionary = {} #action name -> BufferedAction
-var _was_paused := false
 
 func _on_joypad_connection_changed(_device: int, _connected: bool): #for if controller is connected during
 	print("controllers changed")
@@ -117,15 +90,6 @@ func set_input_map_index(index: int):
 				InputMap.action_add_event(action, event)
 
 
-func _physics_process(_delta):
-	analogstick = stick_clamp_zone_X(stick_deadzone(rawstick()))
-
-	write_buffer()
-	var paused := get_tree().paused
-	if paused != _was_paused: #kill the press that paused/unpaused
-		_was_paused = paused
-		discard_presses()
-
 func _input(event: InputEvent): #for sleep
 	if event.device == active_controller_index && (event is InputEventJoypadButton || (event is InputEventJoypadMotion && event.axis in [4, 5])): #triggers
 		if controller_asleep:
@@ -139,90 +103,58 @@ func _input(event: InputEvent): #for sleep
 			oup.set_controller_light_color(active_controller_index, oup.asleep_controller_color)
 
 
-func _threshold(action: String, currently_held: bool) -> float:
-	var o: Dictionary = strength_overrides.get(action, {})
-	if currently_held:
-		return o.get("release", release_strength)
-	return o.get("press", input_strength)
-
-#Tracks the state of every buffered action. ignores can_act so a button held through a can_act=false period doesn't register as a new press later.
-func write_buffer():
-	for action in buffer:
-		var b: BufferedAction = buffer[action]
-		b.frames_since_press = mini(b.frames_since_press + 1, NEVER)
-		b.frames_since_release = mini(b.frames_since_release + 1, NEVER)
-		var was_held := b.held_frames > 0
-		var threshold := _threshold(action, was_held)
-		var is_held := Input.get_action_raw_strength(action) >= threshold
-		if is_held and not was_held and action in vertical_stick_actions and _is_diagonal_stick_press(threshold):
-			is_held = false
-		if is_held:
-			if not was_held:
-				b.frames_since_press = 0
-				b.press_read_frame = UNREAD
-				b.pressed_while_can_act = can_act
-			b.held_frames += 1
-		elif was_held:
-			b.held_frames = 0
-			b.frames_since_release = 0
-			b.release_read_frame = UNREAD
-
-#True when the left stick is what's pushing the action past threshold but it's pointing too far sideways (i.e. dipping down while running).
-#If the stick isn't far enough down to be the source, the press came from the d-pad/keyboard and is allowed.
-func _is_diagonal_stick_press(threshold: float) -> bool:
-	if active_controller_index < 0:
+func base_inputheld(button:String) -> bool:
+	if not can_act:
 		return false
-	var stick := Vector2(Input.get_joy_axis(active_controller_index, JOY_AXIS_LEFT_X), Input.get_joy_axis(active_controller_index, JOY_AXIS_LEFT_Y))
-	if abs(stick.y) < threshold:
+	if Input.get_action_strength(button) >= inputstrength:
+		return true
+	else:
 		return false
-	return abs(stick.x) > abs(stick.y) * tan(deg_to_rad(vertical_stick_max_angle))
 
-func discard_presses():
-	for action in buffer:
-		buffer[action].press_read_frame = DISCARDED
+func writebuffer() -> void:
+	for x in buffer:
+		x[2]+=1
+		x[3]+=1
+		if base_inputheld(x[0]) and x[1] == 0:
+			x[2]=0
+		if base_inputheld(x[0]):
+			x[1]+=1
+		if not base_inputheld(x[0]) and x[1] != 0:
+			x[1]=0
+			x[3]=0
 
-func _get_buffered(button: String) -> BufferedAction:
-	if not buffer.has(button):
-		printerr("INPUT NOT FOUND IN BUFFER: ", button)
-		return null
-	return buffer[button]
 
-#press/release can be read by any number of callers during the physics frame it is first read on, and not after.
-#NOTE: CALL FROM _physics_process ONLY
-func _read(read_frame: int) -> int:
-	var frame := Engine.get_physics_frames()
-	if read_frame == UNREAD or read_frame == frame:
-		return frame
-	return DISCARDED
 
-func pressed(button: String, custombuffer: int = pressbuffer, bypass_can_act := false) -> bool: #buffered
-	var b := _get_buffered(button)
-	if b == null: return false
-	if b.held_frames == 0 or b.frames_since_press > custombuffer: return false
-	if not bypass_can_act and (not can_act or not b.pressed_while_can_act): return false #bypass for ui
-	b.press_read_frame = _read(b.press_read_frame)
-	return b.press_read_frame != DISCARDED
+func pressed(button,custombuffer=pressbuffer) -> bool:
+	for x in buffer:
+		if x[0] == button:
+			if x[2] <= custombuffer and x[1] > 0:
+				x[2] = custombuffer
+				return true
+			else: return false
+	printerr ("INPUT NOT FOUND IN BUFFER")
+	return false
 
-func just_pressed(button: String, bypass_can_act := false) -> bool: #not consumed
-	var b := _get_buffered(button)
-	if b == null: return false
-	if not bypass_can_act and (not can_act or not b.pressed_while_can_act): return false
-	return b.held_frames > 0 and b.frames_since_press == 0
+func held(button,below=900000000,above=0) -> bool: #button held. pretty simple
+	for x in buffer:
+		if x[0] == button:
+			if x[1] > above and x[1] <= below:
+				return true
+			else: return false
+	return false
 
-func held(button: String, below: int = 900000000, above: int = 0, bypass_can_act := false) -> bool:
-	var b := _get_buffered(button)
-	if b == null: return false
-	if not bypass_can_act and not can_act: return false
-	return b.held_frames > above and b.held_frames <= below
+func released(button:String,custombuffer:int=releasebuffer) -> bool:
+	for x in buffer:
+		if x[0] == button:
+			if x[3] <= custombuffer:
+				x[2] = custombuffer
+				return true
+			else: return false #could be removed?
+	return false
 
-func released(button: String, custombuffer: int = releasebuffer) -> bool: #Buffered + consumed
-	var b := _get_buffered(button)
-	if b == null: return false
-	if b.held_frames > 0 or b.frames_since_release > custombuffer: return false
-	b.release_read_frame = _read(b.release_read_frame)
-	return b.release_read_frame != DISCARDED
+##process
+func _physics_process(_delta):
+	analogstick = stick_clampzoneX( stick_deadzone(rawstick()) )
 
-func just_released(button: String) -> bool: #not consumed
-	var b := _get_buffered(button)
-	if b == null: return false
-	return b.held_frames == 0 and b.frames_since_release == 0
+	writebuffer()
+##Presets

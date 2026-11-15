@@ -1,7 +1,6 @@
 extends Control
 
-const LEVELBUTTON = preload("res://src/UI/LevelSelect/LevelButton.tscn")
-const HIDDEN_LEVELS = ["res://src/Level/Default.tscn"] #template for new levels, not playable
+const LEVELBUTTON = preload("res://src/UI//LevelSelect/LevelButton.tscn")
 
 @onready var w = get_tree().get_root().get_node("World")
 
@@ -33,7 +32,7 @@ func get_level_array(path) -> Array:
 		if file == "":
 			break
 		elif not file.begins_with("."):
-			if file.ends_with(".tscn") and not (path + "/" + file) in HIDDEN_LEVELS:
+			if file.ends_with(".tscn"):
 				out.append(path + "/" + file)
 	level_dir.list_dir_end()
 	return out

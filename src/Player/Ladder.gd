@@ -81,6 +81,7 @@ func get_vframe() -> int:
 
 func enter(_prev_state: String) -> void:
 	animate()
+	mm.snap_vector = Vector2.ZERO
 	sprite.position = Vector2(0.0, -8.0)
 	pc.set_collision_mask_value(10, false) #ssp
 	gm.disable() #TODO: why????? A: Not allowing player to shoot on ladder is intentional

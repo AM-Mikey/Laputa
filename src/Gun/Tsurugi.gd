@@ -11,7 +11,6 @@ func _ready():
 	do_muzzle_flash = false
 	max_ammo = 0
 	max_level = 1
-	xp_loss_multiplier = 0
 	set_level(level)
 
 func _set_level(val: int) -> void:

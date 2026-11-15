@@ -52,7 +52,7 @@ func find_npc_scenes(path):
 
 
 
-### SIGNALS ###
+### SINGALS ###
 
 func _on_npc_changed(npc_path):
 	editor.set_tool("entity", "npc")

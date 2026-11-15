@@ -54,6 +54,7 @@ func state_process(_delta):
 			did_bonk = true
 
 	if pc.is_on_floor(): #landed
+		mm.snap_vector = mm.SNAP_DIRECTION * mm.SNAP_LENGTH
 		mm.change_state("run")
 		return
 
@@ -180,7 +181,7 @@ func enter(prev_state: String) -> void:
 
 	pc.set_up_direction(mm.FLOOR_NORMAL)
 	pc.set_floor_stop_on_slope_enabled(true)
-
+	pc.mm.snap_vector = Vector2.ZERO
 	is_dropping = prev_state == "knockback"
 	holding_jump = inp.can_act && Input.is_action_pressed("jump") && !is_dropping
 	if holding_jump:

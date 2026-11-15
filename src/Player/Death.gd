@@ -49,6 +49,7 @@ func state_process(_delta):
 				pc.velocity.y = 0.0
 				am.play("pc_land")
 				oup.vibrate_impulse(1.0, 0.2)
+				mm.snap_vector = mm.SNAP_DIRECTION * mm.SNAP_LENGTH
 	elif !death_screen_displayed:
 		wipe()
 		slowdown()
@@ -181,6 +182,7 @@ func enter(_prev_state: String):
 	pc.set_up_direction(mm.FLOOR_NORMAL)
 	pc.set_floor_stop_on_slope_enabled(true)
 
+	mm.snap_vector = Vector2.ZERO
 
 	guns.visible = false
 	bounces = 0

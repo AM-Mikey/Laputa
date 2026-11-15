@@ -149,6 +149,7 @@ _data = {
 points = PackedVector2Array(-4.5, -6, 3.5, -14, 3.5, -6, 3.5, 6, -4.5, 6)
 
 [node name="BeetleCrawler" type="CharacterBody2D" unique_id=1359591718 groups=["Actors", "Enemies", "Entities"]]
+visibility_layer = 2
 collision_layer = 2
 collision_mask = 8
 floor_max_angle = 0.17453292

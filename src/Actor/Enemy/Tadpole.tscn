@@ -70,6 +70,7 @@ radius = 2.0
 radius = 64.12488
 
 [node name="Tadpole" type="CharacterBody2D" unique_id=1704495056 groups=["Actors", "Enemies", "Entities", "Tadpoles"]]
+visibility_layer = 2
 collision_layer = 2
 collision_mask = 8
 script = ExtResource("1_pb65w")

@@ -16,10 +16,7 @@ func _process(_delta: float) -> void:
 	var active_cam := get_viewport().get_camera_2d()
 	if active_cam == null:
 		return
-	var canvas_transform = get_viewport().get_canvas_transform()
-	var canvas_scale = canvas_transform.get_scale()
-	var canvas_center = (-canvas_transform.get_origin() / canvas_scale) + ((get_viewport_rect().size / canvas_scale) / 2.0)
-	base_position.global_position = canvas_center
+	base_position.global_position = active_cam.get_screen_center_position()
 	camera.zoom = active_cam.zoom
 
 

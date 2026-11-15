@@ -71,6 +71,7 @@ layout_mode = 2
 text = "Load"
 
 [node name="New" type="Button" parent="VBox/HBox" unique_id=2122109189]
+visible = false
 layout_mode = 2
 text = "New"
 
@@ -82,7 +83,6 @@ filters = PackedStringArray("*.tscn")
 filters = PackedStringArray("*.tscn")
 
 [node name="NewDialog" type="FileDialog" parent="." unique_id=894639374]
-title = "New Level"
 filters = PackedStringArray("*.tscn")
 
 [connection signal="pressed" from="VBox/HBox/Default" to="." method="_on_Default_pressed"]
@@ -92,4 +92,4 @@ filters = PackedStringArray("*.tscn")
 [connection signal="pressed" from="VBox/HBox/New" to="." method="on_new"]
 [connection signal="confirmed" from="SaveDialog" to="." method="on_save_confirmed"]
 [connection signal="file_selected" from="LoadDialog" to="." method="on_load_selected"]
-[connection signal="file_selected" from="NewDialog" to="." method="on_new_selected"]
+[connection signal="confirmed" from="NewDialog" to="." method="on_new_confirmed"]

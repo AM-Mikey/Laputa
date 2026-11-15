@@ -11,7 +11,6 @@ func _ready(): #since preload, this happens on game start
 	automatic = false
 	max_ammo = 0
 	max_level = 3
-	xp_loss_multiplier = 15
 	set_level(level)
 
 #only one level, freezes enemies/puts them to sleep. no damage just freezes non-boss enemy code

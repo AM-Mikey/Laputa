@@ -39,15 +39,15 @@ func _input(event):
 			w.el.get_node("Editor/Main/Win/Tab").current_tab = editor_tab
 			w.el.get_node("Editor").on_tab_changed(editor_tab)
 
-	if event.is_action_pressed("debug_print") && !w.ml.has_node("Title") && !w.ml.has_node("PauseMenu"):
+	if event.is_action_pressed("debug_print"):
 		if w.el.has_node("Editor"): return
 		debug_print()
 
-	if event.is_action_pressed("debug_wind") && !w.ml.has_node("Title") && !w.ml.has_node("PauseMenu"):
+	if event.is_action_pressed("debug_wind"):
 		if w.el.has_node("Editor"): return
 		debug_wind()
 
-	if event.is_action_pressed("debug_reload") && !w.ml.has_node("Title") && !w.ml.has_node("PauseMenu"):
+	if event.is_action_pressed("debug_reload"):
 		if w.el.has_node("Editor"): return
 		if w.ui.has_node("DeathScreen"): return
 		if f.db():
@@ -55,8 +55,8 @@ func _input(event):
 		reload_level()
 
 
-	#if event.is_action_pressed("debug_triggers") && !w.ml.has_node("Title") && !w.ml.has_node("PauseMenu"):
-		#w.set_debug_visible()
+	if event.is_action_pressed("debug_triggers"):
+		w.set_debug_visible()
 
 
 	if event.is_action_pressed("debug_quit"):
@@ -68,7 +68,7 @@ func _input(event):
 			DirAccess.remove_absolute(SaveSystem.temp_path)
 		get_tree().quit()
 
-	if !w.el.has_node("Editor") && !w.ml.has_node("Title") && !w.ml.has_node("PauseMenu"): #non-editor only commands
+	if not w.el.has_node("Editor"): #non-editor only commands
 
 		if event.is_action_pressed("debug_save"):
 			print("debug save")

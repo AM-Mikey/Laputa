@@ -52,19 +52,13 @@ func display_options():
 		printerr("ERROR: OPTION COUNT ==: ", options.size())
 
 
-func _physics_process(_delta):
-	if !is_displaying:
-		return
-	var up = inp.pressed("ui_up", inp.pressbuffer, true)
-	var down = inp.pressed("ui_down", inp.pressbuffer, true)
-	if up and !down:
+func _input(event):
+	if event.is_action_pressed("ui_up") && is_displaying:
 		$UpDownTimer.start(up_down_cooldown_time)
 		option_up()
-	elif down and !up:
+	if event.is_action_pressed("ui_down") && is_displaying:
 		$UpDownTimer.start(up_down_cooldown_time)
 		option_down()
-
-func _input(event):
 	if event.is_action_pressed("ui_accept") && is_displaying && !is_exiting:
 		if selected_option == -1:
 			am.play("ui_deny")
@@ -227,16 +221,12 @@ func _on_MainAnimationPlayer_animation_finished(anim_name: StringName):
 		is_entering = false
 
 
-func _on_UpDownTimer_timeout(): #hold-to-repeat
-	if !is_displaying:
+func _on_UpDownTimer_timeout():
+	if inp.held("ui_up") and inp.held("ui_down"):
 		return
-	var up = inp.held("ui_up", 900000000, 0, true)
-	var down = inp.held("ui_down", 900000000, 0, true)
-	if up and down:
-		return
-	elif up:
+	elif inp.held("ui_up"):
 		$UpDownTimer.start(up_down_cooldown_time)
 		option_up()
-	elif down:
+	elif inp.held("ui_down"):
 		$UpDownTimer.start(up_down_cooldown_time)
 		option_down()

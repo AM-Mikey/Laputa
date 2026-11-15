@@ -60,7 +60,7 @@ func find_enemy_scenes(path):
 
 
 
-### SIGNALS ###
+### SINGALS ###
 
 func _on_enemy_changed(enemy_path):
 	editor.set_tool("entity", "enemy")

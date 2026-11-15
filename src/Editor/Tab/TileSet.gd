@@ -77,7 +77,7 @@ func setup_brushes():
 
 		button.toggle_mode = true
 		button.action_mode = BaseButton.ACTION_MODE_BUTTON_PRESS
-		#button.connect("pressed", Callable(self, "on_brush_selected").bind(i))
+		button.connect("pressed", Callable(self, "on_brush_selected").bind(i))
 		get_node(brushes).add_child(button)
 		if brush_id == 0:
 			button.button_pressed = true
@@ -184,9 +184,7 @@ func swap_tiles(first_pos, second_pos): #warning, this is sensative to tile_set 
 				first_tile_map_layer.set_cell(cell, 0, first_pos)
 #4 save level
 			var packed_scene = PackedScene.new()
-			var stripped = w.strip_visibility_layers(loaded_level)
 			packed_scene.pack(loaded_level)
-			w.restore_visibility_layers(stripped)
 			var _err = ResourceSaver.save(packed_scene, "res://src/Level/" + l)
 
 
