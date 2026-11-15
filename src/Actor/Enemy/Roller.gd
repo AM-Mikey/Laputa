@@ -157,7 +157,7 @@ func _on_physics_process(delta):
 
 		if normal_contact:
 			move_dir.x *= -1.0
-			am.play("enemy_slam", self, null, 0.8, 0.1)
+			am.play("enemy_slam", self, null, 0.5, 0.1)
 			var spark = SPARK.instantiate()
 			spark.position = global_position
 			w.middle_front.add_child(spark)
@@ -273,7 +273,8 @@ func _calc_velocity_rolling() -> Vector2:
 		else:
 			if just_landed:
 				if difficulty == 0 && abs(gravity_velocity.y) >= 10.0:
-					am.play("enemy_metal_thud", self, null, min(gravity_velocity.length() / 50.0, 30.0))
+					print(gravity_velocity.length() / 200.0)
+					am.play("enemy_metal_thud", self, null, max(gravity_velocity.length() / 200.0, 1.0))
 					if last_collision != null:
 						if gravity_velocity.length() > 100.0:
 							_create_effect("Land")
@@ -284,7 +285,7 @@ func _calc_velocity_rolling() -> Vector2:
 					knockback_velocity = knockback_velocity.bounce(normal) * bounce_factor
 				elif difficulty == 1:
 					if abs(gravity_velocity.y) >= 5.0:
-						am.play("enemy_metal_thud", self, null, min(gravity_velocity.length() / 50.0, 30.0))
+						am.play("enemy_metal_thud", self, null, max(gravity_velocity.length() / 200.0, 1.0))
 						if last_collision != null:
 							if gravity_velocity.length() > 100.0:
 								_create_effect("Land")
