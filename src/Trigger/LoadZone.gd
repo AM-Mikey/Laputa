@@ -18,10 +18,10 @@ func setup():
 
 func _on_body_entered(body):
 	active_pc = body.get_parent()
+	active_pc.load_zones_inside.append(self)
 	enter_load_zone()
 func _on_body_exited(_body):
-	pass
-
+	active_pc.load_zones_inside.erase(self)
 
 func enter_load_zone(): #see if you need the inspect state
 	if f.pc().dead: return
