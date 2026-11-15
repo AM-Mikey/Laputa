@@ -71,6 +71,7 @@ func _on_CollisionDetector_body_entered(body): #shadows
 				do_fizzle("armor")
 		#enemys
 		elif body.get_collision_layer_value(2):
+			if blocked_by_armor_on_path(): return
 			var blood_dir = get_blood_dir(body)
 			if not touched_floor:
 				body.hit(damage, blood_dir, $PlayerCollisionDetector)
