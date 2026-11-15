@@ -837,7 +837,7 @@ collision_layer = 16384
 collision_mask = 0
 script = ExtResource("18_bq2j0")
 tag_name = "move_dir"
-direction = Vector2(-1, -8.742278e-08)
+direction = Vector2(-1, 8.742278e-08)
 snap_degrees = 180.0
 
 [node name="SaveDisk" type="Area2D" parent="Spawns" unique_id=1449282698 groups=["Entities", "PropSpawns"] instance=ExtResource("15_tk244")]
@@ -938,6 +938,25 @@ properties = {
 "water_gravity": [150.0, 3, ""]
 }
 
+[node name="Roller" type="Area2D" parent="Spawns" unique_id=137304433 groups=["ActorSpawns", "Entities"] instance=ExtResource("6_dcw0l")]
+z_index = 999
+position = Vector2(2456, 1936)
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("8_hahi5")
+actor_path = "res://src/Actor/Enemy/Roller.tscn"
+properties = {
+"base_gravity": [300.0, 3, ""],
+"debug": [false, 1, ""],
+"difficulty": [0, 2, ""],
+"do_bubbles": [false, 1, ""],
+"editor_hidden": [false, 1, ""],
+"id": [&"Roller", 4, ""],
+"speed": [Vector2(150, 350), 5, ""],
+"start_dir": [Vector2(-1, 0), 5, ""],
+"water_gravity": [150.0, 3, ""]
+}
+
 [node name="Waypoints" type="Node2D" parent="." unique_id=1140943479]
 
 [node name="Notes" type="Node2D" parent="." unique_id=577013387]
@@ -1001,3 +1020,4 @@ zoom = 2.0
 [connection signal="input_event" from="Spawns/Larry2" to="Spawns/Larry2" method="_on_input_event"]
 [connection signal="input_event" from="Spawns/Larry3" to="Spawns/Larry3" method="_on_input_event"]
 [connection signal="input_event" from="Spawns/Larry4" to="Spawns/Larry4" method="_on_input_event"]
+[connection signal="input_event" from="Spawns/Roller" to="Spawns/Roller" method="_on_input_event"]

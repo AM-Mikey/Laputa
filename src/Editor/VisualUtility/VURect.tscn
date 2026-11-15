@@ -6,6 +6,7 @@
 [ext_resource type="StyleBox" uid="uid://djnu2b18r7r1d" path="res://src/UI/StyleBox/Cursor.tres" id="3_48ell"]
 
 [node name="VURect" type="Node2D" unique_id=688682803 groups=["Entities", "VURects", "VisualUtilities"]]
+physics_interpolation_mode = 2
 script = ExtResource("1_3xth1")
 
 [node name="Rect" type="MarginContainer" parent="." unique_id=612564398]

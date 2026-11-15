@@ -4441,6 +4441,7 @@ collision_mask = 2192
 shape = SubResource("RectangleShape2D_sat3f")
 
 [node name="GunManager" type="Node2D" parent="." unique_id=950056630]
+physics_interpolation_mode = 2
 script = ExtResource("12")
 
 [node name="GunPosLeft" type="Marker2D" parent="GunManager" unique_id=1580425245]
