@@ -18,9 +18,7 @@ var jump_time : int = 0
 func state_process(_delta):
 	jump_time += 1
 	# Jump holding
-	if is_dropping:
-		holding_jump = false
-	elif inp.can_act && !Input.is_action_pressed("jump"):
+	if inp.can_act && !Input.is_action_pressed("jump"):
 		holding_jump = false
 
 	var squeezing_into_a_corridor : bool
@@ -180,11 +178,8 @@ func enter(prev_state: String):
 
 	pc.set_up_direction(mm.FLOOR_NORMAL)
 	pc.set_floor_stop_on_slope_enabled(true)
-	is_dropping = prev_state == "knockback"
-	holding_jump = inp.can_act && Input.is_action_pressed("jump") && !is_dropping
+	holding_jump = inp.can_act && Input.is_action_pressed("jump") && !is_dropping && prev_state != "knockback"
 	if holding_jump:
-		# Set the player's move dir to -1.0 to indicate a jump.
-		# It will be reset on next physics frame
 		pc.move_dir.y = -1.0
 		am.play("pc_jump")
 	did_bonk = false
