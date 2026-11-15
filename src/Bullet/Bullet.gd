@@ -127,7 +127,7 @@ func do_fizzle(type: String):
 		var space_state = get_world_2d().direct_space_state
 		# use global coordinates, not local to node
 		var query = PhysicsRayQueryParameters2D.create(gun_center, fizzle.position)
-		# Bullet should have its collison mask set accurately to what it intends to collide with
+		# Bullet should have its collision mask set accurately to what it intends to collide with
 		# collision mask: World (bit 3), Armor (bit 5), Breakable (bit 8)
 		# This is done so the raycast doesn't collide with the player or anything else!
 		query.collision_mask = 1<<3 | 1<<5 | 1<<8

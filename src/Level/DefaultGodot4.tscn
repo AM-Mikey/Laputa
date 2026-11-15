@@ -27,7 +27,6 @@ _data = [Vector2(0, 0), 0.0, 10.229628, 0, 0, Vector2(0.22947763, 1), 0.0, 0.0, 
 point_count = 5
 
 [node name="DefaultGodot4" type="Node2D" unique_id=1165197377]
-visibility_layer = 2
 script = ExtResource("1_4uhn8")
 level_name = "DefaultGodot4"
 music = "train"
@@ -35,8 +34,7 @@ dialog_json = "res://src/Dialog/Village.json"
 debug_hp_on_enter = 6
 controller_color_gradient = SubResource("Gradient_iuj41")
 
-[node name="LevelLimiter" parent="." unique_id=10937438 instance=ExtResource("3_t226a")]
-visibility_layer = 2
+[node name="LevelLimiter" type="MarginContainer" parent="." unique_id=10937438 instance=ExtResource("3_t226a")]
 offset_left = 1632.0
 offset_top = 1744.0
 offset_right = 2976.0
@@ -61,52 +59,43 @@ layer_height_offsets = {
 tile_mode = 1
 
 [node name="TileMap" type="Node2D" parent="." unique_id=1148391406]
-visibility_layer = 2
 z_index = 1
 
 [node name="FarBack" type="TileMapLayer" parent="TileMap" unique_id=1394156717]
-visibility_layer = 2
 z_index = -2
 use_parent_material = true
 tile_map_data = PackedByteArray("AAB7AHYAAAAAAAAAAAB7AHcAAAAAAAAAAAB8AHcAAAAAAAAAAAB9AHcAAAAAAAAAAAB7AHgAAAAAAAAAAAB8AHgAAAAAAAAAAAB9AHgAAAAAAAAAAAB7AHkAAAAAAAAAAAB8AHkAAAAAAAAAAAB9AHkAAAAAAAAAAAB7AHoAAAAAAAAAAAB8AHoAAAAAAAAAAAB9AHoAAAAAAAAAAAB7AHsAAAAAAAAAAAB8AHsAAAAAAAAAAAB9AHsAAAAAAAAAAAB6AHwAAAAAAAAAAAB7AHwAAAAAAAAAAAB8AHwAAAAAAAAAAAB9AHwAAAAAAAAAAAA=")
 tile_set = ExtResource("2_s4ctt")
 
 [node name="Back" type="TileMapLayer" parent="TileMap" unique_id=387206527]
-visibility_layer = 2
 z_index = -1
 use_parent_material = true
 tile_map_data = PackedByteArray("AAB5AIIAAAAEAAQAAAB8AIIAAAADAAQAAACLAIMAAAABAAQAAACLAIQAAAABAAQAAACLAIUAAAABAAQAAACLAIYAAAABAAQAAACLAIcAAAABAAQAAABnAIgAAAAAAAYAAABoAIgAAAAAAAYAAABpAIgAAAAAAAYAAABqAIgAAAAAAAYAAABrAIgAAAAAAAYAAABsAIgAAAAAAAYAAABtAIgAAAAAAAYAAABuAIgAAAAAAAYAAACLAIgAAAABAAQAAABnAIkAAAAAAAcAAABoAIkAAAAAAAcAAABpAIkAAAAAAAcAAABqAIkAAAAAAAcAAABrAIkAAAAAAAcAAABsAIkAAAAAAAcAAABtAIkAAAAAAAcAAABuAIkAAAAAAAcAAABnAIoAAAAAAAcAAABoAIoAAAAAAAcAAABpAIoAAAAAAAcAAABqAIoAAAAAAAcAAABrAIoAAAAAAAcAAABsAIoAAAAAAAcAAABtAIoAAAAAAAcAAABuAIoAAAAAAAcAAABnAIsAAAAAAAcAAABoAIsAAAAAAAcAAABpAIsAAAAAAAcAAABqAIsAAAAAAAcAAABrAIsAAAAAAAcAAABsAIsAAAAAAAcAAABtAIsAAAAAAAcAAABuAIsAAAAAAAcAAABnAIwAAAAAAAcAAABoAIwAAAAAAAcAAABpAIwAAAAAAAcAAABqAIwAAAAAAAcAAABrAIwAAAAAAAcAAABsAIwAAAAAAAcAAABtAIwAAAAAAAcAAABuAIwAAAAAAAcAAAB7AIwAAAAAAAQAAAB/AIwAAAAAAAQAAACGAIwAAAAAAAQAAABnAI0AAAAAAAcAAABoAI0AAAAAAAcAAABpAI0AAAAAAAcAAABqAI0AAAAAAAcAAABrAI0AAAAAAAcAAABsAI0AAAAAAAcAAABtAI0AAAAAAAcAAABuAI0AAAAAAAcAAAB7AI0AAAAAAAUAAAB/AI0AAAAAAAUAAACGAI0AAAAAAAUAAACkAIUAAAAAAAQAAACkAIYAAAAAAAUAAAA=")
 tile_set = ExtResource("2_s4ctt")
 
 [node name="Front" type="TileMapLayer" parent="TileMap" unique_id=2126912126]
-visibility_layer = 2
 z_index = 1
 use_parent_material = true
 tile_map_data = PackedByteArray("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")
 tile_set = ExtResource("2_s4ctt")
 
 [node name="FarFront" type="TileMapLayer" parent="TileMap" unique_id=1690667449]
-visibility_layer = 2
 z_index = 2
 use_parent_material = true
 tile_map_data = PackedByteArray("AABxAHMAAAAAAAwAAAB1AHMAAAAAAAwAAAB3AHMAAAAAAAwAAAB5AHMAAAAAAAwAAACIAIIAAAADAA0AAABpAIMAAAADAA0AAABqAIMAAAADAA0AAABrAIMAAAADAA0AAABsAIMAAAADAA0AAACdAH8AAAAAAAwAAACeAH8AAAAAAAwAAACfAH8AAAAAAAwAAAA=")
 tile_set = ExtResource("2_s4ctt")
 
 [node name="Props" type="Node2D" parent="." unique_id=96715822]
-visibility_layer = 2
 
 [node name="Actors" type="Node2D" parent="." unique_id=1174921448]
-visibility_layer = 2
 
 [node name="Triggers" type="Node2D" parent="." unique_id=135787628]
 visible = false
-visibility_layer = 2
 
 [node name="Spawns" type="Node2D" parent="." unique_id=993935856]
-visibility_layer = 2
 
-[node name="Stalagtite" parent="Spawns" unique_id=1099828600 instance=ExtResource("6_dcw0l")]
-visibility_layer = 2
+[node name="Stalagtite" type="Area2D" parent="Spawns" unique_id=1099828600 groups=["ActorSpawns", "Entities"] instance=ExtResource("6_dcw0l")]
+z_index = 999
 position = Vector2(2216, 1984)
 actor_path = "res://src/Actor/Enemy/Stalagtite.tscn"
 properties = {
@@ -121,8 +110,8 @@ properties = {
 "water_gravity": [150.0, 3, ""]
 }
 
-[node name="Stalagtite1" parent="Spawns" unique_id=135404477 instance=ExtResource("6_dcw0l")]
-visibility_layer = 2
+[node name="Stalagtite1" type="Area2D" parent="Spawns" unique_id=135404477 groups=["ActorSpawns", "Entities"] instance=ExtResource("6_dcw0l")]
+z_index = 999
 position = Vector2(2248, 1984)
 actor_path = "res://src/Actor/Enemy/Stalagtite.tscn"
 properties = {
@@ -137,8 +126,8 @@ properties = {
 "water_gravity": [150.0, 3, ""]
 }
 
-[node name="Stalagtite2" parent="Spawns" unique_id=435739753 instance=ExtResource("6_dcw0l")]
-visibility_layer = 2
+[node name="Stalagtite2" type="Area2D" parent="Spawns" unique_id=435739753 groups=["ActorSpawns", "Entities"] instance=ExtResource("6_dcw0l")]
+z_index = 999
 position = Vector2(2184, 1984)
 actor_path = "res://src/Actor/Enemy/Stalagtite.tscn"
 properties = {
@@ -153,8 +142,8 @@ properties = {
 "water_gravity": [150.0, 3, ""]
 }
 
-[node name="Sphagnum" parent="Spawns" unique_id=2134574927 instance=ExtResource("6_dcw0l")]
-visibility_layer = 2
+[node name="Sphagnum" type="Area2D" parent="Spawns" unique_id=2134574927 groups=["ActorSpawns", "Entities"] instance=ExtResource("6_dcw0l")]
+z_index = 999
 position = Vector2(1864, 1984)
 actor_path = "res://src/Actor/Enemy/Sphagnum.tscn"
 properties = {
@@ -167,8 +156,8 @@ properties = {
 "water_gravity": [150.0, 3, ""]
 }
 
-[node name="Stalagtite3" parent="Spawns" unique_id=2139553996 instance=ExtResource("6_dcw0l")]
-visibility_layer = 2
+[node name="Stalagtite3" type="Area2D" parent="Spawns" unique_id=2139553996 groups=["ActorSpawns", "Entities"] instance=ExtResource("6_dcw0l")]
+z_index = 999
 position = Vector2(2168, 1928)
 actor_path = "res://src/Actor/Enemy/Stalagtite.tscn"
 properties = {
@@ -183,8 +172,8 @@ properties = {
 "water_gravity": [150.0, 3, ""]
 }
 
-[node name="Climber" parent="Spawns" unique_id=444396003 instance=ExtResource("6_dcw0l")]
-visibility_layer = 2
+[node name="Climber" type="Area2D" parent="Spawns" unique_id=444396003 groups=["ActorSpawns", "Entities"] instance=ExtResource("6_dcw0l")]
+z_index = 999
 position = Vector2(2048, 1928)
 actor_path = "res://src/Actor/Enemy/Climber.tscn"
 properties = {
@@ -205,7 +194,8 @@ properties = {
 
 [node name="LoadZone" parent="Spawns" unique_id=782260727 instance=ExtResource("7_v7nqo")]
 modulate = Color(1, 1, 1, 0.75)
-visibility_layer = 2
+z_index = 999
+custom_minimum_size = Vector2(8, 8)
 offset_left = 1632.0
 offset_top = 1728.0
 offset_right = 1792.0
@@ -223,7 +213,8 @@ size_is_default = false
 
 [node name="LoadZone1" parent="Spawns" unique_id=2018169658 instance=ExtResource("7_v7nqo")]
 modulate = Color(1, 1, 1, 0.75)
-visibility_layer = 2
+z_index = 999
+custom_minimum_size = Vector2(8, 8)
 offset_left = 1616.0
 offset_top = 1840.0
 offset_right = 1632.0
@@ -241,7 +232,8 @@ size_is_default = false
 
 [node name="Spikes" parent="Spawns" unique_id=206481548 instance=ExtResource("7_v7nqo")]
 modulate = Color(1, 1, 1, 0.75)
-visibility_layer = 2
+z_index = 999
+custom_minimum_size = Vector2(8, 8)
 offset_left = 1680.0
 offset_top = 2104.0
 offset_right = 1744.0
@@ -257,7 +249,8 @@ size_is_default = false
 
 [node name="Water" parent="Spawns" unique_id=2131724566 instance=ExtResource("7_v7nqo")]
 modulate = Color(1, 1, 1, 0.75)
-visibility_layer = 2
+z_index = 999
+custom_minimum_size = Vector2(8, 8)
 offset_left = 1648.0
 offset_top = 2176.0
 offset_right = 1776.0
@@ -273,7 +266,8 @@ size_is_default = false
 
 [node name="Ladder" parent="Spawns" unique_id=144011345 instance=ExtResource("7_v7nqo")]
 modulate = Color(1, 1, 1, 0.75)
-visibility_layer = 2
+z_index = 999
+custom_minimum_size = Vector2(8, 8)
 offset_left = 2224.0
 offset_top = 2096.0
 offset_right = 2240.0
@@ -288,7 +282,8 @@ size_is_default = false
 
 [node name="Spikes1" parent="Spawns" unique_id=118112934 instance=ExtResource("7_v7nqo")]
 modulate = Color(1, 1, 1, 0.75)
-visibility_layer = 2
+z_index = 999
+custom_minimum_size = Vector2(8, 8)
 offset_left = 2176.0
 offset_top = 2088.0
 offset_right = 2192.0
@@ -304,7 +299,8 @@ size_is_default = false
 
 [node name="Sign" parent="Spawns" unique_id=41417858 instance=ExtResource("7_v7nqo")]
 modulate = Color(1, 1, 1, 0.75)
-visibility_layer = 2
+z_index = 999
+custom_minimum_size = Vector2(8, 8)
 offset_left = 1984.0
 offset_top = 2080.0
 offset_right = 2000.0
@@ -322,7 +318,8 @@ size_is_default = false
 
 [node name="Door" parent="Spawns" unique_id=1297641519 instance=ExtResource("7_v7nqo")]
 modulate = Color(1, 1, 1, 0.75)
-visibility_layer = 2
+z_index = 999
+custom_minimum_size = Vector2(8, 8)
 offset_left = 1968.0
 offset_top = 2240.0
 offset_right = 1984.0
@@ -344,7 +341,8 @@ size_is_default = false
 
 [node name="Door1" parent="Spawns" unique_id=1921410849 instance=ExtResource("7_v7nqo")]
 modulate = Color(1, 1, 1, 0.75)
-visibility_layer = 2
+z_index = 999
+custom_minimum_size = Vector2(8, 8)
 offset_left = 2032.0
 offset_top = 2240.0
 offset_right = 2048.0
@@ -366,7 +364,8 @@ size_is_default = false
 
 [node name="Door2" parent="Spawns" unique_id=1929487394 instance=ExtResource("7_v7nqo")]
 modulate = Color(1, 1, 1, 0.75)
-visibility_layer = 2
+z_index = 999
+custom_minimum_size = Vector2(8, 8)
 offset_left = 2144.0
 offset_top = 2240.0
 offset_right = 2160.0
@@ -388,7 +387,8 @@ size_is_default = false
 
 [node name="FlavorText" parent="Spawns" unique_id=1567764415 instance=ExtResource("7_v7nqo")]
 modulate = Color(1, 1, 1, 0.75)
-visibility_layer = 2
+z_index = 999
+custom_minimum_size = Vector2(8, 8)
 offset_left = 1936.0
 offset_top = 2080.0
 offset_right = 1952.0
@@ -402,8 +402,8 @@ properties = {
 }
 size_is_default = false
 
-[node name="Basil" parent="Spawns" unique_id=846815944 instance=ExtResource("6_dcw0l")]
-visibility_layer = 2
+[node name="Basil" type="Area2D" parent="Spawns" unique_id=846815944 groups=["ActorSpawns", "Entities"] instance=ExtResource("6_dcw0l")]
+z_index = 999
 position = Vector2(2360, 2272)
 actor_path = "res://src/Actor/NPC/Basil.tscn"
 properties = {
@@ -420,8 +420,8 @@ properties = {
 "water_gravity": [150.0, 3, ""]
 }
 
-[node name="AmmoRefill" parent="Spawns" unique_id=208725417 instance=ExtResource("15_tk244")]
-visibility_layer = 2
+[node name="AmmoRefill" type="Area2D" parent="Spawns" unique_id=208725417 groups=["Entities", "PropSpawns"] instance=ExtResource("15_tk244")]
+z_index = 999
 position = Vector2(2544, 2256)
 prop_path = "res://src/Prop/AmmoRefill.tscn"
 properties = {
@@ -430,8 +430,8 @@ properties = {
 "id": [&"AmmoRefill", 4]
 }
 
-[node name="HealthRefill" parent="Spawns" unique_id=932539730 instance=ExtResource("15_tk244")]
-visibility_layer = 2
+[node name="HealthRefill" type="Area2D" parent="Spawns" unique_id=932539730 groups=["Entities", "PropSpawns"] instance=ExtResource("15_tk244")]
+z_index = 999
 position = Vector2(2480, 2224)
 prop_path = "res://src/Prop/HealthRefill.tscn"
 properties = {
@@ -442,7 +442,8 @@ properties = {
 
 [node name="Door3" parent="Spawns" unique_id=1800792368 instance=ExtResource("7_v7nqo")]
 modulate = Color(1, 1, 1, 0.75)
-visibility_layer = 2
+z_index = 999
+custom_minimum_size = Vector2(8, 8)
 offset_left = 2512.0
 offset_top = 2240.0
 offset_right = 2528.0
@@ -462,8 +463,8 @@ properties = {
 }
 size_is_default = false
 
-[node name="Sentry" parent="Spawns" unique_id=1199277091 instance=ExtResource("6_dcw0l")]
-visibility_layer = 2
+[node name="Sentry" type="Area2D" parent="Spawns" unique_id=1199277091 groups=["ActorSpawns", "Entities"] instance=ExtResource("6_dcw0l")]
+z_index = 999
 position = Vector2(2600, 2080)
 actor_path = "res://src/Actor/Enemy/Sentry.tscn"
 properties = {
@@ -484,26 +485,24 @@ properties = {
 "water_gravity": [150.0, 3, ""]
 }
 
-[node name="VURect" parent="Spawns/Sentry" unique_id=688682803 instance=ExtResource("15_7v6gq")]
-visibility_layer = 2
+[node name="VURect" type="Node2D" parent="Spawns/Sentry" unique_id=688682803 groups=["Entities", "VURects", "VisualUtilities"] instance=ExtResource("15_7v6gq")]
+script = ExtResource("14_7v6gq")
 tag_name = "player_detector"
 value = Rect2(-128, -128, 256, 256)
 
-[node name="ShootX" parent="Spawns/Sentry" unique_id=1432238783 instance=ExtResource("17_rnumf")]
-visibility_layer = 2
+[node name="ShootX" type="Area2D" parent="Spawns/Sentry" unique_id=1432238783 groups=["Entities", "VisualUtilities", "WaypointLocals", "Waypoints"] instance=ExtResource("17_rnumf")]
 position = Vector2(64, 0)
 tag_name = "shoot_x"
 lock_y = true
 
 [node name="ShootY" parent="Spawns/Sentry" unique_id=595539309 instance=ExtResource("17_rnumf")]
 modulate = Color(0, 1.8247963, 1.8247963, 1)
-visibility_layer = 2
 position = Vector2(0, -64)
 tag_name = "shoot_y"
 lock_x = true
 
-[node name="Sentry1" parent="Spawns" unique_id=986853334 instance=ExtResource("6_dcw0l")]
-visibility_layer = 2
+[node name="Sentry1" type="Area2D" parent="Spawns" unique_id=986853334 groups=["ActorSpawns", "Entities"] instance=ExtResource("6_dcw0l")]
+z_index = 999
 position = Vector2(2648, 2048)
 actor_path = "res://src/Actor/Enemy/Sentry.tscn"
 properties = {
@@ -524,26 +523,24 @@ properties = {
 "water_gravity": [150.0, 3, ""]
 }
 
-[node name="VURect" parent="Spawns/Sentry1" unique_id=1682983982 instance=ExtResource("15_7v6gq")]
-visibility_layer = 2
+[node name="VURect" type="Node2D" parent="Spawns/Sentry1" unique_id=1682983982 groups=["Entities", "VURects", "VisualUtilities"] instance=ExtResource("15_7v6gq")]
+script = ExtResource("14_7v6gq")
 tag_name = "player_detector"
 value = Rect2(-128, -128, 256, 256)
 
-[node name="ShootX" parent="Spawns/Sentry1" unique_id=1771525645 instance=ExtResource("17_rnumf")]
-visibility_layer = 2
+[node name="ShootX" type="Area2D" parent="Spawns/Sentry1" unique_id=1771525645 groups=["Entities", "VisualUtilities", "WaypointLocals", "Waypoints"] instance=ExtResource("17_rnumf")]
 position = Vector2(64, 0)
 tag_name = "shoot_x"
 lock_y = true
 
 [node name="ShootY" parent="Spawns/Sentry1" unique_id=867426649 instance=ExtResource("17_rnumf")]
 modulate = Color(0, 1.8247963, 1.8247963, 1)
-visibility_layer = 2
 position = Vector2(0, -64)
 tag_name = "shoot_y"
 lock_x = true
 
-[node name="Sentry2" parent="Spawns" unique_id=2136017153 instance=ExtResource("6_dcw0l")]
-visibility_layer = 2
+[node name="Sentry2" type="Area2D" parent="Spawns" unique_id=2136017153 groups=["ActorSpawns", "Entities"] instance=ExtResource("6_dcw0l")]
+z_index = 999
 position = Vector2(2680, 2048)
 actor_path = "res://src/Actor/Enemy/Sentry.tscn"
 properties = {
@@ -564,26 +561,24 @@ properties = {
 "water_gravity": [150.0, 3, ""]
 }
 
-[node name="VURect" parent="Spawns/Sentry2" unique_id=1881021360 instance=ExtResource("15_7v6gq")]
-visibility_layer = 2
+[node name="VURect" type="Node2D" parent="Spawns/Sentry2" unique_id=1881021360 groups=["Entities", "VURects", "VisualUtilities"] instance=ExtResource("15_7v6gq")]
+script = ExtResource("14_7v6gq")
 tag_name = "player_detector"
 value = Rect2(-128, -128, 256, 256)
 
-[node name="ShootX" parent="Spawns/Sentry2" unique_id=30317187 instance=ExtResource("17_rnumf")]
-visibility_layer = 2
+[node name="ShootX" type="Area2D" parent="Spawns/Sentry2" unique_id=30317187 groups=["Entities", "VisualUtilities", "WaypointLocals", "Waypoints"] instance=ExtResource("17_rnumf")]
 position = Vector2(64, 0)
 tag_name = "shoot_x"
 lock_y = true
 
 [node name="ShootY" parent="Spawns/Sentry2" unique_id=1075785872 instance=ExtResource("17_rnumf")]
 modulate = Color(0, 1.8247963, 1.8247963, 1)
-visibility_layer = 2
 position = Vector2(0, -64)
 tag_name = "shoot_y"
 lock_x = true
 
-[node name="Sentry3" parent="Spawns" unique_id=56174473 instance=ExtResource("6_dcw0l")]
-visibility_layer = 2
+[node name="Sentry3" type="Area2D" parent="Spawns" unique_id=56174473 groups=["ActorSpawns", "Entities"] instance=ExtResource("6_dcw0l")]
+z_index = 999
 position = Vector2(2712, 2048)
 actor_path = "res://src/Actor/Enemy/Sentry.tscn"
 properties = {
@@ -604,27 +599,25 @@ properties = {
 "water_gravity": [150.0, 3, ""]
 }
 
-[node name="VURect" parent="Spawns/Sentry3" unique_id=1647130205 instance=ExtResource("15_7v6gq")]
-visibility_layer = 2
+[node name="VURect" type="Node2D" parent="Spawns/Sentry3" unique_id=1647130205 groups=["Entities", "VURects", "VisualUtilities"] instance=ExtResource("15_7v6gq")]
+script = ExtResource("14_7v6gq")
 tag_name = "player_detector"
 value = Rect2(-128, -128, 256, 256)
 
 [node name="ShootX" parent="Spawns/Sentry3" unique_id=417413993 instance=ExtResource("17_rnumf")]
 visible = false
-visibility_layer = 2
 position = Vector2(64, 0)
 tag_name = "shoot_x"
 lock_y = true
 
 [node name="ShootY" parent="Spawns/Sentry3" unique_id=1331188293 instance=ExtResource("17_rnumf")]
 modulate = Color(0, 1.8247963, 1.8247963, 1)
-visibility_layer = 2
 position = Vector2(0, -64)
 tag_name = "shoot_y"
 lock_x = true
 
-[node name="Sentry4" parent="Spawns" unique_id=1799588470 instance=ExtResource("6_dcw0l")]
-visibility_layer = 2
+[node name="Sentry4" type="Area2D" parent="Spawns" unique_id=1799588470 groups=["ActorSpawns", "Entities"] instance=ExtResource("6_dcw0l")]
+z_index = 999
 position = Vector2(2744, 2048)
 actor_path = "res://src/Actor/Enemy/Sentry.tscn"
 properties = {
@@ -645,14 +638,13 @@ properties = {
 "water_gravity": [150.0, 3, ""]
 }
 
-[node name="VURect" parent="Spawns/Sentry4" unique_id=1981119342 instance=ExtResource("15_7v6gq")]
-visibility_layer = 2
+[node name="VURect" type="Node2D" parent="Spawns/Sentry4" unique_id=1981119342 groups=["Entities", "VURects", "VisualUtilities"] instance=ExtResource("15_7v6gq")]
+script = ExtResource("14_7v6gq")
 tag_name = "player_detector"
 value = Rect2(-128, -128, 256, 256)
 
 [node name="ShootX" parent="Spawns/Sentry4" unique_id=1699828033 instance=ExtResource("17_rnumf")]
 visible = false
-visibility_layer = 2
 position = Vector2(64, 0)
 tag_name = "shoot_x"
 lock_y = true
@@ -660,13 +652,12 @@ lock_y = true
 [node name="ShootY" parent="Spawns/Sentry4" unique_id=1066131863 instance=ExtResource("17_rnumf")]
 visible = false
 modulate = Color(0, 1.8247963, 1.8247963, 1)
-visibility_layer = 2
 position = Vector2(0, -64)
 tag_name = "shoot_y"
 lock_x = true
 
-[node name="Sentry5" parent="Spawns" unique_id=1959943275 instance=ExtResource("6_dcw0l")]
-visibility_layer = 2
+[node name="Sentry5" type="Area2D" parent="Spawns" unique_id=1959943275 groups=["ActorSpawns", "Entities"] instance=ExtResource("6_dcw0l")]
+z_index = 999
 position = Vector2(2776, 2048)
 actor_path = "res://src/Actor/Enemy/Sentry.tscn"
 properties = {
@@ -687,14 +678,13 @@ properties = {
 "water_gravity": [150.0, 3, ""]
 }
 
-[node name="VURect" parent="Spawns/Sentry5" unique_id=278657433 instance=ExtResource("15_7v6gq")]
-visibility_layer = 2
+[node name="VURect" type="Node2D" parent="Spawns/Sentry5" unique_id=278657433 groups=["Entities", "VURects", "VisualUtilities"] instance=ExtResource("15_7v6gq")]
+script = ExtResource("14_7v6gq")
 tag_name = "player_detector"
 value = Rect2(-128, -128, 256, 256)
 
 [node name="ShootX" parent="Spawns/Sentry5" unique_id=816198350 instance=ExtResource("17_rnumf")]
 visible = false
-visibility_layer = 2
 position = Vector2(64, 0)
 tag_name = "shoot_x"
 lock_y = true
@@ -702,13 +692,12 @@ lock_y = true
 [node name="ShootY" parent="Spawns/Sentry5" unique_id=1956625328 instance=ExtResource("17_rnumf")]
 visible = false
 modulate = Color(0, 1.8247963, 1.8247963, 1)
-visibility_layer = 2
 position = Vector2(0, -64)
 tag_name = "shoot_y"
 lock_x = true
 
-[node name="Golem" parent="Spawns" unique_id=2109360840 instance=ExtResource("6_dcw0l")]
-visibility_layer = 2
+[node name="Golem" type="Area2D" parent="Spawns" unique_id=2109360840 groups=["ActorSpawns", "Entities"] instance=ExtResource("6_dcw0l")]
+z_index = 999
 position = Vector2(2264, 2272)
 actor_path = "res://src/Actor/Enemy/Golem.tscn"
 properties = {
@@ -724,14 +713,16 @@ properties = {
 "water_gravity": [150.0, 3, ""]
 }
 
-[node name="VUVector" parent="Spawns/Golem" unique_id=872564127 instance=ExtResource("17_r87vw")]
-visibility_layer = 2
+[node name="VUVector" type="Area2D" parent="Spawns/Golem" unique_id=872564127 groups=["Entities", "VUVectors", "VisualUtilities"] instance=ExtResource("17_r87vw")]
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("18_bq2j0")
 tag_name = "move_dir"
 direction = Vector2(-1, -8.742278e-08)
 snap_degrees = 180.0
 
-[node name="SaveDisk" parent="Spawns" unique_id=1449282698 instance=ExtResource("15_tk244")]
-visibility_layer = 2
+[node name="SaveDisk" type="Area2D" parent="Spawns" unique_id=1449282698 groups=["Entities", "PropSpawns"] instance=ExtResource("15_tk244")]
+z_index = 999
 position = Vector2(2304, 2064)
 prop_path = "res://src/Prop/SaveDisk.tscn"
 properties = {
@@ -825,20 +816,17 @@ properties = {
 }
 
 [node name="Waypoints" type="Node2D" parent="." unique_id=1140943479]
-visibility_layer = 2
 
 [node name="Notes" type="Node2D" parent="." unique_id=577013387]
-visibility_layer = 2
 
-[node name="VanishingPoint" parent="." unique_id=852042071 instance=ExtResource("7_mlr58")]
-visibility_layer = 2
+[node name="VanishingPoint" type="Area2D" parent="." unique_id=852042071 groups=["VanishingPoints"] instance=ExtResource("7_mlr58")]
+z_index = 999
 position = Vector2(2288, 1832)
 
-[node name="SpawnPoint" parent="." unique_id=1505342073 instance=ExtResource("5_sjslv")]
-visibility_layer = 2
+[node name="SpawnPoint" type="Area2D" parent="." unique_id=1505342073 groups=["SpawnPoints"] instance=ExtResource("5_sjslv")]
 position = Vector2(2536, 2048)
 
-[node name="TitlePreview" parent="." unique_id=2052223351 instance=ExtResource("14_iuj41")]
-visibility_layer = 2
+[node name="TitlePreview" type="Area2D" parent="." unique_id=2052223351 groups=["TitlePreviews"] instance=ExtResource("14_iuj41")]
+z_index = 999
 position = Vector2(2496, 2016)
 zoom = 2.0

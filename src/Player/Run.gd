@@ -66,7 +66,7 @@ func state_process(delta):
 func jump_processing():
 	if f.db():
 		if f.db().is_exiting:
-			return #prevent the jump while db exists and is not exiting, this does allow holdjumping, though
+			return #prevent the jump while the db is exiting, so the ui_accept press that closed it doesn't also jump
 
 	if inp.pressed("jump") && inp.held("look_down") && pc.is_on_ssp && inp.can_act:
 		is_dropping = true
@@ -832,7 +832,7 @@ func play_animation(animation):
 
 	var run_group = ["run", "crouch_run", "back_run"]
 	#var edge_group = ["edge", "edge_front"] #dont blend these
-	var stand_group = ["edge_turn", "stand", "crouch", "stand_close", "stand_close_reverse", "slight_up_slope", "slight_down_slope", "up_slope", "down_slope", "up_slope_to_stand", "stand_to_up_slope", "stand_to_down_slope", "down_slope_to_stnad", "peak", "valley", "push", "slight_up_push", "slight_down_push", "up_push", "down_push"]
+	var stand_group = ["edge_turn", "stand", "crouch", "stand_close", "stand_close_reverse", "slight_up_slope", "slight_down_slope", "up_slope", "down_slope", "up_slope_to_stand", "stand_to_up_slope", "stand_to_down_slope", "down_slope_to_stand", "peak", "valley", "push", "slight_up_push", "slight_down_push", "up_push", "down_push"]
 
 	if run_group.has(animation):
 		ap.speed_scale = max((abs(pc.velocity.x)/mm.speed.x) * 2.0, 0.1)

@@ -12,6 +12,7 @@ func _ready():
 	automatic = true
 	ammo = 200
 	max_level = 3
+	xp_loss_multiplier = 20
 	set_level(level)
 
 func _set_level(val: int) -> void:

@@ -20,7 +20,6 @@ metadata/_snap_enabled = true
 metadata/_snap_count = 12
 
 [node name="MissionTest" type="Node2D" unique_id=734148647]
-visibility_layer = 2
 script = ExtResource("1_53evh")
 level_name = "MissionTest"
 dialog_json = "res://src/Dialog/MissionTest.json"
@@ -29,7 +28,6 @@ debug_main_mission_stage_name = "talk_npc_a"
 controller_color_gradient = SubResource("Gradient_53evh")
 
 [node name="LevelLimiter" parent="." unique_id=1355825292 instance=ExtResource("2_72to3")]
-visibility_layer = 2
 offset_left = 16.0
 offset_top = 32.0
 offset_right = 1040.0
@@ -54,50 +52,40 @@ layer_height_offsets = {
 tile_mode = 1
 
 [node name="TileMap" type="Node2D" parent="." unique_id=1251495005]
-visibility_layer = 2
 z_index = 1
 
 [node name="FarBack" type="TileMapLayer" parent="TileMap" unique_id=390810820]
-visibility_layer = 2
 z_index = -2
 use_parent_material = true
 tile_set = ExtResource("5_5uu0q")
 
 [node name="Back" type="TileMapLayer" parent="TileMap" unique_id=54725277]
-visibility_layer = 2
 z_index = -1
 use_parent_material = true
 tile_map_data = PackedByteArray("AAAZABAAAAAAAAQAAAAZABEAAAAAAAUAAAARAAYAAAAAAAQAAAARAAcAAAAAAAUAAAAMAAYAAAAAAAQAAAAMAAcAAAAAAAUAAAAHAAYAAAAAAAQAAAAHAAcAAAAAAAUAAAACAAYAAAAAAAQAAAACAAcAAAAAAAUAAAA=")
 tile_set = ExtResource("5_5uu0q")
 
 [node name="Front" type="TileMapLayer" parent="TileMap" unique_id=1369203978]
-visibility_layer = 2
 z_index = 1
 use_parent_material = true
 tile_map_data = PackedByteArray("AAABAAIAAAAAAAgAAAABAAMAAAAAAAgAAAABAAQAAAAAAAgAAAABAAYAAAAAAAgAAAABAAUAAAAAAAgAAAABAAcAAAAAAAgAAAABAAgAAAAAAAgAAAABAAkAAAAAAAgAAAABAAoAAAAAAAgAAAABAAsAAAAAAAgAAAABAAwAAAAAAAgAAAABAA0AAAAAAAgAAAABAA4AAAAAAAgAAAABAA8AAAAAAAgAAAABABAAAAAAAAgAAAABABEAAAAAAAgAAAABABIAAAAAAAgAAAACABIAAAAAAAgAAAADABIAAAAAAAgAAAAEABIAAAAAAAgAAAAFABIAAAAAAAgAAAAGABIAAAAAAAgAAAAHABIAAAAAAAgAAAAIABIAAAAAAAgAAAAJABIAAAAAAAgAAAAKABIAAAAAAAgAAAALABIAAAAAAAgAAAAMABIAAAAAAAgAAAANABIAAAAAAAgAAAAOABIAAAAAAAgAAAAPABIAAAAAAAgAAAAQABIAAAAAAAgAAAARABIAAAAAAAgAAAASABIAAAAAAAgAAAATABIAAAAAAAgAAAAUABIAAAAAAAgAAAAVABIAAAAAAAgAAAAWABIAAAAAAAgAAAAXABIAAAAAAAgAAAAYABIAAAAAAAgAAAAZABIAAAAAAAgAAAAaABIAAAAAAAgAAAAbABIAAAAAAAgAAAAcABIAAAAAAAgAAAAdABIAAAAAAAgAAAAeABIAAAAAAAgAAAAfABIAAAAAAAgAAAAgABIAAAAAAAgAAAAhABIAAAAAAAgAAAAiABIAAAAAAAgAAAAjABIAAAAAAAgAAAACAAsAAAAAAAgAAAADAAsAAAAAAAgAAAAEAAsAAAAAAAgAAAAGAAsAAAAAAAgAAAAJAAsAAAAAAAgAAAALAAsAAAAAAAgAAAAMAAsAAAAAAAgAAAANAAsAAAAAAAgAAAAOAAsAAAAAAAgAAAAQAAsAAAAAAAgAAAAPAAsAAAAAAAgAAAAKAAsAAAAAAAgAAAAIAAsAAAAAAAgAAAAHAAsAAAAAAAgAAAAFAAsAAAAAAAgAAAARAAsAAAAAAAgAAAARAAgAAAAAAAgAAAAQAAgAAAAAAAgAAAAPAAgAAAAAAAgAAAAOAAgAAAAAAAgAAAANAAgAAAAAAAgAAAAMAAgAAAAAAAgAAAALAAgAAAAAAAgAAAAKAAgAAAAAAAgAAAAJAAgAAAAAAAgAAAAIAAgAAAAAAAgAAAAHAAgAAAAAAAgAAAAGAAgAAAAAAAgAAAAFAAgAAAAAAAgAAAAEAAgAAAAAAAgAAAADAAgAAAAAAAgAAAACAAgAAAAAAAgAAAAGAAkAAAAAAAgAAAAGAAoAAAAAAAgAAAALAAkAAAAAAAgAAAALAAoAAAAAAAgAAAAQAAkAAAAAAAgAAAAQAAoAAAAAAAgAAAASAAgAAAAAAAgAAAATAAgAAAAAAAgAAAAUAAgAAAAAAAgAAAAUAAsAAAAAAAgAAAAVAAgAAAAAAAgAAAAVAAkAAAAAAAgAAAAVAAoAAAAAAAgAAAAVAAsAAAAAAAgAAAATAAsAAAAAAAgAAAASAAsAAAAAAAgAAAACAA4AAAAAAAgAAAADAA4AAAAAAAgAAAAEAA4AAAAAAAgAAAAFAA4AAAAAAAgAAAAGAA4AAAAAAAgAAAAHAA4AAAAAAAgAAAAIAA4AAAAAAAgAAAAJAA4AAAAAAAgAAAAKAA4AAAAAAAgAAAALAA4AAAAAAAgAAAAMAA4AAAAAAAgAAAANAA4AAAAAAAgAAAAOAA4AAAAAAAgAAAAPAA4AAAAAAAgAAAAQAA4AAAAAAAgAAAARAA4AAAAAAAgAAAASAA4AAAAAAAgAAAATAA4AAAAAAAgAAAAUAA4AAAAAAAgAAAAVAA4AAAAAAAgAAAAVAA0AAAAAAAgAAAAVAAwAAAAAAAgAAAAQAAwAAAAAAAgAAAAQAA0AAAAAAAgAAAALAAwAAAAAAAgAAAALAA0AAAAAAAgAAAAGAAwAAAAAAAgAAAAGAA0AAAAAAAgAAAAWAA8AAAAIAAgAAAAYAAwAAAAIAAgAAAAWAAkAAAAIAAgAAAA=")
 tile_set = ExtResource("5_5uu0q")
 
 [node name="FarFront" type="TileMapLayer" parent="TileMap" unique_id=444515251]
-visibility_layer = 2
 z_index = 2
 use_parent_material = true
 tile_map_data = PackedByteArray("AAAWAA8AAAAIAAwAAAAYAAwAAAAIAAwAAAAWAAkAAAAIAAwAAAA=")
 tile_set = ExtResource("5_5uu0q")
 
 [node name="Props" type="Node2D" parent="." unique_id=319539188]
-visibility_layer = 2
 
 [node name="Actors" type="Node2D" parent="." unique_id=681899524]
-visibility_layer = 2
 
 [node name="Triggers" type="Node2D" parent="." unique_id=1134904630]
-visibility_layer = 2
 
 [node name="Spawns" type="Node2D" parent="." unique_id=1116492951]
-visibility_layer = 2
 
 [node name="Nun" parent="Spawns" unique_id=1776323782 instance=ExtResource("7_72to3")]
-visibility_layer = 2
 position = Vector2(304, 288)
 actor_path = "res://src/Actor/NPC/Nun.tscn"
 properties = {
@@ -113,7 +101,6 @@ properties = {
 }
 
 [node name="Tabith" parent="Spawns" unique_id=1167471834 instance=ExtResource("7_72to3")]
-visibility_layer = 2
 position = Vector2(64, 288)
 actor_path = "res://src/Actor/NPC/Tabith.tscn"
 properties = {
@@ -129,7 +116,6 @@ properties = {
 }
 
 [node name="Sage" parent="Spawns" unique_id=757585549 instance=ExtResource("7_72to3")]
-visibility_layer = 2
 position = Vector2(144, 288)
 actor_path = "res://src/Actor/NPC/Sage.tscn"
 properties = {
@@ -145,7 +131,6 @@ properties = {
 }
 
 [node name="Basil" parent="Spawns" unique_id=282322422 instance=ExtResource("7_72to3")]
-visibility_layer = 2
 position = Vector2(232, 288)
 actor_path = "res://src/Actor/NPC/Basil.tscn"
 properties = {
@@ -161,7 +146,6 @@ properties = {
 }
 
 [node name="ChestItem" parent="Spawns" unique_id=201010743 instance=ExtResource("9_leir5")]
-visibility_layer = 2
 position = Vector2(360, 272)
 prop_path = "res://src/Prop/ChestItem.tscn"
 properties = {
@@ -172,7 +156,6 @@ properties = {
 }
 
 [node name="BreakBlock" parent="Spawns" unique_id=40938396 instance=ExtResource("9_leir5")]
-visibility_layer = 2
 position = Vector2(32, 208)
 prop_path = "res://src/Prop/BreakBlock.tscn"
 properties = {
@@ -184,7 +167,6 @@ properties = {
 }
 
 [node name="BreakBlock1" parent="Spawns" unique_id=914819466 instance=ExtResource("9_leir5")]
-visibility_layer = 2
 position = Vector2(112, 208)
 prop_path = "res://src/Prop/BreakBlock.tscn"
 properties = {
@@ -196,7 +178,6 @@ properties = {
 }
 
 [node name="BreakBlock2" parent="Spawns" unique_id=1933557594 instance=ExtResource("9_leir5")]
-visibility_layer = 2
 position = Vector2(192, 208)
 prop_path = "res://src/Prop/BreakBlock.tscn"
 properties = {
@@ -208,7 +189,6 @@ properties = {
 }
 
 [node name="BreakBlock3" parent="Spawns" unique_id=1524820434 instance=ExtResource("9_leir5")]
-visibility_layer = 2
 position = Vector2(272, 208)
 prop_path = "res://src/Prop/BreakBlock.tscn"
 properties = {
@@ -221,7 +201,6 @@ properties = {
 
 [node name="Door" parent="Spawns" unique_id=2122957837 instance=ExtResource("11_1n8rj")]
 modulate = Color(1, 1, 1, 0.75)
-visibility_layer = 2
 offset_left = 32.0
 offset_top = 96.0
 offset_right = 48.0
@@ -241,7 +220,6 @@ size_is_default = false
 
 [node name="Door1" parent="Spawns" unique_id=12704265 instance=ExtResource("11_1n8rj")]
 modulate = Color(1, 1, 1, 0.75)
-visibility_layer = 2
 offset_left = 112.0
 offset_top = 96.0
 offset_right = 128.0
@@ -261,7 +239,6 @@ size_is_default = false
 
 [node name="Door2" parent="Spawns" unique_id=1077282901 instance=ExtResource("11_1n8rj")]
 modulate = Color(1, 1, 1, 0.75)
-visibility_layer = 2
 offset_left = 192.0
 offset_top = 96.0
 offset_right = 208.0
@@ -281,7 +258,6 @@ size_is_default = false
 
 [node name="Door3" parent="Spawns" unique_id=1453521036 instance=ExtResource("11_1n8rj")]
 modulate = Color(1, 1, 1, 0.75)
-visibility_layer = 2
 offset_left = 272.0
 offset_top = 96.0
 offset_right = 288.0
@@ -301,7 +277,6 @@ size_is_default = false
 
 [node name="Door4" parent="Spawns" unique_id=1797776311 instance=ExtResource("11_1n8rj")]
 modulate = Color(1, 1, 1, 0.75)
-visibility_layer = 2
 offset_left = 400.0
 offset_top = 256.0
 offset_right = 416.0
@@ -320,7 +295,6 @@ properties = {
 size_is_default = false
 
 [node name="AmmoRefill" parent="Spawns" unique_id=1449282698 instance=ExtResource("9_leir5")]
-visibility_layer = 2
 position = Vector2(80, 208)
 prop_path = "res://src/Prop/AmmoRefill.tscn"
 properties = {
@@ -330,19 +304,14 @@ properties = {
 }
 
 [node name="Waypoints" type="Node2D" parent="." unique_id=1416282546]
-visibility_layer = 2
 
 [node name="Notes" type="Node2D" parent="." unique_id=1550338718]
-visibility_layer = 2
 
 [node name="VanishingPoint" parent="." unique_id=9884164 instance=ExtResource("9_if8wo")]
-visibility_layer = 2
 position = Vector2(296, -152)
 
 [node name="SpawnPoint" parent="." unique_id=422711910 instance=ExtResource("10_h4mej")]
-visibility_layer = 2
 position = Vector2(184, 288)
 
 [node name="TitlePreview" parent="." unique_id=2052223351 instance=ExtResource("11_53evh")]
-visibility_layer = 2
 position = Vector2(256, 168)

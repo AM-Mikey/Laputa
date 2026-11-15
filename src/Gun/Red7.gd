@@ -17,6 +17,7 @@ func _ready():
 	max_ammo = 0
 	max_level = 3
 	max_unlocked_level = 1
+	xp_loss_multiplier = 15
 	set_level(level)
 
 func _set_level(val: int) -> void:
