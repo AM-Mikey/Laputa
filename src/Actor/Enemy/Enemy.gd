@@ -42,7 +42,6 @@ func _ready():
 	var state_label = STATE_LABEL.instantiate()
 	add_child(state_label)
 	state_label.visible = debug
-	safe_margin = 0.001
 	setup()
 
 func setup(): #EVERY ENEMY MUST HAVE

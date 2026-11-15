@@ -50,6 +50,7 @@ func setup():
 			$Sprite2D.texture = TX_2
 	damage_on_contact = base_damage
 	enemy_damage_on_contact = 999
+	safe_margin = 0.08
 	speed = Vector2.ZERO
 	gravity = 0
 	w.emit_signal("finished_spawn_entities_step")
@@ -66,6 +67,7 @@ func _on_physics_process(_delta):
 	velocity.y = min(velocity.y, terminal_drop_velocity)
 	set_up_direction(FLOOR_NORMAL)
 	move_and_slide()
+	_check_run_wall()
 
 
 func enter_hang(_last_state):
@@ -112,15 +114,16 @@ func enter_squirm(_last_state):
 	$CollisionShape2D.set_deferred("disabled", true)
 	$GroundedCollision.set_deferred("disabled", false)
 
-	if target:
+	move_dir = Vector2.ZERO
+	if is_instance_valid(target):
 		match difficulty:
 			1:
-				move_dir = Vector2(sign(position.x - target.position.x), 0) #opposite direction of player
+				move_dir = Vector2(sign(global_position.x - target.global_position.x), 0) #opposite direction of player
 			2:
-				move_dir = Vector2(sign(target.position.x - position.x), 0) #direction of player
-	else:
-		# Randomize direction if no target exists
-		move_dir = Vector2([-1.0, 1.0].get(randi_range(0, 1)), 0)
+				move_dir = Vector2(sign(target.global_position.x - global_position.x), 0) #direction of player
+	if move_dir == Vector2.ZERO:
+		#Randomize direction if no target exists or the player is exactly underneath
+		move_dir = Vector2([-1.0, 1.0].pick_random(), 0)
 	match move_dir:
 		Vector2.LEFT: $Sprite2D.flip_h = false
 		Vector2.RIGHT: $Sprite2D.flip_h = true
@@ -137,15 +140,34 @@ func enter_run(_last_state):
 	$WallLeft.enabled = true
 
 func do_run(_delta):
-	match move_dir:
-		Vector2.LEFT:
-			$Sprite2D.flip_h = false
-			if ($WallLeft.is_colliding()):
-				move_dir = Vector2.RIGHT
-		Vector2.RIGHT:
-			$Sprite2D.flip_h = true
-			if ($WallRight.is_colliding()):
-				move_dir = Vector2.LEFT
+	var ahead := _wall_ray(move_dir)
+	var behind := _wall_ray(-move_dir)
+	#only turn when the way back is open, otherwise stop
+	if ahead && ahead.is_colliding() && !(behind && behind.is_colliding()):
+		_turn_around()
+	$Sprite2D.flip_h = move_dir == Vector2.RIGHT
+
+
+func _check_run_wall():
+	#catches obstacles the wall rays miss (low steps, corners)
+	if state != "run" || !is_on_wall(): return
+	var wall_normal := get_wall_normal()
+	if sign(wall_normal.x) != -sign(move_dir.x): return # wall isn't in our movement direction
+	var behind := _wall_ray(-move_dir)
+	if behind && behind.is_colliding(): return
+	_turn_around()
+
+
+func _turn_around():
+	move_dir = -move_dir
+	$Sprite2D.flip_h = move_dir == Vector2.RIGHT
+
+
+func _wall_ray(dir: Vector2) -> RayCast2D:
+	match dir:
+		Vector2.LEFT: return $WallLeft
+		Vector2.RIGHT: return $WallRight
+	return null
 
 
 func exit_run(_next_state):
@@ -168,10 +190,8 @@ func stake_shake():
 		var player_distance = f.pc().global_position.distance_to(global_position)
 		var max_distance := 512
 		var max_shape_pixels := 4.0
-		#var fall_velocity_modifier := (velocity.y * 300.0) / terminal_drop_velocity
 		var shake_pixels = remap(player_distance, 0, max_distance, max_shape_pixels, 0.0)
 		shake_pixels = clampf(shake_pixels, 0.0, max_shape_pixels)
-		#shake_pixels *= fall_velocity_modifier
 		f.pc().get_node("PlayerCamera").shake(shake_pixels, 0.2, 4.0)
 
 func land_impulse():
@@ -179,10 +199,8 @@ func land_impulse():
 		var player_distance = f.pc().global_position.distance_to(global_position)
 		var max_distance := 512
 		var max_shape_pixels := 2.0
-		#var fall_velocity_modifier := (velocity.y * 300.0) / terminal_drop_velocity
 		var shake_pixels = remap(player_distance, 0, max_distance, max_shape_pixels, 0.0)
 		shake_pixels = clampf(shake_pixels, 0.0, max_shape_pixels)
-		#shake_pixels *= fall_velocity_modifier
 		f.pc().get_node("PlayerCamera").impulse(Vector2.DOWN, shake_pixels, 0.2, land_impulse_curve)
 
 ### SIGNALS ###
