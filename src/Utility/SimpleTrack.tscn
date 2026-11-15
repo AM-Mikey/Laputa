@@ -11,5 +11,6 @@ position = Vector2(-8, -8)
 curve = SubResource("1")
 
 [node name="PathFollow2D" type="PathFollow2D" parent="."]
+physics_interpolation_mode = 2
 position = Vector2(-24, 40)
 rotation = -1.55613
