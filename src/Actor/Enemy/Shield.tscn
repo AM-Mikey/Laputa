@@ -1022,7 +1022,7 @@ _data = {
 }
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_tk834"]
-size = Vector2(18, 7)
+size = Vector2(4, 20)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_kcsk2"]
 size = Vector2(22, 2)
@@ -1090,7 +1090,7 @@ script = ExtResource("3_kcsk2")
 block_dir = Vector2(-1, 0)
 
 [node name="Side" type="CollisionShape2D" parent="Armor" unique_id=999651742]
-position = Vector2(-4.5, -10)
+position = Vector2(-9, -10)
 shape = SubResource("RectangleShape2D_tk834")
 debug_color = Color(0, 1, 0, 0.23529412)
 

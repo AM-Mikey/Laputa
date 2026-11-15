@@ -129,6 +129,7 @@ func _on_CollisionDetector_area_entered(area): #shadows
 	#enemyhurt
 	if area.get_collision_layer_value(18):
 		if $BounceGraceTimer.time_left <= 0.0:
+			if blocked_by_armor_on_path(): return
 			var blood_dir = get_blood_dir(area.get_parent())
 			if not touched_floor:
 				area.get_parent().hit(damage, blood_dir, $PlayerCollisionDetector, blood_dir, knockback_strength)
