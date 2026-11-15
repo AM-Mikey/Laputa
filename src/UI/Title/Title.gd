@@ -1,7 +1,8 @@
 extends Control
 
 const KEY_GUIDE = preload("res://src/UI/KeyGuide.tscn")
-const LEVELSELECT = preload("res://src/UI/LevelSelect/LevelSelect.tscn")
+const LEVEL_SELECT = preload("res://src/UI/LevelSelect/LevelSelect.tscn")
+const FILE_SELECT = preload("res://src/UI/FileSelect/FileSelect.tscn")
 const OPTIONS = preload("res://src/UI/Options/Options.tscn")
 
 @onready var w = get_tree().get_root().get_node("World")
@@ -60,17 +61,18 @@ func _on_continue():
 	exit()
 
 func _on_new():
+	SaveSystem.current_slot = SaveSystem.get_last_valid_slot() + 1
 	w.change_level_via_code(w.start_level_path, false)
 	exit()
 
 func _on_load():
-	pass
+	get_parent().add_child(FILE_SELECT.instantiate())
 
 func _on_options():
 	get_parent().add_child(OPTIONS.instantiate())
 
 func _on_level():
-	get_parent().add_child(LEVELSELECT.instantiate())
+	get_parent().add_child(LEVEL_SELECT.instantiate())
 
 func _on_quit():
 	for kb in get_tree().get_nodes_in_group("KillBoxes"):

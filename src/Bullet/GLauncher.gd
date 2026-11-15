@@ -13,7 +13,7 @@ var touched_floor = false
 
 @onready var pc = f.pc()
 @onready var pc_on_floor = pc.is_on_floor()
-@onready var pc_held_down = Input.is_action_pressed("look_down") && inp.can_act
+@onready var pc_held_down = inp.analogstick.y >= inp.Y_axis_shoot_deadzone && inp.can_act
 
 
 

@@ -42,6 +42,8 @@ var control_active := false
 var control_target: Node = null #reference to a node, not strictly necessary but saves performance
 
 func _ready():
+	#physics interpolation runs update on beginning and whenever camera is transformed on a tick. remove the update on transform
+	set_notify_transform(false)
 	noise.frequency = 1.0  #baseline shake
 	default_impulse_curve = Curve.new()
 	default_impulse_curve.add_point(Vector2(0.0, 0.0))
@@ -52,6 +54,13 @@ func _ready():
 	vs.connect("scale_changed", Callable(self, "_resolution_scale_changed"))
 	_resolution_scale_changed(vs.resolution_scale)
 	control_processing()
+
+func _physics_process(_delta):
+	#don't eat presses meant for ladders/inspect
+	if !control_active and !pc.disabled and inp.can_act and !pc.mm.current_state == pc.mm.states["inspect"]:
+		if inp.just_pressed("look_up") or inp.just_pressed("look_down") \
+		or inp.just_released("look_up") or inp.just_released("look_down"):
+			pan_vertical(get_v_dir())
 
 func _process(delta):
 	#print("offset: ", offset, "limit left: ", limit_left)
@@ -64,10 +73,6 @@ func _process(delta):
 			if h_tween.is_running():
 				h_tween.set_speed_scale(max(abs(pc.velocity.x)/mm.speed.x, h_pan_min_speed))
 
-		if !pc.disabled and inp.can_act and !pc.mm.current_state == pc.mm.states["inspect"]:
-			if inp.pressed("look_up",1) or inp.pressed("look_down",1) \
-			or inp.released("look_up") or inp.released("look_down"):
-				pan_vertical(get_v_dir())
 
 		process_shake(delta)
 	#else:
@@ -82,14 +87,14 @@ func pan_vertical(dir):
 	var dist = v_pan_distance / vs.resolution_scale
 	if v_tween:
 		v_tween.kill()
-	v_tween = create_tween()
+	v_tween = create_tween().set_process_mode(Tween.TWEEN_PROCESS_PHYSICS) #camera is sampled on physics ticks
 	v_tween.tween_property(self, "drag_vertical_offset", dir * dist, v_pan_time).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT).set_delay(v_pan_delay) #TODO: dir*dist here is technically incorrect since we just need a value between -1 and 1. this howevwer affects the speed, and it feels good as is now
 
 func pan_horizontal(dir):
 	var dist = h_pan_distance / vs.resolution_scale
 	if h_tween:
 		h_tween.kill()
-	h_tween = create_tween()
+	h_tween = create_tween().set_process_mode(Tween.TWEEN_PROCESS_PHYSICS) #camera is sampled on physics ticks
 	h_tween.tween_property(self, "drag_horizontal_offset", dir * dist, h_pan_time).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT).set_delay(h_pan_delay)
 
 func stop_tweens():
@@ -102,8 +107,10 @@ func reset(): #TODO: REMOVE THESE AWAITS IT CAUSES SHIT TO MULTITHREAD
 	position_smoothing_enabled = false #reset_smoothing() has issues
 	drag_horizontal_offset =  pc.look_dir.x * (h_pan_distance / vs.resolution_scale) #initialize camera offset
 	force_update_scroll()
-	await get_tree().process_frame #godot quirk that this requires two frames
-	await get_tree().process_frame
+	pc.reset_physics_interpolation() #snap player and camera instead of interpolating from the old position
+	await get_tree().physics_frame #with physics interpolation the camera only updates on physics ticks, so wait for ticks instead of rendered frames
+	await get_tree().physics_frame
+	pc.reset_physics_interpolation()
 	position_smoothing_enabled = true
 
 
@@ -251,18 +258,18 @@ func control_to_position(target_pos: Vector2, speed: float, do_player_drag_offse
 	global_position = get_target_position()
 	limit_enabled = false
 
-	control_tween = create_tween()
+	control_tween = create_tween().set_process_mode(Tween.TWEEN_PROCESS_PHYSICS) #camera is sampled on physics ticks
 	if limit_pos(target_pos) != target_pos: #target is outside limits
 		var drag_time = (limit_pos(target_pos) - global_position).length() / (speed * 16.0)
 		control_tween.tween_property(self, "global_position", limited_overshoot_pos, drag_time * 0.8).set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_IN_OUT)
 		await control_tween.finished
-		control_return_tween = create_tween()
+		control_return_tween = create_tween().set_process_mode(Tween.TWEEN_PROCESS_PHYSICS) #camera is sampled on physics ticks
 		control_return_tween.tween_property(self, "global_position", limit_pos(target_pos), drag_time * 0.2).set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_OUT)
 	else:
 		var drag_time = (target_pos - global_position).length() / (speed * 16.0)
 		control_tween.tween_property(self, "global_position", overshoot_pos, drag_time * 0.8).set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_IN_OUT)
 		await control_tween.finished
-		control_return_tween = create_tween()
+		control_return_tween = create_tween().set_process_mode(Tween.TWEEN_PROCESS_PHYSICS) #camera is sampled on physics ticks
 		control_return_tween.tween_property(self, "global_position", target_pos, drag_time * 0.2).set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_OUT)
 
 	await control_return_tween.finished

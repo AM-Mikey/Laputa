@@ -15,6 +15,7 @@ func _ready():
 	automatic = false
 	max_ammo = 0
 	max_level = 3
+	xp_loss_multiplier = 15
 	set_level(level)
 	cd.connect("timeout", Callable(self, "_on_cd_timeout"))
 
@@ -64,7 +65,7 @@ func _on_cd_timeout():
 		am.play(cock_sfx)
 		oup.vibrate_impulse_light(0.1, 0.1)
 
-#old code for charging varient
+#old code for charging variant
 #func activate():
 	#$ChargeTimer.start(max_time)
 	##print("start_charge", max_time)

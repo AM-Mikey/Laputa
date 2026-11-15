@@ -1,0 +1,8 @@
+[gd_scene format=3 uid="uid://c01er7d0yq4k4"]
+
+[ext_resource type="StyleBox" uid="uid://djnu2b18r7r1d" path="res://src/UI/StyleBox/Cursor.tres" id="1_7b8jw"]
+[ext_resource type="Script" uid="uid://eoehagrvdoxx" path="res://src/UI/FocusCursor.gd" id="2_q4g2c"]
+
+[node name="FocusCursor" type="Panel" unique_id=710479866]
+theme_override_styles/panel = ExtResource("1_7b8jw")
+script = ExtResource("2_q4g2c")

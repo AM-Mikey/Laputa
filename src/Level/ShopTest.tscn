@@ -29,7 +29,6 @@ metadata/_snap_enabled = true
 metadata/_snap_count = 12
 
 [node name="ShopTest" type="Node2D" unique_id=1288213928]
-visibility_layer = 2
 script = ExtResource("1_wmuix")
 level_name = "ShopTest"
 music = "shop"
@@ -42,7 +41,6 @@ debug_items_on_enter = Array[String](["BlueprintTurnstileJumper", "BlueprintRobe
 controller_color_gradient = SubResource("Gradient_6cuym")
 
 [node name="LevelLimiter" type="MarginContainer" parent="." unique_id=479239004 instance=ExtResource("2_b6beq")]
-visibility_layer = 2
 offset_left = 1600.0
 offset_top = 1600.0
 offset_right = 2064.0
@@ -69,51 +67,41 @@ layer_height_offsets = {
 tile_mode = 1
 
 [node name="TileMap" type="Node2D" parent="." unique_id=369506391]
-visibility_layer = 2
 
 [node name="FarBack" type="TileMapLayer" parent="TileMap" unique_id=586456315]
-visibility_layer = 2
 z_index = -2
 use_parent_material = true
 tile_map_data = PackedByteArray("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AABpAGkAAAAFAAEAAABqAGkAAAAGAAEAAABrAGkAAAAHAAEAAABsAGkAAAAEAAEAAABtAGkAAAAFAAEAAABuAGkAAAAGAAEAAABvAGkAAAAHAAEAAABwAGkAAAAEAAEAAABxAGkAAAAFAAEAAAByAGkAAAAGAAEAAABzAGkAAAAHAAEAAAB0AGkAAAAEAAEAAAB1AGkAAAAFAAEAAAB2AGkAAAAGAAEAAAB3AGkAAAAHAAEAAAB4AGkAAAAEAAEAAAB5AGkAAAAFAAEAAAB6AGkAAAAGAAEAAAB7AGkAAAAHAAEAAAB8AGkAAAAEAAEAAAB9AGkAAAAFAAEAAAB+AGkAAAADAAAAAAB/AGkAAAADAAAAAACAAGkAAAADAAAAAABkAGoAAAABAAAAAABlAGoAAAABAAAAAABmAGoAAAABAAAAAABnAGoAAAAHAAIAAABoAGoAAAAEAAIAAABpAGoAAAAFAAIAAABqAGoAAAAGAAIAAABrAGoAAAAHAAIAAABsAGoAAAAEAAIAAABtAGoAAAAFAAIAAABuAGoAAAAGAAIAAABvAGoAAAAHAAIAAABwAGoAAAAEAAIAAABxAGoAAAAFAAIAAAByAGoAAAAGAAIAAABzAGoAAAAHAAIAAAB0AGoAAAAEAAIAAAB1AGoAAAAFAAIAAAB2AGoAAAAGAAIAAAB3AGoAAAAHAAIAAAB4AGoAAAAEAAIAAAB5AGoAAAAFAAIAAAB6AGoAAAAGAAIAAAB7AGoAAAAHAAIAAAB8AGoAAAAEAAIAAAB9AGoAAAAFAAIAAAB+AGoAAAADAAAAAAB/AGoAAAADAAAAAACAAGoAAAADAAAAAABkAGsAAAABAAAAAABlAGsAAAABAAAAAABmAGsAAAAGAAMAAABnAGsAAAAHAAMAAABoAGsAAAAEAAMAAABrAGsAAAAHAAMAAABsAGsAAAAEAAMAAABtAGsAAAAFAAMAAABuAGsAAAAGAAMAAABvAGsAAAAGAAIAAABwAGsAAAAHAAIAAABxAGsAAAAGAAIAAAByAGsAAAAHAAIAAABzAGsAAAAGAAIAAAB0AGsAAAAHAAIAAAB1AGsAAAAGAAIAAAB2AGsAAAAGAAMAAAB3AGsAAAAHAAMAAAB4AGsAAAAEAAMAAAB5AGsAAAAFAAMAAAB6AGsAAAAGAAMAAAB7AGsAAAAHAAMAAAB8AGsAAAAEAAMAAAB9AGsAAAAFAAMAAAB+AGsAAAADAAAAAAB/AGsAAAADAAAAAACAAGsAAAADAAAAAABkAGwAAAABAAAAAABlAGwAAAABAAAAAABmAGwAAAABAAAAAABnAGwAAAAGAAIAAABoAGwAAAAHAAIAAABpAGwAAAAGAAIAAABqAGwAAAAHAAIAAABrAGwAAAAGAAIAAABsAGwAAAAHAAIAAABtAGwAAAAGAAIAAABuAGwAAAAHAAIAAABvAGwAAAAGAAMAAABwAGwAAAAHAAMAAABxAGwAAAAGAAMAAAByAGwAAAAHAAMAAABzAGwAAAAGAAMAAAB0AGwAAAAHAAMAAAB1AGwAAAAGAAMAAAB2AGwAAAAGAAAAAAB3AGwAAAAHAAAAAAB4AGwAAAAEAAAAAAB5AGwAAAAFAAAAAAB6AGwAAAAGAAAAAAB7AGwAAAAHAAAAAAB8AGwAAAAEAAAAAAB9AGwAAAAFAAAAAAB+AGwAAAADAAAAAAB/AGwAAAADAAAAAACAAGwAAAADAAAAAABkAG0AAAABAAAAAABlAG0AAAABAAAAAABmAG0AAAABAAAAAABnAG0AAAAGAAMAAABoAG0AAAAHAAMAAABpAG0AAAAGAAMAAABqAG0AAAAHAAMAAABrAG0AAAAGAAMAAABsAG0AAAAHAAMAAABtAG0AAAAGAAMAAABuAG0AAAAHAAMAAABvAG0AAAAGAAIAAABwAG0AAAAHAAIAAABxAG0AAAAHAAIAAAByAG0AAAAHAAIAAABzAG0AAAAHAAEAAAB0AG0AAAAEAAEAAAB1AG0AAAAFAAEAAAB2AG0AAAAGAAEAAAB3AG0AAAAHAAEAAAB4AG0AAAAEAAEAAAB5AG0AAAAFAAEAAAB6AG0AAAAGAAEAAAB7AG0AAAAHAAEAAAB8AG0AAAAEAAEAAAB9AG0AAAAFAAEAAAB+AG0AAAADAAAAAAB/AG0AAAADAAAAAACAAG0AAAADAAAAAABkAG4AAAABAAAAAABlAG4AAAABAAAAAABmAG4AAAABAAAAAABnAG4AAAAHAAIAAABoAG4AAAAEAAIAAABpAG4AAAAFAAIAAABqAG4AAAAGAAIAAABrAG4AAAAHAAIAAABsAG4AAAAEAAIAAABtAG4AAAAFAAIAAABuAG4AAAAGAAIAAABvAG4AAAAGAAMA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")
 tile_set = ExtResource("5_ann6m")
 
 [node name="Back" type="TileMapLayer" parent="TileMap" unique_id=1048976788]
-visibility_layer = 2
 z_index = -1
 use_parent_material = true
 tile_map_data = PackedByteArray("AABqAGkAAAAIAAQAAABrAGkAAAAJAAQAAABsAGkAAAAKAAQAAABqAGoAAAAIAAUAAABrAGoAAAAJAAUAAABsAGoAAAAKAAUAAAByAHAAAAAMAAQAAABzAHAAAAANAAQAAABlAHEAAAACAAQAAABpAHEAAAAPAAYAAABxAHEAAAALAAUAAAByAHEAAAAMAAUAAABzAHEAAAANAAUAAABlAHIAAAACAAUAAABoAHIAAAAUAAQAAABpAHIAAAAVAAQAAABxAHIAAAALAAYAAAByAHIAAAAMAAYAAABzAHIAAAANAAYAAAB0AHIAAAAGAAUAAAB1AHIAAAAHAAUAAAB4AHIAAAALAAcAAABxAHAAAAALAAQAAABwAGsAAAAFAAQAAABwAGwAAAAFAAUAAABwAG0AAAAFAAQAAABwAG4AAAAFAAUAAABwAG8AAAAFAAQAAABwAHAAAAAFAAUAAABwAHEAAAAFAAQAAABwAHIAAAAFAAUAAABjAHMAAAACAAcAAABjAHIAAAACAAcAAABjAHEAAAACAAcAAABjAHAAAAACAAcAAABjAG8AAAACAAcAAABjAG4AAAACAAcAAABjAG0AAAACAAcAAABjAGwAAAACAAcAAABjAGsAAAACAAcAAABjAGoAAAACAAcAAABjAGkAAAACAAcAAABjAGgAAAACAAcAAABjAGcAAAACAAcAAABjAGYAAAACAAcAAABjAGUAAAACAAcAAABjAGQAAAACAAcAAACBAHMAAAACAAcAAACBAHEAAAACAAcAAACBAHIAAAACAAcAAACBAGQAAAACAAcAAACBAGUAAAACAAcAAACBAGYAAAACAAcAAACBAGcAAAACAAcAAACBAGgAAAACAAcAAACBAGkAAAACAAcAAACBAGoAAAACAAcAAACBAGsAAAACAAcAAACBAGwAAAACAAcAAACBAG0AAAACAAcAAACBAG4AAAACAAcAAACBAG8AAAACAAcAAACBAHAAAAACAAcAAABrAGMAAAACAAcAAABsAGMAAAACAAcAAABtAGMAAAACAAcAAABuAGMAAAACAAcAAABvAGMAAAACAAcAAABwAGMAAAACAAcAAABxAGMAAAACAAcAAAByAGMAAAACAAcAAABzAGMAAAACAAcAAAB0AGMAAAACAAcAAAB1AGMAAAACAAcAAAB2AGMAAAACAAcAAAB3AGMAAAACAAcAAAB4AGMAAAACAAcAAAB5AGMAAAACAAcAAAB6AGMAAAACAAcAAAB7AGMAAAACAAcAAAB8AGMAAAACAAcAAAB9AGMAAAACAAcAAAB+AGMAAAACAAcAAAB/AGMAAAACAAcAAACAAGMAAAACAAcAAABkAGMAAAACAAcAAABlAGMAAAACAAcAAABmAGMAAAACAAcAAABjAGMAAAACAAcAAABnAGMAAAACAAcAAABoAGMAAAACAAcAAABpAGMAAAACAAcAAABqAGMAAAACAAcAAACBAGMAAAACAAcAAAA=")
 tile_set = ExtResource("5_ann6m")
 
 [node name="Front" type="TileMapLayer" parent="TileMap" unique_id=1353963813]
-visibility_layer = 2
 z_index = 1
 use_parent_material = true
 tile_map_data = PackedByteArray("AABkAGsAAAAAAAoAAABlAGsAAAABAAoAAABmAGsAAAACAAoAAABnAGsAAAADAAoAAABoAGsAAAAAAAoAAABpAGsAAAABAAoAAABqAGsAAAACAAoAAABrAGsAAAADAAoAAABsAGsAAAAAAAoAAABtAGsAAAABAAoAAABuAGsAAAACAAoAAABvAGsAAAADAAoAAABkAHMAAAABAAsAAABlAHMAAAACAAsAAABmAHMAAAADAAsAAABnAHMAAAAEAAsAAABoAHMAAAABAAsAAABpAHMAAAACAAsAAABqAHMAAAADAAsAAABrAHMAAAAEAAsAAABsAHMAAAABAAsAAABtAHMAAAACAAsAAABuAHMAAAADAAsAAABvAHMAAAAEAAsAAABwAHMAAAABAAsAAABxAHMAAAACAAsAAAByAHMAAAADAAsAAABzAHMAAAAEAAsAAAB0AHMAAAABAAsAAAB1AHMAAAACAAsAAAB2AHMAAAADAAsAAAB3AHMAAAAEAAsAAAB4AHMAAAABAAsAAAB5AHMAAAACAAsAAAB6AHMAAAADAAsAAAB7AHMAAAAEAAsAAAB8AHMAAAABAAsAAAB9AHMAAAACAAsAAAB+AHMAAAACAAsAAAB/AHMAAAADAAsAAACAAHMAAAAEAAsAAAA=")
 tile_set = ExtResource("5_ann6m")
 
 [node name="FarFront" type="TileMapLayer" parent="TileMap" unique_id=1445763423]
-visibility_layer = 2
 z_index = 2
 use_parent_material = true
 tile_map_data = PackedByteArray("AAB4AGQAAAABAAwAAAB4AGUAAAABAAwAAAA=")
 tile_set = ExtResource("5_ann6m")
 
 [node name="Props" type="Node2D" parent="." unique_id=100682392]
-visibility_layer = 2
 
 [node name="Actors" type="Node2D" parent="." unique_id=1937399874]
-visibility_layer = 2
 
 [node name="Triggers" type="Node2D" parent="." unique_id=1026631538]
-visibility_layer = 2
 
 [node name="Spawns" type="Node2D" parent="." unique_id=1426214031]
-visibility_layer = 2
 
 [node name="Door" type="MarginContainer" parent="Spawns" unique_id=753343894 groups=["TriggerSpawns"] instance=ExtResource("6_tlqs8")]
 modulate = Color(1, 1, 1, 0.75)
-visibility_layer = 2
 z_index = 999
 custom_minimum_size = Vector2(8, 8)
 offset_left = 1616.0
@@ -138,7 +126,6 @@ properties = {
 size_is_default = false
 
 [node name="Sage" type="Area2D" parent="Spawns" unique_id=1199277091 groups=["ActorSpawns", "Entities"] instance=ExtResource("7_c6oa4")]
-visibility_layer = 2
 z_index = 999
 position = Vector2(1896, 1840)
 collision_layer = 16384
@@ -160,7 +147,6 @@ properties = {
 }
 
 [node name="Basil" type="Area2D" parent="Spawns" unique_id=352402513 groups=["ActorSpawns", "Entities"] instance=ExtResource("7_c6oa4")]
-visibility_layer = 2
 z_index = 999
 position = Vector2(1752, 1712)
 collision_layer = 16384
@@ -182,7 +168,6 @@ properties = {
 }
 
 [node name="Ladder" type="MarginContainer" parent="Spawns" unique_id=1800792368 groups=["TriggerSpawns"] instance=ExtResource("6_tlqs8")]
-visibility_layer = 2
 z_index = 999
 custom_minimum_size = Vector2(8, 8)
 offset_left = 1792.0
@@ -200,7 +185,6 @@ properties = {
 size_is_default = false
 
 [node name="AmmoRefill" type="Area2D" parent="Spawns" unique_id=1449282698 groups=["Entities", "PropSpawns"] instance=ExtResource("11_vberi")]
-visibility_layer = 2
 z_index = 999
 position = Vector2(1728, 1824)
 collision_layer = 16384
@@ -214,7 +198,6 @@ properties = {
 }
 
 [node name="ChestGun" type="Area2D" parent="Spawns" unique_id=934414503 groups=["Entities", "PropSpawns"] instance=ExtResource("11_vberi")]
-visibility_layer = 2
 z_index = 999
 position = Vector2(1744, 1824)
 collision_layer = 16384
@@ -229,7 +212,6 @@ properties = {
 }
 
 [node name="BreakBlockExperience" type="Area2D" parent="Spawns" unique_id=958790534 groups=["Entities", "PropSpawns"] instance=ExtResource("11_vberi")]
-visibility_layer = 2
 z_index = 999
 position = Vector2(2048, 1824)
 collision_layer = 16384
@@ -248,7 +230,6 @@ properties = {
 }
 
 [node name="BreakBlockExperience1" type="Area2D" parent="Spawns" unique_id=535366862 groups=["Entities", "PropSpawns"] instance=ExtResource("11_vberi")]
-visibility_layer = 2
 z_index = 999
 position = Vector2(2032, 1824)
 collision_layer = 16384
@@ -267,7 +248,6 @@ properties = {
 }
 
 [node name="BreakBlockExperience2" type="Area2D" parent="Spawns" unique_id=1544809449 groups=["Entities", "PropSpawns"] instance=ExtResource("11_vberi")]
-visibility_layer = 2
 z_index = 999
 position = Vector2(2016, 1824)
 collision_layer = 16384
@@ -286,7 +266,6 @@ properties = {
 }
 
 [node name="BreakBlockExperience3" type="Area2D" parent="Spawns" unique_id=84921858 groups=["Entities", "PropSpawns"] instance=ExtResource("11_vberi")]
-visibility_layer = 2
 z_index = 999
 position = Vector2(2000, 1824)
 collision_layer = 16384
@@ -305,7 +284,6 @@ properties = {
 }
 
 [node name="BreakBlockExperience4" type="Area2D" parent="Spawns" unique_id=3060592 groups=["Entities", "PropSpawns"] instance=ExtResource("11_vberi")]
-visibility_layer = 2
 z_index = 999
 position = Vector2(1984, 1824)
 collision_layer = 16384
@@ -324,7 +302,6 @@ properties = {
 }
 
 [node name="BreakBlockExperience5" type="Area2D" parent="Spawns" unique_id=1675304818 groups=["Entities", "PropSpawns"] instance=ExtResource("11_vberi")]
-visibility_layer = 2
 z_index = 999
 position = Vector2(1968, 1824)
 collision_layer = 16384
@@ -343,7 +320,6 @@ properties = {
 }
 
 [node name="BreakBlockExperience6" type="Area2D" parent="Spawns" unique_id=293430499 groups=["Entities", "PropSpawns"] instance=ExtResource("11_vberi")]
-visibility_layer = 2
 z_index = 999
 position = Vector2(1952, 1824)
 collision_layer = 16384
@@ -362,7 +338,6 @@ properties = {
 }
 
 [node name="BreakBlockExperience7" type="Area2D" parent="Spawns" unique_id=385041422 groups=["Entities", "PropSpawns"] instance=ExtResource("11_vberi")]
-visibility_layer = 2
 z_index = 999
 position = Vector2(1952, 1808)
 collision_layer = 16384
@@ -381,7 +356,6 @@ properties = {
 }
 
 [node name="BreakBlockExperience8" type="Area2D" parent="Spawns" unique_id=209062002 groups=["Entities", "PropSpawns"] instance=ExtResource("11_vberi")]
-visibility_layer = 2
 z_index = 999
 position = Vector2(1968, 1808)
 collision_layer = 16384
@@ -400,7 +374,6 @@ properties = {
 }
 
 [node name="BreakBlockExperience9" type="Area2D" parent="Spawns" unique_id=1160587676 groups=["Entities", "PropSpawns"] instance=ExtResource("11_vberi")]
-visibility_layer = 2
 z_index = 999
 position = Vector2(1984, 1808)
 collision_layer = 16384
@@ -419,7 +392,6 @@ properties = {
 }
 
 [node name="BreakBlockExperience10" type="Area2D" parent="Spawns" unique_id=1394867828 groups=["Entities", "PropSpawns"] instance=ExtResource("11_vberi")]
-visibility_layer = 2
 z_index = 999
 position = Vector2(2000, 1808)
 collision_layer = 16384
@@ -438,7 +410,6 @@ properties = {
 }
 
 [node name="BreakBlockExperience11" type="Area2D" parent="Spawns" unique_id=1312514140 groups=["Entities", "PropSpawns"] instance=ExtResource("11_vberi")]
-visibility_layer = 2
 z_index = 999
 position = Vector2(2016, 1808)
 collision_layer = 16384
@@ -457,7 +428,6 @@ properties = {
 }
 
 [node name="BreakBlockExperience12" type="Area2D" parent="Spawns" unique_id=374454733 groups=["Entities", "PropSpawns"] instance=ExtResource("11_vberi")]
-visibility_layer = 2
 z_index = 999
 position = Vector2(2032, 1808)
 collision_layer = 16384
@@ -476,7 +446,6 @@ properties = {
 }
 
 [node name="BreakBlockExperience13" type="Area2D" parent="Spawns" unique_id=662649782 groups=["Entities", "PropSpawns"] instance=ExtResource("11_vberi")]
-visibility_layer = 2
 z_index = 999
 position = Vector2(2048, 1808)
 collision_layer = 16384
@@ -495,7 +464,6 @@ properties = {
 }
 
 [node name="BreakBlockExperience14" type="Area2D" parent="Spawns" unique_id=40445053 groups=["Entities", "PropSpawns"] instance=ExtResource("11_vberi")]
-visibility_layer = 2
 z_index = 999
 position = Vector2(1952, 1792)
 collision_layer = 16384
@@ -514,7 +482,6 @@ properties = {
 }
 
 [node name="BreakBlockExperience15" type="Area2D" parent="Spawns" unique_id=1320129892 groups=["Entities", "PropSpawns"] instance=ExtResource("11_vberi")]
-visibility_layer = 2
 z_index = 999
 position = Vector2(1968, 1792)
 collision_layer = 16384
@@ -533,7 +500,6 @@ properties = {
 }
 
 [node name="BreakBlockExperience16" type="Area2D" parent="Spawns" unique_id=868781961 groups=["Entities", "PropSpawns"] instance=ExtResource("11_vberi")]
-visibility_layer = 2
 z_index = 999
 position = Vector2(1984, 1792)
 collision_layer = 16384
@@ -552,7 +518,6 @@ properties = {
 }
 
 [node name="BreakBlockExperience17" type="Area2D" parent="Spawns" unique_id=1394233589 groups=["Entities", "PropSpawns"] instance=ExtResource("11_vberi")]
-visibility_layer = 2
 z_index = 999
 position = Vector2(2000, 1792)
 collision_layer = 16384
@@ -571,7 +536,6 @@ properties = {
 }
 
 [node name="BreakBlockExperience18" type="Area2D" parent="Spawns" unique_id=326139253 groups=["Entities", "PropSpawns"] instance=ExtResource("11_vberi")]
-visibility_layer = 2
 z_index = 999
 position = Vector2(2016, 1792)
 collision_layer = 16384
@@ -590,7 +554,6 @@ properties = {
 }
 
 [node name="BreakBlockExperience19" type="Area2D" parent="Spawns" unique_id=882258944 groups=["Entities", "PropSpawns"] instance=ExtResource("11_vberi")]
-visibility_layer = 2
 z_index = 999
 position = Vector2(2032, 1792)
 collision_layer = 16384
@@ -609,7 +572,6 @@ properties = {
 }
 
 [node name="BreakBlockExperience20" type="Area2D" parent="Spawns" unique_id=2138244444 groups=["Entities", "PropSpawns"] instance=ExtResource("11_vberi")]
-visibility_layer = 2
 z_index = 999
 position = Vector2(2048, 1792)
 collision_layer = 16384
@@ -628,7 +590,6 @@ properties = {
 }
 
 [node name="BreakBlockExperience21" type="Area2D" parent="Spawns" unique_id=178871543 groups=["Entities", "PropSpawns"] instance=ExtResource("11_vberi")]
-visibility_layer = 2
 z_index = 999
 position = Vector2(2048, 1776)
 collision_layer = 16384
@@ -647,7 +608,6 @@ properties = {
 }
 
 [node name="BreakBlockExperience22" type="Area2D" parent="Spawns" unique_id=46524730 groups=["Entities", "PropSpawns"] instance=ExtResource("11_vberi")]
-visibility_layer = 2
 z_index = 999
 position = Vector2(2032, 1776)
 collision_layer = 16384
@@ -666,7 +626,6 @@ properties = {
 }
 
 [node name="BreakBlockExperience23" type="Area2D" parent="Spawns" unique_id=879647097 groups=["Entities", "PropSpawns"] instance=ExtResource("11_vberi")]
-visibility_layer = 2
 z_index = 999
 position = Vector2(2016, 1776)
 collision_layer = 16384
@@ -685,7 +644,6 @@ properties = {
 }
 
 [node name="BreakBlockExperience24" type="Area2D" parent="Spawns" unique_id=632131744 groups=["Entities", "PropSpawns"] instance=ExtResource("11_vberi")]
-visibility_layer = 2
 z_index = 999
 position = Vector2(2000, 1776)
 collision_layer = 16384
@@ -704,7 +662,6 @@ properties = {
 }
 
 [node name="BreakBlockExperience25" type="Area2D" parent="Spawns" unique_id=728532513 groups=["Entities", "PropSpawns"] instance=ExtResource("11_vberi")]
-visibility_layer = 2
 z_index = 999
 position = Vector2(1984, 1776)
 collision_layer = 16384
@@ -723,7 +680,6 @@ properties = {
 }
 
 [node name="BreakBlockExperience26" type="Area2D" parent="Spawns" unique_id=468939807 groups=["Entities", "PropSpawns"] instance=ExtResource("11_vberi")]
-visibility_layer = 2
 z_index = 999
 position = Vector2(1968, 1776)
 collision_layer = 16384
@@ -742,7 +698,6 @@ properties = {
 }
 
 [node name="BreakBlockExperience27" type="Area2D" parent="Spawns" unique_id=606272313 groups=["Entities", "PropSpawns"] instance=ExtResource("11_vberi")]
-visibility_layer = 2
 z_index = 999
 position = Vector2(1952, 1776)
 collision_layer = 16384
@@ -761,17 +716,13 @@ properties = {
 }
 
 [node name="TileAnimator" type="Node2D" parent="." unique_id=459942112]
-visibility_layer = 2
 script = ExtResource("8_ppd8f")
 
 [node name="Waypoints" type="Node2D" parent="." unique_id=1710575804]
-visibility_layer = 2
 
 [node name="Notes" type="Node2D" parent="." unique_id=3296572]
-visibility_layer = 2
 
 [node name="Note" type="MarginContainer" parent="Notes" unique_id=1359810734 groups=["Notes"] instance=ExtResource("16_prgck")]
-visibility_layer = 2
 z_index = 999
 clip_contents = true
 custom_minimum_size = Vector2(16, 16)
@@ -792,7 +743,6 @@ color = Color(1, 1, 1, 1)
 big_text = false
 
 [node name="VanishingPoint" type="Area2D" parent="." unique_id=1188585786 groups=["VanishingPoints"] instance=ExtResource("9_br5u2")]
-visibility_layer = 2
 z_index = 999
 position = Vector2(1840, 1496)
 collision_layer = 16384
@@ -800,14 +750,12 @@ collision_mask = 0
 script = ExtResource("18_lk15g")
 
 [node name="SpawnPoint" type="Area2D" parent="." unique_id=1936255300 groups=["SpawnPoints"] instance=ExtResource("10_jqmnt")]
-visibility_layer = 2
 position = Vector2(1720, 1840)
 collision_layer = 16384
 collision_mask = 0
 script = ExtResource("20_4yr4h")
 
 [node name="TitlePreview" type="Area2D" parent="." unique_id=2052223351 groups=["TitlePreviews"] instance=ExtResource("11_286gw")]
-visibility_layer = 2
 z_index = 999
 position = Vector2(1832, 1728)
 collision_layer = 16384
