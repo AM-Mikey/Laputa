@@ -65,9 +65,6 @@ func change_state(new_state: String, do_cache_state = true):
 		if do_cache_state: cached_state = current_state
 		old_state = current_state.name.to_lower()
 		current_state.exit(new_state)
-	var old_state = ""
-	if current_state:
-		old_state = current_state.name.to_lower()
 	current_state = states[new_state]
 	current_state.enter(old_state)
 

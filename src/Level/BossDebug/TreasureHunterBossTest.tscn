@@ -206,7 +206,7 @@ visibility_layer = 2
 
 [node name="WaypointGlobal" parent="Waypoints" unique_id=1432238783 instance=ExtResource("15_uvnna")]
 visibility_layer = 2
-position = Vector2(3330, 2064)
+position = Vector2(3306, 2064)
 tag_name = "cutscene_camera_to_pos"
 
 [node name="WaypointGlobal1" parent="Waypoints" unique_id=1761111983 instance=ExtResource("15_uvnna")]

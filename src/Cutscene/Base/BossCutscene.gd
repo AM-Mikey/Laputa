@@ -48,6 +48,10 @@ func boss_battle_start():
 	player_camera.global_position = player.global_position
 	player_camera.control_active = true
 
+	cutscene_camera.limit_bottom = boss_arena_rect.end.y
+	cutscene_camera.limit_left = boss_arena_rect.position.x
+	cutscene_camera.limit_right = boss_arena_rect.end.x
+	cutscene_camera.limit_top = boss_arena_rect.position.y
 	var camera_tween = pan_camera_to(cutscene_camera, player.global_position, 0.2)
 	var boss = get_entity_with_id("Enemies", boss_id)
 	boss.killed.connect(_on_boss_killed)

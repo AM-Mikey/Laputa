@@ -6,9 +6,12 @@ extends Camera2D
 
 func _ready():
 	global_position = previous_camera_pos
-	w.current_level.get_node("LevelLimiter").connect("limit_camera", Callable(self, "on_limit_camera"))
+	#w.current_level.get_node("LevelLimiter").connect("limit_camera", Callable(self, "on_limit_camera"))
 	vs.connect("scale_changed", Callable(self, "_resolution_scale_changed"))
 	_resolution_scale_changed(vs.resolution_scale)
+	await get_tree().process_frame
+	await get_tree().process_frame
+	position_smoothing_enabled = true
 
 func on_limit_camera(left, right, top, bottom):
 	var window_width = get_window().get_size().x
