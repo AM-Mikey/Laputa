@@ -6,21 +6,19 @@ func start():
 	var camera_move_to_hotspot = get_waypoint_with_id("WaypointGlobals", "cutscene_camera_to_pos")
 	var player = f.pc()
 
-	move_player_to(player_move_to_hotspot.global_position)
-	transition_level_limit(boss_arena_rect, 1.2)
-
-	get_player_camera().control_active = false
-
 	cutscene_camera.limit_right = boss_arena_rect.end.x
+
+	move_player_to(player_move_to_hotspot.global_position)
+
+	transition_level_limit(boss_arena_rect, 1.2)
 	cutscene_camera.make_current()
 
 	pan_camera_to(cutscene_camera, camera_move_to_hotspot.global_position, 0.5)
 
 	await player.end_move_to
-	await get_tree().create_timer(1.0).timeout
+	await get_tree().create_timer(0.5).timeout
 
 	# Boss approach
-	await force_spawner_spawn("BossSpawns", boss_id)
 	am.stop_music()
 	var boss = get_entity_with_id("Bosses", boss_id)
 	var boss_move_to_hotspot = get_waypoint_with_id("WaypointGlobals", "cutscene_boss_intro_pos")
@@ -69,6 +67,7 @@ func win_animation():
 	var out_cutscene_waypoint = get_waypoint_with_id("WaypointGlobals", "cutscene_boss_get_out")
 	boss.move_to(out_cutscene_waypoint.global_position, 60.0)
 	await boss.end_move_to
+	boss.queue_free()
 
 	#Make a Victory dialog
 	am.play_music("victory")

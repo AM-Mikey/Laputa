@@ -32,7 +32,6 @@ func state_physics_process(delta: float):
 		if !reach_destination:
 			main.end_move_to.emit()
 		reach_destination = true
-		return
 
 	if main.phase_2_active:
 		var altitude_offset := 0.0
@@ -50,7 +49,7 @@ func state_physics_process(delta: float):
 				propeller_malfunction_elapsed = 0.0
 				main.create_vfx("explosion", main.global_position + Vector2(0.0, -32.0))
 
-		var direction = main.global_position.direction_to(target_position)
+		var direction = main.global_position.direction_to(target_position) if !reach_destination else Vector2.ZERO
 		main.get_node("Hotspot/MoveToPhase2Pos").global_position += direction * move_speed * delta
 		var og_position: Vector2 = main.get_node("Hotspot/MoveToPhase2Pos").global_position
 		main.global_position = Vector2(
@@ -58,9 +57,10 @@ func state_physics_process(delta: float):
 			og_position.y + altitude_offset
 		)
 	else:
-		var direction = main.global_position.direction_to(target_position)
-		main.velocity = direction * move_speed
-		main.move_and_slide()
+		if !reach_destination:
+			var direction = main.global_position.direction_to(target_position)
+			main.velocity = direction * move_speed
+			main.move_and_slide()
 
 func _on_Phase2SmokeTimer_timeout():
 	var rand: = randi_range(1, 3)
