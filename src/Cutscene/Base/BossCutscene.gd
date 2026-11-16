@@ -43,13 +43,24 @@ func boss_battle_start():
 	am.play_music(boss_music)
 	var player = f.pc()
 	player.killed.connect(_on_player_killed)
-	pan_camera_to(get_player_camera(), player.global_position, 0.2)
+	var player_camera = get_player_camera()
+	player_camera.position_smoothing_enabled = false
+	player_camera.global_position = player.global_position
+	player_camera.control_active = true
+
+	var camera_tween = pan_camera_to(cutscene_camera, player.global_position, 0.2)
 	var boss = get_entity_with_id("Enemies", boss_id)
 	boss.killed.connect(_on_boss_killed)
 	boss.process_mode = ProcessMode.PROCESS_MODE_INHERIT
 	if boss.has_method("start_ai"):
 		boss.start_ai()
 	enable_player_input()
+
+	await camera_tween.finished
+	cutscene_camera.position_smoothing_enabled = false
+	player_camera.make_current()
+	player_camera.position_smoothing_enabled = true
+
 
 func win_animation():
 	var boss = get_entity_with_id("Enemies", boss_id)

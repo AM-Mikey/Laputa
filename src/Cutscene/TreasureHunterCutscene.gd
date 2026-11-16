@@ -8,7 +8,10 @@ func start():
 
 	move_player_to(player_move_to_hotspot.global_position)
 	transition_level_limit(boss_arena_rect, 1.2)
-	pan_camera_to(get_player_camera(), camera_move_to_hotspot.global_position, 0.5)
+
+	get_player_camera().control_active = false
+	cutscene_camera.make_current()
+	pan_camera_to(cutscene_camera, camera_move_to_hotspot.global_position, 0.5)
 
 	await player.end_move_to
 	await get_tree().create_timer(1.0).timeout
@@ -31,6 +34,7 @@ func start():
 	await dialog_box.dialog_finished
 
 	await boss_health_bar_filled_anim()
+
 	boss_battle_start()
 
 

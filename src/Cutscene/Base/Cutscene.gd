@@ -2,13 +2,18 @@ extends Node
 
 class_name Cutscene
 
+const CUTSCENE_CAMERA = preload("res://src/Cutscene/Base/CutsceneCamera.tscn")
+
 @onready var w = get_tree().get_root().get_node("World")
+var cutscene_camera = null
 
 const DB = preload("res://src/Dialog/DialogBox.tscn")
 
 func _ready():
 	if !w.is_node_ready():
 		await w.ready
+	cutscene_camera = CUTSCENE_CAMERA.instantiate()
+	add_child(cutscene_camera)
 	setup()
 
 func setup():

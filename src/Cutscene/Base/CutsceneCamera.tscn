@@ -1,0 +1,7 @@
+[gd_scene format=3 uid="uid://cu1nj6rdoi0h8"]
+
+[ext_resource type="Script" uid="uid://chdlntbqecvt3" path="res://src/Cutscene/Base/CutsceneCamera.gd" id="1_sjdjy"]
+
+[node name="CutsceneCamera" type="Camera2D" unique_id=1099696515]
+position_smoothing_enabled = true
+script = ExtResource("1_sjdjy")
