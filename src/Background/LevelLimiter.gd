@@ -8,7 +8,7 @@ enum Focus {TOP, ONE_QUARTER, CENTER, THREE_QUARTERS, BOTTOM}
 enum TileMode {BOTH, HORIZONTAL, VERTICAL, NONE}
 
 @export var background_resource: Background
-	#set = set_background_resouce
+	#set = set_background_resource
 @export var texture: CompressedTexture2D
 @export var layers := 1
 @export var layer_scales: Dictionary
@@ -28,7 +28,7 @@ var default_limit: Rect2 = Rect2()
 
 var a_star_grid: AStarGrid2D
 
-#func set_background_resouce(value): #note this goes through inspector on_changed code
+#func set_background_resource(value): #note this goes through inspector on_changed code
 	#background_resource = value
 	#print("set background resource")
 

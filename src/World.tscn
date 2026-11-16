@@ -42,7 +42,6 @@ _data = {
 }
 
 [node name="World" type="Node2D" unique_id=1498046973]
-visibility_layer = 2
 script = ExtResource("8")
 development_stage = "alpha"
 release_version = "1.8"
@@ -113,24 +112,18 @@ follow_viewport_enabled = true
 script = ExtResource("2_x6ej7")
 
 [node name="FarthestBack" type="Node2D" parent="." unique_id=125280429]
-visibility_layer = 2
 z_index = -1
 
 [node name="MiddleBack" type="Node2D" parent="." unique_id=1451941770]
-visibility_layer = 2
 
 [node name="PlayerBack" type="Node2D" parent="." unique_id=906505202]
-visibility_layer = 2
 z_index = 1
 
 [node name="PlayerFront" type="Node2D" parent="." unique_id=892020458]
-visibility_layer = 2
 z_index = 2
 
 [node name="MiddleFront" type="Node2D" parent="." unique_id=448726191]
-visibility_layer = 2
 z_index = 3
 
 [node name="FarthestFront" type="Node2D" parent="." unique_id=421958040]
-visibility_layer = 2
 z_index = 4

@@ -171,6 +171,7 @@ func read_player_data_from_save():
 	var guns = pc.guns
 	pc.get_node("PlayerCamera").reset()
 	pc.position = player_data["position"]
+	pc.reset_physics_interpolation() #teleport: don't interpolate from the old position
 	pc.hp = player_data["hp"]
 	pc.max_hp = player_data["max_hp"]
 	pc.money = player_data["money"]
@@ -328,6 +329,10 @@ func get_last_valid_slot() -> int:
 		out = get_save_file_indices()[-1] #last one
 	return out
 
+func get_next_available_slot() -> int:
+	var incides = get_save_file_indices()
+	return incides.max() + 1
+
 func write_save_slot_pointer():
 	var save_slot_pointer_data = {}
 	save_slot_pointer_data["current_slot"] = current_slot
@@ -354,6 +359,59 @@ func set_triggers_spent(limited_triggers):
 					await get_tree().process_frame
 					current.spent = true
 					current.expend_trigger()
+
+func file_select_copy_save(from_index) -> int:
+	var new_index = get_next_available_slot()
+	var dir := DirAccess.open("user://")
+	var from_path = "user://save_%d.dat" % from_index
+	var to_path = "user://save_%d.dat" % new_index
+	var err = dir.copy_absolute(from_path, to_path)
+	#failed to open save_0.dat
+	if err != OK:
+		printerr("ERROR: failed to copy save")
+		return -1
+	print("copied save")
+	return new_index
+
+func file_select_delete_save(deleted_index: int):
+	var dir := DirAccess.open("user://")
+	dir.remove("save_%d.dat" % deleted_index)
+
+	var indices = get_save_file_indices()
+	indices.sort()
+	var remap_slots := {}
+	for n in indices.size():
+		var old_i: int = indices[n]
+		var new_i: int = n
+		remap_slots[old_i] = new_i
+		if old_i != new_i:
+			dir.rename("save_%d.dat" % old_i, "save_%d.dat" % new_i)
+
+	# fix up the pointer file
+	var pointed := -1
+	if FileAccess.file_exists(save_slot_pointer_path):
+		pointed = int(read_from_file(save_slot_pointer_path)["current_slot"])
+
+	if indices.size() == 0:
+		dir.remove("save_slot_pointer.dat")
+		current_slot = -1
+		return
+
+	var new_pointed: int
+	if remap_slots.has(pointed):
+		new_pointed = remap_slots[pointed]
+	else: # pointed at the deleted save (or nothing): land on the file that took its place
+		new_pointed = clampi(deleted_index, 0, indices.size() - 1)
+
+	# keep the in-memory slot in sync so the next save doesn't hit the wrong file
+	if remap_slots.has(current_slot):
+		current_slot = remap_slots[current_slot]
+	else:
+		current_slot = new_pointed
+
+	var pointer_data = {"current_slot": new_pointed, "unix_time": Time.get_unix_time_from_system()}
+	write_to_file(save_slot_pointer_path, pointer_data)
+	print("deleted save")
 
 
 

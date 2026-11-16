@@ -1,4 +1,4 @@
 extends Node2D
 
-var direction : Vecor2
+var direction : Vector2
 var speed : float

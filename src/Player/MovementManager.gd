@@ -4,9 +4,6 @@ const LAND: = preload("res://src/Effect/LandParticle.tscn")
 
 const FLOOR_NORMAL: = Vector2.UP
 const SNAP_DIRECTION = Vector2.DOWN
-const SNAP_LENGTH = 4.0
-
-var snap_vector = SNAP_DIRECTION * SNAP_LENGTH
 
 var speed = Vector2(0, 0)
 var crouch_speed = 70.0
@@ -63,8 +60,10 @@ func initialize_states():
 	return
 
 func change_state(new_state: String, do_cache_state = true):
+	var old_state: = ""
 	if current_state:
 		if do_cache_state: cached_state = current_state
+		old_state = current_state.name.to_lower()
 		current_state.exit(new_state)
 	var old_state = ""
 	if current_state:
@@ -121,7 +120,6 @@ func land():
 
 func jump():
 	if pc.is_crouching: return
-	snap_vector = Vector2.ZERO
 	change_state("jump")
 	# Coyote Time debug
 	if not pc.is_on_floor() and debug:

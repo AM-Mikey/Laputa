@@ -57,6 +57,9 @@ func _ready():
 		if node is CanvasItem:
 			node.visibility_layer = 2
 		node.child_entered_tree.connect(child_layer_set)
+	for node: Node in get_children():
+		if node is CanvasLayer and !node.follow_viewport_enabled: #UI animates per rendered frame, not per physics tick, so don't physics-interpolate it
+			node.physics_interpolation_mode = Node.PHYSICS_INTERPOLATION_MODE_OFF
 
 	if !do_skip_title:
 		setup_title_and_background()
@@ -84,6 +87,21 @@ func child_layer_set(c: Node): #set the visibility layer of all children to laye
 	# ^ Makes the function recursive so it gets called for all descendants
 	if c is CanvasItem:
 		c.visibility_layer = 2
+
+#the layer above is runtime-only. call these around PackedScene.pack() so it doesn't get saved onto every node in the scene file
+func strip_visibility_layers(root: Node) -> Array:
+	var nodes: Array = root.find_children("*", "CanvasItem", true, false)
+	nodes.append(root)
+	var stripped: Array = []
+	for n in nodes:
+		if n is CanvasItem and n.visibility_layer == 2:
+			n.visibility_layer = 1
+			stripped.append(n)
+	return stripped
+
+func restore_visibility_layers(stripped: Array):
+	for n in stripped:
+		n.visibility_layer = 2
 
 
 #func set_debug_visible(vis = !debug_visible): #makes triggers and visutils visible #TODO redo this system
@@ -387,6 +405,7 @@ func setup_door(door_index, old_level_path):
 					_: printerr("ERROR: Invalid direction on Load Zone")
 			elif t.is_in_group("Doors"):
 				$Juniper.global_position = t.global_position + Vector2(size.x * 0.5, size.y)
+			$Juniper.reset_physics_interpolation() #teleport: don't interpolate from the old position
 
 		if doors_found == 0:
 			printerr("ERROR: could not find door with right index")

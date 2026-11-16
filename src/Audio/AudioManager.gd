@@ -178,7 +178,7 @@ func play(sfx_string: String, actor = null, bus = null, volume = 1.0, pitchsprea
 				printerr("ERROR: Duration too long for SFX: ", sfx_string)
 		elif !loaded_sfx.loop:
 			_wait_and_clear_non_looping_sfx(player, sfx_string)
-		return player #returs a finished non-looping sfx or a current looping sfx. kinda only half useful
+		return player #returns a finished non-looping sfx or a current looping sfx. kinda only half useful
 	else:
 		return null
 

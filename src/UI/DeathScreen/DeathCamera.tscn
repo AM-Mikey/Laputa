@@ -4,4 +4,5 @@
 
 [node name="DeathCamera" type="Camera2D" unique_id=129475180]
 process_mode = 3
+physics_interpolation_mode = 2
 script = ExtResource("1")

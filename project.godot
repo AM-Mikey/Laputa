@@ -474,6 +474,7 @@ editor_alt={
 
 2d/default_gravity=300.0
 2d/solver/contact_max_allowed_penetration=0.08
+common/physics_interpolation=true
 
 [rendering]
 
