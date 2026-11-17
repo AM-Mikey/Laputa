@@ -1910,6 +1910,8 @@ lock_x = true
 
 [node name="Waypoints" type="Node2D" parent="." unique_id=1416282546]
 
+[node name="Notes" type="Node2D" parent="." unique_id=577013388]
+
 [node name="VanishingPoint" type="Area2D" parent="." unique_id=9884164 groups=["VanishingPoints"] instance=ExtResource("11_pds8g")]
 z_index = 999
 position = Vector2(2264, 2072)
