@@ -2477,6 +2477,8 @@ snap_degrees = 180.0
 
 [node name="Waypoints" type="Node2D" parent="." unique_id=1416282546]
 
+[node name="Notes" type="Node2D" parent="." unique_id=577013388]
+
 [node name="VanishingPoint" type="Area2D" parent="." unique_id=9884164 groups=["VanishingPoints"] instance=ExtResource("9_d2u17")]
 z_index = 999
 position = Vector2(2248, 2504)
