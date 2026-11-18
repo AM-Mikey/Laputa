@@ -124,9 +124,15 @@ shape = SubResource("CircleShape2D_avt3f")
 libraries/ = SubResource("AnimationLibrary_vp88b")
 
 [node name="WorldCast" type="RayCast2D" parent="." unique_id=1098417115]
+visible = false
 z_index = 999
 collision_mask = 40
 collide_with_areas = true
+
+[node name="TrailMercy" type="RayCast2D" parent="." unique_id=2070912650]
+z_index = 1000
+target_position = Vector2(-30, 0)
+collision_mask = 8
 
 [connection signal="area_entered" from="EnemyCollisionDetector" to="." method="_on_CollisionDetector_area_entered"]
 [connection signal="body_entered" from="EnemyCollisionDetector" to="." method="_on_CollisionDetector_body_entered"]

@@ -6,13 +6,11 @@ func start():
 	var camera_move_to_hotspot = get_waypoint_with_id("WaypointGlobals", "cutscene_camera_to_pos")
 	var player = f.pc()
 
-	cutscene_camera.limit_right = boss_arena_rect.end.x
-
 	move_player_to(player_move_to_hotspot.global_position)
-
 	transition_level_limit(boss_arena_rect, 1.2)
-	cutscene_camera.make_current()
 
+	cutscene_camera.limit_right = boss_arena_rect.end.x
+	cutscene_camera.make_current()
 	pan_camera_to(cutscene_camera, camera_move_to_hotspot.global_position, 0.5)
 
 	await player.end_move_to
@@ -36,7 +34,6 @@ func start():
 
 	await boss_health_bar_filled_anim()
 	boss_battle_start()
-
 
 func _on_boss_killed():
 	ms.progress_main_mission.call_deferred()

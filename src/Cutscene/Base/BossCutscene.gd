@@ -88,4 +88,5 @@ func win_animation():
 	am.play_music(level.music)
 
 	await level_trans_tween.finished
+
 	return

@@ -13,6 +13,8 @@ var state = "normal"
 func setup():
 	speed = 300.0
 	rotation_degrees = get_rot(direction)
+	#$TrailMercy.rotation_degrees = -rotation_degrees
+	#$TrailMercy.target_position = -40.0 * direction
 	$TrailSpawnTimer.start(0.05)
 
 func _physics_process(delta):
@@ -128,8 +130,9 @@ func _on_DetectExplosionTimer_timeout() -> void:
 	explode()
 
 func _on_TrailSpawnTimer_timeout() -> void:
-	create_flare_trail()
-	$TrailSpawnTimer.start(trail_timer)
+	if !$TrailMercy.get_collider():
+		create_flare_trail()
+		$TrailSpawnTimer.start(trail_timer)
 
 func _on_ExplosionDetector_body_entered(body):
 	#breakable

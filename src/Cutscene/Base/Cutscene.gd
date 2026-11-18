@@ -79,9 +79,13 @@ func move_player_to(pos: Vector2):
 
 func disable_player_input():
 	inp.can_act = false
+	var player = f.pc()
+	player.invincible = true
 
 func enable_player_input():
 	inp.can_act = true
+	var player = f.pc()
+	player.invincible = false
 
 
 ## Get an Entity with [param group], [param id].[br]
