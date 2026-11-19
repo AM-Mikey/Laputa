@@ -1,0 +1,993 @@
+[gd_scene format=4]
+
+[ext_resource type="Script" path="res://src/Level/Level.gd" id="1_bt32x"]
+[ext_resource type="PackedScene" path="res://src/Background/LevelLimiter.tscn" id="2_7oplm"]
+[ext_resource type="Script" path="res://src/Background/LevelLimiter.gd" id="3_6pu35"]
+[ext_resource type="Resource" path="res://src/Background/TiledPlains.tres" id="3_eb80a"]
+[ext_resource type="Texture2D" path="res://assets/Background/TiledPlainsColor.png" id="4_5gk55"]
+[ext_resource type="TileSet" path="res://src/Tile/Debug.tres" id="5_tua84"]
+[ext_resource type="PackedScene" path="res://src/Editor/VanishingPoint.tscn" id="6_gbmur"]
+[ext_resource type="PackedScene" path="res://src/Editor/Spawn/PropSpawn.tscn" id="7_1yvib"]
+[ext_resource type="PackedScene" path="res://src/Editor/SpawnPoint.tscn" id="7_du1mx"]
+[ext_resource type="Script" path="res://src/Editor/Spawn/PropSpawn.gd" id="8_etev8"]
+[ext_resource type="PackedScene" path="res://src/Editor/TitlePreview.tscn" id="8_rtqcr"]
+[ext_resource type="PackedScene" path="res://src/Editor/VisualUtility/VURect.tscn" id="9_j8ajt"]
+[ext_resource type="Script" path="res://src/Editor/VisualUtility/VURect.gd" id="10_jifxr"]
+[ext_resource type="PackedScene" path="res://src/Editor/VisualUtility/VUActor.tscn" id="11_jvqrf"]
+[ext_resource type="Script" path="res://src/Editor/VisualUtility/VUActor.gd" id="12_dnqp4"]
+[ext_resource type="PackedScene" path="res://src/Editor/Spawn/ActorSpawn.tscn" id="13_2tq6u"]
+[ext_resource type="Script" path="res://src/Editor/Spawn/ActorSpawn.gd" id="14_f2fu4"]
+[ext_resource type="PackedScene" path="res://src/Editor/VisualUtility/VUVector.tscn" id="15_tfi41"]
+[ext_resource type="Script" path="res://src/Editor/VisualUtility/VUVector.gd" id="16_1mv3f"]
+[ext_resource type="PackedScene" path="res://src/Editor/VisualUtility/WaypointLocal.tscn" id="17_4itsw"]
+[ext_resource type="Script" path="res://src/Editor/VisualUtility/WaypointLocal.gd" id="18_mxvm7"]
+[ext_resource type="Script" path="res://src/Editor/VanishingPoint.gd" id="20_akng8"]
+[ext_resource type="Script" path="res://src/Editor/SpawnPoint.gd" id="22_5yo28"]
+
+[sub_resource type="Gradient" id="Gradient_iuj41"]
+interpolation_mode = 2
+offsets = PackedFloat32Array(0, 0.25, 0.5, 0.75, 1)
+colors = PackedColorArray(0.76862746, 0.42745098, 1, 1, 0, 0.79607844, 0.93333334, 1, 0, 0.5294886, 0.89988226, 1, 0, 0.79607844, 0.93333334, 1, 0.76862746, 0.42745098, 1, 1)
+metadata/_snap_enabled = true
+metadata/_snap_count = 12
+
+[node name="GunTestShootingRange" type="Node2D" unique_id=1165197377]
+script = ExtResource("1_bt32x")
+level_name = "GunTestShootingRange"
+music = "train"
+dialog_json = "res://src/Dialog/Village.json"
+debug_hp_on_enter = 6
+controller_color_gradient = SubResource("Gradient_iuj41")
+
+[node name="LevelLimiter" type="MarginContainer" parent="." unique_id=10937438 instance=ExtResource("2_7oplm")]
+offset_left = 1632.0
+offset_top = 1744.0
+offset_right = 2976.0
+offset_bottom = 2288.0
+mouse_filter = 2
+script = ExtResource("3_6pu35")
+background_resource = ExtResource("3_eb80a")
+texture = ExtResource("4_5gk55")
+layers = 5
+layer_scales = {
+0: Vector2(0, 0),
+1: Vector2(0.4, 0.4),
+2: Vector2(0.5, 0.6),
+3: Vector2(0.7, 0.7),
+4: Vector2(0.9, 0.9)
+}
+layer_height_offsets = {
+0: 0.0,
+1: -100.0,
+2: -50.0,
+3: 0.0,
+4: 0.0
+}
+tile_mode = 1
+
+[node name="TileMap" type="Node2D" parent="." unique_id=1148391406]
+z_index = 1
+
+[node name="FarBack" type="TileMapLayer" parent="TileMap" unique_id=1394156717]
+z_index = -2
+use_parent_material = true
+tile_set = ExtResource("5_tua84")
+
+[node name="Back" type="TileMapLayer" parent="TileMap" unique_id=387206527]
+z_index = -1
+use_parent_material = true
+tile_set = ExtResource("5_tua84")
+
+[node name="Front" type="TileMapLayer" parent="TileMap" unique_id=2126912126]
+z_index = 1
+use_parent_material = true
+tile_map_data = PackedByteArray("AAB6AI4AAAAAAAgAAAB7AI4AAAAAAAgAAAB8AI4AAAAAAAgAAAB9AI4AAAAAAAgAAAB+AI4AAAAAAAgAAAB/AI4AAAAAAAgAAACAAI4AAAAAAAgAAACBAI4AAAAAAAgAAACCAI4AAAAAAAgAAACDAI4AAAAAAAgAAACEAI4AAAAAAAgAAACFAI4AAAAAAAgAAACGAI4AAAAAAAgAAACHAI4AAAAAAAgAAACIAI4AAAAAAAgAAACJAI4AAAAAAAgAAACKAI4AAAAAAAgAAACLAI4AAAAAAAgAAACMAI4AAAAAAAgAAACNAI4AAAAAAAgAAACOAI4AAAAAAAgAAACPAI4AAAAAAAgAAACQAI4AAAAAAAgAAACRAI4AAAAAAAgAAACSAI4AAAAAAAgAAACTAI4AAAAAAAgAAACUAI4AAAAAAAgAAACVAI4AAAAAAAgAAACWAI4AAAAAAAgAAACXAI4AAAAAAAgAAACYAI4AAAAAAAgAAACZAI4AAAAAAAgAAACaAI4AAAAAAAgAAACbAI4AAAAAAAgAAACcAI4AAAAAAAgAAACdAI4AAAAAAAgAAACeAI4AAAAAAAgAAACfAI4AAAAAAAgAAACgAI4AAAAAAAgAAAChAI4AAAAAAAgAAACiAI4AAAAAAAgAAACjAI4AAAAAAAgAAACkAI4AAAAAAAgAAAB5AI4AAAAAAAgAAAB5AI8AAAAAAAgAAAB5AJAAAAAAAAgAAAB6AI8AAAAAAAgAAAB6AJAAAAAAAAgAAABmAI4AAAAAAAgAAABmAI8AAAAAAAgAAABmAJAAAAAAAAgAAABnAI4AAAAAAAgAAABnAI8AAAAAAAgAAABnAJAAAAAAAAgAAABoAI4AAAAAAAgAAABoAI8AAAAAAAgAAABoAJAAAAAAAAgAAABpAI4AAAAAAAgAAABpAI8AAAAAAAgAAABpAJAAAAAAAAgAAABqAI4AAAAAAAgAAABqAI8AAAAAAAgAAABqAJAAAAAAAAgAAABrAI4AAAAAAAgAAABrAI8AAAAAAAgAAABrAJAAAAAAAAgAAABsAI4AAAAAAAgAAABsAI8AAAAAAAgAAABsAJAAAAAAAAgAAABtAI4AAAAAAAgAAABtAI8AAAAAAAgAAABtAJAAAAAAAAgAAABuAI4AAAAAAAgAAABuAI8AAAAAAAgAAABuAJAAAAAAAAgAAABvAI4AAAAAAAgAAABvAI8AAAAAAAgAAABvAJAAAAAAAAgAAABwAI4AAAAAAAgAAABwAI8AAAAAAAgAAABwAJAAAAAAAAgAAABxAI4AAAAAAAgAAABxAI8AAAAAAAgAAABxAJAAAAAAAAgAAAByAI4AAAAAAAgAAAByAI8AAAAAAAgAAAByAJAAAAAAAAgAAABzAI4AAAAAAAgAAABzAI8AAAAAAAgAAABzAJAAAAAAAAgAAAB0AI4AAAAAAAgAAAB0AI8AAAAAAAgAAAB0AJAAAAAAAAgAAAB1AI4AAAAAAAgAAAB1AI8AAAAAAAgAAAB1AJAAAAAAAAgAAAB2AI4AAAAAAAgAAAB2AI8AAAAAAAgAAAB2AJAAAAAAAAgAAAB3AI4AAAAAAAgAAAB3AI8AAAAAAAgAAAB3AJAAAAAAAAgAAAB4AI4AAAAAAAgAAAB4AI8AAAAAAAgAAAB4AJAAAAAAAAgAAAB7AI8AAAAAAAgAAAB7AJAAAAAAAAgAAAB8AI8AAAAAAAgAAAB8AJAAAAAAAAgAAAB9AI8AAAAAAAgAAAB9AJAAAAAAAAgAAAB+AI8AAAAAAAgAAAB+AJAAAAAAAAgAAAB/AI8AAAAAAAgAAAB/AJAAAAAAAAgAAACAAI8AAAAAAAgAAACAAJAAAAAAAAgAAACBAI8AAAAAAAgAAACBAJAAAAAAAAgAAACCAI8AAAAAAAgAAACCAJAAAAAAAAgAAACDAI8AAAAAAAgAAACDAJAAAAAAAAgAAACEAI8AAAAAAAgAAACEAJAAAAAAAAgAAACFAI8AAAAAAAgAAACFAJAAAAAAAAgAAACGAI8AAAAAAAgAAACGAJAAAAAAAAgAAACHAI8AAAAAAAgAAACHAJAAAAAAAAgAAACIAI8AAAAAAAgAAACIAJAAAAAAAAgAAACJAI8AAAAAAAgAAACJAJAAAAAAAAgAAACKAI8AAAAAAAgAAACKAJAAAAAAAAgAAACLAI8AAAAAAAgAAACLAJAAAAAAAAgAAACMAI8AAAAAAAgAAACMAJAAAAAAAAgAAACNAI8AAAAAAAgAAACNAJAAAAAAAAgAAACOAI8AAAAAAAgAAACOAJAAAAAAAAgAAACPAI8AAAAAAAgAAACPAJAAAAAAAAgAAACQAI8AAAAAAAgAAACQAJAAAAAAAAgAAACRAI8AAAAAAAgAAACRAJAAAAAAAAgAAACSAI8AAAAAAAgAAACSAJAAAAAAAAgAAACTAI8AAAAAAAgAAACTAJAAAAAAAAgAAACUAI8AAAAAAAgAAACUAJAAAAAAAAgAAACVAI8AAAAAAAgAAACVAJAAAAAAAAgAAACWAI8AAAAAAAgAAACWAJAAAAAAAAgAAACXAI8AAAAAAAgAAACXAJAAAAAAAAgAAACYAI8AAAAAAAgAAACYAJAAAAAAAAgAAACZAI8AAAAAAAgAAACZAJAAAAAAAAgAAACaAI8AAAAAAAgAAACaAJAAAAAAAAgAAACbAI8AAAAAAAgAAACbAJAAAAAAAAgAAACcAI8AAAAAAAgAAACcAJAAAAAAAAgAAACdAI8AAAAAAAgAAACdAJAAAAAAAAgAAACeAI8AAAAAAAgAAACeAJAAAAAAAAgAAACfAI8AAAAAAAgAAACfAJAAAAAAAAgAAACgAI8AAAAAAAgAAACgAJAAAAAAAAgAAAChAI8AAAAAAAgAAAChAJAAAAAAAAgAAACiAI8AAAAAAAgAAACiAJAAAAAAAAgAAACjAI8AAAAAAAgAAACjAJAAAAAAAAgAAACkAI8AAAAAAAgAAACkAJAAAAAAAAgAAAClAI4AAAAAAAgAAAClAI8AAAAAAAgAAAClAJAAAAAAAAgAAACmAI4AAAAAAAgAAACmAI8AAAAAAAgAAACmAJAAAAAAAAgAAACnAI4AAAAAAAgAAACnAI8AAAAAAAgAAACnAJAAAAAAAAgAAACoAI4AAAAAAAgAAACoAI8AAAAAAAgAAACoAJAAAAAAAAgAAACpAI4AAAAAAAgAAACpAI8AAAAAAAgAAACpAJAAAAAAAAgAAACqAI4AAAAAAAgAAACqAI8AAAAAAAgAAACqAJAAAAAAAAgAAACrAI4AAAAAAAgAAACrAI8AAAAAAAgAAACrAJAAAAAAAAgAAACsAI4AAAAAAAgAAACsAI8AAAAAAAgAAACsAJAAAAAAAAgAAACtAI4AAAAAAAgAAACtAI8AAAAAAAgAAACtAJAAAAAAAAgAAACuAI4AAAAAAAgAAACuAI8AAAAAAAgAAACuAJAAAAAAAAgAAACvAI4AAAAAAAgAAACvAI8AAAAAAAgAAACvAJAAAAAAAAgAAACwAI4AAAAAAAgAAACwAI8AAAAAAAgAAACwAJAAAAAAAAgA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")
+tile_set = ExtResource("5_tua84")
+
+[node name="FarFront" type="TileMapLayer" parent="TileMap" unique_id=1690667449]
+z_index = 2
+use_parent_material = true
+tile_map_data = PackedByteArray("AACxAHMAAAADAA0AAACyAHMAAAADAA0AAACzAHMAAAADAA0AAAC4AHEAAAABAA0AAAC4AHIAAAABAA0AAACzAHAAAAACAA0AAAC0AHAAAAACAA0AAACuAHEAAAAAAA0AAACuAHIAAAAAAA0AAACuAHMAAAAAAA0AAAC4AHAAAAABAA0AAAC1AHAAAAACAA0AAAA=")
+tile_set = ExtResource("5_tua84")
+
+[node name="Props" type="Node2D" parent="." unique_id=96715822]
+
+[node name="Actors" type="Node2D" parent="." unique_id=1174921448]
+
+[node name="Triggers" type="Node2D" parent="." unique_id=135787628]
+visible = false
+
+[node name="Spawns" type="Node2D" parent="." unique_id=993935856]
+
+[node name="HealthRefill" type="Area2D" parent="Spawns" unique_id=1449282698 groups=["Entities", "PropSpawns"] instance=ExtResource("7_1yvib")]
+z_index = 999
+position = Vector2(2448, 1952)
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("8_etev8")
+prop_path = "res://src/Prop/HealthRefill.tscn"
+properties = {
+"do_bubble": [false, 1, ""],
+"editor_hidden": [false, 1, ""],
+"id": [&"HealthRefill", 4, ""]
+}
+
+[node name="HealthRefill1" type="Area2D" parent="Spawns" unique_id=1634430074 groups=["Entities", "PropSpawns"] instance=ExtResource("7_1yvib")]
+z_index = 999
+position = Vector2(2448, 1840)
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("8_etev8")
+prop_path = "res://src/Prop/HealthRefill.tscn"
+properties = {
+"do_bubble": [false, 1, ""],
+"editor_hidden": [false, 1, ""],
+"id": [&"HealthRefill1", 4, ""]
+}
+
+[node name="HealthRefill2" type="Area2D" parent="Spawns" unique_id=1852425513 groups=["Entities", "PropSpawns"] instance=ExtResource("7_1yvib")]
+z_index = 999
+position = Vector2(2448, 2080)
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("8_etev8")
+prop_path = "res://src/Prop/HealthRefill.tscn"
+properties = {
+"do_bubble": [false, 1, ""],
+"editor_hidden": [false, 1, ""],
+"id": [&"HealthRefill2", 4, ""]
+}
+
+[node name="SpawnHole" type="Area2D" parent="Spawns" unique_id=1927274806 groups=["Entities", "PropSpawns"] instance=ExtResource("7_1yvib")]
+z_index = 999
+position = Vector2(2944, 2064)
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("8_etev8")
+prop_path = "res://src/Prop/SpawnHole.tscn"
+properties = {
+"always_active": [false, 1, ""],
+"do_bubble": [false, 1, ""],
+"editor_hidden": [false, 1, ""],
+"id": [&"SpawnHole", 4, ""],
+"launch_force": [Vector2(0, 0), 5, ""],
+"spawn_interval": [1.0, 3, ""],
+"spawn_limit": [-1, 2, ""],
+"spawn_start_timer": [1.0, 3, ""]
+}
+
+[node name="VURect" type="Node2D" parent="Spawns/SpawnHole" unique_id=688682803 groups=["Entities", "VURects", "VisualUtilities"] instance=ExtResource("9_j8ajt")]
+script = ExtResource("10_jifxr")
+tag_name = "player_detection"
+value = Rect2(-144, -16, 176, 48)
+
+[node name="VUActor" type="Area2D" parent="Spawns/SpawnHole" unique_id=1199277091 groups=["Entities", "VUActors", "VisualUtilities"] instance=ExtResource("11_jvqrf")]
+z_index = 999
+position = Vector2(8, 0)
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("12_dnqp4")
+actor_path = "uid://c7yhu5je8w1pf"
+filter_team = 1
+filter_actor = "roller"
+tag_name = "spawn_actor"
+properties = {
+"base_gravity": [300.0, 3, ""],
+"debug": [false, 1, ""],
+"difficulty": [0, 2, ""],
+"do_bubbles": [false, 1, ""],
+"editor_hidden": [false, 1, ""],
+"id": ["", 4, ""],
+"speed": [Vector2(150, 350), 5, ""],
+"start_dir": [Vector2(-1, 0), 5, ""],
+"water_gravity": [150.0, 3, ""]
+}
+
+[node name="Shield" type="Area2D" parent="Spawns" unique_id=846853886 groups=["ActorSpawns", "Entities"] instance=ExtResource("13_2tq6u")]
+z_index = 999
+position = Vector2(2952, 2032)
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("14_f2fu4")
+actor_path = "res://src/Actor/Enemy/Shield.tscn"
+properties = {
+"base_gravity": [300.0, 3, ""],
+"debug": [true, 1, ""],
+"difficulty": [0, 2, ""],
+"do_bubbles": [true, 1, ""],
+"editor_hidden": [false, 1, ""],
+"id": [&"Shield", 4, ""],
+"speed": [Vector2(0, 0), 5, ""],
+"water_gravity": [150.0, 3, ""]
+}
+
+[node name="MoveDir" type="Area2D" parent="Spawns/Shield" unique_id=1540331808 groups=["Entities", "VUVectors", "VisualUtilities"] instance=ExtResource("15_tfi41")]
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("16_1mv3f")
+tag_name = "move_dir"
+direction = Vector2(-1, 8.742278e-08)
+snap_degrees = 180.0
+
+[node name="Billy" type="Area2D" parent="Spawns" unique_id=555561612 groups=["ActorSpawns", "Entities"] instance=ExtResource("13_2tq6u")]
+z_index = 999
+position = Vector2(2824, 1904)
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("14_f2fu4")
+actor_path = "res://src/Actor/Enemy/Billy.tscn"
+properties = {
+"base_gravity": [300.0, 3, ""],
+"bullet_damage": [2, 2, ""],
+"bullet_speed": [200, 2, ""],
+"deaggro_delay": [3.0, 3, ""],
+"debug": [true, 1, ""],
+"difficulty": [0, 2, ""],
+"do_bubbles": [true, 1, ""],
+"editor_hidden": [false, 1, ""],
+"id": [&"Billy", 4, ""],
+"idle_max_time": [5.0, 3, ""],
+"lock_distance": [128, 2, ""],
+"lock_tolerance": [16, 2, ""],
+"speed": [Vector2(150, 350), 5, ""],
+"walk_max_time": [10.0, 3, ""],
+"water_gravity": [150.0, 3, ""]
+}
+
+[node name="VUVector" type="Area2D" parent="Spawns/Billy" unique_id=872564127 groups=["Entities", "VUVectors", "VisualUtilities"] instance=ExtResource("15_tfi41")]
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("16_1mv3f")
+tag_name = "move_dir"
+direction = Vector2(-1, 8.742278e-08)
+snap_degrees = 180.0
+
+[node name="Billy1" type="Area2D" parent="Spawns" unique_id=691894641 groups=["ActorSpawns", "Entities"] instance=ExtResource("13_2tq6u")]
+z_index = 999
+position = Vector2(2696, 1904)
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("14_f2fu4")
+actor_path = "res://src/Actor/Enemy/Billy.tscn"
+properties = {
+"base_gravity": [300.0, 3, ""],
+"bullet_damage": [2, 2, ""],
+"bullet_speed": [200, 2, ""],
+"deaggro_delay": [3.0, 3, ""],
+"debug": [true, 1, ""],
+"difficulty": [0, 2, ""],
+"do_bubbles": [true, 1, ""],
+"editor_hidden": [false, 1, ""],
+"id": [&"Billy1", 4, ""],
+"idle_max_time": [5.0, 3, ""],
+"lock_distance": [128, 2, ""],
+"lock_tolerance": [16, 2, ""],
+"speed": [Vector2(150, 350), 5, ""],
+"walk_max_time": [10.0, 3, ""],
+"water_gravity": [150.0, 3, ""]
+}
+
+[node name="VUVector" type="Area2D" parent="Spawns/Billy1" unique_id=1148510409 groups=["Entities", "VUVectors", "VisualUtilities"] instance=ExtResource("15_tfi41")]
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("16_1mv3f")
+tag_name = "move_dir"
+direction = Vector2(-1, 8.742278e-08)
+snap_degrees = 180.0
+
+[node name="Billy2" type="Area2D" parent="Spawns" unique_id=74497575 groups=["ActorSpawns", "Entities"] instance=ExtResource("13_2tq6u")]
+z_index = 999
+position = Vector2(2568, 1904)
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("14_f2fu4")
+actor_path = "res://src/Actor/Enemy/Billy.tscn"
+properties = {
+"base_gravity": [300.0, 3, ""],
+"bullet_damage": [2, 2, ""],
+"bullet_speed": [200, 2, ""],
+"deaggro_delay": [3.0, 3, ""],
+"debug": [true, 1, ""],
+"difficulty": [0, 2, ""],
+"do_bubbles": [true, 1, ""],
+"editor_hidden": [false, 1, ""],
+"id": [&"Billy2", 4, ""],
+"idle_max_time": [5.0, 3, ""],
+"lock_distance": [128, 2, ""],
+"lock_tolerance": [16, 2, ""],
+"speed": [Vector2(150, 350), 5, ""],
+"walk_max_time": [10.0, 3, ""],
+"water_gravity": [150.0, 3, ""]
+}
+
+[node name="VUVector" type="Area2D" parent="Spawns/Billy2" unique_id=909238852 groups=["Entities", "VUVectors", "VisualUtilities"] instance=ExtResource("15_tfi41")]
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("16_1mv3f")
+tag_name = "move_dir"
+direction = Vector2(-1, 8.742278e-08)
+snap_degrees = 180.0
+
+[node name="Billy3" type="Area2D" parent="Spawns" unique_id=1304606916 groups=["ActorSpawns", "Entities"] instance=ExtResource("13_2tq6u")]
+z_index = 999
+position = Vector2(2952, 1904)
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("14_f2fu4")
+actor_path = "res://src/Actor/Enemy/Billy.tscn"
+properties = {
+"base_gravity": [300.0, 3, ""],
+"bullet_damage": [2, 2, ""],
+"bullet_speed": [200, 2, ""],
+"deaggro_delay": [3.0, 3, ""],
+"debug": [true, 1, ""],
+"difficulty": [0, 2, ""],
+"do_bubbles": [true, 1, ""],
+"editor_hidden": [false, 1, ""],
+"id": [&"Billy3", 4, ""],
+"idle_max_time": [5.0, 3, ""],
+"lock_distance": [128, 2, ""],
+"lock_tolerance": [16, 2, ""],
+"speed": [Vector2(150, 350), 5, ""],
+"walk_max_time": [10.0, 3, ""],
+"water_gravity": [150.0, 3, ""]
+}
+
+[node name="VUVector" type="Area2D" parent="Spawns/Billy3" unique_id=857418154 groups=["Entities", "VUVectors", "VisualUtilities"] instance=ExtResource("15_tfi41")]
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("16_1mv3f")
+tag_name = "move_dir"
+direction = Vector2(-1, 8.742278e-08)
+snap_degrees = 180.0
+
+[node name="Sentry" type="Area2D" parent="Spawns" unique_id=1627343938 groups=["ActorSpawns", "Entities"] instance=ExtResource("13_2tq6u")]
+z_index = 999
+position = Vector2(2600, 2096)
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("14_f2fu4")
+actor_path = "res://src/Actor/Enemy/Sentry.tscn"
+properties = {
+"base_gravity": [300.0, 3, ""],
+"debug": [false, 1, ""],
+"diff_3_cooldown": [5.0, 3, ""],
+"diff_3_rapid_fire_time": [0.1, 3, ""],
+"difficulty": [0, 2, ""],
+"do_bubbles": [true, 1, ""],
+"editor_hidden": [false, 1, ""],
+"fountain_bullet_in_spread": [8, 2, ""],
+"fountain_force": [200.0, 3, ""],
+"fountain_spread": [0.2617993877991494, 3, ""],
+"id": [&"Sentry", 4, ""],
+"normal_cooldown": [0.5, 3, ""],
+"projectile_damage": [2, 2, ""],
+"speed": [Vector2(150, 350), 5, ""],
+"water_gravity": [150.0, 3, ""]
+}
+
+[node name="VURect" type="Node2D" parent="Spawns/Sentry" unique_id=432877966 groups=["Entities", "VURects", "VisualUtilities"] instance=ExtResource("9_j8ajt")]
+script = ExtResource("10_jifxr")
+tag_name = "player_detector"
+value = Rect2(-128, -112, 152, 128)
+
+[node name="ShootX" type="Area2D" parent="Spawns/Sentry" unique_id=1432238783 groups=["Entities", "VisualUtilities", "WaypointLocals", "Waypoints"] instance=ExtResource("17_4itsw")]
+position = Vector2(-72, 0)
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("18_mxvm7")
+tag_name = "shoot_x"
+lock_y = true
+
+[node name="ShootY" type="Area2D" parent="Spawns/Sentry" unique_id=595539309 groups=["Entities", "VisualUtilities", "WaypointLocals", "Waypoints"] instance=ExtResource("17_4itsw")]
+modulate = Color(0, 1.8247963, 1.8247963, 1)
+position = Vector2(0, -64)
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("18_mxvm7")
+tag_name = "shoot_y"
+lock_x = true
+
+[node name="AmmoRefill" type="Area2D" parent="Spawns" unique_id=1665120703 groups=["Entities", "PropSpawns"] instance=ExtResource("7_1yvib")]
+z_index = 999
+position = Vector2(2432, 2080)
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("8_etev8")
+prop_path = "res://src/Prop/AmmoRefill.tscn"
+properties = {
+"do_bubble": [false, 1, ""],
+"editor_hidden": [null, 1, ""],
+"id": [&"AmmoRefill", 4, ""]
+}
+
+[node name="AmmoRefill1" type="Area2D" parent="Spawns" unique_id=1415066007 groups=["Entities", "PropSpawns"] instance=ExtResource("7_1yvib")]
+z_index = 999
+position = Vector2(2432, 1952)
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("8_etev8")
+prop_path = "res://src/Prop/AmmoRefill.tscn"
+properties = {
+"do_bubble": [false, 1, ""],
+"editor_hidden": [null, 1, ""],
+"id": [&"AmmoRefill1", 4, ""]
+}
+
+[node name="AmmoRefill2" type="Area2D" parent="Spawns" unique_id=1088794891 groups=["Entities", "PropSpawns"] instance=ExtResource("7_1yvib")]
+z_index = 999
+position = Vector2(2432, 1840)
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("8_etev8")
+prop_path = "res://src/Prop/AmmoRefill.tscn"
+properties = {
+"do_bubble": [false, 1, ""],
+"editor_hidden": [null, 1, ""],
+"id": [&"AmmoRefill2", 4, ""]
+}
+
+[node name="BreakBlock" type="Area2D" parent="Spawns" unique_id=854702798 groups=["Entities", "PropSpawns"] instance=ExtResource("7_1yvib")]
+z_index = 999
+position = Vector2(2672, 2064)
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("8_etev8")
+prop_path = "res://src/Prop/BreakBlock.tscn"
+properties = {
+"break_on_fall": [false, 1, ""],
+"crush_enemies": [true, 1, ""],
+"crush_players": [false, 1, ""],
+"do_bubble": [false, 1, ""],
+"editor_hidden": [false, 1, ""],
+"has_gravity": [true, 1, ""],
+"id": [&"BreakBlock", 4, ""]
+}
+
+[node name="BreakBlock1" type="Area2D" parent="Spawns" unique_id=952034288 groups=["Entities", "PropSpawns"] instance=ExtResource("7_1yvib")]
+z_index = 999
+position = Vector2(2672, 2080)
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("8_etev8")
+prop_path = "res://src/Prop/BreakBlock.tscn"
+properties = {
+"break_on_fall": [false, 1, ""],
+"crush_enemies": [true, 1, ""],
+"crush_players": [false, 1, ""],
+"do_bubble": [false, 1, ""],
+"editor_hidden": [false, 1, ""],
+"has_gravity": [true, 1, ""],
+"id": [&"BreakBlock1", 4, ""]
+}
+
+[node name="BreakBlock2" type="Area2D" parent="Spawns" unique_id=1240506602 groups=["Entities", "PropSpawns"] instance=ExtResource("7_1yvib")]
+z_index = 999
+position = Vector2(2688, 2080)
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("8_etev8")
+prop_path = "res://src/Prop/BreakBlock.tscn"
+properties = {
+"break_on_fall": [false, 1, ""],
+"crush_enemies": [true, 1, ""],
+"crush_players": [false, 1, ""],
+"do_bubble": [false, 1, ""],
+"editor_hidden": [false, 1, ""],
+"has_gravity": [true, 1, ""],
+"id": [&"BreakBlock2", 4, ""]
+}
+
+[node name="BreakBlock3" type="Area2D" parent="Spawns" unique_id=660857482 groups=["Entities", "PropSpawns"] instance=ExtResource("7_1yvib")]
+z_index = 999
+position = Vector2(2688, 2064)
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("8_etev8")
+prop_path = "res://src/Prop/BreakBlock.tscn"
+properties = {
+"break_on_fall": [false, 1, ""],
+"crush_enemies": [true, 1, ""],
+"crush_players": [false, 1, ""],
+"do_bubble": [false, 1, ""],
+"editor_hidden": [false, 1, ""],
+"has_gravity": [true, 1, ""],
+"id": [&"BreakBlock3", 4, ""]
+}
+
+[node name="BreakBlock4" type="Area2D" parent="Spawns" unique_id=1887107256 groups=["Entities", "PropSpawns"] instance=ExtResource("7_1yvib")]
+z_index = 999
+position = Vector2(2688, 2048)
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("8_etev8")
+prop_path = "res://src/Prop/BreakBlock.tscn"
+properties = {
+"break_on_fall": [false, 1, ""],
+"crush_enemies": [true, 1, ""],
+"crush_players": [false, 1, ""],
+"do_bubble": [false, 1, ""],
+"editor_hidden": [false, 1, ""],
+"has_gravity": [true, 1, ""],
+"id": [&"BreakBlock4", 4, ""]
+}
+
+[node name="BreakBlock5" type="Area2D" parent="Spawns" unique_id=185090234 groups=["Entities", "PropSpawns"] instance=ExtResource("7_1yvib")]
+z_index = 999
+position = Vector2(2704, 2048)
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("8_etev8")
+prop_path = "res://src/Prop/BreakBlock.tscn"
+properties = {
+"break_on_fall": [false, 1, ""],
+"crush_enemies": [true, 1, ""],
+"crush_players": [false, 1, ""],
+"do_bubble": [false, 1, ""],
+"editor_hidden": [false, 1, ""],
+"has_gravity": [true, 1, ""],
+"id": [&"BreakBlock5", 4, ""]
+}
+
+[node name="BreakBlock6" type="Area2D" parent="Spawns" unique_id=1646216008 groups=["Entities", "PropSpawns"] instance=ExtResource("7_1yvib")]
+z_index = 999
+position = Vector2(2704, 2064)
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("8_etev8")
+prop_path = "res://src/Prop/BreakBlock.tscn"
+properties = {
+"break_on_fall": [false, 1, ""],
+"crush_enemies": [true, 1, ""],
+"crush_players": [false, 1, ""],
+"do_bubble": [false, 1, ""],
+"editor_hidden": [false, 1, ""],
+"has_gravity": [true, 1, ""],
+"id": [&"BreakBlock6", 4, ""]
+}
+
+[node name="BreakBlock7" type="Area2D" parent="Spawns" unique_id=1405124254 groups=["Entities", "PropSpawns"] instance=ExtResource("7_1yvib")]
+z_index = 999
+position = Vector2(2704, 2080)
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("8_etev8")
+prop_path = "res://src/Prop/BreakBlock.tscn"
+properties = {
+"break_on_fall": [false, 1, ""],
+"crush_enemies": [true, 1, ""],
+"crush_players": [false, 1, ""],
+"do_bubble": [false, 1, ""],
+"editor_hidden": [false, 1, ""],
+"has_gravity": [true, 1, ""],
+"id": [&"BreakBlock7", 4, ""]
+}
+
+[node name="BreakBlock8" type="Area2D" parent="Spawns" unique_id=1486847686 groups=["Entities", "PropSpawns"] instance=ExtResource("7_1yvib")]
+z_index = 999
+position = Vector2(2720, 2080)
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("8_etev8")
+prop_path = "res://src/Prop/BreakBlock.tscn"
+properties = {
+"break_on_fall": [false, 1, ""],
+"crush_enemies": [true, 1, ""],
+"crush_players": [false, 1, ""],
+"do_bubble": [false, 1, ""],
+"editor_hidden": [false, 1, ""],
+"has_gravity": [true, 1, ""],
+"id": [&"BreakBlock8", 4, ""]
+}
+
+[node name="BreakBlock9" type="Area2D" parent="Spawns" unique_id=661785861 groups=["Entities", "PropSpawns"] instance=ExtResource("7_1yvib")]
+z_index = 999
+position = Vector2(2720, 2064)
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("8_etev8")
+prop_path = "res://src/Prop/BreakBlock.tscn"
+properties = {
+"break_on_fall": [false, 1, ""],
+"crush_enemies": [true, 1, ""],
+"crush_players": [false, 1, ""],
+"do_bubble": [false, 1, ""],
+"editor_hidden": [false, 1, ""],
+"has_gravity": [true, 1, ""],
+"id": [&"BreakBlock9", 4, ""]
+}
+
+[node name="BreakBlock10" type="Area2D" parent="Spawns" unique_id=433435913 groups=["Entities", "PropSpawns"] instance=ExtResource("7_1yvib")]
+z_index = 999
+position = Vector2(2720, 2048)
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("8_etev8")
+prop_path = "res://src/Prop/BreakBlock.tscn"
+properties = {
+"break_on_fall": [false, 1, ""],
+"crush_enemies": [true, 1, ""],
+"crush_players": [false, 1, ""],
+"do_bubble": [false, 1, ""],
+"editor_hidden": [false, 1, ""],
+"has_gravity": [true, 1, ""],
+"id": [&"BreakBlock10", 4, ""]
+}
+
+[node name="BreakBlock11" type="Area2D" parent="Spawns" unique_id=1641936669 groups=["Entities", "PropSpawns"] instance=ExtResource("7_1yvib")]
+z_index = 999
+position = Vector2(2736, 2048)
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("8_etev8")
+prop_path = "res://src/Prop/BreakBlock.tscn"
+properties = {
+"break_on_fall": [false, 1, ""],
+"crush_enemies": [true, 1, ""],
+"crush_players": [false, 1, ""],
+"do_bubble": [false, 1, ""],
+"editor_hidden": [false, 1, ""],
+"has_gravity": [true, 1, ""],
+"id": [&"BreakBlock11", 4, ""]
+}
+
+[node name="BreakBlock12" type="Area2D" parent="Spawns" unique_id=1247709643 groups=["Entities", "PropSpawns"] instance=ExtResource("7_1yvib")]
+z_index = 999
+position = Vector2(2736, 2080)
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("8_etev8")
+prop_path = "res://src/Prop/BreakBlock.tscn"
+properties = {
+"break_on_fall": [false, 1, ""],
+"crush_enemies": [true, 1, ""],
+"crush_players": [false, 1, ""],
+"do_bubble": [false, 1, ""],
+"editor_hidden": [false, 1, ""],
+"has_gravity": [true, 1, ""],
+"id": [&"BreakBlock12", 4, ""]
+}
+
+[node name="BreakBlock13" type="Area2D" parent="Spawns" unique_id=1747627447 groups=["Entities", "PropSpawns"] instance=ExtResource("7_1yvib")]
+z_index = 999
+position = Vector2(2736, 2064)
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("8_etev8")
+prop_path = "res://src/Prop/BreakBlock.tscn"
+properties = {
+"break_on_fall": [false, 1, ""],
+"crush_enemies": [true, 1, ""],
+"crush_players": [false, 1, ""],
+"do_bubble": [false, 1, ""],
+"editor_hidden": [false, 1, ""],
+"has_gravity": [true, 1, ""],
+"id": [&"BreakBlock13", 4, ""]
+}
+
+[node name="BreakBlock14" type="Area2D" parent="Spawns" unique_id=1787213409 groups=["Entities", "PropSpawns"] instance=ExtResource("7_1yvib")]
+z_index = 999
+position = Vector2(2752, 2080)
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("8_etev8")
+prop_path = "res://src/Prop/BreakBlock.tscn"
+properties = {
+"break_on_fall": [false, 1, ""],
+"crush_enemies": [true, 1, ""],
+"crush_players": [false, 1, ""],
+"do_bubble": [false, 1, ""],
+"editor_hidden": [false, 1, ""],
+"has_gravity": [true, 1, ""],
+"id": [&"BreakBlock14", 4, ""]
+}
+
+[node name="BreakBlock15" type="Area2D" parent="Spawns" unique_id=1476923278 groups=["Entities", "PropSpawns"] instance=ExtResource("7_1yvib")]
+z_index = 999
+position = Vector2(2752, 2064)
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("8_etev8")
+prop_path = "res://src/Prop/BreakBlock.tscn"
+properties = {
+"break_on_fall": [false, 1, ""],
+"crush_enemies": [true, 1, ""],
+"crush_players": [false, 1, ""],
+"do_bubble": [false, 1, ""],
+"editor_hidden": [false, 1, ""],
+"has_gravity": [true, 1, ""],
+"id": [&"BreakBlock15", 4, ""]
+}
+
+[node name="BreakBlock16" type="Area2D" parent="Spawns" unique_id=180410149 groups=["Entities", "PropSpawns"] instance=ExtResource("7_1yvib")]
+z_index = 999
+position = Vector2(2736, 2032)
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("8_etev8")
+prop_path = "res://src/Prop/BreakBlock.tscn"
+properties = {
+"break_on_fall": [false, 1, ""],
+"crush_enemies": [true, 1, ""],
+"crush_players": [false, 1, ""],
+"do_bubble": [false, 1, ""],
+"editor_hidden": [false, 1, ""],
+"has_gravity": [true, 1, ""],
+"id": [&"BreakBlock16", 4, ""]
+}
+
+[node name="BreakBlock17" type="Area2D" parent="Spawns" unique_id=727073284 groups=["Entities", "PropSpawns"] instance=ExtResource("7_1yvib")]
+z_index = 999
+position = Vector2(2720, 2032)
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("8_etev8")
+prop_path = "res://src/Prop/BreakBlock.tscn"
+properties = {
+"break_on_fall": [false, 1, ""],
+"crush_enemies": [true, 1, ""],
+"crush_players": [false, 1, ""],
+"do_bubble": [false, 1, ""],
+"editor_hidden": [false, 1, ""],
+"has_gravity": [true, 1, ""],
+"id": [&"BreakBlock17", 4, ""]
+}
+
+[node name="BreakBlock18" type="Area2D" parent="Spawns" unique_id=1196226308 groups=["Entities", "PropSpawns"] instance=ExtResource("7_1yvib")]
+z_index = 999
+position = Vector2(2704, 2032)
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("8_etev8")
+prop_path = "res://src/Prop/BreakBlock.tscn"
+properties = {
+"break_on_fall": [false, 1, ""],
+"crush_enemies": [true, 1, ""],
+"crush_players": [false, 1, ""],
+"do_bubble": [false, 1, ""],
+"editor_hidden": [false, 1, ""],
+"has_gravity": [true, 1, ""],
+"id": [&"BreakBlock18", 4, ""]
+}
+
+[node name="BreakBlock19" type="Area2D" parent="Spawns" unique_id=67547692 groups=["Entities", "PropSpawns"] instance=ExtResource("7_1yvib")]
+z_index = 999
+position = Vector2(2688, 2032)
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("8_etev8")
+prop_path = "res://src/Prop/BreakBlock.tscn"
+properties = {
+"break_on_fall": [false, 1, ""],
+"crush_enemies": [true, 1, ""],
+"crush_players": [false, 1, ""],
+"do_bubble": [false, 1, ""],
+"editor_hidden": [false, 1, ""],
+"has_gravity": [true, 1, ""],
+"id": [&"BreakBlock19", 4, ""]
+}
+
+[node name="BreakBlock20" type="Area2D" parent="Spawns" unique_id=10006650 groups=["Entities", "PropSpawns"] instance=ExtResource("7_1yvib")]
+z_index = 999
+position = Vector2(2688, 2016)
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("8_etev8")
+prop_path = "res://src/Prop/BreakBlock.tscn"
+properties = {
+"break_on_fall": [false, 1, ""],
+"crush_enemies": [true, 1, ""],
+"crush_players": [false, 1, ""],
+"do_bubble": [false, 1, ""],
+"editor_hidden": [false, 1, ""],
+"has_gravity": [true, 1, ""],
+"id": [&"BreakBlock20", 4, ""]
+}
+
+[node name="BreakBlock21" type="Area2D" parent="Spawns" unique_id=721270839 groups=["Entities", "PropSpawns"] instance=ExtResource("7_1yvib")]
+z_index = 999
+position = Vector2(2704, 2016)
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("8_etev8")
+prop_path = "res://src/Prop/BreakBlock.tscn"
+properties = {
+"break_on_fall": [false, 1, ""],
+"crush_enemies": [true, 1, ""],
+"crush_players": [false, 1, ""],
+"do_bubble": [false, 1, ""],
+"editor_hidden": [false, 1, ""],
+"has_gravity": [true, 1, ""],
+"id": [&"BreakBlock21", 4, ""]
+}
+
+[node name="BreakBlock22" type="Area2D" parent="Spawns" unique_id=1002484586 groups=["Entities", "PropSpawns"] instance=ExtResource("7_1yvib")]
+z_index = 999
+position = Vector2(2720, 2016)
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("8_etev8")
+prop_path = "res://src/Prop/BreakBlock.tscn"
+properties = {
+"break_on_fall": [false, 1, ""],
+"crush_enemies": [true, 1, ""],
+"crush_players": [false, 1, ""],
+"do_bubble": [false, 1, ""],
+"editor_hidden": [false, 1, ""],
+"has_gravity": [true, 1, ""],
+"id": [&"BreakBlock22", 4, ""]
+}
+
+[node name="BreakBlock23" type="Area2D" parent="Spawns" unique_id=722768944 groups=["Entities", "PropSpawns"] instance=ExtResource("7_1yvib")]
+z_index = 999
+position = Vector2(2736, 2016)
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("8_etev8")
+prop_path = "res://src/Prop/BreakBlock.tscn"
+properties = {
+"break_on_fall": [false, 1, ""],
+"crush_enemies": [true, 1, ""],
+"crush_players": [false, 1, ""],
+"do_bubble": [false, 1, ""],
+"editor_hidden": [false, 1, ""],
+"has_gravity": [true, 1, ""],
+"id": [&"BreakBlock23", 4, ""]
+}
+
+[node name="BreakBlock24" type="Area2D" parent="Spawns" unique_id=445893762 groups=["Entities", "PropSpawns"] instance=ExtResource("7_1yvib")]
+z_index = 999
+position = Vector2(2656, 2064)
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("8_etev8")
+prop_path = "res://src/Prop/BreakBlock.tscn"
+properties = {
+"break_on_fall": [false, 1, ""],
+"crush_enemies": [true, 1, ""],
+"crush_players": [false, 1, ""],
+"do_bubble": [false, 1, ""],
+"editor_hidden": [false, 1, ""],
+"has_gravity": [true, 1, ""],
+"id": [&"BreakBlock24", 4, ""]
+}
+
+[node name="BreakBlock25" type="Area2D" parent="Spawns" unique_id=381461672 groups=["Entities", "PropSpawns"] instance=ExtResource("7_1yvib")]
+z_index = 999
+position = Vector2(2656, 2080)
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("8_etev8")
+prop_path = "res://src/Prop/BreakBlock.tscn"
+properties = {
+"break_on_fall": [false, 1, ""],
+"crush_enemies": [true, 1, ""],
+"crush_players": [false, 1, ""],
+"do_bubble": [false, 1, ""],
+"editor_hidden": [false, 1, ""],
+"has_gravity": [true, 1, ""],
+"id": [&"BreakBlock25", 4, ""]
+}
+
+[node name="BreakBlock26" type="Area2D" parent="Spawns" unique_id=700272341 groups=["Entities", "PropSpawns"] instance=ExtResource("7_1yvib")]
+z_index = 999
+position = Vector2(2672, 2048)
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("8_etev8")
+prop_path = "res://src/Prop/BreakBlock.tscn"
+properties = {
+"break_on_fall": [false, 1, ""],
+"crush_enemies": [true, 1, ""],
+"crush_players": [false, 1, ""],
+"do_bubble": [false, 1, ""],
+"editor_hidden": [false, 1, ""],
+"has_gravity": [true, 1, ""],
+"id": [&"BreakBlock26", 4, ""]
+}
+
+[node name="BreakBlock27" type="Area2D" parent="Spawns" unique_id=502386994 groups=["Entities", "PropSpawns"] instance=ExtResource("7_1yvib")]
+z_index = 999
+position = Vector2(2672, 2032)
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("8_etev8")
+prop_path = "res://src/Prop/BreakBlock.tscn"
+properties = {
+"break_on_fall": [false, 1, ""],
+"crush_enemies": [true, 1, ""],
+"crush_players": [false, 1, ""],
+"do_bubble": [false, 1, ""],
+"editor_hidden": [false, 1, ""],
+"has_gravity": [true, 1, ""],
+"id": [&"BreakBlock27", 4, ""]
+}
+
+[node name="BreakBlock28" type="Area2D" parent="Spawns" unique_id=1750757614 groups=["Entities", "PropSpawns"] instance=ExtResource("7_1yvib")]
+z_index = 999
+position = Vector2(2672, 2016)
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("8_etev8")
+prop_path = "res://src/Prop/BreakBlock.tscn"
+properties = {
+"break_on_fall": [false, 1, ""],
+"crush_enemies": [true, 1, ""],
+"crush_players": [false, 1, ""],
+"do_bubble": [false, 1, ""],
+"editor_hidden": [false, 1, ""],
+"has_gravity": [true, 1, ""],
+"id": [&"BreakBlock28", 4, ""]
+}
+
+[node name="Waypoints" type="Node2D" parent="." unique_id=1140943479]
+
+[node name="Notes" type="Node2D" parent="." unique_id=577013387]
+
+[node name="VanishingPoint" type="Area2D" parent="." unique_id=852042071 groups=["VanishingPoints"] instance=ExtResource("6_gbmur")]
+z_index = 999
+position = Vector2(2288, 1832)
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("20_akng8")
+
+[node name="SpawnPoint" type="Area2D" parent="." unique_id=1505342073 groups=["SpawnPoints"] instance=ExtResource("7_du1mx")]
+position = Vector2(2536, 2048)
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("22_5yo28")
+
+[node name="TitlePreview" type="Area2D" parent="." unique_id=2052223351 groups=["TitlePreviews"] instance=ExtResource("8_rtqcr")]
+z_index = 999
+position = Vector2(2496, 2016)
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("20_akng8")
+zoom = 2.0
+
+[connection signal="body_entered" from="Triggers/KillBoundaryU" to="Triggers/KillBoundaryU" method="_on_body_entered"]
+[connection signal="body_entered" from="Triggers/KillBoundaryD" to="Triggers/KillBoundaryD" method="_on_body_entered"]
+[connection signal="body_entered" from="Triggers/KillBoundaryL" to="Triggers/KillBoundaryL" method="_on_body_entered"]
+[connection signal="body_entered" from="Triggers/KillBoundaryR" to="Triggers/KillBoundaryR" method="_on_body_entered"]
+[connection signal="input_event" from="Spawns/HealthRefill" to="Spawns/HealthRefill" method="_on_input_event"]
+[connection signal="input_event" from="Spawns/HealthRefill1" to="Spawns/HealthRefill1" method="_on_input_event"]
+[connection signal="input_event" from="Spawns/HealthRefill2" to="Spawns/HealthRefill2" method="_on_input_event"]
+[connection signal="input_event" from="Spawns/SpawnHole" to="Spawns/SpawnHole" method="_on_input_event"]
+[connection signal="input_event" from="Spawns/Shield" to="Spawns/Shield" method="_on_input_event"]
+[connection signal="input_event" from="Spawns/Billy" to="Spawns/Billy" method="_on_input_event"]
+[connection signal="input_event" from="Spawns/Billy1" to="Spawns/Billy1" method="_on_input_event"]
+[connection signal="input_event" from="Spawns/Billy2" to="Spawns/Billy2" method="_on_input_event"]
+[connection signal="input_event" from="Spawns/Billy3" to="Spawns/Billy3" method="_on_input_event"]
+[connection signal="input_event" from="Spawns/Sentry" to="Spawns/Sentry" method="_on_input_event"]
+[connection signal="input_event" from="Spawns/AmmoRefill" to="Spawns/AmmoRefill" method="_on_input_event"]
+[connection signal="input_event" from="Spawns/AmmoRefill1" to="Spawns/AmmoRefill1" method="_on_input_event"]
+[connection signal="input_event" from="Spawns/AmmoRefill2" to="Spawns/AmmoRefill2" method="_on_input_event"]
+[connection signal="input_event" from="Spawns/BreakBlock" to="Spawns/BreakBlock" method="_on_input_event"]
+[connection signal="input_event" from="Spawns/BreakBlock1" to="Spawns/BreakBlock1" method="_on_input_event"]
+[connection signal="input_event" from="Spawns/BreakBlock2" to="Spawns/BreakBlock2" method="_on_input_event"]
+[connection signal="input_event" from="Spawns/BreakBlock3" to="Spawns/BreakBlock3" method="_on_input_event"]
+[connection signal="input_event" from="Spawns/BreakBlock4" to="Spawns/BreakBlock4" method="_on_input_event"]
+[connection signal="input_event" from="Spawns/BreakBlock5" to="Spawns/BreakBlock5" method="_on_input_event"]
+[connection signal="input_event" from="Spawns/BreakBlock6" to="Spawns/BreakBlock6" method="_on_input_event"]
+[connection signal="input_event" from="Spawns/BreakBlock7" to="Spawns/BreakBlock7" method="_on_input_event"]
+[connection signal="input_event" from="Spawns/BreakBlock8" to="Spawns/BreakBlock8" method="_on_input_event"]
+[connection signal="input_event" from="Spawns/BreakBlock9" to="Spawns/BreakBlock9" method="_on_input_event"]
+[connection signal="input_event" from="Spawns/BreakBlock10" to="Spawns/BreakBlock10" method="_on_input_event"]
+[connection signal="input_event" from="Spawns/BreakBlock11" to="Spawns/BreakBlock11" method="_on_input_event"]
+[connection signal="input_event" from="Spawns/BreakBlock12" to="Spawns/BreakBlock12" method="_on_input_event"]
+[connection signal="input_event" from="Spawns/BreakBlock13" to="Spawns/BreakBlock13" method="_on_input_event"]
+[connection signal="input_event" from="Spawns/BreakBlock14" to="Spawns/BreakBlock14" method="_on_input_event"]
+[connection signal="input_event" from="Spawns/BreakBlock15" to="Spawns/BreakBlock15" method="_on_input_event"]
+[connection signal="input_event" from="Spawns/BreakBlock16" to="Spawns/BreakBlock16" method="_on_input_event"]
+[connection signal="input_event" from="Spawns/BreakBlock17" to="Spawns/BreakBlock17" method="_on_input_event"]
+[connection signal="input_event" from="Spawns/BreakBlock18" to="Spawns/BreakBlock18" method="_on_input_event"]
+[connection signal="input_event" from="Spawns/BreakBlock19" to="Spawns/BreakBlock19" method="_on_input_event"]
+[connection signal="input_event" from="Spawns/BreakBlock20" to="Spawns/BreakBlock20" method="_on_input_event"]
+[connection signal="input_event" from="Spawns/BreakBlock21" to="Spawns/BreakBlock21" method="_on_input_event"]
+[connection signal="input_event" from="Spawns/BreakBlock22" to="Spawns/BreakBlock22" method="_on_input_event"]
+[connection signal="input_event" from="Spawns/BreakBlock23" to="Spawns/BreakBlock23" method="_on_input_event"]
+[connection signal="input_event" from="Spawns/BreakBlock24" to="Spawns/BreakBlock24" method="_on_input_event"]
+[connection signal="input_event" from="Spawns/BreakBlock25" to="Spawns/BreakBlock25" method="_on_input_event"]
+[connection signal="input_event" from="Spawns/BreakBlock26" to="Spawns/BreakBlock26" method="_on_input_event"]
+[connection signal="input_event" from="Spawns/BreakBlock27" to="Spawns/BreakBlock27" method="_on_input_event"]
+[connection signal="input_event" from="Spawns/BreakBlock28" to="Spawns/BreakBlock28" method="_on_input_event"]

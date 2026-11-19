@@ -64,6 +64,7 @@ _data = {
 collision_layer = 64
 collision_mask = 40
 script = ExtResource("2")
+explosion_damage = 3.0
 camera_recoil_distance = 8.0
 camera_recoil_curve = SubResource("Curve_xt7hv")
 camera_recoil_time = 0.5
@@ -109,10 +110,6 @@ one_shot = true
 
 [node name="Timer" type="Timer" parent="." unique_id=1911554376]
 process_callback = 0
-one_shot = true
-
-[node name="BounceGraceTimer" type="Timer" parent="." unique_id=348487959]
-wait_time = 0.2
 one_shot = true
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=528588730]

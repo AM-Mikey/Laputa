@@ -15,6 +15,7 @@ var touched_floor = false
 @onready var pc_on_floor = pc.is_on_floor()
 @onready var pc_held_down = inp.analogstick.y >= inp.Y_axis_shoot_deadzone && inp.can_act
 
+@export var explosion_damage: = 2.0
 
 
 func setup():
@@ -175,9 +176,9 @@ func _on_ExplosionDetector_area_entered(area):
 	if area.get_collision_layer_value(17):
 		if !is_world_blocking(area):
 			var knockback_direction = Vector2(sign(area.get_parent().global_position.x - global_position.x), 0)
-			area.get_parent().hit(int(damage/4.0), knockback_direction, $ExplosionDetector)
+			area.get_parent().hit(int(explosion_damage), knockback_direction, $ExplosionDetector)
 	#enemyhurt
 	elif area.get_collision_layer_value(18):
 		if !is_world_blocking(area):
 			var blood_dir = get_blood_dir(area.get_parent())
-			area.get_parent().hit(int(damage/4.0), blood_dir, $ExplosionDetector, blood_dir, knockback_strength)
+			area.get_parent().hit(int(explosion_damage), blood_dir, $ExplosionDetector, blood_dir, knockback_strength)
