@@ -77,6 +77,26 @@ func get_initial_velocity(scoped_projectile_speed, scoped_direction) -> Vector2:
 		out.y -= 100 #give us some ups to start with
 	return out
 
+func explode():
+	$ExplosionDetector/CollisionShape2D.set_deferred("disabled", false)
+	$ExplosionDetector.top_level = true
+	$ExplosionDetector.global_position = global_position
+	$AnimationPlayer.stop()
+
+	var explosion = load("res://src/Effect/GrenadeExplosion.tscn").instantiate()
+	explosion.global_position = global_position
+
+	if $ExplosionDetector/CollisionShape2D.shape.radius == 32: #Brotha EWWWW
+		explosion.size = "Small"
+	if $ExplosionDetector/CollisionShape2D.shape.radius == 48:
+		explosion.size = "Medium"
+	if $ExplosionDetector/CollisionShape2D.shape.radius == 64:
+		explosion.size = "Large"
+	w.middle_front.add_child(explosion)
+	var tween = get_tree().create_tween()
+	tween.tween_property($ExplosionDetector, "scale", Vector2.ONE, 0.1).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
+	await tween.finished
+	queue_free()
 
 func is_world_blocking(target) -> bool:
 	var target_center_global_position: Vector2
@@ -124,38 +144,23 @@ func _on_CollisionDetector_body_entered(body):
 	if body is not TileMapLayer:
 		if body.get_collision_layer_value(6): #armor
 			armor_check(body)
+		elif body.get_collision_layer_value(18): #enemy
+			explode()
 
 func _on_CollisionDetector_area_entered(area): #shadows
 	#enemyhurt
 	if area.get_collision_layer_value(18):
 		if $BounceGraceTimer.time_left <= 0.0:
-			var blood_dir = get_blood_dir(area.get_parent())
-			if not touched_floor:
-				area.get_parent().hit(damage, blood_dir, $PlayerCollisionDetector, blood_dir, knockback_strength)
-			else:
-				area.get_parent().hit(int(damage/2.0), blood_dir, $PlayerCollisionDetector, blood_dir, knockback_strength)
-			queue_free()
+			explode()
+			#var blood_dir = get_blood_dir(area.get_parent())
+			#if not touched_floor:
+				#area.get_parent().hit(damage, blood_dir, $PlayerCollisionDetector, blood_dir, knockback_strength)
+			#else:
+				#area.get_parent().hit(int(damage/2.0), blood_dir, $PlayerCollisionDetector, blood_dir, knockback_strength)
+			#queue_free()
 
 func _on_Timer_timeout():
-	$ExplosionDetector/CollisionShape2D.set_deferred("disabled", false)
-	$ExplosionDetector.top_level = true
-	$ExplosionDetector.global_position = global_position
-	$AnimationPlayer.stop()
-
-	var explosion = load("res://src/Effect/GrenadeExplosion.tscn").instantiate()
-	explosion.global_position = global_position
-
-	if $ExplosionDetector/CollisionShape2D.shape.radius == 32: #Brotha EWWWW
-		explosion.size = "Small"
-	if $ExplosionDetector/CollisionShape2D.shape.radius == 48:
-		explosion.size = "Medium"
-	if $ExplosionDetector/CollisionShape2D.shape.radius == 64:
-		explosion.size = "Large"
-	get_tree().get_root().get_node("World").middle_front.add_child(explosion)
-	var tween = get_tree().create_tween()
-	tween.tween_property($ExplosionDetector, "scale", Vector2.ONE, 0.1).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
-	await tween.finished
-	queue_free()
+	explode()
 
 
 func _on_ExplosionDetector_body_entered(body):
