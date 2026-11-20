@@ -117,6 +117,7 @@ position = Vector2(0, -1)
 shape = SubResource("2")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1658245483]
+physics_interpolation_mode = 2
 position = Vector2(0, 9)
 texture = SubResource("CompressedTexture2D_4ljie")
 

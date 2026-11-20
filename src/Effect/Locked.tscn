@@ -40,6 +40,7 @@ _data = {
 script = ExtResource("1_5dupp")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1010921475]
+physics_interpolation_mode = 2
 texture = ExtResource("2_5dupp")
 hframes = 2
 

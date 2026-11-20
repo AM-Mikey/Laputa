@@ -4,6 +4,7 @@
 [ext_resource type="FontFile" uid="uid://c4ibssirigp5x" path="res://assets/UI/Font/Kirigami.ttf" id="2_xyej5"]
 
 [node name="TriggerSpawn" type="MarginContainer" unique_id=1800792368 groups=["TriggerSpawns"]]
+physics_interpolation_mode = 2
 z_index = 999
 custom_minimum_size = Vector2(8, 8)
 offset_right = 64.0

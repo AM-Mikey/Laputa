@@ -91,6 +91,7 @@ func _on_CollisionDetector_area_entered(area):
 	if cool: return
 
 	if area.get_collision_layer_value(18): #enemyhurt
+		if blocked_by_armor_on_path(): return
 		var blood_dir = get_blood_dir(area.get_parent())
 		area.get_parent().hit(damage, blood_dir, $PlayerCollisionDetector, blood_dir, knockback_strength)
 		queue_free()

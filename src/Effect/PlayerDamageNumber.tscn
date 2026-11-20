@@ -74,6 +74,7 @@ script = ExtResource("1_2bhlf")
 libraries/ = SubResource("AnimationLibrary_085d2")
 
 [node name="Layer" type="Node2D" parent="." unique_id=1465247774]
+physics_interpolation_mode = 2
 
 [node name="Sign" type="Sprite2D" parent="Layer" unique_id=294951078]
 position = Vector2(-4, 0)
