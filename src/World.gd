@@ -404,10 +404,10 @@ func setup_door(door_index, old_level_path):
 				$Juniper.global_position = t.global_position + Vector2(size.x * 0.5, size.y)
 			$Juniper.reset_physics_interpolation() #teleport: don't interpolate from the old position
 
-		if doors_found == 0:
-			printerr("ERROR: could not find door with right index")
-		if doors_found > 1:
-			printerr("ERROR: more than one door with same index")
+			if doors_found == 0:
+				printerr("ERROR: could not find door with right index")
+			if doors_found > 1:
+				printerr("ERROR: more than one door with same index")
 
 
 
