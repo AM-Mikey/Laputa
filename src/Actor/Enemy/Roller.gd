@@ -186,6 +186,7 @@ func _animate():
 func _check_raycast_contact(raycast: RayCast2D) -> bool:
 	if raycast.is_colliding():
 		var collider = raycast.get_collider()
+		if !collider: return false
 		if collider is TileMapLayer:
 			return true
 		elif collider.get_collision_layer_value(2):

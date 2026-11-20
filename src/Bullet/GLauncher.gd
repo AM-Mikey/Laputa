@@ -15,8 +15,6 @@ var touched_floor = false
 @onready var pc_on_floor = pc.is_on_floor()
 @onready var pc_held_down = inp.analogstick.y >= inp.Y_axis_shoot_deadzone && inp.can_act
 
-@export var explosion_damage: = 2.0
-
 
 func setup():
 	break_method = "burn"
@@ -111,17 +109,26 @@ func is_world_blocking(target) -> bool:
 		printerr("ERROR: Cannot find child CollisionShape2D in target: ", target)
 	$WorldCast.target_position = to_local(target_center_global_position)
 	$WorldCast.force_raycast_update()
-	if $WorldCast.is_colliding():
+	while $WorldCast.is_colliding() and $WorldCast.get_collider() != target:
 		var collider = $WorldCast.get_collider()
-		if collider is not TileMapLayer and collider.get_collision_layer_value(6):
-			print("Armor in the way of explosion")
-			collider.blocked.emit($ExplosionDetector, collider)
+		if collider is TileMapLayer:
 			return true
 		else:
-			print("World in way of grenade")
-			return true
-	else:
-		return false
+			if collider.get_collision_layer_value(9): # breakable
+				$WorldCast.add_exception(collider)
+				$WorldCast.add_exception(collider.get_parent())
+				$WorldCast.force_raycast_update()
+				#print("Pierce breakable")
+				continue
+			if collider.get_collision_layer_value(6):
+				#print("Armor in the way of explosion")
+				collider.blocked.emit($ExplosionDetector, collider)
+				return true
+			elif collider.get_collision_layer_value(4):
+				#print("World in way of grenade")
+				return true
+
+	return false
 
 func change_side(to_player: bool):
 	var hitbox = get_node_or_null("PlayerCollisionDetector")
@@ -146,13 +153,26 @@ func _on_CollisionDetector_body_entered(body):
 		if body.get_collision_layer_value(6): #armor
 			armor_check(body)
 		elif body.get_collision_layer_value(18): #enemy
-			explode()
+			if $BounceGraceTimer.time_left <= 0.0:
+				explode()
+		#elif body.get_collision_layer_value(9):
+			#if $BounceGraceTimer.time_left <= 0.0:
+				#explode()
 
 func _on_CollisionDetector_area_entered(area): #shadows
 	#enemyhurt
-	if area.get_collision_layer_value(18):
-		if $BounceGraceTimer.time_left <= 0.0:
+	if area.get_collision_layer_value(9):
+		var area_main = area.get_parent()
+		var is_breakable_enemy_bullet = area.get_collision_layer_value(14) or \
+								(area_main is CollisionObject2D and area_main.get_collision_layer_value(14))
+		if is_breakable_enemy_bullet:
+			area_main.on_break("cut")
+	if $BounceGraceTimer.time_left <= 0.0:
+		#if area.get_collision_layer_value(9):
+			#explode()
+		if area.get_collision_layer_value(18):
 			explode()
+
 			#var blood_dir = get_blood_dir(area.get_parent())
 			#if not touched_floor:
 				#area.get_parent().hit(damage, blood_dir, $PlayerCollisionDetector, blood_dir, knockback_strength)
@@ -168,7 +188,7 @@ func _on_ExplosionDetector_body_entered(body):
 	#breakable
 	if body.get_collision_layer_value(9):
 		if !is_world_blocking(body):
-			body.on_break("fire")
+			body.on_break("burn")
 
 
 func _on_ExplosionDetector_area_entered(area):
@@ -176,9 +196,13 @@ func _on_ExplosionDetector_area_entered(area):
 	if area.get_collision_layer_value(17):
 		if !is_world_blocking(area):
 			var knockback_direction = Vector2(sign(area.get_parent().global_position.x - global_position.x), 0)
-			area.get_parent().hit(int(explosion_damage), knockback_direction, $ExplosionDetector)
+			area.get_parent().hit(int(damage), knockback_direction, $ExplosionDetector)
 	#enemyhurt
 	elif area.get_collision_layer_value(18):
 		if !is_world_blocking(area):
 			var blood_dir = get_blood_dir(area.get_parent())
-			area.get_parent().hit(int(explosion_damage), blood_dir, $ExplosionDetector, blood_dir, knockback_strength)
+			area.get_parent().hit(int(damage), blood_dir, $ExplosionDetector, blood_dir, knockback_strength)
+	#breakable
+	elif area.get_collision_layer_value(9):
+		if area != $PlayerCollisionDetector and !is_world_blocking(area):
+			area.get_parent().on_break("burn")

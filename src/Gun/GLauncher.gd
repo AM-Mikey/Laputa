@@ -22,7 +22,7 @@ func _set_level(val: int) -> void:
 	match val:
 		1:
 			bullet_scene = load("res://src/Bullet/GLauncher1.tscn")
-			damage = 4
+			damage = 2
 			speed = 200
 			cooldown_time = 1
 			knockback_strength = 32
@@ -30,7 +30,7 @@ func _set_level(val: int) -> void:
 			max_xp = 20
 		2:
 			bullet_scene = load("res://src/Bullet/GLauncher2.tscn")
-			damage = 4
+			damage = 3
 			speed = 200
 			cooldown_time = 0.5
 			knockback_strength = 48
@@ -38,7 +38,7 @@ func _set_level(val: int) -> void:
 			max_xp = 20
 		3:
 			bullet_scene = load("res://src/Bullet/GLauncher3.tscn")
-			damage = 6
+			damage = 4
 			speed = 200
 			cooldown_time = 0.5
 			knockback_strength = 64

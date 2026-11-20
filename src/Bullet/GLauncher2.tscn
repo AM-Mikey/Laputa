@@ -64,7 +64,7 @@ _data = {
 collision_layer = 64
 collision_mask = 40
 script = ExtResource("2")
-explosion_damage = 3.0
+damage = 3.0
 camera_recoil_distance = 8.0
 camera_recoil_curve = SubResource("Curve_xt7hv")
 camera_recoil_time = 0.5
@@ -116,7 +116,7 @@ one_shot = true
 libraries/ = SubResource("AnimationLibrary_t000f")
 
 [node name="WorldCast" type="RayCast2D" parent="." unique_id=1048863942]
-collision_mask = 40
+collision_mask = 296
 collide_with_areas = true
 
 [connection signal="area_entered" from="PlayerCollisionDetector" to="." method="_on_CollisionDetector_area_entered"]
