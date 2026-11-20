@@ -269,6 +269,8 @@ func _on_CollisionDetector_body_entered(body):
 		elif body.get_collision_layer_value(6):
 			if f.pc(): #and camera gun recoil is true
 				f.pc().get_node("PlayerCamera").impulse(f.pc().shoot_dir * -1, camera_recoil_wall_distance, camera_recoil_time, camera_recoil_curve)
+			if body.has_method("bullet_push") && !already_fizzle:
+				body.bullet_push(self)
 			do_fizzle("armor")
 		#Movable platform
 		if body.get_collision_layer_value(4):

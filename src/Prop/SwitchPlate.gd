@@ -15,6 +15,7 @@ var toggled = false
 @export var toggle_on_player := true
 @export var toggle_on_enemies := false
 @export var toggle_on_npcs := false
+@export var toggle_on_minecarts := true
 @export var timer_duration := 1.0
 
 var triggering_entities := []
@@ -119,18 +120,25 @@ func _on_Timer_timeout():
 	if triggering_entities.size() != 0:
 		activate()
 
-func _on_EntityDetector_body_entered(body: Node2D):
+func get_triggering_entity(body: Node2D) -> Node:
 	if (body.get_collision_layer_value(1) && toggle_on_player) \
 	|| (body.get_collision_layer_value(2) && toggle_on_enemies) \
 	|| (body.get_collision_layer_value(8) && toggle_on_npcs):
+		return body.get_parent()
+	if body.is_in_group("Minecarts") && toggle_on_minecarts:
+		return body
+	return null
+
+func _on_EntityDetector_body_entered(body: Node2D):
+	var entity = get_triggering_entity(body)
+	if entity:
 		var entities_before = triggering_entities.size()
-		triggering_entities.append(body.get_parent())
+		triggering_entities.append(entity)
 		if entities_before == 0:
 			activate()
 
 func _on_EntityDetector_body_exited(body: Node2D):
-	if (body.get_collision_layer_value(1) && toggle_on_player) \
-	|| (body.get_collision_layer_value(2) && toggle_on_enemies) \
-	|| (body.get_collision_layer_value(8) && toggle_on_npcs):
-		triggering_entities.erase(body.get_parent())
+	var entity = get_triggering_entity(body)
+	if entity:
+		triggering_entities.erase(entity)
 		activate(false)

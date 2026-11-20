@@ -4,11 +4,11 @@
 [ext_resource type="PackedScene" uid="uid://7hbenrfv6p3q" path="res://src/Utility/PhysicsLayerBody.tscn" id="2_oe0fm"]
 [ext_resource type="Texture2D" uid="uid://blbu65gssk7ey" path="res://assets/Prop/Minecart.png" id="3_oe0fm"]
 
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_cart"]
+friction = 0.0
+
 [sub_resource type="RectangleShape2D" id="1"]
 size = Vector2(16, 16)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_xkehe"]
-size = Vector2(17, 17)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_xavsd"]
 size = Vector2(14, 1)
@@ -16,9 +16,10 @@ size = Vector2(14, 1)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_0cau2"]
 size = Vector2(16, 16)
 
-[node name="Minecart" type="RigidBody2D" unique_id=1193421281 groups=["Entities", "PhysicsProps", "Props"]]
-collision_layer = 24
+[node name="Minecart" type="RigidBody2D" unique_id=1193421281 groups=["Entities", "Minecarts", "PhysicsProps", "Props"]]
+collision_layer = 56
 collision_mask = 520
+physics_material_override = SubResource("PhysicsMaterial_cart")
 can_sleep = false
 lock_rotation = true
 freeze_mode = 1
@@ -40,14 +41,6 @@ shape = SubResource("1")
 texture = ExtResource("3_oe0fm")
 centered = false
 hframes = 2
-
-[node name="BreakArea" type="Area2D" parent="." unique_id=1617953084]
-collision_layer = 256
-collision_mask = 0
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="BreakArea" unique_id=913900600]
-position = Vector2(8, 8)
-shape = SubResource("RectangleShape2D_xkehe")
 
 [node name="CrushDetector" type="Area2D" parent="." unique_id=41672407]
 collision_layer = 0
@@ -79,3 +72,4 @@ collision_mask = 520
 hit_from_inside = true
 
 [connection signal="body_entered" from="CrushDetector" to="." method="_on_CrushDetector_body_entered"]
+[connection signal="body_exited" from="CrushDetector" to="." method="_on_CrushDetector_body_exited"]

@@ -240,7 +240,7 @@ libraries/ = SubResource("AnimationLibrary_qexbl")
 
 [node name="EntityDetector" type="Area2D" parent="." unique_id=394360552]
 collision_layer = 0
-collision_mask = 131
+collision_mask = 147
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="EntityDetector" unique_id=1994630025]
 position = Vector2(8, 14.5)

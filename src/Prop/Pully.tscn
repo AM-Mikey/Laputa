@@ -167,6 +167,7 @@ _data = {
 collision_layer = 16
 collision_mask = 0
 script = ExtResource("1_dsyq4")
+editor_hidden = true
 metadata/_custom_type_script = "uid://dkko72kbbon8e"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=145023394]
