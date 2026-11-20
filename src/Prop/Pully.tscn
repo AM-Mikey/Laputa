@@ -1,0 +1,208 @@
+[gd_scene format=3 uid="uid://p8vvacmysrt"]
+
+[ext_resource type="Script" uid="uid://bevahdl2ftcsa" path="res://src/Prop/Pully.gd" id="1_dsyq4"]
+[ext_resource type="Texture2D" uid="uid://c1mbfjbp8yoj3" path="res://assets/Prop/PullyWheel.png" id="3_pguqj"]
+
+[sub_resource type="RectangleShape2D" id="1"]
+size = Vector2(16, 16)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_0cau2"]
+size = Vector2(16, 16)
+
+[sub_resource type="Animation" id="Animation_8xheo"]
+resource_name = "Left"
+length = 0.9
+loop_mode = 1
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.70000005, 0.8),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 0, 1, 2, 0, 1, 2]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("GuardSprite:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.3, 0.35, 0.45, 0.8, 0.85),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [3, 4, 5, 3, 5, 4]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("GuardSprite:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(),
+"transitions": PackedFloat32Array(),
+"update": 1,
+"values": []
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Sprite2D:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.3, 0.45, 0.85),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [Vector2(-8, -8), Vector2(-8, -7), Vector2(-8, -8), Vector2(-8, -7)]
+}
+
+[sub_resource type="Animation" id="Animation_dsyq4"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("GuardSprite:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [3]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprite2D:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-8, -8)]
+}
+
+[sub_resource type="Animation" id="Animation_pguqj"]
+resource_name = "Right"
+length = 0.9
+loop_mode = 1
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.20000005, 0.3, 0.39999998, 0.5, 0.6, 0.7, 0.8),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 2, 1, 0, 2, 1, 0, 2, 1]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("GuardSprite:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.3, 0.35, 0.45, 0.8, 0.85),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [3, 4, 5, 3, 5, 4]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("GuardSprite:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(),
+"transitions": PackedFloat32Array(),
+"update": 1,
+"values": []
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Sprite2D:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.3, 0.45, 0.85),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [Vector2(-8, -8), Vector2(-8, -7), Vector2(-8, -8), Vector2(-8, -7)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_pguqj"]
+_data = {
+&"Left": SubResource("Animation_8xheo"),
+&"RESET": SubResource("Animation_dsyq4"),
+&"Right": SubResource("Animation_pguqj")
+}
+
+[node name="Pully" type="CharacterBody2D" unique_id=1787403616 groups=["Entities", "PhysicsProps", "Props"]]
+collision_layer = 16
+collision_mask = 0
+script = ExtResource("1_dsyq4")
+metadata/_custom_type_script = "uid://dkko72kbbon8e"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=145023394]
+position = Vector2(8, 8)
+shape = SubResource("1")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=130698616]
+position = Vector2(-8, -8)
+texture = ExtResource("3_pguqj")
+centered = false
+hframes = 3
+vframes = 2
+
+[node name="GuardSprite" type="Sprite2D" parent="." unique_id=495024692]
+position = Vector2(-8, -8)
+texture = ExtResource("3_pguqj")
+centered = false
+hframes = 3
+vframes = 2
+frame = 3
+
+[node name="EditorArea" type="Area2D" parent="." unique_id=1143192318]
+visible = false
+collision_layer = 0
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="EditorArea" unique_id=1284484738]
+position = Vector2(8, 8)
+shape = SubResource("RectangleShape2D_0cau2")
+debug_color = Color(0, 0.6, 0.69803923, 0)
+
+[node name="LineLeft" type="Marker2D" parent="." unique_id=551845820]
+position = Vector2(0, 10)
+
+[node name="LineRight" type="Marker2D" parent="." unique_id=1161330192]
+position = Vector2(15, 10)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=781463334]
+libraries/ = SubResource("AnimationLibrary_pguqj")
