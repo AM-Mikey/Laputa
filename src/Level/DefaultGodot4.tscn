@@ -990,21 +990,10 @@ prop_path = "res://src/Prop/Minecart.tscn"
 properties = {
 "can_fall_off_ledges": [true, 1, ""],
 "crush_enemies": [true, 1, ""],
-"crush_min_fall_speed": [40.0, 3, ""],
 "crush_players": [true, 1, ""],
 "do_bubble": [false, 1, ""],
 "editor_hidden": [false, 1, ""],
-"ground_friction": [90.0, 3, ""],
-"id": [&"Minecart", 4, ""],
-"max_wind_speed": [120.0, 3, ""],
-"push_full_accel": [140.0, 3, ""],
-"push_grace_time": [0.12, 3, ""],
-"push_max_speed": [70.0, 3, ""],
-"push_reach": [2.0, 3, ""],
-"push_start_accel": [30.0, 3, ""],
-"shot_push_scale": [2.0, 3, ""],
-"thud_min_fall_speed": [80.0, 3, ""],
-"wind_force_scale": [60.0, 3, ""]
+"id": [&"Minecart", 4, ""]
 }
 
 [node name="SwitchPlate" type="Area2D" parent="Spawns" unique_id=338063572 groups=["Entities", "PropSpawns"] instance=ExtResource("15_tk244")]
@@ -1026,6 +1015,140 @@ properties = {
 "toggle_on_minecarts": [true, 1, ""],
 "toggle_on_npcs": [false, 1, ""],
 "toggle_on_player": [true, 1, ""]
+}
+
+[node name="Frog" type="Area2D" parent="Spawns" unique_id=1795772388 groups=["ActorSpawns", "Entities"] instance=ExtResource("6_dcw0l")]
+physics_interpolation_mode = 2
+z_index = 999
+position = Vector2(2696, 1904)
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("8_hahi5")
+actor_path = "res://src/Actor/Enemy/Frog.tscn"
+properties = {
+"base_gravity": [300.0, 3, ""],
+"croak_time": [1.0, 3, ""],
+"debug": [true, 1, ""],
+"difficulty": [1, 2, ""],
+"do_bubbles": [true, 1, ""],
+"editor_hidden": [false, 1, ""],
+"id": [&"Frog", 4, ""],
+"jump_delay": [3.0, 3, ""],
+"speed": [Vector2(50, 100), 5, ""],
+"tongue_damage": [2.0, 3, ""],
+"water_gravity": [150.0, 3, ""]
+}
+
+[node name="LookVector" type="Area2D" parent="Spawns/Frog" unique_id=291408138 groups=["Entities", "VUVectors", "VisualUtilities"] instance=ExtResource("17_r87vw")]
+physics_interpolation_mode = 2
+position = Vector2(0, -7)
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("18_bq2j0")
+tag_name = "look"
+snap_degrees = 180.0
+movement_locked = true
+
+[node name="TongueRange" type="Area2D" parent="Spawns/Frog" unique_id=2008409726 groups=["Entities", "VisualUtilities", "WaypointLocals", "Waypoints"] instance=ExtResource("17_rnumf")]
+physics_interpolation_mode = 2
+position = Vector2(-32, -8)
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("16_ah4rl")
+tag_name = "tongue_range"
+lock_y = true
+
+[node name="ConveyorSegment" type="MarginContainer" parent="Spawns" unique_id=346932642 groups=["TriggerSpawns"] instance=ExtResource("7_v7nqo")]
+z_index = 999
+custom_minimum_size = Vector2(8, 8)
+offset_left = 2704.0
+offset_top = 1904.0
+offset_right = 2768.0
+offset_bottom = 1920.0
+mouse_filter = 2
+script = ExtResource("10_tk244")
+trigger_path = "res://src/Trigger/Conveyor.tscn"
+properties = {
+"color": [Color(0.64969945, 0.0016938174, 0.82506573, 1), 20, ""],
+"editor_hidden": [false, 1, ""],
+"id": [&"ConveyorSegment", 4, ""],
+"move_dir": [Vector2(-1, 0), 5, ""],
+"speed": [10.0, 3, ""],
+"switch_reverses": [false, 1, ""],
+"toggled": [true, 1, ""]
+}
+size_is_default = false
+
+[node name="PhysFanNoSwitch" type="Area2D" parent="Spawns" unique_id=1140634782 groups=["Entities", "PropSpawns"] instance=ExtResource("15_tk244")]
+physics_interpolation_mode = 2
+z_index = 999
+position = Vector2(2656, 1824)
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("12_k26mr")
+prop_path = "res://src/Prop/PhysFanNoSwitch.tscn"
+properties = {
+"do_bubble": [false, 1, ""],
+"editor_hidden": [false, 1, ""],
+"id": [&"PhysFanNoSwitch", 4, ""],
+"protected_toggled": [true, 1, ""],
+"speed": [20.0, 3, ""]
+}
+
+[node name="WindVector" type="Area2D" parent="Spawns/PhysFanNoSwitch" unique_id=1206868159 groups=["Entities", "VUVectors", "VisualUtilities"] instance=ExtResource("17_r87vw")]
+physics_interpolation_mode = 2
+position = Vector2(8, 8)
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("18_bq2j0")
+tag_name = "wind_dir"
+direction = Vector2(-1, 8.742278e-08)
+snap_degrees = 90.0
+movement_locked = true
+
+[node name="Distance" type="Area2D" parent="Spawns/PhysFanNoSwitch" unique_id=2052027603 groups=["Entities", "VisualUtilities", "WaypointLocals", "Waypoints"] instance=ExtResource("17_rnumf")]
+physics_interpolation_mode = 2
+position = Vector2(-264, 8)
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("16_ah4rl")
+tag_name = "distance"
+lock_x = true
+
+[node name="BreakBlock" type="Area2D" parent="Spawns" unique_id=2064743023 groups=["Entities", "PropSpawns"] instance=ExtResource("15_tk244")]
+physics_interpolation_mode = 2
+z_index = 999
+position = Vector2(2576, 1872)
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("12_k26mr")
+prop_path = "res://src/Prop/BreakBlock.tscn"
+properties = {
+"break_on_fall": [false, 1, ""],
+"crush_enemies": [true, 1, ""],
+"crush_players": [false, 1, ""],
+"do_bubble": [false, 1, ""],
+"editor_hidden": [false, 1, ""],
+"has_gravity": [true, 1, ""],
+"id": [&"BreakBlock", 4, ""]
+}
+
+[node name="BreakBlock1" type="Area2D" parent="Spawns" unique_id=2140496075 groups=["Entities", "PropSpawns"] instance=ExtResource("15_tk244")]
+physics_interpolation_mode = 2
+z_index = 999
+position = Vector2(2576, 1856)
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("12_k26mr")
+prop_path = "res://src/Prop/BreakBlock.tscn"
+properties = {
+"break_on_fall": [false, 1, ""],
+"crush_enemies": [true, 1, ""],
+"crush_players": [false, 1, ""],
+"do_bubble": [false, 1, ""],
+"editor_hidden": [false, 1, ""],
+"has_gravity": [true, 1, ""],
+"id": [&"BreakBlock1", 4, ""]
 }
 
 [node name="Waypoints" type="Node2D" parent="." unique_id=1140943479]
@@ -1095,3 +1218,8 @@ zoom = 2.0
 [connection signal="input_event" from="Spawns/Larry4" to="Spawns/Larry4" method="_on_input_event"]
 [connection signal="input_event" from="Spawns/Minecart" to="Spawns/Minecart" method="_on_input_event"]
 [connection signal="input_event" from="Spawns/SwitchPlate" to="Spawns/SwitchPlate" method="_on_input_event"]
+[connection signal="input_event" from="Spawns/Frog" to="Spawns/Frog" method="_on_input_event"]
+[connection signal="gui_input" from="Spawns/ConveyorSegment" to="Spawns/ConveyorSegment" method="_on_gui_input"]
+[connection signal="input_event" from="Spawns/PhysFanNoSwitch" to="Spawns/PhysFanNoSwitch" method="_on_input_event"]
+[connection signal="input_event" from="Spawns/BreakBlock" to="Spawns/BreakBlock" method="_on_input_event"]
+[connection signal="input_event" from="Spawns/BreakBlock1" to="Spawns/BreakBlock1" method="_on_input_event"]

@@ -20,12 +20,19 @@ func state_process(delta):
 
 	if (pc.get_node("WallLB").is_colliding() or pc.get_node("WallLT").is_colliding()) and pc.move_dir.x < 0:
 		push_left_wall = true
-		pc.velocity.x = max(pc.velocity.x, 0)
+		#walk along with a minecart instead of stopping dead against it, so contact doesn't flicker
+		var cart = get_wall_minecart("WallLB", "WallLT")
+		pc.velocity.x = max(pc.velocity.x, min(cart.linear_velocity.x, 0.0) if cart else 0.0)
+	elif pc.move_dir.x < 0 and is_pushing_minecart(-1):
+		push_left_wall = true #cart got a hair ahead this frame, still pushing
 	else:
 		push_left_wall = false
 	if (pc.get_node("WallRB").is_colliding() or pc.get_node("WallRT").is_colliding()) and pc.move_dir.x > 0:
 		push_right_wall = true
-		pc.velocity.x = min(pc.velocity.x, 0)
+		var cart = get_wall_minecart("WallRB", "WallRT")
+		pc.velocity.x = min(pc.velocity.x, max(cart.linear_velocity.x, 0.0) if cart else 0.0)
+	elif pc.move_dir.x > 0 and is_pushing_minecart(1):
+		push_right_wall = true
 	else: push_right_wall = false
 
 	pc.move_and_slide()
@@ -894,6 +901,19 @@ func calc_velocity():
 		out.x = 0
 	return out
 
+
+func get_wall_minecart(bottom_ray: String, top_ray: String) -> Node:
+	for ray_name in [bottom_ray, top_ray]:
+		var ray: RayCast2D = pc.get_node(ray_name)
+		if ray.is_colliding() and ray.get_collider() is Node and ray.get_collider().is_in_group("Minecarts"):
+			return ray.get_collider()
+	return null
+
+func is_pushing_minecart(dir: int) -> bool:
+	for cart in get_tree().get_nodes_in_group("Minecarts"):
+		if cart.push_dir == dir:
+			return true
+	return false
 
 func get_vframe() -> int:
 	var out = 0

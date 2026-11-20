@@ -92,6 +92,11 @@ func get_column_rect() -> Rect2:
 	$WorldCast.position = column_pos
 	if $WorldCast.is_colliding():
 		end_point = $WorldCast.get_collision_point() + Vector2(0, 8).rotated(wind_dir.angle())
+		#minecarts block the wind behind them, but the column has to cover the whole cart or it
+		#drifts out of the column, stops, and gets caught again (bursty instead of continuous)
+		var collider = $WorldCast.get_collider()
+		if collider is Node && collider.is_in_group("Minecarts"):
+			end_point += wind_dir * 16.0
 	else:
 		#print("PhysFan didn't find a collision point, using PhysFan/WorldCast's length")
 		end_point = $WorldCast.global_position + $WorldCast.target_position.rotated($WorldCast.rotation) + Vector2(0, 8).rotated(wind_dir.angle())

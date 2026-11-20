@@ -120,25 +120,34 @@ func _on_Timer_timeout():
 	if triggering_entities.size() != 0:
 		activate()
 
+#triggering_entities holds every node currently weighing the plate down (player, enemies, npcs, minecarts).
+#The plate only goes down when the first one arrives and only comes up when the last one leaves.
 func get_triggering_entity(body: Node2D) -> Node:
-	if (body.get_collision_layer_value(1) && toggle_on_player) \
-	|| (body.get_collision_layer_value(2) && toggle_on_enemies) \
+	if body.get_collision_layer_value(1) && toggle_on_player:
+		return body.get_parent() #player layer body is a child of the player
+	if (body.get_collision_layer_value(2) && toggle_on_enemies) \
 	|| (body.get_collision_layer_value(8) && toggle_on_npcs):
-		return body.get_parent()
+		return body
 	if body.is_in_group("Minecarts") && toggle_on_minecarts:
 		return body
 	return null
 
+func prune_triggering_entities():
+	triggering_entities = triggering_entities.filter(func(e): return is_instance_valid(e))
+
 func _on_EntityDetector_body_entered(body: Node2D):
 	var entity = get_triggering_entity(body)
-	if entity:
-		var entities_before = triggering_entities.size()
-		triggering_entities.append(entity)
-		if entities_before == 0:
-			activate()
+	if !entity: return
+	prune_triggering_entities()
+	if triggering_entities.has(entity): return
+	triggering_entities.append(entity)
+	if triggering_entities.size() == 1:
+		activate()
 
 func _on_EntityDetector_body_exited(body: Node2D):
 	var entity = get_triggering_entity(body)
-	if entity:
-		triggering_entities.erase(entity)
+	if !entity || !triggering_entities.has(entity): return
+	triggering_entities.erase(entity)
+	prune_triggering_entities()
+	if triggering_entities.is_empty():
 		activate(false)
