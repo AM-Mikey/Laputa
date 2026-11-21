@@ -163,11 +163,11 @@ collision_mask = 16
 position = Vector2(8, -1)
 shape = SubResource("RectangleShape2D_carry")
 
-[node name="SquishDetector" type="Area2D" parent="."]
+[node name="SquishDetector" type="Area2D" parent="." unique_id=1667960560]
 collision_layer = 0
 collision_mask = 3
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="SquishDetector"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="SquishDetector" unique_id=820416892]
 position = Vector2(8, 8)
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=811109849]

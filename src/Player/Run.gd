@@ -18,21 +18,26 @@ func state_process(delta):
 	set_player_directions()
 	pc.velocity = calc_velocity()
 
-	if (pc.get_node("WallLB").is_colliding() or pc.get_node("WallLT").is_colliding()) and pc.move_dir.x < 0:
+	#pushing a minecart: stay glued to it instead of stopping against it and running to catch up (that
+	#start-stop let the cart pull ahead and drop the push)
+	var left_wall: bool = pc.get_node("WallLB").is_colliding() or pc.get_node("WallLT").is_colliding()
+	var left_cart = get_pushed_minecart(-1, "WallLB", "WallLT") if pc.move_dir.x < 0 else null
+	if left_cart:
 		push_left_wall = true
-		#walk along with a minecart instead of stopping dead against it, so contact doesn't flicker
-		var cart = get_wall_minecart("WallLB", "WallLT")
-		pc.velocity.x = max(pc.velocity.x, min(cart.linear_velocity.x, 0.0) if cart else 0.0)
-	elif pc.move_dir.x < 0 and is_pushing_minecart(-1):
-		push_left_wall = true #cart got a hair ahead this frame, still pushing
+		pc.velocity.x = get_cart_push_velocity(left_cart, -1, pc.velocity.x)
+	elif left_wall and pc.move_dir.x < 0:
+		push_left_wall = true
+		pc.velocity.x = max(pc.velocity.x, 0.0)
 	else:
 		push_left_wall = false
-	if (pc.get_node("WallRB").is_colliding() or pc.get_node("WallRT").is_colliding()) and pc.move_dir.x > 0:
+	var right_wall: bool = pc.get_node("WallRB").is_colliding() or pc.get_node("WallRT").is_colliding()
+	var right_cart = get_pushed_minecart(1, "WallRB", "WallRT") if pc.move_dir.x > 0 else null
+	if right_cart:
 		push_right_wall = true
-		var cart = get_wall_minecart("WallRB", "WallRT")
-		pc.velocity.x = min(pc.velocity.x, max(cart.linear_velocity.x, 0.0) if cart else 0.0)
-	elif pc.move_dir.x > 0 and is_pushing_minecart(1):
+		pc.velocity.x = get_cart_push_velocity(right_cart, 1, pc.velocity.x)
+	elif right_wall and pc.move_dir.x > 0:
 		push_right_wall = true
+		pc.velocity.x = min(pc.velocity.x, 0.0)
 	else: push_right_wall = false
 
 	pc.move_and_slide()
@@ -914,6 +919,33 @@ func is_pushing_minecart(dir: int) -> bool:
 		if cart.push_dir == dir:
 			return true
 	return false
+
+#the cart against the player's wall rays, or the one the player is pushing this way
+func get_pushed_minecart(dir: int, bottom_ray: String, top_ray: String) -> Node:
+	var cart = get_wall_minecart(bottom_ray, top_ray)
+	if cart: return cart
+	for c in get_tree().get_nodes_in_group("Minecarts"):
+		if c.push_dir == dir:
+			return c
+	return null
+
+const CART_PUSH_CATCHUP := 15.0 #px/s of extra speed per px of gap, closes the gap to the cart smoothly
+
+#move with the cart plus a little to close any gap, never faster than walking or backwards. Capped by the
+#top walk speed for the current input, not the current speed: touching the cart zeroes the player's speed
+#in move_and_slide, and ramping back up from 0 every time is what made the push start-stop.
+func get_cart_push_velocity(cart: Node, dir: int, _walk_vx: float) -> float:
+	var rect: Rect2 = cart._get_rect()
+	var half_width := 6.0
+	var gap: float = rect.position.x - (pc.global_position.x + half_width) if dir > 0 \
+		else (pc.global_position.x - half_width) - rect.end.x
+	var target: float = cart.linear_velocity.x + dir * gap * CART_PUSH_CATCHUP
+	var max_speed: float = mm.speed.x
+	if abs(pc.move_dir.x) <= inp.Xaxis_clampzone: #same analog scaling as calc_velocity()
+		max_speed *= abs(pc.move_dir.x)
+	if dir > 0:
+		return clampf(target, 0.0, max_speed)
+	return clampf(target, -max_speed, 0.0)
 
 func get_vframe() -> int:
 	var out = 0

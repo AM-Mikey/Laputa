@@ -22,7 +22,7 @@ signal blocked(bullet, body) #emitted by Bullet.armor_check()
 @export var squish_enemies := true #enemies the cart drives into a wall/ceiling
 @export var squish_players := true #same for the player
 
-var push_max_speed := 80.0 #keep below player walk speed (90) so the player stays in contact
+var push_max_speed := 70.0 #keep below player walk speed (90) so the player stays in contact
 var push_start_accel := 40.0 #accel when starting from rest, feels heavy
 var push_full_accel := 140.0 #accel once rolling
 var ground_friction := 90.0 #decel when nothing is pushing, controls how far it coasts
@@ -61,6 +61,10 @@ const MAX_SLOPE_RISE := 2.75 #anything steeper between the wheels is a step, not
 const GRADE_SUPPORT_DEFAULT := [16.0, 18.5, 19.0, 29.0]
 
 var roll_min_speed := 2.0
+
+var roll_sfx_full_speed := 160.0 #rolling speed (px/s) where the rolling loop reaches full volume
+var roll_sfx_max_volume := 1.0 #0-1, same scale as am.play()
+var roll_sfx_player: Node
 
 var carry_accel := 400.0 #how hard props on top get dragged along to match the cart (friction)
 
@@ -108,6 +112,7 @@ func _physics_process(delta):
 	_update_squish()
 	_apply_look()
 	_update_animation()
+	_update_roll_sfx()
 
 
 func _integrate_forces(state: PhysicsDirectBodyState2D):
@@ -432,6 +437,31 @@ func _update_squish():
 	squish_pinned($SquishDetector, $CrushDetector, squish_enemies, squish_players)
 
 
+### SFX ###
+
+#rolling loop, follows the cart, only while it's on the ground and rolling. Louder the faster it rolls
+#(speed along the ground, so it's quiet while just riding a conveyor, same as the wheels).
+func _update_roll_sfx():
+	var speed: float = abs(rolling_speed)
+	var rolling := is_grounded && speed > roll_min_speed
+	if !rolling:
+		_stop_roll_sfx()
+		return
+	var volume := roll_sfx_max_volume * clampf(speed / roll_sfx_full_speed, 0.0, 1.0)
+	if !is_instance_valid(roll_sfx_player): #not started yet, or freed by am.stop_sfx() / the player limit
+		roll_sfx_player = am.play("minecart", self, null, volume, 0.0)
+	else:
+		am.set_player_volume(roll_sfx_player, volume)
+
+func _stop_roll_sfx():
+	if is_instance_valid(roll_sfx_player):
+		am.clear_player_by_node(roll_sfx_player)
+	roll_sfx_player = null
+
+func _exit_tree():
+	_stop_roll_sfx()
+
+
 ### ANIMATION ###
 
 func _update_animation():
@@ -498,11 +528,74 @@ func _get_rect() -> Rect2: #the cart's box on flat ground
 
 ### SHOTS ###
 
-func bullet_push(bullet):
-	pending_shot_velocity += bullet.direction.x * bullet.knockback_strength * shot_push_scale
+var pushed_by := {} #"shot<id>"/"blast<id>" of bullets/grenade blasts that already pushed this cart
+
+#pushes away from the face the shot hit, only as much as the hit is sideways: a side hit pushes fully, one
+#landing on the top or a corner barely does. bullet.direction isn't reliable for this: bouncing shots
+#(grenades, birdshot) only update their velocity, so after a wall reflects one its direction is wrong.
+#hit_normal: the cart face's normal from the shot's own collision, when it has one (grenades).
+func bullet_push(bullet, hit_normal := Vector2.ZERO):
+	if !is_instance_valid(bullet) || !("knockback_strength" in bullet): return
+	if !_first_push_from(bullet): return
+
+	var dir := 0.0
+	var amount := 1.0 #how sideways the hit was
+	if hit_normal != Vector2.ZERO:
+		dir = -signf(hit_normal.x)
+		amount = abs(hit_normal.normalized().x)
+	else:
+		var top := global_position.y + ground_hover
+		var vertical_hit: bool = bullet.global_position.y < top + 2.0 || bullet.global_position.y > top + CART_SIZE.y - 2.0
+		if vertical_hit: #landed on the top / hit from below: the sideways part of its travel
+			var vel = bullet.get("velocity")
+			if !(vel is Vector2) || vel == Vector2.ZERO:
+				vel = bullet.direction
+			dir = signf(vel.x)
+			amount = abs(vel.normalized().x)
+		else:
+			dir = signf(get_center().x - bullet.global_position.x)
+	pending_shot_velocity += dir * abs(bullet.knockback_strength) * shot_push_scale * amount
+
+
+var explosion_push_scale := 4.0 #velocity added = grenade knockback_strength * this, at point blank
+var explosion_min_falloff := 0.25 #push at the edge of the blast, as a fraction of point blank
+
+#grenade blast: pushes away from the explosion, harder the closer the cart is. Called by GLauncher.
+func explosion_push(grenade):
+	if !is_instance_valid(grenade) || !("knockback_strength" in grenade): return
+	if !_first_push_from(grenade, "blast"): return
+
+	var center: Vector2 = grenade.global_position
+	var blast = grenade.get_node_or_null("ExplosionDetector")
+	if blast: #stays where it went off while the grenade body keeps moving
+		center = blast.global_position
+	var radius := 32.0
+	var blast_shape = grenade.get_node_or_null("ExplosionDetector/CollisionShape2D")
+	if blast_shape && blast_shape.shape is CircleShape2D:
+		radius = blast_shape.shape.radius
+	var offset: Vector2 = get_center() - center
+	if abs(offset.x) < 1.0: return #right above/below it, nothing to push sideways
+	var falloff := clampf(1.0 - offset.length() / (radius + CART_SIZE.x / 2.0), explosion_min_falloff, 1.0)
+	pending_shot_velocity += signf(offset.x) * abs(grenade.knockback_strength) * explosion_push_scale * falloff
+
+
+#each bullet pushes once (grenades bounce and touch it again and again), each blast once
+func _first_push_from(source, kind := "shot") -> bool:
+	var key := "%s%d" % [kind, source.get_instance_id()]
+	if pushed_by.has(key): return false
+	if pushed_by.size() > 32: #forget sources that are gone
+		for old in pushed_by.keys():
+			if !is_instance_id_valid(int(old.trim_prefix("shot").trim_prefix("blast"))): pushed_by.erase(old)
+	pushed_by[key] = true
+	return true
+
 
 func _on_blocked(bullet, _body):
-	bullet_push(bullet)
+	#a grenade blast that the cart shields something from reports itself as its ExplosionDetector area
+	if bullet is Area2D && bullet.get_parent() && "knockback_strength" in bullet.get_parent():
+		explosion_push(bullet.get_parent())
+	else:
+		bullet_push(bullet)
 
 
 ### WIND ###

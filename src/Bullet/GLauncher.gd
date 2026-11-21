@@ -34,14 +34,19 @@ func _on_physics_process(delta):
 	velocity.y += gravity * delta
 	var collision = move_and_collide(velocity * delta)
 	if collision:
+		var collider = collision.get_collider()
+		#minecarts: push on any hit (also when it stops dead against the side), using the face it hit, so
+		#landing on the top/corner barely pushes. Its detector area often never reaches a cart at rest.
+		var pushes_cart: bool = collider is not TileMapLayer && collider.has_method("bullet_push")
+		if pushes_cart:
+			collider.bullet_push(self, collision.get_normal())
 		if abs(velocity.y) > minimum_speed:
 			velocity *= bounciness
 			velocity = velocity.bounce(collision.get_normal())
 			touched_floor = true
 			$BounceGraceTimer.start()
 			am.play("gun_grenade_bounce", self)
-			var collider = collision.get_collider()
-			if collider is not TileMapLayer and collider.get_collision_layer_value(6):
+			if !pushes_cart and collider is not TileMapLayer and collider.get_collision_layer_value(6):
 				collider.blocked.emit(self, collider)
 		else:
 			velocity = Vector2.ZERO
@@ -122,6 +127,7 @@ func deflect(vel: Vector2):
 
 func _on_CollisionDetector_body_entered(body):
 	if body is not TileMapLayer:
+		if body.has_method("bullet_push"): return #minecarts are pushed from the bounce, which knows the face hit
 		if body.get_collision_layer_value(6): #armor
 			armor_check(body)
 
@@ -153,6 +159,7 @@ func _on_Timer_timeout():
 	if $ExplosionDetector/CollisionShape2D.shape.radius == 64:
 		explosion.size = "Large"
 	get_tree().get_root().get_node("World").middle_front.add_child(explosion)
+	push_minecarts()
 	var tween = get_tree().create_tween()
 	tween.tween_property($ExplosionDetector, "scale", Vector2.ONE, 0.1).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
 	await tween.finished
@@ -164,6 +171,26 @@ func _on_ExplosionDetector_body_entered(body):
 	if body.get_collision_layer_value(9):
 		if !is_world_blocking(body):
 			body.on_break("fire")
+
+
+#minecarts in the blast radius get blown away from it. Done once when it goes off, by distance, so it
+#doesn't depend on the ExplosionDetector growing in over the next frames.
+func push_minecarts():
+	var radius: float = $ExplosionDetector/CollisionShape2D.shape.radius
+	for cart in get_tree().get_nodes_in_group("Minecarts"):
+		if !cart.has_method("explosion_push"): continue
+		var cart_rect := Rect2(cart.global_position, Vector2(16, 16))
+		var closest: Vector2 = global_position.clamp(cart_rect.position, cart_rect.end)
+		if closest.distance_to(global_position) > radius: continue
+		if is_blast_blocked(cart): continue
+		cart.explosion_push(self)
+
+
+#like is_world_blocking(), but ignores the target itself (a minecart is solid world+armor, so the
+#ray would always stop on its own surface)
+func is_blast_blocked(target) -> bool:
+	var query := PhysicsRayQueryParameters2D.create(global_position, target.get_center(), 8, [target.get_rid()])
+	return !get_world_2d().direct_space_state.intersect_ray(query).is_empty()
 
 
 func _on_ExplosionDetector_area_entered(area):

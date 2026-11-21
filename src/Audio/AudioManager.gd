@@ -35,6 +35,7 @@ signal music_fadeout_finished
 	"fan_start": preload("res://assets/SFX/FanStart.ogg"),
 	"fan_loop": preload("res://assets/SFX/FanLoop.ogg"),
 	"fan_end": preload("res://assets/SFX/FanEnd.ogg"),
+	"minecart": preload("res://assets/SFX/Minecart.ogg"),
 
 	"break_grass": preload("res://assets/SFX/Placeholder/snd_explosion2.ogg"),
 
@@ -145,6 +146,8 @@ var underwater_tween_2: Tween
 var underwater_tween_3: Tween
 var underwater_tween_4: Tween
 
+var pos_actors := {} #positional player -> the node it follows (the actor given to play())
+
 func play(sfx_string: String, actor = null, bus = null, volume = 1.0, pitchspread := 0.0, duration := -1.0, is_fadeout_exempt = false):
 	if _check_sfx(sfx_string):
 		var player
@@ -251,6 +254,7 @@ func _add_player(type, audio_string, actor = null, volume = 1.0, pitchspread := 
 			player.stream = sfx_dict[audio_string]
 			player.volume_db = linear_to_db(volume)
 			player.global_position = actor.global_position
+			pos_actors[player] = actor
 			var rngpitch = randf() * pitchspread
 			player.pitch_scale = 1.0 - (pitchspread/2) + rngpitch
 			add_child(player)
@@ -284,19 +288,39 @@ func _clear_player(type, queue_slot):
 			music_queue.erase(queue_slot)
 		"interrupt":
 			interrupt_queue.erase(queue_slot)
+	pos_actors.erase(queue_slot[0])
 	queue_slot[0].queue_free() #player
 
 func clear_player_by_node(player_node):
 	for s in sfx_queue:
 		if s[0] == player_node:
 			sfx_queue.erase(s)
+	pos_actors.erase(player_node)
 	player_node.queue_free()
+
+#change the volume of a playing sfx (same 0-1 scale as play()'s volume)
+func set_player_volume(player, volume: float):
+	if is_instance_valid(player):
+		player.volume_db = linear_to_db(volume)
+
+#positional players follow their actor; if the actor is gone they stay where it last was
+func _process(_delta):
+	for player in pos_actors.keys():
+		if !is_instance_valid(player):
+			pos_actors.erase(player)
+			continue
+		var actor = pos_actors[player]
+		if is_instance_valid(actor) && actor.is_inside_tree():
+			player.global_position = actor.global_position
+		else:
+			pos_actors.erase(player)
 
 ### CONTROLS ###
 func stop_sfx():
 	for s in sfx_queue:
 		s[0].queue_free()
 	sfx_queue.clear()
+	pos_actors.clear()
 
 func fade_sfx(duration = 1.0):
 	if sfx_queue.is_empty(): return

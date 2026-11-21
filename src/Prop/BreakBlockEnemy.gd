@@ -17,6 +17,9 @@ var crush_min_fall_speed := 40.0 #slower than this (sliding, nudged on a cart) d
 
 
 func setup():
+	#static friction: a player-pushed cart (max 80px/s) bumping it at rest can't budge it, a faster rolling
+	#cart knocks it loose. See PhysicsProp.breakaway_speed
+	breakaway_speed = 35.0
 	if !has_gravity:
 		$Sprite2D.frame = 3
 		base_gravity_scale = 0.0
@@ -77,6 +80,11 @@ func _physics_process(_delta):
 			crush_targets.erase(t)
 	if !broken:
 		squish_pinned($SquishDetector, $CrushDetector, squish_enemies, squish_players)
+
+
+func _integrate_forces(state: PhysicsDirectBodyState2D):
+	if !broken:
+		settle_on_ground(state) #sit exactly level with tiles/carts so the player can walk between them
 
 
 func crush(type, target):

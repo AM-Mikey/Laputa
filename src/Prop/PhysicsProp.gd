@@ -75,6 +75,64 @@ func get_supporters() -> Array:
 			out.append(hit.collider)
 	return out
 
+#rigid bodies rest sunk ~0.1px into what they stand on, which leaves a step the player can't walk up from
+#this prop onto a tile or cart. Call from _integrate_forces to sit exactly on a flat surface instead.
+var carry_friction := 400.0 #px/s^2, how hard a settled prop is dragged along by the body it sits on
+var settle_friction := 1.0 #friction coefficient of a settled prop on still ground (decel = gravity * this)
+var breakaway_speed := 0.0 #static friction, px/s: weaker knocks don't move it from rest (0 = off)
+var _at_rest := false
+var _rest_x := 0.0
+
+func settle_on_ground(state: PhysicsDirectBodyState2D, size := SUPPORT_SIZE, inset := 2.0):
+	var was_at_rest := _at_rest
+	_at_rest = false
+	if abs(state.linear_velocity.y) > 20.0: return #falling or launched, not resting
+	var origin := state.transform.origin
+	var bottom := origin.y + size.y
+	var space := state.get_space_state()
+	var highest := INF
+	var lowest := -INF
+	var floor_vy := 0.0
+	var floor_vx := 0.0
+	var on_body := false
+	for x in [inset, size.x - inset]:
+		var query := PhysicsRayQueryParameters2D.create(Vector2(origin.x + x, bottom - 4.0), Vector2(origin.x + x, bottom + 0.5), collision_mask, [get_rid()])
+		var hit := space.intersect_ray(query)
+		if hit.is_empty(): continue #partly over an edge, settle on whatever is under the rest of it
+		highest = min(highest, hit.position.y)
+		lowest = max(lowest, hit.position.y)
+		if hit.collider is RigidBody2D: #riding a cart/box, move with it
+			floor_vy = hit.collider.linear_velocity.y
+			floor_vx = hit.collider.linear_velocity.x
+			on_body = true
+		elif hit.collider is StaticBody2D && hit.collider.constant_linear_velocity != Vector2.ZERO: #conveyor belt
+			floor_vx = hit.collider.constant_linear_velocity.x
+			on_body = true
+	if highest == INF: return #nothing under it
+	if lowest - highest > 0.5 || abs(highest - bottom) > 0.5: return #not flat, or not resting on it
+	var xform := state.transform
+	xform.origin.y = highest - size.y
+	state.transform = xform
+	#gravity would otherwise keep building up and sink it again between snaps
+	if state.linear_velocity.y > floor_vy:
+		state.linear_velocity.y = floor_vy
+	#sitting exactly on top leaves no contact pressure, so friction does nothing: apply it by hand. Moving
+	#bodies/belts drag it along (same strength as a cart carrying it), still ground slows it like normal
+	#friction would (gravity * friction 1). Anything pushing harder still knocks it off / slides it.
+	var friction := carry_friction if on_body else state.total_gravity.y * gravity_scale * settle_friction
+	state.linear_velocity.x = move_toward(state.linear_velocity.x, floor_vx, friction * state.step)
+
+	#static friction: resting on still ground, a knock that would give it less than breakaway_speed doesn't
+	#move it at all (undo the creep the contact already caused). A harder hit breaks it loose and it slides.
+	if !on_body && breakaway_speed > 0.0:
+		if was_at_rest && abs(state.linear_velocity.x) < breakaway_speed:
+			state.linear_velocity.x = 0.0
+			xform.origin.x = _rest_x
+			state.transform = xform
+		if state.linear_velocity.x == 0.0:
+			_at_rest = true
+			_rest_x = xform.origin.x
+
 func is_supported() -> bool:
 	return !get_supporters().is_empty()
 
