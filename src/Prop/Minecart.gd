@@ -12,7 +12,8 @@ extends PhysicsProp
 ## - Carries physics props (breakblocks) on top with friction, unless something pushes them off.
 ##   The top it offers riders is always flat, so riders never have to rotate on a slope.
 
-const ICON = preload("res://assets/Prop/MinecartIcon.png")
+#a var (not const like other props) so variants that extend this script can set their own in _init()
+var ICON: Texture2D = preload("res://assets/Prop/MinecartIcon.png")
 
 signal blocked(bullet, body) #emitted by Bullet.armor_check()
 
