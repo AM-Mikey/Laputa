@@ -12,7 +12,7 @@ const TOOLTIPS = [
 var can_flap = false
 
 var waypoints = {}
-@export var start_waypoint := 0
+@export var start_waypoint := 0.0
 var aggro_waypoint = null
 var current_waypoint := 0
 var target_tolerance = 2
