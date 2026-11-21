@@ -227,15 +227,23 @@ func _enforce_water_boundary():
 
 
 func _find_water_trigger():
+	var best_dist := INF
 	for t in get_tree().get_nodes_in_group("Triggers"):
-		if t.trigger_type == "water":
-			water_trigger = t
-			for child in t.get_children():
-				if child is CollisionShape2D and child.shape is RectangleShape2D:
-					var half = child.shape.size / 2.0
-					var center = t.global_position + child.position
-					water_rect = Rect2(center - half, child.shape.size)
-					return
+		if t.trigger_type != "water": continue
+		for child in t.get_children():
+			if child is CollisionShape2D and child.shape is RectangleShape2D:
+				var half = child.shape.size / 2.0
+				var center = t.global_position + child.position
+				var rect := Rect2(center - half, child.shape.size)
+				var closest := Vector2(
+					clamp(global_position.x, rect.position.x, rect.end.x),
+					clamp(global_position.y, rect.position.y, rect.end.y))
+				var dist := global_position.distance_squared_to(closest) # is 0 when inside water trigger
+				if dist < best_dist:
+					best_dist = dist
+					water_trigger = t
+					water_rect = rect
+				break
 
 
 ### FLOCK HELPERS ###
