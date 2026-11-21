@@ -4,6 +4,9 @@
 [ext_resource type="Texture2D" uid="uid://cj748gt2c20yk" path="res://assets/Prop/BreakBlock.png" id="2_0cau2"]
 [ext_resource type="PackedScene" uid="uid://7hbenrfv6p3q" path="res://src/Utility/PhysicsLayerBody.tscn" id="2_xkehe"]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_squish"]
+size = Vector2(10, 10)
+
 [sub_resource type="RectangleShape2D" id="1"]
 size = Vector2(16, 16)
 
@@ -16,7 +19,7 @@ size = Vector2(14, 1)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_0cau2"]
 size = Vector2(16, 16)
 
-[node name="BreakBlock" type="RigidBody2D" unique_id=1193421281 groups=["Entities", "PhysicsProps", "Props"]]
+[node name="BreakBlock" type="RigidBody2D" unique_id=1193421281 groups=["BreakBlocks", "Entities", "PhysicsProps", "Props"]]
 collision_layer = 24
 collision_mask = 520
 can_sleep = false
@@ -56,6 +59,14 @@ collision_mask = 3
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CrushDetector" unique_id=228822363]
 position = Vector2(8, 16.5)
 shape = SubResource("RectangleShape2D_xavsd")
+
+[node name="SquishDetector" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 3
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="SquishDetector"]
+position = Vector2(8, 8)
+shape = SubResource("RectangleShape2D_squish")
 
 [node name="EditorArea" type="Area2D" parent="." unique_id=1143192318]
 collision_layer = 0

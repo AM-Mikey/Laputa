@@ -19,7 +19,22 @@ var wind_areas_inside := []
 @onready var w = get_tree().get_root().get_node("World")
 
 func _ready():
+	_add_prop_collision_exceptions()
 	setup()
+
+#props in "NoPropCollision" (chests, save disk, ammo refill) have physics against the level but shouldn't
+#push or be pushed by other props. Carts and breakblocks are on the world layer (so things can stand on
+#them), which masks can't tell apart from tiles, so the pairs are excluded here instead. Done from both
+#sides so it works whichever one spawns first.
+func _add_prop_collision_exceptions():
+	var others := []
+	if is_in_group("NoPropCollision"):
+		others = get_tree().get_nodes_in_group("Minecarts") + get_tree().get_nodes_in_group("BreakBlocks")
+	elif is_in_group("Minecarts") || is_in_group("BreakBlocks"):
+		others = get_tree().get_nodes_in_group("NoPropCollision")
+	for other in others:
+		if other != self && other is PhysicsBody2D:
+			add_collision_exception_with(other)
 
 func setup(): #for children
 	pass
@@ -39,6 +54,82 @@ func apply_wind():
 
 	for strong_area in strongest_by_dir.values():
 		apply_central_force(strong_area.wind_dir * strong_area.speed)
+
+const SUPPORT_SIZE := Vector2(16, 16) #props are 16x16 with their origin at the top left
+var _support_shape: RectangleShape2D
+
+#bodies holding this prop up: anything solid (world, ssp, other props, carts) in a thin strip just under
+#its bottom. Players/enemies aren't in the mask, so a prop sitting on someone's head isn't "held up".
+func get_supporters() -> Array:
+	if !_support_shape:
+		_support_shape = RectangleShape2D.new()
+		_support_shape.size = Vector2(SUPPORT_SIZE.x - 2.0, 2.0)
+	var query := PhysicsShapeQueryParameters2D.new()
+	query.shape = _support_shape
+	query.transform = Transform2D(0.0, global_position + Vector2(SUPPORT_SIZE.x / 2.0, SUPPORT_SIZE.y + 1.0))
+	query.collision_mask = collision_mask
+	query.exclude = [get_rid()]
+	var out := []
+	for hit in get_world_2d().direct_space_state.intersect_shape(query, 8):
+		if hit.collider && !out.has(hit.collider):
+			out.append(hit.collider)
+	return out
+
+func is_supported() -> bool:
+	return !get_supporters().is_empty()
+
+#true when resting on a minecart, directly or on top of a stack of props that is
+func rests_on_minecart(depth := 4) -> bool:
+	if depth <= 0: return false
+	for cart in get_tree().get_nodes_in_group("Minecarts"):
+		if cart != self && cart.has_method("is_carrying") && cart.is_carrying(self):
+			return true
+	for body in get_supporters():
+		if body.is_in_group("Minecarts"):
+			return true
+		if body is PhysicsProp && body.rests_on_minecart(depth - 1):
+			return true
+	return false
+
+#props don't collide with players/enemies, they step out of the way themselves. One that this prop has
+#ended up deep inside (area = the prop's shape shrunk a few px) and that can't move away from it is
+#pinned against a wall or ceiling, so it gets squished.
+func squish_pinned(area: Area2D, source: Node2D, squish_enemies := true, squish_players := true):
+	var middle: Vector2 = area.get_child(0).global_position
+	for body in area.get_overlapping_bodies():
+		var mover: Node = null #the body that actually moves and collides with the world
+		if body.get_collision_layer_value(1):
+			if !squish_players: continue
+			mover = body.get_parent() #PlayerLayerBody is a child of the player
+		elif body.get_collision_layer_value(2):
+			if !squish_enemies: continue
+			mover = body
+		if !(mover is CharacterBody2D) || !mover.has_method("hit"): continue
+		if ignore_if_dead_player(mover): continue
+		if !mover.get_collision_mask_value(4): continue #passes through world, can't be pinned
+		#test along the main axis only, so a short body beside the prop doesn't "hit" the floor
+		var away: Vector2 = _get_body_center(mover) - middle
+		var dir := Vector2(sign(away.x), 0.0) if abs(away.x) >= abs(away.y) else Vector2(0.0, sign(away.y))
+		if dir == Vector2.ZERO: dir = Vector2.UP
+		if mover.test_move(mover.global_transform, dir * 2.0):
+			if mover.is_in_group("Players"):
+				mover.invincible = false
+			mover.hit(999, Vector2.ZERO, source)
+
+#a player that's already dead is left alone, and stops colliding with this prop so the death
+#bounce doesn't get stuck inside it and crushed over and over. Players don't revive (a new one spawns).
+func ignore_if_dead_player(target) -> bool:
+	if !is_instance_valid(target) || !target.is_in_group("Players") || !target.get("dead"):
+		return false
+	if target is PhysicsBody2D:
+		target.add_collision_exception_with(self)
+	return true
+
+func _get_body_center(body: Node2D) -> Vector2:
+	for child in body.get_children():
+		if child is CollisionShape2D || child is CollisionPolygon2D:
+			return child.global_position
+	return body.global_position
 
 func get_center() -> Vector2:
 	return $CollisionShape2D.global_position

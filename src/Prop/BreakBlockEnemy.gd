@@ -11,6 +11,9 @@ var is_grounded = true
 @export var has_gravity = true
 @export var crush_players = false
 @export var crush_enemies = true
+@export var squish_enemies = true #enemies this block is pushed into a wall/ceiling
+@export var squish_players = true #same for the player (even when crush_players is off)
+var crush_min_fall_speed := 40.0 #slower than this (sliding, nudged on a cart) doesn't crush
 
 
 func setup():
@@ -34,7 +37,8 @@ func on_break(method = "cut"):
 	explosion.global_position = global_position + Vector2(8.0, 8.0)
 	w.middle_front.add_child(explosion)
 
-	if $GroundLeft.is_colliding() && $GroundRight.is_colliding():
+	#rubble never stays on a minecart (or on a stack on one), the cart would roll out from under it
+	if $GroundLeft.is_colliding() && $GroundRight.is_colliding() && !rests_on_minecart():
 		match method:
 			"cut":
 				$Sprite2D.frame = 1
@@ -49,8 +53,9 @@ func on_break(method = "cut"):
 
 
 func _physics_process(_delta):
+	var supported := !broken && is_supported()
 	if !broken:
-		if !linear_velocity.y > 50.0:
+		if !linear_velocity.y > 50.0 || supported: #riding a cart downhill isn't falling either
 			if !is_grounded:
 				is_grounded = true
 				am.play("block_thud", self)
@@ -64,14 +69,18 @@ func _physics_process(_delta):
 
 	if !($GroundLeft.is_colliding() || $GroundRight.is_colliding()) && broken:
 		$Sprite2D.visible = false
-	if !broken && linear_velocity.length_squared() > 1.0 && !broken && !crush_targets.is_empty():
-		for t in crush_targets:
+	#only a block that's actually falling crushes: fast enough, and with nothing under it holding it up
+	#(a block riding a cart, falling with a cart, or stacked on another block is held up)
+	if !broken && !crush_targets.is_empty() && linear_velocity.y >= crush_min_fall_speed && !supported:
+		for t in crush_targets.duplicate():
 			crush(t[0], t[1])
-			print("BreakBlock Crushed", t)
 			crush_targets.erase(t)
+	if !broken:
+		squish_pinned($SquishDetector, $CrushDetector, squish_enemies, squish_players)
 
 
 func crush(type, target):
+	if ignore_if_dead_player(target): return
 	match type:
 		"player":
 			if crush_players:

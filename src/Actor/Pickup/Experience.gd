@@ -20,6 +20,10 @@ var did_second_frame = false
 func _ready():
 	home = global_position
 	is_wind_affected = true
+	#xp from a crushed/squished enemy often spawns inside a cart or box, which don't push it back out
+	for prop in get_tree().get_nodes_in_group("Minecarts") + get_tree().get_nodes_in_group("BreakBlocks"):
+		if prop is PhysicsBody2D:
+			add_collision_exception_with(prop)
 	$StateTimer.start(normal_time)
 	direction = randomize_direction()
 	speed = randomize_speed()

@@ -51,7 +51,7 @@ size = Vector2(24, 16)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_wipiq"]
 size = Vector2(32, 16)
 
-[node name="ChestItem" type="RigidBody2D" unique_id=786570276 groups=["LimitedProps", "PhysicsProps", "Props"]]
+[node name="ChestItem" type="RigidBody2D" unique_id=786570276 groups=["LimitedProps", "NoPropCollision", "PhysicsProps", "Props"]]
 collision_layer = 16
 collision_mask = 520
 can_sleep = false

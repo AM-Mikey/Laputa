@@ -16,7 +16,7 @@ size = Vector2(16, 16)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_q6lfp"]
 size = Vector2(16, 16)
 
-[node name="AmmoRefill" type="RigidBody2D" unique_id=1749417277 groups=["Entities", "PhysicsProps", "Props"]]
+[node name="AmmoRefill" type="RigidBody2D" unique_id=1749417277 groups=["Entities", "NoPropCollision", "PhysicsProps", "Props"]]
 collision_layer = 2048
 collision_mask = 520
 can_sleep = false

@@ -42,7 +42,7 @@ size = Vector2(16, 16)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_w3a02"]
 size = Vector2(16, 16)
 
-[node name="SaveDisk" type="RigidBody2D" unique_id=1743818005 groups=["Entities", "PhysicsProps", "Props"]]
+[node name="SaveDisk" type="RigidBody2D" unique_id=1743818005 groups=["Entities", "NoPropCollision", "PhysicsProps", "Props"]]
 collision_layer = 16
 collision_mask = 520
 physics_material_override = SubResource("PhysicsMaterial_prrpi")

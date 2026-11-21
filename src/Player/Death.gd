@@ -181,6 +181,11 @@ func enter(_prev_state: String):
 	pc.set_up_direction(mm.FLOOR_NORMAL)
 	pc.set_floor_stop_on_slope_enabled(true)
 
+	#a crushed/squished player is often inside a cart or box, colliding with it would eat the death bounce
+	for prop in get_tree().get_nodes_in_group("Minecarts") + get_tree().get_nodes_in_group("BreakBlocks"):
+		if prop is PhysicsBody2D:
+			pc.add_collision_exception_with(prop)
+
 
 	guns.visible = false
 	bounces = 0
