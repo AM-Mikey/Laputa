@@ -11,7 +11,6 @@ const TITLE = preload("res://src/UI/Title/Title.tscn")
 const TITLECAM = preload("res://src/UI/Title/TitleCam.tscn")
 
 const SPAWN_STEP_TIMEOUT_MS := 3000
-var _spawned_entity_count := 0
 
 var current_level
 var is_in_transition := false
@@ -470,20 +469,21 @@ func spawn_entities():
 func _run_spawn_group(group: String, label: String) -> void:
 	var level = current_level
 	var spawners = get_tree().get_nodes_in_group(group).filter(func(s): return is_instance_valid(s))
-	_spawned_entity_count = 0
-	finished_spawn_entities_step.connect(_on_step_finished)
+	var state := {"count": 0}
+	var on_step := func(): state.count += 1
+	finished_spawn_entities_step.connect(on_step)
 	for s in spawners:
 		s.spawn()
 	var deadline := Time.get_ticks_msec() + SPAWN_STEP_TIMEOUT_MS
-	while _spawned_entity_count < spawners.size():
+	while state.count < spawners.size():
 		if current_level != level:
 			break
 		if Time.get_ticks_msec() > deadline:
-			printerr("Spawn group '%s' timed out: %d/%d finished" % [label, _spawned_entity_count, spawners.size()])
+			printerr("Spawn group '%s' timed out: %d/%d finished" % [label, state.count, spawners.size()])
 			breakpoint
 			break
 		await get_tree().process_frame
-	finished_spawn_entities_step.disconnect(_on_step_finished)
+	finished_spawn_entities_step.disconnect(on_step)
 
 
 func _run_spawn_step(spawner: Node, label: String, level):
@@ -505,9 +505,6 @@ func _run_spawn_step(spawner: Node, label: String, level):
 			breakpoint
 			return
 		await get_tree().process_frame
-
-func _on_step_finished():
-	_spawned_entity_count += 1
 
 ### GETTERS ###
 
