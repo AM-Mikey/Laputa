@@ -210,6 +210,7 @@ func setup_a_star():
 					tiles_with_collision.append(Vector2i(column, row))
 	for tile_map_layer: TileMapLayer in tile_map.get_children():
 		for cell in tile_map_layer.get_used_cells():
+			if !a_star_grid.is_in_boundsv(cell): continue #tiles outside the level limiter aren't on the grid
 			var tile = tile_map_layer.get_cell_atlas_coords(cell)
 			if tiles_with_collision.has(tile):
 
