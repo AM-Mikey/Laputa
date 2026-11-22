@@ -140,5 +140,10 @@ func _on_PlayerDetector_body_exited(_body: Node2D):
 
 func _on_SwingHitbox_area_entered(area: Area2D):
 	if area.get_collision_layer_value(17):
-		var knockback_direction = Vector2(look_dir.x * 100.0, 0.0)
-		area.get_parent().hit(2, knockback_direction, $SwingHitbox)
+		var knockback_direction = Vector2(look_dir.x * 100.0,-20.0)
+		area.get_parent().hit(2.0, knockback_direction, $SwingHitbox)
+
+func _on_GroundRush_area_entered(area: Area2D) -> void:
+	if area.get_collision_layer_value(17):
+		var knockback_direction = Vector2(look_dir.x * 100.0,-20.0)
+		area.get_parent().hit(2.0, knockback_direction, $GroundRush)

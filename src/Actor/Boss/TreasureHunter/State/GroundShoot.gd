@@ -27,4 +27,4 @@ func _on_FinishTimer_timeout():
 	if main.player_in_close_range:
 		sm.change_state("melee")
 	else:
-		sm.change_state("take_off")
+		sm.change_state("ground_rush")

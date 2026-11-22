@@ -664,6 +664,9 @@ _data = {
 [sub_resource type="RectangleShape2D" id="1"]
 size = Vector2(14, 15)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_0ri4u"]
+size = Vector2(16, 27)
+
 [sub_resource type="CircleShape2D" id="CircleShape2D_PlayerDetector"]
 radius = 27.018513
 
@@ -675,7 +678,6 @@ collision_layer = 2
 collision_mask = 520
 floor_max_angle = 0.87266463
 script = ExtResource("1_f2ibc")
-editor_hidden = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1482682800]
 position = Vector2(0, -7)
@@ -703,7 +705,7 @@ script = ExtResource("4_lvjic")
 metadata/_custom_type_script = "uid://bkttdvnxv3ulk"
 
 [node name="Timer" type="Timer" parent="StateMachine/Ground" unique_id=674287737]
-wait_time = 0.8
+wait_time = 0.5
 one_shot = true
 
 [node name="GroundShoot" type="Node" parent="StateMachine" unique_id=1133531667]
@@ -714,7 +716,6 @@ wait_time = 0.3
 one_shot = true
 
 [node name="FinishTimer" type="Timer" parent="StateMachine/GroundShoot" unique_id=1553835919]
-wait_time = 0.5
 one_shot = true
 
 [node name="Melee" type="Node" parent="StateMachine" unique_id=1507651336]
@@ -814,6 +815,15 @@ position = Vector2(0, -7.5)
 shape = SubResource("1")
 debug_color = Color(1, 0, 0, 0.235294)
 
+[node name="GroundRush" type="Area2D" parent="." unique_id=606425083]
+collision_layer = 262144
+collision_mask = 65536
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="GroundRush" unique_id=1368202494]
+position = Vector2(-2, -13.5)
+shape = SubResource("RectangleShape2D_0ri4u")
+debug_color = Color(1, 0.56078434, 0, 0.23529412)
+
 [node name="PlayerDetector" type="Area2D" parent="." unique_id=736450444]
 position = Vector2(0, -15)
 collision_layer = 0
@@ -848,6 +858,7 @@ debug_color = Color(1, 0, 0, 0.235294)
 [connection signal="timeout" from="StateMachine/MoveTo/Phase2SmokeTimer" to="StateMachine/MoveTo" method="_on_Phase2SmokeTimer_timeout"]
 [connection signal="area_entered" from="Hitbox" to="." method="_on_hitbox_area_entered"]
 [connection signal="area_exited" from="Hitbox" to="." method="_on_hitbox_area_exited"]
+[connection signal="area_entered" from="GroundRush" to="." method="_on_GroundRush_area_entered"]
 [connection signal="body_entered" from="PlayerDetector" to="." method="_on_PlayerDetector_body_entered"]
 [connection signal="body_exited" from="PlayerDetector" to="." method="_on_PlayerDetector_body_exited"]
 [connection signal="area_entered" from="SwingHitbox" to="." method="_on_SwingHitbox_area_entered"]
