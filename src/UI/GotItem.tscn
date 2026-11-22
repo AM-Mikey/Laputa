@@ -103,11 +103,10 @@ _data = {
 }
 
 [node name="GotItem" type="MarginContainer" unique_id=309332791]
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
+layout_mode = 3
+anchors_preset = 0
+offset_right = 480.0
+offset_bottom = 270.0
 theme = ExtResource("1_81yb6")
 theme_override_constants/margin_left = 32
 theme_override_constants/margin_top = 32
