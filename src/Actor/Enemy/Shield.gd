@@ -19,6 +19,11 @@ var bodies_on_shield: = []
 var bodies_on_shield_ban: = []
 const launch_velocity: Vector2 = Vector2(0, -500.0)
 
+const TILE_SIZE: = 16.0
+var ceiling_bonk_min_tiles: = 3.0
+var ceiling_bonk_damage: = 2
+var launched_players: = {}
+
 var attack_damage: = 3.0
 var player_in_attack_range: = false
 
@@ -53,7 +58,7 @@ func setup():
 			$SurpriseShieldUpTimer.wait_time = 0.8
 			hp = 6
 			reward = 4
-			damage_on_contact = 2
+			damage_on_contact = 3
 	$AttackDetection.monitoring = difficulty >= 1
 	$ShieldChargeDetection.monitoring = difficulty == 2
 	$ShieldChargeDetection/CollisionShape2D.shape.size.x = shield_charge_distance + 20.0
@@ -369,7 +374,26 @@ func launch():
 			else:
 				main_body.velocity += launch_velocity
 		if body.get_collision_layer_value(1):
-			body.get_parent().velocity += launch_velocity
+			var player = body.get_parent()
+			player.velocity += launch_velocity
+			launched_players[player] = player.global_position.y
+
+func _on_physics_process(_delta):
+	check_launched_players_ceiling_bonk()
+
+func check_launched_players_ceiling_bonk():
+	for player in launched_players.keys():
+		if !is_instance_valid(player) || player.dead:
+			launched_players.erase(player)
+			continue
+		var rise: float = launched_players[player] - player.global_position.y
+		if player.is_on_ceiling():
+			launched_players.erase(player)
+			if rise < ceiling_bonk_min_tiles * TILE_SIZE:
+				player.hit(ceiling_bonk_damage, Vector2.ZERO, $Hitbox)
+		elif player.velocity.y >= 0.0 || player.is_on_floor():
+			# stopped rising without a bonk
+			launched_players.erase(player)
 
 func check_player_in_shield_charge_range() -> bool:
 	if !f.pc() || !player_in_shield_charge_range: return false

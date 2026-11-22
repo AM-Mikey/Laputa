@@ -22,7 +22,6 @@ var is_in_water = false: set = set_is_in_water
 
 
 func _ready():
-	#safe_margin = 0.001
 	setup()
 
 func setup(): #for children

@@ -184,6 +184,7 @@ shape = SubResource("RectangleShape2D_1jc3m")
 debug_color = Color(0, 0.627451, 0.27450982, 0.078431375)
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=342499573]
+physics_interpolation_mode = 2
 position = Vector2(0, -16)
 texture = ExtResource("3_bkm1i")
 hframes = 4

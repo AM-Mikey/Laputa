@@ -283,6 +283,7 @@ position = Vector2(8, 8)
 shape = SubResource("RectangleShape2D_xowu8")
 
 [node name="FloatingParent" type="Node2D" parent="." unique_id=1616430574]
+physics_interpolation_mode = 2
 position = Vector2(0, -4)
 
 [node name="CrystalSprite" type="Sprite2D" parent="FloatingParent" unique_id=1218717689]

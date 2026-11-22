@@ -178,6 +178,7 @@ func setup_level_editor_layer(): #the layer for editor overlays that go over the
 	var editor_layer = Node2D.new()
 	editor_layer.name = "Editor"
 	editor_layer.z_index = 8
+	editor_layer.physics_interpolation_mode = Node.PHYSICS_INTERPOLATION_MODE_OFF #editor overlays move on input, not physics ticks
 	w.current_level.add_child(editor_layer)
 	editor_level_limiter = LIMITER.instantiate()
 	editor_layer.add_child(editor_level_limiter)
