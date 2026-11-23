@@ -10,6 +10,7 @@ func state_start(_prev_state: StringName):
 	$FinishTimer.start()
 
 func state_end(_next_state: StringName):
+	main.get_node("MeleeDetector").set_deferred("monitoring", false)
 	$FireTimer.stop()
 	$FinishTimer.stop()
 

@@ -2,6 +2,7 @@ extends State
 
 func state_start(_prev_state: StringName):
 	main.ap.play("idle")
+	main.get_node("MeleeDetector").set_deferred("monitoring", true)
 	if main.is_on_floor():
 		$Timer.start()
 

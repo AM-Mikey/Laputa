@@ -3,10 +3,10 @@ extends State
 enum FlightMode { HOVERING, MOVING_TO_SWEEP_START, SWEEPING }
 
 @export var hover_duration := 7.0
-@export var hover_horizontal_speed := 120.0
-@export var hover_vertical_amplitude := 12.0
-@export var flare_interval_min := 1.2
-@export var flare_interval_max := 1.2
+@export var hover_horizontal_speed := 85.0
+@export var hover_vertical_amplitude := 10.0
+@export var flare_interval_min := 1.5
+@export var flare_interval_max := 1.5
 @export var sweep_horizontal_speed := 150.0
 @export var sweep_shot_interval := 0.5
 
@@ -21,6 +21,7 @@ var hover_height := 0.0
 var flight_mode: FlightMode = FlightMode.HOVERING
 var sweep_target_x := 0.0
 var sweep_attack_finished := false
+var prev_global_position: = Vector2.ZERO
 
 var propeller_sound = null
 var propeller_phase_2_spark_times: int = 0
@@ -28,10 +29,10 @@ var propeller_malfunction_timer := 0.0
 var propeller_malfunction_elapsed := 0.0
 var propeller_malfunctioning := false
 
-const PHASE_2_SPARK_INTERVAL_MIN := 1.2
+const PHASE_2_SPARK_INTERVAL_MIN := 1.8
 const PHASE_2_SPARK_INTERVAL_MAX := 1.8
-const PHASE_2_FLARE_TIMER:= 1.5
-const PROPELLER_MALFUNCTION_INTERVAL_MIN := 1.2
+const PHASE_2_FLARE_TIMER:= 2.0
+const PROPELLER_MALFUNCTION_INTERVAL_MIN := 1.8
 const PROPELLER_MALFUNCTION_INTERVAL_MAX := 1.8
 const PROPELLER_MALFUNCTION_DURATION := 0.9
 const PROPELLER_ALTITUDE_DROP := 24.0
@@ -84,6 +85,7 @@ func state_physics_process(delta: float):
 	match flight_mode:
 		FlightMode.HOVERING:
 			phase += phase_speed * delta
+			prev_global_position = main.global_position
 			main.global_position = Vector2(
 				arena_center_x + horizontal_radius * sin(phase),
 				hover_height + hover_vertical_amplitude * sin(phase * 2.0)
@@ -94,7 +96,7 @@ func state_physics_process(delta: float):
 				main.look_dir = Vector2(sign(cos(phase)), 0.0)
 			if $DurationTimer.time_left <= 0.0:
 				var nearest_end = left_end_x if abs(main.global_position.x - left_end_x) < abs(main.global_position.x - right_end_x) else right_end_x
-				if main.is_near_x(nearest_end):
+				if main.is_near_x(nearest_end) && (main.global_position.x - prev_global_position.x) * (nearest_end - main.global_position.x) > 0:
 					if $FlareTimer.time_left > 0.0:
 						$FlareTimer.stop()
 					if $ReloadTimer.time_left > 0.0:
@@ -136,6 +138,7 @@ func process_phase_2(delta: float):
 			propeller_malfunction_elapsed = 0.0
 			main.create_vfx("explosion", main.global_position + Vector2(0.0, -32.0))
 
+	prev_global_position = main.global_position
 	main.global_position = Vector2(
 		arena_center_x + horizontal_radius * sin(phase),
 		altitude + altitude_offset
@@ -222,7 +225,7 @@ func _on_Phase2SparkTimer_timeout():
 	if propeller_phase_2_spark_times % 4 == 3:
 		for index in range(8):
 			main.fire_spark(Vector2.RIGHT.rotated(TAU * index / 8.0) * SPARK_FORCE_MAX)
-			$Phase2SparkTimer.start(randf_range(PHASE_2_SPARK_INTERVAL_MIN, PHASE_2_SPARK_INTERVAL_MAX) * 1.5)
+			$Phase2SparkTimer.start(randf_range(PHASE_2_SPARK_INTERVAL_MIN, PHASE_2_SPARK_INTERVAL_MAX) * 2.0)
 	else:
 		for index in range(0, randi() % 3 + 1):
 			main.fire_spark(Vector2.RIGHT.rotated(randf_range(-PI, 0.0)) * randf_range(SPARK_FORCE_MIN, SPARK_FORCE_MAX))

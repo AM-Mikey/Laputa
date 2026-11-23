@@ -4,6 +4,7 @@ var target_x := 0.0
 @onready var ground_rush_hitbox = main.get_node("GroundRush")
 
 func state_start(_prev_state: StringName):
+	main.get_node("MeleeDetector").set_deferred("monitoring", false)
 	target_x = main.get_opposite_arena_side()
 	var direction = sign(target_x - main.global_position.x)
 	main.look_dir = Vector2(direction, 0.0)

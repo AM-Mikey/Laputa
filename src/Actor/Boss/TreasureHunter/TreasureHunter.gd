@@ -18,14 +18,14 @@ var move_dir: = Vector2.LEFT
 var player_in_close_range := false
 
 signal change_to_phase_2
-var phase_2_threshold: float = 20.0
+var phase_2_threshold: float = 30.0
 var phase_2_active := false
 
 var reloading: = false
 
 func setup():
-	hp = 50
-	max_hp = 50
+	hp = 80
+	max_hp = 80
 	w.emit_signal("finished_spawn_entities_step")
 
 func start_ai():
@@ -114,13 +114,10 @@ func create_vfx(effect_name: String, pos: Vector2):
 			w.middle_front.add_child(smoke)
 
 func update_animation():
-	match look_dir.x:
-		-1.0:
-			$Sprite2D.flip_h = false
-			$Hotspot/GunNozzle.position = Vector2(-13, -19)
-		1.0:
-			$Sprite2D.flip_h = true
-			$Hotspot/GunNozzle.position = Vector2(13, -19)
+	$MeleeDetector.scale.x = 1.0 if look_dir.x < 0.0 else -1.0
+	$Sprite2D.flip_h = look_dir.x >= 0.0
+	$Hotspot/GunNozzle.position = Vector2(13, -19) if look_dir.x >= 0.0 else Vector2(-13, -19)
+
 
 func is_at_x(target_x: float) -> bool:
 	return abs(global_position.x - target_x) <= 0.5
@@ -140,8 +137,13 @@ func _on_PlayerDetector_body_exited(_body: Node2D):
 
 func _on_SwingHitbox_area_entered(area: Area2D):
 	if area.get_collision_layer_value(17):
+		var player = area.get_parent()
+		#player.get_node("PlayerCamera").shake(10.0, 0.6, 16.0)
 		var knockback_direction = Vector2(look_dir.x * 100.0,-20.0)
-		area.get_parent().hit(2.0, knockback_direction, $SwingHitbox)
+		player.hit(3.0, knockback_direction, $SwingHitbox)
+		#Engine.time_scale = 0.01
+		#await get_tree().create_timer(0.4, false, true, true).timeout
+		#Engine.time_scale = 1.0
 
 func _on_GroundRush_area_entered(area: Area2D) -> void:
 	if area.get_collision_layer_value(17):

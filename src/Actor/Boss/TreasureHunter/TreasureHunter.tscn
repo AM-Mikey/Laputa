@@ -667,11 +667,11 @@ size = Vector2(14, 15)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_0ri4u"]
 size = Vector2(16, 27)
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_PlayerDetector"]
-radius = 27.018513
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_kxyrx"]
+size = Vector2(55, 45)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_SwingHitbox"]
-size = Vector2(13, 25)
+size = Vector2(15, 28)
 
 [node name="TreasureHunter" type="CharacterBody2D" unique_id=147745042 groups=["Actors", "Bosses", "Enemies", "Entities"]]
 collision_layer = 2
@@ -705,7 +705,6 @@ script = ExtResource("4_lvjic")
 metadata/_custom_type_script = "uid://bkttdvnxv3ulk"
 
 [node name="Timer" type="Timer" parent="StateMachine/Ground" unique_id=674287737]
-wait_time = 0.5
 one_shot = true
 
 [node name="GroundShoot" type="Node" parent="StateMachine" unique_id=1133531667]
@@ -721,8 +720,16 @@ one_shot = true
 [node name="Melee" type="Node" parent="StateMachine" unique_id=1507651336]
 script = ExtResource("8_melee")
 
-[node name="Timer" type="Timer" parent="StateMachine/Melee" unique_id=288004899]
-wait_time = 0.5
+[node name="Startup" type="Timer" parent="StateMachine/Melee" unique_id=288004899]
+wait_time = 0.1
+one_shot = true
+
+[node name="GroundMercy" type="Timer" parent="StateMachine/Melee" unique_id=1157653018]
+wait_time = 0.2
+one_shot = true
+
+[node name="EndLag" type="Timer" parent="StateMachine/Melee" unique_id=207536896]
+wait_time = 0.2
 one_shot = true
 
 [node name="GroundRush" type="Node" parent="StateMachine" unique_id=1579110370]
@@ -818,28 +825,33 @@ debug_color = Color(1, 0, 0, 0.235294)
 [node name="GroundRush" type="Area2D" parent="." unique_id=606425083]
 collision_layer = 262144
 collision_mask = 65536
+monitoring = false
+monitorable = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="GroundRush" unique_id=1368202494]
 position = Vector2(-2, -13.5)
 shape = SubResource("RectangleShape2D_0ri4u")
 debug_color = Color(1, 0.56078434, 0, 0.23529412)
 
-[node name="PlayerDetector" type="Area2D" parent="." unique_id=736450444]
+[node name="MeleeDetector" type="Area2D" parent="." unique_id=736450444]
 position = Vector2(0, -15)
 collision_layer = 0
+monitoring = false
 monitorable = false
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerDetector" unique_id=1005903294]
-shape = SubResource("CircleShape2D_PlayerDetector")
+[node name="CollisionShape2D" type="CollisionShape2D" parent="MeleeDetector" unique_id=1005903294]
+position = Vector2(-27.5, -7.5)
+shape = SubResource("RectangleShape2D_kxyrx")
 debug_color = Color(0.2, 0.6, 1, 0.2)
 
 [node name="SwingHitbox" type="Area2D" parent="." unique_id=1852258479]
 collision_layer = 262144
 collision_mask = 65536
 monitoring = false
+monitorable = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="SwingHitbox" unique_id=632701527]
-position = Vector2(-9.5, -17.5)
+position = Vector2(-10.5, -16)
 shape = SubResource("RectangleShape2D_SwingHitbox")
 debug_color = Color(1, 0, 0, 0.235294)
 
@@ -848,7 +860,8 @@ debug_color = Color(1, 0, 0, 0.235294)
 [connection signal="timeout" from="StateMachine/Ground/Timer" to="StateMachine/Ground" method="_on_Timer_timeout"]
 [connection signal="timeout" from="StateMachine/GroundShoot/FireTimer" to="StateMachine/GroundShoot" method="_on_FireTimer_timeout"]
 [connection signal="timeout" from="StateMachine/GroundShoot/FinishTimer" to="StateMachine/GroundShoot" method="_on_FinishTimer_timeout"]
-[connection signal="timeout" from="StateMachine/Melee/Timer" to="StateMachine/Melee" method="_on_Timer_timeout"]
+[connection signal="timeout" from="StateMachine/Melee/Startup" to="StateMachine/Melee" method="_on_Startup_timeout"]
+[connection signal="timeout" from="StateMachine/Melee/EndLag" to="StateMachine/Melee" method="_on_EndLag_timeout"]
 [connection signal="timeout" from="StateMachine/Air/DurationTimer" to="StateMachine/Air" method="_on_DurationTimer_timeout"]
 [connection signal="timeout" from="StateMachine/Air/FlareTimer" to="StateMachine/Air" method="_on_FlareTimer_timeout"]
 [connection signal="timeout" from="StateMachine/Air/ReloadTimer" to="StateMachine/Air" method="_on_ReloadTimer_timeout"]
@@ -859,6 +872,6 @@ debug_color = Color(1, 0, 0, 0.235294)
 [connection signal="area_entered" from="Hitbox" to="." method="_on_hitbox_area_entered"]
 [connection signal="area_exited" from="Hitbox" to="." method="_on_hitbox_area_exited"]
 [connection signal="area_entered" from="GroundRush" to="." method="_on_GroundRush_area_entered"]
-[connection signal="body_entered" from="PlayerDetector" to="." method="_on_PlayerDetector_body_entered"]
-[connection signal="body_exited" from="PlayerDetector" to="." method="_on_PlayerDetector_body_exited"]
+[connection signal="body_entered" from="MeleeDetector" to="." method="_on_PlayerDetector_body_entered"]
+[connection signal="body_exited" from="MeleeDetector" to="." method="_on_PlayerDetector_body_exited"]
 [connection signal="area_entered" from="SwingHitbox" to="." method="_on_SwingHitbox_area_entered"]
