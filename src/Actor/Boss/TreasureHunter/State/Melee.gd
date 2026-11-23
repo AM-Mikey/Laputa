@@ -22,6 +22,7 @@ func state_physics_process(delta: float):
 		main.velocity.x = lerp(main.velocity.x, 0.0, 0.05)
 		if $GroundMercy.time_left <= 0.0 and main.is_on_floor():
 			if $EndLag.time_left <= 0.0:
+				main.ap.play("idle")
 				$EndLag.start()
 
 ### SIGNALS ###

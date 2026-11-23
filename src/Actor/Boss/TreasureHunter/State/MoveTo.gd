@@ -65,7 +65,7 @@ func state_physics_process(delta: float):
 func _on_Phase2SmokeTimer_timeout():
 	var rand: = randi_range(1, 3)
 	for i in range(0, rand):
-		var offset = Vector2(randf_range(-18.0, 18.0), randf_range(-30.0, -4.0))
+		var offset = Vector2(randf_range(-15.0, 15.0), randf_range(-30.0, -4.0))
 		var smoke_pos = main.global_position + offset
 		main.create_vfx("smoke", smoke_pos)
 	$Phase2SmokeTimer.start(randf_range(SMOKE_TIMER_MIN, SMOKE_TIMER_MAX))

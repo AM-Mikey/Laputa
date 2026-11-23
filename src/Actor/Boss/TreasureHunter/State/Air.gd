@@ -31,7 +31,8 @@ var propeller_malfunctioning := false
 
 const PHASE_2_SPARK_INTERVAL_MIN := 1.8
 const PHASE_2_SPARK_INTERVAL_MAX := 1.8
-const PHASE_2_FLARE_TIMER:= 2.0
+const PHASE_2_FLARE_TIMER:= 1.5
+const PHASE_2_HORIZONTAL_SPEED = 120.0
 const PROPELLER_MALFUNCTION_INTERVAL_MIN := 1.8
 const PROPELLER_MALFUNCTION_INTERVAL_MAX := 1.8
 const PROPELLER_MALFUNCTION_DURATION := 0.9
@@ -55,12 +56,16 @@ func state_start(_prev_state: StringName):
 	main.ap.play("fly")
 	propeller_sound = am.play("boss_treasure_hunter_flare_propeller_loop", main, null, 0.8, 0.0)
 	if main.phase_2_active:
+		phase_speed = PHASE_2_HORIZONTAL_SPEED / horizontal_radius
 		propeller_phase_2_spark_times = 0
 		propeller_malfunction_timer = randf_range(PROPELLER_MALFUNCTION_INTERVAL_MIN, PROPELLER_MALFUNCTION_INTERVAL_MAX)
+
+		propeller_malfunctioning = true
 		propeller_malfunction_elapsed = 0.0
-		propeller_malfunctioning = false
+		main.create_vfx("explosion", main.global_position + Vector2(0.0, -32.0))
+
 		$Phase2SmokeTimer.start(randf_range(SMOKE_TIMER_MIN, SMOKE_TIMER_MAX))
-		$Phase2SparkTimer.start(randf_range(PHASE_2_SPARK_INTERVAL_MIN, PHASE_2_SPARK_INTERVAL_MAX))
+		#$Phase2SparkTimer.start(randf_range(PHASE_2_SPARK_INTERVAL_MIN, PHASE_2_SPARK_INTERVAL_MAX))
 		start_flare_timer()
 		return
 	$DurationTimer.start(hover_duration)
@@ -136,6 +141,15 @@ func process_phase_2(delta: float):
 		if propeller_malfunction_timer <= 0.0:
 			propeller_malfunctioning = true
 			propeller_malfunction_elapsed = 0.0
+			if propeller_phase_2_spark_times % 4 == 3:
+				for index in range(8):
+					main.fire_spark(Vector2.RIGHT.rotated(TAU * index / 8.0) * SPARK_FORCE_MAX)
+					#$Phase2SparkTimer.start(randf_range(PHASE_2_SPARK_INTERVAL_MIN, PHASE_2_SPARK_INTERVAL_MAX) * 2.0)
+			else:
+				for index in range(0, randi() % 3 + 1):
+					main.fire_spark(Vector2.RIGHT.rotated(randf_range(-PI, 0.0)) * randf_range(SPARK_FORCE_MIN, SPARK_FORCE_MAX))
+				#$Phase2SparkTimer.start(randf_range(PHASE_2_SPARK_INTERVAL_MIN, PHASE_2_SPARK_INTERVAL_MAX))
+			propeller_phase_2_spark_times += 1
 			main.create_vfx("explosion", main.global_position + Vector2(0.0, -32.0))
 
 	prev_global_position = main.global_position
@@ -215,19 +229,20 @@ func _on_DurationTimer_timeout():
 func _on_Phase2SmokeTimer_timeout():
 	var rand: = randi_range(1, 3)
 	for i in range(0, rand):
-		var offset = Vector2(randf_range(-18.0, 18.0), randf_range(-30.0, -4.0))
+		var offset = Vector2(randf_range(-15.0, 15.0), randf_range(-30.0, -4.0))
 		var smoke_pos = main.global_position + offset
 		main.create_vfx("smoke", smoke_pos)
 	$Phase2SmokeTimer.start(randf_range(SMOKE_TIMER_MIN, SMOKE_TIMER_MAX))
 
 
 func _on_Phase2SparkTimer_timeout():
-	if propeller_phase_2_spark_times % 4 == 3:
-		for index in range(8):
-			main.fire_spark(Vector2.RIGHT.rotated(TAU * index / 8.0) * SPARK_FORCE_MAX)
-			$Phase2SparkTimer.start(randf_range(PHASE_2_SPARK_INTERVAL_MIN, PHASE_2_SPARK_INTERVAL_MAX) * 2.0)
-	else:
-		for index in range(0, randi() % 3 + 1):
-			main.fire_spark(Vector2.RIGHT.rotated(randf_range(-PI, 0.0)) * randf_range(SPARK_FORCE_MIN, SPARK_FORCE_MAX))
-		$Phase2SparkTimer.start(randf_range(PHASE_2_SPARK_INTERVAL_MIN, PHASE_2_SPARK_INTERVAL_MAX))
-	propeller_phase_2_spark_times += 1
+	return
+	#if propeller_phase_2_spark_times % 4 == 3:
+		#for index in range(8):
+			#main.fire_spark(Vector2.RIGHT.rotated(TAU * index / 8.0) * SPARK_FORCE_MAX)
+			#$Phase2SparkTimer.start(randf_range(PHASE_2_SPARK_INTERVAL_MIN, PHASE_2_SPARK_INTERVAL_MAX) * 2.0)
+	#else:
+		#for index in range(0, randi() % 3 + 1):
+			#main.fire_spark(Vector2.RIGHT.rotated(randf_range(-PI, 0.0)) * randf_range(SPARK_FORCE_MIN, SPARK_FORCE_MAX))
+		#$Phase2SparkTimer.start(randf_range(PHASE_2_SPARK_INTERVAL_MIN, PHASE_2_SPARK_INTERVAL_MAX))
+	#propeller_phase_2_spark_times += 1
