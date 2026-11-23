@@ -27,9 +27,10 @@ _data = {
 [node name="LevelText" type="MarginContainer"]
 process_mode = 3
 modulate = Color(1, 1, 1, 0)
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
+layout_mode = 3
+anchors_preset = 0
+offset_right = 480.0
+offset_bottom = 270.0
 mouse_filter = 2
 theme = ExtResource("1")
 script = ExtResource("2")

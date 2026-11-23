@@ -11,9 +11,10 @@
 [ext_resource type="Texture2D" uid="uid://bdy1084g0hduo" path="res://assets/UI/Options/IconReturn.png" id="10_dwwpy"]
 
 [node name="FileSelect" type="MarginContainer" unique_id=1552228621]
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
+layout_mode = 3
+anchors_preset = 0
+offset_right = 480.0
+offset_bottom = 270.0
 theme = ExtResource("2")
 theme_override_constants/margin_left = 16
 theme_override_constants/margin_top = 16
