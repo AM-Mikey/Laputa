@@ -32,11 +32,11 @@ var propeller_malfunctioning := false
 const PHASE_2_SPARK_INTERVAL_MIN := 1.8
 const PHASE_2_SPARK_INTERVAL_MAX := 1.8
 const PHASE_2_FLARE_TIMER:= 1.5
-const PHASE_2_HORIZONTAL_SPEED = 120.0
+const PHASE_2_HORIZONTAL_SPEED = 100.0
 const PROPELLER_MALFUNCTION_INTERVAL_MIN := 1.8
 const PROPELLER_MALFUNCTION_INTERVAL_MAX := 1.8
-const PROPELLER_MALFUNCTION_DURATION := 0.9
-const PROPELLER_ALTITUDE_DROP := 24.0
+const PROPELLER_MALFUNCTION_DURATION := 1.5
+const PROPELLER_ALTITUDE_DROP := 40.0
 const SMOKE_TIMER_MIN: = 0.1
 const SMOKE_TIMER_MAX: = 0.3
 const SPARK_FORCE_MIN: = 40.0
@@ -141,6 +141,12 @@ func process_phase_2(delta: float):
 		if propeller_malfunction_timer <= 0.0:
 			propeller_malfunctioning = true
 			propeller_malfunction_elapsed = 0.0
+			var xp_spawn_values = []
+			var xp_spawn = randi() % 3
+			for i in range(0, xp_spawn, 1):
+				xp_spawn_values.append(1)
+			main.spawn_xp(xp_spawn_values)
+
 			if propeller_phase_2_spark_times % 4 == 3:
 				for index in range(8):
 					main.fire_spark(Vector2.RIGHT.rotated(TAU * index / 8.0) * SPARK_FORCE_MAX)

@@ -24,7 +24,7 @@ var phase_2_active := false
 var reloading: = false
 
 func setup():
-	hp = 80
+	hp = 40
 	max_hp = 80
 	w.emit_signal("finished_spawn_entities_step")
 
@@ -118,6 +118,12 @@ func update_animation():
 	$Sprite2D.flip_h = look_dir.x >= 0.0
 	$Hotspot/GunNozzle.position = Vector2(13, -19) if look_dir.x >= 0.0 else Vector2(-13, -19)
 
+func spawn_xp(values):
+	for v in values:
+		var experience = EXPERIENCE.instantiate()
+		experience.value = v
+		experience.position = global_position
+		w.player_back.call_deferred("add_child", experience)
 
 func is_at_x(target_x: float) -> bool:
 	return abs(global_position.x - target_x) <= 0.5

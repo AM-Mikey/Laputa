@@ -17,6 +17,7 @@ func _on_boss_killed():
 
 ## Override this to implement custom behaviour when the player die
 func _on_player_killed():
+	boss_hp_bar.queue_free()
 	queue_free()
 
 ## UTILITY

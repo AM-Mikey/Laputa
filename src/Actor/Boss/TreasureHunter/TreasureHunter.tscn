@@ -229,6 +229,18 @@ tracks/1/keys = {
 "update": 1,
 "values": [0]
 }
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Hotspot/GunNozzle:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, -15)]
+}
 
 [sub_resource type="Animation" id="Animation_bf7eb"]
 resource_name = "fly"
@@ -347,6 +359,18 @@ tracks/1/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Hotspot/GunNozzle:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, -15)]
 }
 
 [sub_resource type="Animation" id="Animation_kxyrx"]
@@ -641,6 +665,18 @@ tracks/1/keys = {
 "update": 1,
 "values": [0]
 }
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Hotspot/GunNozzle:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-14, -19)]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_tf65y"]
 _data = {
@@ -668,10 +704,10 @@ size = Vector2(14, 15)
 size = Vector2(16, 27)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_kxyrx"]
-size = Vector2(55, 45)
+size = Vector2(50, 45)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_SwingHitbox"]
-size = Vector2(15, 28)
+size = Vector2(15, 25)
 
 [node name="TreasureHunter" type="CharacterBody2D" unique_id=147745042 groups=["Actors", "Bosses", "Enemies", "Entities"]]
 collision_layer = 2
@@ -789,7 +825,7 @@ metadata/_custom_type_script = "uid://bkttdvnxv3ulk"
 [node name="Hotspot" type="Node2D" parent="." unique_id=1205734841]
 
 [node name="GunNozzle" type="Marker2D" parent="Hotspot" unique_id=1193765223]
-position = Vector2(-13, -19)
+position = Vector2(0, -15)
 
 [node name="PropellerTop" type="Marker2D" parent="Hotspot" unique_id=1693351999]
 position = Vector2(0, -32)
@@ -840,7 +876,7 @@ monitoring = false
 monitorable = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="MeleeDetector" unique_id=1005903294]
-position = Vector2(-27.5, -7.5)
+position = Vector2(-25, -7.5)
 shape = SubResource("RectangleShape2D_kxyrx")
 debug_color = Color(0.2, 0.6, 1, 0.2)
 
@@ -851,7 +887,7 @@ monitoring = false
 monitorable = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="SwingHitbox" unique_id=632701527]
-position = Vector2(-10.5, -16)
+position = Vector2(-10.5, -14.5)
 shape = SubResource("RectangleShape2D_SwingHitbox")
 debug_color = Color(1, 0, 0, 0.235294)
 
