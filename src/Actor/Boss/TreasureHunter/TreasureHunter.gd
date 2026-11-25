@@ -7,6 +7,11 @@ const SMOKE = preload("res://src/Effect/GunSmoke.tscn")
 
 @onready var ap = $AnimationPlayer
 
+@export var gun_nozzle_position: Vector2 = Vector2(14, -19):
+	set(val):
+		gun_nozzle_position = val
+		update_animation()
+
 var fly_speed: = Vector2(60.0, 60.0)
 var take_off_speed: = 200.0
 var ground_rush_speed := 300.0
@@ -114,9 +119,11 @@ func create_vfx(effect_name: String, pos: Vector2):
 			w.middle_front.add_child(smoke)
 
 func update_animation():
-	$MeleeDetector.scale.x = 1.0 if look_dir.x < 0.0 else -1.0
-	$Sprite2D.flip_h = look_dir.x >= 0.0
-	$Hotspot/GunNozzle.position = Vector2(13, -19) if look_dir.x >= 0.0 else Vector2(-13, -19)
+	if is_node_ready():
+		$MeleeDetector.scale.x = 1.0 if look_dir.x < 0.0 else -1.0
+		$Sprite2D.flip_h = look_dir.x >= 0.0
+		$Hotspot/GunNozzle.position = gun_nozzle_position
+		$Hotspot/GunNozzle.position.x *= look_dir.x
 
 func spawn_xp(values):
 	for v in values:

@@ -29,6 +29,26 @@ var propeller_malfunction_timer := 0.0
 var propeller_malfunction_elapsed := 0.0
 var propeller_malfunctioning := false
 
+var phase_2_bullet_hell: = false:
+	set(val):
+		if main.phase_2_active:
+			if !phase_2_bullet_hell and val: # Start bullet hell attack
+				#$Phase2SparkTimer.stop()
+				$FlareTimer.stop()
+				phase_2_bullet_hell_bullet_no = 0
+				main.ap.play("fly_fast_spin_start")
+				main.ap.queue("fly_fast_spin")
+				$Phase2BulletHellDuration.start()
+				#$Phase2BulletHellBulletSpawn.start()
+			elif phase_2_bullet_hell and !val: # End bullet hell attack
+				#$Phase2SparkTimer.stop()
+				start_phase_2_bullet_hell_cooldown_timer()
+				$Phase2BulletHellDuration.stop()
+				$Phase2BulletHellBulletSpawn.stop()
+				main.ap.play("fly_fast_spin_start")
+				main.ap.queue("fly")
+		phase_2_bullet_hell = val
+
 const PHASE_2_SPARK_INTERVAL_MIN := 1.8
 const PHASE_2_SPARK_INTERVAL_MAX := 1.8
 const PHASE_2_FLARE_TIMER:= 1.5
@@ -41,6 +61,9 @@ const SMOKE_TIMER_MIN: = 0.1
 const SMOKE_TIMER_MAX: = 0.3
 const SPARK_FORCE_MIN: = 40.0
 const SPARK_FORCE_MAX: = 120.0
+
+const PHASE_2_BULLET_HELL_COOLDOWN_MIN := 3.0
+const PHASE_2_BULLET_HELL_COOLDOWN_MAX := 4.5
 
 func state_start(_prev_state: StringName):
 	arena_rect = main.get_arena_rect()
@@ -64,6 +87,9 @@ func state_start(_prev_state: StringName):
 		propeller_malfunction_elapsed = 0.0
 		main.create_vfx("explosion", main.global_position + Vector2(0.0, -32.0))
 
+		phase_2_bullet_hell = false
+		start_phase_2_bullet_hell_cooldown_timer()
+
 		$Phase2SmokeTimer.start(randf_range(SMOKE_TIMER_MIN, SMOKE_TIMER_MAX))
 		#$Phase2SparkTimer.start(randf_range(PHASE_2_SPARK_INTERVAL_MIN, PHASE_2_SPARK_INTERVAL_MAX))
 		start_flare_timer()
@@ -77,7 +103,10 @@ func state_end(_next_state: StringName):
 	$ReloadTimer.stop()
 	$SweepFireTimer.stop()
 	$Phase2SmokeTimer.stop()
-	$Phase2SparkTimer.stop()
+	$Phase2BulletHellCooldown.stop()
+	$Phase2BulletHellDuration.stop()
+	$Phase2BulletHellBulletSpawn.stop()
+	#$Phase2SparkTimer.stop()
 	propeller_phase_2_spark_times = 0
 	if propeller_sound:
 		am.stop_sfx()
@@ -141,21 +170,23 @@ func process_phase_2(delta: float):
 		if propeller_malfunction_timer <= 0.0:
 			propeller_malfunctioning = true
 			propeller_malfunction_elapsed = 0.0
-			var xp_spawn_values = []
-			var xp_spawn = randi() % 3
-			for i in range(0, xp_spawn, 1):
-				xp_spawn_values.append(1)
-			main.spawn_xp(xp_spawn_values)
 
-			if propeller_phase_2_spark_times % 4 == 3:
-				for index in range(8):
-					main.fire_spark(Vector2.RIGHT.rotated(TAU * index / 8.0) * SPARK_FORCE_MAX)
-					#$Phase2SparkTimer.start(randf_range(PHASE_2_SPARK_INTERVAL_MIN, PHASE_2_SPARK_INTERVAL_MAX) * 2.0)
-			else:
-				for index in range(0, randi() % 3 + 1):
-					main.fire_spark(Vector2.RIGHT.rotated(randf_range(-PI, 0.0)) * randf_range(SPARK_FORCE_MIN, SPARK_FORCE_MAX))
-				#$Phase2SparkTimer.start(randf_range(PHASE_2_SPARK_INTERVAL_MIN, PHASE_2_SPARK_INTERVAL_MAX))
-			propeller_phase_2_spark_times += 1
+			if !phase_2_bullet_hell:
+				var xp_spawn_values = []
+				var xp_spawn = randi() % 3
+				for i in range(0, xp_spawn, 1):
+					xp_spawn_values.append(1)
+				main.spawn_xp(xp_spawn_values)
+
+				if propeller_phase_2_spark_times % 4 == 3:
+					for index in range(8):
+						main.fire_spark(Vector2.RIGHT.rotated(TAU * index / 8.0) * SPARK_FORCE_MAX)
+						#$Phase2SparkTimer.start(randf_range(PHASE_2_SPARK_INTERVAL_MIN, PHASE_2_SPARK_INTERVAL_MAX) * 2.0)
+				else:
+					for index in range(0, randi() % 3 + 1):
+						main.fire_spark(Vector2.RIGHT.rotated(randf_range(-PI, 0.0)) * randf_range(SPARK_FORCE_MIN, SPARK_FORCE_MAX))
+					#$Phase2SparkTimer.start(randf_range(PHASE_2_SPARK_INTERVAL_MIN, PHASE_2_SPARK_INTERVAL_MAX))
+				propeller_phase_2_spark_times += 1
 			main.create_vfx("explosion", main.global_position + Vector2(0.0, -32.0))
 
 	prev_global_position = main.global_position
@@ -170,6 +201,9 @@ func start_flare_timer():
 		$FlareTimer.start(randf_range(flare_interval_min, flare_interval_max))
 	else:
 		$FlareTimer.start(PHASE_2_FLARE_TIMER)
+
+func start_phase_2_bullet_hell_cooldown_timer():
+	$Phase2BulletHellCooldown.start(randf_range(PHASE_2_BULLET_HELL_COOLDOWN_MIN, PHASE_2_BULLET_HELL_COOLDOWN_MAX))
 
 func move_straight_toward(target_x: float, delta: float):
 	var direction = sign(target_x - main.global_position.x)
@@ -252,3 +286,26 @@ func _on_Phase2SparkTimer_timeout():
 			#main.fire_spark(Vector2.RIGHT.rotated(randf_range(-PI, 0.0)) * randf_range(SPARK_FORCE_MIN, SPARK_FORCE_MAX))
 		#$Phase2SparkTimer.start(randf_range(PHASE_2_SPARK_INTERVAL_MIN, PHASE_2_SPARK_INTERVAL_MAX))
 	#propeller_phase_2_spark_times += 1
+
+
+func _on_Phase2BulletHellCooldown_timeout() -> void:
+	phase_2_bullet_hell = true
+
+func _on_Phase2BulletHellDuration_timeout() -> void:
+	if main.phase_2_active:
+		phase_2_bullet_hell = false
+
+var phase_2_bullet_hell_bullet_no: = 0
+func _on_Phase2BulletHellBulletSpawn_timeout() -> void:
+	main.fire_spark(Vector2(sin(TAU * phase_2_bullet_hell_bullet_no / 8.0) * SPARK_FORCE_MAX, -50.0))
+	phase_2_bullet_hell_bullet_no += 1
+	$Phase2BulletHellBulletSpawn.start()
+
+func _on_AnimationPlayer_animation_finished(anim_name: StringName) -> void:
+	if main.sm.state == "air":
+		match anim_name:
+			"fly_fast_spin_start":
+				if phase_2_bullet_hell:
+					$Phase2BulletHellBulletSpawn.start()
+				else:
+					start_flare_timer()
