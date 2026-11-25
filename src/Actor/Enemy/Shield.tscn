@@ -1062,7 +1062,7 @@ size = Vector2(120, 24)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_onrqs"]
 size = Vector2(13, 21)
 
-[node name="Shield" type="CharacterBody2D" unique_id=1317608156 groups=["Actors", "Enemies", "Entities"]]
+[node name="Shield" type="CharacterBody2D" unique_id=1317608156 groups=["Actors", "CartBumpable", "Enemies", "Entities"]]
 collision_layer = 2
 collision_mask = 520
 floor_max_angle = 0.61086524

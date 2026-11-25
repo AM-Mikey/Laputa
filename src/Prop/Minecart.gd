@@ -17,20 +17,31 @@ var ICON: Texture2D = preload("res://assets/Prop/MinecartIcon.png")
 
 signal blocked(bullet, body) #emitted by Bullet.armor_check()
 
+@export var fast := false
+## Rideable carts are empty: the CargoSprite (load drawn inside the cart) is hidden.
+@export var rideable := false: set = set_rideable
 @export var can_fall_off_ledges := true
-@export var crush_players := true
-@export var crush_enemies := true
-@export var squish_enemies := true #enemies the cart drives into a wall/ceiling
-@export var squish_players := true #same for the player
+var crush_players := true
+var crush_enemies := true
+var squish_enemies := true #enemies the cart drives into a wall/ceiling
+var squish_players := true #same for the player
 
-var push_max_speed := 70.0 #keep below player walk speed (90) so the player stays in contact
-var push_start_accel := 40.0 #accel when starting from rest, feels heavy
-var push_full_accel := 140.0 #accel once rolling
+var push_max_speed := 60.0 #keep below player walk speed (90) so the player stays in contact
+var push_start_accel := 30.0 #accel when starting from rest, feels heavy
+var push_full_accel := 120.0 #accel once rolling
 var ground_friction := 90.0 #decel when nothing is pushing, controls how far it coasts
 var slope_friction := 30.0 #lower on slopes so gravity always wins and it never sits stuck (and unpushable) on one
 var push_reach := 2.0 #px gap between player and cart that still counts as touching
 var push_grace_time := 0.12 #keeps the push going through the player's contact stutter
 var max_roll_speed := 240.0 #cap for long slopes
+
+#fast carts (spiked or not) swap these in over the values above in setup()
+const FAST_TEXTURE := preload("res://assets/Prop/MinecartFast.png")
+const FAST_CARGO_TEXTURE := preload("res://assets/Prop/MinecartFastCargo.png")
+var fast_push_max_speed := 90.0 #same as player walk speed, so the player can push it at full walking pace
+var fast_push_start_accel := 120.0
+var fast_push_full_accel := 360.0
+var fast_max_roll_speed := 360.0
 
 var shot_push_scale := 2.0 #velocity added = bullet knockback_strength * this
 
@@ -71,6 +82,23 @@ var carry_accel := 400.0 #how hard props on top get dragged along to match the c
 
 var squish_depth := 3.0 #how far the cart has to be pushed into an enemy that can't get out of the way
 
+#riding (player state src/Player/Minecart.gd). A ridden cart stays a normal solid cart (pushes, squishes,
+#crushes, presses switchplates); it only drops its armor layer, so it doesn't deflect shots. The rider and the
+#rider's own shots ignore it (collision exceptions / Bullet.is_riders_cart()). Enemies and props that end up
+#on top are shoved off the side (_update_top_shove), since the rider's head is in that space.
+const ARMOR_LAYER := 32
+var top_shove_speed := 120.0 #px/s sideways that props on top of a ridden cart are pushed off at
+var _top_shove_dirs := {} #prop on top -> side it's being shoved to (-1/1), kept so it doesn't flip midway
+#enemies in the "CartBumpable" group that land on a ridden cart are bumped off with a short hop (see
+#_start_hop). Others (flying, path-following, scripted) are left alone.
+var hop_time := 0.25 #s the hop off the side takes
+var hop_height := 6.0 #px the hop rises at its peak
+var hop_margin := 1.0 #px past the cart's edge the enemy's near side ends up
+var _hops := {} #enemy -> {dir, dist, t, offset, paused (we set its `disabled`)}
+var rider: Node = null
+var _former_rider: Node = null #just got out, still overlapping the cart: keep ignoring it until clear
+var _base_layer := 0
+
 var block_dir := Vector2.ZERO #armor on all sides, read by Bullet.armor_check()
 var crush_targets := []
 var push_dir := 0
@@ -97,6 +125,11 @@ var carry_base_pos := Vector2.ZERO
 
 func setup():
 	is_wind_affected = true
+	_base_layer = collision_layer
+	$CarryDetector.set_collision_mask_value(2, true) #enemies on top: block getting in / shoved off when ridden
+	if fast:
+		_apply_fast()
+	set_rideable(rideable)
 	_measure_grade_support()
 	sprite_base_pos = $Sprite2D.position + Vector2(0, ground_hover) #physics hovers above the floor, the sprite shouldn't
 	carry_base_pos = $CarryDetector/CollisionShape2D.position + Vector2(0, ground_hover)
@@ -106,10 +139,42 @@ func setup():
 	w.emit_signal("finished_spawn_entities_step")
 
 
+#the cargo sheet is laid out like the cart's (same frame size, not centered), so it copies the cart
+#sprite's position (raised on slopes) and flip, which mirrors both around the cart's middle
+func _sync_cargo_sprite():
+	var cargo := get_node_or_null("CargoSprite") as Sprite2D
+	if cargo:
+		cargo.position = $Sprite2D.position
+		cargo.flip_h = $Sprite2D.flip_h
+
+
+func set_rideable(val: bool):
+	rideable = val
+	var cargo := get_node_or_null("CargoSprite") as Sprite2D #not every variant has one (spiked cart)
+	if cargo:
+		cargo.visible = !rideable
+
+
+#runs before anything reads the sprite sheet (grade support is measured from it)
+func _apply_fast():
+	$Sprite2D.texture = FAST_TEXTURE
+	var cargo := get_node_or_null("CargoSprite") as Sprite2D
+	if cargo:
+		cargo.texture = FAST_CARGO_TEXTURE
+	push_max_speed = fast_push_max_speed
+	push_start_accel = fast_push_start_accel
+	push_full_accel = fast_push_full_accel
+	max_roll_speed = fast_max_roll_speed
+
+
 func _physics_process(delta):
+	_update_former_rider()
 	_update_push(delta)
 	_update_crush()
 	_update_carry(delta)
+	_update_ride_push()
+	_update_top_shove(delta)
+	_update_hops(delta)
 	_update_squish()
 	_apply_look()
 	_update_animation()
@@ -237,21 +302,42 @@ func _find_ground(state: PhysicsDirectBodyState2D, vel: Vector2, was_grounded: b
 			if back_off <= front_off: front = {}
 			else: back = {}
 
+	#straddling a peak the ground drops away under both wheels, past their normal reach. As long as the
+	#middle is on the ground, look further down for the slopes on each side
+	var middle := _ray(state, cx, from_y, to_y)
+	if back.is_empty() && front.is_empty() && !middle.is_empty():
+		var deep: float = to_y + wheel_offset * MAX_SLOPE_RISE
+		back = _ray(state, cx - wheel_offset, from_y, deep)
+		front = _ray(state, cx + wheel_offset, from_y, deep)
+		if back.is_empty() && front.is_empty():
+			back = middle #a spike too thin for the wheels: rest on the middle
+
 	var k := 0.0
 	var ground_y := 0.0
 	if !back.is_empty() && !front.is_empty():
 		k = (front.position.y - back.position.y) / (front.position.x - back.position.x)
 		ground_y = (front.position.y + back.position.y) / 2.0
+		#over a peak (rising under the back wheel, falling under the front) the line between the wheels
+		#is about level, so it would count as flat and friction could stop it on top. Take the slope on
+		#the side it's heading for (or that its middle is on) instead, so it always rolls off
+		if _is_slope(back.normal) && _is_slope(front.normal) 				&& _normal_k(back.normal) < 0.0 && _normal_k(front.normal) > 0.0:
+			var side := signf(vel.x)
+			if absf(vel.x) < 1.0:
+				side = 1.0
+				if !middle.is_empty() && _is_slope(middle.normal):
+					side = signf(_normal_k(middle.normal))
+				elif rolling_speed != 0.0:
+					side = signf(rolling_speed)
+			k = _normal_k(front.normal) if side > 0.0 else _normal_k(back.normal)
 	elif !back.is_empty() || !front.is_empty():
 		var hit: Dictionary = back if !back.is_empty() else front
 		if _is_slope(hit.normal):
-			k = -hit.normal.x / hit.normal.y
+			k = _normal_k(hit.normal)
 		ground_y = hit.position.y + k * (cx - hit.position.x)
 	else:
 		return {}
 
 	#going over a peak the line between the wheels dips below it, rest on the peak instead
-	var middle := _ray(state, cx, from_y, to_y)
 	if !middle.is_empty():
 		ground_y = min(ground_y, middle.position.y)
 
@@ -262,6 +348,11 @@ func _find_ground(state: PhysicsDirectBodyState2D, vel: Vector2, was_grounded: b
 func _ray(state: PhysicsDirectBodyState2D, x: float, from_y: float, to_y: float) -> Dictionary:
 	var query := PhysicsRayQueryParameters2D.create(Vector2(x, from_y), Vector2(x, to_y), collision_mask, [get_rid()])
 	return state.get_space_state().intersect_ray(query)
+
+
+#rise per px of the ground with this normal (+ = down to the right)
+func _normal_k(normal: Vector2) -> float:
+	return -normal.x / normal.y
 
 
 func _is_slope(normal: Vector2) -> bool:
@@ -410,6 +501,7 @@ func _apply_look():
 	var offset := Vector2(0, CART_SIZE.y - grade_support[grade]) #slope frames sit higher than the flat one
 	$Sprite2D.position = sprite_base_pos + offset
 	$Sprite2D.flip_h = dir < 0
+	_sync_cargo_sprite()
 	$CarryDetector/CollisionShape2D.position = carry_base_pos + offset
 
 
@@ -418,6 +510,7 @@ func _apply_look():
 #props resting on top get dragged toward the cart's speed. Anything that holds them back harder
 #(a wall, a ceiling block) just stops them and the cart rolls out from under.
 func _update_carry(delta):
+	if rider: return #a ridden cart shoves things off its top instead (_update_top_shove)
 	for body in $CarryDetector.get_overlapping_bodies():
 		if body == self || !(body is RigidBody2D) || body.is_in_group("Minecarts"): continue
 		if !body.is_in_group("PhysicsProps") || body.is_in_group("NoPropCollision") || body.freeze: continue
@@ -461,12 +554,18 @@ func _stop_roll_sfx():
 
 func _exit_tree():
 	_stop_roll_sfx()
+	for enemy in _hops.keys(): #don't leave an enemy paused if the cart goes away mid-hop
+		_end_hop(enemy)
 
 
 ### ANIMATION ###
 
+func _get_grade_anim() -> String: #variants can pick other animations (MinecartSpikes uses reverse slopes)
+	return GRADE_ANIM[grade]
+
+
 func _update_animation():
-	var anim: String = GRADE_ANIM[grade]
+	var anim: String = _get_grade_anim()
 	if !ap.has_animation(anim): return
 	if ap.assigned_animation != anim: #switch grade, keep the wheels' phase
 		var was_playing := ap.is_playing()
@@ -502,6 +601,8 @@ func _update_push(delta):
 
 
 func _get_player_push_dir() -> int:
+	if rider: #riding: left/right drives the cart
+		return int(sign(rider.move_dir.x))
 	var pc = f.pc()
 	if !pc || pc.disabled || !pc.is_on_floor(): return 0
 	var mm = pc.get_node("MovementManager")
@@ -527,6 +628,192 @@ func _get_rect() -> Rect2: #the cart's box on flat ground
 	return Rect2(global_position, CART_SIZE)
 
 
+### RIDING ###
+
+func can_be_ridden() -> bool:
+	return rideable && rider == null && !is_ride_blocked()
+
+
+#a box (or any prop) or an enemy on top of the cart, even partly: getting in under it would put it on the
+#rider's head (and the cart's crush/squish checks would kill them)
+func is_ride_blocked() -> bool:
+	for body in $CarryDetector.get_overlapping_bodies():
+		if body == self: continue
+		if body is RigidBody2D && !body.is_in_group("NoPropCollision"):
+			return true
+		if body.is_in_group("Enemies") && !body.get("dead"):
+			return true
+	return false
+
+
+func set_rider(new_rider: Node):
+	if new_rider:
+		rider = new_rider
+		_former_rider = null
+		rider.add_collision_exception_with(self)
+		collision_layer = _base_layer & ~ARMOR_LAYER
+	else:
+		_former_rider = rider
+		rider = null
+		collision_layer = _base_layer
+		_top_shove_dirs.clear() #hops already under way finish on their own
+
+
+#a ridden cart shoves props in front of it along at its own speed. Their static friction (breakaway_speed)
+#would otherwise stop a cart driven at walking pace, which is what keeps a cart pushed on foot from moving
+#boxes. Anything they're pressed against (a wall, a heavier stack) still stops both. Enemies are pushed by
+#the normal collision, like with any cart.
+func _update_ride_push():
+	if !rider || !is_grounded || abs(linear_velocity.x) < 1.0: return
+	var dir := signf(linear_velocity.x)
+	var rect := _get_rect()
+	var strip := RectangleShape2D.new()
+	strip.size = Vector2(2.0, CART_SIZE.y - 6.0)
+	var query := PhysicsShapeQueryParameters2D.new()
+	query.shape = strip
+	var edge_x: float = rect.end.x if dir > 0.0 else rect.position.x
+	query.transform = Transform2D(0.0, Vector2(edge_x + dir, rect.get_center().y))
+	query.collision_mask = 8 #props are on the world layer
+	query.exclude = [get_rid()]
+	for hit in get_world_2d().direct_space_state.intersect_shape(query, 8):
+		var body = hit.collider
+		if !(body is PhysicsProp) || body.is_in_group("Minecarts") || body.is_in_group("NoPropCollision") || body.freeze:
+			continue
+		body._at_rest = false #skip its static friction this step
+		if body.linear_velocity.x * dir < abs(linear_velocity.x):
+			body.linear_velocity.x = linear_velocity.x
+
+
+#nothing stays on top of a ridden cart (the rider's head is there): props on top (CarryDetector) are pushed
+#off the nearer side, away from the rider (dead centre: off the back), trying the other side if that one is
+#blocked. CartBumpable enemies are bumped off with a hop instead (_start_hop).
+func _update_top_shove(delta: float):
+	if !rider: return
+	var still_on := {}
+	for body in $CarryDetector.get_overlapping_bodies():
+		if body == self: continue
+		if body is CharacterBody2D && body.is_in_group("CartBumpable"):
+			if !body.get("dead") && !_hops.has(body) && _is_standing_on_me(body):
+				_start_hop(body)
+			continue
+		if !(body is PhysicsProp) || body.is_in_group("Minecarts") || body.is_in_group("NoPropCollision") || body.freeze:
+			continue
+		var dir: int = _top_shove_dirs.get(body, 0)
+		if dir == 0: dir = _off_side(body)
+		var step := Vector2(dir * top_shove_speed * delta, 0.0)
+		if body.test_move(body.global_transform, step): #that way is blocked
+			if body.test_move(body.global_transform, -step): continue
+			dir = -dir
+		still_on[body] = dir
+		body._at_rest = false #skip its static friction
+		body.linear_velocity.x = linear_velocity.x + dir * top_shove_speed
+	_top_shove_dirs = still_on
+
+
+#landed on this cart, not just passing through the strip above it mid-jump (a frog jumping up beside the
+#cart crosses it): bumping it then would carry it sideways in mid-air and its jump would bring it right back
+func _is_standing_on_me(enemy: CharacterBody2D) -> bool:
+	if !enemy.is_on_floor(): return false
+	for i in enemy.get_slide_collision_count():
+		var col := enemy.get_slide_collision(i)
+		if col.get_collider() == self && col.get_normal().y < -0.7:
+			return true
+	return false
+
+
+#the side to push something off: away from the rider (the cart's middle), dead centre goes off the back
+func _off_side(body) -> int:
+	var dx: float = _get_body_center(body).x - (global_position.x + CART_SIZE.x / 2.0)
+	if abs(dx) >= 1.0: return int(signf(dx))
+	if abs(linear_velocity.x) > 1.0: return -int(signf(linear_velocity.x))
+	return 1
+
+
+#bump an enemy off the top: the cart takes over its movement for hop_time (its AI is paused through the
+#`disabled` flag every enemy has, so it doesn't walk back in and jitter), moving it along a small arc just
+#far enough sideways that its near side clears the cart's edge, whatever its size. Then its AI and gravity
+#take over again. If neither side has room it's squished, like being pinned by the cart.
+#The enemy ignores this cart for the hop: one landing on a cart that's driving into it is already slightly
+#inside it, so the cart itself would otherwise count as blocking both sides (and squish it).
+func _start_hop(enemy: CharacterBody2D):
+	enemy.add_collision_exception_with(self)
+	var dir := _off_side(enemy)
+	var dist := _hop_distance(enemy, dir)
+	var probe := Vector2(dir * min(dist, 4.0), -1.0)
+	if enemy.test_move(enemy.global_transform, probe):
+		dir = -dir
+		dist = _hop_distance(enemy, dir)
+		if enemy.test_move(enemy.global_transform, Vector2(dir * min(dist, 4.0), -1.0)):
+			enemy.remove_collision_exception_with(self)
+			if squish_enemies: enemy.hit(999, Vector2.ZERO, $CrushDetector)
+			return
+	var paused: bool = !enemy.disabled
+	enemy.disabled = true
+	enemy.velocity = Vector2.ZERO
+	_hops[enemy] = {"dir": dir, "dist": dist, "t": 0.0, "offset": Vector2.ZERO, "paused": paused}
+
+
+#how far the enemy has to move sideways for its near edge to clear the cart's edge
+func _hop_distance(enemy: Node2D, dir: int) -> float:
+	var rect := _get_body_rect(enemy)
+	var cart := _get_rect()
+	var dist: float = (cart.end.x + hop_margin - rect.position.x) if dir > 0 else (rect.end.x - (cart.position.x - hop_margin))
+	return max(dist, 0.0)
+
+
+func _get_body_rect(body: Node2D) -> Rect2:
+	for child in body.get_children():
+		if child is CollisionShape2D && !child.disabled && child.shape:
+			var r: Rect2 = child.shape.get_rect()
+			return Rect2(child.global_position + r.position, r.size)
+	return Rect2(body.global_position - Vector2(4, 8), Vector2(8, 8))
+
+
+func _update_hops(delta: float):
+	for enemy in _hops.keys():
+		var hop: Dictionary = _hops[enemy]
+		if !is_instance_valid(enemy) || enemy.get("dead"):
+			_hops.erase(enemy)
+			continue
+		hop.t = min(hop.t + delta, hop_time)
+		var p: float = hop.t / hop_time
+		var offset := Vector2(hop.dir * hop.dist * p, -hop_height * 4.0 * p * (1.0 - p)) #parabola, back to 0 at the end
+		#relative to the cart: it keeps moving (it steps after this, like the rider's seat), so a fast cart
+		#doesn't drive back into an enemy hopped off its front
+		var collision = enemy.move_and_collide(offset - hop.offset + linear_velocity * delta)
+		hop.offset = offset
+		var blocked_sideways: bool = collision && abs(collision.get_normal().x) > 0.7
+		if hop.t >= hop_time || blocked_sideways:
+			_end_hop(enemy)
+
+
+func _end_hop(enemy):
+	var hop: Dictionary = _hops[enemy]
+	_hops.erase(enemy)
+	if !is_instance_valid(enemy): return
+	enemy.remove_collision_exception_with(self)
+	if hop.paused && !enemy.get("dead"):
+		enemy.disabled = false
+	enemy.velocity = Vector2.ZERO
+
+
+#the player leaves the cart from inside it, so the collision exception stays until they've cleared it.
+#A dead player keeps it (the death state ignores all carts).
+func _update_former_rider():
+	if !_former_rider: return
+	if !is_instance_valid(_former_rider):
+		_former_rider = null
+		return
+	if _former_rider.get("dead"):
+		_former_rider = null
+		return
+	var feet: Vector2 = _former_rider.global_position
+	var body := Rect2(feet.x - 6.0, feet.y - 15.0, 12.0, 15.0)
+	if !body.intersects(_get_rect().grow(1.0)):
+		_former_rider.remove_collision_exception_with(self)
+		_former_rider = null
+
+
 ### SHOTS ###
 
 var pushed_by := {} #"shot<id>"/"blast<id>" of bullets/grenade blasts that already pushed this cart
@@ -537,6 +824,7 @@ var pushed_by := {} #"shot<id>"/"blast<id>" of bullets/grenade blasts that alrea
 #hit_normal: the cart face's normal from the shot's own collision, when it has one (grenades).
 func bullet_push(bullet, hit_normal := Vector2.ZERO):
 	if !is_instance_valid(bullet) || !("knockback_strength" in bullet): return
+	if _is_riders_shot(bullet): return
 	if !_first_push_from(bullet): return
 
 	var dir := 0.0
@@ -564,6 +852,7 @@ var explosion_min_falloff := 0.25 #push at the edge of the blast, as a fraction 
 #grenade blast: pushes away from the explosion, harder the closer the cart is. Called by GLauncher.
 func explosion_push(grenade):
 	if !is_instance_valid(grenade) || !("knockback_strength" in grenade): return
+	if _is_riders_shot(grenade): return
 	if !_first_push_from(grenade, "blast"): return
 
 	var center: Vector2 = grenade.global_position
@@ -581,6 +870,11 @@ func explosion_push(grenade):
 
 
 #each bullet pushes once (grenades bounce and touch it again and again), each blast once
+#the rider's own shots never push the cart they're riding
+func _is_riders_shot(bullet) -> bool:
+	return rider != null && !bullet.get("is_enemy_bullet")
+
+
 func _first_push_from(source, kind := "shot") -> bool:
 	var key := "%s%d" % [kind, source.get_instance_id()]
 	if pushed_by.has(key): return false
@@ -621,6 +915,7 @@ func _update_crush():
 
 func crush(type, target):
 	if !is_instance_valid(target) || ignore_if_dead_player(target): return
+	if spares(target): return
 	match type:
 		"player":
 			if crush_players:
@@ -629,6 +924,15 @@ func crush(type, target):
 		"enemy":
 			if crush_enemies:
 				target.hit(999, Vector2.ZERO, $CrushDetector)
+
+
+#a cart never squishes or crushes its own rider (or one still climbing out), nor a player riding any other
+#cart or who just left one (player Minecart state is_cart_immune()). Also used by the spikes
+func spares(target) -> bool:
+	if target == rider || target == _former_rider: return true
+	if !is_instance_valid(target) || !target.is_in_group("Players"): return false
+	var state = target.get_node_or_null("MovementManager/States/Minecart")
+	return state != null && state.is_cart_immune()
 
 
 func _get_crush_target(body):

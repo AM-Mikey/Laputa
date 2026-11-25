@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://bsxyq8yakja3i" path="res://src/Prop/Minecart.gd" id="1_mbetw"]
 [ext_resource type="PackedScene" uid="uid://7hbenrfv6p3q" path="res://src/Utility/PhysicsLayerBody.tscn" id="2_oe0fm"]
 [ext_resource type="Texture2D" uid="uid://blbu65gssk7ey" path="res://assets/Prop/Minecart.png" id="3_oe0fm"]
+[ext_resource type="Texture2D" uid="uid://cmy5r6xs5dso2" path="res://assets/Prop/MinecartCargo.png" id="3_oqp4a"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_cart"]
 friction = 0.0
@@ -35,6 +36,18 @@ tracks/0/keys = {
 "update": 1,
 "values": [0, 1]
 }
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("CargoSprite:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
 
 [sub_resource type="Animation" id="Animation_mbetw"]
 length = 0.001
@@ -45,6 +58,18 @@ tracks/0/path = NodePath("Sprite2D:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("CargoSprite:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
@@ -67,6 +92,18 @@ tracks/0/keys = {
 "update": 1,
 "values": [4, 5]
 }
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("CargoSprite:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [2]
+}
 
 [sub_resource type="Animation" id="Animation_a2nk4"]
 resource_name = "Slope"
@@ -84,6 +121,18 @@ tracks/0/keys = {
 "update": 1,
 "values": [2, 3]
 }
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("CargoSprite:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [1]
+}
 
 [sub_resource type="Animation" id="Animation_5ly1f"]
 resource_name = "SteepSlope"
@@ -100,6 +149,18 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1, 1),
 "update": 1,
 "values": [6, 7]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("CargoSprite:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [3]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_oqp4a"]
@@ -131,12 +192,20 @@ shape = SubResource("1")
 position = Vector2(8, 8)
 shape = SubResource("1")
 
+[node name="CargoSprite" type="Sprite2D" parent="." unique_id=92043487]
+z_index = 1
+position = Vector2(-8, -8)
+texture = ExtResource("3_oqp4a")
+centered = false
+vframes = 4
+
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=130698616]
+z_index = 1
 position = Vector2(-8, -8)
 texture = ExtResource("3_oe0fm")
 centered = false
 hframes = 2
-vframes = 8
+vframes = 11
 
 [node name="CrushDetector" type="Area2D" parent="." unique_id=41672407]
 collision_layer = 0

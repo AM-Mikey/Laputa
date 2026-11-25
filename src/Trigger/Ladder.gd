@@ -15,12 +15,12 @@ func setup():
 
 func _physics_process(_delta):
 	for b in bodies_allow_down: #Allow down input
-		if inp.can_act && !b.mm.current_state in [b.mm.states["ladder"],b.mm.states["fly"]]:
+		if inp.can_act && !b.mm.current_state in [b.mm.states["ladder"],b.mm.states["fly"],b.mm.states["minecart"]]:
 			if inp.pressed("look_down"):
 				b.mm.change_state("ladder")
 				b.position.x = position.x + 8
 	for b in active_bodies: #Allow up and down input
-		if inp.can_act && !b.mm.current_state in [b.mm.states["ladder"],b.mm.states["fly"]]:
+		if inp.can_act && !b.mm.current_state in [b.mm.states["ladder"],b.mm.states["fly"],b.mm.states["minecart"]]:
 			var is_on_solid_floor = true if b.is_on_floor() && !b.is_on_ssp else false
 			if inp.pressed("look_up") || (inp.pressed("look_down") && !is_on_solid_floor):
 				b.mm.change_state("ladder")

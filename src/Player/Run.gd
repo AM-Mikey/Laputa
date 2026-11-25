@@ -73,6 +73,13 @@ func state_process(delta):
 		if closest_thing != null:
 			print("Interacting with ", closest_thing, " at a distance ", closest_thing_distance)
 			closest_thing.player_interact(pc)
+		else: #nothing else to interact with: get into a rideable minecart we're standing on
+			var cart := get_rideable_cart_below()
+			if cart && cart.is_ride_blocked(): #a box or enemy on top
+				am.play("ui_deny")
+			elif cart:
+				mm.get_node("States/Minecart").ride(cart)
+				return
 
 ##Processes jumps and platform drops
 func jump_processing():
@@ -919,6 +926,22 @@ func is_pushing_minecart(dir: int) -> bool:
 		if cart.push_dir == dir:
 			return true
 	return false
+
+#a rideable minecart nobody is riding that the player is standing on top of (any part of the feet). It may
+#still be blocked by something on top of it, see Minecart.gd is_ride_blocked()
+func get_rideable_cart_below() -> Node:
+	if !pc.is_on_floor(): return null
+	var space: PhysicsDirectSpaceState2D = pc.get_world_2d().direct_space_state
+	for x in [-5.0, 0.0, 5.0]:
+		var from: Vector2 = pc.global_position + Vector2(x, -1.0)
+		var query := PhysicsRayQueryParameters2D.create(from, from + Vector2(0.0, 3.0), 8)
+		var hit := space.intersect_ray(query)
+		if hit.is_empty(): continue
+		var cart = hit.collider
+		if cart.is_in_group("Minecarts") && cart.get("rideable") && cart.get("rider") == null:
+			return cart
+	return null
+
 
 #the cart against the player's wall rays, or the one the player is pushing this way
 func get_pushed_minecart(dir: int, bottom_ray: String, top_ray: String) -> Node:

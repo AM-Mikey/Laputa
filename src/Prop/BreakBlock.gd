@@ -12,7 +12,7 @@ var is_grounded = true
 @export var crush_players = false
 @export var crush_enemies = true
 @export var squish_enemies = true #enemies this block is pushed into a wall/ceiling
-@export var squish_players = true #same for the player (even when crush_players is off)
+@export var squish_players = false #same for the player (even when crush_players is off)
 var crush_min_fall_speed := 40.0 #slower than this (sliding, nudged on a cart) doesn't crush
 
 

@@ -19,6 +19,7 @@ var touched_floor = false
 
 func setup():
 	break_method = "burn"
+	if ignored_cart: $WorldCast.add_exception(ignored_cart)
 	$ExplosionDetector.scale = Vector2.ZERO
 	$ExplosionDetector/CollisionShape2D.set_deferred("disabled", true)
 	velocity = get_initial_velocity(speed, direction)
@@ -126,6 +127,7 @@ func deflect(vel: Vector2):
 ### SIGNALS ###
 
 func _on_CollisionDetector_body_entered(body):
+	if is_riders_cart(body): return
 	if body is not TileMapLayer:
 		if body.has_method("bullet_push"): return #minecarts are pushed from the bounce, which knows the face hit
 		if body.get_collision_layer_value(6): #armor
@@ -189,7 +191,9 @@ func push_minecarts():
 #like is_world_blocking(), but ignores the target itself (a minecart is solid world+armor, so the
 #ray would always stop on its own surface)
 func is_blast_blocked(target) -> bool:
-	var query := PhysicsRayQueryParameters2D.create(global_position, target.get_center(), 8, [target.get_rid()])
+	var exclude := [target.get_rid()]
+	if is_riders_cart(ignored_cart): exclude.append(ignored_cart.get_rid())
+	var query := PhysicsRayQueryParameters2D.create(global_position, target.get_center(), 8, exclude)
 	return !get_world_2d().direct_space_state.intersect_ray(query).is_empty()
 
 

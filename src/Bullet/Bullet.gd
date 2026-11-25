@@ -32,6 +32,7 @@ var already_fizzle := false
 var prev_global_position = null
 
 var break_method = "cut"
+var ignored_cart: Node = null #the minecart the player was riding when this shot was fired, see is_riders_cart()
 @export var is_water_affected := false
 @export var is_wind_affected := false
 @export var is_enemy_bullet := false
@@ -55,6 +56,9 @@ const level_exit_safe_distance: float = 512.0
 
 
 func _ready():
+	ignored_cart = _get_riders_cart()
+	if ignored_cart:
+		add_collision_exception_with(ignored_cart)
 	setup_timeout()
 	if f.pc():
 		if camera_recoil_distance > 0.0:
@@ -102,6 +106,18 @@ func level_exit_check():
 		print("freed bullet via level bounds")
 		queue_free()
 
+#player shots fired from a minecart ignore that cart (it's solid world, they start inside it)
+func _get_riders_cart() -> Node:
+	if is_enemy_bullet || !f.pc(): return null
+	var pc = f.pc()
+	var riding = pc.get_node_or_null("MovementManager/States/Minecart")
+	if riding && pc.mm.current_state == riding && is_instance_valid(riding.cart):
+		return riding.cart
+	return null
+
+func is_riders_cart(body) -> bool:
+	return ignored_cart != null && is_instance_valid(ignored_cart) && body == ignored_cart
+
 func on_break(_method):
 	print("destroyed bullet: " + name)
 	do_fizzle("bullet")
@@ -130,6 +146,7 @@ func do_fizzle(type: String):
 		var query = PhysicsRayQueryParameters2D.create(gun_center, fizzle.position)
 		query.collision_mask = 1<<3 | 1<<5 | 1<<8
 		query.hit_from_inside = true
+		if is_riders_cart(ignored_cart): query.exclude = [ignored_cart.get_rid()]
 		var result = space_state.intersect_ray(query)
 		if result:
 			fizzle.position = result.position
@@ -253,6 +270,7 @@ func deflect(vel: Vector2):
 ### SIGNALS ###
 
 func _on_CollisionDetector_body_entered(body):
+	if is_riders_cart(body): return
 	if body is TileMapLayer:
 		if body.tile_set.get_physics_layer_collision_layer(0) == 8: #world (layer value)
 			if f.pc(): #and camera gun recoil is true

@@ -64,6 +64,7 @@ func get_initial_velocity() -> Vector2:
 ### SIGNALS ###
 
 func _on_CollisionDetector_body_entered(body): #shadows
+	if is_riders_cart(body): return
 	if not body is TileMapLayer:
 		#armor
 		if body.get_collision_layer_value(6):

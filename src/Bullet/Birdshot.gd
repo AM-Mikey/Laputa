@@ -78,7 +78,7 @@ func get_direction_from_spread_degrees() -> Vector2:
 ### SIGNALS ###
 
 func _on_CollisionDetector_body_entered(body):
-	if cool: return
+	if cool || is_riders_cart(body): return
 	if !body is TileMapLayer:
 		if body.get_collision_layer_value(9): #breakable
 			on_break(break_method)

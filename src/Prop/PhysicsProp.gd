@@ -164,6 +164,7 @@ func squish_pinned(area: Area2D, source: Node2D, squish_enemies := true, squish_
 			mover = body
 		if !(mover is CharacterBody2D) || !mover.has_method("hit"): continue
 		if ignore_if_dead_player(mover): continue
+		if spares(mover): continue
 		if !mover.get_collision_mask_value(4): continue #passes through world, can't be pinned
 		#test along the main axis only, so a short body beside the prop doesn't "hit" the floor
 		var away: Vector2 = _get_body_center(mover) - middle
@@ -173,6 +174,10 @@ func squish_pinned(area: Area2D, source: Node2D, squish_enemies := true, squish_
 			if mover.is_in_group("Players"):
 				mover.invincible = false
 			mover.hit(999, Vector2.ZERO, source)
+
+#bodies this prop never squishes or crushes (overridden by Minecart for riders)
+func spares(_target) -> bool:
+	return false
 
 #a player that's already dead is left alone, and stops colliding with this prop so the death
 #bounce doesn't get stuck inside it and crushed over and over. Players don't revive (a new one spawns).

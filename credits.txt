@@ -1,23 +1,28 @@
 
 LukaLop: Creator, Designer, Programmer, Artist, Writer, Etc.
 
-Developers: SanpoNeko, Soru, Neropatti, CrystalWarrior
-Programming Assistance: Parzivail, Daedily, Rainy
+Developers: SanpoNeko, Daedily, Neropatti
+Programming Assistance: Parzivail, Soru, CrystalWarrior
 Systems Documentation: Daedily
+Card Game Development: Rainy, Luka
 
 Lead Composer: FiveNineSquared
 Additional Tracks: Curelapse, PhiDelta
 
-Level Design: Luka, Daedily
-UI Design Assistance, Pixel Art Assistance: Toastie
+Level Design: Daedily, Luka
+Sequencing: Luka, Daedily
+Spritework Assistance: Yobonnie, Aikyuu
+UI Design Assistance: Toastie
 UI Programming Assistance: Trio
+
 Additional Backgrounds: Katt
-Additional Concept Art, Additional Character Design: Daedily
-Bat Sprites, Shrimp Design: Yobonnie
+Additional Concept Art: Daedily, Yobonnie
+Additional Character Design: Daedily
 Additional Effect Sprites: Dancing Jackal
 
+TBD: Husna, Asperdev
 
-Special Thanks: Zoe B. Yobonnie, Ashford G.
+Special Thanks: Zoe B., Ashford G.
 
 Also Thanks To: Godot and Godot Discord
 

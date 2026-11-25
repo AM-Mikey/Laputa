@@ -168,17 +168,17 @@ func hit(damage, knockback_direction, _hitbox):
 					$GunManager.level_down(false)
 				emit_signal("guns_updated", guns.get_children(), "take_damage")
 
-		if knockback_direction != Vector2.ZERO && !dead:
+		if knockback_direction != Vector2.ZERO && !dead && mm.current_state != mm.states["minecart"]: #no knockback while riding
 			#print("Knockback in Dir: " + str(knockback_direction))
 			mm.knockback_direction = knockback_direction
 			mm.change_state("knockback")
 
 
-func do_iframes():
+func do_iframes(time := iframe_time):
 	if dead: return
 	invincible = true
 	$EffectPlayer.play("FlashIframe")
-	iframe_timer.start(iframe_time)
+	iframe_timer.start(max(time, iframe_timer.time_left)) #never cuts short iframes already running
 
 
 func hit_again(): #TODO: prioritize this for all forms of damage, not just enemies

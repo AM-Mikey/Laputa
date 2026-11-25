@@ -136,7 +136,7 @@ _data = {
 &"Stake": SubResource("Animation_57rfx")
 }
 
-[node name="Stalagtite" type="CharacterBody2D" unique_id=1485357399 groups=["Actors", "Enemies", "Entities"]]
+[node name="Stalagtite" type="CharacterBody2D" unique_id=1485357399 groups=["Actors", "CartBumpable", "Enemies", "Entities"]]
 collision_layer = 2
 collision_mask = 520
 script = ExtResource("3")

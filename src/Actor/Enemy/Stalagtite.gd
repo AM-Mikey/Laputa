@@ -61,7 +61,10 @@ func link():
 
 func _on_physics_process(_delta):
 	if state == "stake":
-		velocity = Vector2.ZERO
+		#a landed stake keeps falling under gravity, so it drops when what it stands on moves away, and
+		#move_and_slide carries it along with a moving floor (minecarts, moving platforms)
+		velocity.x = 0.0
+		velocity.y += gravity * _delta
 	else:
 		velocity = calc_velocity(move_dir)
 	velocity.y = min(velocity.y, terminal_drop_velocity)
@@ -179,8 +182,8 @@ func enter_stake(_last_state):
 	$AnimationPlayer.play("Stake")
 	am.play("enemy_stomp", self, null, 0.8, 0.1)
 	stake_shake()
-	await get_tree().process_frame
-	$CollisionShape2D.set_deferred("disabled", true) #so it doesn't see itself
+	#the body keeps its own shape so it can stand on things; it just ignores its own platform
+	add_collision_exception_with($Standable)
 	$Standable/CollisionShape2D.set_deferred("disabled", false)
 
 ### HELPERS ###
