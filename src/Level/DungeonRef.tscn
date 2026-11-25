@@ -66,6 +66,8 @@ layer_height_offsets = {
 }
 tile_mode = 1
 
+[node name="Notes" type="Node2D" parent="." unique_id=577013388]
+
 [node name="TileMap" type="Node2D" parent="." unique_id=1251495005]
 z_index = 1
 
@@ -150,6 +152,7 @@ properties = {
 size_is_default = false
 
 [node name="SaveDisk" type="Area2D" parent="Spawns" unique_id=1562926156 groups=["Entities", "PropSpawns"] instance=ExtResource("7_abxvk")]
+physics_interpolation_mode = 2
 z_index = 999
 position = Vector2(2192, 1744)
 collision_layer = 16384
@@ -163,6 +166,7 @@ properties = {
 }
 
 [node name="HealthRefill" type="Area2D" parent="Spawns" unique_id=218588910 groups=["Entities", "PropSpawns"] instance=ExtResource("7_abxvk")]
+physics_interpolation_mode = 2
 z_index = 999
 position = Vector2(2208, 1744)
 collision_layer = 16384
@@ -230,6 +234,7 @@ properties = {
 size_is_default = false
 
 [node name="HealthUpgrade" type="Area2D" parent="Spawns" unique_id=1015636707 groups=["Entities", "PropSpawns"] instance=ExtResource("7_abxvk")]
+physics_interpolation_mode = 2
 z_index = 999
 position = Vector2(2336, 2688)
 collision_layer = 16384
@@ -243,6 +248,7 @@ properties = {
 }
 
 [node name="Gote" type="Area2D" parent="Spawns" unique_id=1335798479 groups=["ActorSpawns", "Entities"] instance=ExtResource("10_o3w1u")]
+physics_interpolation_mode = 2
 z_index = 999
 position = Vector2(2792, 2704)
 collision_layer = 16384
@@ -353,6 +359,7 @@ properties = {
 size_is_default = false
 
 [node name="Golem" type="Area2D" parent="Spawns" unique_id=328137538 groups=["ActorSpawns", "Entities"] instance=ExtResource("10_o3w1u")]
+physics_interpolation_mode = 2
 z_index = 999
 position = Vector2(1904, 3376)
 collision_layer = 16384
@@ -373,14 +380,16 @@ properties = {
 }
 
 [node name="VUVector" type="Area2D" parent="Spawns/Golem" unique_id=531398290 groups=["Entities", "VUVectors", "VisualUtilities"] instance=ExtResource("8_lqyxl")]
+physics_interpolation_mode = 2
 collision_layer = 16384
 collision_mask = 0
 script = ExtResource("14_vph1e")
 tag_name = "move_dir"
-direction = Vector2(-1, 8.742278e-08)
+direction = Vector2(-1, -8.742278e-08)
 snap_degrees = 180.0
 
 [node name="Frog" type="Area2D" parent="Spawns" unique_id=1886526963 groups=["ActorSpawns", "Entities"] instance=ExtResource("10_o3w1u")]
+physics_interpolation_mode = 2
 z_index = 999
 position = Vector2(2216, 2080)
 collision_layer = 16384
@@ -402,6 +411,7 @@ properties = {
 }
 
 [node name="LookVector" type="Area2D" parent="Spawns/Frog" unique_id=1498654701 groups=["Entities", "VUVectors", "VisualUtilities"] instance=ExtResource("8_lqyxl")]
+physics_interpolation_mode = 2
 position = Vector2(0, -7)
 collision_layer = 16384
 collision_mask = 0
@@ -411,6 +421,7 @@ snap_degrees = 180.0
 movement_locked = true
 
 [node name="TongueRange" type="Area2D" parent="Spawns/Frog" unique_id=165186376 groups=["Entities", "VisualUtilities", "WaypointLocals", "Waypoints"] instance=ExtResource("9_w24ri")]
+physics_interpolation_mode = 2
 position = Vector2(-32, -8)
 collision_layer = 16384
 collision_mask = 0
@@ -419,6 +430,7 @@ tag_name = "tongue_range"
 lock_y = true
 
 [node name="BeetleCrawler" type="Area2D" parent="Spawns" unique_id=130535140 groups=["ActorSpawns", "Entities"] instance=ExtResource("10_o3w1u")]
+physics_interpolation_mode = 2
 z_index = 999
 position = Vector2(2192, 1912)
 collision_layer = 16384
@@ -437,6 +449,7 @@ properties = {
 }
 
 [node name="FlyVector" type="Area2D" parent="Spawns/BeetleCrawler" unique_id=201055290 groups=["Entities", "VUVectors", "VisualUtilities"] instance=ExtResource("8_lqyxl")]
+physics_interpolation_mode = 2
 position = Vector2(0, -8)
 collision_layer = 16384
 collision_mask = 0
@@ -445,6 +458,7 @@ tag_name = "fly"
 movement_locked = true
 
 [node name="CrawlVector" type="Area2D" parent="Spawns/BeetleCrawler" unique_id=2126548652 groups=["Entities", "VUVectors", "VisualUtilities"] instance=ExtResource("8_lqyxl")]
+physics_interpolation_mode = 2
 position = Vector2(0, -8)
 collision_layer = 16384
 collision_mask = 0
@@ -457,6 +471,7 @@ movement_locked = true
 color = Color(8.061901e-07, 0.41569918, 0.11087646, 1)
 
 [node name="BeetleCrawler1" type="Area2D" parent="Spawns" unique_id=456514310 groups=["ActorSpawns", "Entities"] instance=ExtResource("10_o3w1u")]
+physics_interpolation_mode = 2
 z_index = 999
 position = Vector2(2288, 2384)
 collision_layer = 16384
@@ -475,6 +490,7 @@ properties = {
 }
 
 [node name="FlyVector" type="Area2D" parent="Spawns/BeetleCrawler1" unique_id=1684342166 groups=["Entities", "VUVectors", "VisualUtilities"] instance=ExtResource("8_lqyxl")]
+physics_interpolation_mode = 2
 position = Vector2(0, -8)
 collision_layer = 16384
 collision_mask = 0
@@ -484,18 +500,20 @@ direction = Vector2(-4.371139e-08, -1)
 movement_locked = true
 
 [node name="CrawlVector" type="Area2D" parent="Spawns/BeetleCrawler1" unique_id=1143573731 groups=["Entities", "VUVectors", "VisualUtilities"] instance=ExtResource("8_lqyxl")]
+physics_interpolation_mode = 2
 position = Vector2(0, -8)
 collision_layer = 16384
 collision_mask = 0
 script = ExtResource("14_vph1e")
 arrow_length = 24.0
 tag_name = "crawl"
-direction = Vector2(-1, -8.742278e-08)
+direction = Vector2(-1, 8.742278e-08)
 snap_degrees = 90.0
 movement_locked = true
 color = Color(8.061901e-07, 0.41569918, 0.11087646, 1)
 
 [node name="BeetleCrawler2" type="Area2D" parent="Spawns" unique_id=873096366 groups=["ActorSpawns", "Entities"] instance=ExtResource("10_o3w1u")]
+physics_interpolation_mode = 2
 z_index = 999
 position = Vector2(2400, 2360)
 collision_layer = 16384
@@ -514,15 +532,17 @@ properties = {
 }
 
 [node name="FlyVector" type="Area2D" parent="Spawns/BeetleCrawler2" unique_id=162545633 groups=["Entities", "VUVectors", "VisualUtilities"] instance=ExtResource("8_lqyxl")]
+physics_interpolation_mode = 2
 position = Vector2(0, -8)
 collision_layer = 16384
 collision_mask = 0
 script = ExtResource("14_vph1e")
 tag_name = "fly"
-direction = Vector2(-1, -8.742278e-08)
+direction = Vector2(-1, 8.742278e-08)
 movement_locked = true
 
 [node name="CrawlVector" type="Area2D" parent="Spawns/BeetleCrawler2" unique_id=1995528283 groups=["Entities", "VUVectors", "VisualUtilities"] instance=ExtResource("8_lqyxl")]
+physics_interpolation_mode = 2
 position = Vector2(0, -8)
 collision_layer = 16384
 collision_mask = 0
@@ -535,6 +555,7 @@ movement_locked = true
 color = Color(8.061901e-07, 0.41569918, 0.11087646, 1)
 
 [node name="BeetleCrawler3" type="Area2D" parent="Spawns" unique_id=684648525 groups=["ActorSpawns", "Entities"] instance=ExtResource("10_o3w1u")]
+physics_interpolation_mode = 2
 z_index = 999
 position = Vector2(1856, 2168)
 collision_layer = 16384
@@ -553,15 +574,17 @@ properties = {
 }
 
 [node name="FlyVector" type="Area2D" parent="Spawns/BeetleCrawler3" unique_id=719715047 groups=["Entities", "VUVectors", "VisualUtilities"] instance=ExtResource("8_lqyxl")]
+physics_interpolation_mode = 2
 position = Vector2(0, -8)
 collision_layer = 16384
 collision_mask = 0
 script = ExtResource("14_vph1e")
 tag_name = "fly"
-direction = Vector2(-1, 8.742278e-08)
+direction = Vector2(-1, -8.742278e-08)
 movement_locked = true
 
 [node name="CrawlVector" type="Area2D" parent="Spawns/BeetleCrawler3" unique_id=2023127291 groups=["Entities", "VUVectors", "VisualUtilities"] instance=ExtResource("8_lqyxl")]
+physics_interpolation_mode = 2
 position = Vector2(0, -8)
 collision_layer = 16384
 collision_mask = 0
@@ -574,6 +597,7 @@ movement_locked = true
 color = Color(8.061901e-07, 0.41569918, 0.11087646, 1)
 
 [node name="Frog1" type="Area2D" parent="Spawns" unique_id=2000474225 groups=["ActorSpawns", "Entities"] instance=ExtResource("10_o3w1u")]
+physics_interpolation_mode = 2
 z_index = 999
 position = Vector2(2344, 2512)
 collision_layer = 16384
@@ -595,16 +619,18 @@ properties = {
 }
 
 [node name="LookVector" type="Area2D" parent="Spawns/Frog1" unique_id=1015213816 groups=["Entities", "VUVectors", "VisualUtilities"] instance=ExtResource("8_lqyxl")]
+physics_interpolation_mode = 2
 position = Vector2(0, -7)
 collision_layer = 16384
 collision_mask = 0
 script = ExtResource("14_vph1e")
 tag_name = "look"
-direction = Vector2(-1, 8.742278e-08)
+direction = Vector2(-1, -8.742278e-08)
 snap_degrees = 180.0
 movement_locked = true
 
 [node name="TongueRange" type="Area2D" parent="Spawns/Frog1" unique_id=56483633 groups=["Entities", "VisualUtilities", "WaypointLocals", "Waypoints"] instance=ExtResource("9_w24ri")]
+physics_interpolation_mode = 2
 position = Vector2(-32, -8)
 collision_layer = 16384
 collision_mask = 0
@@ -613,6 +639,7 @@ tag_name = "tongue_range"
 lock_y = true
 
 [node name="Frog2" type="Area2D" parent="Spawns" unique_id=1540785016 groups=["ActorSpawns", "Entities"] instance=ExtResource("10_o3w1u")]
+physics_interpolation_mode = 2
 z_index = 999
 position = Vector2(2600, 2256)
 collision_layer = 16384
@@ -634,16 +661,18 @@ properties = {
 }
 
 [node name="LookVector" type="Area2D" parent="Spawns/Frog2" unique_id=149957841 groups=["Entities", "VUVectors", "VisualUtilities"] instance=ExtResource("8_lqyxl")]
+physics_interpolation_mode = 2
 position = Vector2(0, -7)
 collision_layer = 16384
 collision_mask = 0
 script = ExtResource("14_vph1e")
 tag_name = "look"
-direction = Vector2(-1, 8.742278e-08)
+direction = Vector2(-1, -8.742278e-08)
 snap_degrees = 180.0
 movement_locked = true
 
 [node name="TongueRange" type="Area2D" parent="Spawns/Frog2" unique_id=524626672 groups=["Entities", "VisualUtilities", "WaypointLocals", "Waypoints"] instance=ExtResource("9_w24ri")]
+physics_interpolation_mode = 2
 position = Vector2(-32, -8)
 collision_layer = 16384
 collision_mask = 0
@@ -652,6 +681,7 @@ tag_name = "tongue_range"
 lock_y = true
 
 [node name="Frog3" type="Area2D" parent="Spawns" unique_id=1100261591 groups=["ActorSpawns", "Entities"] instance=ExtResource("10_o3w1u")]
+physics_interpolation_mode = 2
 z_index = 999
 position = Vector2(2248, 2944)
 collision_layer = 16384
@@ -673,6 +703,7 @@ properties = {
 }
 
 [node name="LookVector" type="Area2D" parent="Spawns/Frog3" unique_id=1930273704 groups=["Entities", "VUVectors", "VisualUtilities"] instance=ExtResource("8_lqyxl")]
+physics_interpolation_mode = 2
 position = Vector2(0, -7)
 collision_layer = 16384
 collision_mask = 0
@@ -682,6 +713,7 @@ snap_degrees = 180.0
 movement_locked = true
 
 [node name="TongueRange" type="Area2D" parent="Spawns/Frog3" unique_id=595968573 groups=["Entities", "VisualUtilities", "WaypointLocals", "Waypoints"] instance=ExtResource("9_w24ri")]
+physics_interpolation_mode = 2
 position = Vector2(-24, -8)
 collision_layer = 16384
 collision_mask = 0
@@ -690,6 +722,7 @@ tag_name = "tongue_range"
 lock_y = true
 
 [node name="Golem1" type="Area2D" parent="Spawns" unique_id=212770938 groups=["ActorSpawns", "Entities"] instance=ExtResource("10_o3w1u")]
+physics_interpolation_mode = 2
 z_index = 999
 position = Vector2(2496, 2896)
 collision_layer = 16384
@@ -710,6 +743,7 @@ properties = {
 }
 
 [node name="VUVector" type="Area2D" parent="Spawns/Golem1" unique_id=471875470 groups=["Entities", "VUVectors", "VisualUtilities"] instance=ExtResource("8_lqyxl")]
+physics_interpolation_mode = 2
 collision_layer = 16384
 collision_mask = 0
 script = ExtResource("14_vph1e")
@@ -717,6 +751,7 @@ tag_name = "move_dir"
 snap_degrees = 180.0
 
 [node name="BreakBlock" type="Area2D" parent="Spawns" unique_id=375758817 groups=["Entities", "PropSpawns"] instance=ExtResource("7_abxvk")]
+physics_interpolation_mode = 2
 z_index = 999
 position = Vector2(1968, 2912)
 collision_layer = 16384
@@ -734,6 +769,7 @@ properties = {
 }
 
 [node name="BreakBlock1" type="Area2D" parent="Spawns" unique_id=1123299750 groups=["Entities", "PropSpawns"] instance=ExtResource("7_abxvk")]
+physics_interpolation_mode = 2
 z_index = 999
 position = Vector2(1952, 2896)
 collision_layer = 16384
@@ -751,6 +787,7 @@ properties = {
 }
 
 [node name="BreakBlock2" type="Area2D" parent="Spawns" unique_id=1010641383 groups=["Entities", "PropSpawns"] instance=ExtResource("7_abxvk")]
+physics_interpolation_mode = 2
 z_index = 999
 position = Vector2(1952, 2912)
 collision_layer = 16384
@@ -768,6 +805,7 @@ properties = {
 }
 
 [node name="BreakBlock3" type="Area2D" parent="Spawns" unique_id=357082393 groups=["Entities", "PropSpawns"] instance=ExtResource("7_abxvk")]
+physics_interpolation_mode = 2
 z_index = 999
 position = Vector2(1968, 2896)
 collision_layer = 16384
@@ -785,6 +823,7 @@ properties = {
 }
 
 [node name="BreakBlock4" type="Area2D" parent="Spawns" unique_id=2040304402 groups=["Entities", "PropSpawns"] instance=ExtResource("7_abxvk")]
+physics_interpolation_mode = 2
 z_index = 999
 position = Vector2(1936, 2912)
 collision_layer = 16384
@@ -802,6 +841,7 @@ properties = {
 }
 
 [node name="BeetleCrawler4" type="Area2D" parent="Spawns" unique_id=935360547 groups=["ActorSpawns", "Entities"] instance=ExtResource("10_o3w1u")]
+physics_interpolation_mode = 2
 z_index = 999
 position = Vector2(2152, 3440)
 collision_layer = 16384
@@ -820,15 +860,17 @@ properties = {
 }
 
 [node name="FlyVector" type="Area2D" parent="Spawns/BeetleCrawler4" unique_id=1339893819 groups=["Entities", "VUVectors", "VisualUtilities"] instance=ExtResource("8_lqyxl")]
+physics_interpolation_mode = 2
 position = Vector2(0, -8)
 collision_layer = 16384
 collision_mask = 0
 script = ExtResource("14_vph1e")
 tag_name = "fly"
-direction = Vector2(-1, 8.742278e-08)
+direction = Vector2(-1, -8.742278e-08)
 movement_locked = true
 
 [node name="CrawlVector" type="Area2D" parent="Spawns/BeetleCrawler4" unique_id=782087829 groups=["Entities", "VUVectors", "VisualUtilities"] instance=ExtResource("8_lqyxl")]
+physics_interpolation_mode = 2
 position = Vector2(0, -8)
 collision_layer = 16384
 collision_mask = 0
@@ -840,6 +882,7 @@ movement_locked = true
 color = Color(8.061901e-07, 0.41569918, 0.11087646, 1)
 
 [node name="Frog4" type="Area2D" parent="Spawns" unique_id=1016242049 groups=["ActorSpawns", "Entities"] instance=ExtResource("10_o3w1u")]
+physics_interpolation_mode = 2
 z_index = 999
 position = Vector2(2584, 3456)
 collision_layer = 16384
@@ -861,16 +904,18 @@ properties = {
 }
 
 [node name="LookVector" type="Area2D" parent="Spawns/Frog4" unique_id=612633527 groups=["Entities", "VUVectors", "VisualUtilities"] instance=ExtResource("8_lqyxl")]
+physics_interpolation_mode = 2
 position = Vector2(0, -7)
 collision_layer = 16384
 collision_mask = 0
 script = ExtResource("14_vph1e")
 tag_name = "look"
-direction = Vector2(-1, -8.742278e-08)
+direction = Vector2(-1, 8.742278e-08)
 snap_degrees = 180.0
 movement_locked = true
 
 [node name="TongueRange" type="Area2D" parent="Spawns/Frog4" unique_id=2105631334 groups=["Entities", "VisualUtilities", "WaypointLocals", "Waypoints"] instance=ExtResource("9_w24ri")]
+physics_interpolation_mode = 2
 position = Vector2(-32, -8)
 collision_layer = 16384
 collision_mask = 0
@@ -879,6 +924,7 @@ tag_name = "tongue_range"
 lock_y = true
 
 [node name="Fish" type="Area2D" parent="Spawns" unique_id=146061771 groups=["ActorSpawns", "Entities"] instance=ExtResource("10_o3w1u")]
+physics_interpolation_mode = 2
 z_index = 999
 position = Vector2(3448, 4328)
 collision_layer = 16384
@@ -899,6 +945,7 @@ properties = {
 }
 
 [node name="WaypointJump" type="Area2D" parent="Spawns/Fish" unique_id=2011292865 groups=["Entities", "VisualUtilities", "WaypointLocals", "Waypoints"] instance=ExtResource("9_w24ri")]
+physics_interpolation_mode = 2
 position = Vector2(0, -94)
 collision_layer = 16384
 collision_mask = 0
@@ -907,6 +954,7 @@ tag_name = "jump"
 lock_x = true
 
 [node name="WaypointGlobalSpawnLeft" type="Area2D" parent="Spawns/Fish" unique_id=669830458 groups=["EditorEntities", "Entities", "VisualUtilities", "WaypointGlobalSpawns"] instance=ExtResource("17_c68ig")]
+physics_interpolation_mode = 2
 modulate = Color(0, 0.502, 1, 1)
 position = Vector2(-64, -8)
 collision_layer = 16384
@@ -916,6 +964,7 @@ tag_name = "left"
 lock_y = true
 
 [node name="WaypointGlobalSpawnRight" type="Area2D" parent="Spawns/Fish" unique_id=331105630 groups=["EditorEntities", "Entities", "VisualUtilities", "WaypointGlobalSpawns"] instance=ExtResource("17_c68ig")]
+physics_interpolation_mode = 2
 modulate = Color(0, 0.502, 1, 1)
 position = Vector2(64, -8)
 collision_layer = 16384
@@ -925,6 +974,7 @@ tag_name = "right"
 lock_y = true
 
 [node name="Fish1" type="Area2D" parent="Spawns" unique_id=932305678 groups=["ActorSpawns", "Entities"] instance=ExtResource("10_o3w1u")]
+physics_interpolation_mode = 2
 z_index = 999
 position = Vector2(3344, 4336)
 collision_layer = 16384
@@ -945,6 +995,7 @@ properties = {
 }
 
 [node name="WaypointJump" type="Area2D" parent="Spawns/Fish1" unique_id=1785892437 groups=["Entities", "VisualUtilities", "WaypointLocals", "Waypoints"] instance=ExtResource("9_w24ri")]
+physics_interpolation_mode = 2
 position = Vector2(0, -136)
 collision_layer = 16384
 collision_mask = 0
@@ -953,6 +1004,7 @@ tag_name = "jump"
 lock_x = true
 
 [node name="WaypointGlobalSpawnLeft" type="Area2D" parent="Spawns/Fish1" unique_id=576442317 groups=["EditorEntities", "Entities", "VisualUtilities", "WaypointGlobalSpawns"] instance=ExtResource("17_c68ig")]
+physics_interpolation_mode = 2
 modulate = Color(0, 0.502, 1, 1)
 position = Vector2(-64, -8)
 collision_layer = 16384
@@ -962,6 +1014,7 @@ tag_name = "left"
 lock_y = true
 
 [node name="WaypointGlobalSpawnRight" type="Area2D" parent="Spawns/Fish1" unique_id=141800288 groups=["EditorEntities", "Entities", "VisualUtilities", "WaypointGlobalSpawns"] instance=ExtResource("17_c68ig")]
+physics_interpolation_mode = 2
 modulate = Color(0, 0.502, 1, 1)
 position = Vector2(64, -8)
 collision_layer = 16384
@@ -971,6 +1024,7 @@ tag_name = "right"
 lock_y = true
 
 [node name="Fish2" type="Area2D" parent="Spawns" unique_id=1563724941 groups=["ActorSpawns", "Entities"] instance=ExtResource("10_o3w1u")]
+physics_interpolation_mode = 2
 z_index = 999
 position = Vector2(3224, 4320)
 collision_layer = 16384
@@ -991,6 +1045,7 @@ properties = {
 }
 
 [node name="WaypointJump" type="Area2D" parent="Spawns/Fish2" unique_id=1373190469 groups=["Entities", "VisualUtilities", "WaypointLocals", "Waypoints"] instance=ExtResource("9_w24ri")]
+physics_interpolation_mode = 2
 position = Vector2(0, -94)
 collision_layer = 16384
 collision_mask = 0
@@ -999,6 +1054,7 @@ tag_name = "jump"
 lock_x = true
 
 [node name="WaypointGlobalSpawnLeft" type="Area2D" parent="Spawns/Fish2" unique_id=920527266 groups=["EditorEntities", "Entities", "VisualUtilities", "WaypointGlobalSpawns"] instance=ExtResource("17_c68ig")]
+physics_interpolation_mode = 2
 modulate = Color(0, 0.502, 1, 1)
 position = Vector2(-64, -8)
 collision_layer = 16384
@@ -1008,6 +1064,7 @@ tag_name = "left"
 lock_y = true
 
 [node name="WaypointGlobalSpawnRight" type="Area2D" parent="Spawns/Fish2" unique_id=1590771058 groups=["EditorEntities", "Entities", "VisualUtilities", "WaypointGlobalSpawns"] instance=ExtResource("17_c68ig")]
+physics_interpolation_mode = 2
 modulate = Color(0, 0.502, 1, 1)
 position = Vector2(64, -8)
 collision_layer = 16384
@@ -1017,6 +1074,7 @@ tag_name = "right"
 lock_y = true
 
 [node name="BeetleCrawler5" type="Area2D" parent="Spawns" unique_id=1582059221 groups=["ActorSpawns", "Entities"] instance=ExtResource("10_o3w1u")]
+physics_interpolation_mode = 2
 z_index = 999
 position = Vector2(3048, 3584)
 collision_layer = 16384
@@ -1035,6 +1093,7 @@ properties = {
 }
 
 [node name="FlyVector" type="Area2D" parent="Spawns/BeetleCrawler5" unique_id=309782687 groups=["Entities", "VUVectors", "VisualUtilities"] instance=ExtResource("8_lqyxl")]
+physics_interpolation_mode = 2
 position = Vector2(0, -8)
 collision_layer = 16384
 collision_mask = 0
@@ -1044,6 +1103,7 @@ direction = Vector2(-4.371139e-08, -1)
 movement_locked = true
 
 [node name="CrawlVector" type="Area2D" parent="Spawns/BeetleCrawler5" unique_id=1065892176 groups=["Entities", "VUVectors", "VisualUtilities"] instance=ExtResource("8_lqyxl")]
+physics_interpolation_mode = 2
 position = Vector2(0, -8)
 collision_layer = 16384
 collision_mask = 0
@@ -1055,6 +1115,7 @@ movement_locked = true
 color = Color(8.061901e-07, 0.41569918, 0.11087646, 1)
 
 [node name="Sentry" type="Area2D" parent="Spawns" unique_id=1717361756 groups=["ActorSpawns", "Entities"] instance=ExtResource("10_o3w1u")]
+physics_interpolation_mode = 2
 z_index = 999
 position = Vector2(2080, 3424)
 collision_layer = 16384
@@ -1080,11 +1141,13 @@ properties = {
 }
 
 [node name="VURect" type="Node2D" parent="Spawns/Sentry" unique_id=688682803 groups=["Entities", "VURects", "VisualUtilities"] instance=ExtResource("19_yhfvk")]
+physics_interpolation_mode = 2
 script = ExtResource("20_xp61l")
 tag_name = "player_detector"
 value = Rect2(-128, -128, 256, 256)
 
 [node name="ShootX" type="Area2D" parent="Spawns/Sentry" unique_id=510566812 groups=["Entities", "VisualUtilities", "WaypointLocals", "Waypoints"] instance=ExtResource("9_w24ri")]
+physics_interpolation_mode = 2
 position = Vector2(64, 0)
 collision_layer = 16384
 collision_mask = 0
@@ -1093,6 +1156,7 @@ tag_name = "shoot_x"
 lock_y = true
 
 [node name="ShootY" type="Area2D" parent="Spawns/Sentry" unique_id=595539309 groups=["Entities", "VisualUtilities", "WaypointLocals", "Waypoints"] instance=ExtResource("9_w24ri")]
+physics_interpolation_mode = 2
 modulate = Color(0, 1.8247963, 1.8247963, 1)
 position = Vector2(0, -64)
 collision_layer = 16384
@@ -1102,6 +1166,7 @@ tag_name = "shoot_y"
 lock_x = true
 
 [node name="Sentry1" type="Area2D" parent="Spawns" unique_id=612747613 groups=["ActorSpawns", "Entities"] instance=ExtResource("10_o3w1u")]
+physics_interpolation_mode = 2
 z_index = 999
 position = Vector2(2032, 3424)
 collision_layer = 16384
@@ -1127,11 +1192,13 @@ properties = {
 }
 
 [node name="VURect" type="Node2D" parent="Spawns/Sentry1" unique_id=644359025 groups=["Entities", "VURects", "VisualUtilities"] instance=ExtResource("19_yhfvk")]
+physics_interpolation_mode = 2
 script = ExtResource("20_xp61l")
 tag_name = "player_detector"
 value = Rect2(-128, -128, 256, 256)
 
 [node name="ShootX" type="Area2D" parent="Spawns/Sentry1" unique_id=2145592901 groups=["Entities", "VisualUtilities", "WaypointLocals", "Waypoints"] instance=ExtResource("9_w24ri")]
+physics_interpolation_mode = 2
 position = Vector2(64, 0)
 collision_layer = 16384
 collision_mask = 0
@@ -1140,6 +1207,7 @@ tag_name = "shoot_x"
 lock_y = true
 
 [node name="ShootY" type="Area2D" parent="Spawns/Sentry1" unique_id=2091017044 groups=["Entities", "VisualUtilities", "WaypointLocals", "Waypoints"] instance=ExtResource("9_w24ri")]
+physics_interpolation_mode = 2
 modulate = Color(0, 1.8247963, 1.8247963, 1)
 position = Vector2(0, -64)
 collision_layer = 16384
@@ -1149,6 +1217,7 @@ tag_name = "shoot_y"
 lock_x = true
 
 [node name="Sentry2" type="Area2D" parent="Spawns" unique_id=123362704 groups=["ActorSpawns", "Entities"] instance=ExtResource("10_o3w1u")]
+physics_interpolation_mode = 2
 z_index = 999
 position = Vector2(2056, 3424)
 collision_layer = 16384
@@ -1174,11 +1243,13 @@ properties = {
 }
 
 [node name="VURect" type="Node2D" parent="Spawns/Sentry2" unique_id=1679262059 groups=["Entities", "VURects", "VisualUtilities"] instance=ExtResource("19_yhfvk")]
+physics_interpolation_mode = 2
 script = ExtResource("20_xp61l")
 tag_name = "player_detector"
 value = Rect2(-128, -128, 256, 256)
 
 [node name="ShootX" type="Area2D" parent="Spawns/Sentry2" unique_id=421175441 groups=["Entities", "VisualUtilities", "WaypointLocals", "Waypoints"] instance=ExtResource("9_w24ri")]
+physics_interpolation_mode = 2
 position = Vector2(64, 0)
 collision_layer = 16384
 collision_mask = 0
@@ -1187,6 +1258,7 @@ tag_name = "shoot_x"
 lock_y = true
 
 [node name="ShootY" type="Area2D" parent="Spawns/Sentry2" unique_id=1300729874 groups=["Entities", "VisualUtilities", "WaypointLocals", "Waypoints"] instance=ExtResource("9_w24ri")]
+physics_interpolation_mode = 2
 modulate = Color(0, 1.8247963, 1.8247963, 1)
 position = Vector2(0, -64)
 collision_layer = 16384
@@ -1196,6 +1268,7 @@ tag_name = "shoot_y"
 lock_x = true
 
 [node name="Sentry3" type="Area2D" parent="Spawns" unique_id=1240886883 groups=["ActorSpawns", "Entities"] instance=ExtResource("10_o3w1u")]
+physics_interpolation_mode = 2
 z_index = 999
 position = Vector2(2520, 2384)
 collision_layer = 16384
@@ -1221,11 +1294,13 @@ properties = {
 }
 
 [node name="VURect" type="Node2D" parent="Spawns/Sentry3" unique_id=1596228804 groups=["Entities", "VURects", "VisualUtilities"] instance=ExtResource("19_yhfvk")]
+physics_interpolation_mode = 2
 script = ExtResource("20_xp61l")
 tag_name = "player_detector"
 value = Rect2(-128, -128, 256, 256)
 
 [node name="ShootX" type="Area2D" parent="Spawns/Sentry3" unique_id=1459656051 groups=["Entities", "VisualUtilities", "WaypointLocals", "Waypoints"] instance=ExtResource("9_w24ri")]
+physics_interpolation_mode = 2
 position = Vector2(64, 0)
 collision_layer = 16384
 collision_mask = 0
@@ -1234,6 +1309,7 @@ tag_name = "shoot_x"
 lock_y = true
 
 [node name="ShootY" type="Area2D" parent="Spawns/Sentry3" unique_id=76180886 groups=["Entities", "VisualUtilities", "WaypointLocals", "Waypoints"] instance=ExtResource("9_w24ri")]
+physics_interpolation_mode = 2
 modulate = Color(0, 1.8247963, 1.8247963, 1)
 position = Vector2(0, -64)
 collision_layer = 16384
@@ -1243,6 +1319,7 @@ tag_name = "shoot_y"
 lock_x = true
 
 [node name="Tadpole" type="Area2D" parent="Spawns" unique_id=1091955830 groups=["ActorSpawns", "Entities"] instance=ExtResource("10_o3w1u")]
+physics_interpolation_mode = 2
 z_index = 999
 position = Vector2(3336, 4384)
 collision_layer = 16384
@@ -1260,6 +1337,7 @@ properties = {
 }
 
 [node name="Tadpole1" type="Area2D" parent="Spawns" unique_id=1649324498 groups=["ActorSpawns", "Entities"] instance=ExtResource("10_o3w1u")]
+physics_interpolation_mode = 2
 z_index = 999
 position = Vector2(3352, 4384)
 collision_layer = 16384
@@ -1277,6 +1355,7 @@ properties = {
 }
 
 [node name="Tadpole2" type="Area2D" parent="Spawns" unique_id=1510507227 groups=["ActorSpawns", "Entities"] instance=ExtResource("10_o3w1u")]
+physics_interpolation_mode = 2
 z_index = 999
 position = Vector2(3320, 4368)
 collision_layer = 16384
@@ -1294,6 +1373,7 @@ properties = {
 }
 
 [node name="BreakBlock5" type="Area2D" parent="Spawns" unique_id=1449282698 groups=["Entities", "PropSpawns"] instance=ExtResource("7_abxvk")]
+physics_interpolation_mode = 2
 z_index = 999
 position = Vector2(2064, 1744)
 collision_layer = 16384
@@ -1311,6 +1391,7 @@ properties = {
 }
 
 [node name="BreakBlock6" type="Area2D" parent="Spawns" unique_id=1222289941 groups=["Entities", "PropSpawns"] instance=ExtResource("7_abxvk")]
+physics_interpolation_mode = 2
 z_index = 999
 position = Vector2(2064, 1712)
 collision_layer = 16384
@@ -1328,6 +1409,7 @@ properties = {
 }
 
 [node name="BreakBlockExperience" type="Area2D" parent="Spawns" unique_id=1451413490 groups=["Entities", "PropSpawns"] instance=ExtResource("7_abxvk")]
+physics_interpolation_mode = 2
 z_index = 999
 position = Vector2(2048, 1744)
 collision_layer = 16384
@@ -1346,6 +1428,7 @@ properties = {
 }
 
 [node name="BreakBlockExperience1" type="Area2D" parent="Spawns" unique_id=522996767 groups=["Entities", "PropSpawns"] instance=ExtResource("7_abxvk")]
+physics_interpolation_mode = 2
 z_index = 999
 position = Vector2(2064, 1728)
 collision_layer = 16384
@@ -1364,6 +1447,7 @@ properties = {
 }
 
 [node name="BreakBlock7" type="Area2D" parent="Spawns" unique_id=569433769 groups=["Entities", "PropSpawns"] instance=ExtResource("7_abxvk")]
+physics_interpolation_mode = 2
 z_index = 999
 position = Vector2(2048, 1728)
 collision_layer = 16384
@@ -1381,6 +1465,7 @@ properties = {
 }
 
 [node name="BreakBlockExperience2" type="Area2D" parent="Spawns" unique_id=1323865245 groups=["Entities", "PropSpawns"] instance=ExtResource("7_abxvk")]
+physics_interpolation_mode = 2
 z_index = 999
 position = Vector2(2048, 1712)
 collision_layer = 16384
@@ -1399,6 +1484,7 @@ properties = {
 }
 
 [node name="Sentry4" type="Area2D" parent="Spawns" unique_id=467670713 groups=["ActorSpawns", "Entities"] instance=ExtResource("10_o3w1u")]
+physics_interpolation_mode = 2
 z_index = 999
 position = Vector2(1800, 2160)
 collision_layer = 16384
@@ -1424,11 +1510,13 @@ properties = {
 }
 
 [node name="VURect" type="Node2D" parent="Spawns/Sentry4" unique_id=111415158 groups=["Entities", "VURects", "VisualUtilities"] instance=ExtResource("19_yhfvk")]
+physics_interpolation_mode = 2
 script = ExtResource("20_xp61l")
 tag_name = "player_detector"
 value = Rect2(-104, -120, 160, 184)
 
 [node name="ShootX" type="Area2D" parent="Spawns/Sentry4" unique_id=1432238783 groups=["Entities", "VisualUtilities", "WaypointLocals", "Waypoints"] instance=ExtResource("9_w24ri")]
+physics_interpolation_mode = 2
 position = Vector2(32, 0)
 collision_layer = 16384
 collision_mask = 0
@@ -1437,6 +1525,7 @@ tag_name = "shoot_x"
 lock_y = true
 
 [node name="ShootY" type="Area2D" parent="Spawns/Sentry4" unique_id=968472932 groups=["Entities", "VisualUtilities", "WaypointLocals", "Waypoints"] instance=ExtResource("9_w24ri")]
+physics_interpolation_mode = 2
 modulate = Color(0, 1.8247963, 1.8247963, 1)
 position = Vector2(0, -48)
 collision_layer = 16384
@@ -1446,6 +1535,7 @@ tag_name = "shoot_y"
 lock_x = true
 
 [node name="Gecko" type="Area2D" parent="Spawns" unique_id=1053055613 groups=["ActorSpawns", "Entities"] instance=ExtResource("10_o3w1u")]
+physics_interpolation_mode = 2
 z_index = 999
 position = Vector2(1992, 1712)
 collision_layer = 16384
@@ -1463,6 +1553,7 @@ properties = {
 }
 
 [node name="NormalVector" type="Area2D" parent="Spawns/Gecko" unique_id=872564127 groups=["Entities", "VUVectors", "VisualUtilities"] instance=ExtResource("8_lqyxl")]
+physics_interpolation_mode = 2
 position = Vector2(0, -8)
 collision_layer = 16384
 collision_mask = 0
@@ -1472,6 +1563,7 @@ direction = Vector2(-4.371139e-08, 1)
 movement_locked = true
 
 [node name="CrawlVector" type="Area2D" parent="Spawns/Gecko" unique_id=186297956 groups=["Entities", "VUVectors", "VisualUtilities"] instance=ExtResource("8_lqyxl")]
+physics_interpolation_mode = 2
 position = Vector2(0, -8)
 collision_layer = 16384
 collision_mask = 0
@@ -1483,6 +1575,7 @@ movement_locked = true
 color = Color(8.061901e-07, 0.41569918, 0.11087646, 1)
 
 [node name="Gecko1" type="Area2D" parent="Spawns" unique_id=955895501 groups=["ActorSpawns", "Entities"] instance=ExtResource("10_o3w1u")]
+physics_interpolation_mode = 2
 z_index = 999
 position = Vector2(2056, 2064)
 collision_layer = 16384
@@ -1500,6 +1593,7 @@ properties = {
 }
 
 [node name="NormalVector" type="Area2D" parent="Spawns/Gecko1" unique_id=952480787 groups=["Entities", "VUVectors", "VisualUtilities"] instance=ExtResource("8_lqyxl")]
+physics_interpolation_mode = 2
 position = Vector2(0, -8)
 collision_layer = 16384
 collision_mask = 0
@@ -1509,6 +1603,7 @@ direction = Vector2(-4.371139e-08, -1)
 movement_locked = true
 
 [node name="CrawlVector" type="Area2D" parent="Spawns/Gecko1" unique_id=1394281911 groups=["Entities", "VUVectors", "VisualUtilities"] instance=ExtResource("8_lqyxl")]
+physics_interpolation_mode = 2
 position = Vector2(0, -8)
 collision_layer = 16384
 collision_mask = 0
@@ -1520,6 +1615,7 @@ movement_locked = true
 color = Color(8.061901e-07, 0.41569918, 0.11087646, 1)
 
 [node name="Sentry5" type="Area2D" parent="Spawns" unique_id=840514668 groups=["ActorSpawns", "Entities"] instance=ExtResource("10_o3w1u")]
+physics_interpolation_mode = 2
 z_index = 999
 position = Vector2(2520, 2304)
 collision_layer = 16384
@@ -1545,11 +1641,13 @@ properties = {
 }
 
 [node name="VURect" type="Node2D" parent="Spawns/Sentry5" unique_id=2055523282 groups=["Entities", "VURects", "VisualUtilities"] instance=ExtResource("19_yhfvk")]
+physics_interpolation_mode = 2
 script = ExtResource("20_xp61l")
 tag_name = "player_detector"
 value = Rect2(-128, -128, 256, 256)
 
 [node name="ShootX" type="Area2D" parent="Spawns/Sentry5" unique_id=1338249404 groups=["Entities", "VisualUtilities", "WaypointLocals", "Waypoints"] instance=ExtResource("9_w24ri")]
+physics_interpolation_mode = 2
 position = Vector2(24, 0)
 collision_layer = 16384
 collision_mask = 0
@@ -1558,6 +1656,7 @@ tag_name = "shoot_x"
 lock_y = true
 
 [node name="ShootY" type="Area2D" parent="Spawns/Sentry5" unique_id=1551252296 groups=["Entities", "VisualUtilities", "WaypointLocals", "Waypoints"] instance=ExtResource("9_w24ri")]
+physics_interpolation_mode = 2
 modulate = Color(0, 1.8247963, 1.8247963, 1)
 position = Vector2(0, -64)
 collision_layer = 16384
@@ -1567,6 +1666,7 @@ tag_name = "shoot_y"
 lock_x = true
 
 [node name="Stalagtite" type="Area2D" parent="Spawns" unique_id=1777615597 groups=["ActorSpawns", "Entities"] instance=ExtResource("10_o3w1u")]
+physics_interpolation_mode = 2
 z_index = 999
 position = Vector2(2520, 1992)
 collision_layer = 16384
@@ -1586,6 +1686,7 @@ properties = {
 }
 
 [node name="BeetleCrawler6" type="Area2D" parent="Spawns" unique_id=670522566 groups=["ActorSpawns", "Entities"] instance=ExtResource("10_o3w1u")]
+physics_interpolation_mode = 2
 z_index = 999
 position = Vector2(3512, 2016)
 collision_layer = 16384
@@ -1604,6 +1705,7 @@ properties = {
 }
 
 [node name="FlyVector" type="Area2D" parent="Spawns/BeetleCrawler6" unique_id=802586018 groups=["Entities", "VUVectors", "VisualUtilities"] instance=ExtResource("8_lqyxl")]
+physics_interpolation_mode = 2
 position = Vector2(0, -8)
 collision_layer = 16384
 collision_mask = 0
@@ -1613,6 +1715,7 @@ direction = Vector2(-4.371139e-08, 1)
 movement_locked = true
 
 [node name="CrawlVector" type="Area2D" parent="Spawns/BeetleCrawler6" unique_id=656847583 groups=["Entities", "VUVectors", "VisualUtilities"] instance=ExtResource("8_lqyxl")]
+physics_interpolation_mode = 2
 position = Vector2(0, -8)
 collision_layer = 16384
 collision_mask = 0
@@ -1642,6 +1745,7 @@ properties = {
 size_is_default = false
 
 [node name="Frog5" type="Area2D" parent="Spawns" unique_id=1365532084 groups=["ActorSpawns", "Entities"] instance=ExtResource("10_o3w1u")]
+physics_interpolation_mode = 2
 z_index = 999
 position = Vector2(2024, 2944)
 collision_layer = 16384
@@ -1663,6 +1767,7 @@ properties = {
 }
 
 [node name="LookVector" type="Area2D" parent="Spawns/Frog5" unique_id=1516068597 groups=["Entities", "VUVectors", "VisualUtilities"] instance=ExtResource("8_lqyxl")]
+physics_interpolation_mode = 2
 position = Vector2(0, -7)
 collision_layer = 16384
 collision_mask = 0
@@ -1672,6 +1777,7 @@ snap_degrees = 180.0
 movement_locked = true
 
 [node name="TongueRange" type="Area2D" parent="Spawns/Frog5" unique_id=31303607 groups=["Entities", "VisualUtilities", "WaypointLocals", "Waypoints"] instance=ExtResource("9_w24ri")]
+physics_interpolation_mode = 2
 position = Vector2(-32, -8)
 collision_layer = 16384
 collision_mask = 0
@@ -1680,6 +1786,7 @@ tag_name = "tongue_range"
 lock_y = true
 
 [node name="Gecko2" type="Area2D" parent="Spawns" unique_id=581140708 groups=["ActorSpawns", "Entities"] instance=ExtResource("10_o3w1u")]
+physics_interpolation_mode = 2
 z_index = 999
 position = Vector2(2416, 2848)
 collision_layer = 16384
@@ -1697,6 +1804,7 @@ properties = {
 }
 
 [node name="NormalVector" type="Area2D" parent="Spawns/Gecko2" unique_id=786616193 groups=["Entities", "VUVectors", "VisualUtilities"] instance=ExtResource("8_lqyxl")]
+physics_interpolation_mode = 2
 position = Vector2(0, -8)
 collision_layer = 16384
 collision_mask = 0
@@ -1706,6 +1814,7 @@ direction = Vector2(-4.371139e-08, 1)
 movement_locked = true
 
 [node name="CrawlVector" type="Area2D" parent="Spawns/Gecko2" unique_id=1444142043 groups=["Entities", "VUVectors", "VisualUtilities"] instance=ExtResource("8_lqyxl")]
+physics_interpolation_mode = 2
 position = Vector2(0, -8)
 collision_layer = 16384
 collision_mask = 0
@@ -1717,6 +1826,7 @@ movement_locked = true
 color = Color(8.061901e-07, 0.41569918, 0.11087646, 1)
 
 [node name="Sentry6" type="Area2D" parent="Spawns" unique_id=1181729988 groups=["ActorSpawns", "Entities"] instance=ExtResource("10_o3w1u")]
+physics_interpolation_mode = 2
 z_index = 999
 position = Vector2(2184, 2928)
 collision_layer = 16384
@@ -1742,11 +1852,13 @@ properties = {
 }
 
 [node name="VURect" type="Node2D" parent="Spawns/Sentry6" unique_id=1319363484 groups=["Entities", "VURects", "VisualUtilities"] instance=ExtResource("19_yhfvk")]
+physics_interpolation_mode = 2
 script = ExtResource("20_xp61l")
 tag_name = "player_detector"
 value = Rect2(-128, -120, 256, 256)
 
 [node name="ShootX" type="Area2D" parent="Spawns/Sentry6" unique_id=1898602847 groups=["Entities", "VisualUtilities", "WaypointLocals", "Waypoints"] instance=ExtResource("9_w24ri")]
+physics_interpolation_mode = 2
 position = Vector2(64, 0)
 collision_layer = 16384
 collision_mask = 0
@@ -1755,6 +1867,7 @@ tag_name = "shoot_x"
 lock_y = true
 
 [node name="ShootY" type="Area2D" parent="Spawns/Sentry6" unique_id=448928131 groups=["Entities", "VisualUtilities", "WaypointLocals", "Waypoints"] instance=ExtResource("9_w24ri")]
+physics_interpolation_mode = 2
 modulate = Color(0, 1.8247963, 1.8247963, 1)
 position = Vector2(0, -40)
 collision_layer = 16384
@@ -1764,6 +1877,7 @@ tag_name = "shoot_y"
 lock_x = true
 
 [node name="HealthRefill1" type="Area2D" parent="Spawns" unique_id=1866149389 groups=["Entities", "PropSpawns"] instance=ExtResource("7_abxvk")]
+physics_interpolation_mode = 2
 z_index = 999
 position = Vector2(3040, 4080)
 collision_layer = 16384
@@ -1777,6 +1891,7 @@ properties = {
 }
 
 [node name="SaveDisk1" type="Area2D" parent="Spawns" unique_id=1551681414 groups=["Entities", "PropSpawns"] instance=ExtResource("7_abxvk")]
+physics_interpolation_mode = 2
 z_index = 999
 position = Vector2(3024, 4080)
 collision_layer = 16384
@@ -1790,6 +1905,7 @@ properties = {
 }
 
 [node name="Lantern" type="Area2D" parent="Spawns" unique_id=937433164 groups=["Entities", "PropSpawns"] instance=ExtResource("7_abxvk")]
+physics_interpolation_mode = 2
 z_index = 999
 position = Vector2(3024, 4016)
 collision_layer = 16384
@@ -1804,6 +1920,7 @@ properties = {
 }
 
 [node name="BreakBlockExperience3" type="Area2D" parent="Spawns" unique_id=332918694 groups=["Entities", "PropSpawns"] instance=ExtResource("7_abxvk")]
+physics_interpolation_mode = 2
 z_index = 999
 position = Vector2(3056, 4208)
 collision_layer = 16384
@@ -1822,6 +1939,7 @@ properties = {
 }
 
 [node name="BreakBlockExperience4" type="Area2D" parent="Spawns" unique_id=992670277 groups=["Entities", "PropSpawns"] instance=ExtResource("7_abxvk")]
+physics_interpolation_mode = 2
 z_index = 999
 position = Vector2(3072, 4208)
 collision_layer = 16384
@@ -1840,6 +1958,7 @@ properties = {
 }
 
 [node name="BreakBlockExperience5" type="Area2D" parent="Spawns" unique_id=1245719251 groups=["Entities", "PropSpawns"] instance=ExtResource("7_abxvk")]
+physics_interpolation_mode = 2
 z_index = 999
 position = Vector2(3072, 4208)
 collision_layer = 16384
@@ -1858,6 +1977,7 @@ properties = {
 }
 
 [node name="BreakBlockExperience6" type="Area2D" parent="Spawns" unique_id=1386352839 groups=["Entities", "PropSpawns"] instance=ExtResource("7_abxvk")]
+physics_interpolation_mode = 2
 z_index = 999
 position = Vector2(3072, 4192)
 collision_layer = 16384
@@ -1876,6 +1996,7 @@ properties = {
 }
 
 [node name="BreakBlockExperience7" type="Area2D" parent="Spawns" unique_id=1996445323 groups=["Entities", "PropSpawns"] instance=ExtResource("7_abxvk")]
+physics_interpolation_mode = 2
 z_index = 999
 position = Vector2(3088, 4192)
 collision_layer = 16384
@@ -1894,6 +2015,7 @@ properties = {
 }
 
 [node name="BreakBlock8" type="Area2D" parent="Spawns" unique_id=1551470911 groups=["Entities", "PropSpawns"] instance=ExtResource("7_abxvk")]
+physics_interpolation_mode = 2
 z_index = 999
 position = Vector2(3088, 4208)
 collision_layer = 16384
@@ -1911,6 +2033,7 @@ properties = {
 }
 
 [node name="BreakBlock9" type="Area2D" parent="Spawns" unique_id=577292999 groups=["Entities", "PropSpawns"] instance=ExtResource("7_abxvk")]
+physics_interpolation_mode = 2
 z_index = 999
 position = Vector2(3088, 4176)
 collision_layer = 16384
@@ -1928,6 +2051,7 @@ properties = {
 }
 
 [node name="BreakBlock10" type="Area2D" parent="Spawns" unique_id=1786781898 groups=["Entities", "PropSpawns"] instance=ExtResource("7_abxvk")]
+physics_interpolation_mode = 2
 z_index = 999
 position = Vector2(3072, 4176)
 collision_layer = 16384
@@ -1945,6 +2069,7 @@ properties = {
 }
 
 [node name="BreakBlock11" type="Area2D" parent="Spawns" unique_id=817827632 groups=["Entities", "PropSpawns"] instance=ExtResource("7_abxvk")]
+physics_interpolation_mode = 2
 z_index = 999
 position = Vector2(3056, 4192)
 collision_layer = 16384
@@ -1962,6 +2087,7 @@ properties = {
 }
 
 [node name="BreakBlock12" type="Area2D" parent="Spawns" unique_id=170024885 groups=["Entities", "PropSpawns"] instance=ExtResource("7_abxvk")]
+physics_interpolation_mode = 2
 z_index = 999
 position = Vector2(3056, 4016)
 collision_layer = 16384
@@ -1979,6 +2105,7 @@ properties = {
 }
 
 [node name="BreakBlock13" type="Area2D" parent="Spawns" unique_id=1529762589 groups=["Entities", "PropSpawns"] instance=ExtResource("7_abxvk")]
+physics_interpolation_mode = 2
 z_index = 999
 position = Vector2(3040, 4016)
 collision_layer = 16384
@@ -1996,6 +2123,7 @@ properties = {
 }
 
 [node name="BreakBlock14" type="Area2D" parent="Spawns" unique_id=303051611 groups=["Entities", "PropSpawns"] instance=ExtResource("7_abxvk")]
+physics_interpolation_mode = 2
 z_index = 999
 position = Vector2(3048, 4000)
 collision_layer = 16384
@@ -2013,6 +2141,7 @@ properties = {
 }
 
 [node name="PhysFan" type="Area2D" parent="Spawns" unique_id=258562908 groups=["Entities", "PropSpawns"] instance=ExtResource("7_abxvk")]
+physics_interpolation_mode = 2
 z_index = 999
 position = Vector2(2944, 3360)
 collision_layer = 16384
@@ -2027,6 +2156,7 @@ properties = {
 }
 
 [node name="WindVector" type="Area2D" parent="Spawns/PhysFan" unique_id=1357147736 groups=["Entities", "VUVectors", "VisualUtilities"] instance=ExtResource("8_lqyxl")]
+physics_interpolation_mode = 2
 position = Vector2(8, 8)
 collision_layer = 16384
 collision_mask = 0
@@ -2037,6 +2167,7 @@ snap_degrees = 90.0
 movement_locked = true
 
 [node name="Distance" type="Area2D" parent="Spawns/PhysFan" unique_id=1035529260 groups=["Entities", "VisualUtilities", "WaypointLocals", "Waypoints"] instance=ExtResource("9_w24ri")]
+physics_interpolation_mode = 2
 position = Vector2(8, -720)
 collision_layer = 16384
 collision_mask = 0
@@ -2045,6 +2176,7 @@ tag_name = "distance"
 lock_x = true
 
 [node name="PhysFan1" type="Area2D" parent="Spawns" unique_id=2006268782 groups=["Entities", "PropSpawns"] instance=ExtResource("7_abxvk")]
+physics_interpolation_mode = 2
 z_index = 999
 position = Vector2(2976, 3360)
 collision_layer = 16384
@@ -2059,6 +2191,7 @@ properties = {
 }
 
 [node name="WindVector" type="Area2D" parent="Spawns/PhysFan1" unique_id=1279719360 groups=["Entities", "VUVectors", "VisualUtilities"] instance=ExtResource("8_lqyxl")]
+physics_interpolation_mode = 2
 position = Vector2(8, 8)
 collision_layer = 16384
 collision_mask = 0
@@ -2069,6 +2202,7 @@ snap_degrees = 90.0
 movement_locked = true
 
 [node name="Distance" type="Area2D" parent="Spawns/PhysFan1" unique_id=105115531 groups=["Entities", "VisualUtilities", "WaypointLocals", "Waypoints"] instance=ExtResource("9_w24ri")]
+physics_interpolation_mode = 2
 position = Vector2(8, -736)
 collision_layer = 16384
 collision_mask = 0
@@ -2077,6 +2211,7 @@ tag_name = "distance"
 lock_x = true
 
 [node name="PhysFan2" type="Area2D" parent="Spawns" unique_id=674405616 groups=["Entities", "PropSpawns"] instance=ExtResource("7_abxvk")]
+physics_interpolation_mode = 2
 z_index = 999
 position = Vector2(2928, 3360)
 collision_layer = 16384
@@ -2091,6 +2226,7 @@ properties = {
 }
 
 [node name="WindVector" type="Area2D" parent="Spawns/PhysFan2" unique_id=336850560 groups=["Entities", "VUVectors", "VisualUtilities"] instance=ExtResource("8_lqyxl")]
+physics_interpolation_mode = 2
 position = Vector2(8, 8)
 collision_layer = 16384
 collision_mask = 0
@@ -2101,6 +2237,7 @@ snap_degrees = 90.0
 movement_locked = true
 
 [node name="Distance" type="Area2D" parent="Spawns/PhysFan2" unique_id=626435966 groups=["Entities", "VisualUtilities", "WaypointLocals", "Waypoints"] instance=ExtResource("9_w24ri")]
+physics_interpolation_mode = 2
 position = Vector2(8, -688)
 collision_layer = 16384
 collision_mask = 0
@@ -2109,6 +2246,7 @@ tag_name = "distance"
 lock_x = true
 
 [node name="PhysFan3" type="Area2D" parent="Spawns" unique_id=510744388 groups=["Entities", "PropSpawns"] instance=ExtResource("7_abxvk")]
+physics_interpolation_mode = 2
 z_index = 999
 position = Vector2(2960, 3360)
 collision_layer = 16384
@@ -2123,6 +2261,7 @@ properties = {
 }
 
 [node name="WindVector" type="Area2D" parent="Spawns/PhysFan3" unique_id=1683431148 groups=["Entities", "VUVectors", "VisualUtilities"] instance=ExtResource("8_lqyxl")]
+physics_interpolation_mode = 2
 position = Vector2(8, 8)
 collision_layer = 16384
 collision_mask = 0
@@ -2133,6 +2272,7 @@ snap_degrees = 90.0
 movement_locked = true
 
 [node name="Distance" type="Area2D" parent="Spawns/PhysFan3" unique_id=1191908238 groups=["Entities", "VisualUtilities", "WaypointLocals", "Waypoints"] instance=ExtResource("9_w24ri")]
+physics_interpolation_mode = 2
 position = Vector2(8, -728)
 collision_layer = 16384
 collision_mask = 0
@@ -2141,6 +2281,7 @@ tag_name = "distance"
 lock_x = true
 
 [node name="PhysFan4" type="Area2D" parent="Spawns" unique_id=1178089297 groups=["Entities", "PropSpawns"] instance=ExtResource("7_abxvk")]
+physics_interpolation_mode = 2
 z_index = 999
 position = Vector2(2912, 3360)
 collision_layer = 16384
@@ -2155,6 +2296,7 @@ properties = {
 }
 
 [node name="WindVector" type="Area2D" parent="Spawns/PhysFan4" unique_id=1814195544 groups=["Entities", "VUVectors", "VisualUtilities"] instance=ExtResource("8_lqyxl")]
+physics_interpolation_mode = 2
 position = Vector2(8, 8)
 collision_layer = 16384
 collision_mask = 0
@@ -2165,6 +2307,7 @@ snap_degrees = 90.0
 movement_locked = true
 
 [node name="Distance" type="Area2D" parent="Spawns/PhysFan4" unique_id=392360567 groups=["Entities", "VisualUtilities", "WaypointLocals", "Waypoints"] instance=ExtResource("9_w24ri")]
+physics_interpolation_mode = 2
 position = Vector2(8, -672)
 collision_layer = 16384
 collision_mask = 0
@@ -2173,6 +2316,7 @@ tag_name = "distance"
 lock_x = true
 
 [node name="PhysFan5" type="Area2D" parent="Spawns" unique_id=2109151534 groups=["Entities", "PropSpawns"] instance=ExtResource("7_abxvk")]
+physics_interpolation_mode = 2
 z_index = 999
 position = Vector2(2912, 2624)
 collision_layer = 16384
@@ -2187,6 +2331,7 @@ properties = {
 }
 
 [node name="WindVector" type="Area2D" parent="Spawns/PhysFan5" unique_id=1895207012 groups=["Entities", "VUVectors", "VisualUtilities"] instance=ExtResource("8_lqyxl")]
+physics_interpolation_mode = 2
 position = Vector2(8, 8)
 collision_layer = 16384
 collision_mask = 0
@@ -2197,6 +2342,7 @@ snap_degrees = 90.0
 movement_locked = true
 
 [node name="Distance" type="Area2D" parent="Spawns/PhysFan5" unique_id=2010948453 groups=["Entities", "VisualUtilities", "WaypointLocals", "Waypoints"] instance=ExtResource("9_w24ri")]
+physics_interpolation_mode = 2
 position = Vector2(8, -224)
 collision_layer = 16384
 collision_mask = 0
@@ -2205,6 +2351,7 @@ tag_name = "distance"
 lock_x = true
 
 [node name="SwitchLever" type="Area2D" parent="Spawns" unique_id=1077605060 groups=["Entities", "PropSpawns"] instance=ExtResource("7_abxvk")]
+physics_interpolation_mode = 2
 z_index = 999
 position = Vector2(2288, 3544)
 collision_layer = 16384
@@ -2222,6 +2369,7 @@ properties = {
 }
 
 [node name="PhysFan6" type="Area2D" parent="Spawns" unique_id=1204133017 groups=["Entities", "PropSpawns"] instance=ExtResource("7_abxvk")]
+physics_interpolation_mode = 2
 z_index = 999
 position = Vector2(2976, 2448)
 collision_layer = 16384
@@ -2236,6 +2384,7 @@ properties = {
 }
 
 [node name="WindVector" type="Area2D" parent="Spawns/PhysFan6" unique_id=1953119970 groups=["Entities", "VUVectors", "VisualUtilities"] instance=ExtResource("8_lqyxl")]
+physics_interpolation_mode = 2
 position = Vector2(8, 8)
 collision_layer = 16384
 collision_mask = 0
@@ -2246,6 +2395,7 @@ snap_degrees = 90.0
 movement_locked = true
 
 [node name="Distance" type="Area2D" parent="Spawns/PhysFan6" unique_id=1478683697 groups=["Entities", "VisualUtilities", "WaypointLocals", "Waypoints"] instance=ExtResource("9_w24ri")]
+physics_interpolation_mode = 2
 position = Vector2(8, -224)
 collision_layer = 16384
 collision_mask = 0
@@ -2254,6 +2404,7 @@ tag_name = "distance"
 lock_x = true
 
 [node name="PhysFan7" type="Area2D" parent="Spawns" unique_id=1856720848 groups=["Entities", "PropSpawns"] instance=ExtResource("7_abxvk")]
+physics_interpolation_mode = 2
 z_index = 999
 position = Vector2(2912, 2272)
 collision_layer = 16384
@@ -2268,6 +2419,7 @@ properties = {
 }
 
 [node name="WindVector" type="Area2D" parent="Spawns/PhysFan7" unique_id=534106130 groups=["Entities", "VUVectors", "VisualUtilities"] instance=ExtResource("8_lqyxl")]
+physics_interpolation_mode = 2
 position = Vector2(8, 8)
 collision_layer = 16384
 collision_mask = 0
@@ -2278,6 +2430,7 @@ snap_degrees = 90.0
 movement_locked = true
 
 [node name="Distance" type="Area2D" parent="Spawns/PhysFan7" unique_id=1102033322 groups=["Entities", "VisualUtilities", "WaypointLocals", "Waypoints"] instance=ExtResource("9_w24ri")]
+physics_interpolation_mode = 2
 position = Vector2(8, -224)
 collision_layer = 16384
 collision_mask = 0
@@ -2286,6 +2439,7 @@ tag_name = "distance"
 lock_x = true
 
 [node name="PhysFan8" type="Area2D" parent="Spawns" unique_id=1130586463 groups=["Entities", "PropSpawns"] instance=ExtResource("7_abxvk")]
+physics_interpolation_mode = 2
 z_index = 999
 position = Vector2(2976, 2096)
 collision_layer = 16384
@@ -2300,6 +2454,7 @@ properties = {
 }
 
 [node name="WindVector" type="Area2D" parent="Spawns/PhysFan8" unique_id=685675188 groups=["Entities", "VUVectors", "VisualUtilities"] instance=ExtResource("8_lqyxl")]
+physics_interpolation_mode = 2
 position = Vector2(8, 8)
 collision_layer = 16384
 collision_mask = 0
@@ -2310,6 +2465,7 @@ snap_degrees = 90.0
 movement_locked = true
 
 [node name="Distance" type="Area2D" parent="Spawns/PhysFan8" unique_id=2110266380 groups=["Entities", "VisualUtilities", "WaypointLocals", "Waypoints"] instance=ExtResource("9_w24ri")]
+physics_interpolation_mode = 2
 position = Vector2(8, -224)
 collision_layer = 16384
 collision_mask = 0
@@ -2318,6 +2474,7 @@ tag_name = "distance"
 lock_x = true
 
 [node name="PhysFan9" type="Area2D" parent="Spawns" unique_id=1603506722 groups=["Entities", "PropSpawns"] instance=ExtResource("7_abxvk")]
+physics_interpolation_mode = 2
 z_index = 999
 position = Vector2(2912, 1912)
 collision_layer = 16384
@@ -2332,6 +2489,7 @@ properties = {
 }
 
 [node name="WindVector" type="Area2D" parent="Spawns/PhysFan9" unique_id=225670724 groups=["Entities", "VUVectors", "VisualUtilities"] instance=ExtResource("8_lqyxl")]
+physics_interpolation_mode = 2
 position = Vector2(8, 8)
 collision_layer = 16384
 collision_mask = 0
@@ -2342,6 +2500,7 @@ snap_degrees = 90.0
 movement_locked = true
 
 [node name="Distance" type="Area2D" parent="Spawns/PhysFan9" unique_id=168715441 groups=["Entities", "VisualUtilities", "WaypointLocals", "Waypoints"] instance=ExtResource("9_w24ri")]
+physics_interpolation_mode = 2
 position = Vector2(8, -184)
 collision_layer = 16384
 collision_mask = 0
@@ -2350,6 +2509,7 @@ tag_name = "distance"
 lock_x = true
 
 [node name="PhysFan10" type="Area2D" parent="Spawns" unique_id=1803349383 groups=["Entities", "PropSpawns"] instance=ExtResource("7_abxvk")]
+physics_interpolation_mode = 2
 z_index = 999
 position = Vector2(2976, 1728)
 collision_layer = 16384
@@ -2364,6 +2524,7 @@ properties = {
 }
 
 [node name="WindVector" type="Area2D" parent="Spawns/PhysFan10" unique_id=1897119209 groups=["Entities", "VUVectors", "VisualUtilities"] instance=ExtResource("8_lqyxl")]
+physics_interpolation_mode = 2
 position = Vector2(8, 8)
 collision_layer = 16384
 collision_mask = 0
@@ -2374,6 +2535,7 @@ snap_degrees = 90.0
 movement_locked = true
 
 [node name="Distance" type="Area2D" parent="Spawns/PhysFan10" unique_id=1618756613 groups=["Entities", "VisualUtilities", "WaypointLocals", "Waypoints"] instance=ExtResource("9_w24ri")]
+physics_interpolation_mode = 2
 position = Vector2(8, -224)
 collision_layer = 16384
 collision_mask = 0
@@ -2382,6 +2544,7 @@ tag_name = "distance"
 lock_x = true
 
 [node name="PhysFan11" type="Area2D" parent="Spawns" unique_id=1902296469 groups=["Entities", "PropSpawns"] instance=ExtResource("7_abxvk")]
+physics_interpolation_mode = 2
 z_index = 999
 position = Vector2(2320, 3856)
 collision_layer = 16384
@@ -2396,6 +2559,7 @@ properties = {
 }
 
 [node name="WindVector" type="Area2D" parent="Spawns/PhysFan11" unique_id=1796642853 groups=["Entities", "VUVectors", "VisualUtilities"] instance=ExtResource("8_lqyxl")]
+physics_interpolation_mode = 2
 position = Vector2(8, 8)
 collision_layer = 16384
 collision_mask = 0
@@ -2406,6 +2570,7 @@ snap_degrees = 90.0
 movement_locked = true
 
 [node name="Distance" type="Area2D" parent="Spawns/PhysFan11" unique_id=2038723366 groups=["Entities", "VisualUtilities", "WaypointLocals", "Waypoints"] instance=ExtResource("9_w24ri")]
+physics_interpolation_mode = 2
 position = Vector2(7.9999876, -272.1176)
 collision_layer = 16384
 collision_mask = 0
@@ -2414,6 +2579,7 @@ tag_name = "distance"
 lock_x = true
 
 [node name="PhysFan12" type="Area2D" parent="Spawns" unique_id=1515702391 groups=["Entities", "PropSpawns"] instance=ExtResource("7_abxvk")]
+physics_interpolation_mode = 2
 z_index = 999
 position = Vector2(2336, 3856)
 collision_layer = 16384
@@ -2428,6 +2594,7 @@ properties = {
 }
 
 [node name="WindVector" type="Area2D" parent="Spawns/PhysFan12" unique_id=959012209 groups=["Entities", "VUVectors", "VisualUtilities"] instance=ExtResource("8_lqyxl")]
+physics_interpolation_mode = 2
 position = Vector2(8, 8)
 collision_layer = 16384
 collision_mask = 0
@@ -2438,6 +2605,7 @@ snap_degrees = 90.0
 movement_locked = true
 
 [node name="Distance" type="Area2D" parent="Spawns/PhysFan12" unique_id=756375264 groups=["Entities", "VisualUtilities", "WaypointLocals", "Waypoints"] instance=ExtResource("9_w24ri")]
+physics_interpolation_mode = 2
 position = Vector2(7.9999876, -272.1176)
 collision_layer = 16384
 collision_mask = 0
@@ -2446,6 +2614,7 @@ tag_name = "distance"
 lock_x = true
 
 [node name="PhysFan13" type="Area2D" parent="Spawns" unique_id=1002005652 groups=["Entities", "PropSpawns"] instance=ExtResource("7_abxvk")]
+physics_interpolation_mode = 2
 z_index = 999
 position = Vector2(2384, 3856)
 collision_layer = 16384
@@ -2460,6 +2629,7 @@ properties = {
 }
 
 [node name="WindVector" type="Area2D" parent="Spawns/PhysFan13" unique_id=568865556 groups=["Entities", "VUVectors", "VisualUtilities"] instance=ExtResource("8_lqyxl")]
+physics_interpolation_mode = 2
 position = Vector2(8, 8)
 collision_layer = 16384
 collision_mask = 0
@@ -2470,6 +2640,7 @@ snap_degrees = 90.0
 movement_locked = true
 
 [node name="Distance" type="Area2D" parent="Spawns/PhysFan13" unique_id=830533837 groups=["Entities", "VisualUtilities", "WaypointLocals", "Waypoints"] instance=ExtResource("9_w24ri")]
+physics_interpolation_mode = 2
 position = Vector2(7.9999876, -272.1176)
 collision_layer = 16384
 collision_mask = 0
@@ -2478,6 +2649,7 @@ tag_name = "distance"
 lock_x = true
 
 [node name="PhysFan14" type="Area2D" parent="Spawns" unique_id=1520651432 groups=["Entities", "PropSpawns"] instance=ExtResource("7_abxvk")]
+physics_interpolation_mode = 2
 z_index = 999
 position = Vector2(2368, 3856)
 collision_layer = 16384
@@ -2492,6 +2664,7 @@ properties = {
 }
 
 [node name="WindVector" type="Area2D" parent="Spawns/PhysFan14" unique_id=60883095 groups=["Entities", "VUVectors", "VisualUtilities"] instance=ExtResource("8_lqyxl")]
+physics_interpolation_mode = 2
 position = Vector2(8, 8)
 collision_layer = 16384
 collision_mask = 0
@@ -2502,6 +2675,7 @@ snap_degrees = 90.0
 movement_locked = true
 
 [node name="Distance" type="Area2D" parent="Spawns/PhysFan14" unique_id=489795210 groups=["Entities", "VisualUtilities", "WaypointLocals", "Waypoints"] instance=ExtResource("9_w24ri")]
+physics_interpolation_mode = 2
 position = Vector2(7.9999876, -272.1176)
 collision_layer = 16384
 collision_mask = 0
@@ -2510,6 +2684,7 @@ tag_name = "distance"
 lock_x = true
 
 [node name="PhysFan15" type="Area2D" parent="Spawns" unique_id=1365610674 groups=["Entities", "PropSpawns"] instance=ExtResource("7_abxvk")]
+physics_interpolation_mode = 2
 z_index = 999
 position = Vector2(2352, 3856)
 collision_layer = 16384
@@ -2524,6 +2699,7 @@ properties = {
 }
 
 [node name="WindVector" type="Area2D" parent="Spawns/PhysFan15" unique_id=8284770 groups=["Entities", "VUVectors", "VisualUtilities"] instance=ExtResource("8_lqyxl")]
+physics_interpolation_mode = 2
 position = Vector2(8, 8)
 collision_layer = 16384
 collision_mask = 0
@@ -2534,6 +2710,7 @@ snap_degrees = 90.0
 movement_locked = true
 
 [node name="Distance" type="Area2D" parent="Spawns/PhysFan15" unique_id=1015594458 groups=["Entities", "VisualUtilities", "WaypointLocals", "Waypoints"] instance=ExtResource("9_w24ri")]
+physics_interpolation_mode = 2
 position = Vector2(7.9999876, -272.1176)
 collision_layer = 16384
 collision_mask = 0
@@ -2542,6 +2719,7 @@ tag_name = "distance"
 lock_x = true
 
 [node name="SwitchLever1" type="Area2D" parent="Spawns" unique_id=1617188391 groups=["Entities", "PropSpawns"] instance=ExtResource("7_abxvk")]
+physics_interpolation_mode = 2
 z_index = 999
 position = Vector2(2128, 3808)
 collision_layer = 16384
@@ -2559,6 +2737,7 @@ properties = {
 }
 
 [node name="PhysFan16" type="Area2D" parent="Spawns" unique_id=1389837284 groups=["Entities", "PropSpawns"] instance=ExtResource("7_abxvk")]
+physics_interpolation_mode = 2
 z_index = 999
 position = Vector2(2400, 3552)
 collision_layer = 16384
@@ -2573,16 +2752,18 @@ properties = {
 }
 
 [node name="WindVector" type="Area2D" parent="Spawns/PhysFan16" unique_id=2014510611 groups=["Entities", "VUVectors", "VisualUtilities"] instance=ExtResource("8_lqyxl")]
+physics_interpolation_mode = 2
 position = Vector2(8, 8)
 collision_layer = 16384
 collision_mask = 0
 script = ExtResource("14_vph1e")
 tag_name = "wind_dir"
-direction = Vector2(-1, -8.742278e-08)
+direction = Vector2(-1, 8.742278e-08)
 snap_degrees = 90.0
 movement_locked = true
 
 [node name="Distance" type="Area2D" parent="Spawns/PhysFan16" unique_id=214796942 groups=["Entities", "VisualUtilities", "WaypointLocals", "Waypoints"] instance=ExtResource("9_w24ri")]
+physics_interpolation_mode = 2
 position = Vector2(-736.04346, 8.000065)
 collision_layer = 16384
 collision_mask = 0
@@ -2591,6 +2772,7 @@ tag_name = "distance"
 lock_y = true
 
 [node name="PhysFan17" type="Area2D" parent="Spawns" unique_id=1355680238 groups=["Entities", "PropSpawns"] instance=ExtResource("7_abxvk")]
+physics_interpolation_mode = 2
 z_index = 999
 position = Vector2(2400, 3536)
 collision_layer = 16384
@@ -2605,16 +2787,18 @@ properties = {
 }
 
 [node name="WindVector" type="Area2D" parent="Spawns/PhysFan17" unique_id=1452182114 groups=["Entities", "VUVectors", "VisualUtilities"] instance=ExtResource("8_lqyxl")]
+physics_interpolation_mode = 2
 position = Vector2(8, 8)
 collision_layer = 16384
 collision_mask = 0
 script = ExtResource("14_vph1e")
 tag_name = "wind_dir"
-direction = Vector2(-1, 8.742278e-08)
+direction = Vector2(-1, -8.742278e-08)
 snap_degrees = 90.0
 movement_locked = true
 
 [node name="Distance" type="Area2D" parent="Spawns/PhysFan17" unique_id=1481734757 groups=["Entities", "VisualUtilities", "WaypointLocals", "Waypoints"] instance=ExtResource("9_w24ri")]
+physics_interpolation_mode = 2
 position = Vector2(-736.04346, 7.999935)
 collision_layer = 16384
 collision_mask = 0
@@ -2623,6 +2807,7 @@ tag_name = "distance"
 lock_y = true
 
 [node name="PhysFan18" type="Area2D" parent="Spawns" unique_id=612239442 groups=["Entities", "PropSpawns"] instance=ExtResource("7_abxvk")]
+physics_interpolation_mode = 2
 z_index = 999
 position = Vector2(2400, 3520)
 collision_layer = 16384
@@ -2637,16 +2822,18 @@ properties = {
 }
 
 [node name="WindVector" type="Area2D" parent="Spawns/PhysFan18" unique_id=1641478687 groups=["Entities", "VUVectors", "VisualUtilities"] instance=ExtResource("8_lqyxl")]
+physics_interpolation_mode = 2
 position = Vector2(8, 8)
 collision_layer = 16384
 collision_mask = 0
 script = ExtResource("14_vph1e")
 tag_name = "wind_dir"
-direction = Vector2(-1, 8.742278e-08)
+direction = Vector2(-1, -8.742278e-08)
 snap_degrees = 90.0
 movement_locked = true
 
 [node name="Distance" type="Area2D" parent="Spawns/PhysFan18" unique_id=805579846 groups=["Entities", "VisualUtilities", "WaypointLocals", "Waypoints"] instance=ExtResource("9_w24ri")]
+physics_interpolation_mode = 2
 position = Vector2(-736.04346, 7.999935)
 collision_layer = 16384
 collision_mask = 0
@@ -2655,6 +2842,7 @@ tag_name = "distance"
 lock_y = true
 
 [node name="PhysFanNoSwitch" type="Area2D" parent="Spawns" unique_id=1864215894 groups=["Entities", "PropSpawns"] instance=ExtResource("7_abxvk")]
+physics_interpolation_mode = 2
 z_index = 999
 position = Vector2(1840, 3568)
 collision_layer = 16384
@@ -2670,6 +2858,7 @@ properties = {
 }
 
 [node name="WindVector" type="Area2D" parent="Spawns/PhysFanNoSwitch" unique_id=546854913 groups=["Entities", "VUVectors", "VisualUtilities"] instance=ExtResource("8_lqyxl")]
+physics_interpolation_mode = 2
 position = Vector2(8, 8)
 collision_layer = 16384
 collision_mask = 0
@@ -2680,6 +2869,7 @@ snap_degrees = 90.0
 movement_locked = true
 
 [node name="Distance" type="Area2D" parent="Spawns/PhysFanNoSwitch" unique_id=1289601763 groups=["Entities", "VisualUtilities", "WaypointLocals", "Waypoints"] instance=ExtResource("9_w24ri")]
+physics_interpolation_mode = 2
 position = Vector2(8, -216)
 collision_layer = 16384
 collision_mask = 0
@@ -2688,6 +2878,7 @@ tag_name = "distance"
 lock_x = true
 
 [node name="PhysFanNoSwitch1" type="Area2D" parent="Spawns" unique_id=1863046548 groups=["Entities", "PropSpawns"] instance=ExtResource("7_abxvk")]
+physics_interpolation_mode = 2
 z_index = 999
 position = Vector2(1824, 3568)
 collision_layer = 16384
@@ -2703,6 +2894,7 @@ properties = {
 }
 
 [node name="WindVector" type="Area2D" parent="Spawns/PhysFanNoSwitch1" unique_id=2020801399 groups=["Entities", "VUVectors", "VisualUtilities"] instance=ExtResource("8_lqyxl")]
+physics_interpolation_mode = 2
 position = Vector2(8, 8)
 collision_layer = 16384
 collision_mask = 0
@@ -2713,6 +2905,7 @@ snap_degrees = 90.0
 movement_locked = true
 
 [node name="Distance" type="Area2D" parent="Spawns/PhysFanNoSwitch1" unique_id=386084562 groups=["Entities", "VisualUtilities", "WaypointLocals", "Waypoints"] instance=ExtResource("9_w24ri")]
+physics_interpolation_mode = 2
 position = Vector2(8, -216)
 collision_layer = 16384
 collision_mask = 0
@@ -2721,6 +2914,7 @@ tag_name = "distance"
 lock_x = true
 
 [node name="PhysFanNoSwitch2" type="Area2D" parent="Spawns" unique_id=675150268 groups=["Entities", "PropSpawns"] instance=ExtResource("7_abxvk")]
+physics_interpolation_mode = 2
 z_index = 999
 position = Vector2(1808, 3568)
 collision_layer = 16384
@@ -2736,6 +2930,7 @@ properties = {
 }
 
 [node name="WindVector" type="Area2D" parent="Spawns/PhysFanNoSwitch2" unique_id=1386059763 groups=["Entities", "VUVectors", "VisualUtilities"] instance=ExtResource("8_lqyxl")]
+physics_interpolation_mode = 2
 position = Vector2(8, 8)
 collision_layer = 16384
 collision_mask = 0
@@ -2746,6 +2941,7 @@ snap_degrees = 90.0
 movement_locked = true
 
 [node name="Distance" type="Area2D" parent="Spawns/PhysFanNoSwitch2" unique_id=1112810380 groups=["Entities", "VisualUtilities", "WaypointLocals", "Waypoints"] instance=ExtResource("9_w24ri")]
+physics_interpolation_mode = 2
 position = Vector2(8, -216)
 collision_layer = 16384
 collision_mask = 0
@@ -2754,6 +2950,7 @@ tag_name = "distance"
 lock_x = true
 
 [node name="AmmoRefill" type="Area2D" parent="Spawns" unique_id=759871816 groups=["Entities", "PropSpawns"] instance=ExtResource("7_abxvk")]
+physics_interpolation_mode = 2
 z_index = 999
 position = Vector2(3040, 4144)
 collision_layer = 16384
@@ -2767,6 +2964,7 @@ properties = {
 }
 
 [node name="PhysFan19" type="Area2D" parent="Spawns" unique_id=104850805 groups=["Entities", "PropSpawns"] instance=ExtResource("7_abxvk")]
+physics_interpolation_mode = 2
 z_index = 999
 position = Vector2(1792, 3296)
 collision_layer = 16384
@@ -2781,6 +2979,7 @@ properties = {
 }
 
 [node name="WindVector" type="Area2D" parent="Spawns/PhysFan19" unique_id=989304502 groups=["Entities", "VUVectors", "VisualUtilities"] instance=ExtResource("8_lqyxl")]
+physics_interpolation_mode = 2
 position = Vector2(8, 8)
 collision_layer = 16384
 collision_mask = 0
@@ -2790,6 +2989,7 @@ snap_degrees = 90.0
 movement_locked = true
 
 [node name="Distance" type="Area2D" parent="Spawns/PhysFan19" unique_id=921260945 groups=["Entities", "VisualUtilities", "WaypointLocals", "Waypoints"] instance=ExtResource("9_w24ri")]
+physics_interpolation_mode = 2
 position = Vector2(1120, 8)
 collision_layer = 16384
 collision_mask = 0
@@ -2798,6 +2998,7 @@ tag_name = "distance"
 lock_y = true
 
 [node name="PhysFan20" type="Area2D" parent="Spawns" unique_id=1333348790 groups=["Entities", "PropSpawns"] instance=ExtResource("7_abxvk")]
+physics_interpolation_mode = 2
 z_index = 999
 position = Vector2(1792, 3312)
 collision_layer = 16384
@@ -2812,6 +3013,7 @@ properties = {
 }
 
 [node name="WindVector" type="Area2D" parent="Spawns/PhysFan20" unique_id=289885136 groups=["Entities", "VUVectors", "VisualUtilities"] instance=ExtResource("8_lqyxl")]
+physics_interpolation_mode = 2
 position = Vector2(8, 8)
 collision_layer = 16384
 collision_mask = 0
@@ -2821,6 +3023,7 @@ snap_degrees = 90.0
 movement_locked = true
 
 [node name="Distance" type="Area2D" parent="Spawns/PhysFan20" unique_id=63092328 groups=["Entities", "VisualUtilities", "WaypointLocals", "Waypoints"] instance=ExtResource("9_w24ri")]
+physics_interpolation_mode = 2
 position = Vector2(1120, 8)
 collision_layer = 16384
 collision_mask = 0
@@ -2829,6 +3032,7 @@ tag_name = "distance"
 lock_y = true
 
 [node name="PhysFan21" type="Area2D" parent="Spawns" unique_id=1881384657 groups=["Entities", "PropSpawns"] instance=ExtResource("7_abxvk")]
+physics_interpolation_mode = 2
 z_index = 999
 position = Vector2(1792, 3328)
 collision_layer = 16384
@@ -2843,6 +3047,7 @@ properties = {
 }
 
 [node name="WindVector" type="Area2D" parent="Spawns/PhysFan21" unique_id=1238152626 groups=["Entities", "VUVectors", "VisualUtilities"] instance=ExtResource("8_lqyxl")]
+physics_interpolation_mode = 2
 position = Vector2(8, 8)
 collision_layer = 16384
 collision_mask = 0
@@ -2852,6 +3057,7 @@ snap_degrees = 90.0
 movement_locked = true
 
 [node name="Distance" type="Area2D" parent="Spawns/PhysFan21" unique_id=1379583735 groups=["Entities", "VisualUtilities", "WaypointLocals", "Waypoints"] instance=ExtResource("9_w24ri")]
+physics_interpolation_mode = 2
 position = Vector2(1120, 8)
 collision_layer = 16384
 collision_mask = 0
@@ -2860,6 +3066,7 @@ tag_name = "distance"
 lock_y = true
 
 [node name="PhysFan22" type="Area2D" parent="Spawns" unique_id=1946603517 groups=["Entities", "PropSpawns"] instance=ExtResource("7_abxvk")]
+physics_interpolation_mode = 2
 z_index = 999
 position = Vector2(2352, 3456)
 collision_layer = 16384
@@ -2874,6 +3081,7 @@ properties = {
 }
 
 [node name="WindVector" type="Area2D" parent="Spawns/PhysFan22" unique_id=217518436 groups=["Entities", "VUVectors", "VisualUtilities"] instance=ExtResource("8_lqyxl")]
+physics_interpolation_mode = 2
 position = Vector2(8, 8)
 collision_layer = 16384
 collision_mask = 0
@@ -2884,6 +3092,7 @@ snap_degrees = 90.0
 movement_locked = true
 
 [node name="Distance" type="Area2D" parent="Spawns/PhysFan22" unique_id=2053351001 groups=["Entities", "VisualUtilities", "WaypointLocals", "Waypoints"] instance=ExtResource("9_w24ri")]
+physics_interpolation_mode = 2
 position = Vector2(8, -120)
 collision_layer = 16384
 collision_mask = 0
@@ -2891,6 +3100,7 @@ script = ExtResource("16_n4won")
 tag_name = "distance"
 
 [node name="PhysFan23" type="Area2D" parent="Spawns" unique_id=1281673075 groups=["Entities", "PropSpawns"] instance=ExtResource("7_abxvk")]
+physics_interpolation_mode = 2
 z_index = 999
 position = Vector2(2272, 3456)
 collision_layer = 16384
@@ -2905,6 +3115,7 @@ properties = {
 }
 
 [node name="WindVector" type="Area2D" parent="Spawns/PhysFan23" unique_id=1119051159 groups=["Entities", "VUVectors", "VisualUtilities"] instance=ExtResource("8_lqyxl")]
+physics_interpolation_mode = 2
 position = Vector2(8, 8)
 collision_layer = 16384
 collision_mask = 0
@@ -2915,6 +3126,7 @@ snap_degrees = 90.0
 movement_locked = true
 
 [node name="Distance" type="Area2D" parent="Spawns/PhysFan23" unique_id=1873699954 groups=["Entities", "VisualUtilities", "WaypointLocals", "Waypoints"] instance=ExtResource("9_w24ri")]
+physics_interpolation_mode = 2
 position = Vector2(8, -136)
 collision_layer = 16384
 collision_mask = 0
@@ -2922,6 +3134,7 @@ script = ExtResource("16_n4won")
 tag_name = "distance"
 
 [node name="PhysFan24" type="Area2D" parent="Spawns" unique_id=1375682793 groups=["Entities", "PropSpawns"] instance=ExtResource("7_abxvk")]
+physics_interpolation_mode = 2
 z_index = 999
 position = Vector2(2432, 3456)
 collision_layer = 16384
@@ -2936,6 +3149,7 @@ properties = {
 }
 
 [node name="WindVector" type="Area2D" parent="Spawns/PhysFan24" unique_id=1422221112 groups=["Entities", "VUVectors", "VisualUtilities"] instance=ExtResource("8_lqyxl")]
+physics_interpolation_mode = 2
 position = Vector2(8, 8)
 collision_layer = 16384
 collision_mask = 0
@@ -2946,6 +3160,7 @@ snap_degrees = 90.0
 movement_locked = true
 
 [node name="Distance" type="Area2D" parent="Spawns/PhysFan24" unique_id=1341291897 groups=["Entities", "VisualUtilities", "WaypointLocals", "Waypoints"] instance=ExtResource("9_w24ri")]
+physics_interpolation_mode = 2
 position = Vector2(8, -136)
 collision_layer = 16384
 collision_mask = 0
@@ -2953,6 +3168,7 @@ script = ExtResource("16_n4won")
 tag_name = "distance"
 
 [node name="Gecko3" type="Area2D" parent="Spawns" unique_id=2085721235 groups=["ActorSpawns", "Entities"] instance=ExtResource("10_o3w1u")]
+physics_interpolation_mode = 2
 z_index = 999
 position = Vector2(2192, 2192)
 collision_layer = 16384
@@ -2970,6 +3186,7 @@ properties = {
 }
 
 [node name="NormalVector" type="Area2D" parent="Spawns/Gecko3" unique_id=781694711 groups=["Entities", "VUVectors", "VisualUtilities"] instance=ExtResource("8_lqyxl")]
+physics_interpolation_mode = 2
 position = Vector2(0, -8)
 collision_layer = 16384
 collision_mask = 0
@@ -2978,6 +3195,7 @@ tag_name = "fly"
 movement_locked = true
 
 [node name="CrawlVector" type="Area2D" parent="Spawns/Gecko3" unique_id=1262884911 groups=["Entities", "VUVectors", "VisualUtilities"] instance=ExtResource("8_lqyxl")]
+physics_interpolation_mode = 2
 position = Vector2(0, -8)
 collision_layer = 16384
 collision_mask = 0
@@ -2990,6 +3208,7 @@ movement_locked = true
 color = Color(8.061901e-07, 0.41569918, 0.11087646, 1)
 
 [node name="BreakBlock15" type="Area2D" parent="Spawns" unique_id=1377495551 groups=["Entities", "PropSpawns"] instance=ExtResource("7_abxvk")]
+physics_interpolation_mode = 2
 z_index = 999
 position = Vector2(2032, 1744)
 collision_layer = 16384
@@ -3007,6 +3226,7 @@ properties = {
 }
 
 [node name="Frog6" type="Area2D" parent="Spawns" unique_id=1177256583 groups=["ActorSpawns", "Entities"] instance=ExtResource("10_o3w1u")]
+physics_interpolation_mode = 2
 z_index = 999
 position = Vector2(2584, 2560)
 collision_layer = 16384
@@ -3028,6 +3248,7 @@ properties = {
 }
 
 [node name="LookVector" type="Area2D" parent="Spawns/Frog6" unique_id=1046643909 groups=["Entities", "VUVectors", "VisualUtilities"] instance=ExtResource("8_lqyxl")]
+physics_interpolation_mode = 2
 position = Vector2(0, -7)
 collision_layer = 16384
 collision_mask = 0
@@ -3037,6 +3258,7 @@ snap_degrees = 180.0
 movement_locked = true
 
 [node name="TongueRange" type="Area2D" parent="Spawns/Frog6" unique_id=54904116 groups=["Entities", "VisualUtilities", "WaypointLocals", "Waypoints"] instance=ExtResource("9_w24ri")]
+physics_interpolation_mode = 2
 position = Vector2(-32, -8)
 collision_layer = 16384
 collision_mask = 0
@@ -3045,6 +3267,7 @@ tag_name = "tongue_range"
 lock_y = true
 
 [node name="Child" type="Area2D" parent="Spawns" unique_id=1199277091 groups=["ActorSpawns", "Entities"] instance=ExtResource("10_o3w1u")]
+physics_interpolation_mode = 2
 z_index = 999
 position = Vector2(1656, 2064)
 collision_layer = 16384
@@ -3114,6 +3337,7 @@ properties = {
 size_is_default = false
 
 [node name="PhysFanNoSwitch3" type="Area2D" parent="Spawns" unique_id=2069656269 groups=["Entities", "PropSpawns"] instance=ExtResource("7_abxvk")]
+physics_interpolation_mode = 2
 z_index = 999
 position = Vector2(2112, 2496)
 collision_layer = 16384
@@ -3129,6 +3353,7 @@ properties = {
 }
 
 [node name="WindVector" type="Area2D" parent="Spawns/PhysFanNoSwitch3" unique_id=461151095 groups=["Entities", "VUVectors", "VisualUtilities"] instance=ExtResource("8_lqyxl")]
+physics_interpolation_mode = 2
 position = Vector2(8, 8)
 collision_layer = 16384
 collision_mask = 0
@@ -3139,6 +3364,7 @@ snap_degrees = 90.0
 movement_locked = true
 
 [node name="Distance" type="Area2D" parent="Spawns/PhysFanNoSwitch3" unique_id=618754577 groups=["Entities", "VisualUtilities", "WaypointLocals", "Waypoints"] instance=ExtResource("9_w24ri")]
+physics_interpolation_mode = 2
 position = Vector2(-264, 8)
 collision_layer = 16384
 collision_mask = 0
@@ -3147,6 +3373,7 @@ tag_name = "distance"
 lock_x = true
 
 [node name="PhysFanNoSwitch4" type="Area2D" parent="Spawns" unique_id=647649248 groups=["Entities", "PropSpawns"] instance=ExtResource("7_abxvk")]
+physics_interpolation_mode = 2
 z_index = 999
 position = Vector2(2128, 2256)
 collision_layer = 16384
@@ -3162,16 +3389,18 @@ properties = {
 }
 
 [node name="WindVector" type="Area2D" parent="Spawns/PhysFanNoSwitch4" unique_id=1761610087 groups=["Entities", "VUVectors", "VisualUtilities"] instance=ExtResource("8_lqyxl")]
+physics_interpolation_mode = 2
 position = Vector2(8, 8)
 collision_layer = 16384
 collision_mask = 0
 script = ExtResource("14_vph1e")
 tag_name = "wind_dir"
-direction = Vector2(-1, 8.742278e-08)
+direction = Vector2(-1, -8.742278e-08)
 snap_degrees = 90.0
 movement_locked = true
 
 [node name="Distance" type="Area2D" parent="Spawns/PhysFanNoSwitch4" unique_id=1777500801 groups=["Entities", "VisualUtilities", "WaypointLocals", "Waypoints"] instance=ExtResource("9_w24ri")]
+physics_interpolation_mode = 2
 position = Vector2(-264, 8)
 collision_layer = 16384
 collision_mask = 0
@@ -3180,6 +3409,7 @@ tag_name = "distance"
 lock_x = true
 
 [node name="PhysFanNoSwitch5" type="Area2D" parent="Spawns" unique_id=1793867405 groups=["Entities", "PropSpawns"] instance=ExtResource("7_abxvk")]
+physics_interpolation_mode = 2
 z_index = 999
 position = Vector2(1888, 2240)
 collision_layer = 16384
@@ -3195,6 +3425,7 @@ properties = {
 }
 
 [node name="WindVector" type="Area2D" parent="Spawns/PhysFanNoSwitch5" unique_id=1372888117 groups=["Entities", "VUVectors", "VisualUtilities"] instance=ExtResource("8_lqyxl")]
+physics_interpolation_mode = 2
 position = Vector2(8, 8)
 collision_layer = 16384
 collision_mask = 0
@@ -3205,6 +3436,7 @@ snap_degrees = 90.0
 movement_locked = true
 
 [node name="Distance" type="Area2D" parent="Spawns/PhysFanNoSwitch5" unique_id=211428875 groups=["Entities", "VisualUtilities", "WaypointLocals", "Waypoints"] instance=ExtResource("9_w24ri")]
+physics_interpolation_mode = 2
 position = Vector2(-264, 8)
 collision_layer = 16384
 collision_mask = 0
@@ -3213,6 +3445,7 @@ tag_name = "distance"
 lock_x = true
 
 [node name="PhysFanNoSwitch6" type="Area2D" parent="Spawns" unique_id=1042433166 groups=["Entities", "PropSpawns"] instance=ExtResource("7_abxvk")]
+physics_interpolation_mode = 2
 z_index = 999
 position = Vector2(1872, 2480)
 collision_layer = 16384
@@ -3228,6 +3461,7 @@ properties = {
 }
 
 [node name="WindVector" type="Area2D" parent="Spawns/PhysFanNoSwitch6" unique_id=380623926 groups=["Entities", "VUVectors", "VisualUtilities"] instance=ExtResource("8_lqyxl")]
+physics_interpolation_mode = 2
 position = Vector2(8, 8)
 collision_layer = 16384
 collision_mask = 0
@@ -3237,6 +3471,7 @@ snap_degrees = 90.0
 movement_locked = true
 
 [node name="Distance" type="Area2D" parent="Spawns/PhysFanNoSwitch6" unique_id=106583608 groups=["Entities", "VisualUtilities", "WaypointLocals", "Waypoints"] instance=ExtResource("9_w24ri")]
+physics_interpolation_mode = 2
 position = Vector2(-264, 8)
 collision_layer = 16384
 collision_mask = 0
@@ -3245,6 +3480,7 @@ tag_name = "distance"
 lock_x = true
 
 [node name="Climber" type="Area2D" parent="Spawns" unique_id=1751646154 groups=["ActorSpawns", "Entities"] instance=ExtResource("10_o3w1u")]
+physics_interpolation_mode = 2
 z_index = 999
 position = Vector2(2008, 2448)
 collision_layer = 16384
@@ -3268,6 +3504,7 @@ properties = {
 }
 
 [node name="Climber1" type="Area2D" parent="Spawns" unique_id=1545922536 groups=["ActorSpawns", "Entities"] instance=ExtResource("10_o3w1u")]
+physics_interpolation_mode = 2
 z_index = 999
 position = Vector2(2008, 2304)
 collision_layer = 16384
@@ -3291,6 +3528,7 @@ properties = {
 }
 
 [node name="Climber2" type="Area2D" parent="Spawns" unique_id=73940858 groups=["ActorSpawns", "Entities"] instance=ExtResource("10_o3w1u")]
+physics_interpolation_mode = 2
 z_index = 999
 position = Vector2(2080, 2376)
 collision_layer = 16384
@@ -3314,6 +3552,7 @@ properties = {
 }
 
 [node name="Climber3" type="Area2D" parent="Spawns" unique_id=1850823363 groups=["ActorSpawns", "Entities"] instance=ExtResource("10_o3w1u")]
+physics_interpolation_mode = 2
 z_index = 999
 position = Vector2(1936, 2376)
 collision_layer = 16384
@@ -3337,6 +3576,7 @@ properties = {
 }
 
 [node name="BreakBlockExperience8" type="Area2D" parent="Spawns" unique_id=72076153 groups=["Entities", "PropSpawns"] instance=ExtResource("7_abxvk")]
+physics_interpolation_mode = 2
 z_index = 999
 position = Vector2(1984, 2352)
 collision_layer = 16384
@@ -3355,6 +3595,7 @@ properties = {
 }
 
 [node name="BreakBlockExperience9" type="Area2D" parent="Spawns" unique_id=1305878366 groups=["Entities", "PropSpawns"] instance=ExtResource("7_abxvk")]
+physics_interpolation_mode = 2
 z_index = 999
 position = Vector2(1984, 2336)
 collision_layer = 16384
@@ -3373,6 +3614,7 @@ properties = {
 }
 
 [node name="BreakBlockExperience10" type="Area2D" parent="Spawns" unique_id=1442783847 groups=["Entities", "PropSpawns"] instance=ExtResource("7_abxvk")]
+physics_interpolation_mode = 2
 z_index = 999
 position = Vector2(2000, 2352)
 collision_layer = 16384
@@ -3391,6 +3633,7 @@ properties = {
 }
 
 [node name="BreakBlockExperience11" type="Area2D" parent="Spawns" unique_id=356086062 groups=["Entities", "PropSpawns"] instance=ExtResource("7_abxvk")]
+physics_interpolation_mode = 2
 z_index = 999
 position = Vector2(2000, 2336)
 collision_layer = 16384
@@ -3409,6 +3652,7 @@ properties = {
 }
 
 [node name="AmmoRefill1" type="Area2D" parent="Spawns" unique_id=1479922290 groups=["Entities", "PropSpawns"] instance=ExtResource("7_abxvk")]
+physics_interpolation_mode = 2
 z_index = 999
 position = Vector2(1984, 2400)
 collision_layer = 16384
@@ -3422,6 +3666,7 @@ properties = {
 }
 
 [node name="Lantern1" type="Area2D" parent="Spawns" unique_id=64473949 groups=["Entities", "PropSpawns"] instance=ExtResource("7_abxvk")]
+physics_interpolation_mode = 2
 z_index = 999
 position = Vector2(2016, 2384)
 collision_layer = 16384
@@ -3510,6 +3755,7 @@ size_is_default = false
 [node name="Waypoints" type="Node2D" parent="." unique_id=1416282546]
 
 [node name="VanishingPoint" type="Area2D" parent="." unique_id=9884164 groups=["VanishingPoints"] instance=ExtResource("11_pds8g")]
+physics_interpolation_mode = 2
 z_index = 999
 position = Vector2(2264, 2072)
 collision_layer = 16384
@@ -3517,6 +3763,7 @@ collision_mask = 0
 script = ExtResource("22_coctk")
 
 [node name="SpawnPoint" type="Area2D" parent="." unique_id=422711910 groups=["SpawnPoints"] instance=ExtResource("12_nmt4o")]
+physics_interpolation_mode = 2
 position = Vector2(2152, 1464)
 collision_layer = 16384
 collision_mask = 0
