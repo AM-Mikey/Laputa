@@ -4,6 +4,7 @@ const ICON = preload("res://assets/Icon/BossIcon.png")
 const FLARE_BULLET = preload("res://src/Bullet/Enemy/Flare.tscn")
 const SPARK = preload("res://src/Bullet/Enemy/Spark.tscn")
 const SMOKE = preload("res://src/Effect/GunSmoke.tscn")
+const MALFUNCTION_SPARK = preload("res://src/Effect/BulletFizzleDistance.tscn")
 
 @onready var ap = $AnimationPlayer
 
@@ -11,6 +12,8 @@ const SMOKE = preload("res://src/Effect/GunSmoke.tscn")
 	set(val):
 		gun_nozzle_position = val
 		update_animation()
+var reload_sound = null
+
 
 var fly_speed: = Vector2(60.0, 60.0)
 var take_off_speed: = 200.0
@@ -29,7 +32,7 @@ var phase_2_active := false
 var reloading: = false
 
 func setup():
-	hp = 40
+	hp = 80
 	max_hp = 80
 	w.emit_signal("finished_spawn_entities_step")
 
@@ -52,6 +55,10 @@ func _on_hit(damage, _blood_direction, _hitbox):
 
 func do_death_animation():
 	#Spawn Smoke
+	$PropellerLoop.stop()
+	$PropellerRevLoop.stop()
+	sm.change_state("cutscene")
+	ap.play("fly")
 	process_mode = ProcessMode.PROCESS_MODE_DISABLED
 	for i in range(0, 25):
 		var sound = am.play("enemy_die", null, null)
@@ -65,6 +72,7 @@ func do_death_animation():
 				sound.volume_db = 5.0
 
 	process_mode = ProcessMode.PROCESS_MODE_INHERIT
+
 
 
 ### UTILITY ###
@@ -96,6 +104,17 @@ func fire(dir):
 	am.play("boss_treasure_hunter_flare_shot", self, null, 2.0)
 	w.player_front.add_child(flare_shot)
 
+func reload():
+	ap.play("reload")
+	if reload_sound:
+		reload_sound.queue_free()
+		reload_sound = null
+	reload_sound = am.play("boss_treasure_hunter_flare_reload", self, null, 5.0)
+	reload_sound.pitch_scale = 1.2
+	reload_sound.finished.connect(set.bind("reload_sound", null))
+	reload_sound.tree_exiting.connect(set.bind("reload_sound", null))
+
+
 func fire_spark(force: Vector2):
 	var spark = SPARK.instantiate()
 	spark.velocity = force
@@ -108,15 +127,30 @@ func create_vfx(effect_name: String, pos: Vector2):
 		"explosion":
 			var explosion = EXPLOSION.instantiate()
 			explosion.global_position = pos
-			var explode_sound = am.play("explode", self, null, 3.0)
+			var explode_sound = am.play("explode", self, null, 5.0)
 			if explode_sound:
-				explode_sound.volume_db = 5.0
 				explode_sound.max_distance = 2000.0
 			w.middle_front.add_child(explosion)
 		"smoke":
 			var smoke = SMOKE.instantiate()
 			smoke.global_position = pos
 			w.middle_front.add_child(smoke)
+		"malfunction_spark":
+			var malfunction_spark = MALFUNCTION_SPARK.instantiate()
+			malfunction_spark.global_position = pos
+			w.middle_front.add_child(malfunction_spark)
+
+func play_sound_2d(sfx_name: String, volume = 0.0, pitch := 1.0, pitch_spread: = 0.0):
+	var sound = am.play(sfx_name, self)
+	if sound:
+		sound.volume_db = volume
+		sound.pitch_scale = pitch + randf_range(-pitch_spread / 2.0, pitch_spread / 2.0)
+
+func play_sound_rev(start := true):
+	var pitch = 1.0 if start else 0.6
+	var time_play : = 0.5
+	var sound = am.play("boss_treasure_hunter_flare_propeller_rev", self, null, 5.0, 0.0)
+	sound.pitch_scale = pitch
 
 func update_animation():
 	if is_node_ready():
@@ -139,6 +173,10 @@ func is_near_x(target_x: float) -> bool:
 	return abs(global_position.x - target_x) <= 20.0
 
 ### SIGNALS ###
+func _on_player_killed():
+	$PropellerLoop.stop()
+	$PropellerRevLoop.stop()
+
 func _on_PlayerDetector_body_entered(_body: Node2D):
 	player_in_close_range = true
 	face_player()

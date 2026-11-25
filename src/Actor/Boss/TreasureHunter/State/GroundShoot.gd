@@ -23,6 +23,8 @@ func _on_FireTimer_timeout():
 		sm.change_state("melee")
 		return
 	main.fire(Vector2(main.look_dir.x, 0.0))
+	#await get_tree().create_timer(0.5).timeout
+	#main.reload()
 
 func _on_FinishTimer_timeout():
 	if main.player_in_close_range:

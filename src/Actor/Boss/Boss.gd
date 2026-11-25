@@ -59,6 +59,8 @@ func _ready(): #Reminder: no function called can use await
 	safe_margin = 0.001
 	hp_bar = BOSS_HEALTH_BAR.instantiate()
 	w.ui.add_child(hp_bar)
+	if pc && !pc.killed.is_connected(_on_player_killed):
+		pc.killed.connect(_on_player_killed)
 	setup()
 	hp_bar.boss = self
 
@@ -286,6 +288,9 @@ func do_drop():
 
 
 ### SIGNALS ###
+func _on_player_killed():
+	pass
+
 
 func _on_hitbox_area_entered(area):
 	if area.get_collision_layer_value(17): #playerhurt

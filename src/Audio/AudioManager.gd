@@ -103,7 +103,10 @@ signal music_fadeout_finished
 	"boss_treasure_hunter_flare_reload": preload("res://assets/SFX/TreasureHunterFlareReload.mp3"),
 	"boss_treasure_hunter_flare_propeller_loop": preload("res://assets/SFX/TreasureHunterPropellerLoop.mp3"),
 	"boss_treasure_hunter_flare_propeller_open": preload("res://assets/SFX/TreasureHunterPropellerOpen.mp3"),
-	"boss_treasure_hunter_flare_propeller_rev": preload("res://assets/SFX/TreasureHunterPropellerRev.mp3"),
+	"boss_treasure_hunter_flare_propeller_rev_start": preload("res://assets/SFX/TreasureHunterPropellerRevStart.mp3"),
+	"boss_treasure_hunter_flare_propeller_rev_loop": preload("res://assets/SFX/TreasureHunterPropellerRevLoop.mp3"),
+	"boss_treasure_hunter_flare_propeller_rev_end": preload("res://assets/SFX/TreasureHunterPropellerRevEnd.mp3"),
+
 	"boss_treasure_hunter_flare_propeller_electric": preload("res://assets/SFX/TreasureHunterElectric.mp3"),
 
 	#"flare_explode": preload("res://assets/SFX/Placeholder/snd_big_crash.ogg"),
@@ -298,7 +301,8 @@ func _clear_player(type, queue_slot):
 			music_queue.erase(queue_slot)
 		"interrupt":
 			interrupt_queue.erase(queue_slot)
-	queue_slot[0].queue_free() #player
+	if queue_slot[0]:
+		queue_slot[0].queue_free() #player
 
 func clear_player_by_node(player_node):
 	for s in sfx_queue:

@@ -14,6 +14,9 @@
 [ext_resource type="Script" uid="uid://brk7rbnuu6omh" path="res://src/Actor/Boss/TreasureHunter/State/Air.gd" id="11_air"]
 [ext_resource type="Script" uid="uid://m1lqjufg0bce" path="res://src/Actor/Boss/TreasureHunter/State/Landing.gd" id="12_landing"]
 [ext_resource type="Script" uid="uid://cwvp2n5a0iofu" path="res://src/Actor/Boss/TreasureHunter/State/TransToPhase2.gd" id="13_0ri4u"]
+[ext_resource type="PackedScene" uid="uid://5f0rh3vdufdg" path="res://src/Audio/PosSFX.tscn" id="15_bf7eb"]
+[ext_resource type="AudioStream" uid="uid://dgfwmtereofk6" path="res://assets/SFX/TreasureHunterPropellerLoop.mp3" id="16_wmy4b"]
+[ext_resource type="AudioStream" uid="uid://dpa10btoljo1q" path="res://assets/SFX/TreasureHunterPropellerRevLoop.mp3" id="17_wmy4b"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_sy72i"]
 size = Vector2(10, 14)
@@ -351,8 +354,8 @@ tracks/1/keys = {
 "values": [0]
 }
 
-[sub_resource type="Animation" id="Animation_dsf6w"]
-resource_name = "fly_fast_spin_start"
+[sub_resource type="Animation" id="Animation_654sa"]
+resource_name = "fly_fast_spin_end"
 length = 0.2
 step = 0.1
 tracks/0/type = "value"
@@ -378,6 +381,63 @@ tracks/1/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [0]
+}
+tracks/2/type = "method"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": ["boss_treasure_hunter_flare_propeller_rev_end", 10.0, 1.0, 0.0],
+"method": &"play_sound_2d"
+}]
+}
+
+[sub_resource type="Animation" id="Animation_dsf6w"]
+resource_name = "fly_fast_spin_start"
+length = 0.4
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"fly_fast_spin_start"]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/2/type = "method"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": ["boss_treasure_hunter_flare_propeller_rev_start", 10.0, 1.0, 0.0],
+"method": &"play_sound_2d"
+}]
 }
 
 [sub_resource type="Animation" id="Animation_mb52v"]
@@ -538,6 +598,20 @@ tracks/1/keys = {
 "update": 1,
 "values": [2, 1, 0]
 }
+tracks/2/type = "method"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": ["boss_treasure_hunter_flare_propeller_open", 0.0, 0.8],
+"method": &"play_sound_2d"
+}]
+}
 
 [sub_resource type="Animation" id="Animation_qtma2"]
 resource_name = "propeller_lunge"
@@ -624,6 +698,20 @@ tracks/1/keys = {
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 1,
 "values": [0, 1, 2]
+}
+tracks/2/type = "method"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": ["boss_treasure_hunter_flare_propeller_open", 0.0, 1.0],
+"method": &"play_sound_2d"
+}]
 }
 
 [sub_resource type="Animation" id="Animation_0ri4u"]
@@ -762,6 +850,7 @@ _data = {
 &"fly": SubResource("Animation_bf7eb"),
 &"fly_backward": SubResource("Animation_wmy4b"),
 &"fly_fast_spin": SubResource("Animation_qcqhg"),
+&"fly_fast_spin_end": SubResource("Animation_654sa"),
 &"fly_fast_spin_start": SubResource("Animation_dsf6w"),
 &"fly_forward": SubResource("Animation_mb52v"),
 &"fly_shoot_down": SubResource("Animation_bgbn8"),
@@ -986,6 +1075,16 @@ monitorable = false
 position = Vector2(-10.5, -14.5)
 shape = SubResource("RectangleShape2D_SwingHitbox")
 debug_color = Color(1, 0, 0, 0.235294)
+
+[node name="PropellerLoop" parent="." unique_id=1094658765 instance=ExtResource("15_bf7eb")]
+stream = ExtResource("16_wmy4b")
+volume_db = 7.0
+bus = &"Master"
+
+[node name="PropellerRevLoop" parent="." unique_id=1609585648 instance=ExtResource("15_bf7eb")]
+stream = ExtResource("17_wmy4b")
+volume_db = 15.0
+bus = &"Master"
 
 [connection signal="animation_finished" from="AnimationPlayer" to="StateMachine/TakeOff" method="_on_AnimationPlayer_animation_finished"]
 [connection signal="animation_finished" from="AnimationPlayer" to="StateMachine/Air" method="_on_AnimationPlayer_animation_finished"]
