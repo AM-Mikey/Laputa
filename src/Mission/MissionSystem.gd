@@ -31,6 +31,8 @@ const MAIN_MISSION = [ #[name, trigger_type, trigger_value, description]
 	"camera related dialog commands demo"],
 	["shop_test", "", "",
 	"test of shopping features"],
+	["init", "", "",
+	"dungeon mission start"],
 ]
 
 var main_mission_stage: Array = MAIN_MISSION[0]

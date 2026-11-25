@@ -1,16 +1,16 @@
 {
-	"scrumm_tip_1":
+	"blab1":
 	"
-	test1
-	",
-
-	"scrumm_tip_2":
-	"
-	test2
+	/newchar,basil,Basil Also talking...
 	",
 	
-	"scrumm_tip_3":
+	"blab2":
 	"
-	test3
+	/newchar,basil,Basil Talking...
+	",
+	
+	"blab3":
+	"
+	test123123...
 	",
 }

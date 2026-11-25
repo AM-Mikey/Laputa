@@ -1,19 +1,14 @@
 {
-
 	"npc_set_main_conversation_queue": {
 		"Main": {
-			"aikka": {
-				"dialog_system_demo_start": "start",
-				"textbox_demo": "textbox_demo",
-				"topics_demo": "topics_demo",
-				"dialog_branching_demo": [["yes_no_demo"], ["options_demo"]],
-				"mission_demo":"mission_demo",
-				"entity_demo": "entity_demo",
-				"camera_demo": "camera_demo",
+			"kida": {
+				"init": "blab1",
+				"end": "blab3",
 			},
-			"tabith": {
-				"dialog_system_demo_start": "waypoint_demo",
-			}
+			"kidb": {
+				"init": "blab2",
+				"end": "blab3",
+			},
 		},
 	},
 }
