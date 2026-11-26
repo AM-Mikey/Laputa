@@ -34,7 +34,7 @@ var phase_2_active := false
 var reloading: = false
 
 func setup():
-	hp = 35
+	hp = 80
 	max_hp = 80
 	w.emit_signal("finished_spawn_entities_step")
 

@@ -29,7 +29,7 @@ music = "train"
 dialog_json = "res://src/Dialog/Village.json"
 mission_level_update = "res://src/Mission/TreasureHunterBossTest.json"
 debug_main_mission_stage_name = "boss_treasure_hunter"
-debug_guns_on_enter = Array[String](["revolver", "speeder", "mpistol", "glauncher", "haymaker", "roberta"])
+debug_guns_on_enter = Array[String](["revolver", "speeder", "mpistol", "glauncher"])
 debug_hp_on_enter = 16
 controller_color_gradient = SubResource("Gradient_nkisl")
 
