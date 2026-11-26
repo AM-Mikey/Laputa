@@ -62,6 +62,9 @@ func wipe():
 	if death_screen_displayed: return
 	pc.z_index = 999
 	w.clear_spawn_layers()
+	death_transition()
+
+func death_transition():
 	var transition = DEATH_TRANSITION.instantiate()
 	transition.z_index = 5
 	transition.process_mode = Node.PROCESS_MODE_ALWAYS
@@ -84,6 +87,9 @@ func bail(do_explosion = true):
 		var explosion = pc.EXPLOSION.instantiate()
 		explosion.position = pc.global_position
 		w.middle_front.add_child(explosion)
+		await get_tree().create_timer(0.2).timeout #Make sure we still get to see the explosion
+		w.clear_spawn_layers()
+		death_transition()
 	death_screen_displayed = true
 	w.ui.add_child(load("res://src/UI/DeathScreen/DeathScreen.tscn").instantiate())
 
