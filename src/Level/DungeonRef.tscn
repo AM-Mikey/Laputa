@@ -360,13 +360,13 @@ collision_layer = 16384
 collision_mask = 0
 script = ExtResource("14_81i1v")
 tag_name = "move_dir"
-direction = Vector2(-1, -8.742278e-08)
+direction = Vector2(-1, 8.742278e-08)
 snap_degrees = 180.0
 
 [node name="Frog" type="Area2D" parent="Spawns" unique_id=1886526963 groups=["ActorSpawns", "Entities"] instance=ExtResource("10_o3w1u")]
 physics_interpolation_mode = 2
 z_index = 999
-position = Vector2(2056, 2064)
+position = Vector2(2040, 2064)
 collision_layer = 16384
 collision_mask = 0
 script = ExtResource("12_iitk5")
@@ -482,7 +482,7 @@ collision_mask = 0
 script = ExtResource("14_81i1v")
 arrow_length = 24.0
 tag_name = "crawl"
-direction = Vector2(-1, 8.742278e-08)
+direction = Vector2(-1, -8.742278e-08)
 snap_degrees = 90.0
 movement_locked = true
 color = Color(8.061901e-07, 0.41569918, 0.11087646, 1)
@@ -513,10 +513,52 @@ collision_layer = 16384
 collision_mask = 0
 script = ExtResource("14_81i1v")
 tag_name = "fly"
-direction = Vector2(-1, 8.742278e-08)
+direction = Vector2(-1, -8.742278e-08)
 movement_locked = true
 
 [node name="CrawlVector" type="Area2D" parent="Spawns/BeetleCrawler2" unique_id=1995528283 groups=["Entities", "VUVectors", "VisualUtilities"] instance=ExtResource("8_lqyxl")]
+physics_interpolation_mode = 2
+position = Vector2(0, -8)
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("14_81i1v")
+arrow_length = 24.0
+tag_name = "crawl"
+direction = Vector2(-4.371139e-08, -1)
+snap_degrees = 90.0
+movement_locked = true
+color = Color(8.061901e-07, 0.41569918, 0.11087646, 1)
+
+[node name="BeetleCrawler3" type="Area2D" parent="Spawns" unique_id=684648525 groups=["ActorSpawns", "Entities"] instance=ExtResource("10_o3w1u")]
+physics_interpolation_mode = 2
+z_index = 999
+position = Vector2(1856, 2168)
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("12_iitk5")
+actor_path = "res://src/Actor/Enemy/BeetleCrawler.tscn"
+properties = {
+"base_gravity": [300.0, 3, ""],
+"debug": [true, 1, ""],
+"difficulty": [0, 2, ""],
+"do_bubbles": [true, 1, ""],
+"editor_hidden": [false, 1, ""],
+"id": [&"BeetleCrawler3", 4, ""],
+"speed": [Vector2(150, 150), 5, ""],
+"water_gravity": [150.0, 3, ""]
+}
+
+[node name="FlyVector" type="Area2D" parent="Spawns/BeetleCrawler3" unique_id=719715047 groups=["Entities", "VUVectors", "VisualUtilities"] instance=ExtResource("8_lqyxl")]
+physics_interpolation_mode = 2
+position = Vector2(0, -8)
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("14_81i1v")
+tag_name = "fly"
+direction = Vector2(-1, 8.742278e-08)
+movement_locked = true
+
+[node name="CrawlVector" type="Area2D" parent="Spawns/BeetleCrawler3" unique_id=2023127291 groups=["Entities", "VUVectors", "VisualUtilities"] instance=ExtResource("8_lqyxl")]
 physics_interpolation_mode = 2
 position = Vector2(0, -8)
 collision_layer = 16384
@@ -558,7 +600,7 @@ collision_layer = 16384
 collision_mask = 0
 script = ExtResource("14_81i1v")
 tag_name = "look"
-direction = Vector2(-1, -8.742278e-08)
+direction = Vector2(-1, 8.742278e-08)
 snap_degrees = 180.0
 movement_locked = true
 
@@ -600,7 +642,7 @@ collision_layer = 16384
 collision_mask = 0
 script = ExtResource("14_81i1v")
 tag_name = "look"
-direction = Vector2(-1, -8.742278e-08)
+direction = Vector2(-1, 8.742278e-08)
 snap_degrees = 180.0
 movement_locked = true
 
@@ -802,7 +844,7 @@ collision_layer = 16384
 collision_mask = 0
 script = ExtResource("14_81i1v")
 tag_name = "look"
-direction = Vector2(-1, 8.742278e-08)
+direction = Vector2(-1, -8.742278e-08)
 snap_degrees = 180.0
 movement_locked = true
 
@@ -1235,7 +1277,7 @@ lock_x = true
 [node name="Gecko" type="Area2D" parent="Spawns" unique_id=1053055613 groups=["ActorSpawns", "Entities"] instance=ExtResource("10_o3w1u")]
 physics_interpolation_mode = 2
 z_index = 999
-position = Vector2(1952, 1816)
+position = Vector2(1992, 1712)
 collision_layer = 16384
 collision_mask = 0
 script = ExtResource("12_iitk5")
@@ -1257,6 +1299,7 @@ collision_layer = 16384
 collision_mask = 0
 script = ExtResource("14_81i1v")
 tag_name = "fly"
+direction = Vector2(-4.371139e-08, 1)
 movement_locked = true
 
 [node name="CrawlVector" type="Area2D" parent="Spawns/Gecko" unique_id=186297956 groups=["Entities", "VUVectors", "VisualUtilities"] instance=ExtResource("8_lqyxl")]
@@ -1267,7 +1310,6 @@ collision_mask = 0
 script = ExtResource("14_81i1v")
 arrow_length = 24.0
 tag_name = "crawl"
-direction = Vector2(-4.371139e-08, 1)
 snap_degrees = 90.0
 movement_locked = true
 color = Color(8.061901e-07, 0.41569918, 0.11087646, 1)
@@ -2375,7 +2417,7 @@ collision_layer = 16384
 collision_mask = 0
 script = ExtResource("14_81i1v")
 tag_name = "wind_dir"
-direction = Vector2(-1, 8.742278e-08)
+direction = Vector2(-1, -8.742278e-08)
 snap_degrees = 90.0
 movement_locked = true
 
@@ -2410,7 +2452,7 @@ collision_layer = 16384
 collision_mask = 0
 script = ExtResource("14_81i1v")
 tag_name = "wind_dir"
-direction = Vector2(-1, -8.742278e-08)
+direction = Vector2(-1, 8.742278e-08)
 snap_degrees = 90.0
 movement_locked = true
 
@@ -2445,7 +2487,7 @@ collision_layer = 16384
 collision_mask = 0
 script = ExtResource("14_81i1v")
 tag_name = "wind_dir"
-direction = Vector2(-1, -8.742278e-08)
+direction = Vector2(-1, 8.742278e-08)
 snap_degrees = 90.0
 movement_locked = true
 
@@ -2990,7 +3032,7 @@ collision_layer = 16384
 collision_mask = 0
 script = ExtResource("14_81i1v")
 tag_name = "wind_dir"
-direction = Vector2(-1, -8.742278e-08)
+direction = Vector2(-1, 8.742278e-08)
 snap_degrees = 90.0
 movement_locked = true
 
@@ -3383,7 +3425,7 @@ properties = {
 [node name="Sentry4" type="Area2D" parent="Spawns" unique_id=145527111 groups=["ActorSpawns", "Entities"] instance=ExtResource("10_o3w1u")]
 physics_interpolation_mode = 2
 z_index = 999
-position = Vector2(1848, 2144)
+position = Vector2(1848, 2080)
 collision_layer = 16384
 collision_mask = 0
 script = ExtResource("12_iitk5")
@@ -3414,7 +3456,7 @@ value = Rect2(-88, -40, 80, 184)
 
 [node name="ShootX" type="Area2D" parent="Spawns/Sentry4" unique_id=1818315730 groups=["Entities", "VisualUtilities", "WaypointLocals", "Waypoints"] instance=ExtResource("9_w24ri")]
 physics_interpolation_mode = 2
-position = Vector2(-48, 0)
+position = Vector2(-40, 0)
 collision_layer = 16384
 collision_mask = 0
 script = ExtResource("16_iva4x")
@@ -3809,7 +3851,7 @@ collision_layer = 16384
 collision_mask = 0
 script = ExtResource("14_81i1v")
 tag_name = "move_dir"
-direction = Vector2(-1, -8.742278e-08)
+direction = Vector2(-1, 8.742278e-08)
 snap_degrees = 180.0
 
 [node name="Bat" type="Area2D" parent="Spawns" unique_id=555974737 groups=["ActorSpawns", "Entities"] instance=ExtResource("10_o3w1u")]
@@ -4475,7 +4517,7 @@ collision_layer = 16384
 collision_mask = 0
 script = ExtResource("14_81i1v")
 tag_name = "move_dir"
-direction = Vector2(-1, -8.742278e-08)
+direction = Vector2(-1, 8.742278e-08)
 snap_degrees = 180.0
 
 [node name="Shield" type="Area2D" parent="Spawns" unique_id=1525955427 groups=["ActorSpawns", "Entities"] instance=ExtResource("10_o3w1u")]
@@ -4503,7 +4545,7 @@ collision_layer = 16384
 collision_mask = 0
 script = ExtResource("14_81i1v")
 tag_name = "move_dir"
-direction = Vector2(-1, -8.742278e-08)
+direction = Vector2(-1, 8.742278e-08)
 snap_degrees = 180.0
 
 [node name="Frog8" type="Area2D" parent="Spawns" unique_id=508619750 groups=["ActorSpawns", "Entities"] instance=ExtResource("10_o3w1u")]
@@ -4739,7 +4781,7 @@ collision_layer = 16384
 collision_mask = 0
 script = ExtResource("14_81i1v")
 tag_name = "move_dir"
-direction = Vector2(-1, 8.742278e-08)
+direction = Vector2(-1, -8.742278e-08)
 snap_degrees = 180.0
 
 [node name="Frog9" type="Area2D" parent="Spawns" unique_id=1594054370 groups=["ActorSpawns", "Entities"] instance=ExtResource("10_o3w1u")]
@@ -4908,7 +4950,7 @@ collision_layer = 16384
 collision_mask = 0
 script = ExtResource("14_81i1v")
 tag_name = "move_dir"
-direction = Vector2(-1, -8.742278e-08)
+direction = Vector2(-1, 8.742278e-08)
 snap_degrees = 180.0
 
 [node name="Frog10" type="Area2D" parent="Spawns" unique_id=1818907550 groups=["ActorSpawns", "Entities"] instance=ExtResource("10_o3w1u")]
@@ -5558,7 +5600,7 @@ collision_layer = 16384
 collision_mask = 0
 script = ExtResource("14_81i1v")
 tag_name = "fly"
-direction = Vector2(-1, -8.742278e-08)
+direction = Vector2(-1, 8.742278e-08)
 movement_locked = true
 
 [node name="CrawlVector" type="Area2D" parent="Spawns/Gecko3" unique_id=1250482515 groups=["Entities", "VUVectors", "VisualUtilities"] instance=ExtResource("8_lqyxl")]
@@ -5601,7 +5643,7 @@ collision_layer = 16384
 collision_mask = 0
 script = ExtResource("14_81i1v")
 tag_name = "move_dir"
-direction = Vector2(-1, -8.742278e-08)
+direction = Vector2(-1, 8.742278e-08)
 snap_degrees = 180.0
 
 [node name="ChestGun" type="Area2D" parent="Spawns" unique_id=701214263 groups=["Entities", "PropSpawns"] instance=ExtResource("7_abxvk")]
@@ -5969,7 +6011,7 @@ collision_layer = 16384
 collision_mask = 0
 script = ExtResource("14_81i1v")
 tag_name = "move_dir"
-direction = Vector2(-1, 8.742278e-08)
+direction = Vector2(-1, -8.742278e-08)
 snap_degrees = 180.0
 
 [node name="BreakBlockExperience14" type="Area2D" parent="Spawns" unique_id=1159889870 groups=["Entities", "PropSpawns"] instance=ExtResource("7_abxvk")]
@@ -6651,7 +6693,7 @@ collision_mask = 0
 script = ExtResource("14_81i1v")
 arrow_length = 24.0
 tag_name = "crawl"
-direction = Vector2(-1, 8.742278e-08)
+direction = Vector2(-1, -8.742278e-08)
 snap_degrees = 90.0
 movement_locked = true
 color = Color(8.061901e-07, 0.41569918, 0.11087646, 1)
@@ -6703,7 +6745,7 @@ collision_layer = 16384
 collision_mask = 0
 script = ExtResource("14_81i1v")
 tag_name = "move_dir"
-direction = Vector2(-1, 8.742278e-08)
+direction = Vector2(-1, -8.742278e-08)
 snap_degrees = 180.0
 
 [node name="Waypoints" type="Node2D" parent="." unique_id=1416282546]
@@ -6744,6 +6786,7 @@ script = ExtResource("24_as7ew")
 [connection signal="input_event" from="Spawns/BeetleCrawler" to="Spawns/BeetleCrawler" method="_on_input_event"]
 [connection signal="input_event" from="Spawns/BeetleCrawler1" to="Spawns/BeetleCrawler1" method="_on_input_event"]
 [connection signal="input_event" from="Spawns/BeetleCrawler2" to="Spawns/BeetleCrawler2" method="_on_input_event"]
+[connection signal="input_event" from="Spawns/BeetleCrawler3" to="Spawns/BeetleCrawler3" method="_on_input_event"]
 [connection signal="input_event" from="Spawns/Frog1" to="Spawns/Frog1" method="_on_input_event"]
 [connection signal="input_event" from="Spawns/Frog2" to="Spawns/Frog2" method="_on_input_event"]
 [connection signal="input_event" from="Spawns/Frog3" to="Spawns/Frog3" method="_on_input_event"]
