@@ -106,6 +106,8 @@ signal music_fadeout_finished
 	"boss_treasure_hunter_flare_propeller_rev_start": preload("res://assets/SFX/TreasureHunterPropellerRevStart.mp3"),
 	"boss_treasure_hunter_flare_propeller_rev_loop": preload("res://assets/SFX/TreasureHunterPropellerRevLoop.mp3"),
 	"boss_treasure_hunter_flare_propeller_rev_end": preload("res://assets/SFX/TreasureHunterPropellerRevEnd.mp3"),
+	"boss_treasure_hunter_rush": preload("res://assets/SFX/Placeholder/snd_block_destroy.ogg"),
+	"boss_treasure_hunter_melee": preload("res://assets/SFX/Placeholder/snd_ironh_shot_fly.ogg"),
 
 	"boss_treasure_hunter_flare_propeller_electric": preload("res://assets/SFX/TreasureHunterElectric.mp3"),
 

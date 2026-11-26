@@ -1,10 +1,14 @@
 extends BossCutscene
 
+var player_audio_listener = null
+
 func start():
 	disable_player_input()
 	var player_move_to_hotspot = get_waypoint_with_id("WaypointGlobals", "cutscene_player_intro_pos")
 	var camera_move_to_hotspot = get_waypoint_with_id("WaypointGlobals", "cutscene_camera_to_pos")
 	var player = f.pc()
+
+	create_player_audio_listener()
 
 	move_player_to(player_move_to_hotspot.global_position)
 	transition_level_limit(boss_arena_rect, 1.2)
@@ -25,15 +29,20 @@ func start():
 	await boss.end_move_to
 
 	# Boss talking
+	var original_propeller_volume = boss.get_node("PropellerLoop").volume_db
+	boss.get_node("PropellerLoop").volume_db = 5.0
 	ms.progress_main_mission()
 	am.play_music("boss_buildup")
 	var dialog_box = create_dialog_box()
 	dialog_box.start_printing("res://src/Dialog/TreasureHunterBossTest.json", "boss_intro_dialog", "cutscene")
-
 	await dialog_box.dialog_finished
 
+	boss.get_node("PropellerLoop").volume_db = original_propeller_volume
 	await boss_health_bar_filled_anim()
+
 	boss_battle_start()
+	remove_player_audio_listener()
+
 
 func _on_boss_killed():
 	ms.progress_main_mission.call_deferred()
@@ -45,6 +54,7 @@ func win_animation():
 	disable_player_input()
 
 	await boss.anim_death_finished
+	create_player_audio_listener()
 
 	## Move to the outtro position
 	var out_waypoint = get_waypoint_with_id("WaypointGlobals", "cutscene_boss_intro_pos")
@@ -56,17 +66,21 @@ func win_animation():
 	boss.face_player()
 
 	## Boss Final word
+	var original_propeller_volume = boss.get_node("PropellerLoop").volume_db
+	boss.get_node("PropellerLoop").volume_db = 5.0
 	var dialog_box = create_dialog_box()
 	dialog_box.start_printing("res://src/Dialog/TreasureHunterBossTest.json", "boss_out_dialog", "cutscene")
 	await dialog_box.dialog_finished
 
 	## Boss fly away
+	boss.get_node("PropellerLoop").volume_db = original_propeller_volume
 	var out_cutscene_waypoint = get_waypoint_with_id("WaypointGlobals", "cutscene_boss_get_out")
 	boss.move_to(out_cutscene_waypoint.global_position, 60.0)
 	await boss.end_move_to
-	boss.queue_free()
 
 	#Make a Victory dialog
+	boss.queue_free()
+	remove_player_audio_listener()
 	am.play_music("victory")
 	dialog_box = create_dialog_box()
 	dialog_box.start_printing("res://src/Dialog/TreasureHunterBossTest.json", "boss_victory", "cutscene")
@@ -82,3 +96,16 @@ func win_animation():
 
 	await level_trans_tween.finished
 	end()
+
+func create_player_audio_listener() -> void:
+	var player = f.pc()
+
+	player_audio_listener = AudioListener2D.new()
+	player_audio_listener.global_position = player.global_position
+	player_audio_listener.make_current()
+	add_child(player_audio_listener)
+
+func remove_player_audio_listener() -> void:
+	if player_audio_listener:
+		player_audio_listener.queue_free()
+		player_audio_listener = null

@@ -35,28 +35,41 @@ var propeller_malfunctioning := false
 var phase_2_bullet_hell: = false:
 	set(val):
 		if main.phase_2_active:
-			if !phase_2_bullet_hell and val: # Start bullet hell attack
+			var old_val = phase_2_bullet_hell
+			phase_2_bullet_hell = val
+			if !old_val and val: # Start bullet hell attack
 				#$Phase2SparkTimer.stop()
 				$FlareTimer.stop()
 				phase_2_bullet_hell_bullet_no = 0
 				for i in range(0, 3):
 					am.play("boss_treasure_hunter_flare_propeller_electric", main, null, 4.0, 1.0)
-					main.create_vfx("malfunction_spark", main.global_position + Vector2(randf_range(-5.0, 5.0), randf_range(-30.0, 0.0)))
+					for j in range(2, randi() % 3 + 3):
+						main.create_vfx("malfunction_spark", main.global_position + Vector2(randf_range(-5.0, 5.0), randf_range(-30.0, 0.0)))
 					await get_tree().create_timer(randf_range(0.05, 0.1)).timeout
 				await get_tree().create_timer(0.2).timeout
 				main.create_vfx("explosion", main.global_position + Vector2(0.0, -32.0))
+				am.play("boss_treasure_hunter_flare_propeller_electric", main, null, 2.0, 1.0)
+				for j in range(2, randi() % 3 + 3):
+					main.create_vfx("malfunction_spark", main.global_position + Vector2(randf_range(-5.0, 5.0), randf_range(-30.0, 0.0)))
 				await get_tree().create_timer(0.2).timeout
 				main.create_vfx("explosion", main.global_position + Vector2(0.0, -32.0))
+				am.play("boss_treasure_hunter_flare_propeller_electric", main, null, 3.0, 1.0)
+				for j in range(2, randi() % 3 + 3):
+					main.create_vfx("malfunction_spark", main.global_position + Vector2(randf_range(-5.0, 5.0), randf_range(-30.0, 0.0)))
 				await get_tree().create_timer(0.1).timeout
 				main.create_vfx("explosion", main.global_position + Vector2(0.0, -32.0))
+				am.play("boss_treasure_hunter_flare_propeller_electric", main, null, 5.0, 1.0)
+				for j in range(2, randi() % 3 + 3):
+					main.create_vfx("malfunction_spark", main.global_position + Vector2(randf_range(-5.0, 5.0), randf_range(-30.0, 0.0)))
 				await get_tree().create_timer(0.2).timeout
+				am.play("boss_treasure_hunter_flare_propeller_electric", main, null, 2.0, 1.0)
 				propeller_malfunction()
 				await get_tree().create_timer(0.3).timeout
 				main.ap.play("fly_fast_spin_start")
 				main.ap.queue("fly_fast_spin")
 				$Phase2BulletHellDuration.start()
 				#$Phase2BulletHellBulletSpawn.start()
-			elif phase_2_bullet_hell and !val: # End bullet hell attack
+			elif old_val and !val: # End bullet hell attack
 				#$Phase2SparkTimer.stop()
 				start_phase_2_bullet_hell_cooldown_timer()
 				start_flare_timer()
@@ -66,7 +79,6 @@ var phase_2_bullet_hell: = false:
 				propeller_phase_2_spark_times = 0
 				main.ap.play("fly_fast_spin_end")
 				main.ap.queue("fly")
-		phase_2_bullet_hell = val
 
 const PHASE_2_SPARK_INTERVAL_MIN := 1.8
 const PHASE_2_SPARK_INTERVAL_MAX := 1.8
@@ -117,6 +129,8 @@ func state_start(_prev_state: StringName):
 		#$Phase2SparkTimer.start(randf_range(PHASE_2_SPARK_INTERVAL_MIN, PHASE_2_SPARK_INTERVAL_MAX))
 		start_flare_timer()
 		return
+	else:
+		main.reload()
 	$DurationTimer.start(hover_duration)
 	start_flare_timer()
 
@@ -229,8 +243,9 @@ func start_phase_2_bullet_hell_cooldown_timer():
 	$Phase2BulletHellCooldown.start(randf_range(PHASE_2_BULLET_HELL_COOLDOWN_MIN, PHASE_2_BULLET_HELL_COOLDOWN_MAX))
 
 func propeller_malfunction():
-	propeller_malfunctioning = true
-	propeller_malfunction_elapsed = 0.0
+	if !propeller_malfunctioning:
+		propeller_malfunctioning = true
+		propeller_malfunction_elapsed = 0.0
 
 func move_straight_toward(target_x: float, delta: float):
 	var direction = sign(target_x - main.global_position.x)
@@ -279,10 +294,8 @@ func _on_SweepFireTimer_timeout():
 		return
 	main.fire(Vector2.DOWN)
 	main.ap.play("fly_shoot_down") #WIP: Replace with reload animatio
-	#$ReloadTimer.start()
 	$SweepFireTimer.start(sweep_shot_interval)
-	await get_tree().create_timer(0.5).timeout
-	main.reload()
+	main.reload(2.0)
 
 func _on_ReloadTimer_timeout():
 	if flight_mode != FlightMode.HOVERING or !$FlareTimer.is_stopped():

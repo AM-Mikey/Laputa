@@ -392,7 +392,7 @@ tracks/2/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "values": [{
-"args": ["boss_treasure_hunter_flare_propeller_rev_end", 10.0, 1.0, 0.0],
+"args": ["boss_treasure_hunter_flare_propeller_rev_end", 15.0, 1.5, 0.0],
 "method": &"play_sound_2d"
 }]
 }
@@ -435,7 +435,7 @@ tracks/2/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "values": [{
-"args": ["boss_treasure_hunter_flare_propeller_rev_start", 10.0, 1.0, 0.0],
+"args": ["boss_treasure_hunter_flare_propeller_rev_start", 15.0, 1.5, 0.0],
 "method": &"play_sound_2d"
 }]
 }
@@ -539,6 +539,20 @@ tracks/1/keys = {
 "update": 1,
 "values": [0]
 }
+tracks/2/type = "method"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": ["boss_treasure_hunter_melee", 15.0, 1.0, 0.0],
+"method": &"play_sound_2d"
+}]
+}
 
 [sub_resource type="Animation" id="Animation_lvjic"]
 resource_name = "idle"
@@ -608,7 +622,7 @@ tracks/2/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "values": [{
-"args": ["boss_treasure_hunter_flare_propeller_open", 0.0, 0.8],
+"args": ["boss_treasure_hunter_flare_propeller_open", 10.0, 0.8, 0.0],
 "method": &"play_sound_2d"
 }]
 }
@@ -709,7 +723,7 @@ tracks/2/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "values": [{
-"args": ["boss_treasure_hunter_flare_propeller_open", 0.0, 1.0],
+"args": ["boss_treasure_hunter_flare_propeller_open", 10.0, 1.0, 0.0],
 "method": &"play_sound_2d"
 }]
 }
@@ -1078,13 +1092,14 @@ debug_color = Color(1, 0, 0, 0.235294)
 
 [node name="PropellerLoop" parent="." unique_id=1094658765 instance=ExtResource("15_bf7eb")]
 stream = ExtResource("16_wmy4b")
-volume_db = 7.0
-bus = &"Master"
+volume_db = 10.0
+pitch_scale = 1.5
+max_distance = 600.0
 
 [node name="PropellerRevLoop" parent="." unique_id=1609585648 instance=ExtResource("15_bf7eb")]
 stream = ExtResource("17_wmy4b")
 volume_db = 15.0
-bus = &"Master"
+pitch_scale = 1.5
 
 [connection signal="animation_finished" from="AnimationPlayer" to="StateMachine/TakeOff" method="_on_AnimationPlayer_animation_finished"]
 [connection signal="animation_finished" from="AnimationPlayer" to="StateMachine/Air" method="_on_AnimationPlayer_animation_finished"]

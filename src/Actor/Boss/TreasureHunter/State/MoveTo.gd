@@ -18,8 +18,9 @@ const PROPELLER_ALTITUDE_DROP := 24.0
 const SMOKE_TIMER_MIN: = 0.1
 const SMOKE_TIMER_MAX: = 0.3
 
-
 func state_start(_prev_state: StringName):
+	main.get_node("PropellerRevLoop").stop()
+	main.get_node("PropellerLoop").play()
 	main.get_node("Hotspot/MoveToPhase2Pos").global_position = main.global_position
 	reach_destination = false
 	main.ap.play("fly")

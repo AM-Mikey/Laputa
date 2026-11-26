@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://i57psc730a4h"]
 
-[ext_resource type="Script" uid="uid://ckghykbxwdru0" path="res://src/Bullet/Enemy/FlareTrail.gd" id="1_qp8pu"]
+[ext_resource type="Script" path="res://src/Bullet/Enemy/FlareTrail.gd" id="1_qp8pu"]
 [ext_resource type="PackedScene" uid="uid://botclre3ffxc4" path="res://src/Bullet/PlayerCollisionDetector.tscn" id="2_i005e"]
 [ext_resource type="PackedScene" uid="uid://7hbenrfv6p3q" path="res://src/Utility/PhysicsLayerBody.tscn" id="3_saj80"]
 [ext_resource type="Texture2D" uid="uid://ups4wtsreu48" path="res://assets/Bullet/Birdshot.png" id="4_3itp8"]

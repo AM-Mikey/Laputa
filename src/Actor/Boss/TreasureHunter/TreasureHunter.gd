@@ -5,6 +5,8 @@ const FLARE_BULLET = preload("res://src/Bullet/Enemy/Flare.tscn")
 const SPARK = preload("res://src/Bullet/Enemy/Spark.tscn")
 const SMOKE = preload("res://src/Effect/GunSmoke.tscn")
 const MALFUNCTION_SPARK = preload("res://src/Effect/BulletFizzleDistance.tscn")
+const RUSH = preload("res://src/Effect/LandParticle.tscn")
+
 
 @onready var ap = $AnimationPlayer
 
@@ -32,7 +34,7 @@ var phase_2_active := false
 var reloading: = false
 
 func setup():
-	hp = 80
+	hp = 35
 	max_hp = 80
 	w.emit_signal("finished_spawn_entities_step")
 
@@ -58,6 +60,7 @@ func do_death_animation():
 	$PropellerLoop.stop()
 	$PropellerRevLoop.stop()
 	sm.change_state("cutscene")
+	ap.stop()
 	ap.play("fly")
 	process_mode = ProcessMode.PROCESS_MODE_DISABLED
 	for i in range(0, 25):
@@ -104,8 +107,8 @@ func fire(dir):
 	am.play("boss_treasure_hunter_flare_shot", self, null, 2.0)
 	w.player_front.add_child(flare_shot)
 
-func reload():
-	ap.play("reload")
+func reload(anim_speed_scale := 1.0):
+	ap.play("reload", -1.0, anim_speed_scale)
 	if reload_sound:
 		reload_sound.queue_free()
 		reload_sound = null
@@ -139,6 +142,15 @@ func create_vfx(effect_name: String, pos: Vector2):
 			var malfunction_spark = MALFUNCTION_SPARK.instantiate()
 			malfunction_spark.global_position = pos
 			w.middle_front.add_child(malfunction_spark)
+		"rush":
+			var rush = RUSH.instantiate()
+			rush.global_position = global_position
+			rush.rotation = PI / 2.0 if look_dir.x >= 0.0 else -PI / 2.0
+			rush.scale = Vector2.ONE * 3.0
+			var tween = rush.create_tween()
+			tween.tween_property(rush, "scale", Vector2.ONE * 8.0, 0.2)
+			tween.tween_property(rush, "global_position", global_position - look_dir * 5.0, 0.2)
+			w.middle_front.add_child(rush)
 
 func play_sound_2d(sfx_name: String, volume = 0.0, pitch := 1.0, pitch_spread: = 0.0):
 	var sound = am.play(sfx_name, self)

@@ -4,6 +4,7 @@ var melee_lunge_force: = Vector2(250.0, -150.0)
 @onready var melee_swing_hitbox = main.get_node("SwingHitbox")
 
 func state_start(_prev_state: StringName):
+	am.play("enemy_jump", main, null, 5.0)
 	main.face_player()
 	main.get_node("MeleeDetector").set_deferred("monitoring", false)
 	$Startup.start()
