@@ -16,6 +16,7 @@ var touched_floor = false
 @onready var pc_held_down = inp.analogstick.y >= inp.Y_axis_shoot_deadzone && inp.can_act
 
 
+
 func setup():
 	break_method = "burn"
 	$ExplosionDetector.scale = Vector2.ZERO
@@ -171,8 +172,8 @@ func _on_CollisionDetector_area_entered(area): #shadows
 		#if area.get_collision_layer_value(9):
 			#explode()
 		if area.get_collision_layer_value(18):
+			if blocked_by_armor_on_path(): return
 			explode()
-
 			#var blood_dir = get_blood_dir(area.get_parent())
 			#if not touched_floor:
 				#area.get_parent().hit(damage, blood_dir, $PlayerCollisionDetector, blood_dir, knockback_strength)

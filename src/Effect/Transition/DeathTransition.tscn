@@ -48,6 +48,7 @@ _data = {
 }
 
 [node name="DeathTransition" type="MarginContainer" unique_id=469751953]
+physics_interpolation_mode = 2
 script = ExtResource("1_ja8km")
 
 [node name="IrisStar" type="ColorRect" parent="." unique_id=2038351618]

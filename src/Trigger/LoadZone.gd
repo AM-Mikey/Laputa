@@ -11,7 +11,7 @@ enum Direction {LEFT, RIGHT, UP, DOWN}
 @export var direction: Direction = Direction.RIGHT
 
 func setup():
-	var _err = connect("level_change", Callable(w, "change_level_via_trigger"))
+	var _err = connect("level_change", Callable(w, "change_level_via_trigger"), CONNECT_DEFERRED)
 	trigger_type = "load_zone"
 	w.emit_signal("finished_spawn_entities_step")
 

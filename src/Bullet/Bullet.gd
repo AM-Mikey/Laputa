@@ -29,6 +29,7 @@ var origin = Vector2.ZERO
 var direction = Vector2.ZERO
 var instant_fizzle := true
 var already_fizzle := false
+var prev_global_position = null
 
 var break_method = "cut"
 @export var is_water_affected := false
@@ -66,6 +67,7 @@ func setup(): #for children
 	pass
 
 func _physics_process(delta):
+	prev_global_position = global_position
 	level_exit_check()
 	_on_physics_process(delta)
 	apply_wind()
@@ -125,14 +127,8 @@ func do_fizzle(type: String):
 		var gun = f.pc().guns.get_child(0)
 		var gun_center = gun.global_position
 		var space_state = get_world_2d().direct_space_state
-		# use global coordinates, not local to node
 		var query = PhysicsRayQueryParameters2D.create(gun_center, fizzle.position)
-		# Bullet should have its collision mask set accurately to what it intends to collide with
-		# collision mask: World (bit 3), Armor (bit 5), Breakable (bit 8)
-		# This is done so the raycast doesn't collide with the player or anything else!
 		query.collision_mask = 1<<3 | 1<<5 | 1<<8
-		# If the raycast appears already inside another body (e.g. a block), we should still consider it,
-		# otherwise the fizzle will appear incorrectly on the other side of the block
 		query.hit_from_inside = true
 		var result = space_state.intersect_ray(query)
 		if result:
@@ -149,7 +145,7 @@ func instant_fizzle_check():
 	instant_fizzle = false
 	visible = true
 
-func on_is_in_water_change(old_val, val):
+func on_is_in_water_change(_old_val, _val): #TODO: why have this?
 	pass
 
 ### GETTERS ###
@@ -176,7 +172,26 @@ func get_blood_dir(body) -> Vector2: #TODO this update changed knockback dir cal
 	return out
 
 ### UTILITY ###
-func armor_check(body) -> bool:
+func blocked_by_armor_on_path() -> bool:
+	if already_fizzle: return true
+	var to: Vector2 = $End.global_position if has_node("End") else global_position
+	var from: Vector2 = prev_global_position if prev_global_position != null else global_position
+	if from == to: return false
+	var query = PhysicsRayQueryParameters2D.create(from, to)
+	query.collision_mask = 1<<5 # armor
+	query.collide_with_areas = false
+	query.collide_with_bodies = true
+	query.hit_from_inside = true
+	var result = get_world_2d().direct_space_state.intersect_ray(query)
+	if result.is_empty(): return false
+	var armor = result.collider
+	if !("block_dir" in armor) || !armor.has_signal("blocked"): return false
+	if armor_check(armor, result.position):
+		do_fizzle("armor")
+		return true
+	return false
+
+func armor_check(body, check_position: Vector2 = global_position) -> bool:
 	if body.block_dir != Vector2.ZERO:
 		var block_dir = body.block_dir * body.scale
 		var valid_collision_shape = null
@@ -188,19 +203,19 @@ func armor_check(body) -> bool:
 			var collision_rect_center = valid_collision_shape.global_position
 			match block_dir:
 				Vector2.LEFT:
-					if global_position.x <= collision_rect_center.x:
+					if check_position.x <= collision_rect_center.x:
 						body.blocked.emit(self, body)
 						return true
 				Vector2.RIGHT:
-					if global_position.x >= collision_rect_center.x:
+					if check_position.x >= collision_rect_center.x:
 						body.blocked.emit(self, body)
 						return true
 				Vector2.DOWN:
-					if global_position.y >= collision_rect_center.y:
+					if check_position.y >= collision_rect_center.y:
 						body.blocked.emit(self, body)
 						return true
 				Vector2.UP:
-					if global_position.y <= collision_rect_center.y:
+					if check_position.y <= collision_rect_center.y:
 						body.blocked.emit(self, body)
 						return true
 		return false
@@ -210,10 +225,10 @@ func armor_check(body) -> bool:
 
 func change_side(to_player: bool):
 	var hitbox = get_node_or_null("PlayerCollisionDetector")
-	var bullet_from_player = !!hitbox
+	#var bullet_from_player = hitbox
 	if !hitbox:
 		hitbox = get_node_or_null("EnemyCollisionDetector")
-		bullet_from_player = false
+		#bullet_from_player = false
 	if !hitbox: return
 	#print("Change side to player: ", to_player)
 	set_collision_layer_value(7, to_player)
@@ -223,7 +238,7 @@ func change_side(to_player: bool):
 	hitbox.set_collision_mask_value(18, to_player)
 	hitbox.set_collision_mask_value(17, !to_player)
 
-func deflect(vel: Vector2): ## Common deflect script for bullet like BulletRevolver.tscn
+func deflect(vel: Vector2):
 	var bullet_sprite = get_node("Sprite2D")
 	direction = -direction
 	var new_bullet_rotation = get_rot(direction)
@@ -264,6 +279,7 @@ func _on_CollisionDetector_body_entered(body):
 
 func _on_CollisionDetector_area_entered(area): #TODO: double check breakable piercing
 	if area.get_collision_layer_value(18): #enemyhurt
+		if blocked_by_armor_on_path(): return
 		var blood_dir = get_blood_dir(area.get_parent())
 		area.get_parent().hit(damage, blood_dir, $PlayerCollisionDetector, blood_dir, knockback_strength)
 		if f.pc(): #and camera gun recoil is true

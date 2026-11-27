@@ -106,6 +106,7 @@ visible = false
 [node name="Spawns" type="Node2D" parent="." unique_id=993935856]
 
 [node name="Stalagtite" type="Area2D" parent="Spawns" unique_id=1099828600 groups=["ActorSpawns", "Entities"] instance=ExtResource("6_dcw0l")]
+physics_interpolation_mode = 2
 z_index = 999
 position = Vector2(2216, 1984)
 collision_layer = 16384
@@ -125,6 +126,7 @@ properties = {
 }
 
 [node name="Stalagtite1" type="Area2D" parent="Spawns" unique_id=135404477 groups=["ActorSpawns", "Entities"] instance=ExtResource("6_dcw0l")]
+physics_interpolation_mode = 2
 z_index = 999
 position = Vector2(2248, 1984)
 collision_layer = 16384
@@ -144,6 +146,7 @@ properties = {
 }
 
 [node name="Stalagtite2" type="Area2D" parent="Spawns" unique_id=435739753 groups=["ActorSpawns", "Entities"] instance=ExtResource("6_dcw0l")]
+physics_interpolation_mode = 2
 z_index = 999
 position = Vector2(2184, 1984)
 collision_layer = 16384
@@ -163,6 +166,7 @@ properties = {
 }
 
 [node name="Sphagnum" type="Area2D" parent="Spawns" unique_id=2134574927 groups=["ActorSpawns", "Entities"] instance=ExtResource("6_dcw0l")]
+physics_interpolation_mode = 2
 z_index = 999
 position = Vector2(1864, 1984)
 collision_layer = 16384
@@ -180,6 +184,7 @@ properties = {
 }
 
 [node name="Stalagtite3" type="Area2D" parent="Spawns" unique_id=2139553996 groups=["ActorSpawns", "Entities"] instance=ExtResource("6_dcw0l")]
+physics_interpolation_mode = 2
 z_index = 999
 position = Vector2(2168, 1928)
 collision_layer = 16384
@@ -199,6 +204,7 @@ properties = {
 }
 
 [node name="Climber" type="Area2D" parent="Spawns" unique_id=444396003 groups=["ActorSpawns", "Entities"] instance=ExtResource("6_dcw0l")]
+physics_interpolation_mode = 2
 z_index = 999
 position = Vector2(2048, 1928)
 collision_layer = 16384
@@ -454,6 +460,7 @@ properties = {
 size_is_default = false
 
 [node name="Basil" type="Area2D" parent="Spawns" unique_id=846815944 groups=["ActorSpawns", "Entities"] instance=ExtResource("6_dcw0l")]
+physics_interpolation_mode = 2
 z_index = 999
 position = Vector2(2360, 2272)
 collision_layer = 16384
@@ -475,6 +482,7 @@ properties = {
 }
 
 [node name="AmmoRefill" type="Area2D" parent="Spawns" unique_id=208725417 groups=["Entities", "PropSpawns"] instance=ExtResource("15_tk244")]
+physics_interpolation_mode = 2
 z_index = 999
 position = Vector2(2544, 2256)
 collision_layer = 16384
@@ -488,6 +496,7 @@ properties = {
 }
 
 [node name="HealthRefill" type="Area2D" parent="Spawns" unique_id=932539730 groups=["Entities", "PropSpawns"] instance=ExtResource("15_tk244")]
+physics_interpolation_mode = 2
 z_index = 999
 position = Vector2(2480, 2224)
 collision_layer = 16384
@@ -526,6 +535,7 @@ properties = {
 size_is_default = false
 
 [node name="Sentry" type="Area2D" parent="Spawns" unique_id=1199277091 groups=["ActorSpawns", "Entities"] instance=ExtResource("6_dcw0l")]
+physics_interpolation_mode = 2
 z_index = 999
 position = Vector2(2600, 2080)
 collision_layer = 16384
@@ -551,11 +561,13 @@ properties = {
 }
 
 [node name="VURect" type="Node2D" parent="Spawns/Sentry" unique_id=688682803 groups=["Entities", "VURects", "VisualUtilities"] instance=ExtResource("15_7v6gq")]
+physics_interpolation_mode = 2
 script = ExtResource("14_7v6gq")
 tag_name = "player_detector"
 value = Rect2(-128, -128, 256, 256)
 
 [node name="ShootX" type="Area2D" parent="Spawns/Sentry" unique_id=1432238783 groups=["Entities", "VisualUtilities", "WaypointLocals", "Waypoints"] instance=ExtResource("17_rnumf")]
+physics_interpolation_mode = 2
 position = Vector2(64, 0)
 collision_layer = 16384
 collision_mask = 0
@@ -564,6 +576,7 @@ tag_name = "shoot_x"
 lock_y = true
 
 [node name="ShootY" type="Area2D" parent="Spawns/Sentry" unique_id=595539309 groups=["Entities", "VisualUtilities", "WaypointLocals", "Waypoints"] instance=ExtResource("17_rnumf")]
+physics_interpolation_mode = 2
 modulate = Color(0, 1.8247963, 1.8247963, 1)
 position = Vector2(0, -64)
 collision_layer = 16384
@@ -573,6 +586,7 @@ tag_name = "shoot_y"
 lock_x = true
 
 [node name="Sentry1" type="Area2D" parent="Spawns" unique_id=986853334 groups=["ActorSpawns", "Entities"] instance=ExtResource("6_dcw0l")]
+physics_interpolation_mode = 2
 z_index = 999
 position = Vector2(2648, 2048)
 collision_layer = 16384
@@ -598,11 +612,13 @@ properties = {
 }
 
 [node name="VURect" type="Node2D" parent="Spawns/Sentry1" unique_id=1682983982 groups=["Entities", "VURects", "VisualUtilities"] instance=ExtResource("15_7v6gq")]
+physics_interpolation_mode = 2
 script = ExtResource("14_7v6gq")
 tag_name = "player_detector"
 value = Rect2(-128, -128, 256, 256)
 
 [node name="ShootX" type="Area2D" parent="Spawns/Sentry1" unique_id=1771525645 groups=["Entities", "VisualUtilities", "WaypointLocals", "Waypoints"] instance=ExtResource("17_rnumf")]
+physics_interpolation_mode = 2
 position = Vector2(64, 0)
 collision_layer = 16384
 collision_mask = 0
@@ -611,6 +627,7 @@ tag_name = "shoot_x"
 lock_y = true
 
 [node name="ShootY" type="Area2D" parent="Spawns/Sentry1" unique_id=867426649 groups=["Entities", "VisualUtilities", "WaypointLocals", "Waypoints"] instance=ExtResource("17_rnumf")]
+physics_interpolation_mode = 2
 modulate = Color(0, 1.8247963, 1.8247963, 1)
 position = Vector2(0, -64)
 collision_layer = 16384
@@ -620,6 +637,7 @@ tag_name = "shoot_y"
 lock_x = true
 
 [node name="Sentry2" type="Area2D" parent="Spawns" unique_id=2136017153 groups=["ActorSpawns", "Entities"] instance=ExtResource("6_dcw0l")]
+physics_interpolation_mode = 2
 z_index = 999
 position = Vector2(2680, 2048)
 collision_layer = 16384
@@ -645,11 +663,13 @@ properties = {
 }
 
 [node name="VURect" type="Node2D" parent="Spawns/Sentry2" unique_id=1881021360 groups=["Entities", "VURects", "VisualUtilities"] instance=ExtResource("15_7v6gq")]
+physics_interpolation_mode = 2
 script = ExtResource("14_7v6gq")
 tag_name = "player_detector"
 value = Rect2(-128, -128, 256, 256)
 
 [node name="ShootX" type="Area2D" parent="Spawns/Sentry2" unique_id=30317187 groups=["Entities", "VisualUtilities", "WaypointLocals", "Waypoints"] instance=ExtResource("17_rnumf")]
+physics_interpolation_mode = 2
 position = Vector2(64, 0)
 collision_layer = 16384
 collision_mask = 0
@@ -658,6 +678,7 @@ tag_name = "shoot_x"
 lock_y = true
 
 [node name="ShootY" type="Area2D" parent="Spawns/Sentry2" unique_id=1075785872 groups=["Entities", "VisualUtilities", "WaypointLocals", "Waypoints"] instance=ExtResource("17_rnumf")]
+physics_interpolation_mode = 2
 modulate = Color(0, 1.8247963, 1.8247963, 1)
 position = Vector2(0, -64)
 collision_layer = 16384
@@ -667,6 +688,7 @@ tag_name = "shoot_y"
 lock_x = true
 
 [node name="Sentry3" type="Area2D" parent="Spawns" unique_id=56174473 groups=["ActorSpawns", "Entities"] instance=ExtResource("6_dcw0l")]
+physics_interpolation_mode = 2
 z_index = 999
 position = Vector2(2712, 2048)
 collision_layer = 16384
@@ -692,11 +714,13 @@ properties = {
 }
 
 [node name="VURect" type="Node2D" parent="Spawns/Sentry3" unique_id=1647130205 groups=["Entities", "VURects", "VisualUtilities"] instance=ExtResource("15_7v6gq")]
+physics_interpolation_mode = 2
 script = ExtResource("14_7v6gq")
 tag_name = "player_detector"
 value = Rect2(-128, -128, 256, 256)
 
 [node name="ShootX" type="Area2D" parent="Spawns/Sentry3" unique_id=417413993 groups=["Entities", "VisualUtilities", "WaypointLocals", "Waypoints"] instance=ExtResource("17_rnumf")]
+physics_interpolation_mode = 2
 visible = false
 position = Vector2(64, 0)
 collision_layer = 16384
@@ -706,6 +730,7 @@ tag_name = "shoot_x"
 lock_y = true
 
 [node name="ShootY" type="Area2D" parent="Spawns/Sentry3" unique_id=1331188293 groups=["Entities", "VisualUtilities", "WaypointLocals", "Waypoints"] instance=ExtResource("17_rnumf")]
+physics_interpolation_mode = 2
 modulate = Color(0, 1.8247963, 1.8247963, 1)
 position = Vector2(0, -64)
 collision_layer = 16384
@@ -715,6 +740,7 @@ tag_name = "shoot_y"
 lock_x = true
 
 [node name="Sentry4" type="Area2D" parent="Spawns" unique_id=1799588470 groups=["ActorSpawns", "Entities"] instance=ExtResource("6_dcw0l")]
+physics_interpolation_mode = 2
 z_index = 999
 position = Vector2(2744, 2048)
 collision_layer = 16384
@@ -740,11 +766,13 @@ properties = {
 }
 
 [node name="VURect" type="Node2D" parent="Spawns/Sentry4" unique_id=1981119342 groups=["Entities", "VURects", "VisualUtilities"] instance=ExtResource("15_7v6gq")]
+physics_interpolation_mode = 2
 script = ExtResource("14_7v6gq")
 tag_name = "player_detector"
 value = Rect2(-128, -128, 256, 256)
 
 [node name="ShootX" type="Area2D" parent="Spawns/Sentry4" unique_id=1699828033 groups=["Entities", "VisualUtilities", "WaypointLocals", "Waypoints"] instance=ExtResource("17_rnumf")]
+physics_interpolation_mode = 2
 visible = false
 position = Vector2(64, 0)
 collision_layer = 16384
@@ -754,6 +782,7 @@ tag_name = "shoot_x"
 lock_y = true
 
 [node name="ShootY" type="Area2D" parent="Spawns/Sentry4" unique_id=1066131863 groups=["Entities", "VisualUtilities", "WaypointLocals", "Waypoints"] instance=ExtResource("17_rnumf")]
+physics_interpolation_mode = 2
 visible = false
 modulate = Color(0, 1.8247963, 1.8247963, 1)
 position = Vector2(0, -64)
@@ -764,6 +793,7 @@ tag_name = "shoot_y"
 lock_x = true
 
 [node name="Sentry5" type="Area2D" parent="Spawns" unique_id=1959943275 groups=["ActorSpawns", "Entities"] instance=ExtResource("6_dcw0l")]
+physics_interpolation_mode = 2
 z_index = 999
 position = Vector2(2776, 2048)
 collision_layer = 16384
@@ -789,11 +819,13 @@ properties = {
 }
 
 [node name="VURect" type="Node2D" parent="Spawns/Sentry5" unique_id=278657433 groups=["Entities", "VURects", "VisualUtilities"] instance=ExtResource("15_7v6gq")]
+physics_interpolation_mode = 2
 script = ExtResource("14_7v6gq")
 tag_name = "player_detector"
 value = Rect2(-128, -128, 256, 256)
 
 [node name="ShootX" type="Area2D" parent="Spawns/Sentry5" unique_id=816198350 groups=["Entities", "VisualUtilities", "WaypointLocals", "Waypoints"] instance=ExtResource("17_rnumf")]
+physics_interpolation_mode = 2
 visible = false
 position = Vector2(64, 0)
 collision_layer = 16384
@@ -803,6 +835,7 @@ tag_name = "shoot_x"
 lock_y = true
 
 [node name="ShootY" type="Area2D" parent="Spawns/Sentry5" unique_id=1956625328 groups=["Entities", "VisualUtilities", "WaypointLocals", "Waypoints"] instance=ExtResource("17_rnumf")]
+physics_interpolation_mode = 2
 visible = false
 modulate = Color(0, 1.8247963, 1.8247963, 1)
 position = Vector2(0, -64)
@@ -813,6 +846,7 @@ tag_name = "shoot_y"
 lock_x = true
 
 [node name="Golem" type="Area2D" parent="Spawns" unique_id=2109360840 groups=["ActorSpawns", "Entities"] instance=ExtResource("6_dcw0l")]
+physics_interpolation_mode = 2
 z_index = 999
 position = Vector2(2264, 2272)
 collision_layer = 16384
@@ -833,6 +867,7 @@ properties = {
 }
 
 [node name="VUVector" type="Area2D" parent="Spawns/Golem" unique_id=872564127 groups=["Entities", "VUVectors", "VisualUtilities"] instance=ExtResource("17_r87vw")]
+physics_interpolation_mode = 2
 collision_layer = 16384
 collision_mask = 0
 script = ExtResource("18_bq2j0")
@@ -841,6 +876,7 @@ direction = Vector2(-1, -8.742278e-08)
 snap_degrees = 180.0
 
 [node name="SaveDisk" type="Area2D" parent="Spawns" unique_id=1449282698 groups=["Entities", "PropSpawns"] instance=ExtResource("15_tk244")]
+physics_interpolation_mode = 2
 z_index = 999
 position = Vector2(2304, 2064)
 collision_layer = 16384
@@ -854,6 +890,7 @@ properties = {
 }
 
 [node name="Larry" type="Area2D" parent="Spawns" unique_id=1296800188 groups=["ActorSpawns", "Entities"] instance=ExtResource("6_dcw0l")]
+physics_interpolation_mode = 2
 z_index = 999
 position = Vector2(2200, 1952)
 collision_layer = 16384
@@ -871,6 +908,7 @@ properties = {
 }
 
 [node name="Larry1" type="Area2D" parent="Spawns" unique_id=439458495 groups=["ActorSpawns", "Entities"] instance=ExtResource("6_dcw0l")]
+physics_interpolation_mode = 2
 z_index = 999
 position = Vector2(2216, 1952)
 collision_layer = 16384
@@ -888,6 +926,7 @@ properties = {
 }
 
 [node name="Larry2" type="Area2D" parent="Spawns" unique_id=1576437438 groups=["ActorSpawns", "Entities"] instance=ExtResource("6_dcw0l")]
+physics_interpolation_mode = 2
 z_index = 999
 position = Vector2(2232, 1952)
 collision_layer = 16384
@@ -905,6 +944,7 @@ properties = {
 }
 
 [node name="Larry3" type="Area2D" parent="Spawns" unique_id=165291216 groups=["ActorSpawns", "Entities"] instance=ExtResource("6_dcw0l")]
+physics_interpolation_mode = 2
 z_index = 999
 position = Vector2(2248, 1952)
 collision_layer = 16384
@@ -922,6 +962,7 @@ properties = {
 }
 
 [node name="Larry4" type="Area2D" parent="Spawns" unique_id=27843849 groups=["ActorSpawns", "Entities"] instance=ExtResource("6_dcw0l")]
+physics_interpolation_mode = 2
 z_index = 999
 position = Vector2(2264, 1952)
 collision_layer = 16384
@@ -938,11 +979,34 @@ properties = {
 "water_gravity": [150.0, 3, ""]
 }
 
+[node name="Bat" type="Area2D" parent="Spawns" unique_id=700867845 groups=["ActorSpawns", "Entities"] instance=ExtResource("6_dcw0l")]
+physics_interpolation_mode = 2
+z_index = 999
+position = Vector2(2568, 2000)
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("8_hahi5")
+actor_path = "res://src/Actor/Enemy/Bat.tscn"
+properties = {
+"base_gravity": [300.0, 3, ""],
+"debug": [false, 1, ""],
+"do_bubbles": [true, 1, ""],
+"editor_hidden": [false, 1, ""],
+"flap_time": [0.1, 3, ""],
+"id": [&"Bat", 4, ""],
+"idle_time": [0.05, 3, ""],
+"move_dir": [Vector2(0, 0), 5, ""],
+"speed": [Vector2(150, 350), 5, ""],
+"start_waypoint": [0.0, 3, ""],
+"water_gravity": [150.0, 3, ""]
+}
+
 [node name="Waypoints" type="Node2D" parent="." unique_id=1140943479]
 
 [node name="Notes" type="Node2D" parent="." unique_id=577013387]
 
 [node name="VanishingPoint" type="Area2D" parent="." unique_id=852042071 groups=["VanishingPoints"] instance=ExtResource("7_mlr58")]
+physics_interpolation_mode = 2
 z_index = 999
 position = Vector2(2288, 1832)
 collision_layer = 16384
@@ -950,6 +1014,7 @@ collision_mask = 0
 script = ExtResource("20_e6srf")
 
 [node name="SpawnPoint" type="Area2D" parent="." unique_id=1505342073 groups=["SpawnPoints"] instance=ExtResource("5_sjslv")]
+physics_interpolation_mode = 2
 position = Vector2(2536, 2048)
 collision_layer = 16384
 collision_mask = 0
@@ -1001,3 +1066,4 @@ zoom = 2.0
 [connection signal="input_event" from="Spawns/Larry2" to="Spawns/Larry2" method="_on_input_event"]
 [connection signal="input_event" from="Spawns/Larry3" to="Spawns/Larry3" method="_on_input_event"]
 [connection signal="input_event" from="Spawns/Larry4" to="Spawns/Larry4" method="_on_input_event"]
+[connection signal="input_event" from="Spawns/Bat" to="Spawns/Bat" method="_on_input_event"]
