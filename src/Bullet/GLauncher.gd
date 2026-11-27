@@ -138,7 +138,7 @@ func change_side(to_player: bool):
 	hitbox.set_collision_layer_value(7, to_player)
 	hitbox.set_collision_layer_value(14, !to_player)
 	hitbox.set_collision_mask_value(18, to_player)
-	hitbox.set_collision_mask_value(17, !to_player)
+	hitbox.set_collision_mask_valuex(17, !to_player)
 
 func deflect(vel: Vector2):
 	var bullet_sprite = get_node("Sprite2D")

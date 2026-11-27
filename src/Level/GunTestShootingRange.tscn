@@ -1,4 +1,4 @@
-[gd_scene format=4 uid="uid://b3c3pcghhrbaf"]
+[gd_scene format=4 uid="uid://dbkdpk37h7v45"]
 
 [ext_resource type="Script" uid="uid://ucr1waa8u8j1" path="res://src/Level/Level.gd" id="1_bt32x"]
 [ext_resource type="PackedScene" uid="uid://deyh6xyl8c6tr" path="res://src/Background/LevelLimiter.tscn" id="2_7oplm"]

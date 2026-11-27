@@ -75,7 +75,6 @@ shape = SubResource("RectangleShape2D_3j34y")
 debug_color = Color(0, 0.588235, 0.705882, 0.235294)
 
 [node name="PlayerCollisionDetector" parent="." unique_id=508247890 instance=ExtResource("1")]
-collision_layer = 320
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerCollisionDetector" unique_id=525355916]
 shape = SubResource("RectangleShape2D_3j34y")
