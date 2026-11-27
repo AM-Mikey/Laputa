@@ -154,11 +154,9 @@ func _on_CollisionDetector_body_entered(body):
 		if body.get_collision_layer_value(6): #armor
 			armor_check(body)
 		elif body.get_collision_layer_value(18): #enemy
-			if $BounceGraceTimer.time_left <= 0.0:
+			if $BounceGraceTimer.time_left <= 0.0 && velocity.length() > minimum_speed:
+				if blocked_by_armor_on_path(): return
 				explode()
-		#elif body.get_collision_layer_value(9):
-			#if $BounceGraceTimer.time_left <= 0.0:
-				#explode()
 
 func _on_CollisionDetector_area_entered(area): #shadows
 	#enemyhurt
@@ -168,18 +166,10 @@ func _on_CollisionDetector_area_entered(area): #shadows
 								(area_main is CollisionObject2D and area_main.get_collision_layer_value(14))
 		if is_breakable_enemy_bullet:
 			area_main.on_break("cut")
-	if $BounceGraceTimer.time_left <= 0.0:
-		#if area.get_collision_layer_value(9):
-			#explode()
+	if $BounceGraceTimer.time_left <= 0.0 && velocity.length() > minimum_speed:
 		if area.get_collision_layer_value(18):
 			if blocked_by_armor_on_path(): return
 			explode()
-			#var blood_dir = get_blood_dir(area.get_parent())
-			#if not touched_floor:
-				#area.get_parent().hit(damage, blood_dir, $PlayerCollisionDetector, blood_dir, knockback_strength)
-			#else:
-				#area.get_parent().hit(int(damage/2.0), blood_dir, $PlayerCollisionDetector, blood_dir, knockback_strength)
-			#queue_free()
 
 func _on_Timer_timeout():
 	explode()
