@@ -218,7 +218,7 @@ collision_layer = 16384
 collision_mask = 0
 script = ExtResource("16_2tq6u")
 tag_name = "move_dir"
-direction = Vector2(-1, 8.742278e-08)
+direction = Vector2(-1, -8.742278e-08)
 snap_degrees = 180.0
 
 [node name="Billy" type="Area2D" parent="Spawns" unique_id=555561612 groups=["ActorSpawns", "Entities"] instance=ExtResource("13_2tq6u")]
@@ -253,7 +253,7 @@ collision_layer = 16384
 collision_mask = 0
 script = ExtResource("16_2tq6u")
 tag_name = "move_dir"
-direction = Vector2(-1, 8.742278e-08)
+direction = Vector2(-1, -8.742278e-08)
 snap_degrees = 180.0
 
 [node name="Billy1" type="Area2D" parent="Spawns" unique_id=691894641 groups=["ActorSpawns", "Entities"] instance=ExtResource("13_2tq6u")]
@@ -288,7 +288,7 @@ collision_layer = 16384
 collision_mask = 0
 script = ExtResource("16_2tq6u")
 tag_name = "move_dir"
-direction = Vector2(-1, 8.742278e-08)
+direction = Vector2(-1, -8.742278e-08)
 snap_degrees = 180.0
 
 [node name="Billy2" type="Area2D" parent="Spawns" unique_id=74497575 groups=["ActorSpawns", "Entities"] instance=ExtResource("13_2tq6u")]
@@ -323,7 +323,7 @@ collision_layer = 16384
 collision_mask = 0
 script = ExtResource("16_2tq6u")
 tag_name = "move_dir"
-direction = Vector2(-1, 8.742278e-08)
+direction = Vector2(-1, -8.742278e-08)
 snap_degrees = 180.0
 
 [node name="Billy3" type="Area2D" parent="Spawns" unique_id=1304606916 groups=["ActorSpawns", "Entities"] instance=ExtResource("13_2tq6u")]
@@ -358,7 +358,7 @@ collision_layer = 16384
 collision_mask = 0
 script = ExtResource("16_2tq6u")
 tag_name = "move_dir"
-direction = Vector2(-1, 8.742278e-08)
+direction = Vector2(-1, -8.742278e-08)
 snap_degrees = 180.0
 
 [node name="Sentry" type="Area2D" parent="Spawns" unique_id=1627343938 groups=["ActorSpawns", "Entities"] instance=ExtResource("13_2tq6u")]
@@ -1019,12 +1019,12 @@ movement_locked = true
 
 [node name="Distance" type="Area2D" parent="Spawns/PhysFanNoSwitch" unique_id=1826062754 groups=["Entities", "VisualUtilities", "WaypointLocals", "Waypoints"] instance=ExtResource("17_4itsw")]
 physics_interpolation_mode = 2
-position = Vector2(-264, 8)
+position = Vector2(-232, 8)
 collision_layer = 16384
 collision_mask = 0
 script = ExtResource("18_f2fu4")
 tag_name = "distance"
-lock_x = true
+lock_y = true
 
 [node name="SwitchPlate" type="Area2D" parent="Spawns" unique_id=1999661824 groups=["Entities", "PropSpawns"] instance=ExtResource("7_1yvib")]
 physics_interpolation_mode = 2
@@ -1068,7 +1068,7 @@ collision_layer = 16384
 collision_mask = 0
 script = ExtResource("16_2tq6u")
 tag_name = "wind_dir"
-direction = Vector2(-1, -8.742278e-08)
+direction = Vector2(-1, 8.742278e-08)
 snap_degrees = 90.0
 movement_locked = true
 
@@ -1103,7 +1103,7 @@ collision_layer = 16384
 collision_mask = 0
 script = ExtResource("16_2tq6u")
 tag_name = "wind_dir"
-direction = Vector2(-1, -8.742278e-08)
+direction = Vector2(-1, 8.742278e-08)
 snap_degrees = 90.0
 movement_locked = true
 
@@ -1165,7 +1165,7 @@ movement_locked = true
 
 [node name="Distance" type="Area2D" parent="Spawns/PhysFanNoSwitch1" unique_id=1597531972 groups=["Entities", "VisualUtilities", "WaypointLocals", "Waypoints"] instance=ExtResource("17_4itsw")]
 physics_interpolation_mode = 2
-position = Vector2(-264, 8)
+position = Vector2(8, -88)
 collision_layer = 16384
 collision_mask = 0
 script = ExtResource("18_f2fu4")
@@ -1201,7 +1201,7 @@ movement_locked = true
 
 [node name="Distance" type="Area2D" parent="Spawns/PhysFanNoSwitch2" unique_id=823678465 groups=["Entities", "VisualUtilities", "WaypointLocals", "Waypoints"] instance=ExtResource("17_4itsw")]
 physics_interpolation_mode = 2
-position = Vector2(-264, 8)
+position = Vector2(8, -88)
 collision_layer = 16384
 collision_mask = 0
 script = ExtResource("18_f2fu4")
@@ -1237,7 +1237,7 @@ movement_locked = true
 
 [node name="Distance" type="Area2D" parent="Spawns/PhysFanNoSwitch3" unique_id=792479095 groups=["Entities", "VisualUtilities", "WaypointLocals", "Waypoints"] instance=ExtResource("17_4itsw")]
 physics_interpolation_mode = 2
-position = Vector2(-264, 8)
+position = Vector2(8, -88)
 collision_layer = 16384
 collision_mask = 0
 script = ExtResource("18_f2fu4")
@@ -1273,7 +1273,7 @@ movement_locked = true
 
 [node name="Distance" type="Area2D" parent="Spawns/PhysFanNoSwitch4" unique_id=841915900 groups=["Entities", "VisualUtilities", "WaypointLocals", "Waypoints"] instance=ExtResource("17_4itsw")]
 physics_interpolation_mode = 2
-position = Vector2(-264, 8)
+position = Vector2(8, 88)
 collision_layer = 16384
 collision_mask = 0
 script = ExtResource("18_f2fu4")
@@ -1309,7 +1309,7 @@ movement_locked = true
 
 [node name="Distance" type="Area2D" parent="Spawns/PhysFanNoSwitch5" unique_id=453964767 groups=["Entities", "VisualUtilities", "WaypointLocals", "Waypoints"] instance=ExtResource("17_4itsw")]
 physics_interpolation_mode = 2
-position = Vector2(-264, 8)
+position = Vector2(8, 88)
 collision_layer = 16384
 collision_mask = 0
 script = ExtResource("18_f2fu4")
@@ -1345,7 +1345,7 @@ movement_locked = true
 
 [node name="Distance" type="Area2D" parent="Spawns/PhysFanNoSwitch6" unique_id=63603980 groups=["Entities", "VisualUtilities", "WaypointLocals", "Waypoints"] instance=ExtResource("17_4itsw")]
 physics_interpolation_mode = 2
-position = Vector2(-264, 8)
+position = Vector2(8, 88)
 collision_layer = 16384
 collision_mask = 0
 script = ExtResource("18_f2fu4")
@@ -1382,7 +1382,7 @@ properties = {
 physics_interpolation_mode = 2
 script = ExtResource("10_jifxr")
 tag_name = "player_detector"
-value = Rect2(-128, -128, 256, 256)
+value = Rect2(-120, -208, 256, 256)
 
 [node name="ShootX" type="Area2D" parent="Spawns/Sentry1" unique_id=1626706646 groups=["Entities", "VisualUtilities", "WaypointLocals", "Waypoints"] instance=ExtResource("17_4itsw")]
 physics_interpolation_mode = 2
