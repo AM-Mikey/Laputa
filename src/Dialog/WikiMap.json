@@ -25,15 +25,15 @@
 	Topics, such as this /t,example example /ut format this text to a golden color! Check book in the Q menu.
 	That's all for this category! /progress_main_mission
 	",
-	
+
 	"yes_no_demo":
 	"
-	/newchar,Juniper,Juniper should i own an air fryer?.. /yn 
+	/newchar,Juniper,Juniper should i own an air fryer?.. /yn
 	/db,0 yes, the masses must know air fry. /udb
 	/db,1 no, but what if... /udb
 	/m delightfully devilish, juniper
 	",
-	
+
 	"options_demo":
 	"
 	/newchar,Basil,Basil Pick the correct one. /options,a,b,c,d
@@ -43,7 +43,7 @@
 	/db,3 Cmon, at least try to get it right... /udb
 	/m EXTREMELY LOUD BUZZER SOUND /progress_main_mission
 	",
-	
+
 	"topics_demo":
 	"
 	/newchar,Nun,Nun What did you want to talk about? /topics,example,cats
@@ -51,7 +51,7 @@
 	/db,1 you picked cats! /udb
 	/m what fun topics.
 	",
-	
+
 	"entity_demo":
 	"
 	/newchar,Sage,Sage Lets make Basil vanish forever.
@@ -61,7 +61,7 @@
 	/lookat,aikka,not_pc hmph!
 	/right,aikka ... /progress_main_mission
 	",
-	
+
 	"camera_demo":
 	"
 	/lookat,sage,basil lookat can target one or more NPCs
@@ -72,10 +72,10 @@
 	/cam,hold camera will be held at this position until the player progresses text
 	/cam,to_player,30 returning the camera to the player once more /progress_main_mission
 	",
-	
+
 	"waypoint_demo":
 	"/newchar,Cool,Tabith Walking to waypoint 0. /waypoint,tabith,0
 	walking to waypoint 1. /waypoint,tabith,1
 	",
-	
+
 }

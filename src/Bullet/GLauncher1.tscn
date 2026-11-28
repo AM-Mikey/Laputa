@@ -63,6 +63,7 @@ _data = {
 collision_layer = 64
 collision_mask = 40
 script = ExtResource("3")
+damage = 2.0
 camera_recoil_distance = 5.0
 camera_recoil_curve = SubResource("Curve_744ti")
 camera_recoil_time = 0.5
@@ -100,7 +101,7 @@ position = Vector2(0, 5)
 texture = ExtResource("2")
 hframes = 8
 vframes = 3
-frame = 1
+frame = 7
 
 [node name="BounceGraceTimer" type="Timer" parent="." unique_id=766296752]
 wait_time = 0.2
@@ -115,7 +116,7 @@ libraries/ = SubResource("AnimationLibrary_5bfrg")
 
 [node name="WorldCast" type="RayCast2D" parent="." unique_id=721022876]
 z_index = 999
-collision_mask = 40
+collision_mask = 296
 collide_with_areas = true
 
 [connection signal="area_entered" from="PlayerCollisionDetector" to="." method="_on_CollisionDetector_area_entered"]

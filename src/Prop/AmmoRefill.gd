@@ -27,7 +27,7 @@ func activate(player):
 	for g in player.guns.get_children():
 		if g.ammo != g.max_ammo:
 			g.ammo = g.max_ammo
-	player.emit_signal("guns_updated", player.guns.get_children())
+	player.emit_signal("guns_updated", player.guns.get_children(), "get_ammo")
 	var ammo_get_max = AMMO_GET_MAX.instantiate()
 	ammo_get_max.global_position = $CollisionShape2D.global_position
 	w.farthest_front.add_child(ammo_get_max)

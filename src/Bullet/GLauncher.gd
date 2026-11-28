@@ -10,6 +10,8 @@ var explosion_time = 2.5
 var start_avg_vel: float
 var touched_floor = false
 
+var calc_velocity: = Vector2.ZERO
+
 
 @onready var pc = f.pc()
 @onready var pc_on_floor = pc.is_on_floor()
@@ -21,22 +23,26 @@ func setup():
 	break_method = "burn"
 	$ExplosionDetector.scale = Vector2.ZERO
 	$ExplosionDetector/CollisionShape2D.set_deferred("disabled", true)
-	velocity = get_initial_velocity(speed, direction)
-	start_avg_vel = (abs(velocity.x) + abs(velocity.y)) / 2.0 #used to calculate animation slowdown
+	calc_velocity = get_initial_velocity(speed, direction)
+	start_avg_vel = (abs(calc_velocity.x) + abs(calc_velocity.y)) / 2.0 #used to calculate animation slowdown
 	$Timer.start(explosion_time)
-	if velocity.x < 0:
+	if calc_velocity.x < 0:
 		$AnimationPlayer.play("FlipLeft")
 	else:
 		$AnimationPlayer.play("FlipRight")
 
 
 func _on_physics_process(delta):
-	velocity.y += gravity * delta
-	var collision = move_and_collide(velocity * delta)
+	calc_velocity.y += gravity * delta
+	calc_velocity += velocity
+	var collision = move_and_collide(calc_velocity * delta)
+	velocity = Vector2.ZERO
+	move_and_slide()
+
 	if collision:
-		if abs(velocity.y) > minimum_speed:
-			velocity *= bounciness
-			velocity = velocity.bounce(collision.get_normal())
+		if abs(calc_velocity.y) > minimum_speed:
+			calc_velocity *= bounciness
+			calc_velocity = calc_velocity.bounce(collision.get_normal())
 			touched_floor = true
 			$BounceGraceTimer.start()
 			am.play("gun_grenade_bounce", self)
@@ -44,17 +50,17 @@ func _on_physics_process(delta):
 			if collider is not TileMapLayer and collider.get_collision_layer_value(6):
 				collider.blocked.emit(self, collider)
 		else:
-			velocity = Vector2.ZERO
-		if velocity.x < 0:
+			calc_velocity = Vector2.ZERO
+		if calc_velocity.x < 0:
 			$AnimationPlayer.play("FlipLeft")
 		else:
 			$AnimationPlayer.play("FlipRight")
 
 	if wind_areas_inside.size() != 0: #Inside Wind
-		if velocity.y < 0:
-			velocity.y *= 0.9
+		if calc_velocity.y < 0:
+			calc_velocity.y *= 0.9
 
-	var avg_velocity = abs(velocity.x) + abs(velocity.y) / 2.0 #used to calculate animation slowdown
+	var avg_velocity = abs(calc_velocity.x) + abs(calc_velocity.y) / 2.0 #used to calculate animation slowdown
 	$AnimationPlayer.speed_scale = avg_velocity / start_avg_vel
 	if $AnimationPlayer.speed_scale < .1:
 		$AnimationPlayer.stop()
@@ -64,7 +70,7 @@ func _on_physics_process(delta):
 ### GETTERS ###
 
 func get_initial_velocity(scoped_projectile_speed, scoped_direction) -> Vector2:
-	var out = velocity
+	var out = calc_velocity
 
 	out.x = scoped_projectile_speed * scoped_direction.x
 	out.y = scoped_projectile_speed * scoped_direction.y
@@ -77,67 +83,7 @@ func get_initial_velocity(scoped_projectile_speed, scoped_direction) -> Vector2:
 		out.y -= 100 #give us some ups to start with
 	return out
 
-
-func is_world_blocking(target) -> bool:
-	var target_center_global_position: Vector2
-	var target_shape : CollisionShape2D #NOTE: only works on CollisionShape2D
-	for c in target.get_children():
-		if c is CollisionShape2D:
-			target_shape = c #NOTE: gets the LAST collisionshape
-	if target_shape:
-		target_center_global_position = target_shape.global_position
-	else:
-		printerr("ERROR: Cannot find child CollisionShape2D in target: ", target)
-	$WorldCast.target_position = to_local(target_center_global_position)
-	$WorldCast.force_raycast_update()
-	if $WorldCast.is_colliding():
-		var collider = $WorldCast.get_collider()
-		if collider is not TileMapLayer and collider.get_collision_layer_value(6):
-			print("Armor in the way of explosion")
-			collider.blocked.emit($ExplosionDetector, collider)
-			return true
-		else:
-			print("World in way of grenade")
-			return true
-	else:
-		return false
-
-func change_side(to_player: bool):
-	var hitbox = get_node_or_null("PlayerCollisionDetector")
-	set_collision_layer_value(7, to_player)
-	set_collision_layer_value(14, !to_player)
-	hitbox.set_collision_layer_value(7, to_player)
-	hitbox.set_collision_layer_value(14, !to_player)
-	hitbox.set_collision_mask_value(18, to_player)
-	hitbox.set_collision_mask_value(17, !to_player)
-
-func deflect(vel: Vector2):
-	var bullet_sprite = get_node("Sprite2D")
-	var new_bullet_position = bullet_sprite.global_position
-	direction = vel.normalized()
-	velocity = vel
-	global_position = new_bullet_position
-
-### SIGNALS ###
-
-func _on_CollisionDetector_body_entered(body):
-	if body is not TileMapLayer:
-		if body.get_collision_layer_value(6): #armor
-			armor_check(body)
-
-func _on_CollisionDetector_area_entered(area): #shadows
-	#enemyhurt
-	if area.get_collision_layer_value(18):
-		if $BounceGraceTimer.time_left <= 0.0:
-			if blocked_by_armor_on_path(): return
-			var blood_dir = get_blood_dir(area.get_parent())
-			if not touched_floor:
-				area.get_parent().hit(damage, blood_dir, $PlayerCollisionDetector, blood_dir, knockback_strength)
-			else:
-				area.get_parent().hit(int(damage/2.0), blood_dir, $PlayerCollisionDetector, blood_dir, knockback_strength)
-			queue_free()
-
-func _on_Timer_timeout():
+func explode():
 	$ExplosionDetector/CollisionShape2D.set_deferred("disabled", false)
 	$ExplosionDetector.top_level = true
 	$ExplosionDetector.global_position = global_position
@@ -152,18 +98,94 @@ func _on_Timer_timeout():
 		explosion.size = "Medium"
 	if $ExplosionDetector/CollisionShape2D.shape.radius == 64:
 		explosion.size = "Large"
-	get_tree().get_root().get_node("World").middle_front.add_child(explosion)
+	w.middle_front.add_child(explosion)
 	var tween = get_tree().create_tween()
 	tween.tween_property($ExplosionDetector, "scale", Vector2.ONE, 0.1).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
 	await tween.finished
 	queue_free()
+
+func is_world_blocking(target) -> bool:
+	var target_center_global_position: Vector2
+	var target_shape : CollisionShape2D #NOTE: only works on CollisionShape2D
+	for c in target.get_children():
+		if c is CollisionShape2D:
+			target_shape = c #NOTE: gets the LAST collisionshape
+	if target_shape:
+		target_center_global_position = target_shape.global_position
+	else:
+		printerr("ERROR: Cannot find child CollisionShape2D in target: ", target)
+	$WorldCast.target_position = to_local(target_center_global_position)
+	$WorldCast.force_raycast_update()
+	while $WorldCast.is_colliding() and $WorldCast.get_collider() != target:
+		var collider = $WorldCast.get_collider()
+		if collider is TileMapLayer:
+			return true
+		else:
+			if collider.get_collision_layer_value(9): # breakable
+				$WorldCast.add_exception(collider)
+				$WorldCast.add_exception(collider.get_parent())
+				$WorldCast.force_raycast_update()
+				#print("Pierce breakable")
+				continue
+			if collider.get_collision_layer_value(6):
+				#print("Armor in the way of explosion")
+				collider.blocked.emit($ExplosionDetector, collider)
+				return true
+			elif collider.get_collision_layer_value(4):
+				#print("World in way of grenade")
+				return true
+
+	return false
+
+func change_side(to_player: bool):
+	var hitbox = get_node_or_null("PlayerCollisionDetector")
+	set_collision_layer_value(7, to_player)
+	set_collision_layer_value(14, !to_player)
+	hitbox.set_collision_layer_value(7, to_player)
+	hitbox.set_collision_layer_value(14, !to_player)
+	hitbox.set_collision_mask_value(18, to_player)
+	hitbox.set_collision_mask_valuex(17, !to_player)
+
+func deflect(vel: Vector2):
+	var bullet_sprite = get_node("Sprite2D")
+	var new_bullet_position = bullet_sprite.global_position
+	direction = vel.normalized()
+	calc_velocity = vel
+	global_position = new_bullet_position
+
+### SIGNALS ###
+
+func _on_CollisionDetector_body_entered(body):
+	if body is not TileMapLayer:
+		if body.get_collision_layer_value(6): #armor
+			armor_check(body)
+		elif body.get_collision_layer_value(18): #enemy
+			if $BounceGraceTimer.time_left <= 0.0 && calc_velocity.length() > minimum_speed:
+				if blocked_by_armor_on_path(): return
+				explode()
+
+func _on_CollisionDetector_area_entered(area): #shadows
+	#enemyhurt
+	if area.get_collision_layer_value(9):
+		var area_main = area.get_parent()
+		var is_breakable_enemy_bullet = area.get_collision_layer_value(14) or \
+								(area_main is CollisionObject2D and area_main.get_collision_layer_value(14))
+		if is_breakable_enemy_bullet:
+			area_main.on_break("cut")
+	if $BounceGraceTimer.time_left <= 0.0 && calc_velocity.length() > minimum_speed:
+		if area.get_collision_layer_value(18):
+			if blocked_by_armor_on_path(): return
+			explode()
+
+func _on_Timer_timeout():
+	explode()
 
 
 func _on_ExplosionDetector_body_entered(body):
 	#breakable
 	if body.get_collision_layer_value(9):
 		if !is_world_blocking(body):
-			body.on_break("fire")
+			body.on_break("burn")
 
 
 func _on_ExplosionDetector_area_entered(area):
@@ -171,9 +193,13 @@ func _on_ExplosionDetector_area_entered(area):
 	if area.get_collision_layer_value(17):
 		if !is_world_blocking(area):
 			var knockback_direction = Vector2(sign(area.get_parent().global_position.x - global_position.x), 0)
-			area.get_parent().hit(int(damage/4.0), knockback_direction, $ExplosionDetector)
+			area.get_parent().hit(int(damage), knockback_direction, $ExplosionDetector)
 	#enemyhurt
 	elif area.get_collision_layer_value(18):
 		if !is_world_blocking(area):
 			var blood_dir = get_blood_dir(area.get_parent())
-			area.get_parent().hit(int(damage/4.0), blood_dir, $ExplosionDetector, blood_dir, knockback_strength)
+			area.get_parent().hit(int(damage), blood_dir, $ExplosionDetector, blood_dir, knockback_strength)
+	#breakable
+	elif area.get_collision_layer_value(9):
+		if area != $PlayerCollisionDetector and !is_world_blocking(area):
+			area.get_parent().on_break("burn")

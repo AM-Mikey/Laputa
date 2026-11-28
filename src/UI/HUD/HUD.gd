@@ -74,7 +74,7 @@ func _process(_delta):
 		var pc = f.pc()
 		if pc.guns.get_children().size() != 0:
 			cd_progress.visible = true
-			cd_progress.value = 100 - ((pc.get_node("GunManager/CooldownTimer").time_left / pc.guns.get_child(0).cooldown_time) * 100)
+			cd_progress.value = 100 - ((pc.guns.get_child(0).cd.time_left / pc.guns.get_child(0).cooldown_time) * 100)
 		else: cd_progress.visible = false
 
 

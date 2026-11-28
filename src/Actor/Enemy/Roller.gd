@@ -186,6 +186,7 @@ func _animate():
 func _check_raycast_contact(raycast: RayCast2D) -> bool:
 	if raycast.is_colliding():
 		var collider = raycast.get_collider()
+		if !collider: return false
 		if collider is TileMapLayer:
 			return true
 		elif collider.get_collision_layer_value(2):
@@ -273,7 +274,7 @@ func _calc_velocity_rolling() -> Vector2:
 		else:
 			if just_landed:
 				if difficulty == 0 && abs(gravity_velocity.y) >= 10.0:
-					print(gravity_velocity.length() / 200.0)
+					#print(gravity_velocity.length() / 200.0)
 					am.play("enemy_metal_thud", self, null, max(gravity_velocity.length() / 200.0, 1.0))
 					if last_collision != null:
 						if gravity_velocity.length() > 100.0:

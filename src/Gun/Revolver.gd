@@ -17,6 +17,7 @@ func _set_level(val: int) -> void:
 	match val:
 		1:
 			bullet_scene = load("res://src/Bullet/BulletRevolver1.tscn")
+			damage = 1
 			f_range = 60
 			speed = 256
 			max_xp = 10
@@ -28,7 +29,7 @@ func _set_level(val: int) -> void:
 			max_xp = 15
 		3:
 			bullet_scene = load("res://src/Bullet/BulletRevolver3.tscn")
-			damage = 4
+			damage = 3
 			f_range = 128
 			speed = 384
 			max_xp = 20

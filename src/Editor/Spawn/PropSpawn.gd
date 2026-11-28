@@ -13,7 +13,7 @@ func _draw():
 	if prop == "": return
 
 	match prop:
-		"PhysFan":
+		"PhysFan", "PhysFanNoSwitch":
 			var from_point = Vector2(8.0, 8.0)
 			var to_point = $Distance.position
 			var color = Color.CYAN
@@ -178,7 +178,7 @@ func on_vu_value_changed(vu, _old_value, new_value):
 	if prop == "": return
 
 	match prop:
-		"PhysFan":
+		"PhysFan", "PhysFanNoSwitch":
 			if vu.is_in_group("VUVectors") and vu.tag_name == "wind_dir":
 				var distance_waypoint = $Distance
 				var true_wp_pos = $Distance.position - Vector2(8.0, 8.0) - 8.0 * new_value

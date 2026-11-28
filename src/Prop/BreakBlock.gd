@@ -26,7 +26,7 @@ func on_break(method = "cut"):
 	$CollisionShape2D.set_deferred("disabled", true)
 	$BreakArea/CollisionShape2D.set_deferred("disabled", true)
 	$CrushDetector/CollisionShape2D.set_deferred("disabled", true)
-	self.set_deferred("freeze", true)
+	set_deferred("freeze", true)
 	am.play("block_break", self)
 	var explosion = EXPLOSION.instantiate()
 	explosion.global_position = global_position + Vector2(8.0, 8.0)
@@ -38,6 +38,8 @@ func on_break(method = "cut"):
 				$Sprite2D.frame = 1
 			"burn":
 				$Sprite2D.frame = 2
+			_:
+				$Sprite2D.frame = 1
 	else:
 		$Sprite2D.visible = false
 

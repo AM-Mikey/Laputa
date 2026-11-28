@@ -12,3 +12,7 @@ texture = ExtResource("2")
 
 [node name="Muzzle" type="Marker2D" parent="." unique_id=1102972549]
 position = Vector2(-6, -1)
+
+[node name="CooldownTimer" type="Timer" parent="." unique_id=1334726544]
+process_callback = 0
+one_shot = true

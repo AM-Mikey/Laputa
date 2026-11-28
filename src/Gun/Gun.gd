@@ -44,7 +44,7 @@ var rebuild_count = 0
 
 @onready var w = get_tree().get_root().get_node("World")
 @onready var pc = get_parent().get_parent().get_parent()
-@onready var cd = pc.get_node("GunManager/CooldownTimer")
+@onready var cd = $CooldownTimer
 
 func set_level(val: int) -> void:
 	_set_level(val)
