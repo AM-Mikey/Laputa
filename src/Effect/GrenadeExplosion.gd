@@ -5,7 +5,29 @@ var size
 
 func _ready(): #TODO: move sfx to am
 	$AudioStreamPlayer2D.play()
-	$AnimationPlayer.play(size)
+	# $AnimationPlayer.play(size)
+	
+	#$Explosion.amount = 8;
+	#$Explosion.initial_velocity_max *= 2
+	#$Explosion.initial_velocity_min *= 2
+	
+	# spwn circle effect
+	var n = int(24)
+	var vel = 200
+	$base.emitting = false
+	for i in n:
+		var meow = $base.duplicate()
+		add_child(meow)
+		
+		var ang = 2 * PI / n * i
+		
+		meow.direction = Vector2(cos(ang), sin(ang))
+		meow.initial_velocity_min = vel
+		meow.initial_velocity_max = vel
+		meow.one_shot = true
+		meow.emitting = true
+		
+
 	if f.pc():
 		var player_distance = f.pc().global_position.distance_to(global_position)
 		var max_distance := 256
