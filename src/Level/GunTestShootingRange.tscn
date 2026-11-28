@@ -169,7 +169,7 @@ properties = {
 
 [node name="MoveDir" parent="Spawns/Shield" unique_id=1540331808 instance=ExtResource("15_tfi41")]
 tag_name = "move_dir"
-direction = Vector2(-1, -8.742278e-08)
+direction = Vector2(-1, 8.742278e-08)
 snap_degrees = 180.0
 
 [node name="Billy" parent="Spawns" unique_id=555561612 instance=ExtResource("13_2tq6u")]
@@ -195,7 +195,7 @@ properties = {
 
 [node name="VUVector" parent="Spawns/Billy" unique_id=872564127 instance=ExtResource("15_tfi41")]
 tag_name = "move_dir"
-direction = Vector2(-1, -8.742278e-08)
+direction = Vector2(-1, 8.742278e-08)
 snap_degrees = 180.0
 
 [node name="Billy1" parent="Spawns" unique_id=691894641 instance=ExtResource("13_2tq6u")]
@@ -221,7 +221,7 @@ properties = {
 
 [node name="VUVector" parent="Spawns/Billy1" unique_id=1148510409 instance=ExtResource("15_tfi41")]
 tag_name = "move_dir"
-direction = Vector2(-1, -8.742278e-08)
+direction = Vector2(-1, 8.742278e-08)
 snap_degrees = 180.0
 
 [node name="Billy2" parent="Spawns" unique_id=74497575 instance=ExtResource("13_2tq6u")]
@@ -247,7 +247,7 @@ properties = {
 
 [node name="VUVector" parent="Spawns/Billy2" unique_id=909238852 instance=ExtResource("15_tfi41")]
 tag_name = "move_dir"
-direction = Vector2(-1, -8.742278e-08)
+direction = Vector2(-1, 8.742278e-08)
 snap_degrees = 180.0
 
 [node name="Billy3" parent="Spawns" unique_id=1304606916 instance=ExtResource("13_2tq6u")]
@@ -273,7 +273,7 @@ properties = {
 
 [node name="VUVector" parent="Spawns/Billy3" unique_id=857418154 instance=ExtResource("15_tfi41")]
 tag_name = "move_dir"
-direction = Vector2(-1, -8.742278e-08)
+direction = Vector2(-1, 8.742278e-08)
 snap_degrees = 180.0
 
 [node name="Sentry" parent="Spawns" unique_id=1627343938 instance=ExtResource("13_2tq6u")]
@@ -739,7 +739,7 @@ properties = {
 [node name="WindVector" parent="Spawns/PhysFanNoSwitch" unique_id=53206622 instance=ExtResource("15_tfi41")]
 position = Vector2(8, 8)
 tag_name = "wind_dir"
-direction = Vector2(-1, 8.742278e-08)
+direction = Vector2(-1, -8.742278e-08)
 snap_degrees = 90.0
 movement_locked = true
 
@@ -776,7 +776,7 @@ properties = {
 [node name="WindVector" parent="Spawns/PhysFan" unique_id=597669988 instance=ExtResource("15_tfi41")]
 position = Vector2(8, 8)
 tag_name = "wind_dir"
-direction = Vector2(-1, 8.742278e-08)
+direction = Vector2(-1, -8.742278e-08)
 snap_degrees = 90.0
 movement_locked = true
 
@@ -798,7 +798,7 @@ properties = {
 [node name="WindVector" parent="Spawns/PhysFan1" unique_id=1002331351 instance=ExtResource("15_tfi41")]
 position = Vector2(8, 8)
 tag_name = "wind_dir"
-direction = Vector2(-1, 8.742278e-08)
+direction = Vector2(-1, -8.742278e-08)
 snap_degrees = 90.0
 movement_locked = true
 
@@ -1010,6 +1010,20 @@ properties = {
 "speed": [30.0, 3, ""],
 "switch_reverses": [false, 1, ""],
 "toggled": [true, 1, ""]
+}
+size_is_default = false
+
+[node name="Water1" parent="Spawns" unique_id=1815439847 instance=ExtResource("19_tfi41")]
+offset_left = 2432.0
+offset_top = 2112.0
+offset_right = 2592.0
+offset_bottom = 2272.0
+trigger_path = "res://src/Trigger/Water.tscn"
+properties = {
+"color": [Color(0, 0, 0.701961, 1), 20, ""],
+"editor_hidden": [false, 1, ""],
+"id": [&"Water1", 4, ""],
+"velocity_dropoff": [0.75, 3, ""]
 }
 size_is_default = false
 
