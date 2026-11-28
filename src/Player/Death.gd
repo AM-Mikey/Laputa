@@ -88,8 +88,8 @@ func bail(do_explosion = true):
 		explosion.position = pc.global_position
 		w.middle_front.add_child(explosion)
 		await get_tree().create_timer(0.2).timeout #Make sure we still get to see the explosion
-		w.clear_spawn_layers()
-		death_transition()
+	w.clear_spawn_layers()
+	death_transition()
 	death_screen_displayed = true
 	w.ui.add_child(load("res://src/UI/DeathScreen/DeathScreen.tscn").instantiate())
 
@@ -173,6 +173,7 @@ func get_launch_velocity() -> Vector2:
 func enter(_prev_state: String):
 	if die_via_kill_box:
 		bail(false)
+		##prob here
 		return
 
 
