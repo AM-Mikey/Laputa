@@ -10,6 +10,8 @@ var explosion_time = 2.5
 var start_avg_vel: float
 var touched_floor = false
 
+var calc_velocity: = Vector2.ZERO
+
 
 @onready var pc = f.pc()
 @onready var pc_on_floor = pc.is_on_floor()
@@ -21,22 +23,26 @@ func setup():
 	break_method = "burn"
 	$ExplosionDetector.scale = Vector2.ZERO
 	$ExplosionDetector/CollisionShape2D.set_deferred("disabled", true)
-	velocity = get_initial_velocity(speed, direction)
-	start_avg_vel = (abs(velocity.x) + abs(velocity.y)) / 2.0 #used to calculate animation slowdown
+	calc_velocity = get_initial_velocity(speed, direction)
+	start_avg_vel = (abs(calc_velocity.x) + abs(calc_velocity.y)) / 2.0 #used to calculate animation slowdown
 	$Timer.start(explosion_time)
-	if velocity.x < 0:
+	if calc_velocity.x < 0:
 		$AnimationPlayer.play("FlipLeft")
 	else:
 		$AnimationPlayer.play("FlipRight")
 
 
 func _on_physics_process(delta):
-	velocity.y += gravity * delta
-	var collision = move_and_collide(velocity * delta)
+	calc_velocity.y += gravity * delta
+	calc_velocity += velocity
+	var collision = move_and_collide(calc_velocity * delta)
+	velocity = Vector2.ZERO
+	move_and_slide()
+
 	if collision:
-		if abs(velocity.y) > minimum_speed:
-			velocity *= bounciness
-			velocity = velocity.bounce(collision.get_normal())
+		if abs(calc_velocity.y) > minimum_speed:
+			calc_velocity *= bounciness
+			calc_velocity = calc_velocity.bounce(collision.get_normal())
 			touched_floor = true
 			$BounceGraceTimer.start()
 			am.play("gun_grenade_bounce", self)
@@ -44,17 +50,17 @@ func _on_physics_process(delta):
 			if collider is not TileMapLayer and collider.get_collision_layer_value(6):
 				collider.blocked.emit(self, collider)
 		else:
-			velocity = Vector2.ZERO
-		if velocity.x < 0:
+			calc_velocity = Vector2.ZERO
+		if calc_velocity.x < 0:
 			$AnimationPlayer.play("FlipLeft")
 		else:
 			$AnimationPlayer.play("FlipRight")
 
 	if wind_areas_inside.size() != 0: #Inside Wind
-		if velocity.y < 0:
-			velocity.y *= 0.9
+		if calc_velocity.y < 0:
+			calc_velocity.y *= 0.9
 
-	var avg_velocity = abs(velocity.x) + abs(velocity.y) / 2.0 #used to calculate animation slowdown
+	var avg_velocity = abs(calc_velocity.x) + abs(calc_velocity.y) / 2.0 #used to calculate animation slowdown
 	$AnimationPlayer.speed_scale = avg_velocity / start_avg_vel
 	if $AnimationPlayer.speed_scale < .1:
 		$AnimationPlayer.stop()
@@ -64,7 +70,7 @@ func _on_physics_process(delta):
 ### GETTERS ###
 
 func get_initial_velocity(scoped_projectile_speed, scoped_direction) -> Vector2:
-	var out = velocity
+	var out = calc_velocity
 
 	out.x = scoped_projectile_speed * scoped_direction.x
 	out.y = scoped_projectile_speed * scoped_direction.y
@@ -144,7 +150,7 @@ func deflect(vel: Vector2):
 	var bullet_sprite = get_node("Sprite2D")
 	var new_bullet_position = bullet_sprite.global_position
 	direction = vel.normalized()
-	velocity = vel
+	calc_velocity = vel
 	global_position = new_bullet_position
 
 ### SIGNALS ###
@@ -154,7 +160,7 @@ func _on_CollisionDetector_body_entered(body):
 		if body.get_collision_layer_value(6): #armor
 			armor_check(body)
 		elif body.get_collision_layer_value(18): #enemy
-			if $BounceGraceTimer.time_left <= 0.0 && velocity.length() > minimum_speed:
+			if $BounceGraceTimer.time_left <= 0.0 && calc_velocity.length() > minimum_speed:
 				if blocked_by_armor_on_path(): return
 				explode()
 
@@ -166,7 +172,7 @@ func _on_CollisionDetector_area_entered(area): #shadows
 								(area_main is CollisionObject2D and area_main.get_collision_layer_value(14))
 		if is_breakable_enemy_bullet:
 			area_main.on_break("cut")
-	if $BounceGraceTimer.time_left <= 0.0 && velocity.length() > minimum_speed:
+	if $BounceGraceTimer.time_left <= 0.0 && calc_velocity.length() > minimum_speed:
 		if area.get_collision_layer_value(18):
 			if blocked_by_armor_on_path(): return
 			explode()
