@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://dieoao7ksjo81"]
 
-[ext_resource type="Script" uid="uid://maxcbs20svmu" path="res://src/Gun/MPistolM2.gd" id="1_k4opi"]
+[ext_resource type="Script" path="res://src/Gun/MPistolM2.gd" id="1_k4opi"]
 [ext_resource type="Texture2D" uid="uid://jjyq7h7e0qih" path="res://assets/Gun/MPistol.png" id="2_be6fq"]
 
 [node name="MPistolM2" type="Node2D" unique_id=191467459]
@@ -12,3 +12,7 @@ texture = ExtResource("2_be6fq")
 
 [node name="Muzzle" type="Marker2D" parent="." unique_id=1238097349]
 position = Vector2(-7, -1)
+
+[node name="CooldownTimer" type="Timer" parent="." unique_id=2035288052]
+process_callback = 0
+one_shot = true

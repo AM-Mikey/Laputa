@@ -16,4 +16,8 @@ position = Vector2(-7, -1)
 [node name="AutoReload" type="Timer" parent="." unique_id=502082199]
 process_callback = 0
 
+[node name="CooldownTimer" type="Timer" parent="." unique_id=273395514]
+process_callback = 0
+one_shot = true
+
 [connection signal="timeout" from="AutoReload" to="." method="_on_AutoReload_timeout"]
